@@ -14,7 +14,7 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 8715169,
+    "heapSize": 3706096,
     "cls": 0.02539969435049372,
     "lcp": 3912.9145,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T20:52:39.378Z",
+      "url": "https://linkedin.com/",
+      "rank": 9,
+      "baseline": {
+        "usedSize": 3706096,
+        "totalSize": 4440064
+      },
+      "samples": [
+        {
+          "usedSize": 5900416,
+          "totalSize": 10207232
+        },
+        {
+          "usedSize": 4681248,
+          "totalSize": 9945088
+        },
+        {
+          "usedSize": 6044940,
+          "totalSize": 10469376
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 6044940,
+        "totalSize": 10469376,
+        "totalSelfSizeBytes": 7480466,
+        "nodeCount": 115594,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 2338844,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/linkedin.com"
+    },
+    "heapSizeAfterInteraction": 7480466,
+    "heapDeltaAfterInteraction": 2338844
   },
   "principles": [
     {
@@ -171,9 +208,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 2.3 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -189,6 +226,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

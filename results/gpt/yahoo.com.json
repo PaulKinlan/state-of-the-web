@@ -14,7 +14,7 @@
       "seo": null
     },
     "axeViolations": 3,
-    "heapSize": 1814122,
+    "heapSize": 828976,
     "cls": 0,
     "lcp": 632.33,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T20:58:02.615Z",
+      "url": "https://yahoo.com/",
+      "rank": 40,
+      "baseline": {
+        "usedSize": 828976,
+        "totalSize": 1835008
+      },
+      "samples": [
+        {
+          "usedSize": 831328,
+          "totalSize": 1835008
+        },
+        {
+          "usedSize": 831328,
+          "totalSize": 1835008
+        },
+        {
+          "usedSize": 831328,
+          "totalSize": 1835008
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 831328,
+        "totalSize": 1835008,
+        "totalSelfSizeBytes": 1243019,
+        "nodeCount": 33931,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 2352,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/yahoo.com"
+    },
+    "heapSizeAfterInteraction": 1243019,
+    "heapDeltaAfterInteraction": 2352
   },
   "principles": [
     {
@@ -181,9 +218,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -199,6 +236,7 @@
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
     "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

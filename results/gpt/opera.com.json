@@ -14,7 +14,7 @@
       "seo": 100
     },
     "axeViolations": 2,
-    "heapSize": 10918830,
+    "heapSize": 6871456,
     "cls": 0.0012243514269613168,
     "lcp": 3289.411,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:04:22.316Z",
+      "url": "https://opera.com/",
+      "rank": 75,
+      "baseline": {
+        "usedSize": 6871456,
+        "totalSize": 7864320
+      },
+      "samples": [
+        {
+          "usedSize": 15531844,
+          "totalSize": 22020096
+        },
+        {
+          "usedSize": 17549292,
+          "totalSize": 21233664
+        },
+        {
+          "usedSize": 17583564,
+          "totalSize": 21495808
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 17583564,
+        "totalSize": 21495808,
+        "totalSelfSizeBytes": 18713023,
+        "nodeCount": 395853,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 10712108,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/opera.com"
+    },
+    "heapSizeAfterInteraction": 18713023,
+    "heapDeltaAfterInteraction": 10712108
   },
   "principles": [
     {
@@ -184,10 +221,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +10.7 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "opera.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+10.7 MB)",
+          "evidence": "Same-session memory pass: baseline 6871456 bytes; final after interaction cycles + forced GC 18713023 bytes; delta 10712108 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 3 principles with issues; top concerns: high be-inclusive: axe found 2 violation groups; medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
@@ -201,6 +248,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

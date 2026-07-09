@@ -14,7 +14,7 @@
       "seo": 100
     },
     "axeViolations": 4,
-    "heapSize": 72738081,
+    "heapSize": 37665492,
     "cls": 0.1022405070601634,
     "lcp": 8847.104000000001,
     "inp": null,
@@ -36,7 +36,44 @@
           "effect": true
         }
       ]
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:00:04.341Z",
+      "url": "https://msn.com/",
+      "rank": 45,
+      "baseline": {
+        "usedSize": 37665492,
+        "totalSize": 39325696
+      },
+      "samples": [
+        {
+          "usedSize": 64894344,
+          "totalSize": 66985984
+        },
+        {
+          "usedSize": 86017140,
+          "totalSize": 88084480
+        },
+        {
+          "usedSize": 105853632,
+          "totalSize": 108531712
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 105853632,
+        "totalSize": 108531712,
+        "totalSelfSizeBytes": 172806912,
+        "nodeCount": 3158918,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 68188140,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/msn.com"
+    },
+    "heapSizeAfterInteraction": 172806912,
+    "heapDeltaAfterInteraction": 68188140
   },
   "principles": [
     {
@@ -240,10 +277,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +68.2 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "msn.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+68.2 MB)",
+          "evidence": "Same-session memory pass: baseline 37665492 bytes; final after interaction cycles + forced GC 172806912 bytes; delta 68188140 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (0%); high be-inclusive: axe found 4 violation groups; medium be-sustainable: Heavy transfer on initial load (4.3 MB).",
@@ -258,6 +305,7 @@
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
     "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

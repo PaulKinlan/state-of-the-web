@@ -14,7 +14,7 @@
       "seo": 92
     },
     "axeViolations": null,
-    "heapSize": 59640007,
+    "heapSize": 37494020,
     "cls": 0.10573592081521024,
     "lcp": 4542.2798,
     "inp": null,
@@ -41,7 +41,44 @@
           "effect": true
         }
       ]
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:04:52.116Z",
+      "url": "https://yandex.ru/",
+      "rank": 78,
+      "baseline": {
+        "usedSize": 37494020,
+        "totalSize": 38940672
+      },
+      "samples": [
+        {
+          "usedSize": 16639680,
+          "totalSize": 23330816
+        },
+        {
+          "usedSize": 11076864,
+          "totalSize": 14680064
+        },
+        {
+          "usedSize": 25616724,
+          "totalSize": 31719424
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 25616724,
+        "totalSize": 31719424,
+        "totalSelfSizeBytes": 40373986,
+        "nodeCount": 756502,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -11877296,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/yandex.ru"
+    },
+    "heapSizeAfterInteraction": 40373986,
+    "heapDeltaAfterInteraction": -11877296
   },
   "principles": [
     {
@@ -251,9 +288,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -11.9 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -269,6 +306,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

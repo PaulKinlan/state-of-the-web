@@ -14,7 +14,7 @@
       "seo": 75
     },
     "axeViolations": null,
-    "heapSize": 41884573,
+    "heapSize": 22365956,
     "cls": 0.7545008715756252,
     "lcp": 11127.316620000001,
     "inp": null,
@@ -51,7 +51,44 @@
           "effect": true
         }
       ]
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:04:12.148Z",
+      "url": "https://qq.com/",
+      "rank": 63,
+      "baseline": {
+        "usedSize": 22365956,
+        "totalSize": 23928832
+      },
+      "samples": [
+        {
+          "usedSize": 21462000,
+          "totalSize": 25153536
+        },
+        {
+          "usedSize": 21413780,
+          "totalSize": 22794240
+        },
+        {
+          "usedSize": 21680584,
+          "totalSize": 23318528
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 21680584,
+        "totalSize": 23318528,
+        "totalSelfSizeBytes": 45516701,
+        "nodeCount": 571440,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -685372,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/qq.com"
+    },
+    "heapSizeAfterInteraction": 45516701,
+    "heapDeltaAfterInteraction": -685372
   },
   "principles": [
     {
@@ -252,9 +289,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -0.7 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -269,6 +306,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

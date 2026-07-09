@@ -14,7 +14,7 @@
       "seo": 85
     },
     "axeViolations": 1,
-    "heapSize": 11967135,
+    "heapSize": 6543016,
     "cls": 0.5282167831433597,
     "lcp": 25042.593499999988,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T20:52:53.811Z",
+      "url": "https://live.com/",
+      "rank": 12,
+      "baseline": {
+        "usedSize": 6543016,
+        "totalSize": 11046912
+      },
+      "samples": [
+        {
+          "usedSize": 8510572,
+          "totalSize": 13144064
+        },
+        {
+          "usedSize": 20240588,
+          "totalSize": 36204544
+        },
+        {
+          "usedSize": 29454660,
+          "totalSize": 41328640
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 29454660,
+        "totalSize": 41328640,
+        "totalSelfSizeBytes": 39373695,
+        "nodeCount": 553748,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 22911644,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/live.com"
+    },
+    "heapSizeAfterInteraction": 39373695,
+    "heapDeltaAfterInteraction": 22911644
   },
   "principles": [
     {
@@ -249,10 +286,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +22.9 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "live.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+22.9 MB)",
+          "evidence": "Same-session memory pass: baseline 6543016 bytes; final after interaction cycles + forced GC 39373695 bytes; delta 22911644 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (1%); medium be-inclusive: axe found 1 violation groups; medium be-sustainable: Heavy transfer on initial load (7.2 MB).",
@@ -266,6 +313,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

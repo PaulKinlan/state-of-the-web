@@ -14,7 +14,7 @@
       "seo": 85
     },
     "axeViolations": 1,
-    "heapSize": 701524,
+    "heapSize": 6867408,
     "cls": 0.5289624585565157,
     "lcp": 23415.161999999993,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:08:44.458Z",
+      "url": "https://outlook.com/",
+      "rank": 109,
+      "baseline": {
+        "usedSize": 6867408,
+        "totalSize": 9474048
+      },
+      "samples": [
+        {
+          "usedSize": 8520788,
+          "totalSize": 15241216
+        },
+        {
+          "usedSize": 14532064,
+          "totalSize": 33853440
+        },
+        {
+          "usedSize": 24382868,
+          "totalSize": 34377728
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 24382868,
+        "totalSize": 34377728,
+        "totalSelfSizeBytes": 35509270,
+        "nodeCount": 477572,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 17515460,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/outlook.com"
+    },
+    "heapSizeAfterInteraction": 35509270,
+    "heapDeltaAfterInteraction": 17515460
   },
   "principles": [
     {
@@ -223,10 +260,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +17.5 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "outlook.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+17.5 MB)",
+          "evidence": "Same-session memory pass: baseline 6867408 bytes; final after interaction cycles + forced GC 35509270 bytes; delta 17515460 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: medium be-inclusive: axe found 1 violation groups; medium be-sustainable: Heavy transfer on initial load (4.0 MB); medium be-private-and-secure: Large third-party/network surface.",
@@ -240,6 +287,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

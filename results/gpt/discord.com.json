@@ -14,7 +14,7 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 48207370,
+    "heapSize": 23004656,
     "cls": 0.01909037708324533,
     "lcp": 19014.87,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:12:49.949Z",
+      "url": "https://discord.com/",
+      "rank": 137,
+      "baseline": {
+        "usedSize": 23004656,
+        "totalSize": 27463680
+      },
+      "samples": [
+        {
+          "usedSize": 51415824,
+          "totalSize": 57339904
+        },
+        {
+          "usedSize": 52001684,
+          "totalSize": 60747776
+        },
+        {
+          "usedSize": 51989688,
+          "totalSize": 61009920
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 51989688,
+        "totalSize": 61009920,
+        "totalSelfSizeBytes": 65850408,
+        "nodeCount": 1078983,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 28985032,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/discord.com"
+    },
+    "heapSizeAfterInteraction": 65850408,
+    "heapDeltaAfterInteraction": 28985032
   },
   "principles": [
     {
@@ -204,10 +241,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained +29.0 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "discord.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+29.0 MB)",
+          "evidence": "Same-session memory pass: baseline 23004656 bytes; final after interaction cycles + forced GC 65850408 bytes; delta 28985032 bytes; monotonic=false.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: medium be-sustainable: Heavy transfer on initial load (17.4 MB); medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
@@ -222,6 +269,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

@@ -82,6 +82,7 @@ def audit(rank, domain, url):
     lighthouse_cmd(url, evdir/'lighthouse.json', timeout=180)
     evidence_cmd('trace', url, evdir/'trace.json', '--viewport','1365x900','--wait','3500', timeout=80)
     evidence_cmd('video', url, evdir/'reduced-motion.mp4', '--viewport','1365x900','--wait','1500','--duration','2500','--emulate-media','prefers-reduced-motion=reduce', timeout=70)
+    evidence_cmd('evaluate', url, evdir/'reduced-motion-probe.json', '--viewport','1365x900','--wait','2500','--emulate-media','prefers-reduced-motion=reduce','--expr',"(() => ({animationCount: document.getAnimations({subtree:true}).length, animations: document.getAnimations({subtree:true}).slice(0,10).map(a=>({playState:a.playState,currentTime:a.currentTime,effect:!!a.effect}))}))()", timeout=45)
     evidence_cmd('heap', url, evdir/'heap.json', '--viewport','1365x900','--wait','2500', timeout=55)
     evidence_cmd('heap', url, evdir/'heap-after.json', '--viewport','1365x900','--wait','10000','--interact',INTERACT_EXPR, timeout=80)
     evidence_cmd('evaluate', url, evdir/'axe.json', '--viewport','1365x900','--wait','3500','--expr-file',str(AXE), timeout=45)
@@ -89,6 +90,7 @@ def audit(rank, domain, url):
 
     disc=load(evdir/'discoverability.json',{})
     probes=load(evdir/'probes.json',{})
+    reduced_motion=load(evdir/'reduced-motion-probe.json',{})
     layout=load(evdir/'layout-desktop.json',{})
     mobile=load(evdir/'layout-mobile.json',{})
     har=load(evdir/'page-summary.json',{})
@@ -156,7 +158,7 @@ def audit(rank, domain, url):
     if bytes_ and bytes_>3_000_000: add('be-sustainable','medium',f'Heavy transfer on initial load ({bytes_/1_000_000:.1f} MB)',f'HAR recorded {req} requests and {bytes_} transferred bytes.','resource-efficiency')
     if req and (req>100 or (third.get('thirdPartyRequestCount') or 0)>50): add('be-private-and-secure','medium','Large third-party/network surface',f"HAR requests={req}; thirdPartyRequests={third.get('thirdPartyRequestCount')}; thirdPartyBytes={third.get('thirdPartyTransferredBytes')}.",'third-party-minimisation')
     if probes.get('colorScheme') in (None,'normal'): add('respect-user-preferences','medium','No explicit color-scheme/dark-mode signal observed',f"computed root colorScheme={probes.get('colorScheme')!r}; dark condition not separately captured in this batch.",'respects-color-scheme')
-    if (probes.get('animationCount') or 0)>10: add('respect-user-preferences','low','Animations present; reduced-motion not verified',f"probe counted {probes.get('animationCount')} active animations.",'respects-reduced-motion')
+    if isinstance(reduced_motion.get('animationCount'), int) and reduced_motion.get('animationCount')>10: add('respect-user-preferences','low','Animations still present under reduced-motion',f"reduced-motion probe counted {reduced_motion.get('animationCount')} active animations; video artifact retained.",'respects-reduced-motion')
     if not probes.get('lang'): add('be-internationalised','medium','Missing document language','html lang was not detected.','document-language')
     if (probes.get('inputsWithoutNames') or 0)>0 or (probes.get('buttonsWithoutNames') or 0)>0 or (probes.get('linksWithoutNames') or 0)>0:
         add('be-inclusive','medium','Unnamed controls or links detected',f"inputsWithoutNames={probes.get('inputsWithoutNames')}, buttonsWithoutNames={probes.get('buttonsWithoutNames')}, linksWithoutNames={probes.get('linksWithoutNames')}.",'accessible-names')
@@ -164,8 +166,7 @@ def audit(rank, domain, url):
     if lh_cats.get('best-practices') is not None and lh_cats.get('best-practices') < 0.9: add('follow-best-practices','medium',f'Lighthouse best-practices score {lh_cats.get("best-practices")*100:.0f}', 'Lighthouse best-practices category is below 90.', 'lighthouse-best-practices')
     if lh_cats.get('seo') is not None and lh_cats.get('seo') < 0.9: add('be-discoverable','medium',f'Lighthouse SEO score {lh_cats.get("seo")*100:.0f}', 'Lighthouse SEO category is below 90.', 'lighthouse-seo')
     if req and req>140 and domain not in {'wikipedia.org'}: add('maximize-content-reduce-noise','medium','Substantial page chrome/network noise',f'HAR recorded {req} requests; script hosts include {", ".join((probes.get("externalScriptHosts") or [])[:8])}.','reduce-noise')
-    if heap_delta is not None and heap_delta > 25000000 and heap_after_size > heap_size * 1.5:
-        add('be-memory-efficient','medium',f'Heap grew after lightweight interaction (+{heap_delta/1000000:.1f} MB)',f'Baseline heap self size {heap_size} bytes; after scroll/nav/wait heap self size {heap_after_size} bytes. This is a signal, not a confirmed leak trace.','heap-growth-after-interaction')
+    # Coarse heap-after is retained as evidence only. be-memory-efficient is updated by rigorous_memory_pass.mjs.
 
     by_pr={p:[f for f in findings if f['principleId']==p] for p in PRINCIPLES}
     principles=[]
@@ -181,12 +182,7 @@ def audit(rank, domain, url):
             elif disc.get('coveragePct') is not None:
                 st='issues'; summary=f"Non-JS/agent-visible content coverage is {disc.get('coveragePct')}%, isJsShell={disc.get('isJsShell')}."; fs += [{'id':f['id'],'severity':f['severity'],'title':f['title'],'evidence':f['evidence'],'suggestedFix':f.get('suggestedFix')} for f in by_pr.get('be-discoverable',[])]
         elif p=='be-memory-efficient':
-            if by_pr[p]:
-                st='issues'
-            if heap_after_size is not None:
-                summary=f"Heap baseline {heap_size} bytes; after lightweight scroll/nav/wait {heap_after_size} bytes (delta {heap_delta} bytes). This is a coarse leak signal, not a heap-trace proof."; conf='medium'
-            else:
-                summary=f"Single-load heap snapshot captured ({heap_size} bytes self size); post-interaction heap unavailable."; conf='low'
+            st='not-applicable'; summary='Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.'; conf='low'; fs=[]
         elif p=='be-fast-and-stable' and st=='pass':
             summary=f"Lighthouse/trace/layout evidence: LCP {lcp}, CLS {cls:.3f}, TBT {tbt}."; conf='high' if lcp is not None else 'medium'
         elif p=='adapt-to-the-form-factor' and st=='pass':
@@ -251,6 +247,8 @@ def audit(rank, domain, url):
             'lcp':lcp,
             'inp':None,
             'tbt':tbt,
+            'reducedMotionVideo': str(evdir/'reduced-motion.mp4') if (evdir/'reduced-motion.mp4').exists() else None,
+            'reducedMotionProbe': reduced_motion,
             'isJsShell':disc.get('isJsShell'),
             'textChars':(disc.get('rendered') or {}).get('textChars') or probes.get('textChars'),
             'hasViewport':bool(probes.get('viewport') or layout.get('observed',{}).get('hasViewportMeta')),
@@ -263,7 +261,7 @@ def audit(rank, domain, url):
         'overallScore':score(findings, principles),
         '_batch':BATCH,
         '_artifactsDir':str(evdir),
-        '_caveats':['Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.','Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.','Dark-mode/reduced-motion are inferred from probes unless separately captured.'] + ([f'Axe blocked or failed: {axe_block_reason}'] if axe_blocked else [])
+        '_caveats':['Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.','Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.','Dark-mode/reduced-motion are inferred from probes unless separately captured.'] + ([f'Axe blocked or failed: {axe_block_reason}'] if axe_blocked else [])
     }
     write(RESULTS/f'{site}.json', out)
     return out

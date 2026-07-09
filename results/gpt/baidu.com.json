@@ -14,7 +14,7 @@
       "seo": 83
     },
     "axeViolations": null,
-    "heapSize": 14295081,
+    "heapSize": 7220952,
     "cls": 0.04209475749598792,
     "lcp": 11756.846,
     "inp": null,
@@ -36,7 +36,44 @@
           "effect": true
         }
       ]
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T21:03:19.024Z",
+      "url": "https://baidu.com/",
+      "rank": 62,
+      "baseline": {
+        "usedSize": 7220952,
+        "totalSize": 8388608
+      },
+      "samples": [
+        {
+          "usedSize": 7222828,
+          "totalSize": 8126464
+        },
+        {
+          "usedSize": 7222828,
+          "totalSize": 8126464
+        },
+        {
+          "usedSize": 7223124,
+          "totalSize": 8126464
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 7223124,
+        "totalSize": 8126464,
+        "totalSelfSizeBytes": 13371481,
+        "nodeCount": 214393,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 2172,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/baidu.com"
+    },
+    "heapSizeAfterInteraction": 13371481,
+    "heapDeltaAfterInteraction": 2172
   },
   "principles": [
     {
@@ -211,9 +248,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -228,6 +265,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

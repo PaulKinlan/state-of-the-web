@@ -14,7 +14,7 @@
       "seo": 100
     },
     "axeViolations": 1,
-    "heapSize": 7177407,
+    "heapSize": 4602908,
     "cls": 0.01195283237540398,
     "lcp": 5499.374499999998,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T20:54:54.080Z",
+      "url": "https://wordpress.org/",
+      "rank": 27,
+      "baseline": {
+        "usedSize": 4602908,
+        "totalSize": 5505024
+      },
+      "samples": [
+        {
+          "usedSize": 5633272,
+          "totalSize": 11010048
+        },
+        {
+          "usedSize": 6296568,
+          "totalSize": 10747904
+        },
+        {
+          "usedSize": 5842096,
+          "totalSize": 9961472
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 5842096,
+        "totalSize": 9961472,
+        "totalSelfSizeBytes": 6937011,
+        "nodeCount": 156293,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 1239188,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/wordpress.org"
+    },
+    "heapSizeAfterInteraction": 6937011,
+    "heapDeltaAfterInteraction": 1239188
   },
   "principles": [
     {
@@ -177,9 +214,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 1.2 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -194,6 +231,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

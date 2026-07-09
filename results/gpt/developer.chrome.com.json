@@ -14,7 +14,7 @@
       "seo": 92
     },
     "axeViolations": 3,
-    "heapSize": 12987550,
+    "heapSize": 7277052,
     "cls": 0.061952639688353975,
     "lcp": 2960.052,
     "inp": null,
@@ -30,7 +30,44 @@
     "reducedMotionProbe": {
       "animationCount": 0,
       "animations": []
-    }
+    },
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T20:48:52.283Z",
+      "url": "https://developer.chrome.com/",
+      "rank": null,
+      "baseline": {
+        "usedSize": 7277052,
+        "totalSize": 8278016
+      },
+      "samples": [
+        {
+          "usedSize": 12046344,
+          "totalSize": 16031744
+        },
+        {
+          "usedSize": 8019628,
+          "totalSize": 9850880
+        },
+        {
+          "usedSize": 8029664,
+          "totalSize": 8802304
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 8029664,
+        "totalSize": 8802304,
+        "totalSelfSizeBytes": 12953202,
+        "nodeCount": 252371,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 752612,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-001-evidence/developer.chrome.com"
+    },
+    "heapSizeAfterInteraction": 12953202,
+    "heapDeltaAfterInteraction": 752612
   },
   "principles": [
     {
@@ -184,9 +221,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.8 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -202,6 +239,7 @@
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
     "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
-    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
