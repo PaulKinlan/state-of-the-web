@@ -8,15 +8,15 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/msn.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 46,
+      "accessibility": 91,
+      "bestPractices": 54,
+      "seo": 100
     },
     "axeViolations": 4,
     "heapSize": 72738081,
-    "cls": 0.001863943203984982,
-    "lcp": 2153.57,
+    "cls": 0.1022405070601634,
+    "lcp": 8847.104000000001,
     "inp": null,
     "isJsShell": true,
     "textChars": 5957,
@@ -24,9 +24,9 @@
     "hasMetaDescription": true,
     "httpsOnly": true,
     "hsts": true,
-    "tbt": 341.34,
-    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/msn.com/trace-summary.json",
-    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/msn.com/reduced-motion.mp4",
+    "tbt": 498,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-retry-evidence/msn.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-retry-evidence/msn.com/reduced-motion.mp4",
     "reducedMotionProbe": {
       "animationCount": 1,
       "animations": [
@@ -99,16 +99,34 @@
       "id": "be-fast-and-stable",
       "status": "issues",
       "confidence": "high",
-      "summary": "Total blocking time is high (341ms)",
+      "summary": "LCP above good threshold (8.8s); Total blocking time is high (498ms); CLS above good threshold (0.10)",
       "findings": [
+        {
+          "id": "msn.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (8.8s)",
+          "evidence": "Lighthouse/trace recorded LCP 8847ms and TBT 498ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
         {
           "id": "msn.com-total-blocking-time",
           "principleId": "be-fast-and-stable",
           "checkId": "total-blocking-time",
           "severity": "medium",
-          "title": "Total blocking time is high (341ms)",
-          "evidence": "Lighthouse/trace recorded TBT 341ms.",
+          "title": "Total blocking time is high (498ms)",
+          "evidence": "Lighthouse/trace recorded TBT 498ms.",
           "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "msn.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.10)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.102.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -128,10 +146,20 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "summary": "Lighthouse best-practices score 54",
+      "findings": [
+        {
+          "id": "msn.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 54",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
@@ -219,7 +247,7 @@
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (0%); high be-inclusive: axe found 4 violation groups; medium be-sustainable: Heavy transfer on initial load (4.3 MB).",
-  "overallScore": 18,
+  "overallScore": 0,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/msn.com/evidence",
   "_caveats": [
@@ -229,6 +257,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged.",
     "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }
