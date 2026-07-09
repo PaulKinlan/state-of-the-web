@@ -1,0 +1,112 @@
+{
+  "version": "2026-07-09",
+  "summary": "Evidence backing and confidence caveats for State of the Web vision audits.",
+  "evidenceReviewedDirectly": [
+    "axe.json",
+    "layout-desktop.json",
+    "layout-mobile.json",
+    "discoverability.json",
+    "page-summary.json",
+    "probes.json",
+    "evidence.memoryAudit where present"
+  ],
+  "evidenceCollectedButNotManuallyReviewedPerSite": [
+    "screenshot.png",
+    "mobile.png",
+    "discoverability rendered/crawler PNGs",
+    "raw page.har",
+    "heap-after.json coarse signal"
+  ],
+  "originalScaleBatchMissingEvidence": [
+    "lighthouse.json",
+    "trace-summary.json",
+    "reduced-motion video"
+  ],
+  "principles": {
+    "be-inclusive": {
+      "status": "evidence-backed",
+      "primaryEvidence": ["axe.json", "probes.json"],
+      "notes": "Axe blocked/failed is not an issue; it is pass with low confidence unless other probes find a problem."
+    },
+    "respect-user-preferences": {
+      "status": "partial-until-supplemental",
+      "primaryEvidence": ["probes.json", "reduced-motion video/probe after supplemental pass"],
+      "notes": "Original batches used colorScheme and animation probes; reduced-motion video was missing and is being added by supplemental pass."
+    },
+    "be-fast-and-stable": {
+      "status": "partial-until-supplemental",
+      "primaryEvidence": ["layout-desktop.json", "layout-mobile.json", "lighthouse.json after supplemental pass", "trace-summary.json after supplemental pass"],
+      "notes": "Original scale batches had CLS/layout but not Lighthouse/trace; confidence caveated until supplemental evidence lands."
+    },
+    "be-discoverable": {
+      "status": "evidence-backed",
+      "primaryEvidence": ["discoverability.json", "probes.json", "lighthouse SEO after supplemental pass"],
+      "notes": "Crawler/no-JS coverage and meta/title/h1 signals were parsed directly."
+    },
+    "be-agent-ready": {
+      "status": "evidence-backed",
+      "primaryEvidence": ["discoverability.json", "probes.json"],
+      "notes": "Judged from no-JS/agent-visible content and semantic/metadata probes."
+    },
+    "be-sustainable": {
+      "status": "evidence-backed",
+      "primaryEvidence": ["page-summary.json"],
+      "notes": "Judged from transferred bytes and request counts. Raw HAR retained but summary used for reasoning."
+    },
+    "be-private-and-secure": {
+      "status": "evidence-backed",
+      "primaryEvidence": ["page-summary.json", "probes.json", "curl headers"],
+      "notes": "Judged from HTTPS/HSTS, third-party request surface, script hosts, and headers where available."
+    },
+    "be-internationalised": {
+      "status": "evidence-backed-basic",
+      "primaryEvidence": ["probes.json"],
+      "notes": "Basic html lang/dir checks only; deeper locale formatting flows not tested."
+    },
+    "follow-best-practices": {
+      "status": "partial-until-supplemental",
+      "primaryEvidence": ["probes.json", "lighthouse best-practices after supplemental pass"],
+      "notes": "Original batches used metadata/viewport/probe evidence; Lighthouse best-practices being added by supplemental pass."
+    },
+    "adapt-to-the-form-factor": {
+      "status": "evidence-backed",
+      "primaryEvidence": ["layout-desktop.json", "layout-mobile.json", "mobile.png artifact"],
+      "notes": "Judged from mobile/desktop layout metrics and horizontal overflow."
+    },
+    "support-core-task-success": {
+      "status": "medium-confidence",
+      "primaryEvidence": ["screenshot artifacts", "probes.json", "DOM text/controls"],
+      "notes": "Homepage primary task availability only; full task completion flows not exercised."
+    },
+    "be-memory-efficient": {
+      "status": "pending-unless-memoryAudit-present",
+      "primaryEvidence": ["evidence.memoryAudit"],
+      "notes": "Baseline heap alone is not a pass. Same-session forced-GC memory audit required."
+    },
+    "be-trustworthy": {
+      "status": "pending-active-flow-test",
+      "primaryEvidence": [],
+      "notes": "Passive homepage evidence is not treated as a pass; needs consent/account/commerce/dark-pattern flow review."
+    },
+    "be-resilient": {
+      "status": "pending-active-flow-test",
+      "primaryEvidence": [],
+      "notes": "Manifest/SW presence is not treated as a pass; needs no-JS/offline/reload fallback testing."
+    },
+    "implement-natural-interactions": {
+      "status": "pending-active-flow-test",
+      "primaryEvidence": [],
+      "notes": "Needs keyboard/focus/input-modality testing."
+    },
+    "provide-guided-navigation": {
+      "status": "pending-active-flow-test",
+      "primaryEvidence": [],
+      "notes": "Needs wayfinding/search/menu-flow testing."
+    },
+    "maximize-content-reduce-noise": {
+      "status": "medium-confidence",
+      "primaryEvidence": ["page-summary.json", "probes.json", "screenshot artifacts"],
+      "notes": "Judged mostly from request/script surface and page chrome signals; visual noise not manually reviewed for every site."
+    }
+  }
+}
