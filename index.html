@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>State of the Web — quality audit of the top 1000 sites</title>
+<style>
+:root{color-scheme:light dark;--color:#000;--background:#fdfcf8;--bg-secondary:#f0eee6;--border:#e0ddd4;--muted:#666;--accent:#4b3aff;--good:#1a8a3a;--bad:#c0392b;--warn:#e6a700}
+@media(prefers-color-scheme:dark){:root{--color:#e8e4dc;--background:#1c1a17;--bg-secondary:#2a2723;--border:#3a3530;--muted:#9a9088;--accent:#8ab4f8;--good:#57c97a;--bad:#e06c75;--warn:#d9a441}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;line-height:1.7;color:var(--color);background-color:var(--background);padding:1rem;max-width:900px;margin:0 auto}
+h1{font-family:Georgia,"Times New Roman",Times,serif;font-size:2rem;margin-bottom:.3rem;font-weight:normal}
+h2{font-family:Georgia,"Times New Roman",Times,serif;font-size:1.3rem;font-weight:normal;margin:1.5rem 0 .5rem;border-bottom:1px solid var(--border);padding-bottom:.3rem}
+.sub{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem;margin-bottom:1.5rem}
+.card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:.5rem;padding:1rem}
+.card .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.3rem}
+.card .value{font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color)}
+.card .detail{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.bar-chart{margin:1rem 0}
+.bar-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.bar-row .name{width:200px;font-size:.78rem;text-align:right;flex-shrink:0;color:var(--muted)}
+.bar-row .bar-track{flex:1;background:var(--bg-secondary);border-radius:.25rem;overflow:hidden;height:24px;position:relative}
+.bar-row .bar-fill{height:100%;border-radius:.25rem;transition:width .3s}
+.bar-row .pct{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font-size:.7rem;font-variant-numeric:tabular-nums;color:var(--color)}
+.fill-bad{background:linear-gradient(90deg,#c0392b,#e74c3c)}
+.fill-warn{background:linear-gradient(90deg,#e6a700,#f0c040)}
+.fill-good{background:linear-gradient(90deg,#1a8a3a,#2ecc71)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:1rem}
+table{width:100%;border-collapse:collapse;background:var(--bg-secondary);border:1px solid var(--border);border-radius:.5rem;overflow:hidden}
+th,td{padding:.4rem .6rem;text-align:left;font-size:.8rem;border-bottom:1px solid var(--border)}
+th{background:var(--bg-secondary);font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);position:sticky;top:0;z-index:1;cursor:pointer}
+th:hover{color:var(--accent)}
+td.num{font-variant-numeric:tabular-nums;text-align:right}
+.score{display:inline-block;width:32px;height:32px;border-radius:50%;text-align:center;line-height:32px;font-size:.75rem;font-weight:700;color:#fff}
+.score.s0-29{background:#c0392b}.score.s30-59{background:#e6a700}.score.s60-79{background:#2980b9}.score.s80-100{background:#1a8a3a}
+.status-pass{color:var(--good)}.status-issues{color:var(--bad)}.status-na{color:var(--muted)}
+.controls{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
+input,select{font:inherit;padding:.35rem .5rem;border:1px solid var(--border);border-radius:.35rem;background:var(--background);color:var(--color);font-size:.8rem}
+input{flex:1;min-width:120px}
+.loading{padding:3rem;text-align:center;color:var(--muted);font-size:.9rem}
+.section-title{font-family:Georgia,serif;font-size:1.1rem;margin:1.5rem 0 .5rem;font-weight:normal}
+a{color:var(--accent)}
+.note{font-size:.75rem;color:var(--muted);margin-top:.5rem}
+.badge{display:inline-block;font-size:.65rem;padding:.1rem .4rem;border-radius:.2rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.badge.high{background:#c0392b;color:#fff}.badge.serious{background:#e74c3c;color:#fff}.badge.moderate{background:#e6a700;color:#fff}.badge.low{background:var(--bg-secondary);color:var(--muted);border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<h1>State of the Web</h1>
+<p class="sub">A quality audit of the top 1,000 sites across 17 modern web principles. Data: CDP evidence (870 sites) + vision-based principle analysis (48 sites). <a href="#" id="about-link">About</a></p>
+
+<div id="about-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
+  <div style="max-width:500px;margin:auto;background:var(--background);border:1px solid var(--border);border-radius:.5rem;padding:1.5rem;margin-top:2rem">
+    <h2 style="border:none">About</h2>
+    <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Audited using the <a href="https://github.com/PaulKinlan/web-uplift" target="_blank">web-uplift</a> methodology: 17 principles covering UX, performance, accessibility, privacy, resilience, and more. Each site's homepage was measured via Chrome DevTools Protocol (Lighthouse, axe, heap, layout) and judged by an AI agent with vision. Two agents cross-validated: glm-5.2 (evidence) + gpt-5.5 (principles).</p>
+    <button onclick="document.getElementById('about-modal').style.display='none'" style="margin-top:1rem;padding:.4rem 1rem;border:1px solid var(--border);border-radius:.35rem;background:var(--background);color:var(--color);cursor:pointer;font:inherit">Close</button>
+  </div>
+</div>
+
+<div id="loading" class="loading">Loading database…</div>
+<div id="app" style="display:none">
+  <div class="cards" id="cards"></div>
+  
+  <h2>Principle issues across audited sites</h2>
+  <div id="principle-chart"></div>
+  
+  <h2>Per-site results</h2>
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search site…">
+    <select id="score-filter"><option value="">All scores</option><option value="0-29">Critical (0-29)</option><option value="30-59">Poor (30-59)</option><option value="60-79">Fair (60-79)</option><option value="80-100">Good (80-100)</option></select>
+  </div>
+  <div class="table-wrap"><table id="sites-table"><thead><tr>
+    <th data-col="site">Site</th><th data-col="rank" class="num">Rank</th><th class="num">Score</th>
+    <th class="num">Issues</th><th class="num">CLS</th><th class="num">Axe</th><th class="num">Shell</th>
+  </tr></thead><tbody id="tbody"></tbody></table></div>
+
+  <h2>Principle breakdown</h2>
+  <div class="table-wrap"><table id="principle-table"><thead><tr>
+    <th>Principle</th><th class="num">Pass</th><th class="num">Issues</th><th class="num">N/A</th><th class="num">Fail rate</th>
+  </tr></thead><tbody id="ptbody"></tbody></table></div>
+
+  <p class="note">Data: <a href="https://github.com/PaulKinlan/state-of-the-web" target="_blank">GitHub</a> · Methodology: <a href="https://github.com/PaulKinlan/web-uplift" target="_blank">web-uplift</a> · <a href="https://aifoc.us" target="_blank">AI Focus</a></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.min.js"></script>
+<script>
+let db, sortCol='overall_score', sortDir='desc';
+async function init(){
+  const loading=document.getElementById('loading');
+  try{
+    loading.textContent='Loading SQLite engine…';
+    const SQL=await initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`});
+    loading.textContent='Loading database…';
+    const resp=await fetch('state-of-the-web.db');
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const buf=await resp.arrayBuffer();
+    db=new SQL.Database(new Uint8Array(buf));
+    loading.style.display='none';
+    document.getElementById('app').style.display='block';
+    setTimeout(()=>{renderCards();renderPrincipleChart();renderSites();renderPrinciples();},50);
+  }catch(e){
+    loading.textContent='Error: '+e.message;
+    loading.style.color='var(--bad)';
+    console.error(e);
+  }
+}
+function q(sql){const s=db.prepare(sql);const r=[];while(s.step())r.push(s.getAsObject());s.free();return r;}
+function pct(n,total){return total?Math.round(n/total*100):0;}
+function scoreClass(s){if(s==null)return'';if(s<30)return's0-29';if(s<60)return's30-59';if(s<80)return's60-79';return's80-100';}
+
+function renderCards(){
+  const sites=q("SELECT * FROM sites WHERE source='gpt'");
+  const scores=sites.filter(s=>s.overall_score!=null).map(s=>s.overall_score).sort((a,b)=>a-b);
+  const allSites=q("SELECT COUNT(*) as c FROM sites")[0].c;
+  const shells=q("SELECT COUNT(*) as c FROM sites WHERE is_js_shell=1")[0].c;
+  const highCls=q("SELECT COUNT(*) as c FROM sites WHERE cls>0.1")[0].c;
+  const med=scores.length?scores[Math.floor(scores.length/2)]:0;
+  const mean=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+  const passRate=Math.round(scores.filter(s=>s>=60).length/scores.length*100);
+  
+  const cards=[
+    {label:'Sites audited',value:sites.length,detail:`of ${allSites} total (${q("SELECT COUNT(*) as c FROM sites WHERE source='cdp'")[0].c} CDP-only)`},
+    {label:'Median score',value:med,detail:`mean: ${mean}`},
+    {label:'Sites passing (≥60)',value:passRate+'%',detail:`${scores.filter(s=>s>=60).length} of ${scores.length} audited`},
+    {label:'JS shells',value:shells,detail:`${pct(shells,allSites)}% of all sites`},
+  ];
+  document.getElementById('cards').innerHTML=cards.map(c=>
+    `<div class="card"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="detail">${c.detail}</div></div>`
+  ).join('');
+}
+
+function renderPrincipleChart(){
+  const rows=q("SELECT principle_id, SUM(CASE WHEN status='pass' THEN 1 ELSE 0 END) as pass, SUM(CASE WHEN status='issues' THEN 1 ELSE 0 END) as issues, SUM(CASE WHEN status='not-applicable' THEN 1 ELSE 0 END) as na, COUNT(*) as total FROM principles GROUP BY principle_id ORDER BY issues DESC");
+  const max=Math.max(...rows.map(r=>r.issues));
+  document.getElementById('principle-chart').innerHTML=rows.map(r=>{
+    const failPct=pct(r.issues,r.total);
+    const cls=failPct>=60?'fill-bad':failPct>=30?'fill-warn':'fill-good';
+    const w=max?r.issues/max*100:0;
+    return `<div class="bar-row"><span class="name">${r.principle_id}</span><div class="bar-track"><div class="bar-fill ${cls}" style="width:${w}%"></div><span class="pct">${failPct}% (${r.issues}/${r.total})</span></div></div>`;
+  }).join('');
+}
+
+function renderSites(){
+  const search=document.getElementById('search').value;
+  const sf=document.getElementById('score-filter').value;
+  let where=["source='gpt'"];let params=[];
+  if(search){where.push('site LIKE ?');params.push('%'+search+'%');}
+  if(sf){const[a,b]=sf.split('-');where.push(`overall_score >= ${a} AND overall_score <= ${b}`);}
+  const sc={'site':'site','rank':'rank','overall_score':'overall_score'}[sortCol]||'overall_score';
+  const sites=q(`SELECT s.*, (SELECT COUNT(*) FROM principles p WHERE p.site=s.site AND p.status='issues') as issue_count FROM sites s WHERE ${where.join(' AND ')} ORDER BY ${sc} ${sortDir}`);
+  document.getElementById('tbody').innerHTML=sites.map(s=>{
+    const sc=s.overall_score!=null?`<span class="score ${scoreClass(s.overall_score)}">${s.overall_score}</span>`:'—';
+    const cls=s.cls!=null?(s.cls>0.1?`<span style="color:var(--bad)">${s.cls.toFixed(2)}</span>`:s.cls.toFixed(3)):'—';
+    const axe=s.axe_violations!=null?s.axe_violations:'—';
+    const shell=s.is_js_shell?'<span style="color:var(--bad)">Yes</span>':'No';
+    return `<tr><td>${s.site}</td><td class="num">${s.rank||'—'}</td><td class="num">${sc}</td><td class="num">${s.issue_count||0}</td><td class="num">${cls}</td><td class="num">${axe}</td><td class="num">${shell}</td></tr>`;
+  }).join('');
+}
+
+function renderPrinciples(){
+  const rows=q("SELECT principle_id, SUM(CASE WHEN status='pass' THEN 1 ELSE 0 END) as pass, SUM(CASE WHEN status='issues' THEN 1 ELSE 0 END) as issues, SUM(CASE WHEN status='not-applicable' THEN 1 ELSE 0 END) as na, COUNT(*) as total FROM principles GROUP BY principle_id ORDER BY issues DESC");
+  document.getElementById('ptbody').innerHTML=rows.map(r=>{
+    const failPct=pct(r.issues,r.total);
+    const cls=failPct>=60?'status-issues':failPct>=30?'':'status-pass';
+    return `<tr><td>${r.principle_id}</td><td class="num status-pass">${r.pass}</td><td class="num status-issues">${r.issues}</td><td class="num status-na">${r.na}</td><td class="num ${cls}">${failPct}%</td></tr>`;
+  }).join('');
+}
+
+document.getElementById('search').addEventListener('input',renderSites);
+document.getElementById('score-filter').addEventListener('change',renderSites);
+document.querySelectorAll('th[data-col]').forEach(th=>th.addEventListener('click',()=>{
+  const c=th.dataset.col;if(sortCol===c)sortDir=sortDir==='asc'?'desc':'asc';else{sortCol=c;sortDir='desc';}renderSites();
+}));
+document.getElementById('about-link').addEventListener('click',e=>{e.preventDefault();document.getElementById('about-modal').style.display='block';});
+init();
+</script>
+</body>
+</html>
