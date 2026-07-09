@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 5,
-    "heapSize": 17286278,
-    "heapSizeAfterInteraction": 76283669,
-    "heapDeltaAfterInteraction": 58997391,
+    "heapSize": 19036680,
+    "heapSizeAfterInteraction": 75934032,
+    "heapDeltaAfterInteraction": 26213796,
     "cls": 0,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:08:40.774Z",
+      "url": "https://wildberries.ru/",
+      "rank": 241,
+      "baseline": {
+        "usedSize": 19036680,
+        "totalSize": 29061120
+      },
+      "samples": [
+        {
+          "usedSize": 40849384,
+          "totalSize": 42954752
+        },
+        {
+          "usedSize": 42161388,
+          "totalSize": 43941888
+        },
+        {
+          "usedSize": 45250476,
+          "totalSize": 47087616
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 45250476,
+        "totalSize": 47087616,
+        "totalSelfSizeBytes": 75934032,
+        "nodeCount": 1311739,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 26213796,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/wildberries.ru"
+    }
   },
   "principles": [
     {
@@ -189,10 +224,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +26.2 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "wildberries.ru-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+26.2 MB)",
+          "evidence": "Same-session memory pass: baseline 19036680 bytes; final after interaction cycles + forced GC 75934032 bytes; delta 26213796 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (2%); high be-inclusive: axe found 5 violation groups; medium be-private-and-secure: Large third-party/network surface.",
@@ -201,10 +246,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/wildberries.ru/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

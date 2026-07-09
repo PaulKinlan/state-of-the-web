@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 1,
-    "heapSize": 67252934,
-    "heapSizeAfterInteraction": 68367211,
-    "heapDeltaAfterInteraction": 1114277,
+    "heapSize": 38266604,
+    "heapSizeAfterInteraction": 985976,
+    "heapDeltaAfterInteraction": -37340460,
     "cls": 0.0934151860919566,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:06:38.148Z",
+      "url": "https://linktr.ee/",
+      "rank": 236,
+      "baseline": {
+        "usedSize": 38266604,
+        "totalSize": 39845888
+      },
+      "samples": [
+        {
+          "usedSize": 916108,
+          "totalSize": 1835008
+        },
+        {
+          "usedSize": 926144,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 926144,
+          "totalSize": 1572864
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 926144,
+        "totalSize": 1572864,
+        "totalSelfSizeBytes": 985976,
+        "nodeCount": 30381,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -37340460,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/linktr.ee"
+    }
   },
   "principles": [
     {
@@ -182,9 +217,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -37.3 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -194,10 +229,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/linktr.ee/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

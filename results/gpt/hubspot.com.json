@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 3,
-    "heapSize": 30397077,
-    "heapSizeAfterInteraction": 30102434,
-    "heapDeltaAfterInteraction": -294643,
+    "heapSize": 17730480,
+    "heapSizeAfterInteraction": 18473237,
+    "heapDeltaAfterInteraction": -3913976,
     "cls": 0.0534885438678031,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:06:02.088Z",
+      "url": "https://hubspot.com/",
+      "rank": 234,
+      "baseline": {
+        "usedSize": 17730480,
+        "totalSize": 19410944
+      },
+      "samples": [
+        {
+          "usedSize": 10147236,
+          "totalSize": 14942208
+        },
+        {
+          "usedSize": 12347832,
+          "totalSize": 24903680
+        },
+        {
+          "usedSize": 13816504,
+          "totalSize": 25427968
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 13816504,
+        "totalSize": 25427968,
+        "totalSelfSizeBytes": 18473237,
+        "nodeCount": 296834,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -3913976,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/hubspot.com"
+    }
   },
   "principles": [
     {
@@ -189,9 +224,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -3.9 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -201,10 +236,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/hubspot.com/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

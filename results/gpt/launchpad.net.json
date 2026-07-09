@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 5,
-    "heapSize": 4504833,
-    "heapSizeAfterInteraction": 4503869,
-    "heapDeltaAfterInteraction": -964,
+    "heapSize": 2369984,
+    "heapSizeAfterInteraction": 3616182,
+    "heapDeltaAfterInteraction": 3728,
     "cls": 0,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:09:39.422Z",
+      "url": "https://launchpad.net/",
+      "rank": 250,
+      "baseline": {
+        "usedSize": 2369984,
+        "totalSize": 2883584
+      },
+      "samples": [
+        {
+          "usedSize": 2373712,
+          "totalSize": 2883584
+        },
+        {
+          "usedSize": 2373712,
+          "totalSize": 2883584
+        },
+        {
+          "usedSize": 2373712,
+          "totalSize": 2883584
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 2373712,
+        "totalSize": 2883584,
+        "totalSelfSizeBytes": 3616182,
+        "nodeCount": 78462,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 3728,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/launchpad.net"
+    }
   },
   "principles": [
     {
@@ -166,9 +201,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -178,10 +213,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/launchpad.net/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 12,
-    "heapSize": 119794621,
-    "heapSizeAfterInteraction": 136463549,
-    "heapDeltaAfterInteraction": 16668928,
+    "heapSize": 54648448,
+    "heapSizeAfterInteraction": 115941175,
+    "heapDeltaAfterInteraction": -5619772,
     "cls": 0.058056872037914695,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:11:16.679Z",
+      "url": "https://ibm.com/",
+      "rank": 253,
+      "baseline": {
+        "usedSize": 54648448,
+        "totalSize": 61075456
+      },
+      "samples": [
+        {
+          "usedSize": 54932660,
+          "totalSize": 59240448
+        },
+        {
+          "usedSize": 54952740,
+          "totalSize": 59240448
+        },
+        {
+          "usedSize": 49028676,
+          "totalSize": 54259712
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 49028676,
+        "totalSize": 54259712,
+        "totalSelfSizeBytes": 115941175,
+        "nodeCount": 1033260,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -5619772,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/ibm.com"
+    }
   },
   "principles": [
     {
@@ -205,9 +240,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -5.6 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -217,10 +252,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/ibm.com/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

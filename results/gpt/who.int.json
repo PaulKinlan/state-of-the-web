@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": null,
-    "heapSize": 51245852,
-    "heapSizeAfterInteraction": 50031239,
-    "heapDeltaAfterInteraction": -1214613,
+    "heapSize": 24501116,
+    "heapSizeAfterInteraction": 46320540,
+    "heapDeltaAfterInteraction": 7754020,
     "cls": 0.04990623212814005,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:05:49.928Z",
+      "url": "https://who.int/",
+      "rank": 232,
+      "baseline": {
+        "usedSize": 24501116,
+        "totalSize": 26599424
+      },
+      "samples": [
+        {
+          "usedSize": 28125636,
+          "totalSize": 37404672
+        },
+        {
+          "usedSize": 31942800,
+          "totalSize": 47190016
+        },
+        {
+          "usedSize": 32255136,
+          "totalSize": 46665728
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 32255136,
+        "totalSize": 46665728,
+        "totalSelfSizeBytes": 46320540,
+        "nodeCount": 759929,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 7754020,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/who.int"
+    }
   },
   "principles": [
     {
@@ -174,10 +209,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +7.8 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "who.int-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+7.8 MB)",
+          "evidence": "Same-session memory pass: baseline 24501116 bytes; final after interaction cycles + forced GC 46320540 bytes; delta 7754020 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: medium be-sustainable: Heavy transfer on initial load (5.8 MB); medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
@@ -186,11 +231,11 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/who.int/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
