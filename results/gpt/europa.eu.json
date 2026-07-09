@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/europa.eu/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 69,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100
     },
     "axeViolations": 1,
     "heapSize": 7077334,
     "cls": 0,
-    "lcp": null,
+    "lcp": 8630.784,
     "inp": null,
     "isJsShell": true,
     "textChars": 4216,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 6,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/europa.eu/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/europa.eu/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (8.6s)",
+      "findings": [
+        {
+          "id": "europa.eu-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (8.6s)",
+          "evidence": "Lighthouse/trace recorded LCP 8631ms and TBT 6ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -105,14 +122,14 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (3%)",
       "findings": [
         {
@@ -188,7 +205,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (3%); medium be-inclusive: axe found 1 violation groups; medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 54,
+  "overallScore": 28,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/europa.eu/evidence",
   "_caveats": [
@@ -197,6 +214,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

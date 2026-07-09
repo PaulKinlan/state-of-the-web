@@ -8,22 +8,75 @@
   "evidence": {
     "screenshot": "/tmp/state-web-pilot-20260709T082805Z/nytimes/evidence/screenshot.png",
     "lighthouse": {
-      "performance": 24,
-      "accessibility": 83,
+      "performance": 23,
+      "accessibility": 80,
       "bestPractices": 54,
       "seo": 85
     },
     "axeViolations": 5,
     "heapSize": 106268519,
     "cls": 0.14375775004838756,
-    "lcp": 6431.2040000000015,
+    "lcp": 28887.19149999997,
     "inp": null,
     "isJsShell": false,
     "textChars": 12903,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 1975.5000000000036,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/nytimes.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/nytimes.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 9,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 4099.8600004884,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -85,8 +138,8 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "LCP above good threshold (6.4s); CLS above good threshold (0.14)",
+      "confidence": "high",
+      "summary": "LCP above good threshold (6.4s); CLS above good threshold (0.14); LCP above good threshold (28.9s)",
       "findings": [
         {
           "id": "nytimes-01",
@@ -99,6 +152,33 @@
           "severity": "high",
           "title": "CLS above good threshold (0.14)",
           "evidence": "Lighthouse/layout recorded cumulative layout shift 0.144."
+        },
+        {
+          "id": "nytimes.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (28.9s)",
+          "evidence": "Lighthouse/trace recorded LCP 28887ms and TBT 1976ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "nytimes.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (1976ms)",
+          "evidence": "Lighthouse/trace recorded TBT 1976ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "nytimes.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.14)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.144.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -119,16 +199,36 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Lighthouse best-practices score 0.54; failed audits include speed-index, errors-in-console, interactive, deprecations, third-party-cookies.",
-      "findings": []
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 54",
+      "findings": [
+        {
+          "id": "nytimes.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 54",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "discoverability coverage 67%, title/h1/meta raw presence: True/True/True.",
-      "findings": []
+      "summary": "Lighthouse SEO score 85",
+      "findings": [
+        {
+          "id": "nytimes.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 85",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
+        }
+      ]
     },
     {
       "id": "be-private-and-secure",
@@ -195,7 +295,7 @@
     }
   ],
   "verdict": "Homepage pilot: 7 principles with issues; top concerns are high be-fast-and-stable: LCP above good threshold (6.4s); high be-fast-and-stable: CLS above good threshold (0.14); high be-inclusive: axe found 5 violation groups.",
-  "overallScore": 26,
+  "overallScore": 0,
   "_pilotCaveats": [
     "Pilot judgments are homepage-only and intended to validate schema/aggregation before scaling.",
     "Axe was injected via Runtime.evaluate; BBC CSP blocked unsafe eval so BBC a11y is Lighthouse/probe-only in this pass.",
@@ -220,6 +320,7 @@
   ],
   "_caveats": [
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
-    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes."
+    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

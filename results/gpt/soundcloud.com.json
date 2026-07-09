@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/soundcloud.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 31,
+      "accessibility": 91,
+      "bestPractices": 100,
+      "seo": 100
     },
     "axeViolations": 6,
     "heapSize": 32594840,
     "heapSizeAfterInteraction": 1183676,
     "heapDeltaAfterInteraction": -31547452,
-    "cls": 0.09398233417937604,
-    "lcp": null,
+    "cls": 0.17606362639131057,
+    "lcp": 13220.483500000002,
     "inp": null,
     "isJsShell": true,
     "textChars": 3912,
@@ -60,6 +60,19 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/soundcloud.com"
+    },
+    "tbt": 723.7897499999999,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/soundcloud.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/soundcloud.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 1,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 66.7400001122953,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -131,10 +144,38 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.094; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (13.2s); Total blocking time is high (724ms); CLS above good threshold (0.18)",
+      "findings": [
+        {
+          "id": "soundcloud.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (13.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 13220ms and TBT 724ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "soundcloud.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (724ms)",
+          "evidence": "Lighthouse/trace recorded TBT 724ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "soundcloud.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.18)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.176.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -161,14 +202,14 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (3%)",
       "findings": [
         {
@@ -255,7 +296,7 @@
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high adapt-to-the-form-factor: Mobile viewport has horizontal overflow; high be-discoverable: Low non-JS discoverability (3%); high be-inclusive: axe found 6 violation groups.",
-  "overallScore": 18,
+  "overallScore": 0,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/soundcloud.com/evidence",
   "_caveats": [
@@ -264,6 +305,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

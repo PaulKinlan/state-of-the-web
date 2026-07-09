@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/mit.edu/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 58,
+      "accessibility": 95,
+      "bestPractices": 100,
+      "seo": 92
     },
     "axeViolations": 2,
     "heapSize": 3642560,
     "heapSizeAfterInteraction": 13189641,
     "heapDeltaAfterInteraction": 6564368,
-    "cls": 0.0072886939517205086,
-    "lcp": null,
+    "cls": 0.1464966726384865,
+    "lcp": 5739.002,
     "inp": null,
     "isJsShell": false,
     "textChars": 2685,
@@ -60,6 +60,24 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/mit.edu"
+    },
+    "tbt": 34.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/mit.edu/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/mit.edu/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 2,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -115,10 +133,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.007; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (5.7s); CLS above good threshold (0.15)",
+      "findings": [
+        {
+          "id": "mit.edu-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (5.7s)",
+          "evidence": "Lighthouse/trace recorded LCP 5739ms and TBT 34ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "mit.edu-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.15)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.146.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -145,8 +182,8 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal",
       "findings": [
         {
           "id": "mit.edu-04",
@@ -161,7 +198,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 87%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -215,7 +252,7 @@
     }
   ],
   "verdict": "Homepage batch: 3 principles with issues; top concerns: high be-inclusive: axe found 2 violation groups; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed; medium be-inclusive: Unnamed controls or links detected.",
-  "overallScore": 64,
+  "overallScore": 38,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/mit.edu/evidence",
   "_caveats": [
@@ -224,6 +261,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

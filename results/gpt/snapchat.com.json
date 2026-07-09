@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/snapchat.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 43,
+      "accessibility": 98,
+      "bestPractices": 73,
+      "seo": 100
     },
     "axeViolations": null,
     "heapSize": 58507205,
     "cls": 0.011775228924487666,
-    "lcp": null,
+    "lcp": 7435.829,
     "inp": null,
     "isJsShell": true,
     "textChars": 1259,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 747,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/snapchat.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/snapchat.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.012; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (7.4s); Total blocking time is high (747ms)",
+      "findings": [
+        {
+          "id": "snapchat.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (7.4s)",
+          "evidence": "Lighthouse/trace recorded LCP 7436ms and TBT 747ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "snapchat.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (747ms)",
+          "evidence": "Lighthouse/trace recorded TBT 747ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -98,15 +124,25 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 73",
+      "findings": [
+        {
+          "id": "snapchat.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 73",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (2%)",
       "findings": [
         {
@@ -189,7 +225,7 @@
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (2%); medium be-sustainable: Heavy transfer on initial load (13.0 MB); medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 52,
+  "overallScore": 12,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/snapchat.com/evidence",
   "_caveats": [
@@ -199,6 +235,7 @@
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

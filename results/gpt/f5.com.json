@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/f5.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 41,
+      "accessibility": 100,
+      "bestPractices": 96,
+      "seo": 100
     },
     "axeViolations": null,
     "heapSize": 12798076,
     "heapSizeAfterInteraction": 46755343,
     "heapDeltaAfterInteraction": 15573944,
     "cls": 6.979989892077804e-05,
-    "lcp": null,
+    "lcp": 21442.9145,
     "inp": null,
     "isJsShell": false,
     "textChars": 5406,
@@ -60,6 +60,13 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/f5.com"
+    },
+    "tbt": 649,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/f5.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/f5.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
     }
   },
   "principles": [
@@ -115,10 +122,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (21.4s); Total blocking time is high (649ms)",
+      "findings": [
+        {
+          "id": "f5.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (21.4s)",
+          "evidence": "Lighthouse/trace recorded LCP 21443ms and TBT 649ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "f5.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (649ms)",
+          "evidence": "Lighthouse/trace recorded TBT 649ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -138,7 +164,7 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
@@ -146,7 +172,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 95%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -216,7 +242,7 @@
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: medium be-sustainable: Heavy transfer on initial load (3.3 MB); medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 68,
+  "overallScore": 48,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/f5.com/evidence",
   "_caveats": [
@@ -226,6 +252,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

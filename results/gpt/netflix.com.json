@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/netflix.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 74,
+      "accessibility": 94,
+      "bestPractices": 73,
+      "seo": 100
     },
     "axeViolations": 4,
     "heapSize": 35759858,
     "cls": 0.009736638133776412,
-    "lcp": null,
+    "lcp": 3795.7749999999996,
     "inp": null,
     "isJsShell": false,
     "textChars": 3723,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "tbt": 267,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/netflix.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/netflix.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.010; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (3.8s)",
+      "findings": [
+        {
+          "id": "netflix.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "medium",
+          "title": "LCP above good threshold (3.8s)",
+          "evidence": "Lighthouse/trace recorded LCP 3796ms and TBT 267ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -104,16 +121,26 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 73",
+      "findings": [
+        {
+          "id": "netflix.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 73",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 90%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -174,7 +201,7 @@
     }
   ],
   "verdict": "Homepage batch: 3 principles with issues; top concerns: high be-inclusive: axe found 4 violation groups; medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 64,
+  "overallScore": 48,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/netflix.com/evidence",
   "_caveats": [
@@ -183,6 +210,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/flickr.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 42,
+      "accessibility": 84,
+      "bestPractices": 96,
+      "seo": 92
     },
     "axeViolations": null,
     "heapSize": 8246112,
     "heapSizeAfterInteraction": 13941161,
     "heapDeltaAfterInteraction": 1526900,
-    "cls": 0.3227956532766514,
-    "lcp": null,
+    "cls": 0.45209153945970704,
+    "lcp": 6878.371499999999,
     "inp": null,
     "isJsShell": false,
     "textChars": 3848,
@@ -60,6 +60,29 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/flickr.com"
+    },
+    "tbt": 25.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/flickr.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/flickr.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 3,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 5949.732000750304,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 5949.732000750304,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 5949.732000750304,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -116,14 +139,32 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.32) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.32); LCP above good threshold (6.9s); CLS above good threshold (0.45)",
       "findings": [
         {
           "id": "flickr.com-01",
           "severity": "high",
           "title": "CLS above good threshold (0.32)",
           "evidence": "layout primitive reported CLS 0.323.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        },
+        {
+          "id": "flickr.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (6.9s)",
+          "evidence": "Lighthouse/trace recorded LCP 6878ms and TBT 26ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "flickr.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.45)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.452.",
           "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
@@ -146,7 +187,7 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
@@ -154,7 +195,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 65%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -224,7 +265,7 @@
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.32); medium be-sustainable: Heavy transfer on initial load (5.7 MB); medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 52,
+  "overallScore": 28,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/flickr.com/evidence",
   "_caveats": [
@@ -234,6 +275,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

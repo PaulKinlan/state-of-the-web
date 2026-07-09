@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results-gpt/batch-001-evidence/facebook.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 62,
+      "accessibility": 78,
+      "bestPractices": 77,
+      "seo": 100
     },
     "axeViolations": null,
     "heapSize": 29582167,
     "cls": 0.08573997925888358,
-    "lcp": null,
+    "lcp": 6155.591992500002,
     "inp": null,
     "isJsShell": true,
     "textChars": 1984,
     "hasViewport": false,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 20.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/facebook.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/facebook.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.086; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (6.2s)",
+      "findings": [
+        {
+          "id": "facebook.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (6.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 6156ms and TBT 20ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -92,21 +109,30 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal; Lighthouse best-practices score 77",
       "findings": [
         {
           "id": "facebook.com-05",
           "severity": "medium",
           "title": "Missing meta description signal",
           "evidence": "No rendered/raw meta description was detected."
+        },
+        {
+          "id": "facebook.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 77",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
         }
       ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (1%)",
       "findings": [
         {
@@ -175,7 +201,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (1%); low be-inclusive: axe injection blocked or failed; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 56,
+  "overallScore": 36,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results-gpt/batch-001-evidence/facebook.com/evidence",
   "_caveats": [
@@ -185,6 +211,7 @@
     "Axe blocked/failed; be-inclusive marked low-confidence pass rather than issue.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/weather.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 43,
+      "accessibility": 100,
+      "bestPractices": 96,
+      "seo": 92
     },
     "axeViolations": 2,
     "heapSize": 21247364,
     "heapSizeAfterInteraction": 56415117,
     "heapDeltaAfterInteraction": 34036860,
-    "cls": 0.007439351582284132,
-    "lcp": null,
+    "cls": 0.1584165738704629,
+    "lcp": 16067.339439999998,
     "inp": null,
     "isJsShell": false,
     "textChars": 1835,
@@ -60,6 +60,13 @@
       "monotonicGrowth": true,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/weather.com"
+    },
+    "tbt": 740,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/weather.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/weather.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
     }
   },
   "principles": [
@@ -115,10 +122,38 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.007; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (16.1s); Total blocking time is high (740ms); CLS above good threshold (0.16)",
+      "findings": [
+        {
+          "id": "weather.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (16.1s)",
+          "evidence": "Lighthouse/trace recorded LCP 16067ms and TBT 740ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "weather.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (740ms)",
+          "evidence": "Lighthouse/trace recorded TBT 740ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "weather.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.16)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.158.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -145,7 +180,7 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
@@ -153,7 +188,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 68%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -225,7 +260,7 @@
     }
   ],
   "verdict": "Homepage batch: 3 principles with issues; top concerns: high be-inclusive: axe found 2 violation groups; medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 64,
+  "overallScore": 18,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/weather.com/evidence",
   "_caveats": [
@@ -234,6 +269,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

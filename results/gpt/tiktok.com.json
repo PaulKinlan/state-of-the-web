@@ -8,22 +8,55 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/tiktok.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 32,
+      "accessibility": 75,
+      "bestPractices": 54,
+      "seo": 77
     },
     "axeViolations": 10,
     "heapSize": 91426610,
     "cls": 0.003955825193325193,
-    "lcp": null,
+    "lcp": 21166.4505,
     "inp": null,
     "isJsShell": true,
     "textChars": 1114,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 1172.782999999994,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/tiktok.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/tiktok.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 5,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 0,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 632.01,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 632.01,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 466.6999999999999,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 466.6999999999999,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -91,10 +124,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.004; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (21.2s); Total blocking time is high (1173ms)",
+      "findings": [
+        {
+          "id": "tiktok.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (21.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 21166ms and TBT 1173ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "tiktok.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (1173ms)",
+          "evidence": "Lighthouse/trace recorded TBT 1173ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -118,22 +170,41 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 54",
+      "findings": [
+        {
+          "id": "tiktok.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 54",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Low non-JS discoverability (2%)",
+      "confidence": "high",
+      "summary": "Low non-JS discoverability (2%); Lighthouse SEO score 77",
       "findings": [
         {
           "id": "tiktok.com-02",
           "severity": "high",
           "title": "Low non-JS discoverability (2%)",
           "evidence": "discoverability found coveragePct=2%, isJsShell=True."
+        },
+        {
+          "id": "tiktok.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 77",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
         }
       ]
     },
@@ -209,7 +280,7 @@
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high adapt-to-the-form-factor: Mobile viewport has horizontal overflow; high be-discoverable: Low non-JS discoverability (2%); high be-inclusive: axe found 10 violation groups.",
-  "overallScore": 18,
+  "overallScore": 0,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/tiktok.com/evidence",
   "_caveats": [
@@ -218,6 +289,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

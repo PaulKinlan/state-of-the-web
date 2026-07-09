@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/oracle.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 60,
+      "accessibility": 82,
+      "bestPractices": 73,
+      "seo": 92
     },
     "axeViolations": 4,
     "heapSize": 453268,
     "heapSizeAfterInteraction": 604601,
     "heapDeltaAfterInteraction": 66760,
     "cls": 0,
-    "lcp": null,
+    "lcp": 9504.364000000001,
     "inp": null,
     "isJsShell": false,
     "textChars": 448,
@@ -60,6 +60,13 @@
       "monotonicGrowth": true,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/oracle.com"
+    },
+    "tbt": 156.0000000000009,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/oracle.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/oracle.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
     }
   },
   "principles": [
@@ -115,10 +122,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (9.5s)",
+      "findings": [
+        {
+          "id": "oracle.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (9.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 9504ms and TBT 156ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -138,8 +155,8 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal; Lighthouse best-practices score 73",
       "findings": [
         {
           "id": "oracle.com-04",
@@ -147,6 +164,15 @@
           "title": "Missing meta description signal",
           "evidence": "No rendered/raw meta description was detected.",
           "suggestedFix": "Add a concise, page-specific meta description and keep essential metadata server-rendered."
+        },
+        {
+          "id": "oracle.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 73",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
         }
       ]
     },
@@ -154,7 +180,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 95%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -216,7 +242,7 @@
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: high be-inclusive: axe found 4 violation groups; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed; medium be-internationalised: Missing document language.",
-  "overallScore": 62,
+  "overallScore": 42,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/oracle.com/evidence",
   "_caveats": [
@@ -225,6 +251,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/webex.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 31,
+      "accessibility": 78,
+      "bestPractices": 73,
+      "seo": 75
     },
     "axeViolations": 3,
     "heapSize": 453268,
     "heapSizeAfterInteraction": 585153,
     "heapDeltaAfterInteraction": 66760,
-    "cls": 0,
-    "lcp": null,
+    "cls": 0.33114335869274764,
+    "lcp": 16592.328999999998,
     "inp": null,
     "isJsShell": false,
     "textChars": 191,
@@ -60,6 +60,13 @@
       "monotonicGrowth": true,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/webex.com"
+    },
+    "tbt": 348,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/webex.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/webex.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
     }
   },
   "principles": [
@@ -115,10 +122,38 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (16.6s); Total blocking time is high (348ms); CLS above good threshold (0.33)",
+      "findings": [
+        {
+          "id": "webex.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (16.6s)",
+          "evidence": "Lighthouse/trace recorded LCP 16592ms and TBT 348ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "webex.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (348ms)",
+          "evidence": "Lighthouse/trace recorded TBT 348ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "webex.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.33)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.331.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -138,8 +173,8 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal; Lighthouse best-practices score 73",
       "findings": [
         {
           "id": "webex.com-05",
@@ -147,14 +182,23 @@
           "title": "Missing meta description signal",
           "evidence": "No rendered/raw meta description was detected.",
           "suggestedFix": "Add a concise, page-specific meta description and keep essential metadata server-rendered."
+        },
+        {
+          "id": "webex.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 73",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
         }
       ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Low non-JS discoverability (13%)",
+      "confidence": "high",
+      "summary": "Low non-JS discoverability (13%); Lighthouse SEO score 75",
       "findings": [
         {
           "id": "webex.com-01",
@@ -162,6 +206,15 @@
           "title": "Low non-JS discoverability (13%)",
           "evidence": "discoverability found coveragePct=13%, isJsShell=False.",
           "suggestedFix": "Server-render the primary content and metadata so crawlers and no-JavaScript users can access the page."
+        },
+        {
+          "id": "webex.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 75",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
         }
       ]
     },
@@ -232,7 +285,7 @@
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: medium be-discoverable: Low non-JS discoverability (13%); high be-inclusive: axe found 3 violation groups; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 52,
+  "overallScore": 2,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/webex.com/evidence",
   "_caveats": [
@@ -241,6 +294,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

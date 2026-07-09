@@ -8,22 +8,35 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/dropbox.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 31,
+      "accessibility": 88,
+      "bestPractices": 77,
+      "seo": 92
     },
     "axeViolations": 1,
     "heapSize": 43847944,
-    "cls": 0.02354420963651733,
-    "lcp": null,
+    "cls": 0.05313244115859134,
+    "lcp": 9978.360499999999,
     "inp": null,
     "isJsShell": false,
     "textChars": 4622,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 1252.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/dropbox.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/dropbox.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 1,
+      "animations": [
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -84,10 +97,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.024; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (10.0s); Total blocking time is high (1252ms)",
+      "findings": [
+        {
+          "id": "dropbox.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (10.0s)",
+          "evidence": "Lighthouse/trace recorded LCP 9978ms and TBT 1252ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "dropbox.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (1252ms)",
+          "evidence": "Lighthouse/trace recorded TBT 1252ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -111,16 +143,26 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 77",
+      "findings": [
+        {
+          "id": "dropbox.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 77",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 92%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -188,7 +230,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-inclusive: axe found 1 violation groups; medium be-sustainable: Heavy transfer on initial load (10.1 MB); medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 48,
+  "overallScore": 20,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/dropbox.com/evidence",
   "_caveats": [
@@ -197,6 +239,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

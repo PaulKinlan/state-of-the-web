@@ -16,14 +16,27 @@
     "axeViolations": 4,
     "heapSize": 72738081,
     "cls": 0.001863943203984982,
-    "lcp": null,
+    "lcp": 2153.57,
     "inp": null,
     "isJsShell": true,
     "textChars": 5957,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 341.34,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/msn.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/msn.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 1,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 250,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -84,10 +97,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.002; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Total blocking time is high (341ms)",
+      "findings": [
+        {
+          "id": "msn.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (341ms)",
+          "evidence": "Lighthouse/trace recorded TBT 341ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -106,14 +129,14 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (0%)",
       "findings": [
         {
@@ -196,7 +219,7 @@
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (0%); high be-inclusive: axe found 4 violation groups; medium be-sustainable: Heavy transfer on initial load (4.3 MB).",
-  "overallScore": 38,
+  "overallScore": 18,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/msn.com/evidence",
   "_caveats": [
@@ -205,6 +228,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

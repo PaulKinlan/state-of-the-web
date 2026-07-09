@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/tumblr.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 42,
+      "accessibility": 74,
+      "bestPractices": 100,
+      "seo": 85
     },
     "axeViolations": 14,
     "heapSize": 54431444,
     "cls": 0,
-    "lcp": null,
+    "lcp": 12462.924049999996,
     "inp": null,
     "isJsShell": true,
     "textChars": 6387,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 692.5000000000018,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/tumblr.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/tumblr.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (12.5s); Total blocking time is high (693ms)",
+      "findings": [
+        {
+          "id": "tumblr.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (12.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 12463ms and TBT 693ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "tumblr.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (693ms)",
+          "evidence": "Lighthouse/trace recorded TBT 693ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -105,21 +131,30 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Low non-JS discoverability (5%)",
+      "confidence": "high",
+      "summary": "Low non-JS discoverability (5%); Lighthouse SEO score 85",
       "findings": [
         {
           "id": "tumblr.com-01",
           "severity": "high",
           "title": "Low non-JS discoverability (5%)",
           "evidence": "discoverability found coveragePct=5%, isJsShell=True."
+        },
+        {
+          "id": "tumblr.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 85",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
         }
       ]
     },
@@ -188,7 +223,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (5%); high be-inclusive: axe found 14 violation groups; medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 48,
+  "overallScore": 10,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/tumblr.com/evidence",
   "_caveats": [
@@ -197,6 +232,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

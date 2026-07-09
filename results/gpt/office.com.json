@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/office.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 79,
+      "accessibility": 100,
+      "bestPractices": 54,
+      "seo": 85
     },
     "axeViolations": null,
     "heapSize": 19649220,
     "cls": 0.3886255924170616,
-    "lcp": null,
+    "lcp": 4809.833999999999,
     "inp": null,
     "isJsShell": false,
     "textChars": 3878,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "tbt": 55,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/office.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/office.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -78,14 +85,32 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.39) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.39); LCP above good threshold (4.8s); CLS above good threshold (0.39)",
       "findings": [
         {
           "id": "office.com-01",
           "severity": "high",
           "title": "CLS above good threshold (0.39)",
           "evidence": "layout primitive reported CLS 0.389."
+        },
+        {
+          "id": "office.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (4.8s)",
+          "evidence": "Lighthouse/trace recorded LCP 4810ms and TBT 55ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "office.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.39)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.389.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -105,17 +130,37 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 54",
+      "findings": [
+        {
+          "id": "office.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 54",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "discoverability coverage 89%, JS shell=False.",
-      "findings": []
+      "summary": "Lighthouse SEO score 85",
+      "findings": [
+        {
+          "id": "office.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 85",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
+        }
+      ]
     },
     {
       "id": "be-private-and-secure",
@@ -182,7 +227,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.39); medium be-sustainable: Heavy transfer on initial load (3.2 MB); medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 54,
+  "overallScore": 14,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/office.com/evidence",
   "_caveats": [
@@ -192,6 +237,7 @@
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

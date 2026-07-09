@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/unity3d.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 51,
+      "accessibility": 88,
+      "bestPractices": 96,
+      "seo": 92
     },
     "axeViolations": 3,
     "heapSize": 453264,
     "heapSizeAfterInteraction": 584813,
     "heapDeltaAfterInteraction": 66760,
-    "cls": 0,
-    "lcp": null,
+    "cls": 0.010591603194311773,
+    "lcp": 11527.50965187836,
     "inp": null,
     "isJsShell": false,
     "textChars": 187,
@@ -60,6 +60,13 @@
       "monotonicGrowth": true,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/unity3d.com"
+    },
+    "tbt": 303.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/unity3d.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/unity3d.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
     }
   },
   "principles": [
@@ -115,10 +122,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (11.5s); Total blocking time is high (304ms)",
+      "findings": [
+        {
+          "id": "unity3d.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (11.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 11528ms and TBT 304ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "unity3d.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (304ms)",
+          "evidence": "Lighthouse/trace recorded TBT 304ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -138,8 +164,8 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal",
       "findings": [
         {
           "id": "unity3d.com-05",
@@ -153,7 +179,7 @@
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (27%)",
       "findings": [
         {
@@ -232,7 +258,7 @@
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: medium be-discoverable: Low non-JS discoverability (27%); high be-inclusive: axe found 3 violation groups; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 52,
+  "overallScore": 26,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/unity3d.com/evidence",
   "_caveats": [
@@ -241,6 +267,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

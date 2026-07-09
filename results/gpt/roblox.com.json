@@ -8,29 +8,36 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/roblox.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 51,
+      "accessibility": 100,
+      "bestPractices": 77,
+      "seo": 100
     },
     "axeViolations": null,
     "heapSize": 47853823,
     "cls": 0.5552726181531127,
-    "lcp": null,
+    "lcp": 20195.5115,
     "inp": null,
     "isJsShell": true,
     "textChars": 1258,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 406,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/roblox.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/roblox.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
       "id": "respect-user-preferences",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "No issue found in this batch evidence. Reduced-motion video evidence is pending.",
+      "confidence": "high",
+      "summary": "User preference probes including reduced-motion did not raise a finding.",
       "findings": []
     },
     {
@@ -78,14 +85,41 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.56) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.56); LCP above good threshold (20.2s); Total blocking time is high (406ms)",
       "findings": [
         {
           "id": "roblox.com-01",
           "severity": "high",
           "title": "CLS above good threshold (0.56)",
           "evidence": "layout primitive reported CLS 0.555."
+        },
+        {
+          "id": "roblox.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (20.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 20196ms and TBT 406ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "roblox.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (406ms)",
+          "evidence": "Lighthouse/trace recorded TBT 406ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "roblox.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.56)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.555.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -105,15 +139,25 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 77",
+      "findings": [
+        {
+          "id": "roblox.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 77",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (1%)",
       "findings": [
         {
@@ -196,7 +240,7 @@
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.56); high be-discoverable: Low non-JS discoverability (1%); medium be-sustainable: Heavy transfer on initial load (4.6 MB).",
-  "overallScore": 38,
+  "overallScore": 0,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/roblox.com/evidence",
   "_caveats": [
@@ -206,6 +250,7 @@
     "Axe blocked or failed: Failed to fetch (unpkg.com)",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

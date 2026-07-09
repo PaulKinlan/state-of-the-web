@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/roku.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 32,
+      "accessibility": 100,
+      "bestPractices": 96,
+      "seo": 85
     },
     "axeViolations": 2,
     "heapSize": 7279720,
     "heapSizeAfterInteraction": 18138470,
     "heapDeltaAfterInteraction": -867348,
-    "cls": 0.41126876301693155,
-    "lcp": null,
+    "cls": 0.4882259175557756,
+    "lcp": 12199.004749999998,
     "inp": null,
     "isJsShell": true,
     "textChars": 1850,
@@ -60,6 +60,13 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/roku.com"
+    },
+    "tbt": 208.36754999999994,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/roku.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/roku.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
     }
   },
   "principles": [
@@ -116,14 +123,32 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.41) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.41); LCP above good threshold (12.2s); CLS above good threshold (0.49)",
       "findings": [
         {
           "id": "roku.com-01",
           "severity": "high",
           "title": "CLS above good threshold (0.41)",
           "evidence": "layout primitive reported CLS 0.411.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        },
+        {
+          "id": "roku.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (12.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 12199ms and TBT 208ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "roku.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.49)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.488.",
           "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
@@ -153,15 +178,15 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Low non-JS discoverability (3%)",
+      "confidence": "high",
+      "summary": "Low non-JS discoverability (3%); Lighthouse SEO score 85",
       "findings": [
         {
           "id": "roku.com-02",
@@ -169,6 +194,15 @@
           "title": "Low non-JS discoverability (3%)",
           "evidence": "discoverability found coveragePct=3%, isJsShell=True.",
           "suggestedFix": "Server-render the primary content and metadata so crawlers and no-JavaScript users can access the page."
+        },
+        {
+          "id": "roku.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 85",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
         }
       ]
     },
@@ -231,7 +265,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.41); high be-discoverable: Low non-JS discoverability (3%); medium be-inclusive: axe found 2 violation groups.",
-  "overallScore": 48,
+  "overallScore": 6,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/roku.com/evidence",
   "_caveats": [
@@ -240,6 +274,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

@@ -8,22 +8,50 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/qq.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 40,
+      "accessibility": 59,
+      "bestPractices": 96,
+      "seo": 75
     },
     "axeViolations": null,
     "heapSize": 41884573,
-    "cls": 2.5705877354228997e-07,
-    "lcp": null,
+    "cls": 0.7545008715756252,
+    "lcp": 11127.316620000001,
     "inp": null,
     "isJsShell": false,
     "textChars": 8589,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "tbt": 46.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/qq.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/qq.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 4,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 133.29600012898447,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 6833,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 6833,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 6833,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -91,10 +119,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (11.1s); CLS above good threshold (0.75)",
+      "findings": [
+        {
+          "id": "qq.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (11.1s)",
+          "evidence": "Lighthouse/trace recorded LCP 11127ms and TBT 46ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "qq.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.75)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.755.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -106,21 +153,30 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Low non-JS discoverability (46%)",
+      "confidence": "high",
+      "summary": "Low non-JS discoverability (46%); Lighthouse SEO score 75",
       "findings": [
         {
           "id": "qq.com-02",
           "severity": "medium",
           "title": "Low non-JS discoverability (46%)",
           "evidence": "discoverability found coveragePct=46%, isJsShell=False."
+        },
+        {
+          "id": "qq.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 75",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
         }
       ]
     },
@@ -203,7 +259,7 @@
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high adapt-to-the-form-factor: Mobile viewport has horizontal overflow; medium be-discoverable: Low non-JS discoverability (46%); medium be-sustainable: Heavy transfer on initial load (6.9 MB).",
-  "overallScore": 36,
+  "overallScore": 0,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/qq.com/evidence",
   "_caveats": [
@@ -212,6 +268,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

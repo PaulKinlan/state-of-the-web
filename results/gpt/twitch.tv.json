@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/twitch.tv/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 41,
+      "accessibility": 100,
+      "bestPractices": 73,
+      "seo": 100
     },
     "axeViolations": 5,
     "heapSize": 39118920,
     "heapSizeAfterInteraction": 957506,
     "heapDeltaAfterInteraction": -38258320,
     "cls": 0.4268728501098007,
-    "lcp": null,
+    "lcp": 9212.35126,
     "inp": null,
     "isJsShell": true,
     "textChars": 2796,
@@ -60,6 +60,64 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/twitch.tv"
+    },
+    "tbt": 718.4999999999991,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/twitch.tv/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/twitch.tv/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 21,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 16.68299989438049,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 16.68299989438049,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1949.9389992434383,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -131,14 +189,41 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.43) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.43); LCP above good threshold (9.2s); Total blocking time is high (718ms)",
       "findings": [
         {
           "id": "twitch.tv-01",
           "severity": "high",
           "title": "CLS above good threshold (0.43)",
           "evidence": "layout primitive reported CLS 0.427.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        },
+        {
+          "id": "twitch.tv-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (9.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 9212ms and TBT 718ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "twitch.tv-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (718ms)",
+          "evidence": "Lighthouse/trace recorded TBT 718ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "twitch.tv-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.43)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.427.",
           "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
@@ -167,15 +252,25 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 73",
+      "findings": [
+        {
+          "id": "twitch.tv-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 73",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (1%)",
       "findings": [
         {
@@ -262,7 +357,7 @@
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.43); high be-discoverable: Low non-JS discoverability (1%); high be-inclusive: axe found 5 violation groups.",
-  "overallScore": 16,
+  "overallScore": 0,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/twitch.tv/evidence",
   "_caveats": [
@@ -271,6 +366,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

@@ -8,29 +8,36 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/x.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 36,
+      "accessibility": 93,
+      "bestPractices": 92,
+      "seo": 100
     },
     "axeViolations": null,
     "heapSize": 32291964,
-    "cls": 0.07770447995821164,
-    "lcp": null,
+    "cls": 0.1503668764005165,
+    "lcp": 15626.245000000006,
     "inp": null,
     "isJsShell": false,
     "textChars": 652,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 611,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/x.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/x.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
       "id": "respect-user-preferences",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "No issue found in this batch evidence. Reduced-motion video evidence is pending.",
+      "confidence": "high",
+      "summary": "User preference probes including reduced-motion did not raise a finding.",
       "findings": []
     },
     {
@@ -70,10 +77,38 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.078; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (15.6s); Total blocking time is high (611ms); CLS above good threshold (0.15)",
+      "findings": [
+        {
+          "id": "x.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (15.6s)",
+          "evidence": "Lighthouse/trace recorded LCP 15626ms and TBT 611ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "x.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (611ms)",
+          "evidence": "Lighthouse/trace recorded TBT 611ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "x.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.15)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.150.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -92,14 +127,14 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (22%)",
       "findings": [
         {
@@ -175,7 +210,7 @@
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: medium be-discoverable: Low non-JS discoverability (22%); medium be-private-and-secure: Large third-party/network surface; medium be-inclusive: Unnamed controls or links detected.",
-  "overallScore": 74,
+  "overallScore": 36,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/x.com/evidence",
   "_caveats": [
@@ -185,6 +220,7 @@
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

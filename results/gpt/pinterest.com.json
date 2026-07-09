@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/pinterest.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 33,
+      "accessibility": 93,
+      "bestPractices": 96,
+      "seo": 92
     },
     "axeViolations": null,
     "heapSize": 59527393,
-    "cls": 0.13908966655038082,
-    "lcp": null,
+    "cls": 0.46303945874125757,
+    "lcp": 18172.567864999997,
     "inp": null,
     "isJsShell": true,
     "textChars": 2182,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 165.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/pinterest.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/pinterest.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -92,14 +99,32 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.14) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.14); LCP above good threshold (18.2s); CLS above good threshold (0.46)",
       "findings": [
         {
           "id": "pinterest.com-01",
           "severity": "high",
           "title": "CLS above good threshold (0.14)",
           "evidence": "layout primitive reported CLS 0.139."
+        },
+        {
+          "id": "pinterest.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (18.2s)",
+          "evidence": "Lighthouse/trace recorded LCP 18173ms and TBT 166ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "pinterest.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.46)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.463.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -120,14 +145,14 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (1%)",
       "findings": [
         {
@@ -210,7 +235,7 @@
     }
   ],
   "verdict": "Homepage batch: 9 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.14); high adapt-to-the-form-factor: Mobile viewport has horizontal overflow; high be-discoverable: Low non-JS discoverability (1%).",
-  "overallScore": 16,
+  "overallScore": 0,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/pinterest.com/evidence",
   "_caveats": [
@@ -220,6 +245,7 @@
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

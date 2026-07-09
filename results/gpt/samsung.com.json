@@ -8,22 +8,55 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/samsung.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 50,
+      "accessibility": 92,
+      "bestPractices": 77,
+      "seo": 77
     },
     "axeViolations": 7,
     "heapSize": 16433575,
-    "cls": 0.0007890412670425192,
-    "lcp": null,
+    "cls": 0.10175600652624864,
+    "lcp": 10762.4905,
     "inp": null,
     "isJsShell": false,
     "textChars": 7869,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "tbt": 297.9999999999982,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/samsung.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/samsung.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 5,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 200,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 200,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 200,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 200,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 200,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -77,10 +110,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.001; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (10.8s); CLS above good threshold (0.10)",
+      "findings": [
+        {
+          "id": "samsung.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (10.8s)",
+          "evidence": "Lighthouse/trace recorded LCP 10762ms and TBT 298ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "samsung.com-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.10)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.102.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -104,17 +156,37 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 77",
+      "findings": [
+        {
+          "id": "samsung.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 77",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "discoverability coverage 75%, JS shell=False.",
-      "findings": []
+      "summary": "Lighthouse SEO score 77",
+      "findings": [
+        {
+          "id": "samsung.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 77",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
+        }
+      ]
     },
     {
       "id": "be-private-and-secure",
@@ -174,7 +246,7 @@
     }
   ],
   "verdict": "Homepage batch: 3 principles with issues; top concerns: high be-inclusive: axe found 7 violation groups; medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 64,
+  "overallScore": 22,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/samsung.com/evidence",
   "_caveats": [
@@ -183,6 +255,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

@@ -8,22 +8,35 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/zoom.us/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 44,
+      "accessibility": 73,
+      "bestPractices": 54,
+      "seo": 77
     },
     "axeViolations": 8,
     "heapSize": 21787262,
-    "cls": 0.18699904798599798,
-    "lcp": null,
+    "cls": 0.1937995255406921,
+    "lcp": 15497.561200225831,
     "inp": null,
     "isJsShell": false,
     "textChars": 5985,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 224.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/zoom.us/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/zoom.us/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 1,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 0.01,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -85,14 +98,32 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.19) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.19); LCP above good threshold (15.5s); CLS above good threshold (0.19)",
       "findings": [
         {
           "id": "zoom.us-01",
           "severity": "high",
           "title": "CLS above good threshold (0.19)",
           "evidence": "layout primitive reported CLS 0.187."
+        },
+        {
+          "id": "zoom.us-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (15.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 15498ms and TBT 224ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "zoom.us-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.19)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.194.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -118,17 +149,37 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 54",
+      "findings": [
+        {
+          "id": "zoom.us-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 54",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "discoverability coverage 94%, JS shell=False.",
-      "findings": []
+      "summary": "Lighthouse SEO score 77",
+      "findings": [
+        {
+          "id": "zoom.us-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 77",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
+        }
+      ]
     },
     {
       "id": "be-private-and-secure",
@@ -188,7 +239,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.19); high be-inclusive: axe found 8 violation groups; medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 42,
+  "overallScore": 2,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/zoom.us/evidence",
   "_caveats": [
@@ -197,6 +248,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

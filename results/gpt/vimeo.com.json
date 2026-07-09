@@ -8,22 +8,50 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/vimeo.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 30,
+      "accessibility": 75,
+      "bestPractices": 100,
+      "seo": 85
     },
     "axeViolations": 6,
     "heapSize": 265189647,
-    "cls": 0.014954049342315551,
-    "lcp": null,
+    "cls": 0.018819029979938187,
+    "lcp": 35990.252499999995,
     "inp": null,
     "isJsShell": false,
     "textChars": 8707,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 1407.0000000000036,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/vimeo.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/vimeo.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 4,
+      "animations": [
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "effect": true
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "effect": true
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "effect": true
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -84,10 +112,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.015; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (36.0s); Total blocking time is high (1407ms)",
+      "findings": [
+        {
+          "id": "vimeo.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (36.0s)",
+          "evidence": "Lighthouse/trace recorded LCP 35990ms and TBT 1407ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "vimeo.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (1407ms)",
+          "evidence": "Lighthouse/trace recorded TBT 1407ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -112,16 +159,26 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "discoverability coverage 90%, JS shell=False.",
-      "findings": []
+      "summary": "Lighthouse SEO score 85",
+      "findings": [
+        {
+          "id": "vimeo.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 85",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
+        }
+      ]
     },
     {
       "id": "be-private-and-secure",
@@ -188,7 +245,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-inclusive: axe found 6 violation groups; medium be-sustainable: Heavy transfer on initial load (11.7 MB); medium be-private-and-secure: Large third-party/network surface.",
-  "overallScore": 48,
+  "overallScore": 20,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/vimeo.com/evidence",
   "_caveats": [
@@ -197,6 +254,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

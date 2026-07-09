@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/forbes.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 57,
+      "accessibility": 92,
+      "bestPractices": 96,
+      "seo": 92
     },
     "axeViolations": 4,
     "heapSize": 32225216,
     "heapSizeAfterInteraction": 43279646,
     "heapDeltaAfterInteraction": 10048384,
     "cls": 0.001991334338907599,
-    "lcp": null,
+    "lcp": 4502.537,
     "inp": null,
     "isJsShell": false,
     "textChars": 17021,
@@ -60,6 +60,64 @@
       "monotonicGrowth": true,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/forbes.com"
+    },
+    "tbt": 558.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/forbes.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/forbes.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 15,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 400,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3499.836,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3499.836,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 1733.2359999984499,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -130,10 +188,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.002; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (4.5s); Total blocking time is high (558ms)",
+      "findings": [
+        {
+          "id": "forbes.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (4.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 4503ms and TBT 558ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "forbes.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (558ms)",
+          "evidence": "Lighthouse/trace recorded TBT 558ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -160,7 +237,7 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
@@ -168,7 +245,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 87%, JS shell=False.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -248,7 +325,7 @@
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high adapt-to-the-form-factor: Mobile viewport has horizontal overflow; high be-inclusive: axe found 4 violation groups; medium be-sustainable: Heavy transfer on initial load (4.3 MB).",
-  "overallScore": 40,
+  "overallScore": 12,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/forbes.com/evidence",
   "_caveats": [
@@ -257,6 +334,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

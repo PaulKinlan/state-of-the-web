@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/ui.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 63,
+      "accessibility": 80,
+      "bestPractices": 96,
+      "seo": 92
     },
     "axeViolations": 3,
     "heapSize": 12476516,
     "heapSizeAfterInteraction": 22383994,
     "heapDeltaAfterInteraction": 11852,
-    "cls": 0.045106106001942904,
-    "lcp": null,
+    "cls": 0.04657264047456997,
+    "lcp": 6594.554,
     "inp": null,
     "isJsShell": true,
     "textChars": 2100,
@@ -60,6 +60,24 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-smoke-ui-evidence/ui.com"
+    },
+    "tbt": 185,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/ui.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/ui.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 2,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 3066.5,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -123,10 +141,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.045; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (6.6s)",
+      "findings": [
+        {
+          "id": "ui.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (6.6s)",
+          "evidence": "Lighthouse/trace recorded LCP 6595ms and TBT 185ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -153,14 +181,14 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "low",
+      "confidence": "high",
       "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (1%)",
       "findings": [
         {
@@ -247,7 +275,7 @@
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (1%); high be-inclusive: axe found 3 violation groups; medium be-sustainable: Heavy transfer on initial load (6.0 MB).",
-  "overallScore": 32,
+  "overallScore": 6,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/ui.com/evidence",
   "_caveats": [
@@ -257,6 +285,7 @@
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

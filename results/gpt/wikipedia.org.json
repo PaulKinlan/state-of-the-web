@@ -16,21 +16,28 @@
     "axeViolations": 0,
     "heapSize": 2137752,
     "cls": 0,
-    "lcp": 1733.063,
+    "lcp": 1738.1945,
     "inp": null,
     "isJsShell": false,
     "textChars": 4663,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 363.68,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/wikipedia.org/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/wikipedia.org/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
       "id": "respect-user-preferences",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "No issue found in homepage pilot evidence.",
+      "confidence": "high",
+      "summary": "User preference probes including reduced-motion did not raise a finding.",
       "findings": []
     },
     {
@@ -70,10 +77,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
+      "status": "issues",
       "confidence": "high",
-      "summary": "LCP 1733ms, CLS 0.000, TBT 0ms.",
-      "findings": []
+      "summary": "Total blocking time is high (364ms)",
+      "findings": [
+        {
+          "id": "wikipedia.org-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (364ms)",
+          "evidence": "Lighthouse/trace recorded TBT 364ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -93,7 +110,7 @@
       "id": "be-discoverable",
       "status": "pass",
       "confidence": "high",
-      "summary": "discoverability coverage 100%, title/h1/meta raw presence: True/False/True.",
+      "summary": "Discoverability and Lighthouse SEO evidence did not raise a finding.",
       "findings": []
     },
     {
@@ -147,7 +164,7 @@
     }
   ],
   "verdict": "Homepage pilot: strong result with 16 passing principles and no findings in this evidence pass.",
-  "overallScore": 100,
+  "overallScore": 92,
   "_pilotCaveats": [
     "Pilot judgments are homepage-only and intended to validate schema/aggregation before scaling.",
     "Axe was injected via Runtime.evaluate; BBC CSP blocked unsafe eval so BBC a11y is Lighthouse/probe-only in this pass.",
@@ -172,6 +189,7 @@
   ],
   "_caveats": [
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
-    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes."
+    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

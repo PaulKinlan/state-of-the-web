@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/mts.ru/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 50,
+      "accessibility": 86,
+      "bestPractices": 73,
+      "seo": 100
     },
     "axeViolations": 3,
     "heapSize": 31348764,
     "heapSizeAfterInteraction": 1164797,
     "heapDeltaAfterInteraction": -30245116,
     "cls": 0.1771132943456819,
-    "lcp": null,
+    "lcp": 3654.3559299999997,
     "inp": null,
     "isJsShell": false,
     "textChars": 6830,
@@ -60,6 +60,54 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/mts.ru"
+    },
+    "tbt": 1225.9999999999964,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/mts.ru/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-3-evidence/mts.ru/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 8,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 500,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3849.9330001462104,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 300,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -124,14 +172,41 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.18) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.18); LCP above good threshold (3.7s); Total blocking time is high (1226ms)",
       "findings": [
         {
           "id": "mts.ru-01",
           "severity": "high",
           "title": "CLS above good threshold (0.18)",
           "evidence": "layout primitive reported CLS 0.177.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
+        },
+        {
+          "id": "mts.ru-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "medium",
+          "title": "LCP above good threshold (3.7s)",
+          "evidence": "Lighthouse/trace recorded LCP 3654ms and TBT 1226ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "mts.ru-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (1226ms)",
+          "evidence": "Lighthouse/trace recorded TBT 1226ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "mts.ru-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.18)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.177.",
           "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
@@ -160,15 +235,25 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 73",
+      "findings": [
+        {
+          "id": "mts.ru-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 73",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (29%)",
       "findings": [
         {
@@ -255,7 +340,7 @@
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.18); medium be-discoverable: Low non-JS discoverability (29%); high be-inclusive: axe found 3 violation groups.",
-  "overallScore": 24,
+  "overallScore": 0,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/mts.ru/evidence",
   "_caveats": [
@@ -264,6 +349,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

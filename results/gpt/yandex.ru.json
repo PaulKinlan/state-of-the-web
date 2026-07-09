@@ -8,22 +8,40 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/yandex.ru/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 59,
+      "accessibility": 44,
+      "bestPractices": 54,
+      "seo": 92
     },
     "axeViolations": null,
     "heapSize": 59640007,
     "cls": 0.10573592081521024,
-    "lcp": null,
+    "lcp": 4542.2798,
     "inp": null,
     "isJsShell": false,
     "textChars": 4922,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 378,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/yandex.ru/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-2-evidence/yandex.ru/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 2,
+      "animations": [
+        {
+          "playState": "finished",
+          "currentTime": 0,
+          "effect": true
+        },
+        {
+          "playState": "finished",
+          "currentTime": 0,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -78,14 +96,41 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "CLS above good threshold (0.11) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
+      "confidence": "high",
+      "summary": "CLS above good threshold (0.11); LCP above good threshold (4.5s); Total blocking time is high (378ms)",
       "findings": [
         {
           "id": "yandex.ru-01",
           "severity": "high",
           "title": "CLS above good threshold (0.11)",
           "evidence": "layout primitive reported CLS 0.106."
+        },
+        {
+          "id": "yandex.ru-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (4.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 4542ms and TBT 378ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "yandex.ru-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (378ms)",
+          "evidence": "Lighthouse/trace recorded TBT 378ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        },
+        {
+          "id": "yandex.ru-cumulative-layout-shift",
+          "principleId": "be-fast-and-stable",
+          "checkId": "cumulative-layout-shift",
+          "severity": "high",
+          "title": "CLS above good threshold (0.11)",
+          "evidence": "Layout/Lighthouse recorded CLS 0.106.",
+          "suggestedFix": "Reserve space for late-loading media/ads and avoid inserting content above existing content after render."
         }
       ]
     },
@@ -105,15 +150,25 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 54",
+      "findings": [
+        {
+          "id": "yandex.ru-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 54",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (0%)",
       "findings": [
         {
@@ -203,7 +258,7 @@
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high be-fast-and-stable: CLS above good threshold (0.11); medium be-discoverable: Low non-JS discoverability (0%); medium be-sustainable: Heavy transfer on initial load (3.9 MB).",
-  "overallScore": 36,
+  "overallScore": 0,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/yandex.ru/evidence",
   "_caveats": [
@@ -213,6 +268,7 @@
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

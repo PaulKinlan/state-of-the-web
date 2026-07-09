@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/epicgames.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 37,
+      "accessibility": 95,
+      "bestPractices": 50,
+      "seo": 83
     },
     "axeViolations": 4,
     "heapSize": 3125727,
     "cls": 0.027037802385391167,
-    "lcp": null,
+    "lcp": 4697.485000000001,
     "inp": null,
     "isJsShell": false,
     "textChars": 114,
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 2186.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/epicgames.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-shard-1-evidence/epicgames.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,29 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.027; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (4.7s); Total blocking time is high (2186ms)",
+      "findings": [
+        {
+          "id": "epicgames.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (4.7s)",
+          "evidence": "Lighthouse/trace recorded LCP 4697ms and TBT 2186ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "epicgames.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (2186ms)",
+          "evidence": "Lighthouse/trace recorded TBT 2186ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -105,28 +131,46 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal; Lighthouse best-practices score 50",
       "findings": [
         {
           "id": "epicgames.com-06",
           "severity": "medium",
           "title": "Missing meta description signal",
           "evidence": "No rendered/raw meta description was detected."
+        },
+        {
+          "id": "epicgames.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 50",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
         }
       ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Low non-JS discoverability (10%)",
+      "confidence": "high",
+      "summary": "Low non-JS discoverability (10%); Lighthouse SEO score 83",
       "findings": [
         {
           "id": "epicgames.com-01",
           "severity": "medium",
           "title": "Low non-JS discoverability (10%)",
           "evidence": "discoverability found coveragePct=10%, isJsShell=False."
+        },
+        {
+          "id": "epicgames.com-lighthouse-seo",
+          "principleId": "be-discoverable",
+          "checkId": "lighthouse-seo",
+          "severity": "medium",
+          "title": "Lighthouse SEO score 83",
+          "evidence": "Lighthouse SEO category is below 90.",
+          "suggestedFix": "Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content."
         }
       ]
     },
@@ -195,7 +239,7 @@
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: medium be-discoverable: Low non-JS discoverability (10%); high be-inclusive: axe found 4 violation groups; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
-  "overallScore": 46,
+  "overallScore": 8,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/epicgames.com/evidence",
   "_caveats": [
@@ -204,6 +248,7 @@
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }
