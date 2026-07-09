@@ -1,6 +1,7 @@
 // State of the Web — SQLite schema for web-uplift audit results
 CREATE TABLE IF NOT EXISTS sites (
-    domain TEXT PRIMARY KEY,
+    site TEXT PRIMARY KEY,
+    source TEXT DEFAULT 'cdp',  -- 'gpt' (vision-audited) or 'cdp' (CDP evidence only)
     rank INTEGER,
     audited_at TEXT,
     url TEXT,
@@ -26,18 +27,18 @@ CREATE TABLE IF NOT EXISTS sites (
     hsts INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS principle_results (
-    domain TEXT,
+CREATE TABLE IF NOT EXISTS principles (
+    site TEXT,
     principle_id TEXT,
     status TEXT,  -- pass | issues | not-applicable
     confidence TEXT,
     summary TEXT,
     finding_count INTEGER,
-    PRIMARY KEY (domain, principle_id)
+    PRIMARY KEY (site, principle_id)
 );
 
 CREATE TABLE IF NOT EXISTS findings (
-    domain TEXT,
+    site TEXT,
     principle_id TEXT,
     finding_id TEXT,
     severity TEXT,  -- high | serious | moderate | low
@@ -48,13 +49,13 @@ CREATE TABLE IF NOT EXISTS findings (
 -- Aggregate views
 CREATE VIEW IF NOT EXISTS principle_summary AS
 SELECT principle_id, status, COUNT(*) as count
-FROM principle_results
+FROM principles
 GROUP BY principle_id, status
 ORDER BY principle_id, status;
 
 CREATE VIEW IF NOT EXISTS top_issues AS
 SELECT principle_id, severity, COUNT(*) as count, 
-       GROUP_CONCAT(domain, ', ') as sites
+       GROUP_CONCAT(site, ', ') as sites
 FROM findings
 GROUP BY principle_id, severity
 ORDER BY count DESC;
