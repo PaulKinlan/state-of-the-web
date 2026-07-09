@@ -8,22 +8,29 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/archive.org/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 82,
+      "accessibility": 99,
+      "bestPractices": 100,
+      "seo": 92
     },
     "axeViolations": null,
     "heapSize": 7442895,
     "cls": 0.0014251050765473842,
-    "lcp": null,
+    "lcp": 4295.891139897156,
     "inp": null,
     "isJsShell": false,
     "textChars": 261,
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 14,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-001-evidence/archive.org/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-001-evidence/archive.org/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 0,
+      "animations": []
+    }
   },
   "principles": [
     {
@@ -77,10 +84,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.001; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (4.3s)",
+      "findings": [
+        {
+          "id": "archive.org-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (4.3s)",
+          "evidence": "Lighthouse/trace recorded LCP 4296ms and TBT 14ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -92,8 +109,8 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Missing meta description signal Lighthouse best-practices evidence is pending for this site.",
+      "confidence": "high",
+      "summary": "Missing meta description signal",
       "findings": [
         {
           "id": "archive.org-03",
@@ -106,7 +123,7 @@
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (17%)",
       "findings": [
         {
@@ -175,7 +192,7 @@
     }
   ],
   "verdict": "Homepage batch: 4 principles with issues; top concerns: medium be-discoverable: Low non-JS discoverability (17%); medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed; medium follow-best-practices: Missing meta description signal.",
-  "overallScore": 74,
+  "overallScore": 54,
   "_batch": "batch-001",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-001-evidence/archive.org/evidence",
   "_caveats": [
@@ -185,6 +202,7 @@
     "Axe blocked or failed: Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: script-src https://archive.org/offshoot_assets/ https://*.archive.org/o",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
-    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

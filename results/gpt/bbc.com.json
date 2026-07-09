@@ -8,7 +8,7 @@
   "evidence": {
     "screenshot": "/tmp/state-web-pilot-20260709T082805Z/bbc/evidence/screenshot.png",
     "lighthouse": {
-      "performance": 33,
+      "performance": 32,
       "accessibility": 100,
       "bestPractices": 77,
       "seo": 100
@@ -16,14 +16,72 @@
     "axeViolations": null,
     "heapSize": 42907414,
     "cls": 0.0213112364103736,
-    "lcp": 14852.35064,
+    "lcp": 13454.907499999998,
     "inp": null,
     "isJsShell": false,
     "textChars": 16488,
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "tbt": 1835.4999999999982,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-001-evidence/bbc.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-001-evidence/bbc.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 16,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3516.372,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3466.472,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3466.472,
+          "effect": true
+        }
+      ]
+    }
   },
   "principles": [
     {
@@ -91,14 +149,32 @@
     {
       "id": "be-fast-and-stable",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "LCP above good threshold (14.9s)",
+      "confidence": "high",
+      "summary": "LCP above good threshold (14.9s); LCP above good threshold (13.5s); Total blocking time is high (1835ms)",
       "findings": [
         {
           "id": "bbc-01",
           "severity": "high",
           "title": "LCP above good threshold (14.9s)",
           "evidence": "Lighthouse/trace recorded LCP 14852ms and TBT 1268ms."
+        },
+        {
+          "id": "bbc.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "high",
+          "title": "LCP above good threshold (13.5s)",
+          "evidence": "Lighthouse/trace recorded LCP 13455ms and TBT 1835ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        },
+        {
+          "id": "bbc.com-total-blocking-time",
+          "principleId": "be-fast-and-stable",
+          "checkId": "total-blocking-time",
+          "severity": "medium",
+          "title": "Total blocking time is high (1835ms)",
+          "evidence": "Lighthouse/trace recorded TBT 1835ms.",
+          "suggestedFix": "Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work."
         }
       ]
     },
@@ -112,14 +188,24 @@
     {
       "id": "follow-best-practices",
       "status": "issues",
-      "confidence": "medium",
-      "summary": "Lighthouse best-practices score 0.77; failed audits include largest-contentful-paint, interactive, third-party-cookies, inspector-issues, lcp-discovery-insight.",
-      "findings": []
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 77",
+      "findings": [
+        {
+          "id": "bbc.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 77",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (36%)",
       "findings": [
         {
@@ -202,7 +288,7 @@
     }
   ],
   "verdict": "Homepage pilot: 9 principles with issues; top concerns are high be-fast-and-stable: LCP above good threshold (14.9s); medium be-discoverable: Low non-JS discoverability (36%); low be-inclusive: axe injection blocked by CSP.",
-  "overallScore": 34,
+  "overallScore": 10,
   "_pilotCaveats": [
     "Pilot judgments are homepage-only and intended to validate schema/aggregation before scaling.",
     "Axe was injected via Runtime.evaluate; BBC CSP blocked unsafe eval so BBC a11y is Lighthouse/probe-only in this pass.",
@@ -228,6 +314,7 @@
   "_caveats": [
     "Axe blocked/failed; be-inclusive marked low-confidence pass rather than issue.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
-    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes."
+    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

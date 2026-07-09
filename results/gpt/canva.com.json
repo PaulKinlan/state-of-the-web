@@ -8,17 +8,17 @@
   "evidence": {
     "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/canva.com/evidence/screenshot.png",
     "lighthouse": {
-      "performance": null,
-      "accessibility": null,
-      "bestPractices": null,
-      "seo": null
+      "performance": 80,
+      "accessibility": 97,
+      "bestPractices": 81,
+      "seo": 100
     },
     "axeViolations": 2,
     "heapSize": 46973016,
     "heapSizeAfterInteraction": 68272411,
     "heapDeltaAfterInteraction": 19728812,
     "cls": 0.0019812657936284306,
-    "lcp": null,
+    "lcp": 3631.4793900000004,
     "inp": null,
     "isJsShell": true,
     "textChars": 4387,
@@ -60,6 +60,64 @@
       "monotonicGrowth": false,
       "thresholdBytes": 5000000,
       "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/canva.com"
+    },
+    "tbt": 94.5,
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-001-evidence/canva.com/trace-summary.json",
+    "reducedMotionVideo": "/home/paulkinlan/state-of-the-web/results/gpt/supplemental-ltv-001-evidence/canva.com/reduced-motion.mp4",
+    "reducedMotionProbe": {
+      "animationCount": 42,
+      "animations": [
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        },
+        {
+          "playState": "running",
+          "currentTime": 3699.8570001989606,
+          "effect": true
+        }
+      ]
     }
   },
   "principles": [
@@ -115,10 +173,20 @@
     },
     {
       "id": "be-fast-and-stable",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Batch layout CLS 0.002; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "LCP above good threshold (3.6s)",
+      "findings": [
+        {
+          "id": "canva.com-largest-contentful-paint",
+          "principleId": "be-fast-and-stable",
+          "checkId": "largest-contentful-paint",
+          "severity": "medium",
+          "title": "LCP above good threshold (3.6s)",
+          "evidence": "Lighthouse/trace recorded LCP 3631ms and TBT 94ms.",
+          "suggestedFix": "Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery."
+        }
+      ]
     },
     {
       "id": "be-inclusive",
@@ -137,15 +205,25 @@
     },
     {
       "id": "follow-best-practices",
-      "status": "pass",
-      "confidence": "low",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Lighthouse best-practices score 81",
+      "findings": [
+        {
+          "id": "canva.com-lighthouse-best-practices",
+          "principleId": "follow-best-practices",
+          "checkId": "lighthouse-best-practices",
+          "severity": "medium",
+          "title": "Lighthouse best-practices score 81",
+          "evidence": "Lighthouse best-practices category is below 90.",
+          "suggestedFix": "Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues."
+        }
+      ]
     },
     {
       "id": "be-discoverable",
       "status": "issues",
-      "confidence": "medium",
+      "confidence": "high",
       "summary": "Low non-JS discoverability (3%)",
       "findings": [
         {
@@ -232,7 +310,7 @@
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-discoverable: Low non-JS discoverability (3%); medium be-inclusive: axe found 2 violation groups; medium be-sustainable: Heavy transfer on initial load (3.5 MB).",
-  "overallScore": 56,
+  "overallScore": 28,
   "_batch": "batch-002",
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/canva.com/evidence",
   "_caveats": [
@@ -241,6 +319,7 @@
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
     "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
     "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
-    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
+    "Supplemental Lighthouse/trace/reduced-motion evidence collected and merged."
   ]
 }

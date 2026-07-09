@@ -5,7 +5,8 @@ from pathlib import Path
 ROOT=Path('/home/paulkinlan/journal')
 RESULTS=Path('/home/paulkinlan/state-of-the-web/results/gpt')
 BATCH=sys.argv[1] if len(sys.argv)>1 else 'supplemental-ltv-001'
-LIMIT=int(sys.argv[2]) if len(sys.argv)>2 else 0
+LIST=Path(sys.argv[2]) if len(sys.argv)>2 and sys.argv[2].endswith('.txt') else None
+LIMIT=int(sys.argv[3] if LIST and len(sys.argv)>3 else (sys.argv[2] if len(sys.argv)>2 and not LIST else 0))
 OUT=RESULTS/f'{BATCH}-evidence'
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -125,17 +126,28 @@ def process(path):
     return {'site':site,'ok':True,'lighthouse':ev['lighthouse'],'lcp':lcp,'tbt':tbt,'cls':cls,'reducedMotionAnimations':rm.get('animationCount')}
 
 sites=[]
-for p in sorted(RESULTS.glob('*.json')):
-    if p.name.startswith(('batch-','pilot-','memory-','supplemental-')) or p.name.endswith('.error.json'): continue
-    try:
-        obj=load(p)
-    except Exception: continue
-    # Process all existing sites; skip if already has supplemental marker and lighthouse present.
-    sites.append(p)
+if LIST:
+    for line in LIST.read_text().splitlines():
+        if not line.strip(): continue
+        p=RESULTS/f'{line.strip()}.json'
+        if p.exists(): sites.append(p)
+else:
+    for p in sorted(RESULTS.glob('*.json')):
+        if p.name.startswith(('batch-','pilot-','memory-','supplemental-')) or p.name.endswith('.error.json'): continue
+        sites.append(p)
 if LIMIT: sites=sites[:LIMIT]
 results=[]
 for p in sites:
-    try: results.append(process(p))
+    try:
+        obj=load(p)
+        ev=obj.get('evidence',{})
+        lh=ev.get('lighthouse') or {}
+        has_lh=any(v is not None for v in lh.values())
+        if has_lh and ev.get('traceSummary') and ev.get('reducedMotionVideo'):
+            print(f'[ltv] skip existing {obj.get("site") or p.stem}', flush=True)
+            results.append({'site':obj.get('site') or p.stem,'ok':True,'skipped':True})
+        else:
+            results.append(process(p))
     except Exception as e:
         print(f'[ltv] ERROR {p.name}: {e}', flush=True); results.append({'site':p.stem,'ok':False,'error':str(e)})
     write(RESULTS/f'{BATCH}.partial.json',results)
