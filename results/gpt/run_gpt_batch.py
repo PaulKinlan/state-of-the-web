@@ -51,6 +51,8 @@ if not AXE.exists():
 
 PROBE_EXPR = """(() => ({title: document.title, lang: document.documentElement.lang || null, dir: document.documentElement.dir || null, h1s: [...document.querySelectorAll('h1')].slice(0,5).map(h=>h.innerText.trim()), metaDescription: document.querySelector('meta[name=description]')?.content || null, viewport: document.querySelector('meta[name=viewport]')?.content || null, forms: document.forms.length, inputsWithoutNames: [...document.querySelectorAll('input,select,textarea')].filter(el=>!el.getAttribute('aria-label')&&!el.labels?.length&&!el.getAttribute('aria-labelledby')).length, buttonsWithoutNames: [...document.querySelectorAll('button')].filter(b=>!b.innerText.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('aria-labelledby')).length, linksWithoutNames: [...document.querySelectorAll('a[href]')].filter(a=>!a.innerText.trim()&&!a.getAttribute('aria-label')&&!a.getAttribute('aria-labelledby')).length, hasManifest: !!document.querySelector('link[rel~=manifest]'), serviceWorkerControlled: !!navigator.serviceWorker?.controller, colorScheme: getComputedStyle(document.documentElement).colorScheme, animationCount: document.getAnimations({subtree:true}).length, textChars: document.body?.innerText?.length || 0, externalScriptHosts: [...new Set([...document.scripts].map(s=>s.src&&new URL(s.src).host).filter(Boolean))].slice(0,25)}))()"""
 
+INTERACT_EXPR = """(() => { window.scrollTo({top: Math.max(600, document.body.scrollHeight * 0.45), behavior: 'instant'}); setTimeout(() => { const candidates = [...document.querySelectorAll('nav a[href], header a[href], main a[href]')].filter(a => { const href = a.href || ''; return href && !href.startsWith('javascript:') && !href.startsWith('mailto:') && !href.includes('#') && a.offsetParent !== null; }); const a = candidates.find(a => new URL(a.href, location.href).origin === location.origin) || candidates[0]; if (a) a.click(); }, 800); return true; })()"""
+
 def score(findings, outcomes):
     weights={'critical':18,'high':12,'medium':6,'low':2}
     penalty=sum(weights.get(f.get('severity'),4) for f in findings)
@@ -71,6 +73,7 @@ def audit(rank, domain, url):
     evidence_cmd('discoverability', url, evdir/'discoverability.json', '--viewport','1365x900','--wait','2500', timeout=45)
     evidence_cmd('har', url, evdir/'page.har', '--viewport','1365x900','--wait','3000', timeout=55)
     evidence_cmd('heap', url, evdir/'heap.json', '--viewport','1365x900','--wait','2500', timeout=55)
+    evidence_cmd('heap', url, evdir/'heap-after.json', '--viewport','1365x900','--wait','10000','--interact',INTERACT_EXPR, timeout=80)
     evidence_cmd('evaluate', url, evdir/'axe.json', '--viewport','1365x900','--wait','3500','--expr-file',str(AXE), timeout=45)
     evidence_cmd('evaluate', url, evdir/'probes.json', '--viewport','1365x900','--wait','2500','--expr',PROBE_EXPR, timeout=35)
 
@@ -80,12 +83,15 @@ def audit(rank, domain, url):
     mobile=load(evdir/'layout-mobile.json',{})
     har=load(evdir/'page-summary.json',{})
     heap=load(evdir/'heap.json',{})
+    heap_after=load(evdir/'heap-after.json',{})
     axe=load(evdir/'axe.json',{})
     totals=har.get('totals',har)
     third=har.get('thirdParty',{})
     req=totals.get('requestCount')
     bytes_=totals.get('totalTransferredBytes')
     heap_size=(heap.get('totals') or heap).get('totalSelfSizeBytes')
+    heap_after_size=(heap_after.get('totals') or heap_after).get('totalSelfSizeBytes')
+    heap_delta=(heap_after_size-heap_size) if isinstance(heap_size,(int,float)) and isinstance(heap_after_size,(int,float)) else None
     cls=max(layout.get('observed',{}).get('cls',0) or 0, mobile.get('observed',{}).get('cls',0) or 0)
     overflow=mobile.get('observed',{}).get('horizontalOverflowPx',0) or 0
     axe_viol=axe.get('violations') if axe.get('ok') else None
@@ -95,9 +101,24 @@ def audit(rank, domain, url):
     if http_status is None: http_status=head_status
 
     findings=[]
+    def suggested_fix(principle, check, title):
+        if check == 'cumulative-layout-shift': return 'Reserve space for late-loading media/ads and avoid inserting content above existing content after render.'
+        if check == 'responsive-no-horizontal-scroll': return 'Add/repair viewport-aware responsive CSS so all content fits within the mobile visual viewport without horizontal scrolling.'
+        if check == 'content-visible-without-js': return 'Server-render the primary content and metadata so crawlers and no-JavaScript users can access the page.'
+        if check == 'automated-a11y': return 'Fix the reported axe violations with semantic HTML, valid ARIA, accessible names, labels, and sufficient contrast.'
+        if check == 'accessible-names': return 'Give every interactive control/link a visible label or accurate accessible name.'
+        if check == 'resource-efficiency': return 'Reduce initial bytes by compressing assets, lazy-loading non-critical media, and removing unused scripts.'
+        if check == 'third-party-minimisation': return 'Audit third-party scripts/requests and remove, defer, or sandbox anything not essential to the core task.'
+        if check == 'respects-color-scheme': return 'Declare color-scheme support and provide a usable dark theme via prefers-color-scheme or light-dark().'
+        if check == 'respects-reduced-motion': return 'Wrap non-essential animations in prefers-reduced-motion and reduce/disable motion when requested.'
+        if check == 'document-language': return 'Set the correct html lang attribute and ensure locale-specific content uses appropriate language metadata.'
+        if check == 'metadata': return 'Add a concise, page-specific meta description and keep essential metadata server-rendered.'
+        if check == 'reduce-noise': return 'Prioritise core content and defer or remove distracting ads, trackers, popups, and non-essential chrome.'
+        if check == 'heap-growth-after-interaction': return 'Profile the interaction, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references.'
+        return 'Review this principle against the evidence and apply the relevant modern web guidance.'
     def add(principle,severity,title,evidence,check=None):
         fid=f'{site}-{len(findings)+1:02d}'
-        findings.append({'id':fid,'principleId':principle,'checkId':check,'severity':severity,'title':title,'evidence':evidence})
+        findings.append({'id':fid,'principleId':principle,'checkId':check,'severity':severity,'title':title,'evidence':evidence,'suggestedFix':suggested_fix(principle, check, title)})
     if cls and cls>0.1: add('be-fast-and-stable','high',f'CLS above good threshold ({cls:.2f})',f'layout primitive reported CLS {cls:.3f}.','cumulative-layout-shift')
     if overflow>0: add('adapt-to-the-form-factor','high','Mobile viewport has horizontal overflow',f'mobile layout reported horizontalOverflowPx={overflow}.','responsive-no-horizontal-scroll')
     if disc.get('coveragePct') is not None and disc.get('coveragePct')<50: add('be-discoverable','high' if disc.get('isJsShell') else 'medium',f"Low non-JS discoverability ({disc.get('coveragePct')}%)",f"discoverability found coveragePct={disc.get('coveragePct')}%, isJsShell={disc.get('isJsShell')}.",'content-visible-without-js')
@@ -117,25 +138,29 @@ def audit(rank, domain, url):
         add('be-inclusive','medium','Unnamed controls or links detected',f"inputsWithoutNames={probes.get('inputsWithoutNames')}, buttonsWithoutNames={probes.get('buttonsWithoutNames')}, linksWithoutNames={probes.get('linksWithoutNames')}.",'accessible-names')
     if not (probes.get('metaDescription') or disc.get('metaDescriptionPresentInRaw')): add('follow-best-practices','medium','Missing meta description signal','No rendered/raw meta description was detected.','metadata')
     if req and req>140 and domain not in {'wikipedia.org'}: add('maximize-content-reduce-noise','medium','Substantial page chrome/network noise',f'HAR recorded {req} requests; script hosts include {", ".join((probes.get("externalScriptHosts") or [])[:8])}.','reduce-noise')
+    if heap_delta is not None and heap_delta > 25000000 and heap_after_size > heap_size * 1.5:
+        add('be-memory-efficient','medium',f'Heap grew after lightweight interaction (+{heap_delta/1000000:.1f} MB)',f'Baseline heap self size {heap_size} bytes; after scroll/nav/wait heap self size {heap_after_size} bytes. This is a signal, not a confirmed leak trace.','heap-growth-after-interaction')
 
     by_pr={p:[f for f in findings if f['principleId']==p] for p in PRINCIPLES}
     principles=[]
     for p in PRINCIPLES:
         st='pass'; conf='medium'; summary='No issue found in this batch evidence.'; fs=[]
         if by_pr[p]:
-            st='issues'; fs=[{'id':f['id'],'severity':f['severity'],'title':f['title'],'evidence':f['evidence']} for f in by_pr[p]]; summary='; '.join(f['title'] for f in by_pr[p][:3])
+            st='issues'; fs=[{'id':f['id'],'severity':f['severity'],'title':f['title'],'evidence':f['evidence'],'suggestedFix':f.get('suggestedFix')} for f in by_pr[p]]; summary='; '.join(f['title'] for f in by_pr[p][:3])
         if p=='be-resilient':
-            if probes.get('hasManifest') or probes.get('serviceWorkerControlled'):
-                summary='Manifest/service-worker signal present; offline fallback not exercised.'; conf='low'
-            else:
-                st='not-applicable'; summary='No app-like offline/installable intent established in homepage batch evidence.'
+            st='not-applicable'; summary='Pending active no-JS/offline/reload resilience test; manifest/service-worker presence alone is not treated as a pass.'; conf='low'
         elif p=='be-agent-ready':
             if disc.get('coveragePct') is not None and disc.get('coveragePct')>=67 and not disc.get('isJsShell'):
                 st='pass'; summary=f"Non-JS content coverage is {disc.get('coveragePct')}%."; conf='high'
             elif disc.get('coveragePct') is not None:
-                st='issues'; summary=f"Non-JS/agent-visible content coverage is {disc.get('coveragePct')}%, isJsShell={disc.get('isJsShell')}."; fs += [{'id':f['id'],'severity':f['severity'],'title':f['title'],'evidence':f['evidence']} for f in by_pr.get('be-discoverable',[])]
+                st='issues'; summary=f"Non-JS/agent-visible content coverage is {disc.get('coveragePct')}%, isJsShell={disc.get('isJsShell')}."; fs += [{'id':f['id'],'severity':f['severity'],'title':f['title'],'evidence':f['evidence'],'suggestedFix':f.get('suggestedFix')} for f in by_pr.get('be-discoverable',[])]
         elif p=='be-memory-efficient':
-            st='pass'; summary=f"Single-load heap snapshot captured ({heap_size} bytes self size); no repeated-interaction leak test."; conf='low'
+            if by_pr[p]:
+                st='issues'
+            if heap_after_size is not None:
+                summary=f"Heap baseline {heap_size} bytes; after lightweight scroll/nav/wait {heap_after_size} bytes (delta {heap_delta} bytes). This is a coarse leak signal, not a heap-trace proof."; conf='medium'
+            else:
+                summary=f"Single-load heap snapshot captured ({heap_size} bytes self size); post-interaction heap unavailable."; conf='low'
         elif p=='be-fast-and-stable' and st=='pass':
             summary=f"Batch layout CLS {cls:.3f}; deeper LCP/INP merged from CDP coordinator data."; conf='medium'
         elif p=='adapt-to-the-form-factor' and st=='pass':
@@ -157,14 +182,17 @@ def audit(rank, domain, url):
             summary=f"Network surface looked bounded in batch evidence ({req} requests)."; conf='medium'
         elif p=='be-internationalised' and st=='pass':
             summary=f"html lang={probes.get('lang')!r}; deeper locale flows not tested."; conf='medium'
-        elif p=='provide-guided-navigation' and st=='pass':
-            summary='Homepage navigation/search entry points were not flagged by DOM/screenshot evidence; flow not exercised.'; conf='low'
-        elif p=='implement-natural-interactions' and st=='pass':
-            summary='No interaction-specific issue found; keyboard/focus journeys not exercised.'; conf='low'
+        elif p=='provide-guided-navigation':
+            if st == 'pass':
+                st='not-applicable'; summary='Pending active wayfinding/search/menu-flow test; passive homepage evidence is not treated as a pass.'; conf='low'
+        elif p=='implement-natural-interactions':
+            if st == 'pass':
+                st='not-applicable'; summary='Pending active keyboard/focus/input-modality test; screenshot/DOM evidence is not treated as a pass.'; conf='low'
         elif p=='support-core-task-success' and st=='pass':
             summary='Primary homepage entry point rendered; task completion flow not exercised.'; conf='low'
-        elif p=='be-trustworthy' and st=='pass':
-            summary='No obvious trust/deceptive-design issue found in homepage batch evidence; consent/account flows not exercised.'; conf='low'
+        elif p=='be-trustworthy':
+            if st == 'pass':
+                st='not-applicable'; summary='Pending active consent/account/commerce-flow review for dark patterns; passive homepage evidence is not treated as a pass.'; conf='low'
         principles.append({'id':p,'status':st,'confidence':conf,'summary':summary,'findings':fs})
 
     counts={}
@@ -186,6 +214,8 @@ def audit(rank, domain, url):
             'lighthouse':{'performance':None,'accessibility':None,'bestPractices':None,'seo':None},
             'axeViolations':None if axe_viol is None else len(axe_viol),
             'heapSize':heap_size,
+            'heapSizeAfterInteraction':heap_after_size,
+            'heapDeltaAfterInteraction':heap_delta,
             'cls':cls,
             'lcp':None,
             'inp':None,
@@ -201,7 +231,7 @@ def audit(rank, domain, url):
         'overallScore':score(findings, principles),
         '_batch':BATCH,
         '_artifactsDir':str(evdir),
-        '_caveats':['Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.','Memory is a single heap snapshot, not a repeated-interaction leak proof.','Dark-mode/reduced-motion are inferred from probes unless separately captured.'] + ([f'Axe blocked or failed: {axe_block_reason}'] if axe_blocked else [])
+        '_caveats':['Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.','Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.','Dark-mode/reduced-motion are inferred from probes unless separately captured.'] + ([f'Axe blocked or failed: {axe_block_reason}'] if axe_blocked else [])
     }
     write(RESULTS/f'{site}.json', out)
     return out
