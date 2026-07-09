@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 4,
-    "heapSize": 28126137,
-    "heapSizeAfterInteraction": 28875241,
-    "heapDeltaAfterInteraction": 749104,
+    "heapSize": 12946896,
+    "heapSizeAfterInteraction": 23684121,
+    "heapDeltaAfterInteraction": 9780928,
     "cls": 0.3026214621340538,
     "lcp": null,
     "inp": null,
@@ -25,14 +25,49 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:03:04.833Z",
+      "url": "https://cisco.com/",
+      "rank": 213,
+      "baseline": {
+        "usedSize": 12946896,
+        "totalSize": 14352384
+      },
+      "samples": [
+        {
+          "usedSize": 21589032,
+          "totalSize": 31576064
+        },
+        {
+          "usedSize": 17500468,
+          "totalSize": 28770304
+        },
+        {
+          "usedSize": 22727824,
+          "totalSize": 32624640
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 22727824,
+        "totalSize": 32624640,
+        "totalSelfSizeBytes": 23684121,
+        "nodeCount": 423769,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 9780928,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/cisco.com"
+    }
   },
   "principles": [
     {
       "id": "respect-user-preferences",
       "status": "pass",
       "confidence": "medium",
-      "summary": "No issue found in this batch evidence.",
+      "summary": "No issue found in this batch evidence. Reduced-motion video evidence is pending.",
       "findings": []
     },
     {
@@ -74,7 +109,7 @@
       "id": "be-fast-and-stable",
       "status": "issues",
       "confidence": "medium",
-      "summary": "CLS above good threshold (0.30)",
+      "summary": "CLS above good threshold (0.30) Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
       "findings": [
         {
           "id": "cisco.com-01",
@@ -110,8 +145,8 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch.",
+      "confidence": "low",
+      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
@@ -181,9 +216,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 9.8 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -193,9 +228,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/cisco.com/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
-    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes."
+    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
   ]
 }

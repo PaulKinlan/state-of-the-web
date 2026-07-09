@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": null,
-    "heapSize": 13210966,
-    "heapSizeAfterInteraction": 13052585,
-    "heapDeltaAfterInteraction": -158381,
+    "heapSize": 7238344,
+    "heapSizeAfterInteraction": 11137557,
+    "heapDeltaAfterInteraction": 1680112,
     "cls": 0,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:00:12.851Z",
+      "url": "https://nist.gov/",
+      "rank": 202,
+      "baseline": {
+        "usedSize": 7238344,
+        "totalSize": 7864320
+      },
+      "samples": [
+        {
+          "usedSize": 8666544,
+          "totalSize": 12845056
+        },
+        {
+          "usedSize": 8106168,
+          "totalSize": 13369344
+        },
+        {
+          "usedSize": 8918456,
+          "totalSize": 12845056
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 8918456,
+        "totalSize": 12845056,
+        "totalSelfSizeBytes": 11137557,
+        "nodeCount": 226161,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 1680112,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/nist.gov"
+    }
   },
   "principles": [
     {
@@ -81,8 +116,8 @@
     {
       "id": "be-fast-and-stable",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data.",
+      "confidence": "low",
+      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
       "findings": []
     },
     {
@@ -103,8 +138,8 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch.",
+      "confidence": "low",
+      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
@@ -166,9 +201,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 1.7 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -178,10 +213,11 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/nist.gov/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Axe blocked or failed: Failed to fetch",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
-    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes."
+    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution.",
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims."
   ]
 }

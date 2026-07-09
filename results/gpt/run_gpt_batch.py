@@ -45,6 +45,13 @@ def evidence_cmd(kind, url, out, *opts, timeout=45):
         Path(str(out)+'.error.txt').write_text((r.stdout or '')+'\n'+(r.stderr or ''))
     return r.returncode==0
 
+def lighthouse_cmd(url, out, timeout=170):
+    cmd=['npx','-y','lighthouse',url,'--output=json',f'--output-path={out}','--quiet','--chrome-flags=--headless=new --no-sandbox --disable-gpu','--only-categories=performance,accessibility,best-practices,seo']
+    r=sh(cmd, timeout=timeout)
+    if r.returncode!=0:
+        Path(str(out)+'.error.txt').write_text((r.stdout or '')+'\n'+(r.stderr or ''))
+    return r.returncode==0
+
 AXE = Path('/tmp/axe-probe.js')
 if not AXE.exists():
     AXE.write_text("""(async()=>{try{const r=await fetch('https://unpkg.com/axe-core@4.10.3/axe.min.js',{cache:'no-store'});const s=await r.text();(0,eval)(s);const result=await globalThis.axe.run(document,{resultTypes:['violations','incomplete'],runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','best-practice']}});return {ok:true,violations:result.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.length,help:v.help})),incomplete:result.incomplete.length};}catch(e){return {ok:false,error:String(e&&e.message||e)}}})()""")
@@ -72,6 +79,9 @@ def audit(rank, domain, url):
     evidence_cmd('layout', url, evdir/'layout-mobile.json', '--viewport','390x844','--wait','2500', timeout=35)
     evidence_cmd('discoverability', url, evdir/'discoverability.json', '--viewport','1365x900','--wait','2500', timeout=45)
     evidence_cmd('har', url, evdir/'page.har', '--viewport','1365x900','--wait','3000', timeout=55)
+    lighthouse_cmd(url, evdir/'lighthouse.json', timeout=180)
+    evidence_cmd('trace', url, evdir/'trace.json', '--viewport','1365x900','--wait','3500', timeout=80)
+    evidence_cmd('video', url, evdir/'reduced-motion.mp4', '--viewport','1365x900','--wait','1500','--duration','2500','--emulate-media','prefers-reduced-motion=reduce', timeout=70)
     evidence_cmd('heap', url, evdir/'heap.json', '--viewport','1365x900','--wait','2500', timeout=55)
     evidence_cmd('heap', url, evdir/'heap-after.json', '--viewport','1365x900','--wait','10000','--interact',INTERACT_EXPR, timeout=80)
     evidence_cmd('evaluate', url, evdir/'axe.json', '--viewport','1365x900','--wait','3500','--expr-file',str(AXE), timeout=45)
@@ -82,6 +92,8 @@ def audit(rank, domain, url):
     layout=load(evdir/'layout-desktop.json',{})
     mobile=load(evdir/'layout-mobile.json',{})
     har=load(evdir/'page-summary.json',{})
+    lighthouse=load(evdir/'lighthouse.json',{})
+    trace=load(evdir/'trace-summary.json',{})
     heap=load(evdir/'heap.json',{})
     heap_after=load(evdir/'heap-after.json',{})
     axe=load(evdir/'axe.json',{})
@@ -99,9 +111,19 @@ def audit(rank, domain, url):
     http_status=disc.get('fetchedStatus')
     head_status,hsts=headers(final_url)
     if http_status is None: http_status=head_status
+    lh_cats={k:v.get('score') for k,v in (lighthouse.get('categories') or {}).items()}
+    lh_audits=lighthouse.get('audits') or {}
+    lcp=(lh_audits.get('largest-contentful-paint') or {}).get('numericValue') or (trace.get('timings') or {}).get('largestContentfulPaintMs')
+    tbt=(lh_audits.get('total-blocking-time') or {}).get('numericValue') or (trace.get('mainThread') or {}).get('totalBlockingTimeMs')
+    lh_cls=(lh_audits.get('cumulative-layout-shift') or {}).get('numericValue')
+    if isinstance(lh_cls,(int,float)) and lh_cls > cls: cls=lh_cls
 
     findings=[]
     def suggested_fix(principle, check, title):
+        if check == 'largest-contentful-paint': return 'Improve LCP by prioritizing the hero/content resource, reducing render-blocking work, and optimizing server/critical CSS delivery.'
+        if check == 'total-blocking-time': return 'Reduce main-thread JavaScript by splitting, deferring, and removing non-critical third-party work.'
+        if check == 'lighthouse-best-practices': return 'Review Lighthouse best-practices failures and fix console errors, deprecated APIs, unsafe patterns, and browser compatibility issues.'
+        if check == 'lighthouse-seo': return 'Fix Lighthouse SEO failures such as crawlable links, metadata, status codes, and indexable content.'
         if check == 'cumulative-layout-shift': return 'Reserve space for late-loading media/ads and avoid inserting content above existing content after render.'
         if check == 'responsive-no-horizontal-scroll': return 'Add/repair viewport-aware responsive CSS so all content fits within the mobile visual viewport without horizontal scrolling.'
         if check == 'content-visible-without-js': return 'Server-render the primary content and metadata so crawlers and no-JavaScript users can access the page.'
@@ -119,7 +141,9 @@ def audit(rank, domain, url):
     def add(principle,severity,title,evidence,check=None):
         fid=f'{site}-{len(findings)+1:02d}'
         findings.append({'id':fid,'principleId':principle,'checkId':check,'severity':severity,'title':title,'evidence':evidence,'suggestedFix':suggested_fix(principle, check, title)})
-    if cls and cls>0.1: add('be-fast-and-stable','high',f'CLS above good threshold ({cls:.2f})',f'layout primitive reported CLS {cls:.3f}.','cumulative-layout-shift')
+    if lcp and lcp>2500: add('be-fast-and-stable','high' if lcp>4000 else 'medium',f'LCP above good threshold ({lcp/1000:.1f}s)',f'Lighthouse/trace recorded LCP {lcp:.0f}ms and TBT {tbt or 0:.0f}ms.','largest-contentful-paint')
+    if tbt and tbt>300: add('be-fast-and-stable','medium',f'Total blocking time is high ({tbt:.0f}ms)',f'Lighthouse/trace recorded TBT {tbt:.0f}ms.','total-blocking-time')
+    if cls and cls>0.1: add('be-fast-and-stable','high',f'CLS above good threshold ({cls:.2f})',f'layout/Lighthouse recorded CLS {cls:.3f}.','cumulative-layout-shift')
     if overflow>0: add('adapt-to-the-form-factor','high','Mobile viewport has horizontal overflow',f'mobile layout reported horizontalOverflowPx={overflow}.','responsive-no-horizontal-scroll')
     if disc.get('coveragePct') is not None and disc.get('coveragePct')<50: add('be-discoverable','high' if disc.get('isJsShell') else 'medium',f"Low non-JS discoverability ({disc.get('coveragePct')}%)",f"discoverability found coveragePct={disc.get('coveragePct')}%, isJsShell={disc.get('isJsShell')}.",'content-visible-without-js')
     axe_blocked = False
@@ -137,6 +161,8 @@ def audit(rank, domain, url):
     if (probes.get('inputsWithoutNames') or 0)>0 or (probes.get('buttonsWithoutNames') or 0)>0 or (probes.get('linksWithoutNames') or 0)>0:
         add('be-inclusive','medium','Unnamed controls or links detected',f"inputsWithoutNames={probes.get('inputsWithoutNames')}, buttonsWithoutNames={probes.get('buttonsWithoutNames')}, linksWithoutNames={probes.get('linksWithoutNames')}.",'accessible-names')
     if not (probes.get('metaDescription') or disc.get('metaDescriptionPresentInRaw')): add('follow-best-practices','medium','Missing meta description signal','No rendered/raw meta description was detected.','metadata')
+    if lh_cats.get('best-practices') is not None and lh_cats.get('best-practices') < 0.9: add('follow-best-practices','medium',f'Lighthouse best-practices score {lh_cats.get("best-practices")*100:.0f}', 'Lighthouse best-practices category is below 90.', 'lighthouse-best-practices')
+    if lh_cats.get('seo') is not None and lh_cats.get('seo') < 0.9: add('be-discoverable','medium',f'Lighthouse SEO score {lh_cats.get("seo")*100:.0f}', 'Lighthouse SEO category is below 90.', 'lighthouse-seo')
     if req and req>140 and domain not in {'wikipedia.org'}: add('maximize-content-reduce-noise','medium','Substantial page chrome/network noise',f'HAR recorded {req} requests; script hosts include {", ".join((probes.get("externalScriptHosts") or [])[:8])}.','reduce-noise')
     if heap_delta is not None and heap_delta > 25000000 and heap_after_size > heap_size * 1.5:
         add('be-memory-efficient','medium',f'Heap grew after lightweight interaction (+{heap_delta/1000000:.1f} MB)',f'Baseline heap self size {heap_size} bytes; after scroll/nav/wait heap self size {heap_after_size} bytes. This is a signal, not a confirmed leak trace.','heap-growth-after-interaction')
@@ -162,7 +188,7 @@ def audit(rank, domain, url):
             else:
                 summary=f"Single-load heap snapshot captured ({heap_size} bytes self size); post-interaction heap unavailable."; conf='low'
         elif p=='be-fast-and-stable' and st=='pass':
-            summary=f"Batch layout CLS {cls:.3f}; deeper LCP/INP merged from CDP coordinator data."; conf='medium'
+            summary=f"Lighthouse/trace/layout evidence: LCP {lcp}, CLS {cls:.3f}, TBT {tbt}."; conf='high' if lcp is not None else 'medium'
         elif p=='adapt-to-the-form-factor' and st=='pass':
             summary='Mobile layout showed no horizontal overflow.'; conf='high'
         elif p=='be-inclusive' and st=='pass':
@@ -173,7 +199,7 @@ def audit(rank, domain, url):
                 summary='axe/probes found no obvious homepage accessibility issue.' if axe.get('ok') else 'Axe unavailable; judgement based on DOM probes only.'
                 conf='high' if axe.get('ok') else 'low'
         elif p=='follow-best-practices' and st=='pass':
-            summary='Basic metadata/viewport probes passed; Lighthouse not run in this scale batch.'; conf='medium'
+            summary='Basic metadata/viewport probes and Lighthouse best-practices/SEO checks did not raise a finding.'; conf='high' if lh_cats else 'medium'
         elif p=='be-discoverable' and st=='pass':
             summary=f"discoverability coverage {disc.get('coveragePct')}%, JS shell={disc.get('isJsShell')}."; conf='high'
         elif p=='be-sustainable' and st=='pass':
@@ -211,14 +237,20 @@ def audit(rank, domain, url):
         'httpStatus':http_status,
         'evidence':{
             'screenshot':str(evdir/'screenshot.png'),
-            'lighthouse':{'performance':None,'accessibility':None,'bestPractices':None,'seo':None},
+            'lighthouse':{
+                'performance': None if lh_cats.get('performance') is None else round(lh_cats.get('performance')*100),
+                'accessibility': None if lh_cats.get('accessibility') is None else round(lh_cats.get('accessibility')*100),
+                'bestPractices': None if lh_cats.get('best-practices') is None else round(lh_cats.get('best-practices')*100),
+                'seo': None if lh_cats.get('seo') is None else round(lh_cats.get('seo')*100),
+            },
             'axeViolations':None if axe_viol is None else len(axe_viol),
             'heapSize':heap_size,
             'heapSizeAfterInteraction':heap_after_size,
             'heapDeltaAfterInteraction':heap_delta,
             'cls':cls,
-            'lcp':None,
+            'lcp':lcp,
             'inp':None,
+            'tbt':tbt,
             'isJsShell':disc.get('isJsShell'),
             'textChars':(disc.get('rendered') or {}).get('textChars') or probes.get('textChars'),
             'hasViewport':bool(probes.get('viewport') or layout.get('observed',{}).get('hasViewportMeta')),
@@ -231,7 +263,7 @@ def audit(rank, domain, url):
         'overallScore':score(findings, principles),
         '_batch':BATCH,
         '_artifactsDir':str(evdir),
-        '_caveats':['Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.','Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.','Dark-mode/reduced-motion are inferred from probes unless separately captured.'] + ([f'Axe blocked or failed: {axe_block_reason}'] if axe_blocked else [])
+        '_caveats':['Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.','Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.','Dark-mode/reduced-motion are inferred from probes unless separately captured.'] + ([f'Axe blocked or failed: {axe_block_reason}'] if axe_blocked else [])
     }
     write(RESULTS/f'{site}.json', out)
     return out

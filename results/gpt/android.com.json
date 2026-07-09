@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 3,
-    "heapSize": 14506300,
-    "heapSizeAfterInteraction": 22947584,
-    "heapDeltaAfterInteraction": 8441284,
+    "heapSize": 6896468,
+    "heapSizeAfterInteraction": 21692424,
+    "heapDeltaAfterInteraction": 10488036,
     "cls": 0.00042778321935831086,
     "lcp": null,
     "inp": null,
@@ -25,7 +25,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-09T17:03:33.464Z",
+      "url": "https://android.com/",
+      "rank": 216,
+      "baseline": {
+        "usedSize": 6896468,
+        "totalSize": 7864320
+      },
+      "samples": [
+        {
+          "usedSize": 15909160,
+          "totalSize": 23592960
+        },
+        {
+          "usedSize": 17382544,
+          "totalSize": 23855104
+        },
+        {
+          "usedSize": 17384504,
+          "totalSize": 24117248
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 17384504,
+        "totalSize": 24117248,
+        "totalSelfSizeBytes": 21692424,
+        "nodeCount": 406978,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 10488036,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-002-evidence/android.com"
+    }
   },
   "principles": [
     {
@@ -81,8 +116,8 @@
     {
       "id": "be-fast-and-stable",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data.",
+      "confidence": "low",
+      "summary": "Batch layout CLS 0.000; deeper LCP/INP merged from CDP coordinator data. Lighthouse/trace evidence is pending for this site; current judgement is based on layout/CLS/HAR only.",
       "findings": []
     },
     {
@@ -110,8 +145,8 @@
     {
       "id": "follow-best-practices",
       "status": "pass",
-      "confidence": "medium",
-      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch.",
+      "confidence": "low",
+      "summary": "Basic metadata/viewport probes passed; Lighthouse not run in this scale batch. Lighthouse best-practices evidence is pending for this site.",
       "findings": []
     },
     {
@@ -173,10 +208,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Rigorous same-session memory leak test has not been run yet; previous single/coarse heap data is not treated as a pass.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +10.5 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "android.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+10.5 MB)",
+          "evidence": "Same-session memory pass: baseline 6896468 bytes; final after interaction cycles + forced GC 21692424 bytes; delta 10488036 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 3 principles with issues; top concerns: medium be-inclusive: axe found 3 violation groups; medium be-private-and-secure: Large third-party/network surface; medium respect-user-preferences: No explicit color-scheme/dark-mode signal observed.",
@@ -185,9 +230,10 @@
   "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/batch-002-evidence/android.com/evidence",
   "_caveats": [
     "Scale batch: no Lighthouse, LCP or INP in this pass; coordinator CDP data should fill objective metrics.",
-    "Memory uses baseline plus one lightweight scroll/nav/wait heap snapshot; this is a coarse signal, not a confirmed leak trace.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
     "Memory principle pending rigorous same-session recheck; no pass/issue asserted from single/coarse heap snapshots.",
-    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes."
+    "Passive-only principles patched: trustworthy/resilient/natural-interactions/guided-navigation require active flow testing and are not counted as passes.",
+    "Lighthouse/trace/reduced-motion video were not collected in the original batch; future batches include them and this site needs supplemental evidence for high-confidence performance/reduced-motion claims.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
