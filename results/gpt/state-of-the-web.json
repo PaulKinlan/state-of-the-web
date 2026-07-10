@@ -1,0 +1,250 @@
+{
+  "site": "state-of-the-web",
+  "rank": null,
+  "auditedAt": "2026-07-10T12:02:09.231430Z",
+  "url": "https://paulkinlan.github.io/state-of-the-web/",
+  "finalUrl": "https://paulkinlan.github.io/state-of-the-web/",
+  "httpStatus": 200,
+  "evidence": {
+    "screenshot": "/home/paulkinlan/state-of-the-web/results/gpt/state-of-the-web-evidence/screenshot.png",
+    "discoverability": "/home/paulkinlan/state-of-the-web/results/gpt/state-of-the-web-evidence/discoverability.json",
+    "layout": "/home/paulkinlan/state-of-the-web/results/gpt/state-of-the-web-evidence/layout.json",
+    "traceSummary": "/home/paulkinlan/state-of-the-web/results/gpt/state-of-the-web-evidence/trace-summary-summary.json",
+    "coveragePct": 11,
+    "isJsShell": false,
+    "textChars": 14010,
+    "hasViewport": true,
+    "hasMetaDescription": false,
+    "lang": "en",
+    "buttons": 35,
+    "links": 5,
+    "buttonsHaveNames": true,
+    "imgAltIssues": 0,
+    "horizontalOverflowPx": 0,
+    "lcp": 627.96,
+    "tbt": 0,
+    "cls": "~0 per coordinator evidence",
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T12:03:58.325Z",
+      "url": "https://paulkinlan.github.io/state-of-the-web/",
+      "rank": 1,
+      "baseline": {
+        "usedSize": 1064936,
+        "totalSize": 1572864
+      },
+      "samples": [
+        {
+          "usedSize": 1072728,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 1072728,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 1072728,
+          "totalSize": 1572864
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 1072728,
+        "totalSize": 1572864,
+        "totalSelfSizeBytes": 26076861,
+        "nodeCount": 87719,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 7792,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-sotw-self-evidence/state-of-the-web"
+    },
+    "heapSize": 1064936,
+    "heapSizeAfterInteraction": 26076861,
+    "heapDeltaAfterInteraction": 7792
+  },
+  "principles": [
+    {
+      "id": "respect-user-preferences",
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "The dashboard uses transitions but there is no evidence of prefers-reduced-motion handling.",
+      "findings": [
+        {
+          "id": "state-of-the-web-respect-user-preferences-01",
+          "severity": "medium",
+          "title": "Reduced-motion preference is not handled",
+          "evidence": "Coordinator evidence reports no prefers-reduced-motion handling while the UI uses transitions.",
+          "suggestedFix": "Wrap non-essential transitions/animations in a prefers-reduced-motion media query and reduce or disable motion when the user requests it."
+        }
+      ]
+    },
+    {
+      "id": "implement-natural-interactions",
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "The UI appears interactive and button labels are present, but transitions do not respect reduced motion.",
+      "findings": [
+        {
+          "id": "state-of-the-web-implement-natural-interactions-01",
+          "severity": "medium",
+          "title": "Transitions lack reduced-motion fallback",
+          "evidence": "Known evidence: the dashboard has transitions and no prefers-reduced-motion handling.",
+          "suggestedFix": "Keep interaction feedback, but shorten/remove animated transitions under prefers-reduced-motion: reduce."
+        }
+      ]
+    },
+    {
+      "id": "provide-guided-navigation",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "The visible dashboard has a clear title, summary metrics, an About link, and clickable principle rows that explain what each principle tests. It is a single-page dashboard, so breadcrumbs are not required.",
+      "findings": []
+    },
+    {
+      "id": "maximize-content-reduce-noise",
+      "status": "pass",
+      "confidence": "high",
+      "summary": "The screenshot shows a focused data dashboard with summary cards and principle bars; no ads, popups, newsletter modals, or distracting promotional chrome are visible.",
+      "findings": []
+    },
+    {
+      "id": "adapt-to-the-form-factor",
+      "status": "pass",
+      "confidence": "high",
+      "summary": "Layout evidence reports a viewport meta tag and no horizontal overflow; the dashboard content fits the captured viewport width.",
+      "findings": []
+    },
+    {
+      "id": "support-core-task-success",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "The core task is browsing audit results, not completing a linear checkout/sign-up flow. The screenshot shows key aggregate results, principle issue rates, and affordances to learn more.",
+      "findings": []
+    },
+    {
+      "id": "be-fast-and-stable",
+      "status": "pass",
+      "confidence": "high",
+      "summary": "Trace summary is strong: FCP/LCP about 628ms, load event about 1.0s, no long tasks, and total blocking time 0ms. Coordinator evidence reports CLS approximately 0.",
+      "findings": []
+    },
+    {
+      "id": "be-inclusive",
+      "status": "pass",
+      "confidence": "high",
+      "summary": "Known accessibility probes found lang=en, a good title, all buttons named, 35 buttons, 5 links, and no image alt issues.",
+      "findings": []
+    },
+    {
+      "id": "follow-best-practices",
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "The page is missing a meta description, which is a basic metadata/best-practices gap.",
+      "findings": [
+        {
+          "id": "state-of-the-web-follow-best-practices-01",
+          "severity": "medium",
+          "title": "Missing meta description",
+          "evidence": "Discoverability evidence reports metaDescriptionPresentInRaw is null / no meta description.",
+          "suggestedFix": "Add a concise, page-specific meta description explaining that the dashboard reports web quality audit results across the top sites."
+        }
+      ]
+    },
+    {
+      "id": "be-discoverable",
+      "status": "issues",
+      "confidence": "high",
+      "summary": "The page has a good title and raw H1, but non-JavaScript/raw content coverage is low and no meta description is present.",
+      "findings": [
+        {
+          "id": "state-of-the-web-be-discoverable-01",
+          "severity": "high",
+          "title": "Low non-JS content coverage",
+          "evidence": "discoverability.json reports coveragePct=11, rendered textChars=14010, raw textChars=995, and metaDescriptionPresentInRaw=null.",
+          "suggestedFix": "Server-render or statically include the key dashboard summary, principle names, and current counts so crawlers can understand the page without JavaScript."
+        },
+        {
+          "id": "state-of-the-web-be-discoverable-02",
+          "severity": "medium",
+          "title": "Missing meta description",
+          "evidence": "discoverability.json reports no raw meta description.",
+          "suggestedFix": "Add a descriptive meta description for search previews and crawlers."
+        }
+      ]
+    },
+    {
+      "id": "be-private-and-secure",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "The site is served over HTTPS on GitHub Pages and the screenshot shows no cookie consent wall, tracking prompt, account nag, or third-party ad surface. A deeper network/privacy audit was not provided for this specific pass.",
+      "findings": []
+    },
+    {
+      "id": "be-resilient",
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "The page is not an empty JS shell, but most rendered dashboard content is not present in the raw HTML, which weakens resilience for no-JavaScript/crawler contexts.",
+      "findings": [
+        {
+          "id": "state-of-the-web-be-resilient-01",
+          "severity": "medium",
+          "title": "Dashboard content depends heavily on client rendering",
+          "evidence": "discoverability.json reports contentVisibleWithoutJs=11 and coveragePct=11, while rendered text is much larger than raw HTML text.",
+          "suggestedFix": "Pre-render the critical dashboard data or provide a static fallback table/summary so the page remains useful when JavaScript fails."
+        }
+      ]
+    },
+    {
+      "id": "be-internationalised",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "The document language is set to lang=en. No deeper locale, timezone, or translation flow was tested.",
+      "findings": []
+    },
+    {
+      "id": "be-trustworthy",
+      "status": "pass",
+      "confidence": "high",
+      "summary": "The screenshot shows a transparent data dashboard with source/methodology-oriented copy and an About link. No visible dark patterns, consent walls, disguised ads, fake urgency, or nag banners are present.",
+      "findings": []
+    },
+    {
+      "id": "be-sustainable",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "The visible page is a text/data-heavy dashboard with no video, ad wall, or large media carousel. Trace timings are low; no detailed transfer-size evidence was supplied for this specific pass.",
+      "findings": []
+    },
+    {
+      "id": "be-agent-ready",
+      "status": "issues",
+      "confidence": "high",
+      "summary": "AI/crawler-readable raw content is limited compared with the rendered dashboard.",
+      "findings": [
+        {
+          "id": "state-of-the-web-be-agent-ready-01",
+          "severity": "high",
+          "title": "Low raw content coverage for agents",
+          "evidence": "discoverability.json reports coveragePct=11 and raw contentTokens=68 versus rendered contentTokens=400.",
+          "suggestedFix": "Expose the key dashboard results, principle descriptions, and current counts in server-rendered/static HTML or linked JSON with clear metadata."
+        }
+      ]
+    },
+    {
+      "id": "be-memory-efficient",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
+      "findings": []
+    }
+  ],
+  "verdict": "State of the Web dashboard: 6 principles with issues, 10 pass, 1 not applicable. Main fixes are to add metadata/static crawlable dashboard content and respect reduced-motion preferences.",
+  "overallScore": 34,
+  "_artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/state-of-the-web-evidence",
+  "_caveats": [
+    "Judgement uses existing screenshot and supplied evidence only; no new browser capture or interaction flow was run.",
+    "Memory efficiency remains not-applicable until a rigorous heap-diff audit is run.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
+  ]
+}
