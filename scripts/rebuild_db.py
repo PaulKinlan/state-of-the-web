@@ -117,6 +117,40 @@ def load_ltv():
             pass
     return out
 
+def merge_active_probes(con):
+    """Merge active-probe results for the last 2 principles:
+    implement-natural-interactions (feature detection) and
+    support-core-task-success (interaction testing)."""
+    fpath = os.path.join(ROOT, 'results', 'gpt', 'active-probes-001.json')
+    if not os.path.exists(fpath):
+        return
+    data = json.load(open(fpath))
+    pid_map = {
+        'naturalInteractions': 'implement-natural-interactions',
+        'taskSuccess': 'support-core-task-success',
+    }
+    counts = {k: {'pass': 0, 'issues': 0} for k in pid_map}
+    for r in data:
+        site = r.get('site')
+        if not site or not r.get('ok'):
+            continue
+        for key, pid in pid_map.items():
+            score = (r.get(key) or {}).get('score') or r.get(key) or {}
+            status = score.get('status', 'not-applicable')
+            conf = score.get('confidence', 'medium')
+            summ = score.get('summary', '')
+            con.execute("DELETE FROM findings WHERE site=? AND principle_id=?", (site, pid))
+            con.execute("INSERT OR REPLACE INTO principles (site, principle_id, status, confidence, summary, finding_count) VALUES (?,?,?,?,?,?)",
+                        (site, pid, status, conf, summ, 1 if status == 'issues' else 0))
+            if status == 'issues':
+                con.execute("INSERT INTO findings (site, principle_id, finding_id, severity, summary, evidence) VALUES (?,?,?,?,?,?)",
+                            (site, pid, site.replace('.', '-') + '-01', 'moderate', summ.split('.')[0] if summ else 'Issue found', summ))
+            if status in counts.get(key, {}):
+                counts[key][status] += 1
+    for key, pid in pid_map.items():
+        c = counts[key]
+        print(f"  merged active-probe {pid}: {c['pass']} pass, {c['issues']} issues", file=sys.stderr)
+
 def merge_reaudits(con):
     """Merge vision re-audit results (be-trustworthy, provide-guided-navigation)
     that were re-judged from existing screenshots with dark-pattern/nav findings."""
@@ -271,8 +305,9 @@ def main():
                 n_find += 1
     con.commit()
 
-    # --- Post-processing: merge re-audits, then derive/fix ---
+    # --- Post-processing: merge re-audits + active probes, then derive/fix ---
     merge_reaudits(con)
+    merge_active_probes(con)
     derive_resilience(con, cdp)
     fix_false_passes(con)
     con.commit()
