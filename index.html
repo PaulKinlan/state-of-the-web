@@ -212,12 +212,13 @@ const PRINCIPLES={
 "be-trustworthy":{title:"Be trustworthy",status:"pending",desc:"Honest and humane. No dark patterns (confirmshaming, forced continuity, disguised ads, nagging consent walls), honest defaults, clear pricing and consent, easy reversal of actions, predictable controls, and humane error handling.",how:"Dark patterns, honest defaults, clear pricing/consent, and error recovery. Currently pending an active testing method — not yet measured."},
 "be-resilient":{title:"Be resilient",status:"pending",desc:"Core content and primary flows work under adverse conditions: no JS, slow or offline network, older or non-Baseline browsers. Modern features are progressive enhancements with graceful fallbacks.",how:"No-JS content, offline fallback, installability, and graceful degradation below Baseline. Currently pending an active testing method — not yet measured."}
 };
+function closeInfo(){const pop=document.getElementById('info-popover');if(typeof pop.hidePopover==='function'){pop.hidePopover();}else{pop.removeAttribute('open');pop.style.display='none';}}
 function pidName(id){return PRINCIPLES[id]?PRINCIPLES[id].title:id.replace(/-/g,' ');}
 function showInfo(btn,pid){
   const info=PRINCIPLES[pid];const pop=document.getElementById('info-popover');
   if(!info){return;}
   const badge=info.status==='pending'?'<span class="pp-status" style="background:var(--bg-secondary);color:var(--muted);border:1px solid var(--border)">Pending active testing</span>':'';
-  pop.innerHTML='<div class="pp-head"><h3>'+info.title+'</h3><button class="pp-close" onclick="document.getElementById(\'info-popover\').hidePopover?document.getElementById(\'info-popover\').hidePopover():document.getElementById(\'info-popover\').removeAttribute(\'open\')" aria-label="Close">×</button></div><div class="pp-body"><p class="pp-desc">'+info.desc+'</p>'+badge+'<p class="pp-how"><strong>How it\'s tested:</strong> '+info.how+'</p></div>';
+  pop.innerHTML='<div class="pp-head"><h3>'+info.title+'</h3><button class="pp-close" onclick="closeInfo()" aria-label="Close">×</button></div><div class="pp-body"><p class="pp-desc">'+info.desc+'</p>'+badge+'<p class="pp-how"><strong>How it\'s tested:</strong> '+info.how+'</p></div>';
   if(typeof pop.showPopover==='function'){
     pop.showPopover();
     requestAnimationFrame(()=>{
