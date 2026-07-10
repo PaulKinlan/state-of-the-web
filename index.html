@@ -217,7 +217,7 @@ function renderSites(){
     const score=s.overall_score!=null?`<span class="score ${scoreClass(s.overall_score)}">${s.overall_score}</span>`:'—';
     const cls=s.cls!=null?(s.cls>0.1?`<span style="color:var(--bad)">${s.cls.toFixed(2)}</span>`:s.cls.toFixed(3)):'—';
     const shell=s.is_js_shell?' <span class="shell-icon" title="JS shell — no content without JavaScript">⬚</span>':'';
-    return `<tr><td><a class="site-link" href="site.html?site=${s.site}">${s.site}</a>${shell}</td><td class="num">${s.rank||'—'}</td><td class="num">${score}</td><td class="num">${s.issue_count||0}</td><td class="num">${cls}</td></tr>`;
+    return `<tr><td><a class="site-link" href="sites/${s.site}.html">${s.site}</a>${shell}</td><td class="num">${s.rank||'—'}</td><td class="num">${score}</td><td class="num">${s.issue_count||0}</td><td class="num">${cls}</td></tr>`;
   }).join('');
   // update sort indicators
   document.querySelectorAll('#sites-table th[data-col]').forEach(th=>{
