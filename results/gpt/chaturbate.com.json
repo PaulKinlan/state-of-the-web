@@ -14,9 +14,9 @@
       "seo": 77
     },
     "axeViolations": null,
-    "heapSize": 62838711,
-    "heapSizeAfterInteraction": 78054535,
-    "heapDeltaAfterInteraction": 15215824,
+    "heapSize": 40676656,
+    "heapSizeAfterInteraction": 65945448,
+    "heapDeltaAfterInteraction": 9609000,
     "cls": 0.025837951484462378,
     "lcp": 3389.6594999999998,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T09:41:12.389Z",
+      "url": "https://chaturbate.com/",
+      "rank": 920,
+      "baseline": {
+        "usedSize": 40676656,
+        "totalSize": 45027328
+      },
+      "samples": [
+        {
+          "usedSize": 31486912,
+          "totalSize": 46280704
+        },
+        {
+          "usedSize": 41189356,
+          "totalSize": 52834304
+        },
+        {
+          "usedSize": 50285656,
+          "totalSize": 59387904
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 50285656,
+        "totalSize": 59387904,
+        "totalSelfSizeBytes": 65945448,
+        "nodeCount": 1011266,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 9609000,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-008-evidence/chaturbate.com"
+    }
   },
   "principles": [
     {
@@ -241,9 +276,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 9.6 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -255,6 +290,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

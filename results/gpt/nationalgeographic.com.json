@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": null,
-    "heapSize": 59400973,
-    "heapSizeAfterInteraction": 62960515,
-    "heapDeltaAfterInteraction": 3559542,
+    "heapSize": 35624476,
+    "heapSizeAfterInteraction": 49883128,
+    "heapDeltaAfterInteraction": 12058448,
     "cls": 0.16587775329680923,
     "lcp": 20087.846124999996,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T09:34:24.062Z",
+      "url": "https://nationalgeographic.com/",
+      "rank": 903,
+      "baseline": {
+        "usedSize": 35624476,
+        "totalSize": 37986304
+      },
+      "samples": [
+        {
+          "usedSize": 31540564,
+          "totalSize": 69025792
+        },
+        {
+          "usedSize": 49195356,
+          "totalSize": 66928640
+        },
+        {
+          "usedSize": 47682924,
+          "totalSize": 66142208
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 47682924,
+        "totalSize": 66142208,
+        "totalSelfSizeBytes": 49883128,
+        "nodeCount": 873873,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 12058448,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-008-evidence/nationalgeographic.com"
+    }
   },
   "principles": [
     {
@@ -218,9 +253,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 12.1 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -232,6 +267,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: https://unpkg.com/axe-core@4.10.3/axe.min.js fetch blocked by privacy-gateway"
+    "Axe blocked or failed: https://unpkg.com/axe-core@4.10.3/axe.min.js fetch blocked by privacy-gateway",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

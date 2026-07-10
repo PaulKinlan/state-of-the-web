@@ -14,9 +14,9 @@
       "seo": 77
     },
     "axeViolations": 4,
-    "heapSize": 14191280,
-    "heapSizeAfterInteraction": 15551621,
-    "heapDeltaAfterInteraction": 1360341,
+    "heapSize": 9211568,
+    "heapSizeAfterInteraction": 25535428,
+    "heapDeltaAfterInteraction": 10649876,
     "cls": 0.026066350710900472,
     "lcp": 11661.570920000004,
     "inp": null,
@@ -42,7 +42,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T09:44:52.208Z",
+      "url": "https://whitehouse.gov/",
+      "rank": 944,
+      "baseline": {
+        "usedSize": 9211568,
+        "totalSize": 10223616
+      },
+      "samples": [
+        {
+          "usedSize": 16767192,
+          "totalSize": 20447232
+        },
+        {
+          "usedSize": 19576144,
+          "totalSize": 27787264
+        },
+        {
+          "usedSize": 19861444,
+          "totalSize": 28835840
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 19861444,
+        "totalSize": 28835840,
+        "totalSelfSizeBytes": 25535428,
+        "nodeCount": 503784,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 10649876,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-008-evidence/whitehouse.gov"
+    }
   },
   "principles": [
     {
@@ -214,10 +249,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +10.6 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "whitehouse.gov-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+10.6 MB)",
+          "evidence": "Same-session memory pass: baseline 9211568 bytes; final after interaction cycles + forced GC 25535428 bytes; delta 10649876 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (11.7s); high be-inclusive: axe found 4 violation groups; medium be-sustainable: Heavy transfer on initial load (4.7 MB).",
@@ -227,6 +272,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

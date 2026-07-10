@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 56933837,
-    "heapSizeAfterInteraction": 56650769,
-    "heapDeltaAfterInteraction": -283068,
+    "heapSize": 51589868,
+    "heapSizeAfterInteraction": 30782380,
+    "heapDeltaAfterInteraction": -22821564,
     "cls": 0.070848878462313,
     "lcp": 11375.138500000001,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T09:45:27.072Z",
+      "url": "https://note.com/",
+      "rank": 949,
+      "baseline": {
+        "usedSize": 51589868,
+        "totalSize": 83099648
+      },
+      "samples": [
+        {
+          "usedSize": 29752788,
+          "totalSize": 39845888
+        },
+        {
+          "usedSize": 12043480,
+          "totalSize": 18612224
+        },
+        {
+          "usedSize": 28768304,
+          "totalSize": 40370176
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 28768304,
+        "totalSize": 40370176,
+        "totalSelfSizeBytes": 30782380,
+        "nodeCount": 657905,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -22821564,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-008-evidence/note.com"
+    }
   },
   "principles": [
     {
@@ -219,9 +254,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -22.8 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -233,6 +268,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: script-src 'self' https: 'nonce-N2RhNzFkODctZDA2MC00YmJiLWFkYzUtMGFiNGF"
+    "Axe blocked or failed: Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: script-src 'self' https: 'nonce-N2RhNzFkODctZDA2MC00YmJiLWFkYzUtMGFiNGF",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

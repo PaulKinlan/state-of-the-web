@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 4,
-    "heapSize": 21366259,
-    "heapSizeAfterInteraction": 33034406,
-    "heapDeltaAfterInteraction": 11668147,
+    "heapSize": 12158748,
+    "heapSizeAfterInteraction": 34905771,
+    "heapDeltaAfterInteraction": 19299180,
     "cls": 0.10751032653345957,
     "lcp": 20852.414479999996,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T09:43:00.224Z",
+      "url": "https://docker.io/",
+      "rank": 927,
+      "baseline": {
+        "usedSize": 12158748,
+        "totalSize": 13340672
+      },
+      "samples": [
+        {
+          "usedSize": 18148228,
+          "totalSize": 22515712
+        },
+        {
+          "usedSize": 31025972,
+          "totalSize": 42266624
+        },
+        {
+          "usedSize": 31457928,
+          "totalSize": 46985216
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 31457928,
+        "totalSize": 46985216,
+        "totalSelfSizeBytes": 34905771,
+        "nodeCount": 647671,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 19299180,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-008-evidence/docker.io"
+    }
   },
   "principles": [
     {
@@ -202,10 +237,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +19.3 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "docker.io-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+19.3 MB)",
+          "evidence": "Same-session memory pass: baseline 12158748 bytes; final after interaction cycles + forced GC 34905771 bytes; delta 19299180 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (20.9s); high be-fast-and-stable: CLS above good threshold (0.11); high be-inclusive: axe found 4 violation groups.",
@@ -215,6 +260,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

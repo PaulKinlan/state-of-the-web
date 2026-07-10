@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 3,
-    "heapSize": 25790821,
-    "heapSizeAfterInteraction": 24000593,
-    "heapDeltaAfterInteraction": -1790228,
+    "heapSize": 14028112,
+    "heapSizeAfterInteraction": 21194264,
+    "heapDeltaAfterInteraction": 14020508,
     "cls": 0.1162440196761079,
     "lcp": 25727.526279999995,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T09:46:32.664Z",
+      "url": "https://caixa.gov.br/",
+      "rank": 958,
+      "baseline": {
+        "usedSize": 14028112,
+        "totalSize": 15577088
+      },
+      "samples": [
+        {
+          "usedSize": 27255212,
+          "totalSize": 61132800
+        },
+        {
+          "usedSize": 28366116,
+          "totalSize": 62181376
+        },
+        {
+          "usedSize": 28048620,
+          "totalSize": 61919232
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 28048620,
+        "totalSize": 61919232,
+        "totalSelfSizeBytes": 21194264,
+        "nodeCount": 331229,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 14020508,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-008-evidence/caixa.gov.br"
+    }
   },
   "principles": [
     {
@@ -226,9 +261,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 14.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -239,6 +274,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
