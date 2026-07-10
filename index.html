@@ -45,6 +45,20 @@ a{color:var(--accent)}
 .note{font-size:.75rem;color:var(--muted);margin-top:.5rem}
 .badge{display:inline-block;font-size:.65rem;padding:.1rem .4rem;border-radius:.2rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
 .badge.high{background:#c0392b;color:#fff}.badge.serious{background:#e74c3c;color:#fff}.badge.moderate{background:#e6a700;color:#fff}.badge.low{background:var(--bg-secondary);color:var(--muted);border:1px solid var(--border)}
+.principle-link{display:inline-flex;align-items:center;gap:.25rem;background:none;border:none;color:var(--muted);font:inherit;font-size:.78rem;cursor:pointer;text-align:right;padding:0;text-decoration:none;line-height:1.3}
+.principle-link:hover{color:var(--accent);text-decoration:underline}
+.principle-link .q{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid currentColor;font-size:.62rem;font-weight:700;line-height:1;opacity:.55;flex-shrink:0;text-decoration:none}
+.principle-link:hover .q{opacity:1;text-decoration:none}
+#info-popover{inset:auto;margin:0;position:fixed;width:min(340px,calc(100vw - 16px));padding:0;border:1px solid var(--border);border-radius:.6rem;background:var(--background);box-shadow:0 10px 40px rgba(0,0,0,.22);font-size:.82rem;line-height:1.55;color:var(--color)}
+#info-popover .pp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;padding:.85rem .9rem .35rem}
+#info-popover h3{font-family:Georgia,serif;font-size:1rem;font-weight:normal;margin:0;flex:1;line-height:1.3}
+#info-popover .pp-close{background:none;border:none;color:var(--muted);font-size:1.25rem;cursor:pointer;line-height:1;padding:0 0 .2rem;flex-shrink:0}
+#info-popover .pp-close:hover{color:var(--color)}
+#info-popover .pp-body{padding:0 .9rem .85rem}
+#info-popover .pp-desc{margin:0 0 .55rem}
+#info-popover .pp-how{color:var(--muted);font-size:.74rem;border-top:1px solid var(--border);padding-top:.5rem;margin:0}
+#info-popover .pp-how strong{color:var(--color)}
+#info-popover .pp-status{display:inline-block;font-size:.66rem;font-weight:700;padding:.12rem .45rem;border-radius:.25rem;margin-top:.4rem;text-transform:uppercase;letter-spacing:.03em}
 </style>
 </head>
 <body>
@@ -84,6 +98,12 @@ a{color:var(--accent)}
   <p class="note">Data: <a href="https://github.com/PaulKinlan/state-of-the-web" target="_blank">GitHub</a> · Methodology: <a href="https://github.com/PaulKinlan/web-uplift" target="_blank">web-uplift</a> · <a href="https://aifoc.us" target="_blank">AI Focus</a></p>
 </div>
 
+<div id="info-popover" popover="auto"></div>
+<script type="module">
+if(!HTMLElement.prototype.hasOwnProperty('popover')){
+  import('https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover-fn.js').then(({apply})=>apply());
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.min.js"></script>
 <script>
 let db, sortCol='overall_score', sortDir='desc';
@@ -138,7 +158,7 @@ function renderPrincipleChart(){
     const failPct=pct(r.issues,r.total);
     const cls=failPct>=60?'fill-bad':failPct>=30?'fill-warn':'fill-good';
     const w=max?r.issues/max*100:0;
-    return `<div class="bar-row"><span class="name">${r.principle_id}</span><div class="bar-track"><div class="bar-fill ${cls}" style="width:${w}%"></div><span class="pct">${failPct}% (${r.issues}/${r.total})</span></div></div>`;
+    return `<div class="bar-row"><button class="principle-link" onclick="showInfo(this,'${r.principle_id}')">${pidName(r.principle_id)}<span class="q" aria-hidden="true">?</span></button><div class="bar-track"><div class="bar-fill ${cls}" style="width:${w}%"></div><span class="pct">${failPct}% (${r.issues}/${r.total})</span></div></div>`;
   }).join('');
 }
 
@@ -164,7 +184,7 @@ function renderPrinciples(){
   document.getElementById('ptbody').innerHTML=rows.map(r=>{
     const failPct=pct(r.issues,r.total);
     const cls=failPct>=60?'status-issues':failPct>=30?'':'status-pass';
-    return `<tr><td>${r.principle_id}</td><td class="num status-pass">${r.pass}</td><td class="num status-issues">${r.issues}</td><td class="num status-na">${r.na}</td><td class="num ${cls}">${failPct}%</td></tr>`;
+    return `<tr><td><button class="principle-link" style="text-align:left;font-size:.8rem" onclick="showInfo(this,'${r.principle_id}')">${pidName(r.principle_id)}<span class="q" aria-hidden="true">?</span></button></td><td class="num status-pass">${r.pass}</td><td class="num status-issues">${r.issues}</td><td class="num status-na">${r.na}</td><td class="num ${cls}">${failPct}%</td></tr>`;
   }).join('');
 }
 
@@ -173,6 +193,42 @@ document.getElementById('score-filter').addEventListener('change',renderSites);
 document.querySelectorAll('th[data-col]').forEach(th=>th.addEventListener('click',()=>{
   const c=th.dataset.col;if(sortCol===c)sortDir=sortDir==='asc'?'desc':'asc';else{sortCol=c;sortDir='desc';}renderSites();
 }));
+const PRINCIPLES={
+"respect-user-preferences":{title:"Respect user preferences",status:"",desc:"The most fundamental principle for web usability: adapt to the user's stated and system-level preferences (theme, motion, contrast) rather than imposing one fixed experience. Read the signals the platform already provides and adjust.",how:"Probes prefers-color-scheme (dark mode), prefers-reduced-motion, and forced-colors via Chrome DevTools Protocol. A vision agent then checks whether the page actually adapts to each signal."},
+"be-inclusive":{title:"Be inclusive",status:"",desc:"Usable with assistive technology and a keyboard, plus a comparable inclusive experience beyond bare conformance: sufficient colour contrast, names and roles on controls, labelled form fields, sensible heading/landmark structure, visible focus order, legible text. WCAG is the floor; inclusive design is the ceiling.",how:"Lighthouse accessibility audit plus axe violations (colour contrast, labels, landmarks, focus order, heading structure). Vision agent corroborates."},
+"be-fast-and-stable":{title:"Be fast and stable",status:"",desc:"Load quickly and stay visually stable: good Core Web Vitals (LCP, INP, CLS), a light main thread, and no layout jank from late-arriving content. Speed and stability are part of modern UX, not separate from it.",how:"Lighthouse performance score plus Core Web Vitals (LCP, CLS, TBT) from Lighthouse and CDP traces. Vision agent checks for visible layout shift and slow loading."},
+"follow-best-practices":{title:"Follow best practices",status:"",desc:"Soundly built and served: no console errors or uncaught exceptions, a valid doctype and charset, correctly sized images, no deprecated APIs, well-structured non-repetitive CSS and HTML.",how:"Lighthouse best-practices dimension: console errors, doctype/charset, image sizing, deprecated APIs, HTTPS."},
+"be-private-and-secure":{title:"Be private and secure",status:"",desc:"Protects users by default. Served over HTTPS with a sensible Content-Security-Policy, secure/SameSite cookies, no over-collection or leaky third parties, permission prompts requested in context, data-minimised analytics.",how:"HTTPS, Content-Security-Policy headers, secure/SameSite cookies, permission-prompt timing, and third-party tracking inspection via CDP and vision."},
+"be-discoverable":{title:"Be discoverable",status:"",desc:"Discoverable and shareable: a descriptive title and meta description, crawlable links, a valid robots configuration, a viewport meta tag, and meaningful link text.",how:"Title, meta description, viewport meta, crawlable links, and robots config (the Lighthouse SEO dimension). Non-JS discoverability is measured as the % of content visible without JavaScript."},
+"be-agent-ready":{title:"Be agent ready",status:"",desc:"Forward-looking. The site exposes its capabilities to AI agents and on-device intelligence in a structured, safe way (WebMCP tools, agentic forms, semantic markup) and uses on-device inference appropriately. Emerging, so judged as opportunity rather than obligation.",how:"Structured data, semantic HTML, machine-readable content, and WebMCP/agent tool exposure. Judged as opportunity, not obligation."},
+"be-sustainable":{title:"Be sustainable",status:"",desc:"Resource-efficient. Respects a page-weight budget, ships optimised assets at appropriate resolutions, avoids wasteful background work and over-fetching, and prefers the lightest technique that achieves the result.",how:"Page weight, asset optimisation, redundant requests, and wasted background work. Backed by the W3C Web Sustainability Guidelines."},
+"maximize-content-reduce-noise":{title:"Maximise content, reduce noise",status:"",desc:"Prioritise the user's content by eliminating visual clutter and intrusive interruptions. Avoid pop-ups and banners that obscure content; use the right semantic, dismissible primitives instead of heavy custom chrome.",how:"Intrusive pop-ups, banners, cookie walls, and custom chrome that obscure content. Vision-based judgement."},
+"be-internationalised":{title:"Be internationalised",status:"",desc:"Works for users in any language and locale. Correct lang/dir, logical CSS properties, locale-aware dates, numbers and currencies, translation-ready markup, and time handling that survives time zones and DST.",how:"Correct lang/dir attributes, logical CSS properties, locale-aware formatting, and translation-ready markup."},
+"be-memory-efficient":{title:"Be memory-efficient",status:"",desc:"Should not leak memory or grow its footprint without bound, especially under repeated interaction. A session that gets slower and heavier the longer it is used is a broken experience even if the first paint was fast.",how:"Heap-diff: baseline snapshot → 3 scroll/navigation cycles → forced garbage collection → final snapshot. Sites retaining more than 5 MB after GC are flagged as leaks."},
+"adapt-to-the-form-factor":{title:"Adapt to the form factor",status:"",desc:"Account for the form factor users actually access the site from. A modern experience genuinely adapts layout and interaction across viewports and input types using modern responsive techniques.",how:"Responsive layout across viewports, horizontal-overflow check, touch-target sizing, and viewport meta presence via CDP."},
+"support-core-task-success":{title:"Support core task success",status:"",desc:"Help people accomplish the thing they came to do. Understand the offer, find the path, complete the flow, see system state, and recover. A page can pass technical checks and still fail if the purpose is unclear.",how:"Clarity of purpose, discoverable primary actions, loading/empty/error states, and journey completion. Vision-based judgement."},
+"provide-guided-navigation":{title:"Provide guided navigation",status:"pending",desc:"Help users understand where they are and guide their attention through the experience, using state-aware UI and positioning rather than leaving them to orient themselves.",how:"Wayfinding, breadcrumbs, active-state indication, and focus management. Currently pending an active testing method — not yet measured."},
+"implement-natural-interactions":{title:"Implement natural interactions",status:"pending",desc:"Make interactions feel intuitive and physical. Use modern declarative motion and transition APIs so movement reflects how things move in the real world, rather than abrupt state swaps or heavy hand-rolled JavaScript.",how:"Modern motion APIs (view transitions, scroll-driven animations), physical easing. Currently pending an active testing method — not yet measured."},
+"be-trustworthy":{title:"Be trustworthy",status:"pending",desc:"Honest and humane. No dark patterns (confirmshaming, forced continuity, disguised ads, nagging consent walls), honest defaults, clear pricing and consent, easy reversal of actions, predictable controls, and humane error handling.",how:"Dark patterns, honest defaults, clear pricing/consent, and error recovery. Currently pending an active testing method — not yet measured."},
+"be-resilient":{title:"Be resilient",status:"pending",desc:"Core content and primary flows work under adverse conditions: no JS, slow or offline network, older or non-Baseline browsers. Modern features are progressive enhancements with graceful fallbacks.",how:"No-JS content, offline fallback, installability, and graceful degradation below Baseline. Currently pending an active testing method — not yet measured."}
+};
+function pidName(id){return PRINCIPLES[id]?PRINCIPLES[id].title:id.replace(/-/g,' ');}
+function showInfo(btn,pid){
+  const info=PRINCIPLES[pid];const pop=document.getElementById('info-popover');
+  if(!info){return;}
+  const badge=info.status==='pending'?'<span class="pp-status" style="background:var(--bg-secondary);color:var(--muted);border:1px solid var(--border)">Pending active testing</span>':'';
+  pop.innerHTML='<div class="pp-head"><h3>'+info.title+'</h3><button class="pp-close" onclick="document.getElementById(\'info-popover\').hidePopover?document.getElementById(\'info-popover\').hidePopover():document.getElementById(\'info-popover\').removeAttribute(\'open\')" aria-label="Close">×</button></div><div class="pp-body"><p class="pp-desc">'+info.desc+'</p>'+badge+'<p class="pp-how"><strong>How it\'s tested:</strong> '+info.how+'</p></div>';
+  if(typeof pop.showPopover==='function'){
+    pop.showPopover();
+    requestAnimationFrame(()=>{
+      const r=btn.getBoundingClientRect();const pw=pop.offsetWidth;const ph=pop.offsetHeight;
+      let left=Math.max(8,Math.min(r.left,window.innerWidth-pw-8));
+      let top=r.bottom+6;
+      if(top+ph>window.innerHeight-8){top=Math.max(8,r.top-ph-6);}
+      pop.style.top=top+'px';pop.style.left=left+'px';
+    });
+  }else{pop.setAttribute('open','');pop.style.display='block';}
+}
 document.getElementById('about-link').addEventListener('click',e=>{e.preventDefault();document.getElementById('about-modal').style.display='block';});
 init();
 </script>
