@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Detailed audit results for a single site across 17 modern web principles.">
+<title id="page-title">Site audit — State of the Web</title>
+<style>
+:root{color-scheme:light dark;--color:#000;--background:#fdfcf8;--bg-secondary:#f0eee6;--border:#e0ddd4;--muted:#666;--accent:#4b3aff;--good:#1a8a3a;--bad:#c0392b;--warn:#e6a700}
+@media(prefers-color-scheme:dark){:root{--color:#e8e4dc;--background:#1c1a17;--bg-secondary:#2a2723;--border:#3a3530;--muted:#9a9088;--accent:#8ab4f8;--good:#57c97a;--bad:#e06c75;--warn:#d9a441}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.7;color:var(--color);background-color:var(--background);padding:1rem;max-width:800px;margin:0 auto}
+h1{font-family:Georgia,serif;font-size:1.8rem;font-weight:normal;margin-bottom:.2rem}
+h2{font-family:Georgia,serif;font-size:1.2rem;font-weight:normal;margin:1.5rem 0 .5rem;border-bottom:1px solid var(--border);padding-bottom:.3rem}
+a{color:var(--accent)}
+.back{font-size:.8rem;color:var(--muted);margin-bottom:1rem;display:inline-block}
+.score{display:inline-block;width:36px;height:36px;border-radius:50%;text-align:center;line-height:36px;font-size:.8rem;font-weight:700;color:#fff;vertical-align:middle}
+.score.s0-29{background:#c0392b}.score.s30-59{background:#e6a700}.score.s60-79{background:#2980b9}.score.s80-100{background:#1a8a3a}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem;margin:1rem 0}
+.meta-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:.5rem;padding:.7rem}
+.meta-card .label{font-size:.65rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.2rem}
+.meta-card .val{font-size:1.1rem;font-weight:700;font-variant-numeric:tabular-nums}
+.verdict{font-size:.82rem;color:var(--muted);line-height:1.5;padding:.7rem;background:var(--bg-secondary);border-radius:.4rem;margin:1rem 0}
+.principle-row{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.principle-row .pstatus{flex-shrink:0;width:65px;font-weight:700;font-size:.7rem;text-transform:uppercase}
+.principle-row .pname{flex-shrink:0;width:170px}
+.principle-row .psum{flex:1;color:var(--muted);font-size:.8rem;line-height:1.45}
+.pstatus.pass{color:var(--good)}.pstatus.issues{color:var(--bad)}.pstatus.not-applicable{color:var(--muted)}
+.findings{margin-top:.3rem;padding-left:1rem}
+.finding{font-size:.75rem;color:var(--muted);padding:.15rem 0}
+.finding .sev{font-weight:700;text-transform:uppercase;font-size:.65rem;margin-right:.3rem}
+.finding .sev.high{color:var(--bad)}.finding .sev.serious{color:var(--bad)}.finding .sev.moderate{color:var(--warn)}.finding .sev.low{color:var(--muted)}
+.principle-link{display:inline-flex;align-items:center;gap:.2rem;background:none;border:none;color:var(--accent);font:inherit;font-size:.8rem;cursor:pointer;text-align:left;padding:0;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:2px}
+.principle-link:hover{text-decoration-color:var(--accent)}
+.principle-link .q{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--accent);color:var(--background);font-size:.58rem;font-weight:700;line-height:1;flex-shrink:0}
+.loading{padding:3rem;text-align:center;color:var(--muted)}
+#info-popover{inset:auto;margin:0;position:fixed;width:min(340px,calc(100vw - 16px));padding:0;border:1px solid var(--border);border-radius:.6rem;background:var(--background);box-shadow:0 10px 40px rgba(0,0,0,.22);font-size:.82rem;line-height:1.55}
+@supports(anchor-name:--a){#info-popover{position-area:block-end;margin-block-start:6px;position-try-fallbacks:flip-block;inset:auto}}
+#info-popover .pp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;padding:.85rem .9rem .35rem}
+#info-popover h3{font-family:Georgia,serif;font-size:1rem;font-weight:normal;margin:0;flex:1}
+#info-popover .pp-close{background:none;border:none;color:var(--muted);font-size:1.25rem;cursor:pointer;line-height:1;padding:0}
+#info-popover .pp-body{padding:0 .9rem .85rem}
+#info-popover .pp-desc{margin:0 0 .55rem}
+#info-popover .pp-how{color:var(--muted);font-size:.74rem;border-top:1px solid var(--border);padding-top:.5rem;margin:0}
+#info-popover .pp-how strong{color:var(--color)}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Back to all sites</a>
+<div id="loading" class="loading">Loading database…</div>
+<div id="app" style="display:none">
+  <h1 id="site-name"></h1>
+  <div class="meta-grid" id="meta"></div>
+  <div class="verdict" id="verdict"></div>
+  <h2>Principle results (17)</h2>
+  <div id="principles"></div>
+  <p style="font-size:.75rem;color:var(--muted);margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border)">Data: <a href="https://github.com/PaulKinlan/state-of-the-web" target="_blank">GitHub</a> · Methodology: <a href="https://github.com/PaulKinlan/web-uplift" target="_blank">web-uplift</a></p>
+</div>
+<div id="info-popover" popover="auto"></div>
+<script src="principles.js"></script>
+<script type="module">
+if(!HTMLElement.prototype.hasOwnProperty('popover')){import('https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover-fn.js').then(({apply})=>apply());}
+if(!("anchorName" in document.documentElement.style)){import('https://unpkg.com/@oddbird/css-anchor-positioning');}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.min.js"></script>
+<script>
+const PRINCIPLES=window.PRINCIPLES||{};
+const params=new URLSearchParams(location.search);
+const siteName=params.get('site')||'';
+function pidName(id){return PRINCIPLES[id]?PRINCIPLES[id].title:id.replace(/-/g,' ');}
+function scoreClass(s){if(s==null)return'';if(s<30)return's0-29';if(s<60)return's30-59';if(s<80)return's60-79';return's80-100';}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function closeInfo(){var p=document.getElementById('info-popover');if(typeof p.hidePopover==='function')p.hidePopover();else{p.removeAttribute('open');p.style.display='none';}}
+function showInfo(btn,pid){
+  var info=PRINCIPLES[pid],pop=document.getElementById('info-popover');if(!info)return;
+  var badge=info.status==='pending'?'<span style="display:inline-block;font-size:.66rem;font-weight:700;padding:.12rem .45rem;border-radius:.25rem;background:var(--bg-secondary);color:var(--muted);border:1px solid var(--border)">Pending active testing</span>':'';
+  pop.innerHTML='<div class="pp-head"><h3>'+info.title+'</h3><button class="pp-close" onclick="closeInfo()" aria-label="Close">×</button></div><div class="pp-body"><p class="pp-desc">'+info.desc+'</p>'+badge+'<p class="pp-how"><strong>How it\'s tested:</strong> '+info.how+'</p></div>';
+  var an='--pp-'+pid;btn.style.anchorName=an;pop.style.positionAnchor=an;pop.style.top='';pop.style.left='';
+  if(typeof pop.showPopover==='function'){pop.showPopover();if(!CSS.supports('anchor-name','--x')){requestAnimationFrame(function(){var r=btn.getBoundingClientRect(),pw=pop.offsetWidth,ph=pop.offsetHeight,left=Math.max(8,Math.min(r.left,window.innerWidth-pw-8)),top=r.bottom+6;if(top+ph>window.innerHeight-8)top=Math.max(8,r.top-ph-6);pop.style.top=top+'px';pop.style.left=left+'px';});}}else{pop.setAttribute('open','');pop.style.display='block';}
+}
+async function init(){
+  if(!siteName){document.getElementById('loading').textContent='No site specified. Use ?site=example.com';return;}
+  try{
+    var SQL=await initSqlJs({locateFile:function(f){return'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/'+f;}});
+    var resp=await fetch('state-of-the-web.db');if(!resp.ok)throw new Error('HTTP '+resp.status);
+    var db=new SQL.Database(new Uint8Array(await resp.arrayBuffer()));
+    function q(sql){var s=db.prepare(sql),r=[];while(s.step())r.push(s.getAsObject());s.free();return r;}
+    var site=q("SELECT * FROM sites WHERE site='"+siteName.replace(/'/g,"''")+"'")[0];
+    if(!site){document.getElementById('loading').textContent='Site "'+esc(siteName)+'" not found in the database.';return;}
+    document.getElementById('loading').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('site-name').innerHTML=esc(site.site)+(site.is_js_shell?' <span style="color:var(--warn)" title="JS shell">⬚</span>':'');
+    document.title=site.site+' — State of the Web';
+    var scoreHtml=site.overall_score!=null?'<span class="score '+scoreClass(site.overall_score)+'">'+site.overall_score+'</span>':'—';
+    var meta=[
+      {label:'Overall score',val:scoreHtml},
+      {label:'Rank',val:site.rank||'—'},
+      {label:'CLS',val:site.cls!=null?site.cls.toFixed(3):'—'},
+      {label:'LH perf',val:site.lh_performance!=null?Math.round(site.lh_performance*100):'—'},
+      {label:'LH a11y',val:site.lh_accessibility!=null?Math.round(site.lh_accessibility*100):'—'},
+      {label:'JS shell',val:site.is_js_shell?'Yes':'No'},
+    ];
+    if(site.url)meta.push({label:'URL',val:'<a href="'+esc(site.url)+'" target="_blank">Visit ↗</a>'});
+    document.getElementById('meta').innerHTML=meta.map(function(m){return '<div class="meta-card"><div class="label">'+m.label+'</div><div class="val">'+m.val+'</div></div>';}).join('');
+    document.getElementById('verdict').textContent=site.verdict||'';
+    var prs=q("SELECT principle_id,status,confidence,summary,finding_count FROM principles WHERE site='"+siteName.replace(/'/g,"''")+"' ORDER BY CASE status WHEN 'issues' THEN 0 WHEN 'pass' THEN 1 ELSE 2 END, principle_id");
+    var finds=q("SELECT principle_id,severity,summary,evidence FROM findings WHERE site='"+siteName.replace(/'/g,"''")+"'");
+    var findsByPid={};finds.forEach(function(f){(findsByPid[f.principle_id]=findsByPid[f.principle_id]||[]).push(f);});
+    document.getElementById('principles').innerHTML=prs.map(function(p){
+      var st=p.status==='not-applicable'?'n/a':p.status;
+      var fs=(findsByPid[p.principle_id]||[]).map(function(f){return '<div class="finding"><span class="sev '+esc(f.severity)+'">'+esc(f.severity)+'</span>'+esc(f.summary)+'</div>';}).join('');
+      return '<div class="principle-row"><span class="pstatus '+p.status+'">'+st+'</span><div style="flex:1"><button class="principle-link" onclick="showInfo(this,\''+p.principle_id+'\')">'+pidName(p.principle_id)+'<span class="q" aria-hidden="true">?</span></button><div class="psum">'+esc(p.summary||'')+(fs?'<div class="findings">'+fs+'</div>':'')+'</div></div></div>';
+    }).join('');
+  }catch(e){document.getElementById('loading').textContent='Error: '+e.message;document.getElementById('loading').style.color='var(--bad)';console.error(e);}
+}
+init();
+</script>
+</body>
+</html>
