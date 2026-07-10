@@ -14,9 +14,9 @@
       "seo": 85
     },
     "axeViolations": 5,
-    "heapSize": 50948854,
-    "heapSizeAfterInteraction": 76071542,
-    "heapDeltaAfterInteraction": 25122688,
+    "heapSize": 30081976,
+    "heapSizeAfterInteraction": 73729812,
+    "heapDeltaAfterInteraction": 28021444,
     "cls": 0.17436160614722995,
     "lcp": 7622.532300000002,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:05:46.466Z",
+      "url": "https://www.t-mobile.com/",
+      "rank": 458,
+      "baseline": {
+        "usedSize": 30081976,
+        "totalSize": 34521088
+      },
+      "samples": [
+        {
+          "usedSize": 54450820,
+          "totalSize": 62713856
+        },
+        {
+          "usedSize": 69282056,
+          "totalSize": 82604032
+        },
+        {
+          "usedSize": 58103420,
+          "totalSize": 65667072
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 58103420,
+        "totalSize": 65667072,
+        "totalSelfSizeBytes": 73729812,
+        "nodeCount": 1337751,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 28021444,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/t-mobile.com"
+    }
   },
   "principles": [
     {
@@ -225,10 +260,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained +28.0 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "t-mobile.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+28.0 MB)",
+          "evidence": "Same-session memory pass: baseline 30081976 bytes; final after interaction cycles + forced GC 73729812 bytes; delta 28021444 bytes; monotonic=false.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (7.6s); medium be-fast-and-stable: Total blocking time is high (970ms); high be-fast-and-stable: CLS above good threshold (0.17).",
@@ -238,6 +283,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

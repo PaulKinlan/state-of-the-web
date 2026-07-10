@@ -14,9 +14,9 @@
       "seo": 85
     },
     "axeViolations": 9,
-    "heapSize": 44788487,
-    "heapSizeAfterInteraction": 45348256,
-    "heapDeltaAfterInteraction": 559769,
+    "heapSize": 25713384,
+    "heapSizeAfterInteraction": 1115837,
+    "heapDeltaAfterInteraction": -24659124,
     "cls": 0,
     "lcp": 6940.204000000003,
     "inp": null,
@@ -37,7 +37,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T04:47:28.476Z",
+      "url": "https://launchdarkly.com/",
+      "rank": 304,
+      "baseline": {
+        "usedSize": 25713384,
+        "totalSize": 29839360
+      },
+      "samples": [
+        {
+          "usedSize": 1044224,
+          "totalSize": 2097152
+        },
+        {
+          "usedSize": 1054260,
+          "totalSize": 1835008
+        },
+        {
+          "usedSize": 1054260,
+          "totalSize": 1835008
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 1054260,
+        "totalSize": 1835008,
+        "totalSelfSizeBytes": 1115837,
+        "nodeCount": 33133,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -24659124,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/launchdarkly.com"
+    }
   },
   "principles": [
     {
@@ -217,9 +252,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -24.7 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -230,6 +265,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

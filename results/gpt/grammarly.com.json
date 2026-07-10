@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 2,
-    "heapSize": 40718351,
-    "heapSizeAfterInteraction": 41003686,
-    "heapDeltaAfterInteraction": 285335,
+    "heapSize": 24939744,
+    "heapSizeAfterInteraction": 39641683,
+    "heapDeltaAfterInteraction": 11746832,
     "cls": 0.01902945698989655,
     "lcp": 9628.096785000002,
     "inp": null,
@@ -42,7 +42,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:23:03.370Z",
+      "url": "https://www.grammarly.com/",
+      "rank": 558,
+      "baseline": {
+        "usedSize": 24939744,
+        "totalSize": 27000832
+      },
+      "samples": [
+        {
+          "usedSize": 29753208,
+          "totalSize": 44040192
+        },
+        {
+          "usedSize": 36657984,
+          "totalSize": 64487424
+        },
+        {
+          "usedSize": 36686576,
+          "totalSize": 65011712
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 36686576,
+        "totalSize": 65011712,
+        "totalSelfSizeBytes": 39641683,
+        "nodeCount": 704814,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 11746832,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/grammarly.com"
+    }
   },
   "principles": [
     {
@@ -213,10 +248,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +11.7 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "grammarly.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+11.7 MB)",
+          "evidence": "Same-session memory pass: baseline 24939744 bytes; final after interaction cycles + forced GC 39641683 bytes; delta 11746832 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (9.6s); medium be-fast-and-stable: Total blocking time is high (379ms); medium be-inclusive: axe found 2 violation groups.",
@@ -226,6 +271,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

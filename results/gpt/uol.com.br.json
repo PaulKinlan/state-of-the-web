@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 12,
-    "heapSize": 62609622,
-    "heapSizeAfterInteraction": 63323036,
-    "heapDeltaAfterInteraction": 713414,
+    "heapSize": 44196184,
+    "heapSizeAfterInteraction": 56621960,
+    "heapDeltaAfterInteraction": 16895960,
     "cls": 0.022497972816181867,
     "lcp": 6762.338990000001,
     "inp": null,
@@ -82,7 +82,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:17:57.607Z",
+      "url": "https://www.uol.com.br/",
+      "rank": 525,
+      "baseline": {
+        "usedSize": 44196184,
+        "totalSize": 45887488
+      },
+      "samples": [
+        {
+          "usedSize": 15516832,
+          "totalSize": 22061056
+        },
+        {
+          "usedSize": 50671952,
+          "totalSize": 94674944
+        },
+        {
+          "usedSize": 61092144,
+          "totalSize": 79470592
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 61092144,
+        "totalSize": 79470592,
+        "totalSelfSizeBytes": 56621960,
+        "nodeCount": 1208664,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 16895960,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/uol.com.br"
+    }
   },
   "principles": [
     {
@@ -268,9 +303,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 16.9 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -281,6 +316,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

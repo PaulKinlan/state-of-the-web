@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 86723129,
-    "heapSizeAfterInteraction": 86775660,
-    "heapDeltaAfterInteraction": 52531,
+    "heapSize": 37817892,
+    "heapSizeAfterInteraction": 82501182,
+    "heapDeltaAfterInteraction": 75316,
     "cls": 0.0029852254379726904,
     "lcp": 26069.898080000003,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": false,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:02:45.588Z",
+      "url": "https://vk.com/",
+      "rank": 424,
+      "baseline": {
+        "usedSize": 37817892,
+        "totalSize": 40140800
+      },
+      "samples": [
+        {
+          "usedSize": 37870752,
+          "totalSize": 39878656
+        },
+        {
+          "usedSize": 37888512,
+          "totalSize": 39878656
+        },
+        {
+          "usedSize": 37893208,
+          "totalSize": 39878656
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 37893208,
+        "totalSize": 39878656,
+        "totalSelfSizeBytes": 82501182,
+        "nodeCount": 1157171,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 75316,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/vkontakte.ru"
+    }
   },
   "principles": [
     {
@@ -204,9 +239,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.1 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -218,6 +253,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

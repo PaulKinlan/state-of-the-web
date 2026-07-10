@@ -14,9 +14,9 @@
       "seo": 75
     },
     "axeViolations": 5,
-    "heapSize": 28086446,
-    "heapSizeAfterInteraction": 28488797,
-    "heapDeltaAfterInteraction": 402351,
+    "heapSize": 17378028,
+    "heapSizeAfterInteraction": 555869,
+    "heapDeltaAfterInteraction": -16879780,
     "cls": 0.8442015720763432,
     "lcp": 21930.82843999998,
     "inp": null,
@@ -82,7 +82,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:30:32.951Z",
+      "url": "https://www.nintendo.com/",
+      "rank": 611,
+      "baseline": {
+        "usedSize": 17378028,
+        "totalSize": 18014208
+      },
+      "samples": [
+        {
+          "usedSize": 431840,
+          "totalSize": 786432
+        },
+        {
+          "usedSize": 497208,
+          "totalSize": 786432
+        },
+        {
+          "usedSize": 498248,
+          "totalSize": 1310720
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 498248,
+        "totalSize": 1310720,
+        "totalSelfSizeBytes": 555869,
+        "nodeCount": 23841,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -16879780,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/nintendo.com"
+    }
   },
   "principles": [
     {
@@ -269,9 +304,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -16.9 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -282,6 +317,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

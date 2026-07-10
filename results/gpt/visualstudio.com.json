@@ -14,10 +14,10 @@
       "seo": 92
     },
     "axeViolations": 4,
-    "heapSize": 17414898,
-    "heapSizeAfterInteraction": 15655039,
-    "heapDeltaAfterInteraction": -1759859,
-    "cls": 3.565461468391871e-05,
+    "heapSize": 8835524,
+    "heapSizeAfterInteraction": 13525598,
+    "heapDeltaAfterInteraction": 2043304,
+    "cls": 0.00003565461468391871,
     "lcp": 22969.17369499999,
     "inp": null,
     "tbt": 31,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:16:34.121Z",
+      "url": "https://visualstudio.microsoft.com/",
+      "rank": 514,
+      "baseline": {
+        "usedSize": 8835524,
+        "totalSize": 9715712
+      },
+      "samples": [
+        {
+          "usedSize": 9833076,
+          "totalSize": 13508608
+        },
+        {
+          "usedSize": 11069716,
+          "totalSize": 14557184
+        },
+        {
+          "usedSize": 10878828,
+          "totalSize": 14032896
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 10878828,
+        "totalSize": 14032896,
+        "totalSelfSizeBytes": 13525598,
+        "nodeCount": 197770,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 2043304,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/visualstudio.com"
+    }
   },
   "principles": [
     {
@@ -203,9 +238,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 2.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -216,6 +251,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

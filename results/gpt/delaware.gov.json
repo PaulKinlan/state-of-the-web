@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 1,
-    "heapSize": 34425936,
-    "heapSizeAfterInteraction": 34961968,
-    "heapDeltaAfterInteraction": 536032,
+    "heapSize": 19119828,
+    "heapSizeAfterInteraction": 32859251,
+    "heapDeltaAfterInteraction": 9595208,
     "cls": 0.0033431886599697954,
     "lcp": 35322.9147234436,
     "inp": null,
@@ -42,7 +42,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:33:08.269Z",
+      "url": "https://delaware.gov/",
+      "rank": 620,
+      "baseline": {
+        "usedSize": 19119828,
+        "totalSize": 21204992
+      },
+      "samples": [
+        {
+          "usedSize": 23668276,
+          "totalSize": 28979200
+        },
+        {
+          "usedSize": 25781168,
+          "totalSize": 40378368
+        },
+        {
+          "usedSize": 28715036,
+          "totalSize": 41418752
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 28715036,
+        "totalSize": 41418752,
+        "totalSelfSizeBytes": 32859251,
+        "nodeCount": 581224,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 9595208,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/delaware.gov"
+    }
   },
   "principles": [
     {
@@ -206,10 +241,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +9.6 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "delaware.gov-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+9.6 MB)",
+          "evidence": "Same-session memory pass: baseline 19119828 bytes; final after interaction cycles + forced GC 32859251 bytes; delta 9595208 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 5 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (35.3s); high be-inclusive: axe found 1 violation groups; medium be-sustainable: Heavy transfer on initial load (6.0 MB).",
@@ -219,6 +264,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

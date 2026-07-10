@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 8,
-    "heapSize": 57207894,
-    "heapSizeAfterInteraction": 69486632,
-    "heapDeltaAfterInteraction": 12278738,
+    "heapSize": 45219780,
+    "heapSizeAfterInteraction": 185306079,
+    "heapDeltaAfterInteraction": 76246484,
     "cls": 0.22490547429683366,
     "lcp": 29153.68375000001,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:05:21.433Z",
+      "url": "https://www.npr.org/",
+      "rank": 451,
+      "baseline": {
+        "usedSize": 45219780,
+        "totalSize": 48250880
+      },
+      "samples": [
+        {
+          "usedSize": 72580204,
+          "totalSize": 74203136
+        },
+        {
+          "usedSize": 95676036,
+          "totalSize": 97271808
+        },
+        {
+          "usedSize": 121466264,
+          "totalSize": 123486208
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 121466264,
+        "totalSize": 123486208,
+        "totalSelfSizeBytes": 185306079,
+        "nodeCount": 4404524,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 76246484,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/npr.org"
+    }
   },
   "principles": [
     {
@@ -218,10 +253,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +76.2 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "npr.org-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+76.2 MB)",
+          "evidence": "Same-session memory pass: baseline 45219780 bytes; final after interaction cycles + forced GC 185306079 bytes; delta 76246484 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (29.2s); medium be-fast-and-stable: Total blocking time is high (482ms); high be-fast-and-stable: CLS above good threshold (0.22).",
@@ -231,6 +276,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

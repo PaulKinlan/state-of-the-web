@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": null,
-    "heapSize": 18874038,
-    "heapSizeAfterInteraction": 27174391,
-    "heapDeltaAfterInteraction": 8300353,
+    "heapSize": 10742296,
+    "heapSizeAfterInteraction": 44041914,
+    "heapDeltaAfterInteraction": 18106112,
     "cls": 0.0003958389017386354,
     "lcp": 5366.476050000001,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T05:02:56.137Z",
+      "url": "https://duckduckgo.com/",
+      "rank": 429,
+      "baseline": {
+        "usedSize": 10742296,
+        "totalSize": 11796480
+      },
+      "samples": [
+        {
+          "usedSize": 21985776,
+          "totalSize": 33292288
+        },
+        {
+          "usedSize": 21142936,
+          "totalSize": 27262976
+        },
+        {
+          "usedSize": 28848408,
+          "totalSize": 30932992
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 28848408,
+        "totalSize": 30932992,
+        "totalSelfSizeBytes": 44041914,
+        "nodeCount": 799503,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 18106112,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/duckduckgo.com"
+    }
   },
   "principles": [
     {
@@ -188,9 +223,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 18.1 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -202,6 +237,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

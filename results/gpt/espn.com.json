@@ -14,9 +14,9 @@
       "seo": 77
     },
     "axeViolations": null,
-    "heapSize": 93318530,
-    "heapSizeAfterInteraction": 51106323,
-    "heapDeltaAfterInteraction": -42212207,
+    "heapSize": 56095024,
+    "heapSizeAfterInteraction": 118376052,
+    "heapDeltaAfterInteraction": 7743940,
     "cls": 0.11196679236091554,
     "lcp": 15860.909264999998,
     "inp": null,
@@ -57,7 +57,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T04:59:37.707Z",
+      "url": "https://www.espn.com/",
+      "rank": 406,
+      "baseline": {
+        "usedSize": 56095024,
+        "totalSize": 62296064
+      },
+      "samples": [
+        {
+          "usedSize": 63021644,
+          "totalSize": 65904640
+        },
+        {
+          "usedSize": 62494416,
+          "totalSize": 66035712
+        },
+        {
+          "usedSize": 63838964,
+          "totalSize": 68087808
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 63838964,
+        "totalSize": 68087808,
+        "totalSelfSizeBytes": 118376052,
+        "nodeCount": 1735925,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 7743940,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/espn.com"
+    }
   },
   "principles": [
     {
@@ -274,9 +309,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 7.7 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -288,6 +323,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: https://unpkg.com/axe-core@4.10.3/axe.min.js fetch blocked by privacy-gateway"
+    "Axe blocked or failed: https://unpkg.com/axe-core@4.10.3/axe.min.js fetch blocked by privacy-gateway",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

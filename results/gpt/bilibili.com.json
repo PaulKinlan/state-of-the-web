@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 7,
-    "heapSize": 19523454,
-    "heapSizeAfterInteraction": 22627328,
-    "heapDeltaAfterInteraction": 3103874,
+    "heapSize": 11750412,
+    "heapSizeAfterInteraction": 1061463,
+    "heapDeltaAfterInteraction": -10747464,
     "cls": 0.23607657995615972,
     "lcp": 16756.39715,
     "inp": null,
@@ -37,7 +37,42 @@
     "hasViewport": false,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T04:51:51.261Z",
+      "url": "https://www.bilibili.com/",
+      "rank": 311,
+      "baseline": {
+        "usedSize": 11750412,
+        "totalSize": 12898304
+      },
+      "samples": [
+        {
+          "usedSize": 992912,
+          "totalSize": 1835008
+        },
+        {
+          "usedSize": 1002948,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 1002948,
+          "totalSize": 1572864
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 1002948,
+        "totalSize": 1572864,
+        "totalSelfSizeBytes": 1061463,
+        "nodeCount": 31848,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -10747464,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/bilibili.com"
+    }
   },
   "principles": [
     {
@@ -232,9 +267,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -10.7 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -245,6 +280,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

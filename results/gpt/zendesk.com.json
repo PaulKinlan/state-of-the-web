@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 1,
-    "heapSize": 65675077,
-    "heapSizeAfterInteraction": 76336270,
-    "heapDeltaAfterInteraction": 10661193,
+    "heapSize": 30671704,
+    "heapSizeAfterInteraction": 150176724,
+    "heapDeltaAfterInteraction": 68890052,
     "cls": 0.019369730822200715,
     "lcp": 3187.7042002716066,
     "inp": null,
@@ -47,7 +47,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T04:46:51.410Z",
+      "url": "https://www.zendesk.com/",
+      "rank": 301,
+      "baseline": {
+        "usedSize": 30671704,
+        "totalSize": 32243712
+      },
+      "samples": [
+        {
+          "usedSize": 56710276,
+          "totalSize": 68419584
+        },
+        {
+          "usedSize": 86242100,
+          "totalSize": 113508352
+        },
+        {
+          "usedSize": 99561756,
+          "totalSize": 114032640
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 99561756,
+        "totalSize": 114032640,
+        "totalSelfSizeBytes": 150176724,
+        "nodeCount": 2172176,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 68890052,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-004-005-evidence/zendesk.com"
+    }
   },
   "principles": [
     {
@@ -226,10 +261,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +68.9 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "zendesk.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+68.9 MB)",
+          "evidence": "Same-session memory pass: baseline 30671704 bytes; final after interaction cycles + forced GC 150176724 bytes; delta 68890052 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: medium be-fast-and-stable: LCP above good threshold (3.2s); medium be-fast-and-stable: Total blocking time is high (1149ms); medium be-inclusive: axe found 1 violation groups.",
@@ -239,6 +284,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
