@@ -117,6 +117,39 @@ def load_ltv():
             pass
     return out
 
+def merge_reaudits(con):
+    """Merge vision re-audit results (be-trustworthy, provide-guided-navigation)
+    that were re-judged from existing screenshots with dark-pattern/nav findings."""
+    reaudit_map = {
+        'reaudit-trustworthy.json': 'be-trustworthy',
+        'reaudit-guided-nav.json': 'provide-guided-navigation',
+    }
+    for fname, pid in reaudit_map.items():
+        fpath = os.path.join(ROOT, 'results', 'gpt', fname)
+        if not os.path.exists(fpath):
+            continue
+        data = json.load(open(fpath))
+        if not isinstance(data, list):
+            continue
+        n = 0
+        for r in data:
+            site = r.get('site') or r.get('domain')
+            if not site:
+                continue
+            status = r.get('status', 'not-applicable')
+            conf = r.get('confidence', 'medium')
+            summ = r.get('summary', '')
+            finds = r.get('findings', [])
+            con.execute("DELETE FROM findings WHERE site=? AND principle_id=?", (site, pid))
+            con.execute("INSERT OR REPLACE INTO principles (site, principle_id, status, confidence, summary, finding_count) VALUES (?,?,?,?,?,?)",
+                        (site, pid, status, conf, summ, len(finds)))
+            for fnd in finds:
+                con.execute("INSERT INTO findings (site, principle_id, finding_id, severity, summary, evidence) VALUES (?,?,?,?,?,?)",
+                            (site, pid, fnd.get('id', site+'-01'), fnd.get('severity', 'moderate'),
+                             fnd.get('title') or fnd.get('summary'), fnd.get('evidence')))
+            n += 1
+        print(f"  merged {fname}: {n} sites for {pid}", file=sys.stderr)
+
 def derive_resilience(con, cdp):
     """Derive be-resilient from CDP evidence: content visibility without JS.
     A site that shows 0% content without JS, or is a JS shell, fails resilience
@@ -238,7 +271,8 @@ def main():
                 n_find += 1
     con.commit()
 
-    # --- Post-processing: derive principles from real evidence ---
+    # --- Post-processing: merge re-audits, then derive/fix ---
+    merge_reaudits(con)
     derive_resilience(con, cdp)
     fix_false_passes(con)
     con.commit()
