@@ -117,6 +117,51 @@ def load_ltv():
             pass
     return out
 
+def derive_resilience(con, cdp):
+    """Derive be-resilient from CDP evidence: content visibility without JS.
+    A site that shows 0% content without JS, or is a JS shell, fails resilience
+    (core content does not work under adverse conditions)."""
+    n_pass = n_issues = 0
+    for dom, c in cdp.items():
+        exists = con.execute("SELECT 1 FROM principles WHERE site=? AND principle_id='be-resilient'", (dom,)).fetchone()
+        if not exists:
+            continue  # only derive for vision-audited sites
+        disc = c.get("discoverability_pct")
+        is_shell = c.get("is_js_shell")
+        if is_shell or (disc is not None and disc == 0):
+            status, conf = "issues", "high"
+            summ = f"Site shows {disc or 0}% of content without JavaScript" + (" and is a JS shell" if is_shell else "") + ". Core content does not work under no-JS conditions."
+            finding_id = dom.replace('.', '-') + "-resilience-01"
+            con.execute("DELETE FROM findings WHERE site=? AND principle_id='be-resilient'", (dom,))
+            con.execute("INSERT INTO findings (site, principle_id, finding_id, severity, summary, evidence) VALUES (?,?,?,?,?,?)",
+                        (dom, "be-resilient", finding_id, "serious", "Core content invisible without JavaScript",
+                         f"CDP discoverability probe: {disc or 0}% of page content visible with JS disabled"))
+            n_issues += 1
+        elif disc is not None and disc < 10:
+            status, conf = "issues", "medium"
+            summ = f"Only {disc}% of content visible without JavaScript — most of the page requires JS to render."
+            n_issues += 1
+        else:
+            status, conf = "pass", "medium"
+            summ = f"{disc}% of content visible without JavaScript — core content survives no-JS conditions."
+            con.execute("DELETE FROM findings WHERE site=? AND principle_id='be-resilient'", (dom,))
+            n_pass += 1
+        con.execute("INSERT OR REPLACE INTO principles (site, principle_id, status, confidence, summary, finding_count) VALUES (?,?,?,?,?,?)",
+                    (dom, "be-resilient", status, conf, summ, 1 if status=="issues" else 0))
+    print(f"  be-resilient derived from CDP: {n_pass} pass, {n_issues} issues", file=sys.stderr)
+
+def fix_false_passes(con):
+    """Reclassify low-confidence 'not exercised' passes as not-applicable (pending).
+    support-core-task-success was marked pass/low with 'task completion flow not exercised'
+    — that is not a real audit, so reclassify it honestly."""
+    n = con.execute("""UPDATE principles SET status='not-applicable', confidence='low',
+                   summary='Task completion flows were not exercised in this audit — pending active interaction testing.'
+                   WHERE principle_id='support-core-task-success' AND status='pass'
+                   AND confidence='low'""").rowcount
+    if n:
+        con.execute("DELETE FROM findings WHERE principle_id='support-core-task-success'")
+        print(f"  support-core-task-success: {n} false passes reclassified as pending", file=sys.stderr)
+
 def main():
     cdp = load_cdp()
     gpt = load_gpt()
@@ -191,6 +236,11 @@ def main():
                      fnd.get("title") or fnd.get("summary"),
                      fnd.get("evidence")))
                 n_find += 1
+    con.commit()
+
+    # --- Post-processing: derive principles from real evidence ---
+    derive_resilience(con, cdp)
+    fix_false_passes(con)
     con.commit()
     print(f"Inserted {n_sites} sites, {n_prin} principle results, {n_find} findings", file=sys.stderr)
 
