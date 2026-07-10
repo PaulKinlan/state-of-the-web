@@ -27,6 +27,7 @@ h2{font-family:Georgia,"Times New Roman",Times,serif;font-size:1.3rem;font-weigh
 .fill-bad{background:linear-gradient(90deg,#c0392b,#e74c3c)}
 .fill-warn{background:linear-gradient(90deg,#e6a700,#f0c040)}
 .fill-good{background:linear-gradient(90deg,#1a8a3a,#2ecc71)}
+.fill-pending{background:repeating-linear-gradient(45deg,var(--bg-secondary),var(--bg-secondary) 6px,var(--border) 6px,var(--border) 12px)}
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:1rem}
 table{width:100%;border-collapse:collapse;background:var(--bg-secondary);border:1px solid var(--border);border-radius:.5rem;overflow:hidden}
 th,td{padding:.4rem .6rem;text-align:left;font-size:.8rem;border-bottom:1px solid var(--border)}
@@ -156,6 +157,10 @@ function renderPrincipleChart(){
   const max=Math.max(...rows.map(r=>r.issues));
   document.getElementById('principle-chart').innerHTML=rows.map(r=>{
     const failPct=pct(r.issues,r.total);
+    const isPending=r.na>=r.total*0.9;
+    if(isPending){
+      return `<div class="bar-row"><button class="principle-link" onclick="showInfo(this,'${r.principle_id}')">${pidName(r.principle_id)}<span class="q" aria-hidden="true">?</span></button><div class="bar-track" style="opacity:.5"><div class="bar-fill fill-pending" style="width:100%"></div><span class="pct" style="color:var(--muted)">Pending test</span></div></div>`;
+    }
     const cls=failPct>=60?'fill-bad':failPct>=30?'fill-warn':'fill-good';
     const w=max?r.issues/max*100:0;
     return `<div class="bar-row"><button class="principle-link" onclick="showInfo(this,'${r.principle_id}')">${pidName(r.principle_id)}<span class="q" aria-hidden="true">?</span></button><div class="bar-track"><div class="bar-fill ${cls}" style="width:${w}%"></div><span class="pct">${failPct}% (${r.issues}/${r.total})</span></div></div>`;
