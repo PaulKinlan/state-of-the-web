@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 6,
-    "heapSize": 26786269,
-    "heapSizeAfterInteraction": 30007200,
-    "heapDeltaAfterInteraction": 3220931,
+    "heapSize": 19152216,
+    "heapSizeAfterInteraction": 31411076,
+    "heapDeltaAfterInteraction": 3290292,
     "cls": 1.3706434815751225,
     "lcp": 11352.8815,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T01:03:47.968Z",
+      "url": "https://shopee.com.br/",
+      "rank": 763,
+      "baseline": {
+        "usedSize": 19152216,
+        "totalSize": 20533248
+      },
+      "samples": [
+        {
+          "usedSize": 21822596,
+          "totalSize": 22933504
+        },
+        {
+          "usedSize": 22360144,
+          "totalSize": 23666688
+        },
+        {
+          "usedSize": 22442508,
+          "totalSize": 23928832
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 22442508,
+        "totalSize": 23928832,
+        "totalSelfSizeBytes": 31411076,
+        "nodeCount": 418706,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 3290292,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/shopee.com.br"
+    }
   },
   "principles": [
     {
@@ -232,9 +267,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 3.3 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -245,6 +280,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

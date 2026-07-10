@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 5,
-    "heapSize": 68649723,
-    "heapSizeAfterInteraction": 68221663,
-    "heapDeltaAfterInteraction": -428060,
+    "heapSize": 34754316,
+    "heapSizeAfterInteraction": 555869,
+    "heapDeltaAfterInteraction": -34256068,
     "cls": 0,
     "lcp": 23067.7935,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T00:49:11.594Z",
+      "url": "https://calendly.com/",
+      "rank": 356,
+      "baseline": {
+        "usedSize": 34754316,
+        "totalSize": 36417536
+      },
+      "samples": [
+        {
+          "usedSize": 431840,
+          "totalSize": 786432
+        },
+        {
+          "usedSize": 497208,
+          "totalSize": 786432
+        },
+        {
+          "usedSize": 498248,
+          "totalSize": 1310720
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 498248,
+        "totalSize": 1310720,
+        "totalSelfSizeBytes": 555869,
+        "nodeCount": 23841,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -34256068,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/calendly.com"
+    }
   },
   "principles": [
     {
@@ -218,9 +253,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -34.3 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -231,6 +266,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

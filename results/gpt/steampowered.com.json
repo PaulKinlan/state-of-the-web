@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": null,
-    "heapSize": 27714466,
-    "heapSizeAfterInteraction": 29471585,
-    "heapDeltaAfterInteraction": 1757119,
+    "heapSize": 14849904,
+    "heapSizeAfterInteraction": 24931443,
+    "heapDeltaAfterInteraction": -2549616,
     "cls": 0.06391350214159956,
     "lcp": 1200.04,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T00:46:33.773Z",
+      "url": "https://store.steampowered.com/",
+      "rank": 284,
+      "baseline": {
+        "usedSize": 14849904,
+        "totalSize": 16146432
+      },
+      "samples": [
+        {
+          "usedSize": 14956040,
+          "totalSize": 15884288
+        },
+        {
+          "usedSize": 12285868,
+          "totalSize": 13107200
+        },
+        {
+          "usedSize": 12300288,
+          "totalSize": 13107200
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 12300288,
+        "totalSize": 13107200,
+        "totalSelfSizeBytes": 24931443,
+        "nodeCount": 426441,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -2549616,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/steampowered.com"
+    }
   },
   "principles": [
     {
@@ -196,9 +231,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -2.5 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -210,6 +245,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

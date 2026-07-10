@@ -14,10 +14,10 @@
       "seo": 100
     },
     "axeViolations": 3,
-    "heapSize": 46111615,
-    "heapSizeAfterInteraction": 78190699,
-    "heapDeltaAfterInteraction": 32079084,
-    "cls": 3.046482394503125e-05,
+    "heapSize": 32605912,
+    "heapSizeAfterInteraction": 80684627,
+    "heapDeltaAfterInteraction": 25069676,
+    "cls": 0.00003046482394503125,
     "lcp": 10872.100000000002,
     "inp": null,
     "tbt": 2202.0000000000036,
@@ -37,7 +37,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T00:58:57.944Z",
+      "url": "https://www.target.com/",
+      "rank": 577,
+      "baseline": {
+        "usedSize": 32605912,
+        "totalSize": 34553856
+      },
+      "samples": [
+        {
+          "usedSize": 74457168,
+          "totalSize": 97468416
+        },
+        {
+          "usedSize": 59977092,
+          "totalSize": 62865408
+        },
+        {
+          "usedSize": 57675588,
+          "totalSize": 59719680
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 57675588,
+        "totalSize": 59719680,
+        "totalSelfSizeBytes": 80684627,
+        "nodeCount": 1552513,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 25069676,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/target.com"
+    }
   },
   "principles": [
     {
@@ -224,10 +259,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained +25.1 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "target.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+25.1 MB)",
+          "evidence": "Same-session memory pass: baseline 32605912 bytes; final after interaction cycles + forced GC 80684627 bytes; delta 25069676 bytes; monotonic=false.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (10.9s); medium be-fast-and-stable: Total blocking time is high (2202ms); high be-inclusive: axe found 3 violation groups.",
@@ -237,6 +282,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

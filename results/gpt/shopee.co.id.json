@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 5,
-    "heapSize": 37392627,
-    "heapSizeAfterInteraction": 41315342,
-    "heapDeltaAfterInteraction": 3922715,
+    "heapSize": 24227528,
+    "heapSizeAfterInteraction": 43360345,
+    "heapDeltaAfterInteraction": 6789956,
     "cls": 0.09768951446162308,
     "lcp": 9678.094900000002,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T01:02:06.148Z",
+      "url": "https://shopee.co.id/",
+      "rank": 713,
+      "baseline": {
+        "usedSize": 24227528,
+        "totalSize": 25255936
+      },
+      "samples": [
+        {
+          "usedSize": 29678708,
+          "totalSize": 30613504
+        },
+        {
+          "usedSize": 30649032,
+          "totalSize": 32448512
+        },
+        {
+          "usedSize": 31017484,
+          "totalSize": 32972800
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 31017484,
+        "totalSize": 32972800,
+        "totalSelfSizeBytes": 43360345,
+        "nodeCount": 617296,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 6789956,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/shopee.co.id"
+    }
   },
   "principles": [
     {
@@ -225,10 +260,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +6.8 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "shopee.co.id-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+6.8 MB)",
+          "evidence": "Same-session memory pass: baseline 24227528 bytes; final after interaction cycles + forced GC 43360345 bytes; delta 6789956 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (9.7s); medium be-fast-and-stable: Total blocking time is high (2221ms); medium be-discoverable: Low non-JS discoverability (0%).",
@@ -238,6 +283,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

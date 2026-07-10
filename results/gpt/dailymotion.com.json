@@ -14,9 +14,9 @@
       "seo": 77
     },
     "axeViolations": 2,
-    "heapSize": 1502061,
-    "heapSizeAfterInteraction": 2812813,
-    "heapDeltaAfterInteraction": 1310752,
+    "heapSize": 459824,
+    "heapSizeAfterInteraction": 2815178,
+    "heapDeltaAfterInteraction": 288924,
     "cls": 0,
     "lcp": 19490.027000000002,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T00:48:34.620Z",
+      "url": "https://www.dailymotion.com/",
+      "rank": 354,
+      "baseline": {
+        "usedSize": 459824,
+        "totalSize": 1048576
+      },
+      "samples": [
+        {
+          "usedSize": 748736,
+          "totalSize": 1310720
+        },
+        {
+          "usedSize": 748748,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 748748,
+          "totalSize": 1572864
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 748748,
+        "totalSize": 1572864,
+        "totalSelfSizeBytes": 2815178,
+        "nodeCount": 53201,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 288924,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/dailymotion.com"
+    }
   },
   "principles": [
     {
@@ -225,9 +260,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.3 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -238,6 +273,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

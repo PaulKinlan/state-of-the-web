@@ -14,9 +14,9 @@
       "seo": 85
     },
     "axeViolations": 7,
-    "heapSize": 93088262,
-    "heapSizeAfterInteraction": 60141772,
-    "heapDeltaAfterInteraction": -32946490,
+    "heapSize": 46488892,
+    "heapSizeAfterInteraction": 111388982,
+    "heapDeltaAfterInteraction": 28114692,
     "cls": 0.021691677551763242,
     "lcp": 40253.9805,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T01:04:07.436Z",
+      "url": "https://apnews.com/",
+      "rank": 764,
+      "baseline": {
+        "usedSize": 46488892,
+        "totalSize": 48734208
+      },
+      "samples": [
+        {
+          "usedSize": 70062700,
+          "totalSize": 75968512
+        },
+        {
+          "usedSize": 79459020,
+          "totalSize": 109260800
+        },
+        {
+          "usedSize": 74603584,
+          "totalSize": 107950080
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 74603584,
+        "totalSize": 107950080,
+        "totalSelfSizeBytes": 111388982,
+        "nodeCount": 1995051,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 28114692,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-003-evidence/apnews.com"
+    }
   },
   "principles": [
     {
@@ -227,10 +262,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained +28.1 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "apnews.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+28.1 MB)",
+          "evidence": "Same-session memory pass: baseline 46488892 bytes; final after interaction cycles + forced GC 111388982 bytes; delta 28114692 bytes; monotonic=false.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 9 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (40.3s); medium be-fast-and-stable: Total blocking time is high (716ms); high be-inclusive: axe found 7 violation groups.",
@@ -240,6 +285,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
