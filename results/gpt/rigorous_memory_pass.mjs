@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { spawn } from 'node:child_process';
+import { spawn, execSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -204,8 +204,17 @@ for(const row of rows){
     } catch {}
   }
   console.log(`[memory] ${site}`);
-  try { results.push(await auditSite(row)); }
+  const SITE_TIMEOUT = Number(process.env.MEMORY_TIMEOUT || '150000'); // 150s per site
+  try {
+    const result = await Promise.race([
+      auditSite(row),
+      new Promise((_,reject)=>setTimeout(()=>reject(new Error(`timeout after ${SITE_TIMEOUT/1000}s`)), SITE_TIMEOUT))
+    ]);
+    results.push(result);
+  }
   catch(e){ console.error(`[memory] ERROR ${site}:`, e.message); results.push({site, ok:false, error:e.message}); }
+  // ensure no orphaned chrome lingers from this site
+  try { execSync('pkill -9 -f "sotw-memory"', {stdio:'ignore'}); } catch {}
   writeJson(`${RESULTS}/${BATCH}.partial.json`, results);
 }
 writeJson(`${RESULTS}/${BATCH}.json`, results);
