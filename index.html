@@ -57,6 +57,9 @@ a{color:var(--accent)}
 .principle-link .q{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--accent);color:var(--background);font-size:.62rem;font-weight:700;line-height:1;flex-shrink:0;text-decoration:none}
 .bar-row .principle-link{width:200px;flex-shrink:0;justify-content:flex-end}
 #info-popover{inset:auto;margin:0;position:fixed;width:min(340px,calc(100vw - 16px));padding:0;border:1px solid var(--border);border-radius:.6rem;background:var(--background);box-shadow:0 10px 40px rgba(0,0,0,.22);font-size:.82rem;line-height:1.55;color:var(--color)}
+@supports(anchor-name:--a){
+  #info-popover{position-area:block-end;margin-block-start:6px;position-try-fallbacks:flip-block;inset:auto}
+}
 #info-popover .pp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;padding:.85rem .9rem .35rem}
 #info-popover h3{font-family:Georgia,serif;font-size:1rem;font-weight:normal;margin:0;flex:1;line-height:1.3}
 #info-popover .pp-close{background:none;border:none;color:var(--muted);font-size:1.25rem;cursor:pointer;line-height:1;padding:0 0 .2rem;flex-shrink:0}
@@ -66,6 +69,26 @@ a{color:var(--accent)}
 #info-popover .pp-how{color:var(--muted);font-size:.74rem;border-top:1px solid var(--border);padding-top:.5rem;margin:0}
 #info-popover .pp-how strong{color:var(--color)}
 #info-popover .pp-status{display:inline-block;font-size:.66rem;font-weight:700;padding:.12rem .45rem;border-radius:.25rem;margin-top:.4rem;text-transform:uppercase;letter-spacing:.03em}
+.shell-icon{display:inline-block;color:var(--warn);font-size:.85rem;cursor:help;vertical-align:baseline}
+.site-link{color:var(--accent);cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:2px}
+.site-link:hover{text-decoration-color:var(--accent)}
+#sites-table th.sortable{cursor:pointer;user-select:none}
+#sites-table th.sortable:hover{color:var(--accent)}
+#sites-table th.active-sort{color:var(--accent)}
+#site-detail{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;padding:1rem;overflow-y:auto;display:none}
+#site-detail.open{display:block}
+#site-detail .detail-panel{max-width:700px;margin:1rem auto;background:var(--background);border:1px solid var(--border);border-radius:.6rem;padding:1.5rem}
+#site-detail .detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1rem}
+#site-detail .detail-head h2{margin:0;border:none;font-size:1.4rem}
+#site-detail .detail-close{background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1;padding:0}
+#site-detail .detail-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;font-size:.8rem;color:var(--muted)}
+#site-detail .detail-meta b{color:var(--color)}
+#site-detail .detail-verdict{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:1rem;padding:.6rem;background:var(--bg-secondary);border-radius:.4rem}
+#site-detail .principle-row{display:flex;align-items:flex-start;gap:.5rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.8rem}
+#site-detail .principle-row .pstatus{flex-shrink:0;width:70px;font-weight:700;font-size:.72rem;text-transform:uppercase}
+#site-detail .principle-row .pname{flex-shrink:0;width:180px;color:var(--color)}
+#site-detail .principle-row .psum{flex:1;color:var(--muted);line-height:1.45}
+#site-detail .pstatus.pass{color:var(--good)}#site-detail .pstatus.issues{color:var(--bad)}#site-detail .pstatus.not-applicable{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -94,8 +117,8 @@ a{color:var(--accent)}
     <select id="score-filter"><option value="">All scores</option><option value="0-29">Critical (0-29)</option><option value="30-59">Poor (30-59)</option><option value="60-79">Fair (60-79)</option><option value="80-100">Good (80-100)</option></select>
   </div>
   <div class="table-wrap"><table id="sites-table"><thead><tr>
-    <th data-col="site">Site</th><th data-col="rank" class="num">Rank</th><th class="num">Score</th>
-    <th class="num">Issues</th><th class="num">CLS</th><th class="num">Axe</th><th class="num">Shell</th>
+    <th data-col="site">Site</th><th data-col="rank" class="num sortable">Rank</th><th data-col="overall_score" class="num sortable">Score</th>
+    <th data-col="issues" class="num sortable">Issues</th><th data-col="cls" class="num sortable">CLS</th>
   </tr></thead><tbody id="tbody"></tbody></table></div>
 
   <h2>Principle breakdown</h2>
@@ -106,10 +129,15 @@ a{color:var(--accent)}
   <p class="note">Data: <a href="https://github.com/PaulKinlan/state-of-the-web" target="_blank">GitHub</a> · Methodology: <a href="https://github.com/PaulKinlan/web-uplift" target="_blank">web-uplift</a> · <a href="https://aifoc.us" target="_blank">AI Focus</a></p>
 </div>
 
+<div id="site-detail"><div class="detail-panel"><div class="detail-head"><h2 id="detail-title"></h2><button class="detail-close" onclick="closeSiteDetail()" aria-label="Close">×</button></div><div class="detail-meta" id="detail-meta"></div><div class="detail-verdict" id="detail-verdict"></div><div id="detail-principles"></div></div></div>
+
 <div id="info-popover" popover="auto"></div>
 <script type="module">
 if(!HTMLElement.prototype.hasOwnProperty('popover')){
   import('https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover-fn.js').then(({apply})=>apply());
+}
+if(!("anchorName" in document.documentElement.style)){
+  import('https://unpkg.com/@oddbird/css-anchor-positioning');
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.min.js"></script>
@@ -177,18 +205,28 @@ function renderPrincipleChart(){
 function renderSites(){
   const search=document.getElementById('search').value;
   const sf=document.getElementById('score-filter').value;
-  let where=["source='gpt'"];let params=[];
-  if(search){where.push('site LIKE ?');params.push('%'+search+'%');}
+  let where=["source='gpt'"];
+  if(search){where.push("site LIKE '%"+search+"%'");}
   if(sf){const[a,b]=sf.split('-');where.push(`overall_score >= ${a} AND overall_score <= ${b}`);}
-  const sc={'site':'site','rank':'rank','overall_score':'overall_score'}[sortCol]||'overall_score';
-  const sites=q(`SELECT s.*, (SELECT COUNT(*) FROM principles p WHERE p.site=s.site AND p.status='issues') as issue_count FROM sites s WHERE ${where.join(' AND ')} ORDER BY ${sc} ${sortDir}`);
+  const colMap={'site':'site','rank':'rank','overall_score':'overall_score','issues':'issue_count','cls':'cls'};
+  let orderCol=colMap[sortCol]||'overall_score';
+  // handle nulls: sort nulls last regardless of direction
+  let nullExpr = orderCol==='site' ? '' : (orderCol==='issue_count' ? 'COALESCE(issue_count,0)' : 'COALESCE('+orderCol+',0)');
+  let orderExpr = orderCol==='site' ? 'site COLLATE NOCASE' : nullExpr;
+  const sites=q(`SELECT s.*, (SELECT COUNT(*) FROM principles p WHERE p.site=s.site AND p.status='issues') as issue_count FROM sites s WHERE ${where.join(' AND ')} ORDER BY ${orderExpr} ${sortDir}`);
   document.getElementById('tbody').innerHTML=sites.map(s=>{
-    const sc=s.overall_score!=null?`<span class="score ${scoreClass(s.overall_score)}">${s.overall_score}</span>`:'—';
+    const score=s.overall_score!=null?`<span class="score ${scoreClass(s.overall_score)}">${s.overall_score}</span>`:'—';
     const cls=s.cls!=null?(s.cls>0.1?`<span style="color:var(--bad)">${s.cls.toFixed(2)}</span>`:s.cls.toFixed(3)):'—';
-    const axe=s.axe_violations!=null?s.axe_violations:'—';
-    const shell=s.is_js_shell?'<span style="color:var(--bad)">Yes</span>':'No';
-    return `<tr><td>${s.site}</td><td class="num">${s.rank||'—'}</td><td class="num">${sc}</td><td class="num">${s.issue_count||0}</td><td class="num">${cls}</td><td class="num">${axe}</td><td class="num">${shell}</td></tr>`;
+    const shell=s.is_js_shell?' <span class="shell-icon" title="JS shell — no content without JavaScript">⬚</span>':'';
+    return `<tr><td><a class="site-link" onclick="showSite('${s.site}')">${s.site}</a>${shell}</td><td class="num">${s.rank||'—'}</td><td class="num">${score}</td><td class="num">${s.issue_count||0}</td><td class="num">${cls}</td></tr>`;
   }).join('');
+  // update sort indicators
+  document.querySelectorAll('#sites-table th[data-col]').forEach(th=>{
+    const c=th.dataset.col;
+    const arrow = c===sortCol ? (sortDir==='desc'?' ▼':' ▲') : '';
+    th.textContent = th.textContent.replace(/ [▲▼]$/,'') + arrow;
+    th.classList.toggle('active-sort', c===sortCol);
+  });
 }
 
 function renderPrinciples(){
@@ -202,8 +240,8 @@ function renderPrinciples(){
 
 document.getElementById('search').addEventListener('input',renderSites);
 document.getElementById('score-filter').addEventListener('change',renderSites);
-document.querySelectorAll('th[data-col]').forEach(th=>th.addEventListener('click',()=>{
-  const c=th.dataset.col;if(sortCol===c)sortDir=sortDir==='asc'?'desc':'asc';else{sortCol=c;sortDir='desc';}renderSites();
+document.querySelectorAll('#sites-table th[data-col]').forEach(th=>th.addEventListener('click',()=>{
+  const c=th.dataset.col;if(sortCol===c)sortDir=sortDir==='asc'?'desc':'asc';else{sortCol=c;sortDir=c==='site'?'asc':'desc';}renderSites();
 }));
 const PRINCIPLES={
 "respect-user-preferences":{title:"Respect user preferences",status:"",desc:"The most fundamental principle for web usability: adapt to the user's stated and system-level preferences (theme, motion, contrast) rather than imposing one fixed experience. Read the signals the platform already provides and adjust.",how:"Probes prefers-color-scheme (dark mode), prefers-reduced-motion, and forced-colors via Chrome DevTools Protocol. A vision agent then checks whether the page actually adapts to each signal."},
@@ -231,17 +269,43 @@ function showInfo(btn,pid){
   if(!info){return;}
   const badge=info.status==='pending'?'<span class="pp-status" style="background:var(--bg-secondary);color:var(--muted);border:1px solid var(--border)">Pending active testing</span>':'';
   pop.innerHTML='<div class="pp-head"><h3>'+info.title+'</h3><button class="pp-close" onclick="closeInfo()" aria-label="Close">×</button></div><div class="pp-body"><p class="pp-desc">'+info.desc+'</p>'+badge+'<p class="pp-how"><strong>How it\'s tested:</strong> '+info.how+'</p></div>';
+  // set explicit anchor for anchor positioning (native + polyfill)
+  var anchorName='--pp-'+pid;
+  btn.style.anchorName=anchorName;
+  pop.style.positionAnchor=anchorName;
+  // clear any JS-set position so CSS anchor positioning can take over
+  pop.style.top='';pop.style.left='';
   if(typeof pop.showPopover==='function'){
     pop.showPopover();
-    requestAnimationFrame(()=>{
-      const r=btn.getBoundingClientRect();const pw=pop.offsetWidth;const ph=pop.offsetHeight;
-      let left=Math.max(8,Math.min(r.left,window.innerWidth-pw-8));
-      let top=r.bottom+6;
-      if(top+ph>window.innerHeight-8){top=Math.max(8,r.top-ph-6);}
-      pop.style.top=top+'px';pop.style.left=left+'px';
-    });
+    // JS fallback only if anchor positioning not supported (native or polyfill)
+    if(!CSS.supports('anchor-name','--x')){
+      requestAnimationFrame(()=>{
+        var r=btn.getBoundingClientRect();var pw=pop.offsetWidth;var ph=pop.offsetHeight;
+        var left=Math.max(8,Math.min(r.left,window.innerWidth-pw-8));
+        var top=r.bottom+6;
+        if(top+ph>window.innerHeight-8){top=Math.max(8,r.top-ph-6);}
+        pop.style.top=top+'px';pop.style.left=left+'px';
+      });
+    }
   }else{pop.setAttribute('open','');pop.style.display='block';}
 }
+function showSite(site){
+  var s=q("SELECT * FROM sites WHERE site='"+site.replace(/'/g,"''")+"'")[0];
+  if(!s){return;}
+  document.getElementById('detail-title').textContent=s.site;
+  var meta='<b>Rank:</b> '+(s.rank||'—')+' &nbsp; <b>Score:</b> '+(s.overall_score!=null?s.overall_score:'—')+' &nbsp; <b>CLS:</b> '+(s.cls!=null?s.cls.toFixed(3):'—')+' &nbsp; <b>Lighthouse perf:</b> '+(s.lh_performance!=null?Math.round(s.lh_performance*100):'—')+' &nbsp; <b>JS shell:</b> '+(s.is_js_shell?'Yes':'No');
+  if(s.url){meta+=' &nbsp; <a href="'+s.url+'" target="_blank" style="color:var(--accent)">Visit ↗</a>';}
+  document.getElementById('detail-meta').innerHTML=meta;
+  document.getElementById('detail-verdict').textContent=s.verdict||'';
+  var prs=q("SELECT principle_id,status,confidence,summary,finding_count FROM principles WHERE site='"+site.replace(/'/g,"''")+"' ORDER BY CASE status WHEN 'issues' THEN 0 WHEN 'pass' THEN 1 ELSE 2 END, principle_id");
+  document.getElementById('detail-principles').innerHTML=prs.map(function(p){
+    var st=p.status==='not-applicable'?'n/a':p.status;
+    return '<div class="principle-row"><span class="pstatus '+p.status+'">'+st+'</span><span class="pname">'+pidName(p.principle_id)+(p.finding_count?' ('+p.finding_count+')':'')+'</span><span class="psum">'+(p.summary||'')+'</span></div>';
+  }).join('');
+  var d=document.getElementById('site-detail');d.classList.add('open');d.style.display='block';
+  d.onclick=function(e){if(e.target===d)closeSiteDetail();};
+}
+function closeSiteDetail(){var d=document.getElementById('site-detail');d.classList.remove('open');d.style.display='none';}
 document.getElementById('about-link').addEventListener('click',e=>{e.preventDefault();document.getElementById('about-modal').style.display='block';});
 init();
 </script>
