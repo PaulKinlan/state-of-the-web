@@ -151,6 +151,38 @@ def merge_active_probes(con):
         c = counts[key]
         print(f"  merged active-probe {pid}: {c['pass']} pass, {c['issues']} issues", file=sys.stderr)
 
+def merge_secrets(con):
+    """Merge secrets-scan results into be-private-and-secure.
+    If exposed secrets are found, upgrade the principle to 'issues' and add findings."""
+    fpath = os.path.join(ROOT, 'results', 'gpt', 'secrets-scan-001.json')
+    if not os.path.exists(fpath):
+        return
+    data = json.load(open(fpath))
+    n_issues = 0
+    for r in data:
+        site = r.get('site')
+        if not site or not r.get('ok'):
+            continue
+        if r.get('status') != 'issues':
+            continue
+        n_issues += 1
+        findings = r.get('findings', [])
+        # add secret findings
+        for f in findings:
+            con.execute("INSERT INTO findings (site, principle_id, finding_id, severity, summary, evidence) VALUES (?,?,?,?,?,?)",
+                        (site, 'be-private-and-secure', site.replace('.','-')+'-secret-'+f.get('pattern','x'),
+                         f.get('severity','high'), f"Exposed {f.get('description','secret')} in {f.get('source','?')}",
+                         f"Match: {f.get('match','?')}"))
+        # upgrade principle to issues if it was pass
+        cur = con.execute("SELECT status, summary FROM principles WHERE site=? AND principle_id='be-private-and-secure'", (site,)).fetchone()
+        if cur and cur[0] != 'issues':
+            con.execute("UPDATE principles SET status='issues', confidence='high', summary=? WHERE site=? AND principle_id='be-private-and-secure'",
+                        (r.get('summary','Exposed secrets detected') + ('. ' + cur[1] if cur[1] else ''), site))
+        elif cur:
+            con.execute("UPDATE principles SET status='issues', confidence='high', summary=? WHERE site=? AND principle_id='be-private-and-secure'",
+                        (r.get('summary','Exposed secrets detected'), site))
+    print(f"  merged secrets-scan: {n_issues} sites with exposed secrets", file=sys.stderr)
+
 def merge_reaudits(con):
     """Merge vision re-audit results (be-trustworthy, provide-guided-navigation)
     that were re-judged from existing screenshots with dark-pattern/nav findings."""
@@ -305,9 +337,10 @@ def main():
                 n_find += 1
     con.commit()
 
-    # --- Post-processing: merge re-audits + active probes, then derive/fix ---
+    # --- Post-processing: merge re-audits + active probes + secrets, then derive/fix ---
     merge_reaudits(con)
     merge_active_probes(con)
+    merge_secrets(con)
     derive_resilience(con, cdp)
     fix_false_passes(con)
     con.commit()
