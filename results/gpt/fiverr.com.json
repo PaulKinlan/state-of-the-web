@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 11206811,
-    "heapSizeAfterInteraction": 11206578,
-    "heapDeltaAfterInteraction": -233,
+    "heapSize": 8763272,
+    "heapSizeAfterInteraction": 11141449,
+    "heapDeltaAfterInteraction": 40008,
     "cls": 0.01352043460907817,
     "lcp": 43700.476769999994,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:44:51.410Z",
+      "url": "https://www.fiverr.com/",
+      "rank": 759,
+      "baseline": {
+        "usedSize": 8763272,
+        "totalSize": 9699328
+      },
+      "samples": [
+        {
+          "usedSize": 8790356,
+          "totalSize": 9699328
+        },
+        {
+          "usedSize": 8796516,
+          "totalSize": 9699328
+        },
+        {
+          "usedSize": 8803280,
+          "totalSize": 9699328
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 8803280,
+        "totalSize": 9699328,
+        "totalSelfSizeBytes": 11141449,
+        "nodeCount": 410196,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 40008,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/fiverr.com"
+    }
   },
   "principles": [
     {
@@ -179,9 +214,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -193,6 +228,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Cannot read properties of undefined (reading 'toLowerCase')"
+    "Axe blocked or failed: Cannot read properties of undefined (reading 'toLowerCase')",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

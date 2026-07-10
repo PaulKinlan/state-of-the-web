@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 4,
-    "heapSize": 42538213,
-    "heapSizeAfterInteraction": 42633660,
-    "heapDeltaAfterInteraction": 95447,
+    "heapSize": 25751856,
+    "heapSizeAfterInteraction": 41110640,
+    "heapDeltaAfterInteraction": 17725920,
     "cls": 0,
     "lcp": 2619.145,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:56:41.188Z",
+      "url": "https://www.chess.com/",
+      "rank": 847,
+      "baseline": {
+        "usedSize": 25751856,
+        "totalSize": 27525120
+      },
+      "samples": [
+        {
+          "usedSize": 37008460,
+          "totalSize": 61194240
+        },
+        {
+          "usedSize": 41010308,
+          "totalSize": 74825728
+        },
+        {
+          "usedSize": 43477776,
+          "totalSize": 77447168
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 43477776,
+        "totalSize": 77447168,
+        "totalSelfSizeBytes": 41110640,
+        "nodeCount": 721435,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 17725920,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/chess.com"
+    }
   },
   "principles": [
     {
@@ -203,10 +238,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +17.7 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "chess.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+17.7 MB)",
+          "evidence": "Same-session memory pass: baseline 25751856 bytes; final after interaction cycles + forced GC 41110640 bytes; delta 17725920 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: medium be-fast-and-stable: LCP above good threshold (2.6s); high be-inclusive: axe found 4 violation groups; medium be-sustainable: Heavy transfer on initial load (4.0 MB).",
@@ -216,6 +261,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

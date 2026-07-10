@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": null,
-    "heapSize": 48553410,
-    "heapSizeAfterInteraction": 53514714,
-    "heapDeltaAfterInteraction": 4961304,
+    "heapSize": 33932388,
+    "heapSizeAfterInteraction": 1818408,
+    "heapDeltaAfterInteraction": -32211620,
     "cls": 0.1245067020605939,
     "lcp": 15984.385499999997,
     "inp": null,
@@ -47,7 +47,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:32:45.171Z",
+      "url": "https://stripchat.com/",
+      "rank": 699,
+      "baseline": {
+        "usedSize": 33932388,
+        "totalSize": 35749888
+      },
+      "samples": [
+        {
+          "usedSize": 1710732,
+          "totalSize": 2621440
+        },
+        {
+          "usedSize": 1720768,
+          "totalSize": 2359296
+        },
+        {
+          "usedSize": 1720768,
+          "totalSize": 2359296
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 1720768,
+        "totalSize": 2359296,
+        "totalSelfSizeBytes": 1818408,
+        "nodeCount": 46267,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -32211620,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/stripchat.com"
+    }
   },
   "principles": [
     {
@@ -242,9 +277,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -32.2 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -256,6 +291,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

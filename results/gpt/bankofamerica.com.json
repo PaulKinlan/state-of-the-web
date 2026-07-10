@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 8,
-    "heapSize": 61542432,
-    "heapSizeAfterInteraction": 100383689,
-    "heapDeltaAfterInteraction": 38841257,
+    "heapSize": 33322612,
+    "heapSizeAfterInteraction": 156911276,
+    "heapDeltaAfterInteraction": 83880976,
     "cls": 0.14145839427158108,
     "lcp": 18984.937500000007,
     "inp": null,
@@ -37,7 +37,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:58:45.407Z",
+      "url": "https://www.bankofamerica.com/",
+      "rank": 864,
+      "baseline": {
+        "usedSize": 33322612,
+        "totalSize": 36216832
+      },
+      "samples": [
+        {
+          "usedSize": 50721468,
+          "totalSize": 58343424
+        },
+        {
+          "usedSize": 102260576,
+          "totalSize": 121196544
+        },
+        {
+          "usedSize": 117203588,
+          "totalSize": 136179712
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 117203588,
+        "totalSize": 136179712,
+        "totalSelfSizeBytes": 156911276,
+        "nodeCount": 2506574,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 83880976,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/bankofamerica.com"
+    }
   },
   "principles": [
     {
@@ -231,10 +266,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +83.9 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "bankofamerica.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+83.9 MB)",
+          "evidence": "Same-session memory pass: baseline 33322612 bytes; final after interaction cycles + forced GC 156911276 bytes; delta 83880976 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (19.0s); medium be-fast-and-stable: Total blocking time is high (2814ms); high be-fast-and-stable: CLS above good threshold (0.14).",
@@ -244,6 +289,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

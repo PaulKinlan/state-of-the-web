@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": null,
-    "heapSize": 10544384,
-    "heapSizeAfterInteraction": 13382931,
-    "heapDeltaAfterInteraction": 2838547,
+    "heapSize": 4601796,
+    "heapSizeAfterInteraction": 22053694,
+    "heapDeltaAfterInteraction": 10744572,
     "cls": 0.000260269830473602,
     "lcp": 6621.249500000002,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:27:37.089Z",
+      "url": "https://openstreetmap.org/",
+      "rank": 672,
+      "baseline": {
+        "usedSize": 4601796,
+        "totalSize": 5505024
+      },
+      "samples": [
+        {
+          "usedSize": 8076312,
+          "totalSize": 8912896
+        },
+        {
+          "usedSize": 12120212,
+          "totalSize": 13893632
+        },
+        {
+          "usedSize": 15346368,
+          "totalSize": 16515072
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 15346368,
+        "totalSize": 16515072,
+        "totalSelfSizeBytes": 22053694,
+        "nodeCount": 437997,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 10744572,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/openstreetmap.org"
+    }
   },
   "principles": [
     {
@@ -164,10 +199,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +10.7 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "openstreetmap.org-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+10.7 MB)",
+          "evidence": "Same-session memory pass: baseline 4601796 bytes; final after interaction cycles + forced GC 22053694 bytes; delta 10744572 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 2 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (6.6s); medium be-inclusive: Unnamed controls or links detected.",
@@ -178,6 +223,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

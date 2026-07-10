@@ -14,9 +14,9 @@
       "seo": 85
     },
     "axeViolations": 1,
-    "heapSize": 37559858,
-    "heapSizeAfterInteraction": 53860546,
-    "heapDeltaAfterInteraction": 16300688,
+    "heapSize": 23586736,
+    "heapSizeAfterInteraction": 111828593,
+    "heapDeltaAfterInteraction": 68630080,
     "cls": 0,
     "lcp": 5253.89701,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:24:54.439Z",
+      "url": "https://mailchimp.com/",
+      "rank": 655,
+      "baseline": {
+        "usedSize": 23586736,
+        "totalSize": 25636864
+      },
+      "samples": [
+        {
+          "usedSize": 49091716,
+          "totalSize": 61308928
+        },
+        {
+          "usedSize": 62453552,
+          "totalSize": 71479296
+        },
+        {
+          "usedSize": 92216816,
+          "totalSize": 109154304
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 92216816,
+        "totalSize": 109154304,
+        "totalSelfSizeBytes": 111828593,
+        "nodeCount": 1915456,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 68630080,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/mailchimp.com"
+    }
   },
   "principles": [
     {
@@ -218,10 +253,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +68.6 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "mailchimp.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+68.6 MB)",
+          "evidence": "Same-session memory pass: baseline 23586736 bytes; final after interaction cycles + forced GC 111828593 bytes; delta 68630080 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 7 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (5.3s); medium be-fast-and-stable: Total blocking time is high (426ms); medium be-inclusive: axe found 1 violation groups.",
@@ -231,6 +276,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

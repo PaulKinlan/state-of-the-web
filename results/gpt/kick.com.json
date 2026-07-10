@@ -14,10 +14,10 @@
       "seo": 100
     },
     "axeViolations": 5,
-    "heapSize": 519164,
-    "heapSizeAfterInteraction": 588920,
-    "heapDeltaAfterInteraction": 69756,
-    "cls": 3.504090818637748e-05,
+    "heapSize": 453260,
+    "heapSizeAfterInteraction": 586161,
+    "heapDeltaAfterInteraction": 66760,
+    "cls": 0.00003504090818637748,
     "lcp": 13580.971500000001,
     "inp": null,
     "tbt": 939.5,
@@ -31,7 +31,42 @@
     "hasViewport": false,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:29:30.587Z",
+      "url": "https://kick.com/",
+      "rank": 690,
+      "baseline": {
+        "usedSize": 453260,
+        "totalSize": 1048576
+      },
+      "samples": [
+        {
+          "usedSize": 520020,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 520020,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 520020,
+          "totalSize": 1572864
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 520020,
+        "totalSize": 1572864,
+        "totalSelfSizeBytes": 586161,
+        "nodeCount": 24765,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 66760,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/kick.com"
+    }
   },
   "principles": [
     {
@@ -202,9 +237,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.1 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -215,6 +250,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

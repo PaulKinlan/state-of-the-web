@@ -14,9 +14,9 @@
       "seo": null
     },
     "axeViolations": 2,
-    "heapSize": 661432,
-    "heapSizeAfterInteraction": 662540,
-    "heapDeltaAfterInteraction": 1108,
+    "heapSize": 574408,
+    "heapSizeAfterInteraction": 659381,
+    "heapDeltaAfterInteraction": -540,
     "cls": 0,
     "lcp": null,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:22:35.521Z",
+      "url": "https://yelp.com/",
+      "rank": 646,
+      "baseline": {
+        "usedSize": 574408,
+        "totalSize": 1310720
+      },
+      "samples": [
+        {
+          "usedSize": 573868,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 573868,
+          "totalSize": 1572864
+        },
+        {
+          "usedSize": 573868,
+          "totalSize": 1572864
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 573868,
+        "totalSize": 1572864,
+        "totalSelfSizeBytes": 659381,
+        "nodeCount": 26095,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -540,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/yelp.com"
+    }
   },
   "principles": [
     {
@@ -172,9 +207,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -185,6 +220,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

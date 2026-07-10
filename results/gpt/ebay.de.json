@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 4,
-    "heapSize": 30697628,
-    "heapSizeAfterInteraction": 18272490,
-    "heapDeltaAfterInteraction": -12425138,
+    "heapSize": 20390580,
+    "heapSizeAfterInteraction": 3337387,
+    "heapDeltaAfterInteraction": -17785668,
     "cls": 0.016918242571653565,
     "lcp": 18746.752099999998,
     "inp": null,
@@ -52,7 +52,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:50:57.196Z",
+      "url": "https://www.ebay.de/",
+      "rank": 814,
+      "baseline": {
+        "usedSize": 20390580,
+        "totalSize": 21344256
+      },
+      "samples": [
+        {
+          "usedSize": 10967252,
+          "totalSize": 19247104
+        },
+        {
+          "usedSize": 1608344,
+          "totalSize": 3407872
+        },
+        {
+          "usedSize": 2604912,
+          "totalSize": 6029312
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 2604912,
+        "totalSize": 6029312,
+        "totalSelfSizeBytes": 3337387,
+        "nodeCount": 68837,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -17785668,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/ebay.de"
+    }
   },
   "principles": [
     {
@@ -247,9 +282,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -17.8 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -260,6 +295,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 13,
-    "heapSize": 75175295,
-    "heapSizeAfterInteraction": 61797157,
-    "heapDeltaAfterInteraction": -13378138,
+    "heapSize": 47404636,
+    "heapSizeAfterInteraction": 43068791,
+    "heapDeltaAfterInteraction": -5314396,
     "cls": 0.19072020679955698,
     "lcp": 7073.441489999997,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:27:53.367Z",
+      "url": "https://seznam.cz/",
+      "rank": 676,
+      "baseline": {
+        "usedSize": 47404636,
+        "totalSize": 51802112
+      },
+      "samples": [
+        {
+          "usedSize": 30551548,
+          "totalSize": 40333312
+        },
+        {
+          "usedSize": 47558576,
+          "totalSize": 77389824
+        },
+        {
+          "usedSize": 42090240,
+          "totalSize": 60350464
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 42090240,
+        "totalSize": 60350464,
+        "totalSelfSizeBytes": 43068791,
+        "nodeCount": 710761,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -5314396,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/seznam.cz"
+    }
   },
   "principles": [
     {
@@ -217,9 +252,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -5.3 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -230,6 +265,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

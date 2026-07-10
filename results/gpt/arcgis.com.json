@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 4,
-    "heapSize": 8373685,
-    "heapSizeAfterInteraction": 8385087,
-    "heapDeltaAfterInteraction": 11402,
+    "heapSize": 5154168,
+    "heapSizeAfterInteraction": 754844,
+    "heapDeltaAfterInteraction": -4458020,
     "cls": 0.059012636905905115,
     "lcp": 16007.971,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T08:00:16.260Z",
+      "url": "https://www.arcgis.com/",
+      "rank": 871,
+      "baseline": {
+        "usedSize": 5154168,
+        "totalSize": 5705728
+      },
+      "samples": [
+        {
+          "usedSize": 686112,
+          "totalSize": 1310720
+        },
+        {
+          "usedSize": 696148,
+          "totalSize": 1310720
+        },
+        {
+          "usedSize": 696148,
+          "totalSize": 1310720
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 696148,
+        "totalSize": 1310720,
+        "totalSelfSizeBytes": 754844,
+        "nodeCount": 26496,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": -4458020,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/arcgis.com"
+    }
   },
   "principles": [
     {
@@ -202,9 +237,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained -4.5 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -215,6 +250,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

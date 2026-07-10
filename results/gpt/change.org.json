@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 48120478,
-    "heapSizeAfterInteraction": 50054853,
-    "heapDeltaAfterInteraction": 1934375,
+    "heapSize": 31433080,
+    "heapSizeAfterInteraction": 49646264,
+    "heapDeltaAfterInteraction": 2599516,
     "cls": 0.02508618272577435,
     "lcp": 4320.692,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:56:29.502Z",
+      "url": "https://www.change.org/",
+      "rank": 846,
+      "baseline": {
+        "usedSize": 31433080,
+        "totalSize": 33378304
+      },
+      "samples": [
+        {
+          "usedSize": 32935736,
+          "totalSize": 34426880
+        },
+        {
+          "usedSize": 33547744,
+          "totalSize": 34951168
+        },
+        {
+          "usedSize": 34032596,
+          "totalSize": 35737600
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 34032596,
+        "totalSize": 35737600,
+        "totalSelfSizeBytes": 49646264,
+        "nodeCount": 863360,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 2599516,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/change.org"
+    }
   },
   "principles": [
     {
@@ -195,9 +230,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 2.6 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -209,6 +244,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch (unpkg.com)"
+    "Axe blocked or failed: Failed to fetch (unpkg.com)",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 3,
-    "heapSize": 69703875,
-    "heapSizeAfterInteraction": 70115634,
-    "heapDeltaAfterInteraction": 411759,
+    "heapSize": 55131316,
+    "heapSizeAfterInteraction": 35850327,
+    "heapDeltaAfterInteraction": 73265856,
     "cls": 0.04794440504146449,
     "lcp": 6566.241000000002,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:48:30.915Z",
+      "url": "https://www.rakuten.com/",
+      "rank": 780,
+      "baseline": {
+        "usedSize": 55131316,
+        "totalSize": 56655872
+      },
+      "samples": [
+        {
+          "usedSize": 112987696,
+          "totalSize": 140365824
+        },
+        {
+          "usedSize": 128604028,
+          "totalSize": 187576320
+        },
+        {
+          "usedSize": 128397172,
+          "totalSize": 173420544
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 128397172,
+        "totalSize": 173420544,
+        "totalSelfSizeBytes": 35850327,
+        "nodeCount": 404874,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 73265856,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/rakuten.com"
+    }
   },
   "principles": [
     {
@@ -226,10 +261,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained +73.3 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "rakuten.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "high",
+          "title": "Heap retained after interaction and GC (+73.3 MB)",
+          "evidence": "Same-session memory pass: baseline 55131316 bytes; final after interaction cycles + forced GC 35850327 bytes; delta 73265856 bytes; monotonic=false.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 8 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (6.6s); medium be-fast-and-stable: Total blocking time is high (7192ms); medium be-discoverable: Low non-JS discoverability (47%).",
@@ -239,6 +284,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

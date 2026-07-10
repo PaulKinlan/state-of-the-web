@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": null,
-    "heapSize": 13645384,
-    "heapSizeAfterInteraction": 13700687,
-    "heapDeltaAfterInteraction": 55303,
+    "heapSize": 11149832,
+    "heapSizeAfterInteraction": 13554898,
+    "heapDeltaAfterInteraction": 30520,
     "cls": 0.008395526660137785,
     "lcp": 7797.507,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:27:26.170Z",
+      "url": "https://zillow.com/",
+      "rank": 663,
+      "baseline": {
+        "usedSize": 11149832,
+        "totalSize": 12140544
+      },
+      "samples": [
+        {
+          "usedSize": 11162848,
+          "totalSize": 12140544
+        },
+        {
+          "usedSize": 11171188,
+          "totalSize": 12140544
+        },
+        {
+          "usedSize": 11180352,
+          "totalSize": 12402688
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 11180352,
+        "totalSize": 12402688,
+        "totalSelfSizeBytes": 13554898,
+        "nodeCount": 404379,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 30520,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/zillow.com"
+    }
   },
   "principles": [
     {
@@ -195,9 +230,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.0 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -209,6 +244,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Cannot read properties of undefined (reading 'toLowerCase')"
+    "Axe blocked or failed: Cannot read properties of undefined (reading 'toLowerCase')",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

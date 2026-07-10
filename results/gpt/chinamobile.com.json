@@ -14,9 +14,9 @@
       "seo": 82
     },
     "axeViolations": null,
-    "heapSize": 4289577,
-    "heapSizeAfterInteraction": 4370299,
-    "heapDeltaAfterInteraction": 80722,
+    "heapSize": 1949884,
+    "heapSizeAfterInteraction": 4089540,
+    "heapDeltaAfterInteraction": 84452,
     "cls": 0.07765567765567766,
     "lcp": 11516.980499999998,
     "inp": null,
@@ -82,7 +82,42 @@
     "hasViewport": true,
     "hasMetaDescription": false,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:44:05.624Z",
+      "url": "https://www.chinamobileltd.com/",
+      "rank": 752,
+      "baseline": {
+        "usedSize": 1949884,
+        "totalSize": 3145728
+      },
+      "samples": [
+        {
+          "usedSize": 1983340,
+          "totalSize": 2883584
+        },
+        {
+          "usedSize": 2005900,
+          "totalSize": 2883584
+        },
+        {
+          "usedSize": 2034336,
+          "totalSize": 2883584
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 2034336,
+        "totalSize": 2883584,
+        "totalSelfSizeBytes": 4089540,
+        "nodeCount": 73637,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 84452,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/chinamobile.com"
+    }
   },
   "principles": [
     {
@@ -262,9 +297,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 0.1 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -276,6 +311,7 @@
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
     "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
-    "Axe blocked or failed: Failed to fetch"
+    "Axe blocked or failed: Failed to fetch",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

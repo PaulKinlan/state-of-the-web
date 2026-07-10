@@ -14,9 +14,9 @@
       "seo": 85
     },
     "axeViolations": 6,
-    "heapSize": 24416524,
-    "heapSizeAfterInteraction": 55806403,
-    "heapDeltaAfterInteraction": 31389879,
+    "heapSize": 10988992,
+    "heapSizeAfterInteraction": 51576031,
+    "heapDeltaAfterInteraction": 24516208,
     "cls": 0.014063889792713053,
     "lcp": 13756.318710000003,
     "inp": null,
@@ -37,7 +37,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": true
+    "hsts": true,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:48:13.468Z",
+      "url": "https://www.lenovo.com/",
+      "rank": 779,
+      "baseline": {
+        "usedSize": 10988992,
+        "totalSize": 11968512
+      },
+      "samples": [
+        {
+          "usedSize": 14486548,
+          "totalSize": 16949248
+        },
+        {
+          "usedSize": 29878716,
+          "totalSize": 36151296
+        },
+        {
+          "usedSize": 35505200,
+          "totalSize": 43118592
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 35505200,
+        "totalSize": 43118592,
+        "totalSelfSizeBytes": 51576031,
+        "nodeCount": 699969,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 24516208,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/lenovo.com"
+    }
   },
   "principles": [
     {
@@ -209,10 +244,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +24.5 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "lenovo.com-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+24.5 MB)",
+          "evidence": "Same-session memory pass: baseline 10988992 bytes; final after interaction cycles + forced GC 51576031 bytes; delta 24516208 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (13.8s); high adapt-to-the-form-factor: Mobile viewport has horizontal overflow; high be-inclusive: axe found 6 violation groups.",
@@ -222,6 +267,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

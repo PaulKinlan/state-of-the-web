@@ -14,9 +14,9 @@
       "seo": 100
     },
     "axeViolations": 3,
-    "heapSize": 13086431,
-    "heapSizeAfterInteraction": 25317896,
-    "heapDeltaAfterInteraction": 12231465,
+    "heapSize": 5479240,
+    "heapSizeAfterInteraction": 45562837,
+    "heapDeltaAfterInteraction": 23656568,
     "cls": 0.09930335760427336,
     "lcp": 10376.0385,
     "inp": null,
@@ -82,7 +82,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:37:23.584Z",
+      "url": "https://bitrix24.ru/",
+      "rank": 726,
+      "baseline": {
+        "usedSize": 5479240,
+        "totalSize": 6291456
+      },
+      "samples": [
+        {
+          "usedSize": 19194836,
+          "totalSize": 26042368
+        },
+        {
+          "usedSize": 25629612,
+          "totalSize": 35463168
+        },
+        {
+          "usedSize": 29135808,
+          "totalSize": 35893248
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 29135808,
+        "totalSize": 35893248,
+        "totalSelfSizeBytes": 45562837,
+        "nodeCount": 639130,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 23656568,
+      "monotonicGrowth": true,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/bitrix24.ru"
+    }
   },
   "principles": [
     {
@@ -261,10 +296,20 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
-      "findings": []
+      "status": "issues",
+      "confidence": "high",
+      "summary": "Same-session memory pass retained +23.7 MB after interaction cycles and forced GC.",
+      "findings": [
+        {
+          "id": "bitrix24.ru-memory-01",
+          "principleId": "be-memory-efficient",
+          "checkId": "heap-growth-after-gc",
+          "severity": "medium",
+          "title": "Heap retained after interaction and GC (+23.7 MB)",
+          "evidence": "Same-session memory pass: baseline 5479240 bytes; final after interaction cycles + forced GC 45562837 bytes; delta 23656568 bytes; monotonic=true.",
+          "suggestedFix": "Profile repeated interactions, remove retained detached DOM/listeners/timers, and ensure route/component cleanup releases references."
+        }
+      ]
     }
   ],
   "verdict": "Homepage batch: 6 principles with issues; top concerns: high be-fast-and-stable: LCP above good threshold (10.4s); high be-inclusive: axe found 3 violation groups; medium be-sustainable: Heavy transfer on initial load (6.3 MB).",
@@ -274,6 +319,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }

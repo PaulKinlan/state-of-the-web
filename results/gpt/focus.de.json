@@ -14,9 +14,9 @@
       "seo": 92
     },
     "axeViolations": 5,
-    "heapSize": 23900766,
-    "heapSizeAfterInteraction": 24123206,
-    "heapDeltaAfterInteraction": 222440,
+    "heapSize": 12147396,
+    "heapSizeAfterInteraction": 23108870,
+    "heapDeltaAfterInteraction": 5563992,
     "cls": 0.06388707751345114,
     "lcp": 12942.640499999998,
     "inp": null,
@@ -31,7 +31,42 @@
     "hasViewport": true,
     "hasMetaDescription": true,
     "httpsOnly": true,
-    "hsts": false
+    "hsts": false,
+    "memoryAudit": {
+      "method": "same-session baseline heap usage -> 3 scroll/nav/wait cycles -> forced Runtime.gc/HeapProfiler.collectGarbage after each cycle -> final heap snapshot summary",
+      "auditedAt": "2026-07-10T07:54:26.075Z",
+      "url": "https://www.focus.de/",
+      "rank": 834,
+      "baseline": {
+        "usedSize": 12147396,
+        "totalSize": 12992512
+      },
+      "samples": [
+        {
+          "usedSize": 15733296,
+          "totalSize": 34750464
+        },
+        {
+          "usedSize": 20877008,
+          "totalSize": 33345536
+        },
+        {
+          "usedSize": 17711388,
+          "totalSize": 35966976
+        }
+      ],
+      "finalAfterGc": {
+        "usedSize": 17711388,
+        "totalSize": 35966976,
+        "totalSelfSizeBytes": 23108870,
+        "nodeCount": 441679,
+        "detachedCount": 0
+      },
+      "deltaAfterGcBytes": 5563992,
+      "monotonicGrowth": false,
+      "thresholdBytes": 5000000,
+      "artifactsDir": "/home/paulkinlan/state-of-the-web/results/gpt/memory-batch-006-007-evidence/focus.de"
+    }
   },
   "principles": [
     {
@@ -195,9 +230,9 @@
     },
     {
       "id": "be-memory-efficient",
-      "status": "not-applicable",
-      "confidence": "low",
-      "summary": "Pending rigorous same-session memory audit; coarse heap snapshots are retained as evidence but not treated as pass/fail.",
+      "status": "pass",
+      "confidence": "medium",
+      "summary": "Same-session memory pass retained 5.6 MB after interaction cycles and forced GC; no monotonic leak signal above threshold.",
       "findings": []
     }
   ],
@@ -208,6 +243,7 @@
   "_caveats": [
     "Scale batch includes Lighthouse, trace, HAR, layout, screenshots, discoverability, axe/probes, and reduced-motion video; INP still requires a dedicated interaction flow.",
     "Memory pass/fail requires rigorous_memory_pass.mjs; coarse heap snapshots are retained but not treated as pass/fail.",
-    "Dark-mode/reduced-motion are inferred from probes unless separately captured."
+    "Dark-mode/reduced-motion are inferred from probes unless separately captured.",
+    "Memory was rechecked with same-session baseline, 3 interaction cycles, forced GC, and final heap snapshot; still a homepage smoke test, not full memlab trace attribution."
   ]
 }
