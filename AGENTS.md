@@ -86,6 +86,17 @@ Each site produces one JSON file at `results/gpt/{site}.json`:
       "status": "pass|issues|not-applicable",
       "confidence": "high|medium|low",
       "summary": "One-line assessment",
+      "tests": [
+        {
+          "id": "stable-test-id",
+          "title": "Human-readable check",
+          "method": "Exact active, visual, or objective method",
+          "status": "pass|issues|not-applicable|blocked|not-run",
+          "confidence": "high|medium|low",
+          "summary": "What this check observed",
+          "evidence": "Exact metric, interaction, screenshot, selector, or exception"
+        }
+      ],
       "findings": [
         {"id": "F-001", "severity": "serious", "title": "Short description", "evidence": "How we know"}
       ]
@@ -122,6 +133,8 @@ Each site produces one JSON file at `results/gpt/{site}.json`:
 - **issues**: One or more findings. Include severity (high/serious/moderate/low) and evidence.
 - **not-applicable**: Principle doesn't apply to this site type (e.g., be-internationalised for a technical-spec site with no user-facing text).
 - **confidence**: `high` = direct evidence (axe violation, Lighthouse score). `medium` = inferred from screenshots/metrics. `low` = couldn't verify (e.g., axe blocked by CSP).
+- **tests are mandatory**: every principle must define stable atomic test IDs and retain one result per applicable test. Use `blocked` or `not-run` when execution was impossible; never turn missing evidence into a pass or a vague “pending testing method”.
+- **principle status is derived from tests**: any test with `issues` makes the principle `issues`; all applicable measured tests passing makes it `pass`; `not-applicable` is only valid when the principle or test genuinely does not apply. A mix containing `blocked`/`not-run` cannot be reported as a high-confidence pass.
 
 ## Important
 

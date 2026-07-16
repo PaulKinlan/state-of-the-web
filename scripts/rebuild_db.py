@@ -187,10 +187,20 @@ def merge_reaudits(con):
     """Merge vision re-audit results (be-trustworthy, provide-guided-navigation)
     that were re-judged from existing screenshots with dark-pattern/nav findings."""
     reaudit_map = {
-        'reaudit-trustworthy.json': 'be-trustworthy',
-        'reaudit-guided-nav.json': 'provide-guided-navigation',
+        'reaudit-trustworthy.json': (
+            'be-trustworthy',
+            'homepage-screenshot-review',
+            'Homepage dark-pattern and trust review',
+            'Review retained desktop and mobile screenshots for obstructive consent, misleading defaults, disguised advertising, and visible recovery paths.',
+        ),
+        'reaudit-guided-nav.json': (
+            'provide-guided-navigation',
+            'homepage-wayfinding-review',
+            'Homepage wayfinding review',
+            'Review retained desktop and mobile screenshots for primary navigation, search, current-location cues, hierarchy, obstruction, and clear paths to primary actions.',
+        ),
     }
-    for fname, pid in reaudit_map.items():
+    for fname, (pid, test_id, test_title, test_method) in reaudit_map.items():
         fpath = os.path.join(ROOT, 'results', 'gpt', fname)
         if not os.path.exists(fpath):
             continue
@@ -209,6 +219,11 @@ def merge_reaudits(con):
             con.execute("DELETE FROM findings WHERE site=? AND principle_id=?", (site, pid))
             con.execute("INSERT OR REPLACE INTO principles (site, principle_id, status, confidence, summary, finding_count) VALUES (?,?,?,?,?,?)",
                         (site, pid, status, conf, summ, len(finds)))
+            test_status = 'blocked' if status == 'not-applicable' and 'prevent' in summ.lower() else status
+            con.execute("INSERT OR REPLACE INTO principle_tests (principle_id,test_id,title,method) VALUES (?,?,?,?)",
+                        (pid, test_id, test_title, test_method))
+            con.execute("INSERT OR REPLACE INTO test_results (site,principle_id,test_id,status,confidence,summary,evidence) VALUES (?,?,?,?,?,?,?)",
+                        (site, pid, test_id, test_status, conf, summ, json.dumps(r.get('sourceEvidence', {}), sort_keys=True)))
             for fnd in finds:
                 con.execute("INSERT INTO findings (site, principle_id, finding_id, severity, summary, evidence) VALUES (?,?,?,?,?,?)",
                             (site, pid, fnd.get('id', site+'-01'), fnd.get('severity', 'moderate'),
@@ -221,13 +236,19 @@ def derive_resilience(con, cdp):
     A site that shows 0% content without JS, or is a JS shell, fails resilience
     (core content does not work under adverse conditions)."""
     n_pass = n_issues = 0
+    con.execute("INSERT OR REPLACE INTO principle_tests (principle_id,test_id,title,method) VALUES (?,?,?,?)",
+                ('be-resilient', 'no-js-content', 'No-JavaScript content survival',
+                 'Compare rendered content with JavaScript enabled and disabled; record content coverage and JS-shell detection.'))
     for dom, c in cdp.items():
         exists = con.execute("SELECT 1 FROM principles WHERE site=? AND principle_id='be-resilient'", (dom,)).fetchone()
         if not exists:
             continue  # only derive for vision-audited sites
         disc = c.get("discoverability_pct")
         is_shell = c.get("is_js_shell")
-        if is_shell or (disc is not None and disc == 0):
+        if disc is None and not is_shell:
+            status, conf = "not-applicable", "low"
+            summ = "No JavaScript-disabled content measurement was retained for this site; resilience was not inferred."
+        elif is_shell or disc == 0:
             status, conf = "issues", "high"
             summ = f"Site shows {disc or 0}% of content without JavaScript" + (" and is a JS shell" if is_shell else "") + ". Core content does not work under no-JS conditions."
             finding_id = dom.replace('.', '-') + "-resilience-01"
@@ -247,6 +268,10 @@ def derive_resilience(con, cdp):
             n_pass += 1
         con.execute("INSERT OR REPLACE INTO principles (site, principle_id, status, confidence, summary, finding_count) VALUES (?,?,?,?,?,?)",
                     (dom, "be-resilient", status, conf, summ, 1 if status=="issues" else 0))
+        test_status = 'not-run' if disc is None and not is_shell else status
+        con.execute("INSERT OR REPLACE INTO test_results (site,principle_id,test_id,status,confidence,summary,evidence) VALUES (?,?,?,?,?,?,?)",
+                    (dom, 'be-resilient', 'no-js-content', test_status, conf, summ,
+                     f"discoverability_pct={disc}; is_js_shell={bool(is_shell)}"))
     print(f"  be-resilient derived from CDP: {n_pass} pass, {n_issues} issues", file=sys.stderr)
 
 def fix_false_passes(con):
@@ -327,6 +352,18 @@ def main():
                 VALUES (?,?,?,?,?,?)""",
                 (dom, pid, status, conf, summ, len(finds)))
             n_prin += 1
+            for test in pr.get("tests", []):
+                test_id = test.get("id", "").strip()
+                if not test_id:
+                    continue
+                con.execute("""INSERT OR REPLACE INTO principle_tests
+                    (principle_id, test_id, title, method) VALUES (?,?,?,?)""",
+                    (pid, test_id, test.get("title") or test_id, test.get("method")))
+                con.execute("""INSERT OR REPLACE INTO test_results
+                    (site, principle_id, test_id, status, confidence, summary, evidence)
+                    VALUES (?,?,?,?,?,?,?)""",
+                    (dom, pid, test_id, test.get("status", "not-run"),
+                     test.get("confidence"), test.get("summary"), test.get("evidence")))
             for fnd in finds:
                 con.execute("""INSERT INTO findings
                     (site, principle_id, finding_id, severity, summary, evidence)

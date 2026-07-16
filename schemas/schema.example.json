@@ -26,6 +26,10 @@
       "status": "pass",
       "confidence": "high",
       "summary": "Respects prefers-color-scheme, prefers-reduced-motion, and forced-colors.",
+      "tests": [
+        {"id": "color-scheme", "title": "Colour scheme adaptation", "method": "Capture light and dark emulation screenshots", "status": "pass", "confidence": "high", "summary": "Page adapts in both modes", "evidence": "light.png and dark.png"},
+        {"id": "reduced-motion", "title": "Reduced-motion adaptation", "method": "Emulate prefers-reduced-motion and inspect active animations", "status": "pass", "confidence": "high", "summary": "No non-essential motion remains", "evidence": "animationCount=0"}
+      ],
       "findings": []
     },
     {
@@ -33,6 +37,10 @@
       "status": "issues",
       "confidence": "high",
       "summary": "3 axe violations: 2 color-contrast (serious), 1 missing label (moderate).",
+      "tests": [
+        {"id": "axe", "title": "Automated accessibility scan", "method": "Run axe-core in the audited page", "status": "issues", "confidence": "high", "summary": "Three violation groups", "evidence": "axe.json"},
+        {"id": "keyboard", "title": "Keyboard and focus flow", "method": "Tab through visible controls and inspect focus order", "status": "not-run", "confidence": "low", "summary": "Interaction route was blocked", "evidence": "CAPTCHA prevented page access"}
+      ],
       "findings": [
         {"id": "F-001", "severity": "serious", "summary": "Button text fails color contrast (2.1:1)", "evidence": "axe-core flagged #btn-submit with rgb(200,200,200) on rgb(255,255,255)"}
       ]

@@ -1,6 +1,6 @@
 // State of the Web — service worker
 // Caches the SQLite DB + page shell for offline use (resilience)
-const CACHE = 'sotw-v1';
+const CACHE = 'sotw-v2';
 const ASSETS = ['/', '/index.html', '/state-of-the-web.db'];
 
 self.addEventListener('install', (e) => {

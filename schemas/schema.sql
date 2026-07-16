@@ -46,6 +46,27 @@ CREATE TABLE IF NOT EXISTS findings (
     evidence TEXT
 );
 
+-- Atomic checks within a principle. New audit reports must emit one row per
+-- applicable check so the UI can distinguish a measured pass from no finding.
+CREATE TABLE IF NOT EXISTS principle_tests (
+    principle_id TEXT,
+    test_id TEXT,
+    title TEXT,
+    method TEXT,
+    PRIMARY KEY (principle_id, test_id)
+);
+
+CREATE TABLE IF NOT EXISTS test_results (
+    site TEXT,
+    principle_id TEXT,
+    test_id TEXT,
+    status TEXT,  -- pass | issues | not-applicable | blocked | not-run
+    confidence TEXT,
+    summary TEXT,
+    evidence TEXT,
+    PRIMARY KEY (site, principle_id, test_id)
+);
+
 -- Aggregate views
 CREATE VIEW IF NOT EXISTS principle_summary AS
 SELECT principle_id, status, COUNT(*) as count
