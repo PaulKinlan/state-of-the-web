@@ -4,7 +4,7 @@ An automated audit of the top 1,000 websites using the [web-uplift](https://gith
 
 ## What this is
 
-This project is auditing the homepages of the top 1,000 Tranco sites (2026) against 17 principles and 58 authoritative checks from the vendored `principles.json`. The current dataset is incomplete: 499 sites have broad principle-level judgements, but the earlier run did not retain an outcome for every check. Those judgements are useful evidence, not proof of complete 58-check coverage. Evidence was collected in two modes:
+This project is auditing the top 1,000 Tranco sites (2026) against 17 principles and 58 authoritative checks from the vendored `principles.json`, using the representative routes and states required by each check. The current dataset is incomplete: 499 sites have broad principle-level judgements, but the earlier run did not retain an outcome for every check. Those judgements are useful evidence, not proof of complete 58-check coverage. Evidence was collected in two modes:
 
 1. **CDP evidence pass** (automated, scalable): CLS, horizontal overflow, JS-shell detection, discoverability, layout metrics. Covers 870/1000 sites.
 2. **Vision-based principle analysis** (AI agent with screenshot review): broad pass/issues/not-applicable judgements and findings for 499 sites. This predates the atomic-test schema and therefore does not establish that all checks passed.
@@ -33,7 +33,8 @@ state-of-the-web/
 │   └── schema.example.json   — example per-site JSON output
 ├── scripts/
 │   ├── audit_runner2.py      — CDP evidence batch runner (automated metrics)
-│   ├── run_gpt_batch.py      — Vision-based principle audit runner (gpt-5.5)
+│   ├── run_gpt_batch.py      — disabled legacy partial-evidence collector; not an audit
+│   ├── validate_atomic_report.mjs — exact check-coverage publication gate
 │   └── batch-001-sites.tsv   — site list for batch 001
 ├── results/
 │   ├── cdp/                  — CDP evidence results (870 sites, JSON)
@@ -52,12 +53,18 @@ python3 scripts/audit_runner2.py /tmp/tranco-top1000.txt 0 50
 # Results saved to results/cdp/results-batch-{start}.json
 ```
 
-### Vision-based principle audit (requires a vision-capable AI agent)
-See `AGENTS.md` and `.web-uplift/skill/SKILL.md` for the full methodology.
+### Atomic-check audit (requires a vision-capable AI agent)
+See `AGENTS.md` and the web-uplift skill for the full methodology. Before import or publication, validate every report:
+
+```bash
+node scripts/validate_atomic_report.mjs principles.json results/gpt/example.com.json
+```
+
+Only reports with complete exact coverage may be scored or described as audited.
 
 ### Merge results into SQLite
 ```bash
-python3 scripts/merge_results.py
+python3 scripts/rebuild_db.py
 # Produces state-of-the-web.db
 ```
 
@@ -70,7 +77,7 @@ python3 scripts/merge_results.py
 
 ## Limitations
 
-- Homepage-only (not article/detail pages)
+- The legacy dataset was homepage-oriented and therefore could not support several interaction- and journey-level checks. New complete audits require representative routes and states.
 - Single point-in-time snapshot per site
 - Headless Chrome — some sites block automated access (2.9%)
 - Lighthouse/INP not available for all sites (CSP may block injection)

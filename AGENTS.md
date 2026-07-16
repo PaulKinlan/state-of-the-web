@@ -4,7 +4,7 @@ This file instructs AI agents (Claude Code, Codex, Gemini, etc.) on how to run t
 
 ## Overview
 
-Run web-uplift audits across the top 1,000 Tranco sites. Each site gets a structured JSON report with 17 principle outcomes, evidence metrics, and findings.
+Run web-uplift audits across the top 1,000 Tranco sites. Each site gets a structured JSON report covering every authoritative `(principleId, checkId)` pair from `principles.json`, plus derived principle outcomes, evidence metrics, and findings. The catalog currently contains 17 principles and 58 checks; always derive those counts from the file.
 
 ## Prerequisites
 
@@ -34,9 +34,9 @@ Collects per site:
 
 Output: `results/cdp/results-batch-{start}.json`
 
-### Mode 2: Vision-based principle audit (requires vision-capable model)
+### Mode 2: Agentic atomic-check audit (requires a vision-capable model)
 
-Comprehensive — runs at ~2-5 min per site. Produces full 17-principle analysis.
+Potentially comprehensive, but only when the atomic coverage validator passes. Produces one explicit outcome for every check in `principles.json`; a 17-row principle summary alone is incomplete.
 
 For each site, gather evidence via the web-uplift skill:
 ```bash
@@ -51,7 +51,7 @@ node ~/.web-uplift/evidence/cli.mjs heap <url>
 node ~/.web-uplift/evidence/cli.mjs evaluate <url> --expr "<axe injection>"
 ```
 
-Then review the evidence (screenshots, metrics) and judge all 17 principles.
+Then materialise the exact check manifest from `principles.json`, gather the check-specific evidence (including active interactions and representative routes where required), record every check outcome, derive the 17 principle outcomes, and run the coverage validator. Do not use a generic evidence bundle to default untested checks to pass.
 
 ## Output schema
 
@@ -80,26 +80,38 @@ Each site produces one JSON file at `results/gpt/{site}.json`:
     "httpsOnly": true,
     "hsts": true
   },
-  "principles": [
+  "coverage": {
+    "catalogVersion": "from principles.json",
+    "catalogChecksum": "sha256:...",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
     {
-      "id": "respect-user-preferences",
-      "status": "pass|issues|not-applicable",
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "pass|issues|not-applicable|opted-out|blocked|not-run",
       "confidence": "high|medium|low",
-      "summary": "One-line assessment",
-      "tests": [
-        {
-          "id": "stable-test-id",
-          "title": "Human-readable check",
-          "method": "Exact active, visual, or objective method",
-          "status": "pass|issues|not-applicable|blocked|not-run",
-          "confidence": "high|medium|low",
-          "summary": "What this check observed",
-          "evidence": "Exact metric, interaction, screenshot, selector, or exception"
-        }
-      ],
-      "findings": [
-        {"id": "F-001", "severity": "serious", "title": "Short description", "evidence": "How we know"}
-      ]
+      "method": "Exact active, visual, or objective method used or attempted",
+      "evidence": "Exact metric, interaction, screenshot, selector, or exception",
+      "pathIds": ["homepage-dark"],
+      "artifacts": ["evidence/dark.png"],
+      "findingIds": []
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "pass|issues|incomplete|not-applicable|opted-out",
+      "findingIds": []
     }
   ],
   "verdict": "One-line overall assessment",
@@ -107,39 +119,25 @@ Each site produces one JSON file at `results/gpt/{site}.json`:
 }
 ```
 
-## The 17 principles
+## Authoritative principles and checks
 
-1. `respect-user-preferences` — color-scheme, reduced-motion, forced-colors
-2. `implement-natural-interactions` — keyboard, focus, gestures, drag
-3. `provide-guided-navigation` — wayfinding, breadcrumbs, progressive disclosure
-4. `maximize-content-reduce-noise` — density, hierarchy, whitespace
-5. `adapt-to-the-form-factor` — responsive, container queries, viewport, overflow
-6. `support-core-task-success` — can the user complete the primary task?
-7. `be-inclusive` — WCAG/axe, contrast, labels, landmarks
-8. `be-fast-and-stable` — CWV (LCP/INP/CLS), TBT, long tasks
-9. `be-discoverable` — SEO, meta, structured data, JS-shell detection
-10. `be-private-and-secure` — HTTPS, HSTS, CSP, cookie flags
-11. `be-resilient` — offline/PWA, no-JS fallback, service worker
-12. `be-internationalised` — i18n, RTL, locale, charset
-13. `be-trustworthy` — no dark patterns, honest UX
-14. `be-sustainable` — transfer size, resource count, third-party weight
-15. `be-agent-ready` — structured data, semantic HTML, crawlable
-16. `follow-best-practices` — console errors, deprecated APIs, HTTPS images
-17. `be-memory-efficient` — heap size, leak indicators
+Do not maintain a prose approximation here. Read `principles.json` at runtime and use its exact principle IDs, check IDs, applicability criteria, evidence hints, guidance references, catalog version, and checksum. Hand-written summaries drifted from the catalog and contributed to incomplete coverage.
 
 ## Scoring guidance
 
-- **pass**: No issues found for this principle. Evidence supports compliance.
-- **issues**: One or more findings. Include severity (high/serious/moderate/low) and evidence.
-- **not-applicable**: Principle doesn't apply to this site type (e.g., be-internationalised for a technical-spec site with no user-facing text).
-- **confidence**: `high` = direct evidence (axe violation, Lighthouse score). `medium` = inferred from screenshots/metrics. `low` = couldn't verify (e.g., axe blocked by CSP).
+- **check pass**: Direct evidence supports that specific check. “No issue found” and absence of a finding are not evidence.
+- **check issues**: Direct evidence shows the check failed. Include finding IDs, severity, and evidence.
+- **check not-applicable**: The check genuinely does not apply, with a check-specific rationale. It never means untested.
+- **check blocked/not-run**: Execution was prevented or did not happen. Both make the derived principle `incomplete` and the site audit `partial`.
+- **confidence**: `high` = direct evidence (axe violation, Lighthouse score). `medium` = supported visual/model judgement. `low` describes evidence quality only; it cannot convert an unexecuted check into pass.
 - **tests are mandatory**: use the exact 58 check IDs vendored in `principles.json` (the authoritative web-uplift principle catalog). Every principle must retain one result for every defined check. Do not replace those checks with a weaker generic screenshot review or invent substitute IDs.
 - **missing execution is explicit**: use `blocked` or `not-run` when execution was impossible; never turn missing evidence into a pass or a vague “pending testing method”. The denominator remains every applicable defined check for every site.
-- **principle status is derived from tests**: any test with `issues` makes the principle `issues`; all applicable measured tests passing makes it `pass`; `not-applicable` is only valid when the principle or test genuinely does not apply. A mix containing `blocked`/`not-run` cannot be reported as a high-confidence pass.
+- **principle status is derived from tests**: any test with `issues` makes the principle `issues`; all applicable measured tests passing makes it `pass`; `not-applicable` is only valid when the principle or test genuinely does not apply. A mix containing `blocked`/`not-run` derives `incomplete`, never pass.
+- **validation is a publication gate**: run `node scripts/validate_atomic_report.mjs principles.json <report.json>` before import, scoring, aggregation, or publication. Missing, unknown, duplicate, blocked, or not-run checks keep the report partial and unscored.
 
 ## Important
 
-- **Homepage only** for this study (not article/detail pages).
-- **Don't fabricate evidence** — if you can't verify, mark confidence "low" or status "not-applicable".
+- **Representative paths are required**: start from the ranked URL, then exercise the routes, states, overlays, and user flows needed by the checks. If scope or access prevents that, record `blocked`/`not-run` and keep the site partial; do not downgrade the method to homepage-only while claiming a complete audit.
+- **Don't fabricate evidence** — low confidence is not permission to pass. Untested means `not-run`; inability to execute after an attempt means `blocked`; `not-applicable` is only for genuine applicability decisions.
 - **Save incrementally** — write each site's JSON immediately after auditing, so partial progress survives.
-- **Skip infrastructure domains** — CDN, ad-tech, DNS, analytics domains are not meaningful audit targets.
+- **Keep the exact 1,000-site denominator**: CDN, ad-tech, DNS, analytics, blocked, failed, and non-homepage domains remain in the manifest. Classify their applicability and audit status honestly; never silently skip them.

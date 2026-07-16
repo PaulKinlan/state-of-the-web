@@ -331,6 +331,46 @@ def main():
     # principles + findings from GPT
     n_prin = 0; n_find = 0
     for dom, g in gpt.items():
+        if "checkOutcomes" in g:
+            expected_pairs = {
+                (principle["id"], check["id"])
+                for principle in PRINCIPLE_CATALOG.values()
+                for check in principle.get("checks", [])
+            }
+            actual_pairs = [(row.get("principleId"), row.get("checkId")) for row in g["checkOutcomes"]]
+            if len(actual_pairs) != len(set(actual_pairs)) or set(actual_pairs) != expected_pairs:
+                missing = expected_pairs - set(actual_pairs)
+                unknown = set(actual_pairs) - expected_pairs
+                raise ValueError(f"{dom}: atomic coverage invalid; missing={len(missing)} unknown={len(unknown)} duplicates={len(actual_pairs)-len(set(actual_pairs))}")
+            findings_by_id = {finding.get("id"): finding for finding in g.get("findings", [])}
+            checks_by_principle = {}
+            for test in g["checkOutcomes"]:
+                checks_by_principle.setdefault(test["principleId"], []).append(test)
+                con.execute("""INSERT OR REPLACE INTO test_results
+                    (site, principle_id, test_id, status, confidence, summary, evidence)
+                    VALUES (?,?,?,?,?,?,?)""",
+                    (dom, test["principleId"], test["checkId"], test["status"],
+                     test.get("confidence"), test.get("reason") or test.get("evidence"), test.get("evidence")))
+            for outcome in g.get("principleOutcomes", []):
+                pid = outcome["principleId"]
+                finding_ids = outcome.get("findingIds", [])
+                tests = checks_by_principle.get(pid, [])
+                confidence = "low" if any(test.get("confidence") == "low" for test in tests) else "medium"
+                if tests and all(test.get("confidence") == "high" for test in tests):
+                    confidence = "high"
+                con.execute("""INSERT OR REPLACE INTO principles
+                    (site, principle_id, status, confidence, summary, finding_count)
+                    VALUES (?,?,?,?,?,?)""",
+                    (dom, pid, outcome["status"], confidence, outcome.get("reason"), len(finding_ids)))
+                n_prin += 1
+                for finding_id in finding_ids:
+                    fnd = findings_by_id.get(finding_id, {})
+                    con.execute("""INSERT INTO findings
+                        (site, principle_id, finding_id, severity, summary, evidence)
+                        VALUES (?,?,?,?,?,?)""",
+                        (dom, pid, finding_id, fnd.get("severity"), fnd.get("summary"), fnd.get("evidence")))
+                    n_find += 1
+            continue
         for pr in g.get("principles", []):
             pid = norm_pid(pr.get("id", ""))
             status = pr.get("status")

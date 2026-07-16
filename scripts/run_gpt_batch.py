@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
+"""Legacy evidence batch. This is not a complete web-uplift audit.
+
+It hard-codes broad principle heuristics rather than executing the authoritative
+check manifest. It is disabled by default to prevent incomplete output from
+being published as an audit.
+"""
 import json, os, re, subprocess, sys, time, datetime, urllib.parse
+
+if os.environ.get("ALLOW_INCOMPLETE_LEGACY_EVIDENCE_PASS") != "1":
+    raise SystemExit(
+        "run_gpt_batch.py is a legacy partial evidence collector, not an audit: "
+        "it does not execute every check in principles.json. Use an atomic-check "
+        "runner and validate exact coverage before publishing. Set "
+        "ALLOW_INCOMPLETE_LEGACY_EVIDENCE_PASS=1 only to collect explicitly "
+        "labelled recon evidence."
+    )
 from pathlib import Path
 
 ROOT = Path('/home/paulkinlan/journal')
