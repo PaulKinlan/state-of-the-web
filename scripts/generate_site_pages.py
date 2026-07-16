@@ -8,15 +8,15 @@ DB = os.path.join(ROOT, "state-of-the-web.db")
 OUT = os.path.join(ROOT, "sites")
 os.makedirs(OUT, exist_ok=True)
 
-PRINCIPLES = json.load(open(os.path.join(ROOT, "principles.js").replace("principles.js", "principles.js")) if os.path.exists(os.path.join(ROOT, "principles.js")) else "/dev/null") if False else None
-# Load PRINCIPLES from principles.js (it's JS, parse it)
-import re
-pjs = open(os.path.join(ROOT, "principles.js")).read()
-# Extract titles/descriptions via simple parsing
-PRINCIPLES = {}
-for m in re.finditer(r'"([^"]+)":\{title:"([^"]*)"[^}]*desc:"([^"]*)"[^}]*how:"([^"]*)"', pjs):
-    pid, title, desc, how = m.group(1), m.group(2), m.group(3), m.group(4)
-    PRINCIPLES[pid] = {"title": title, "desc": desc, "how": how}
+with open(os.path.join(ROOT, "principles.json"), encoding="utf-8") as source:
+    PRINCIPLES = {}
+    for principle in json.load(source)["principles"]:
+        checks = principle.get("checks", [])
+        PRINCIPLES[principle["id"]] = {
+            "title": principle["title"],
+            "desc": principle["description"],
+            "how": f"{len(checks)} authoritative checks: " + ", ".join(check["id"] for check in checks),
+        }
 
 def pid_name(pid):
     return PRINCIPLES.get(pid, {}).get("title", pid.replace("-", " "))

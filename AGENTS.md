@@ -133,7 +133,8 @@ Each site produces one JSON file at `results/gpt/{site}.json`:
 - **issues**: One or more findings. Include severity (high/serious/moderate/low) and evidence.
 - **not-applicable**: Principle doesn't apply to this site type (e.g., be-internationalised for a technical-spec site with no user-facing text).
 - **confidence**: `high` = direct evidence (axe violation, Lighthouse score). `medium` = inferred from screenshots/metrics. `low` = couldn't verify (e.g., axe blocked by CSP).
-- **tests are mandatory**: every principle must define stable atomic test IDs and retain one result per applicable test. Use `blocked` or `not-run` when execution was impossible; never turn missing evidence into a pass or a vague “pending testing method”.
+- **tests are mandatory**: use the exact 58 check IDs vendored in `principles.json` (the authoritative web-uplift principle catalog). Every principle must retain one result for every defined check. Do not replace those checks with a weaker generic screenshot review or invent substitute IDs.
+- **missing execution is explicit**: use `blocked` or `not-run` when execution was impossible; never turn missing evidence into a pass or a vague “pending testing method”. The denominator remains every applicable defined check for every site.
 - **principle status is derived from tests**: any test with `issues` makes the principle `issues`; all applicable measured tests passing makes it `pass`; `not-applicable` is only valid when the principle or test genuinely does not apply. A mix containing `blocked`/`not-run` cannot be reported as a high-confidence pass.
 
 ## Important

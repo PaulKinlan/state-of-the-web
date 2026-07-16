@@ -5,7 +5,6 @@ import html
 import json
 import os
 import sqlite3
-import subprocess
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,34 +12,10 @@ DB = os.path.join(ROOT, "state-of-the-web.db")
 OUT = os.path.join(ROOT, "principles")
 os.makedirs(OUT, exist_ok=True)
 
-REAUDIT_TESTS = {
-    "provide-guided-navigation": (
-        "results/gpt/reaudit-guided-nav.json",
-        "Homepage wayfinding review",
-        "Desktop/mobile screenshot review of navigation, search, hierarchy, obstruction, and paths to primary actions.",
-    ),
-    "be-trustworthy": (
-        "results/gpt/reaudit-trustworthy.json",
-        "Homepage dark-pattern and trust review",
-        "Desktop/mobile screenshot review of consent obstruction, misleading defaults, disguised advertising, and visible recovery paths.",
-    ),
-}
-
-
 def load_metadata():
-    script = """
-const fs=require('fs'),vm=require('vm');
-const context={};
-vm.runInNewContext(fs.readFileSync(process.argv[1],'utf8'),context);
-process.stdout.write(JSON.stringify(context.PRINCIPLES));
-"""
-    result = subprocess.run(
-        ["node", "-e", script, os.path.join(ROOT, "principles.js")],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return json.loads(result.stdout)
+    with open(os.path.join(ROOT, "principles.json"), encoding="utf-8") as source:
+        data = json.load(source)
+    return {principle["id"]: principle for principle in data["principles"]}
 
 
 def status_label(status):
@@ -68,7 +43,7 @@ h1,h2{font-family:Georgia,serif;font-weight:400}h1{font-size:clamp(1.8rem,5vw,2.
 a{color:var(--accent)}.back{font-size:.85rem}.lede{max-width:75ch;color:var(--muted)}.method{padding:1rem;border-left:4px solid var(--accent);background:var(--bg-secondary);max-width:90ch}.method strong{color:var(--color)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1.25rem 0}.card{padding:1rem;border:1px solid var(--border);border-radius:.5rem;background:var(--bg-secondary)}.card .label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}.card .value{font-size:1.65rem;font-weight:700;font-variant-numeric:tabular-nums}
 .controls{display:grid;grid-template-columns:minmax(180px,1fr) repeat(2,minmax(150px,auto));gap:.6rem;margin:1rem 0}input,select{width:100%;padding:.55rem;border:1px solid var(--border);border-radius:.35rem;background:var(--background);color:var(--color);font:inherit}
-.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:.45rem}table{width:100%;border-collapse:collapse;background:var(--background)}caption{text-align:left;padding:.7rem;color:var(--muted);font-size:.82rem}th,td{padding:.55rem .65rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;font-size:.82rem}th{position:sticky;top:0;background:var(--bg-secondary);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}tbody tr:last-child td{border-bottom:0}.num{text-align:right;font-variant-numeric:tabular-nums}.status{font-weight:700;text-transform:uppercase;font-size:.7rem}.status.pass{color:var(--good)}.status.issues{color:var(--bad)}.status.not-applicable{color:var(--muted)}.summary{min-width:28ch;color:var(--muted)}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:.45rem}table{width:100%;border-collapse:collapse;background:var(--background)}caption{text-align:left;padding:.7rem;color:var(--muted);font-size:.82rem}th,td{padding:.55rem .65rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;font-size:.82rem}th{position:sticky;top:0;background:var(--bg-secondary);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}tbody tr:last-child td{border-bottom:0}.sort-button{display:inline-flex;align-items:center;gap:.3rem;padding:0;border:0;background:none;color:inherit;font:inherit;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.sort-button:hover,.sort-button:focus-visible{color:var(--accent);text-decoration:underline;text-underline-offset:3px}.sort-arrow{display:inline-block;min-width:1ch}.num{text-align:right;font-variant-numeric:tabular-nums}.num .sort-button{justify-content:flex-end;width:100%}.status{font-weight:700;text-transform:uppercase;font-size:.7rem}.status.pass{color:var(--good)}.status.issues{color:var(--bad)}.status.not-applicable{color:var(--muted)}.summary{min-width:28ch;color:var(--muted)}
 details{margin-top:.35rem}summary{cursor:pointer;color:var(--accent)}.finding{margin:.45rem 0;padding:.55rem;background:var(--bg-secondary);border-left:3px solid var(--bad)}.finding b{font-size:.68rem;text-transform:uppercase}.finding p{margin:.2rem 0;color:var(--muted)}.score{font-weight:700}.score.s0-29{color:var(--bad)}.score.s30-59{color:var(--warn)}.score.s60-79,.score.s80-100{color:var(--good)}.empty{padding:1.5rem;color:var(--muted)}.note{color:var(--muted);font-size:.82rem}.hidden{display:none}
 @media(max-width:700px){.controls{grid-template-columns:1fr}.summary{min-width:20ch}th,td{padding:.45rem;font-size:.76rem}}
 """
@@ -79,22 +54,49 @@ const search=document.querySelector('#search');
 const status=document.querySelector('#status-filter');
 const order=document.querySelector('#order');
 const statusWeight={issues:0,pass:1,'not-applicable':2};
+const defaultDirection={failures:'asc',successes:'asc',rank:'asc',score:'desc',confidence:'desc',site:'asc'};
+let sortKey=order.value,sortDirection=defaultDirection[sortKey];
+function compareNumeric(a,b,key,missing){
+ const av=Number(a.dataset[key]),bv=Number(b.dataset[key]);
+ if(av===missing&&bv!==missing)return 1;
+ if(bv===missing&&av!==missing)return -1;
+ const result=av-bv;
+ return sortDirection==='desc'?-result:result;
+}
+function compareRows(a,b){
+ let result=0;
+ if(sortKey==='failures')result=statusWeight[a.dataset.status]-statusWeight[b.dataset.status]||Number(a.dataset.rank)-Number(b.dataset.rank);
+ else if(sortKey==='successes')result=statusWeight[b.dataset.status]-statusWeight[a.dataset.status]||Number(a.dataset.rank)-Number(b.dataset.rank);
+ else if(sortKey==='rank')return compareNumeric(a,b,'rank',999999);
+ else if(sortKey==='score')return compareNumeric(a,b,'score',-1);
+ else if(sortKey==='confidence')return compareNumeric(a,b,'confidence',0);
+ else result=a.dataset.site.localeCompare(b.dataset.site);
+ return sortDirection==='desc'?-result:result;
+}
+function updateSortHeaders(){
+ document.querySelectorAll('th[data-sort]').forEach(th=>{
+  const active=th.dataset.sort===sortKey;
+  th.setAttribute('aria-sort',active?(sortDirection==='asc'?'ascending':'descending'):'none');
+  th.querySelector('.sort-arrow').textContent=active?(sortDirection==='asc'?'▲':'▼'):'';
+ });
+}
 function render(){
  const term=search.value.trim().toLowerCase();
  const wanted=status.value;
  rows.forEach(row=>row.classList.toggle('hidden',!!term&&!row.dataset.search.includes(term)||!!wanted&&row.dataset.status!==wanted));
- const sorted=[...rows].sort((a,b)=>{
-  if(order.value==='failures')return statusWeight[a.dataset.status]-statusWeight[b.dataset.status]||Number(a.dataset.rank)-Number(b.dataset.rank);
-  if(order.value==='successes')return statusWeight[b.dataset.status]-statusWeight[a.dataset.status]||Number(a.dataset.rank)-Number(b.dataset.rank);
-  if(order.value==='rank')return Number(a.dataset.rank)-Number(b.dataset.rank);
-  if(order.value==='score')return Number(b.dataset.score)-Number(a.dataset.score);
-  return a.dataset.site.localeCompare(b.dataset.site);
- });
- sorted.forEach(row=>row.parentNode.append(row));
+ [...rows].sort(compareRows).forEach(row=>row.parentNode.append(row));
  const visible=rows.filter(row=>!row.classList.contains('hidden')).length;
  document.querySelector('#shown').textContent=visible;
+ updateSortHeaders();
 }
-[search,status,order].forEach(control=>control.addEventListener(control===search?'input':'change',render));
+search.addEventListener('input',render);status.addEventListener('change',render);
+order.addEventListener('change',()=>{sortKey=order.value;sortDirection=defaultDirection[sortKey];render();});
+document.querySelectorAll('.sort-button[data-sort]').forEach(button=>button.addEventListener('click',()=>{
+ const next=button.dataset.sort;
+ if(sortKey===next)sortDirection=sortDirection==='asc'?'desc':'asc';
+ else{sortKey=next;sortDirection=defaultDirection[next];order.value=next;}
+ render();
+}));
 render();
 """
 
@@ -145,8 +147,9 @@ def generate():
             score = row["overall_score"]
             score_html = "—" if score is None else f'<span class="score {score_class(score)}">{score}</span>'
             rank = row["rank"] if row["rank"] is not None else 999999
+            confidence_weight = {"low": 1, "medium": 2, "high": 3}.get(row["confidence"], 0)
             rows_html.append(
-                f'<tr data-site="{html.escape(site)}" data-search="{html.escape(site.lower())}" data-status="{html.escape(row["status"])}" data-rank="{rank}" data-score="{score if score is not None else -1}">'
+                f'<tr data-site="{html.escape(site)}" data-search="{html.escape(site.lower())}" data-status="{html.escape(row["status"])}" data-rank="{rank}" data-score="{score if score is not None else -1}" data-confidence="{confidence_weight}">'
                 f'<td><span class="status {html.escape(row["status"])}">{html.escape(status_label(row["status"]))}</span></td>'
                 f'<td><a href="../sites/{html.escape(site)}.html">{html.escape(site)}</a></td>'
                 f'<td class="num">{row["rank"] if row["rank"] is not None else "—"}</td>'
@@ -174,57 +177,37 @@ def generate():
             )
 
         tables = {row[0] for row in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        atomic_rows = []
-        if {"principle_tests", "test_results"}.issubset(tables):
-            atomic = con.execute(
-                """SELECT t.test_id,t.title,t.method,
-                          SUM(CASE WHEN r.status='pass' THEN 1 ELSE 0 END) pass,
-                          SUM(CASE WHEN r.status='issues' THEN 1 ELSE 0 END) issues,
-                          SUM(CASE WHEN r.status='not-applicable' THEN 1 ELSE 0 END) na,
-                          SUM(CASE WHEN r.status='blocked' THEN 1 ELSE 0 END) blocked,
-                          SUM(CASE WHEN r.status='not-run' THEN 1 ELSE 0 END) not_run,
-                          COUNT(r.site) total
-                   FROM principle_tests t
-                   LEFT JOIN test_results r ON r.principle_id=t.principle_id AND r.test_id=t.test_id
-                   WHERE t.principle_id=? GROUP BY t.test_id,t.title,t.method ORDER BY t.test_id""",
+        test_stats = {}
+        if "test_results" in tables:
+            for test in con.execute(
+                """SELECT test_id,
+                          SUM(CASE WHEN status='pass' THEN 1 ELSE 0 END) pass,
+                          SUM(CASE WHEN status='issues' THEN 1 ELSE 0 END) issues,
+                          SUM(CASE WHEN status='not-applicable' THEN 1 ELSE 0 END) na,
+                          SUM(CASE WHEN status='blocked' THEN 1 ELSE 0 END) blocked,
+                          SUM(CASE WHEN status='not-run' THEN 1 ELSE 0 END) not_run,
+                          COUNT(*) measured
+                   FROM test_results WHERE principle_id=? GROUP BY test_id""",
                 (pid,),
-            ).fetchall()
-            for test in atomic:
-                atomic_rows.append(
-                    f'<tr><td><strong>{html.escape(test["title"] or test["test_id"])}</strong><br><span class="note">{html.escape(test["method"] or "")}</span></td>'
-                    f'<td class="num">{test["pass"]}</td><td class="num">{test["issues"]}</td><td class="num">{test["na"]}</td>'
-                    f'<td class="num">{test["blocked"]}</td><td class="num">{test["not_run"]}</td><td class="num">{test["total"]}</td></tr>'
-                )
-        if not atomic_rows and pid in REAUDIT_TESTS:
-            relative_path, test_title, test_method = REAUDIT_TESTS[pid]
-            source_path = os.path.join(ROOT, relative_path)
-            if os.path.exists(source_path):
-                audited_sites = {row["site"] for row in results}
-                source_results = json.load(open(source_path, encoding="utf-8"))
-                test_counts = Counter()
-                for result in source_results:
-                    site = result.get("site") or result.get("domain")
-                    if site not in audited_sites:
-                        continue
-                    result_status = result.get("status", "not-applicable")
-                    summary = result.get("summary", "").lower()
-                    if result_status == "not-applicable" and any(word in summary for word in ("prevent", "impossible", "obscur")):
-                        result_status = "blocked"
-                    test_counts[result_status] += 1
-                measured_total = sum(test_counts.values())
-                test_counts["not-run"] = max(0, len(results) - measured_total)
-                total = sum(test_counts.values())
-                atomic_rows.append(
-                    f'<tr><td><strong>{html.escape(test_title)}</strong><br><span class="note">{html.escape(test_method)}</span></td>'
-                    f'<td class="num">{test_counts["pass"]}</td><td class="num">{test_counts["issues"]}</td>'
-                    f'<td class="num">{test_counts["not-applicable"]}</td><td class="num">{test_counts["blocked"]}</td>'
-                    f'<td class="num">{test_counts["not-run"]}</td><td class="num">{total}</td></tr>'
-                )
+            ):
+                test_stats[test["test_id"]] = test
+
+        atomic_rows = []
+        for check in info.get("checks", []):
+            test = test_stats.get(check["id"])
+            measured = test["measured"] if test else 0
+            not_run = (test["not_run"] if test else 0) + max(0, len(results) - measured)
+            atomic_rows.append(
+                f'<tr><td><strong>{html.escape(check["id"])}</strong><br>{html.escape(check["summary"])}'
+                f'<br><span class="note"><strong>Detection:</strong> {html.escape(check.get("detectableVia", "No detection guidance recorded."))}</span></td>'
+                f'<td class="num">{test["pass"] if test else 0}</td><td class="num">{test["issues"] if test else 0}</td>'
+                f'<td class="num">{test["na"] if test else 0}</td><td class="num">{test["blocked"] if test else 0}</td>'
+                f'<td class="num">{not_run}</td><td class="num">{len(results)}</td></tr>'
+            )
         atomic_section = (
-            '<div class="table-wrap"><table><caption>Atomic test outcomes</caption><thead><tr><th>Test and method</th><th class="num">Pass</th><th class="num">Issues</th><th class="num">N/A</th><th class="num">Blocked</th><th class="num">Not run</th><th class="num">Total</th></tr></thead><tbody>'
+            '<p class="method"><strong>Important:</strong> The older 499-site dataset stored broad principle judgements, not outcomes for every authoritative check below. Those judgements remain visible for inspection, but they do not prove that an unrecorded check passed. Check-level coverage is shown literally.</p>'
+            '<div class="table-wrap"><table><caption>Authoritative check outcomes from principles.json</caption><thead><tr><th>Defined check and detection guidance</th><th class="num">Pass</th><th class="num">Issues</th><th class="num">N/A</th><th class="num">Blocked</th><th class="num">Not run</th><th class="num">Sites</th></tr></thead><tbody>'
             + ''.join(atomic_rows) + '</tbody></table></div>'
-            if atomic_rows
-            else '<p class="method"><strong>No atomic test-result rows were stored in this audit run.</strong> The site outcomes and failure findings below are real, but the UI does not infer that every sub-check passed when no finding exists. The updated audit schema now requires stable test IDs, methods, and explicit pass/issues/blocked/not-run results for future runs.</p>'
         )
 
         page = f"""<!doctype html>
@@ -232,12 +215,12 @@ def generate():
 <meta name="description" content="Passes, failures, evidence and site-level results for {html.escape(title)} in the State of the Web audit.">
 <title>{html.escape(title)} — State of the Web</title><style>{STYLE}</style></head><body>
 <nav aria-label="Breadcrumb"><a class="back" href="../index.html">← All principles and sites</a></nav>
-<main><header><p class="note">Principle result breakdown</p><h1>{html.escape(title)}</h1><p class="lede">{html.escape(info.get("desc", ""))}</p></header>
-<section aria-labelledby="method-title"><h2 id="method-title">How it is measured</h2><p class="method"><strong>Current method:</strong> {html.escape(info.get("how", "No method description recorded."))}</p></section>
-<div class="cards"><div class="card"><div class="label">Site results</div><div class="value">{len(results)}</div></div><div class="card"><div class="label">Pass</div><div class="value">{counts['pass']}</div></div><div class="card"><div class="label">Issues</div><div class="value">{counts['issues']}</div></div><div class="card"><div class="label">Not assessed / N/A</div><div class="value">{counts['not-applicable']}</div></div><div class="card"><div class="label">Failure rate</div><div class="value">{fail_rate}%</div></div></div>
+<main><header><p class="note">Principle result breakdown</p><h1>{html.escape(title)}</h1><p class="lede">{html.escape(info.get("description", ""))}</p></header>
+<section aria-labelledby="method-title"><h2 id="method-title">Applicability and measurement</h2><p class="method"><strong>Applicability:</strong> {html.escape(info.get("applicability", {}).get("criteria", "No applicability criteria recorded."))}<br><br><strong>Required coverage:</strong> all {len(info.get("checks", []))} checks defined in the vendored <code>principles.json</code>, with explicit pass, issues, N/A, blocked, or not-run evidence per site.</p></section>
+<div class="cards"><div class="card"><div class="label">Principle-level outcomes</div><div class="value">{len(results)}</div></div><div class="card"><div class="label">Recorded pass (legacy)</div><div class="value">{counts['pass']}</div></div><div class="card"><div class="label">Recorded issues</div><div class="value">{counts['issues']}</div></div><div class="card"><div class="label">Unassessed / N/A</div><div class="value">{counts['not-applicable']}</div></div><div class="card"><div class="label">Recorded failure rate</div><div class="value">{fail_rate}%</div></div></div>
 <section aria-labelledby="atomic-tests"><h2 id="atomic-tests">Atomic test breakdown</h2>{atomic_section}</section>
-<section aria-labelledby="site-results"><h2 id="site-results">Sites that passed and failed</h2><div class="controls"><label>Search sites<input id="search" type="search" placeholder="example.com"></label><label>Filter status<select id="status-filter"><option value="">All statuses</option><option value="issues">Issues</option><option value="pass">Pass</option><option value="not-applicable">Not assessed / N/A</option></select></label><label>Order<select id="order"><option value="failures">Failures first</option><option value="successes">Passes first</option><option value="rank">Tranco rank</option><option value="score">Overall score</option><option value="site">Site name</option></select></label></div>
-<p class="note"><span id="shown">{len(results)}</span> of {len(results)} site results shown. “Not assessed / N/A” remains separate from a pass.</p><div class="table-wrap"><table id="results"><caption>{html.escape(title)} outcomes by site</caption><thead><tr><th>Status</th><th>Site</th><th class="num">Rank</th><th class="num">Score</th><th>Confidence</th><th>Assessment and evidence</th></tr></thead><tbody>{''.join(rows_html)}</tbody></table></div></section>
+<section aria-labelledby="site-results"><h2 id="site-results">Sites that passed and failed</h2><div class="controls"><label>Search sites<input id="search" type="search" placeholder="example.com"></label><label>Filter status<select id="status-filter"><option value="">All statuses</option><option value="issues">Issues</option><option value="pass">Pass</option><option value="not-applicable">Not assessed / N/A</option></select></label><label>Order<select id="order"><option value="failures">Failures first</option><option value="successes">Passes first</option><option value="rank">Tranco rank</option><option value="score">Overall score</option><option value="confidence">Confidence</option><option value="site">Site name</option></select></label></div>
+<p class="note"><span id="shown">{len(results)}</span> of {len(results)} site results shown. “Not assessed / N/A” remains separate from a pass. Select an order above or use a sortable column heading.</p><div class="table-wrap"><table id="results"><caption>{html.escape(title)} outcomes by site</caption><thead><tr><th>Status</th><th data-sort="site" aria-sort="none"><button class="sort-button" type="button" data-sort="site">Site <span class="sort-arrow" aria-hidden="true"></span></button></th><th class="num" data-sort="rank" aria-sort="none"><button class="sort-button" type="button" data-sort="rank">Rank <span class="sort-arrow" aria-hidden="true"></span></button></th><th class="num" data-sort="score" aria-sort="none"><button class="sort-button" type="button" data-sort="score">Score <span class="sort-arrow" aria-hidden="true"></span></button></th><th data-sort="confidence" aria-sort="none"><button class="sort-button" type="button" data-sort="confidence">Confidence <span class="sort-arrow" aria-hidden="true"></span></button></th><th>Assessment and evidence</th></tr></thead><tbody>{''.join(rows_html)}</tbody></table></div></section>
 <section aria-labelledby="finding-tests"><h2 id="finding-tests">Recorded failure checks</h2><p class="note">These are the individual failed checks retained as findings in the current reports. The current dataset does not infer a per-check pass merely because no finding was recorded.</p><div class="table-wrap"><table><caption>Failure finding types and affected sites</caption><thead><tr><th>Check / finding</th><th class="num">Occurrences</th><th>Severity</th><th>Sites</th></tr></thead><tbody>{''.join(finding_rows) if finding_rows else '<tr><td colspan="4" class="empty">No individual failure findings were retained for this principle.</td></tr>'}</tbody></table></div></section>
 </main><footer><p class="note">Data and methodology: <a href="https://github.com/PaulKinlan/state-of-the-web">State of the Web on GitHub</a>.</p></footer><script>{SCRIPT}</script></body></html>"""
         with open(os.path.join(OUT, f"{pid}.html"), "w", encoding="utf-8") as output:

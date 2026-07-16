@@ -4,10 +4,10 @@ An automated audit of the top 1,000 websites using the [web-uplift](https://gith
 
 ## What this is
 
-We audited the homepages of the top 1,000 Tranco sites (2026) across 17 principles derived from Una Kravets' modern-UX framework, Lighthouse dimensions, and the web-uplift principle set. Each site was measured twice:
+This project is auditing the homepages of the top 1,000 Tranco sites (2026) against 17 principles and 58 authoritative checks from the vendored `principles.json`. The current dataset is incomplete: 499 sites have broad principle-level judgements, but the earlier run did not retain an outcome for every check. Those judgements are useful evidence, not proof of complete 58-check coverage. Evidence was collected in two modes:
 
 1. **CDP evidence pass** (automated, scalable): CLS, horizontal overflow, JS-shell detection, discoverability, layout metrics. Covers 870/1000 sites.
-2. **Vision-based principle analysis** (AI agent with screenshot review): all 17 principles scored as pass/issues/not-applicable with findings and evidence. Covers the top content sites.
+2. **Vision-based principle analysis** (AI agent with screenshot review): broad pass/issues/not-applicable judgements and findings for 499 sites. This predates the atomic-test schema and therefore does not establish that all checks passed.
 
 ## Results
 
@@ -26,8 +26,10 @@ Notable: Wikipedia is the gold standard (score 100, CLS 0, 6 requests). Amazon i
 state-of-the-web/
 ├── README.md                 — this file
 ├── AGENTS.md                 — instructions for AI agents running audits
+├── principles.json           — authoritative 17-principle / 58-check catalog
+├── principles/               — generated per-principle result pages
 ├── schemas/
-│   ├── schema.sql            — SQLite schema for audit results
+│   ├── schema.sql            — SQLite schema, including atomic test results
 │   └── schema.example.json   — example per-site JSON output
 ├── scripts/
 │   ├── audit_runner2.py      — CDP evidence batch runner (automated metrics)
@@ -61,7 +63,7 @@ python3 scripts/merge_results.py
 
 ## Methodology
 
-- **17 principles**: Una Kravets' 5 modern-UX principles + Lighthouse dimensions (performance/CWV, accessibility, best practices, SEO) + privacy/security, resilience, internationalisation, trustworthiness, sustainability, agent-readiness, memory efficiency.
+- **17 principles / 58 checks**: the exact IDs, applicability criteria, evidence hints, and guidance references are vendored in `principles.json`. New reports must retain pass/issues/N/A/blocked/not-run for every defined check; broad principle summaries are derived, not substitutes.
 - **CDP evidence**: Raw Chrome DevTools Protocol via [web-uplift evidence primitives](https://github.com/PaulKinlan/web-uplift) — screenshots, Lighthouse, axe-core, heap snapshots, layout/CLS, discoverability, HAR, performance traces.
 - **Domain classification**: Public Suffix List (tldextract) for proper registrable-domain handling.
 - **SPA detection**: Pages with <300 chars of visible text in raw HTML flagged as JavaScript-rendered shells.
@@ -72,7 +74,7 @@ python3 scripts/merge_results.py
 - Single point-in-time snapshot per site
 - Headless Chrome — some sites block automated access (2.9%)
 - Lighthouse/INP not available for all sites (CSP may block injection)
-- Two-agent validation: CDP evidence collected by glm-5.2, principle judgments by gpt-5.5, cross-validated
+- The legacy principle-level run does not contain a complete per-site 58-check matrix. Principle pages expose this as `not run`; missing evidence is not counted as a test pass.
 
 ## License
 

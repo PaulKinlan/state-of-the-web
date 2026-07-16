@@ -13,6 +13,9 @@ import json, glob, os, sqlite3, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, "state-of-the-web.db")
+PRINCIPLES_PATH = os.path.join(ROOT, "principles.json")
+with open(PRINCIPLES_PATH, encoding="utf-8") as source:
+    PRINCIPLE_CATALOG = {item["id"]: item for item in json.load(source)["principles"]}
 
 # --- principle id mapping: normalise the 17 principle ids ---
 def norm_pid(pid):
@@ -187,20 +190,10 @@ def merge_reaudits(con):
     """Merge vision re-audit results (be-trustworthy, provide-guided-navigation)
     that were re-judged from existing screenshots with dark-pattern/nav findings."""
     reaudit_map = {
-        'reaudit-trustworthy.json': (
-            'be-trustworthy',
-            'homepage-screenshot-review',
-            'Homepage dark-pattern and trust review',
-            'Review retained desktop and mobile screenshots for obstructive consent, misleading defaults, disguised advertising, and visible recovery paths.',
-        ),
-        'reaudit-guided-nav.json': (
-            'provide-guided-navigation',
-            'homepage-wayfinding-review',
-            'Homepage wayfinding review',
-            'Review retained desktop and mobile screenshots for primary navigation, search, current-location cues, hierarchy, obstruction, and clear paths to primary actions.',
-        ),
+        'reaudit-trustworthy.json': 'be-trustworthy',
+        'reaudit-guided-nav.json': 'provide-guided-navigation',
     }
-    for fname, (pid, test_id, test_title, test_method) in reaudit_map.items():
+    for fname, pid in reaudit_map.items():
         fpath = os.path.join(ROOT, 'results', 'gpt', fname)
         if not os.path.exists(fpath):
             continue
@@ -219,11 +212,6 @@ def merge_reaudits(con):
             con.execute("DELETE FROM findings WHERE site=? AND principle_id=?", (site, pid))
             con.execute("INSERT OR REPLACE INTO principles (site, principle_id, status, confidence, summary, finding_count) VALUES (?,?,?,?,?,?)",
                         (site, pid, status, conf, summ, len(finds)))
-            test_status = 'blocked' if status == 'not-applicable' and 'prevent' in summ.lower() else status
-            con.execute("INSERT OR REPLACE INTO principle_tests (principle_id,test_id,title,method) VALUES (?,?,?,?)",
-                        (pid, test_id, test_title, test_method))
-            con.execute("INSERT OR REPLACE INTO test_results (site,principle_id,test_id,status,confidence,summary,evidence) VALUES (?,?,?,?,?,?,?)",
-                        (site, pid, test_id, test_status, conf, summ, json.dumps(r.get('sourceEvidence', {}), sort_keys=True)))
             for fnd in finds:
                 con.execute("INSERT INTO findings (site, principle_id, finding_id, severity, summary, evidence) VALUES (?,?,?,?,?,?)",
                             (site, pid, fnd.get('id', site+'-01'), fnd.get('severity', 'moderate'),
@@ -236,9 +224,6 @@ def derive_resilience(con, cdp):
     A site that shows 0% content without JS, or is a JS shell, fails resilience
     (core content does not work under adverse conditions)."""
     n_pass = n_issues = 0
-    con.execute("INSERT OR REPLACE INTO principle_tests (principle_id,test_id,title,method) VALUES (?,?,?,?)",
-                ('be-resilient', 'no-js-content', 'No-JavaScript content survival',
-                 'Compare rendered content with JavaScript enabled and disabled; record content coverage and JS-shell detection.'))
     for dom, c in cdp.items():
         exists = con.execute("SELECT 1 FROM principles WHERE site=? AND principle_id='be-resilient'", (dom,)).fetchone()
         if not exists:
@@ -270,7 +255,7 @@ def derive_resilience(con, cdp):
                     (dom, "be-resilient", status, conf, summ, 1 if status=="issues" else 0))
         test_status = 'not-run' if disc is None and not is_shell else status
         con.execute("INSERT OR REPLACE INTO test_results (site,principle_id,test_id,status,confidence,summary,evidence) VALUES (?,?,?,?,?,?,?)",
-                    (dom, 'be-resilient', 'no-js-content', test_status, conf, summ,
+                    (dom, 'be-resilient', 'progressive-enhancement', test_status, conf, summ,
                      f"discoverability_pct={disc}; is_js_shell={bool(is_shell)}"))
     print(f"  be-resilient derived from CDP: {n_pass} pass, {n_issues} issues", file=sys.stderr)
 
@@ -298,6 +283,11 @@ def main():
     schema = open(os.path.join(ROOT, "schemas", "schema.sql")).read()
     schema = "\n".join(l for l in schema.splitlines() if not l.strip().startswith("//"))  # strip // comment lines
     con.executescript(schema)
+    for principle in PRINCIPLE_CATALOG.values():
+        for check in principle.get("checks", []):
+            con.execute("""INSERT OR REPLACE INTO principle_tests
+                (principle_id,test_id,title,method) VALUES (?,?,?,?)""",
+                (principle["id"], check["id"], check["summary"], check.get("detectableVia")))
 
     # union of all domains
     all_doms = sorted(set(cdp) | set(gpt))
@@ -352,10 +342,13 @@ def main():
                 VALUES (?,?,?,?,?,?)""",
                 (dom, pid, status, conf, summ, len(finds)))
             n_prin += 1
+            valid_test_ids = {check["id"] for check in PRINCIPLE_CATALOG.get(pid, {}).get("checks", [])}
             for test in pr.get("tests", []):
                 test_id = test.get("id", "").strip()
                 if not test_id:
                     continue
+                if test_id not in valid_test_ids:
+                    raise ValueError(f"{dom}: unknown test id {pid}/{test_id}; use the exact IDs from principles.json")
                 con.execute("""INSERT OR REPLACE INTO principle_tests
                     (principle_id, test_id, title, method) VALUES (?,?,?,?)""",
                     (pid, test_id, test.get("title") or test_id, test.get("method")))
