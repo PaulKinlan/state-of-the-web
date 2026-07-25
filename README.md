@@ -9,7 +9,18 @@ This project is auditing the top 1,000 Tranco sites (2026) against 17 principles
 1. **CDP evidence pass** (automated, scalable): CLS, horizontal overflow, JS-shell detection, discoverability, layout metrics. Covers 870/1000 sites.
 2. **Vision-based principle analysis** (AI agent with screenshot review): broad pass/issues/not-applicable judgements and findings for 499 sites. This predates the atomic-test schema and therefore does not establish that all checks passed.
 
-## Results
+## Labelled atomic checkpoint (2026-07-25)
+
+The retained top-1,000 run currently has **631 coverage-complete sites** with exactly **36,598 judged check outcomes** (58 per completed site), plus 277 fully blocked sites, 91 partially judged sites, and one site with no report. The completed subset is selection-biased, so its percentages are not an overall score or a result for the whole top 1,000. See [`checkpoint.html`](checkpoint.html) and the machine-readable [`atomic-checkpoint.json`](atomic-checkpoint.json).
+
+The checkpoint generator is reproducible against the retained local run:
+
+```bash
+python3 scripts/generate_atomic_checkpoint.py \
+  runs/2026-07-17T17-27-24-856Z --out .
+```
+
+## Legacy results
 
 | Metric | Finding |
 |---|---|
