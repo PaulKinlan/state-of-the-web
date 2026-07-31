@@ -21,7 +21,22 @@ from reconcile_atomic_run import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def validate(root: Path, check_db: bool = True) -> dict:
+def path_beneath_root(root: Path, value: object) -> Path | None:
+    """Resolve a recorded repository-relative path without allowing escape."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    relative = Path(value)
+    if relative.is_absolute():
+        return None
+    resolved = (root / relative).resolve()
+    try:
+        resolved.relative_to(root.resolve())
+    except ValueError:
+        return None
+    return resolved
+
+
+def validate(root: Path, check_db: bool = True, check_local_evidence: bool = False) -> dict:
     errors: list[str] = []
     inventory_path = root / "results/atomic/inventory.json"
     inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
@@ -66,7 +81,22 @@ def validate(root: Path, check_db: bool = True) -> dict:
             errors.append(f"{prefix}: report SHA-256 mismatch")
             continue
         report = json.loads(report_path.read_text(encoding="utf-8"))
-        result = validate_report(report, catalog, catalog_sha)
+        evidence_root = None
+        if check_local_evidence:
+            provenance = target.get("provenance") if isinstance(target.get("provenance"), dict) else {}
+            source_report = path_beneath_root(root, provenance.get("sourceReport"))
+            evidence_root = path_beneath_root(root, provenance.get("evidenceRoot"))
+            if source_report is None:
+                errors.append(f"{prefix}: invalid local source report path")
+            elif not source_report.is_file():
+                errors.append(f"{prefix}: missing local source report")
+            elif sha256_file(source_report) != target.get("reportSha256"):
+                errors.append(f"{prefix}: local source/canonical report mismatch")
+            if evidence_root is None:
+                errors.append(f"{prefix}: invalid local evidence root path")
+            elif source_report is not None and evidence_root != source_report.parent:
+                errors.append(f"{prefix}: evidence root is not the source report directory")
+        result = validate_report(report, catalog, catalog_sha, evidence_root)
         if result["errors"]:
             errors.append(f"{prefix}: {'; '.join(result['errors'][:3])}")
             continue
@@ -153,6 +183,7 @@ def validate(root: Path, check_db: bool = True) -> dict:
         "checkOutcomes": expected_outcomes,
         "sitePages": len(site_pages),
         "principlePages": len(principle_pages),
+        "localEvidenceChecked": check_local_evidence,
         "database": db_summary,
     }
     print(json.dumps(summary, indent=2))
@@ -165,8 +196,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--no-db", action="store_true")
+    parser.add_argument(
+        "--check-local-evidence",
+        action="store_true",
+        help="require retained source reports and every declared artifact beneath each local evidenceRoot",
+    )
     args = parser.parse_args()
-    validate(args.root.resolve(), not args.no_db)
+    validate(args.root.resolve(), not args.no_db, args.check_local_evidence)
     return 0
 
 

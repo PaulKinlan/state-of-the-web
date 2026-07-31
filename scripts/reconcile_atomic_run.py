@@ -71,8 +71,40 @@ def derive_principle_status(rows: list[dict]) -> str:
     return "incomplete"
 
 
-def validate_report(report: dict, catalog: dict, catalog_checksum: str) -> dict:
-    """Validate exact rows, derived outcomes, references, coverage, and scoring rules."""
+def validate_artifact_files(report: dict, evidence_root: Path) -> list[str]:
+    """Fail closed when a declared artifact path does not exist beneath evidence_root."""
+    errors: list[str] = []
+    resolved_root = evidence_root.resolve()
+    if not resolved_root.is_dir():
+        return [f"evidence root is not a directory: {evidence_root}"]
+    artifacts = report.get("artifacts") if isinstance(report.get("artifacts"), list) else []
+    for index, artifact in enumerate(artifacts):
+        declared = artifact.get("path") if isinstance(artifact, dict) else None
+        if not isinstance(declared, str) or not declared.strip():
+            errors.append(f"artifacts[{index}] has no valid path")
+            continue
+        relative = Path(declared)
+        if relative.is_absolute():
+            errors.append(f"artifacts[{index}] path is absolute: {declared}")
+            continue
+        resolved = (resolved_root / relative).resolve()
+        try:
+            resolved.relative_to(resolved_root)
+        except ValueError:
+            errors.append(f"artifacts[{index}] path escapes evidence root: {declared}")
+            continue
+        if not resolved.exists():
+            errors.append(f"artifacts[{index}] declared path is missing: {declared}")
+    return errors
+
+
+def validate_report(
+    report: dict,
+    catalog: dict,
+    catalog_checksum: str,
+    evidence_root: Path | None = None,
+) -> dict:
+    """Validate exact rows, outcomes, references, coverage, scoring, and local artifacts."""
     errors: list[str] = []
     principle_ids, pairs, principle_map = expected_catalog(catalog)
     rows = report.get("checkOutcomes")
@@ -182,6 +214,8 @@ def validate_report(report: dict, catalog: dict, catalog_checksum: str) -> dict:
         errors.append("incomplete report status is completed")
     if not complete and ("overallScore" in report or "score" in report):
         errors.append("incomplete report publishes a score")
+    if evidence_root is not None:
+        errors.extend(validate_artifact_files(report, evidence_root))
     return {"errors": errors, "coverage": expected_coverage, "statusCounts": dict(status_counts)}
 
 
@@ -343,7 +377,7 @@ def reconcile(run_dir: Path, catalog_path: Path, root: Path = ROOT) -> dict:
         report = json.loads(report_bytes)
         if canonical_origin(report.get("url", "")) != canonical_origin(origin):
             raise SystemExit(f"position {position}: report URL mismatch: {report.get('url')!r} != {origin!r}")
-        validation = validate_report(report, catalog, catalog_checksum)
+        validation = validate_report(report, catalog, catalog_checksum, source_report.parent)
         if validation["errors"]:
             raise SystemExit(f"position {position} ({origin}) invalid report: {'; '.join(validation['errors'][:8])}")
         coverage = validation["coverage"]

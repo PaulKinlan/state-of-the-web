@@ -62,9 +62,11 @@ python3 scripts/reconcile_atomic_run.py \
   --catalog /home/paulkinlan/web-uplift/knowledge/principles.json
 
 python3 scripts/build_atomic_db.py
-python3 scripts/validate_atomic_publication.py
+python3 scripts/validate_atomic_publication.py --check-local-evidence
 python3 -m unittest scripts/test_reconcile_atomic_run.py
 ```
+
+`--check-local-evidence` is the full local publication gate: it requires each retained source report to match its canonical SHA-256 and every declared artifact to exist at its exact path beneath the recorded `evidenceRoot`. Omit the flag only in a publication-only clone where the intentionally uncommitted run tree is unavailable.
 
 The existing per-report validator is intentionally fail-closed for incomplete reports. Across the canonical report set, its expected result is exactly 705 exit-zero reports and 295 exit-one reports. Every exit-one report must be one of the published 257 blocked or 38 partial dispositions; an incomplete report must never pass the publication gate or carry a score.
 
@@ -79,6 +81,7 @@ The publication validator independently checks:
 - one unique canonical report and static page per manifest position;
 - all 58 catalog pairs and 17 derived principle outcomes per report;
 - evidence/path/finding references and literal coverage counters;
+- with `--check-local-evidence`, exact source-report bytes and physical artifact paths beneath every retained evidence root;
 - exact 705 / 257 / 38 dispositions and zero queue/retry/invalid counts;
 - exactly 58,000 database test rows, 17,000 principle rows, and zero scores.
 

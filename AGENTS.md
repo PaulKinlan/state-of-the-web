@@ -142,7 +142,7 @@ The finished bounded run is reconciled into `results/atomic/`, 1,000 static page
 ```bash
 python3 scripts/reconcile_atomic_run.py <run-dir> --catalog <exact-run-catalog.json>
 python3 scripts/build_atomic_db.py
-python3 scripts/validate_atomic_publication.py
+python3 scripts/validate_atomic_publication.py --check-local-evidence
 ```
 
 The final inventory is unscored and must preserve complete, exhausted-blocked, and exhausted-partial dispositions exactly.

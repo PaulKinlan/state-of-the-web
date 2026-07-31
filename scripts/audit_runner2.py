@@ -3,7 +3,7 @@
 import subprocess, json, os, sys, time, re
 
 EVIDENCE_CLI = os.path.expanduser("~/.web-uplift/evidence/cli.mjs")
-SITE_LIST = sys.argv[1] if len(sys.argv) > 1 else "/tmp/tranco-top1000.txt"
+SITE_LIST = sys.argv[1] if len(sys.argv) > 1 else "/tmp/crux-rank-1000-origins.txt"
 START_IDX = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 COUNT = int(sys.argv[3]) if len(sys.argv) > 3 else 50
 
