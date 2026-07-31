@@ -1,0 +1,1721 @@
+{
+  "url": "https://m.scan-manga.com",
+  "auditedAt": "2026-07-26T18:27:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic audit completed for the reachable surface. The target itself consistently returns HTTP 404, so no additional application templates or journeys could be discovered; this is a site finding, not an execution blocker.",
+  "page": {
+    "appType": "unknown",
+    "framework": "none detected",
+    "notes": "The supplied public root serves a minimal nginx 404 via Cloudflare. No internal links, manifest, sitemap, robots policy, or functioning application route was discoverable."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "discoverability",
+    "HAR",
+    "trace",
+    "heap-summary",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "Lighthouse (attempted; HTTP 404 runtime error)",
+    "curl HTTP recon",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "anchor-positioning-tab-underline",
+    "directional-navigation-transitions",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "complex-shapes",
+    "fluid-scaling",
+    "size-aware-styling",
+    "css",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "highlight-text-ranges",
+    "move-dom-element-without-losing-state",
+    "security",
+    "html",
+    "search-hidden-content",
+    "language-model",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "resilient-context-menus-and-nested-dropdowns",
+    "passkey-management",
+    "persistent-toast-notifications",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "faster-spa-view-transitions",
+    "calculate-with-intrinsic-sizes",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Public root at 1440×1000 shows only the nginx 404.",
+      "condition": "viewport: 1440x1000",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Public root at 360×800 shows the scaled nginx 404.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark-preference capture remains identical to the light page.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered HTML, computed styles, and missing semantic regions.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout reports no viewport meta and a 980 CSS-pixel layout viewport.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw and rendered root both resolve to HTTP 404.",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser view of the 404.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view of the same 404.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network log for the root request.",
+      "condition": "cold navigation",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Five requests, 14.4 KB transferred, document status 404.",
+      "condition": "cold navigation",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace for the error response.",
+      "condition": "cold navigation",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "FCP/LCP 880 ms, no long tasks, zero TBT.",
+      "condition": "cold navigation",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.json",
+      "caption": "Single-state heap summary: 60,096 nodes and 2.48 MB self size.",
+      "condition": "steady error page",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse stopped with ERRORED_DOCUMENT_REQUEST because the document returned 404.",
+      "condition": "cold navigation",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header inspection.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security inspection.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party/tracker inspection.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secret scan.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit found no images.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/page-probe.json",
+      "caption": "Metadata, semantics, navigation, controls, and CSS probe.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Reduced-motion probe found no animations.",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "Desktop screenshots in default and prefers-color-scheme: dark are pixel-identical white pages; the DOM reports color-scheme: normal and no CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F001"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Under prefers-reduced-motion: reduce, matchMedia is active and document.getAnimations() returns zero animations; there is no non-essential motion to suppress.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "The rendered error uses black text on a white browser-default background with clearly visible text and rule; no custom scrollbar or control styling interferes with forced colours.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The rendered 404 contains no anchors, navigation landmark, home link, search, or recovery action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F002"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Desktop/mobile screenshots, layout metrics, and semantic probe inspect reflow, landmarks, focusables, text, media, and controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Desktop/mobile screenshots, layout metrics, and semantic probe inspect reflow, landmarks, focusables, text, media, and controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The page-probe found zero focusable elements, so keyboard and touch users cannot recover from the 404 within the page.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F003"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The first-viewport screenshot contains only “404 Not Found” and “nginx”; there is no site identity, content, or call to action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F004"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The main document returns HTTP 404. The DOM has no internal links or forms, and robots.txt and sitemap.xml also return 404, leaving no discoverable journey to exercise.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F005"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The HTTP error is visible, but there is no explanation, retry, home link, search, or support route; the HAR confirms the document itself is 404.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F006"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Trace, layout, HAR, and image audit directly measure the reachable document: LCP 880 ms, CLS 0, TBT 0, 14.4 KB, no image issues or render-blocking candidates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Trace, layout, HAR, and image audit directly measure the reachable document: LCP 880 ms, CLS 0, TBT 0, 14.4 KB, no image issues or render-blocking candidates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Trace, layout, HAR, and image audit directly measure the reachable document: LCP 880 ms, CLS 0, TBT 0, 14.4 KB, no image issues or render-blocking candidates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Trace, layout, HAR, and image audit directly measure the reachable document: LCP 880 ms, CLS 0, TBT 0, 14.4 KB, no image issues or render-blocking candidates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Trace, layout, HAR, and image audit directly measure the reachable document: LCP 880 ms, CLS 0, TBT 0, 14.4 KB, no image issues or render-blocking candidates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Desktop/mobile screenshots, layout metrics, and semantic probe inspect reflow, landmarks, focusables, text, media, and controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Desktop/mobile screenshots, layout metrics, and semantic probe inspect reflow, landmarks, focusables, text, media, and controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The page-probe found one H1 but zero main/nav/header/footer/role landmarks and zero focusable controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F007"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Desktop/mobile screenshots, layout metrics, and semantic probe inspect reflow, landmarks, focusables, text, media, and controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "At a requested 360×800 viewport, layout metrics report a 980 CSS-pixel layout viewport and scale 0.367 because meta[name=viewport] is absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F008"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "All CDP primitives loaded and evaluated the document without an uncaught runtime failure; Lighthouse stopped only on the HTTP 404 document status.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The DOM probe reports doctype: null and browser-decoded characterSet: windows-1252; the source has no charset declaration.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F009"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The DOM title is “404 Not Found” and meta[name=description] is absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F010"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The page has zero anchors and no viewport meta; robots.txt returns 404.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F011"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The discoverability primitive fetched the root with status 404; curl confirmed robots.txt and sitemap.xml also return 404, and no canonical link is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F012"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The page-probe found zero JSON-LD blocks, zero Open Graph tags, and no canonical metadata.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F013"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The headers primitive confirms HTTPS but finds no CSP, HSTS, or X-Content-Type-Options; the Cloudflare clearance cookie is Secure and HttpOnly.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F014"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Tracker and HAR probes report zero third-party origins and no known trackers; the secret scan reports zero findings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Headers, cookie, tracker, secret, HAR, and DOM probes directly inspect the reachable response.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "X-Frame-Options: SAMEORIGIN and Referrer-Policy: same-origin are present, but Permissions-Policy, CSP/frame-ancestors, HSTS, and nosniff are absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F015"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Raw HTML and rendered DOM contain the same 404 heading without relying on JavaScript; discoverability reports isJsShell: false.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Discoverability, raw HTTP recon, DOM, and screenshots show a server-rendered 404 with no functioning route or recovery path.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "The reachable surface is a server error page and recon exposed no app manifest or functioning application whose install/offline intent could be judged.",
+      "reason": "The reachable surface is a server error page and recon exposed no app manifest or functioning application whose install/offline intent could be judged.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The representative HTTP failure state is only the nginx 404 and offers no retry, fallback content, or navigation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F016"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active navigation plus targeted screenshot/DOM/layout/network probe",
+      "evidence": "The DOM probe reports empty html.lang and html.dir, so assistive technology and translation tools cannot identify the page language.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F017"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "The only reachable content is a 404 with no dates, numbers, currencies, durations, or locale-sensitive data.",
+      "reason": "The only reachable content is a 404 with no dates, numbers, currencies, durations, or locale-sensitive data.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "The only reachable content contains no time or event concepts.",
+      "reason": "The only reachable content contains no time or event concepts.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "No form is present on the reachable page, so form validation behaviour does not apply.",
+      "reason": "No form is present on the reachable page, so form validation behaviour does not apply.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "No input fields are present on the reachable page.",
+      "reason": "No input fields are present on the reachable page.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "No checkout, subscription, consent, authentication, or account flow is exposed on the reachable page.",
+      "reason": "No checkout, subscription, consent, authentication, or account flow is exposed on the reachable page.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Rendered screenshot, DOM, page probe, reduced-motion probe, and network evidence directly inspect the reachable surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "The reachable surface is only a 404 and exposes no functioning content or task capability for an agent-facing integration.",
+      "reason": "The reachable surface is only a 404 and exposes no functioning content or task capability for an agent-facing integration.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "The reachable surface has no inference-appropriate feature; adding on-device AI to a server error would not improve the experience.",
+      "reason": "The reachable surface has no inference-appropriate feature; adding on-device AI to a server error would not improve the experience.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and DOM feature inventory",
+      "evidence": "The reachable 404 page has no real interaction to repeat; fabricating one would not test representative product behaviour.",
+      "reason": "The reachable 404 page has no real interaction to repeat; fabricating one would not test representative product behaviour.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Single-state heap summary is proportionate for the error page (60,096 nodes, 2.48 MB self size) and lists no Detached* constructor among top populations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/layout/trace/HAR/heap/evaluate evidence",
+      "evidence": "Single-state heap summary is proportionate for the error page (60,096 nodes, 2.48 MB self size) and lists no Detached* constructor among top populations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F001"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F002"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F003"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F004",
+        "F005",
+        "F006"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F007",
+        "F008"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F009"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F010",
+        "F011",
+        "F012",
+        "F013"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F014",
+        "F015"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F016"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F017"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable to the only reachable server-error surface."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Public root and server-error archetype. Chosen as the entry path and only reachable template; validates load, semantics, mobile/dark preferences, security, crawlability, performance, and recovery.",
+      "url": "https://m.scan-manga.com/",
+      "conditions": [
+        "1440x1000",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "discovery",
+      "description": "Route discovery via internal links, /robots.txt, and /sitemap.xml. No additional archetype was available: the DOM has no links and both discovery endpoints return 404. Authenticated, search, listing, manga-detail, reader, and account flows were not covered because no route or navigation to them could be discovered from the target.",
+      "url": "https://m.scan-manga.com/robots.txt",
+      "conditions": [
+        "raw HTTP"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F001",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page ignores the user’s dark colour-scheme preference",
+      "evidence": "Desktop screenshots in default and prefers-color-scheme: dark are pixel-identical white pages; the DOM reports color-scheme: normal and no CSS.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "suggestedFix": "Declare color-scheme and provide dark surface/text colours with prefers-color-scheme or light-dark().",
+      "effort": "small"
+    },
+    {
+      "id": "F002",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "guidanceId": "directional-navigation-transitions",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The error page offers no route back to useful content",
+      "evidence": "The rendered 404 contains no anchors, navigation landmark, home link, search, or recovery action.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add descriptive recovery navigation, including a home link and search or section links, and visibly move focus to the error heading.",
+      "effort": "small"
+    },
+    {
+      "id": "F003",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "There is no keyboard, touch, or pointer recovery control",
+      "evidence": "The page-probe found zero focusable elements, so keyboard and touch users cannot recover from the 404 within the page.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add adequately sized semantic links/buttons with visible :focus-visible treatment for recovery actions.",
+      "effort": "small"
+    },
+    {
+      "id": "F004",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The public entry URL does not explain the site or expose a next action",
+      "evidence": "The first-viewport screenshot contains only “404 Not Found” and “nginx”; there is no site identity, content, or call to action.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Serve the intended homepage at /, or provide a branded error page that explains the site and offers a clear primary recovery action.",
+      "effort": "small"
+    },
+    {
+      "id": "F005",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The primary experience is unavailable at the supplied public URL",
+      "evidence": "The main document returns HTTP 404. The DOM has no internal links or forms, and robots.txt and sitemap.xml also return 404, leaving no discoverable journey to exercise.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Restore routing/origin configuration so / serves the intended experience, then verify one representative reading/search journey end to end.",
+      "effort": "large"
+    },
+    {
+      "id": "F006",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The 404 state has no useful recovery options",
+      "evidence": "The HTTP error is visible, but there is no explanation, retry, home link, search, or support route; the HAR confirms the document itself is 404.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Replace the server-default page with an actionable branded 404 that preserves context and offers retry, home, search, and support options.",
+      "effort": "small"
+    },
+    {
+      "id": "F007",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The error document lacks landmarks and a focusable recovery path",
+      "evidence": "The page-probe found one H1 but zero main/nav/header/footer/role landmarks and zero focusable controls.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Wrap the error content in <main>, add labelled navigation, and place keyboard focus predictably on the error heading or primary recovery action.",
+      "effort": "small"
+    },
+    {
+      "id": "F008",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The document omits the viewport meta tag",
+      "evidence": "At a requested 360×800 viewport, layout metrics report a 980 CSS-pixel layout viewport and scale 0.367 because meta[name=viewport] is absent.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "suggestedFix": "Add <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> and retest reflow and target sizes.",
+      "effort": "small"
+    },
+    {
+      "id": "F009",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The error document has no HTML doctype or declared charset",
+      "evidence": "The DOM probe reports doctype: null and browser-decoded characterSet: windows-1252; the source has no charset declaration.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Emit <!doctype html> and <meta charset=\"utf-8\"> at the start of the error document.",
+      "effort": "small"
+    },
+    {
+      "id": "F010",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The homepage has a generic error title and no meta description",
+      "evidence": "The DOM title is “404 Not Found” and meta[name=description] is absent.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "After restoring the homepage, provide a unique descriptive title and concise visible-content-aligned meta description.",
+      "effort": "small"
+    },
+    {
+      "id": "F011",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The response exposes no crawlable navigation or mobile viewport signal",
+      "evidence": "The page has zero anchors and no viewport meta; robots.txt returns 404.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Serve crawlable href-based navigation, a viewport meta tag, and an intentional robots.txt policy.",
+      "effort": "small"
+    },
+    {
+      "id": "F012",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The public root and discovery endpoints return 404",
+      "evidence": "The discoverability primitive fetched the root with status 404; curl confirmed robots.txt and sitemap.xml also return 404, and no canonical link is present.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Restore a successful public root, publish consistent robots.txt and sitemap.xml, and add canonical URLs to indexable templates.",
+      "effort": "large"
+    },
+    {
+      "id": "F013",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "No structured or social-preview metadata describes the site",
+      "evidence": "The page-probe found zero JSON-LD blocks, zero Open Graph tags, and no canonical metadata.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add accurate Organization/WebSite metadata and Open Graph/Twitter preview fields after the visible homepage is restored.",
+      "effort": "small"
+    },
+    {
+      "id": "F014",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Key transport and content security headers are missing",
+      "evidence": "The headers primitive confirms HTTPS but finds no CSP, HSTS, or X-Content-Type-Options; the Cloudflare clearance cookie is Secure and HttpOnly.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add HSTS, a restrictive CSP, and X-Content-Type-Options: nosniff at the edge/origin; retain secure cookie flags.",
+      "effort": "medium"
+    },
+    {
+      "id": "F015",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser-enforced defensive policy coverage is incomplete",
+      "evidence": "X-Frame-Options: SAMEORIGIN and Referrer-Policy: same-origin are present, but Permissions-Policy, CSP/frame-ancestors, HSTS, and nosniff are absent.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Define a least-privilege Permissions-Policy and CSP frame-ancestors, plus HSTS and nosniff.",
+      "effort": "medium"
+    },
+    {
+      "id": "F016",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The network failure state is a bare server page",
+      "evidence": "The representative HTTP failure state is only the nginx 404 and offers no retry, fallback content, or navigation.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Implement an application-level 404 and network-failure fallback with clear status, retained context, and recovery actions.",
+      "effort": "small"
+    },
+    {
+      "id": "F017",
+      "pathId": "home",
+      "url": "https://m.scan-manga.com/",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "built-in-ai",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The document language and direction are not declared",
+      "evidence": "The DOM probe reports empty html.lang and html.dir, so assistive technology and translation tools cannot identify the page language.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Set the correct BCP 47 lang value on <html>; set dir when needed and use logical properties in restored templates.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Restore the public root and representative site journeys",
+      "priority": 1,
+      "findingIds": [
+        "F004",
+        "F005",
+        "F012"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Ship an actionable, semantic, responsive branded error page",
+      "priority": 2,
+      "findingIds": [
+        "F002",
+        "F003",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F016",
+        "F017"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Restore crawlable metadata and discovery endpoints",
+      "priority": 3,
+      "findingIds": [
+        "F010",
+        "F011",
+        "F013"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Add a complete edge security-header policy",
+      "priority": 4,
+      "findingIds": [
+        "F014",
+        "F015"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Respect the user colour-scheme preference",
+      "priority": 5,
+      "findingIds": [
+        "F001"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 360,
+    "pathCount": 2,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-26T18-25-23-226Z"
+}

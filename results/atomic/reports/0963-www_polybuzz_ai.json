@@ -1,0 +1,2268 @@
+{
+  "url": "https://www.polybuzz.ai",
+  "auditedAt": "2026-07-27T06:48:17.689Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "All 58 catalog checks received conclusive outcomes. Intermittent EdgeOne 567 blocks were judged as resilience evidence rather than an audit blocker because other browser and raw HTTP runs succeeded.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Nuxt/Vue",
+    "notes": "SSR discovery feed with SPA interactions, chat, image generation, membership and account surfaces."
+  },
+  "config": {
+    "loaded": false
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom/raw-html",
+    "layout-metrics",
+    "Lighthouse",
+    "HAR",
+    "trace",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "discoverability",
+    "secrets",
+    "heap-snapshot",
+    "Modern Web Guidance search"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "component-specific-light-dark-theme",
+    "adapt-scrollbar-to-contrast-preferences",
+    "brand-consistent-forms",
+    "css",
+    "carousel-slide-effects",
+    "scroll-entry-exit-effects",
+    "directional-navigation-transitions",
+    "stack-drill-down",
+    "pull-to-reveal",
+    "position-aware-tooltips",
+    "persistent-app-tours",
+    "declarative-dialog-popover-control",
+    "html",
+    "css-layout",
+    "light-dismiss-a-dialog",
+    "scroll-position-aware-elements",
+    "size-aware-styling",
+    "scrollability-affordance-hints",
+    "forms",
+    "validate-input-after-interaction",
+    "stabilize-reactive-state",
+    "required-field-feedback",
+    "language-model",
+    "performance",
+    "webmcp",
+    "deprioritize-background-fetches",
+    "optimize-script-priority",
+    "accessible-error-announcement",
+    "defer-rendering-heavy-content",
+    "style-parent-with-has",
+    "security",
+    "search-hidden-content",
+    "privacy",
+    "passkey-reauthentication",
+    "passkey-authentication",
+    "passkeys",
+    "passkey-registration",
+    "coordinate-global-events",
+    "support-global-calendar-systems",
+    "capture-location-agnostic-data",
+    "translator",
+    "calculate-event-differentials",
+    "autofill-sign-up-form",
+    "autofill-payment-form",
+    "autofill-sign-in-form",
+    "autofill-address-form",
+    "agentic-javascript-tools",
+    "agentic-forms",
+    "persistent-top-layer-ui",
+    "move-dom-element-without-losing-state",
+    "defer-work-until-scroll-ends",
+    "efficient-background-processing"
+  ],
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The normal desktop capture is dark, while raw server HTML contains no prefers-color-scheme or color-scheme handling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Raw server HTML and inline styles contain no prefers-reduced-motion rule; the reduced-motion capture was additionally blocked by the edge WAF, so static authored output is the direct signal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse reports a failing colour-contrast node (.fc-faq-label), and raw output contains no prefers-contrast or forced-colors handling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Raw rendered HTML contains no view-transition declarations, while this SPA exposes route changes between discovery, generator, chat and membership surfaces.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Static source inspection plus screenshots",
+      "evidence": "No parallax, scrollytelling or scroll-linked reveal was observed on representative pages, so no main-thread scroll-animation anti-pattern was present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Mobile screenshot and layout inspection",
+      "evidence": "The mobile feed uses native vertical scrolling, has no horizontal overflow, and no custom pointer-driven gesture surface was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative desktop/mobile screenshots",
+      "evidence": "Persistent desktop side navigation and mobile bottom navigation remain position-aware and available without obscuring the feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative overlay screenshots",
+      "evidence": "The observed login promotion and consent surfaces remained within viewport bounds at desktop and mobile sizes; no drifting anchored tooltip/menu was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Screenshots across home, chat and generator",
+      "evidence": "Selected navigation, Back on chat, headings and card hierarchy visibly communicate location and next actions behind the consent layer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Desktop and mobile screenshots show a full-screen dimmer and consent modal before any interaction; on mobile it occupies almost the full viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Raw output contains no dialog or popover primitive; the chat screenshot shows a blank white modal panel over the conversation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/chat-desktop.png",
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop and mobile screenshots",
+      "evidence": "Outside the consent interruption, the discovery surface dedicates most space to character cards and collapses desktop chrome into a compact mobile bar.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Layout primitive at 360x800",
+      "evidence": "Layout reports scrollWidth 360, innerWidth 360 and horizontalOverflowPx 0 with a viewport meta present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The SSR output contains no @container or container-type despite card components being reused in desktop grids and mobile feeds.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse found four links without discernible names in the mobile footer navigation, preventing reliable keyboard and assistive interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "SSR HTML and home screenshot",
+      "evidence": "The server-rendered H1 explicitly describes free AI character chat and visible cards/search communicate the primary discovery action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "All four representative path screenshots are covered by the consent surface; the chat path additionally shows a blank modal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/chat-desktop.png",
+        "evidence/generator-mobile.png",
+        "evidence/membership-desktop.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The discoverability browser capture intermittently receives EdgeOne “Restricted Access 567” with only an owner-oriented instruction, and the chat overlay is blank.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/chat-desktop.png"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse measured LCP 20.8 s, FCP 3.9 s, TBT 700 ms and a performance score of 0.40; a separate trace measured LCP 2.25 s, showing high run-to-run variability.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Trace, Lighthouse and mobile layout",
+      "evidence": "Lighthouse CLS is 0.093 (good range), while the focused mobile layout run observed CLS 0 and no shifts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse measured 700 ms TBT; 71 scripts were transferred in the HAR.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "HAR recorded 173 requests and 2.23 MB, including ten parser-inserted high-priority stylesheets; Lighthouse reports a 6.1 s dependency chain and about 500 ms render-blocking savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse estimates 572 KiB unused JavaScript and 42 KiB unused CSS, including advertising, tag-manager and app bundles.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse accessibility reports four unnamed mobile footer links; the images primitive also reports eight images without alt text.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse identifies .fc-faq-label as failing the colour-contrast audit.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse accessibility audits",
+      "evidence": "Heading order, aria-allowed attributes and aria-hidden focus checks pass; failures are separately recorded for unnamed links.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "Primary headings, card labels and consent copy use readable sizing and wrapping at both tested viewports, apart from the separately recorded contrast failure.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The page ships maximum-scale=1 and user-scalable=no; Lighthouse fails the meta-viewport accessibility audit.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse best-practices audit",
+      "evidence": "Lighthouse reports no browser console errors or uncaught exceptions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "SSR HTML, Lighthouse and images evidence",
+      "evidence": "The document has HTML5 doctype and UTF-8; Lighthouse passes image aspect/resolution checks and 48/55 observed images use modern formats.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse reports one BFCache restoration failure even though deprecation and inspector audits pass.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "SSR HTML inspection",
+      "evidence": "The home response contains a descriptive unique title and meta description aligned with AI character chat.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Lighthouse reports an anchor.delete-account without href and fails the restrictive viewport audit.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "GET /sitemap.xml returned HTTP 200 but HTML whose title/canonical/hreflang all describe /404 rather than XML.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/sitemap.xml"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "SSR HTML inspection",
+      "evidence": "The home response contains five Open Graph properties and one JSON-LD block describing visible content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Headers evidence shows no CSP or X-Content-Type-Options; all 12 observed cookies lack Secure and most use SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "HAR records 170/173 requests and 2.19 MB as non-main-origin, including Google Ads/Analytics and Facebook; trackers evidence finds four known trackers while the consent wall is still on screen.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The public SSR output has a Log In route but no WebAuthn, PublicKeyCredential or navigator.credentials integration; no permission prompt fired on load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Headers evidence shows no CSP, Referrer-Policy, Permissions-Policy or X-Content-Type-Options; HSTS and X-Frame-Options are present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Raw HTML versus rendered evidence",
+      "evidence": "The 145 KB server response contains about 800 content tokens, an H1 and real character links, so core discovery content is not an empty JS shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The chat screenshot shows a large blank white overlay with no label, loading status, close affordance or recovery copy.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/chat-desktop.png"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "HAR loads /manifest.webmanifest, while SSR output contains no service-worker registration and WAF/network failures replace the app with a dead-end page.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The rendered discoverability capture shows Restricted Access 567 and tells the user only to contact the owner; no retry, home or support action is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "SSR HTML inspection",
+      "evidence": "The document declares lang=en and exposes 16 hreflang alternates; no incorrect forced RTL direction was present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "HAR and SSR locale signals",
+      "evidence": "Requests include localLanguage=en-GB and localTimezone=Europe/London, and the site exposes locale variants rather than one hard-coded locale.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "HAR request inspection",
+      "evidence": "User detail requests explicitly transmit the IANA time zone Europe/London, avoiding an ambiguous numeric offset.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The first layer offers Consent and Manage options but no equally prominent Reject all; HAR simultaneously records Google/Facebook advertising and analytics requests before choice.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The chat screenshot contains an empty white panel over dimmed content with no status text or actionable control.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/chat-desktop.png"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered/SSR form inspection",
+      "evidence": "The public entry page exposes search rather than address/payment data collection; no paste prevention or obstructive input behaviour was reported by Lighthouse.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "The membership screenshot is an otherwise blank black page beneath the consent wall, so pricing, commitment and cancellation information are unavailable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/membership-desktop.png"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "Images evidence finds 10 oversized images, 42 without srcset and 7 legacy-format assets; 55 images lack width/height attributes even where CSS may reserve space.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "HAR records 71 scripts and 170 non-main-origin requests; Lighthouse estimates 572 KiB unused JavaScript.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "HAR attributes 2.19 MB of 2.23 MB transferred to non-main origins, with GTM, Facebook and AdSense among the largest scripts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "SSR output contains no WebMCP or agentic form/tool declarations despite chat and image generation being suitable structured tasks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual, browser, network, Lighthouse or static evidence as cited",
+      "evidence": "SSR output contains no built-in LanguageModel or Summarizer integration; all product intelligence is server-oriented.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/post heap snapshots after 10 scroll cycles",
+      "evidence": "Node count changed 30,610 to 30,752 (+0.46%) and self size 1,024,113 to 1,031,089 bytes (+0.68%), with no unbounded growth signal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap baseline summary",
+      "evidence": "The tested state retained 30,610 nodes and about 1.02 MB self size, proportionate to the rendered consent/discovery surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/post heap comparison",
+      "evidence": "After ten down/up scroll cycles the heap increased by only 142 nodes and about 7 KB; no accumulating population was evident at this test resolution.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F21",
+        "F22",
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26",
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F28",
+        "F29",
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F31",
+        "F32",
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F34",
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage/discovery archetype: primary content feed, global navigation, consent, metadata, performance and mobile adaptation.",
+      "url": "https://www.polybuzz.ai/",
+      "conditions": [
+        "1440x1000",
+        "360x800",
+        "raw HTML",
+        "mobile Lighthouse"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "chat",
+      "description": "Representative character-chat detail and primary conversation journey.",
+      "url": "https://www.polybuzz.ai/character/chat/chase-45N6c?tagId=-1",
+      "conditions": [
+        "1440x1000",
+        "fresh session"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "generator",
+      "description": "Image-generation tool archetype and mobile interactive flow.",
+      "url": "https://www.polybuzz.ai/ai-image-generator",
+      "conditions": [
+        "360x800",
+        "fresh session"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "membership",
+      "description": "Commercial/subscription archetype for pricing and account-flow trust.",
+      "url": "https://www.polybuzz.ai/membership",
+      "conditions": [
+        "1440x1000",
+        "fresh session"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The site hard-codes a dark presentation instead of adapting to the user’s colour-scheme preference.",
+      "evidence": "The normal desktop capture is dark, while raw server HTML contains no prefers-color-scheme or color-scheme handling.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Declare color-scheme and provide preference-driven light and dark tokens with prefers-color-scheme or light-dark().",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Reduced-motion preferences are not implemented.",
+      "evidence": "Raw server HTML and inline styles contain no prefers-reduced-motion rule; the reduced-motion capture was additionally blocked by the edge WAF, so static authored output is the direct signal.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "suggestedFix": "Wrap non-essential transitions and animation in no-preference queries and remove or shorten them under reduce.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Some text fails minimum contrast and there is no high-contrast adaptation.",
+      "evidence": "Lighthouse reports a failing colour-contrast node (.fc-faq-label), and raw output contains no prefers-contrast or forced-colors handling.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "adapt-scrollbar-to-contrast-preferences",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Raise text contrast and add forced-colors/prefers-contrast adaptations without suppressing system colours.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Route and state changes do not use View Transitions.",
+      "evidence": "Raw rendered HTML contains no view-transition declarations, while this SPA exposes route changes between discovery, generator, chat and membership surfaces.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "directional-navigation-transitions",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Use same-document View Transitions for SPA route/state changes, with a reduced-motion fallback.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "A consent wall obscures the entire experience on every tested path.",
+      "evidence": "Desktop and mobile screenshots show a full-screen dimmer and consent modal before any interaction; on mobile it occupies almost the full viewport.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Replace the full takeover with a compact, accessible consent surface that leaves essential content available and includes equally prominent choices.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Overlays are implemented as custom/non-semantic surfaces and can render blank.",
+      "evidence": "Raw output contains no dialog or popover primitive; the chat screenshot shows a blank white modal panel over the conversation.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Use dialog/popover semantics with labelled content, focus management, Escape/light-dismiss where appropriate, and a robust loading/error state.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/chat-desktop.png",
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F07",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Reusable cards and navigation rely on viewport styling rather than container responsiveness.",
+      "evidence": "The SSR output contains no @container or container-type despite card components being reused in desktop grids and mobile feeds.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Give reusable card/navigation wrappers containment and adapt internals with size container queries.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F08",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Mobile icon navigation has unnamed interactive targets.",
+      "evidence": "Lighthouse found four links without discernible names in the mobile footer navigation, preventing reliable keyboard and assistive interaction.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "suggestedFix": "Add visible or aria-label names, preserve visible focus, and keep touch targets at least 44 CSS pixels.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F09",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The consent wall prevents the primary chat, image-generation and membership journeys from starting.",
+      "evidence": "All four representative path screenshots are covered by the consent surface; the chat path additionally shows a blank modal.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "suggestedFix": "Let users reject or configure non-essential processing without blocking core use, then test chat and generation end to end.",
+      "effort": "large",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/chat-desktop.png",
+        "evidence/generator-mobile.png",
+        "evidence/membership-desktop.png"
+      ]
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Blocked and failed states do not provide useful recovery.",
+      "evidence": "The discoverability browser capture intermittently receives EdgeOne “Restricted Access 567” with only an owner-oriented instruction, and the chat overlay is blank.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Provide a user-facing retry/back route and support reference for WAF blocks, plus explicit loading and error content in overlays.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/chat-desktop.png"
+      ]
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile loading performance is poor.",
+      "evidence": "Lighthouse measured LCP 20.8 s, FCP 3.9 s, TBT 700 ms and a performance score of 0.40; a separate trace measured LCP 2.25 s, showing high run-to-run variability.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Prioritise the LCP resource, delay non-essential third parties, and reduce initial JavaScript execution.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Initial JavaScript work blocks the main thread.",
+      "evidence": "Lighthouse measured 700 ms TBT; 71 scripts were transferred in the HAR.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Remove or defer non-critical scripts, split long tasks, and schedule background work at lower priority.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The critical network path is long and cache/render delivery is inefficient.",
+      "evidence": "HAR recorded 173 requests and 2.23 MB, including ten parser-inserted high-priority stylesheets; Lighthouse reports a 6.1 s dependency chain and about 500 ms render-blocking savings.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Inline only critical CSS, consolidate/defer the rest, apply durable caching to hashed assets, and prioritise only true critical resources.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Large amounts of unused JavaScript and CSS ship on first load.",
+      "evidence": "Lighthouse estimates 572 KiB unused JavaScript and 42 KiB unused CSS, including advertising, tag-manager and app bundles.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Use route-level code splitting and conditionally load advertising/analytics after consent and when needed.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Several interactive links lack accessible names.",
+      "evidence": "Lighthouse accessibility reports four unnamed mobile footer links; the images primitive also reports eight images without alt text.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "suggestedFix": "Name every icon link and supply meaningful alt text, or empty alt for decorative images.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Consent/help text has insufficient colour contrast.",
+      "evidence": "Lighthouse identifies .fc-faq-label as failing the colour-contrast audit.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "suggestedFix": "Adjust foreground/background tokens to meet WCAG AA in every consent and helper-text state.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The viewport explicitly prevents user zoom.",
+      "evidence": "The page ships maximum-scale=1 and user-scalable=no; Lighthouse fails the meta-viewport accessibility audit.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Remove maximum-scale and user-scalable restrictions and verify reflow at 200–400% zoom.",
+      "effort": "trivial",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page is not eligible for back/forward cache.",
+      "evidence": "Lighthouse reports one BFCache restoration failure even though deprecation and inspector audits pass.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "suggestedFix": "Inspect the BFCache not-restored reason and remove unload handlers or other blockers.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "One account-management action is not a crawlable link and the viewport is not zoom-friendly.",
+      "evidence": "Lighthouse reports an anchor.delete-account without href and fails the restrictive viewport audit.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "suggestedFix": "Use real href destinations for navigation and an unrestricted responsive viewport.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The advertised sitemap endpoint serves a soft 404 document.",
+      "evidence": "GET /sitemap.xml returned HTTP 200 but HTML whose title/canonical/hreflang all describe /404 rather than XML.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "suggestedFix": "Serve a valid XML sitemap with an XML content type and a truthful non-200 status for missing resources.",
+      "effort": "small",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/sitemap.xml"
+      ]
+    },
+    {
+      "id": "F21",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Security headers and cookie attributes are incomplete.",
+      "evidence": "Headers evidence shows no CSP or X-Content-Type-Options; all 12 observed cookies lack Secure and most use SameSite=None.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "suggestedFix": "Deploy a nonce/hash CSP, nosniff, and Secure/SameSite-appropriate cookie attributes; keep HSTS and SAMEORIGIN.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "id": "F22",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Tracking executes before an informed consent choice.",
+      "evidence": "HAR records 170/173 requests and 2.19 MB as non-main-origin, including Google Ads/Analytics and Facebook; trackers evidence finds four known trackers while the consent wall is still on screen.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "suggestedFix": "Block advertising and analytics tags until an explicit opt-in, minimise vendors, shorten retention, and batch essential telemetry.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "No phishing-resistant authentication capability is exposed.",
+      "evidence": "The public SSR output has a Log In route but no WebAuthn, PublicKeyCredential or navigator.credentials integration; no permission prompt fired on load.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "passkeys",
+      "suggestedFix": "Offer passkey registration and sign-in alongside recovery, and continue requesting permissions only from user gestures.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F24",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Browser-enforced defensive policies are missing.",
+      "evidence": "Headers evidence shows no CSP, Referrer-Policy, Permissions-Policy or X-Content-Type-Options; HSTS and X-Frame-Options are present.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "suggestedFix": "Add CSP frame-ancestors/Trusted Types where feasible, strict referrer and permissions policies, and nosniff.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/headers.json"
+      ]
+    },
+    {
+      "id": "F25",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The chat route can leave an empty modal covering the application.",
+      "evidence": "The chat screenshot shows a large blank white overlay with no label, loading status, close affordance or recovery copy.",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "persistent-top-layer-ui",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Make overlay state explicit and atomic: render labelled loading, success and error states, always with a working close/back action.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/chat-desktop.png"
+      ]
+    },
+    {
+      "id": "F26",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The app advertises a manifest but has no observable offline worker/fallback.",
+      "evidence": "HAR loads /manifest.webmanifest, while SSR output contains no service-worker registration and WAF/network failures replace the app with a dead-end page.",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Register a service worker for a small offline shell and recovery page, and verify manifest installability.",
+      "effort": "large",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "id": "F27",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Network/security failures produce a dead end rather than a recoverable app state.",
+      "evidence": "The rendered discoverability capture shows Restricted Access 567 and tells the user only to contact the owner; no retry, home or support action is present.",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "suggestedFix": "Provide retry, return-home and support actions while preserving context; return truthful HTTP statuses.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/discoverability-rendered.png"
+      ]
+    },
+    {
+      "id": "F28",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Consent is not a balanced, informed choice and trackers run before it.",
+      "evidence": "The first layer offers Consent and Manage options but no equally prominent Reject all; HAR simultaneously records Google/Facebook advertising and analytics requests before choice.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "suggestedFix": "Present Accept and Reject all with equal prominence, default non-essential purposes off, and do not fire vendors before opt-in.",
+      "effort": "large",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "id": "F29",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The blank chat modal gives no error explanation or recovery.",
+      "evidence": "The chat screenshot contains an empty white panel over dimmed content with no status text or actionable control.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "accessibility",
+      "suggestedFix": "Render accessible status/error text, move focus to it, and provide retry/cancel without losing chat context.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/chat-desktop.png"
+      ]
+    },
+    {
+      "id": "F30",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Consent blocks pricing/account evaluation and the membership path renders no product context behind it.",
+      "evidence": "The membership screenshot is an otherwise blank black page beneath the consent wall, so pricing, commitment and cancellation information are unavailable.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "suggestedFix": "Render essential pricing and account terms independently of marketing consent, with clear cancellation and confirmation steps.",
+      "effort": "large",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/membership-desktop.png"
+      ]
+    },
+    {
+      "id": "F31",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image delivery is not consistently responsive or right-sized.",
+      "evidence": "Images evidence finds 10 oversized images, 42 without srcset and 7 legacy-format assets; 55 images lack width/height attributes even where CSS may reserve space.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Generate srcset/sizes variants, keep modern formats, set intrinsic dimensions and lazy-load below-fold media.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "id": "F32",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page performs substantial non-essential work before consent.",
+      "evidence": "HAR records 71 scripts and 170 non-main-origin requests; Lighthouse estimates 572 KiB unused JavaScript.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Gate analytics/ads, conditionally import features, and defer low-value fetches until idle or user intent.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F33",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party code dominates the page budget.",
+      "evidence": "HAR attributes 2.19 MB of 2.23 MB transferred to non-main origins, with GTM, Facebook and AdSense among the largest scripts.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "performance",
+      "suggestedFix": "Set a third-party byte/request budget, remove redundant vendors and load retained integrations only after consent and interaction.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "id": "F34",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The AI service exposes no structured browser-agent capability.",
+      "evidence": "SSR output contains no WebMCP or agentic form/tool declarations despite chat and image generation being suitable structured tasks.",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "webmcp",
+      "suggestedFix": "Pilot narrowly scoped WebMCP tools for character search and draft generation with confirmation before side effects.",
+      "effort": "medium",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    },
+    {
+      "id": "F35",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "No on-device inference path is offered for lightweight AI tasks.",
+      "evidence": "SSR output contains no built-in LanguageModel or Summarizer integration; all product intelligence is server-oriented.",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "on-device-inference",
+      "guidanceId": "language-model",
+      "guidanceCategory": "built-in-ai",
+      "suggestedFix": "Consider optional on-device summarisation or drafting where capability detection and privacy benefits justify it.",
+      "effort": "large",
+      "pathId": "multi",
+      "url": "https://www.polybuzz.ai",
+      "artifacts": [
+        "evidence/raw-home.html"
+      ]
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Stop trackers until balanced consent",
+      "priority": 1,
+      "guidanceId": "privacy",
+      "status": "open",
+      "findingIds": [
+        "F22",
+        "F28",
+        "F05"
+      ]
+    },
+    {
+      "id": "T2",
+      "title": "Unblock and harden core chat/generation flows",
+      "priority": 2,
+      "guidanceId": "persistent-top-layer-ui",
+      "status": "open",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F25",
+        "F27",
+        "F29"
+      ]
+    },
+    {
+      "id": "T3",
+      "title": "Cut initial JavaScript, third parties and dependency depth",
+      "priority": 3,
+      "guidanceId": "performance",
+      "status": "open",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F32",
+        "F33"
+      ]
+    },
+    {
+      "id": "T4",
+      "title": "Restore zoom, names and contrast",
+      "priority": 4,
+      "guidanceId": "accessibility",
+      "status": "open",
+      "findingIds": [
+        "F08",
+        "F15",
+        "F16",
+        "F17",
+        "F03"
+      ]
+    },
+    {
+      "id": "T5",
+      "title": "Deploy CSP, secure cookies and browser policies",
+      "priority": 5,
+      "guidanceId": "security",
+      "status": "open",
+      "findingIds": [
+        "F21",
+        "F24"
+      ]
+    },
+    {
+      "id": "T6",
+      "title": "Repair sitemap and crawlable controls",
+      "priority": 6,
+      "guidanceId": "html",
+      "status": "open",
+      "findingIds": [
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "id": "T7",
+      "title": "Optimise responsive image delivery",
+      "priority": 7,
+      "guidanceId": "optimize-image-priority",
+      "status": "open",
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "id": "T8",
+      "title": "Add preference-driven theme and motion handling",
+      "priority": 8,
+      "guidanceId": "dark-mode",
+      "status": "open",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "id": "T9",
+      "title": "Modernise overlays, routing and component responsiveness",
+      "priority": 9,
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open",
+      "findingIds": [
+        "F04",
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "id": "T10",
+      "title": "Evaluate passkeys and safe agent-facing capabilities",
+      "priority": 10,
+      "guidanceId": "passkeys",
+      "status": "open",
+      "findingIds": [
+        "F23",
+        "F34",
+        "F35"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage at 1440x1000 with consent wall",
+      "condition": "viewport 1440x1000",
+      "findingIds": [
+        "F01",
+        "F05",
+        "F22",
+        "F28"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800 with consent wall",
+      "condition": "viewport 360x800",
+      "findingIds": [
+        "F05",
+        "F09"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/chat-desktop.png",
+      "caption": "Representative chat route with blank modal",
+      "condition": "viewport 1440x1000",
+      "findingIds": [
+        "F06",
+        "F09",
+        "F10",
+        "F25",
+        "F29"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/generator-mobile.png",
+      "caption": "Image generator route on mobile",
+      "condition": "viewport 360x800",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/membership-desktop.png",
+      "caption": "Membership route behind consent",
+      "condition": "viewport 1440x1000",
+      "findingIds": [
+        "F09",
+        "F30"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser discoverability capture blocked by EdgeOne",
+      "condition": "browser view",
+      "findingIds": [
+        "F10",
+        "F27"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "No-JS crawler capture",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM snapshot",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/raw-home.html",
+      "caption": "Raw server HTML for homepage",
+      "condition": "no JavaScript",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F04",
+        "F06",
+        "F07",
+        "F23",
+        "F34",
+        "F35"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile overflow and layout-shift metrics",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse mobile report",
+      "condition": "mobile throttling",
+      "findingIds": [
+        "F03",
+        "F08",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F32"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Homepage network archive",
+      "condition": "5 second load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary",
+      "condition": "5 second load",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F22",
+        "F26",
+        "F28",
+        "F32",
+        "F33"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace",
+      "condition": "5 second load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace timings and long tasks",
+      "condition": "5 second load",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap snapshot",
+      "condition": "initial state",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Heap after ten repeated scroll cycles",
+      "condition": "10 scroll cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers audit",
+      "condition": "main document",
+      "findingIds": [
+        "F21",
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie attribute audit",
+      "condition": "initial load",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker enumeration",
+      "condition": "initial load",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Rendered image audit",
+      "condition": "homepage",
+      "findingIds": [
+        "F15",
+        "F31"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secrets scan",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-versus-rendered discoverability comparison",
+      "condition": "browser and no-JS",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-searches.txt",
+      "caption": "Pinned Modern Web Guidance searches",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt response",
+      "condition": "raw HTTP",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Soft-404 response from sitemap.xml",
+      "condition": "raw HTTP",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/http-headers.txt",
+      "caption": "Raw response headers",
+      "condition": "raw HTTP",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1100,
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T06-48-17-689Z"
+}

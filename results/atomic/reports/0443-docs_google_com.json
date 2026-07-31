@@ -1,0 +1,1448 @@
+{
+  "url": "https://docs.google.com",
+  "auditedAt": "2026-07-20T21:20:50.454Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Completed atomic audit of the unauthenticated Google Docs entry, which redirects to the Google Accounts identifier screen. Authenticated editor surfaces were excluded because no credentials were supplied.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Google Accounts server-rendered application",
+    "notes": "docs.google.com redirects unauthenticated users through three 302 responses to accounts.google.com. The representative reachable surface is the identifier step."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "DOM",
+    "evaluate probes",
+    "layout metrics",
+    "trace",
+    "HAR",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "discoverability",
+    "images",
+    "heap summary",
+    "Lighthouse"
+  ],
+  "guidanceConsulted": [
+    "privacy",
+    "accessibility",
+    "security",
+    "dark-mode",
+    "performance",
+    "forms",
+    "improve-text-layout-and-legibility",
+    "fluid-scaling",
+    "break-up-long-tasks",
+    "visually-stable-font-fallbacks"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home.png",
+      "caption": "home.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "mobile.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/dark.png",
+      "caption": "dark.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/reduced-motion.png",
+      "caption": "reduced motion.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "high contrast.png"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home dom"
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "recon"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/mobile-layout.json",
+      "caption": "mobile layout"
+    },
+    {
+      "type": "trace",
+      "path": "evidence/trace",
+      "caption": "trace"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/trace-summary.json",
+      "caption": "trace summary"
+    },
+    {
+      "type": "har",
+      "path": "evidence/network.har",
+      "caption": "network.har"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/network-summary.json",
+      "caption": "network summary"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "headers"
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "cookies"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "trackers"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "secrets"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "discoverability"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "discoverability rendered.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "discoverability crawler.png"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "images"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap",
+      "caption": "heap"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "lighthouse"
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "lighthouse summary"
+    },
+    {
+      "type": "other",
+      "path": "evidence/probe.json",
+      "caption": "probe"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-search.json",
+      "caption": "guidance search"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "guidance retrieved.md"
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "Dark and default screenshots were byte-identical (36,608 bytes) and both show a white surface; the page does not retint for prefers-color-scheme: dark.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/dark.png"
+      ],
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The reduced-motion capture completed with document.getAnimations() returning an empty list; no non-essential motion remained.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The prefers-contrast capture remained legible and Lighthouse accessibility scored 1.00.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The reachable identifier state contains no abrupt in-page swap; navigation is implemented as a native form/document transition, preserving predictable browser behavior on this tested step.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The sign-in screen has no scrolling narrative, parallax, reveal, or carousel motion.",
+      "reason": "The sign-in screen has no scrolling narrative, parallax, reveal, or carousel motion."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The sign-in screen exposes no gesture-driven, swipe, pull, snap, or overscroll interaction.",
+      "reason": "The sign-in screen exposes no gesture-driven, swipe, pull, snap, or overscroll interaction."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The complete sign-in screen fits the viewport and has no scroll-dependent chrome.",
+      "reason": "The complete sign-in screen fits the viewport and has no scroll-dependent chrome."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "No tooltip, popover, or anchored menu is present on the tested identifier screen.",
+      "reason": "No tooltip, popover, or anchored menu is present on the tested identifier screen."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The desktop and mobile screenshots show a single H1, one clearly outlined identifier field, and a visually dominant Next action.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Load screenshots show the sign-in content directly, with no interstitial, consent wall, or overlay obscuring it.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "No overlay, disclosure, picker, or transient rich control is present on the tested screen.",
+      "reason": "No overlay, disclosure, picker, or transient rich control is present on the tested screen."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Screenshots show a compact, content-first sign-in surface with minimal framing and no competing promotional chrome.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "At 360x800, layout measured scrollWidth=clientWidth=360 and horizontalOverflowPx=0; viewport meta is present.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Desktop and 360px screenshots show the card becoming an edge-to-edge mobile layout without clipping.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The primary input is 368x56, links have 36-48px hit areas, and the language selector exposes a 2px focused outline; Lighthouse accessibility passed.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "First viewport states “Sign in”, explains account scope, labels the identifier field, and presents Next as the primary action.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The available identifier step has a labelled username field, recovery path, account-creation path, and a conventional Next action; credential-dependent continuation was not submitted.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The screen provides “Forgot email?”, Guest mode guidance, and Create account recovery routes; all are real href links.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "Lighthouse lab run measured LCP 5.3s and TBT 250ms (performance 0.71), outside the good LCP threshold, although trace under a lighter run measured LCP 1.13s.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/trace-summary.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Mobile layout observer measured CLS 0 with no shifts; Lighthouse also measured CLS 0.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Trace recorded zero long tasks and 0ms TBT; Lighthouse’s throttled run recorded 250ms TBT, indicating moderate but not severe scripting cost.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/trace-summary.json",
+        "evidence/network-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "HAR recorded a three-hop sign-in redirect chain; Lighthouse estimated 1,680ms redirect savings and reported document/font/dependency latency insights.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/trace-summary.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "Lighthouse estimated 360KiB unused JavaScript and 165KiB unused CSS on the small sign-in screen.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/trace-summary.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Lighthouse accessibility scored 1.00; the visible identifier input has the “Email or phone” label and Google image has alt text.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Lighthouse accessibility scored 1.00 and default/high-contrast screenshots show legible text and controls.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "DOM has one H1 and labelled form controls; Lighthouse accessibility scored 1.00. Focus probe found an explicit 2px outline on the language selector.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Desktop and mobile screenshots show readable line lengths, unclipped text, and stable alignment.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Viewport allows normal scaling; 360px capture has no overflow, primary field is 56px high, and no media requires captions.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Lighthouse best-practices scored 1.00 and did not report a console-error audit failure.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Probe found HTML doctype, UTF-8 charset, responsive viewport; the only image has width/height, correct aspect ratio, and alt text.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "Lighthouse reported four BFCache failure reasons despite a 1.00 aggregate best-practices score.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ],
+      "findingIds": [
+        "F-004"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "DOM and Lighthouse confirm a descriptive title (“Sign in - Google Accounts”) but no meta description.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ],
+      "findingIds": [
+        "F-005"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "All six visible links have href values, viewport meta is width=device-width, and link text is descriptive.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "This is a deliberately authentication-gated continuation URL, not a public content page intended for indexing.",
+      "reason": "This is a deliberately authentication-gated continuation URL, not a public content page intended for indexing."
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The utility sign-in screen does not represent an article, product, event, organization, or other rich entity.",
+      "reason": "The utility sign-in screen does not represent an article, product, event, organization, or other rich entity."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "HTTPS, HSTS, nosniff, X-Frame-Options DENY, and Trusted Types are present, but CDP reported NID without Secure and SameSite=None.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F-006"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Tracker scan found no known trackers; 8 third-party requests are limited to Google-owned authentication/static origins and secrets scan found no exposed credentials.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "No browser permission request occurred; the password/passkey stage is beyond the unauthenticated identifier screen and was not applicable to this rendered step.",
+      "reason": "No browser permission request occurred; the password/passkey stage is beyond the unauthenticated identifier screen and was not applicable to this rendered step."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted browser evidence and corroborating audit",
+      "evidence": "HSTS, DENY framing, nosniff, Permissions-Policy and Trusted Types are present, but Referrer-Policy is absent and one CSP policy permits unsafe-inline/unsafe-eval.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F-007"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Discoverability fetch found 76% rendered-word coverage in raw HTML, title and H1 present, and isJsShell=false.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The simple identifier screen contains no overlays to clip; desktop/mobile captures remained stable and links/forms use native controls.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "Account authentication is intrinsically online and the rendered utility screen is not an installable application surface.",
+      "reason": "Account authentication is intrinsically online and the rendered utility screen is not an installable application surface."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The tested authentication entry returned successfully with no HAR HTTP errors and exposes recovery/help routes rather than a blank shell.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "DOM declares lang=en-US and dir=ltr; the language selector exposes many locale choices and mobile layout remains intact.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The tested screen renders no dates, numbers, currency, duration, or calendar data.",
+      "reason": "The tested screen renders no dates, numbers, currency, duration, or calendar data."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The tested screen renders and accepts no times or events.",
+      "reason": "The tested screen renders and accepts no times or events."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "No consent wall, upsell, disguised ad, forced continuity, or preselected commercial option appears; recovery and account creation are plainly labelled.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The identifier field is explicitly labelled and recovery is offered adjacent to it; Lighthouse accessibility found no form violation.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The identifier input uses autocomplete=username and an explicit Email or phone label.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "No checkout, subscription, consent, account-management, or sensitive post-authentication action is available on the identifier step.",
+      "reason": "No checkout, subscription, consent, account-management, or sensitive post-authentication action is available on the identifier step."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "The sole 3.7KB logo has fixed dimensions, correct display density and no oversizing flag; no heavy decorative media is shipped.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "HAR contains only 10 requests/156KB and trace records no long tasks; no background media or continual work was observed.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "No audio/video/autoplay exists; total transfer is about 156KB and Google-owned auth/static origins account for the cross-origin requests.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "A security-sensitive sign-in identifier screen has no appropriate public agent-facing capability; exposing one would not improve this step.",
+      "reason": "A security-sensitive sign-in identifier screen has no appropriate public agent-facing capability; exposing one would not improve this step."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The sign-in identifier task has no summarisation or language-model use case where on-device inference would add value.",
+      "reason": "The sign-in identifier task has no summarisation or language-model use case where on-device inference would add value."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from DOM and representative unauthenticated surface",
+      "evidence": "The unauthenticated screen has no representative open/close, route-back, or list interaction to repeat ten times without fabricating a synthetic action.",
+      "reason": "The unauthenticated screen has no representative open/close, route-back, or list interaction to repeat ten times without fabricating a synthetic action."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Heap summary measured 132,543 nodes and 7.79MB self size; performance.memory used 5.28MB, proportionate for the rendered authentication UI.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/heap"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Targeted browser primitive, visual review, and/or Lighthouse corroboration",
+      "evidence": "Single-state heap constructor summary did not surface a Detached* population among significant constructors; no timers or ongoing animation were observed.",
+      "pathIds": [
+        "signin-desktop",
+        "signin-mobile",
+        "signin-preferences"
+      ],
+      "artifacts": [
+        "evidence/heap"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-002",
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-004"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-005"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable to this authentication-gated utility surface."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "signin-desktop",
+      "description": "Unauthenticated desktop entry and Google Accounts identifier archetype; represents the only reachable core flow before credentials.",
+      "url": "https://docs.google.com",
+      "conditions": [
+        "desktop",
+        "network trace",
+        "keyboard/programmatic focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "signin-mobile",
+      "description": "Narrow 360x800 rendering of the same identifier step to verify reflow, targets and overflow.",
+      "url": "https://docs.google.com",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "signin-preferences",
+      "description": "Identifier screen under dark, reduced-motion, and increased-contrast preferences.",
+      "url": "https://docs.google.com",
+      "conditions": [
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-001",
+      "pathId": "signin-preferences",
+      "url": "https://docs.google.com",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The sign-in surface ignores the user’s dark color-scheme preference.",
+      "evidence": "Dark and default screenshots were byte-identical (36,608 bytes) and both show a white surface; the page does not retint for prefers-color-scheme: dark.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/dark.png"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and use preference-aware surface, text, border, and form-control colors with light-dark() or prefers-color-scheme.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-002",
+      "pathId": "signin-desktop",
+      "url": "https://docs.google.com",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The throttled sign-in load misses the good LCP range and pays for a multi-hop redirect chain.",
+      "evidence": "Lighthouse measured LCP 5.3s, performance 0.71, and estimated 1,680ms redirect savings; HAR records three 302 hops before the final identifier page.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/network-summary.json",
+        "evidence/network.har"
+      ],
+      "suggestedFix": "Collapse avoidable authentication redirects and prioritise the final document’s critical render path so the LCP content is discoverable and delivered earlier.",
+      "effort": "large"
+    },
+    {
+      "id": "F-003",
+      "pathId": "signin-desktop",
+      "url": "https://docs.google.com",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The small identifier screen ships substantial unused JavaScript and CSS.",
+      "evidence": "Lighthouse estimated 360KiB unused JavaScript and 165KiB unused CSS on the small sign-in screen.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Code-split sign-in stages, remove identifier-step dead code, and load later-stage CSS/JS only when that stage is reached.",
+      "effort": "large"
+    },
+    {
+      "id": "F-004",
+      "pathId": "signin-desktop",
+      "url": "https://docs.google.com",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The page cannot be restored from the back/forward cache.",
+      "evidence": "Lighthouse reported four BFCache failure reasons despite a 1.00 aggregate best-practices score.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Review Lighthouse’s BFCache failure details and remove avoidable unload handlers, cache-control blockers, or incompatible lifecycle behavior.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-005",
+      "pathId": "signin-desktop",
+      "url": "https://docs.google.com",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The public sign-in entry has no meta description.",
+      "evidence": "DOM and Lighthouse confirm a descriptive title (“Sign in - Google Accounts”) but no meta description.",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Add a concise description explaining that this page signs the user into Google Docs with their Google Account.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F-006",
+      "pathId": "signin-desktop",
+      "url": "https://docs.google.com",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "A Google NID cookie was exposed without the Secure flag and with SameSite=None.",
+      "evidence": "The cookies primitive reported NID (.google.com), HttpOnly=true, secure=false, SameSite=None, expiry 183 days.",
+      "artifacts": [
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Set Secure on every cookie delivered in this HTTPS authentication flow and use Lax/Strict unless cross-site behavior is strictly required and documented.",
+      "effort": "small"
+    },
+    {
+      "id": "F-007",
+      "pathId": "signin-desktop",
+      "url": "https://docs.google.com",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Defensive response policy is weakened by a missing Referrer-Policy and permissive CSP directives.",
+      "evidence": "Headers primitive found no Referrer-Policy; one script-src policy permits unsafe-inline and unsafe-eval, though nonces and Trusted Types are also configured.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Set an explicit strict-origin-when-cross-origin or stricter Referrer-Policy and continue migrating script execution away from unsafe-inline/unsafe-eval to nonces/hashes plus Trusted Types.",
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-001",
+      "title": "Collapse the authentication redirect chain and optimise LCP delivery",
+      "priority": 1,
+      "findingIds": [
+        "F-002"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T-002",
+      "title": "Secure the NID cookie and tighten browser response policies",
+      "priority": 2,
+      "findingIds": [
+        "F-006",
+        "F-007"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T-003",
+      "title": "Split unused identifier-step JavaScript and CSS",
+      "priority": 3,
+      "findingIds": [
+        "F-003"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T-004",
+      "title": "Add preference-driven dark styling",
+      "priority": 4,
+      "findingIds": [
+        "F-001"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T-005",
+      "title": "Restore BFCache eligibility",
+      "priority": 5,
+      "findingIds": [
+        "F-004"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T-006",
+      "title": "Add a sign-in meta description",
+      "priority": 6,
+      "findingIds": [
+        "F-005"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-20T21-20-50-454Z"
+}

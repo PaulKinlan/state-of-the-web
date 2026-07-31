@@ -1,0 +1,2504 @@
+{
+  "url": "https://www.msn.com",
+  "auditedAt": "2026-07-22T11:21:26.812Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete atomic audit across four representative public paths. Content/article detail, authenticated account, subscription and payment flows were not covered because consent-isolated DOM recon did not expose stable article URLs and those journeys are outside the representative anonymous scope.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "React-like web components / shadow DOM",
+    "notes": "Localized en-GB news portal and weather tool. Homepage is a client-rendered shell with a first-load consent surface."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-css",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "heap-summary",
+    "lighthouse",
+    "modern-web-guidance"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "component-specific-light-dark-theme",
+    "adapt-scrollbar-to-contrast-preferences",
+    "accessibility",
+    "css",
+    "search-hidden-content",
+    "forms",
+    "privacy",
+    "passkey-reauthentication",
+    "passkey-authentication",
+    "passkey-registration",
+    "security",
+    "coordinate-global-events",
+    "capture-location-agnostic-data",
+    "support-global-calendar-systems",
+    "calculate-event-differentials",
+    "translator",
+    "autofill-highlight-inputs",
+    "autofill-payment-form",
+    "autofill-sign-up-form",
+    "autofill-address-form",
+    "autofill-sign-in-form",
+    "html",
+    "performance",
+    "efficient-background-processing",
+    "deliver-optimized-decorative-images",
+    "optimize-image-priority",
+    "agentic-javascript-tools",
+    "agentic-forms",
+    "language-model",
+    "persistent-top-layer-ui",
+    "defer-work-until-scroll-ends",
+    "move-dom-element-without-losing-state",
+    "carousel-slide-effects",
+    "navigation-drawer",
+    "scroll-entry-exit-effects",
+    "scroll-snap-realtime-feedback",
+    "position-aware-tooltips",
+    "pull-to-reveal",
+    "scroll-target-on-load",
+    "defer-rendering-heavy-content",
+    "soft-edge-content-fade",
+    "faster-spa-view-transitions",
+    "interactions-in-complex-layouts",
+    "scroll-position-aware-elements",
+    "size-aware-styling",
+    "scrollability-affordance-hints",
+    "fluid-scaling",
+    "stabilize-reactive-state",
+    "webmcp",
+    "sequence-distributed-events",
+    "identify-inp-causes",
+    "accessible-error-announcement",
+    "interactive-content-reveal",
+    "summarizer"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage first viewport with consent interruption",
+      "condition": "1440x900",
+      "findingIds": [
+        "F05",
+        "F07",
+        "F09"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile homepage consent state",
+      "condition": "360x800",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast.png",
+      "caption": "Homepage under forced colors/high contrast",
+      "condition": "forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/news.png",
+      "caption": "News listing archetype",
+      "condition": "1440x900",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/weather-mobile.png",
+      "caption": "Weather tool showing narrow-layout clipping",
+      "condition": "360x800",
+      "findingIds": [
+        "F10",
+        "F19"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/weather-layout.json",
+      "caption": "Weather layout metrics: 261 px horizontal overflow",
+      "condition": "360x800",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F19",
+        "F27"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/not-found.png",
+      "caption": "Blank invalid-route response",
+      "condition": "invalid route",
+      "findingIds": [
+        "F12",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and captured CSS",
+      "condition": "default",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F11",
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Rendered metadata, headings and consent semantics recon",
+      "condition": "default",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/objective-probe.json",
+      "caption": "Reduced-motion, semantics, metadata and platform probe",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F01",
+        "F08",
+        "F22",
+        "F29"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace",
+      "condition": "homepage load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact performance trace summary",
+      "condition": "homepage load",
+      "findingIds": [
+        "F13",
+        "F15",
+        "F31"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive",
+      "condition": "homepage load",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR signals",
+      "condition": "homepage load",
+      "findingIds": [
+        "F16",
+        "F17",
+        "F24",
+        "F30",
+        "F31",
+        "F32"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered coverage",
+      "condition": "JavaScript disabled crawler",
+      "findingIds": [
+        "F26",
+        "F33"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Blank crawler view",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F26",
+        "F33"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report",
+      "condition": "mobile emulation",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Selected Lighthouse metrics/audits",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15",
+        "F18",
+        "F20",
+        "F21",
+        "F25",
+        "F30"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response headers",
+      "condition": "homepage",
+      "findingIds": [
+        "F23",
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie posture",
+      "condition": "homepage",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party/tracker inventory",
+      "condition": "homepage",
+      "findingIds": [
+        "F24",
+        "F32"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan (zero findings)",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary",
+      "condition": "homepage",
+      "findingIds": [
+        "F34",
+        "F35",
+        "F36"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll.json",
+      "caption": "Heap after ten feed traversals",
+      "condition": "repeated interaction",
+      "findingIds": [
+        "F34",
+        "F35",
+        "F36"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/consent-buttons.json",
+      "caption": "Supporting audit evidence: consent-buttons.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/retrieved-ids.json",
+      "caption": "Supporting audit evidence: guidance/retrieved-ids.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/retrieved.err",
+      "caption": "Supporting audit evidence: guidance/retrieved.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/retrieved.md",
+      "caption": "Supporting audit evidence: guidance/retrieved.md",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-1.err",
+      "caption": "Supporting audit evidence: guidance/search-1.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-1.json",
+      "caption": "Supporting audit evidence: guidance/search-1.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-10.err",
+      "caption": "Supporting audit evidence: guidance/search-10.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-10.json",
+      "caption": "Supporting audit evidence: guidance/search-10.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-11.err",
+      "caption": "Supporting audit evidence: guidance/search-11.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-11.json",
+      "caption": "Supporting audit evidence: guidance/search-11.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-12.err",
+      "caption": "Supporting audit evidence: guidance/search-12.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-12.json",
+      "caption": "Supporting audit evidence: guidance/search-12.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-13.err",
+      "caption": "Supporting audit evidence: guidance/search-13.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-13.json",
+      "caption": "Supporting audit evidence: guidance/search-13.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-14.err",
+      "caption": "Supporting audit evidence: guidance/search-14.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-14.json",
+      "caption": "Supporting audit evidence: guidance/search-14.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-15.err",
+      "caption": "Supporting audit evidence: guidance/search-15.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-15.json",
+      "caption": "Supporting audit evidence: guidance/search-15.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-16.err",
+      "caption": "Supporting audit evidence: guidance/search-16.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-16.json",
+      "caption": "Supporting audit evidence: guidance/search-16.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-17.err",
+      "caption": "Supporting audit evidence: guidance/search-17.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-17.json",
+      "caption": "Supporting audit evidence: guidance/search-17.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-2.err",
+      "caption": "Supporting audit evidence: guidance/search-2.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-2.json",
+      "caption": "Supporting audit evidence: guidance/search-2.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-3.err",
+      "caption": "Supporting audit evidence: guidance/search-3.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-3.json",
+      "caption": "Supporting audit evidence: guidance/search-3.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-4.err",
+      "caption": "Supporting audit evidence: guidance/search-4.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-4.json",
+      "caption": "Supporting audit evidence: guidance/search-4.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-5.err",
+      "caption": "Supporting audit evidence: guidance/search-5.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-5.json",
+      "caption": "Supporting audit evidence: guidance/search-5.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-6.err",
+      "caption": "Supporting audit evidence: guidance/search-6.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-6.json",
+      "caption": "Supporting audit evidence: guidance/search-6.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-7.err",
+      "caption": "Supporting audit evidence: guidance/search-7.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-7.json",
+      "caption": "Supporting audit evidence: guidance/search-7.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-8.err",
+      "caption": "Supporting audit evidence: guidance/search-8.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-8.json",
+      "caption": "Supporting audit evidence: guidance/search-8.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-9.err",
+      "caption": "Supporting audit evidence: guidance/search-9.err",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance/search-9.json",
+      "caption": "Supporting audit evidence: guidance/search-9.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Supporting audit evidence: home-mobile-layout.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-rejected-desktop.png",
+      "caption": "Supporting audit evidence: home-rejected-desktop.png",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Supporting audit evidence: images.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon-rejected.json",
+      "caption": "Supporting audit evidence: recon-rejected.json",
+      "condition": "audit evidence",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshot comparison under prefers-color-scheme: dark.",
+      "evidence": "Dark-mode screenshots show the homepage and weather chrome retinted to dark surfaces.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "With prefers-reduced-motion: reduce, objective-probe.json reports a 250 ms slideInFromBottom animation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/objective-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Forced-colors screenshot and DOM CSS inspection.",
+      "evidence": "Forced-colors/high-contrast capture keeps consent controls and text visible; CSS includes forced-colors rules.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-contrast.png",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The captured page CSS contains no view-transition declarations; navigation is presented as abrupt state replacement.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "DOM/CSS capture contains no animation-timeline declaration despite a long feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "DOM/CSS capture contains no scroll-snap declaration on the long feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Desktop/mobile captures show a long feed but no progress indicator, and CSS has no scroll-state query.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Captured CSS has no anchor-name/position-anchor declarations; consent and menus use fixed/absolute positioning.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual review of first viewport.",
+      "evidence": "Desktop capture uses active navigation state and clear category labels to orient the feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Desktop and mobile screenshots show a consent surface covering or dimming the personalised-news feed before interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Recon finds role=dialog but objective probe finds zero native dialog/popover elements; dismissal is custom-scripted.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/objective-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The first desktop viewport devotes substantial space to shortcut icons, navigation, a sponsored slot, and consent chrome before feed content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "weather-layout.json reports inner/scroll width 621 px against a 360 px visual viewport, 261 px horizontal overflow; the screenshot clips weather text and controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/weather-mobile.png"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The weather component remains 621 px wide at a 360 px visual viewport; captured homepage CSS contains no @container rules.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse plus DOM CSS focus-state inspection.",
+      "evidence": "Lighthouse target-size audit passes and consent CSS defines focus-visible outlines.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile first-viewport review.",
+      "evidence": "MSN branding, web search, category navigation and headline cards make the news/search purpose and next actions clear.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative home, news and weather navigation screenshots.",
+      "evidence": "Anonymous users can reach news and weather destinations and are offered direct Reject All as well as Accept; no account wall blocks those destinations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/news.png",
+        "evidence/weather-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The invalid-route screenshot is an unlabelled blank dark page with no 404 explanation, back link, search, or retry.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found.png"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Lighthouse reports LCP 10.0 s, CLS 0.102 and TBT 520 ms; the separate trace reports LCP 3.31 s and 1.19 s blocking, confirming variable but poor load behavior.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Lighthouse measured CLS 0.102, just outside the good <=0.1 range.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Trace reports 6 long tasks, a 1021.94 ms longest task and 1190.48 ms total blocking; Lighthouse TBT is 520 ms.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "HAR summary records 294 requests and 4,499,311 transferred bytes, including 96 scripts / 2,331,227 bytes and parser-inserted high-priority candidates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "HAR records 96 scripts and 2.33 MB transferred script, led by a 370 KB common bundle plus ads/auth/telemetry bundles.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits and DOM probe.",
+      "evidence": "Lighthouse button-name and image-alt audits pass; consent controls have visible names.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/objective-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Lighthouse reports 4.21:1 for #777 text on #111, below the required 4.5:1.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse and DOM CSS.",
+      "evidence": "Lighthouse heading-order and main-landmark audits pass; captured CSS supplies focus-visible outlines for controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual review at two viewports.",
+      "evidence": "Consent and feed text are readable at desktop and mobile sizes without observed clipping on the homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "At 360 px, weather has 261 px horizontal overflow even though the homepage target-size audit passes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/weather-mobile.png"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse errors-in-console audit.",
+      "evidence": "Lighthouse reports no browser errors logged to the console.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Lighthouse image-size-responsive audit fails: a 380x199 image is displayed at 380x199 where 570x299 is expected for DPR.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Lighthouse reports four BFCache failure reasons, including an unload handler and no-store behavior.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM recon.",
+      "evidence": "Rendered DOM has a descriptive MSN title and a substantive meta description.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse SEO audits.",
+      "evidence": "Lighthouse passes crawlable anchors, robots.txt, descriptive link text and viewport audits.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Objective probe finds no link[rel=canonical] despite index,follow; public localized routes should state canonical/hreflang relationships.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/objective-probe.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered meta-tag probe.",
+      "evidence": "Homepage exposes og:url, og:title, og:type, og:site_name, og:image and twitter:card matching MSN.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Headers show HTTPS/HSTS/nosniff, but CSP allows unsafe-inline and unsafe-eval; cookies audit flags multiple non-Secure cookies including MUIDB and _C_Auth.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Tracker capture finds 24 third-party origins and DoubleClick; HAR assigns 290/294 requests and 4.47 MB to other origins, including telemetry/ad endpoints.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-load visual review and HAR/Lighthouse evidence.",
+      "evidence": "No permission prompt appears on load; HAR shows Microsoft OAuth authorization using PKCE challenge rather than an inline password form.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Headers lack Referrer-Policy and Permissions-Policy; CSP permits unsafe-inline/unsafe-eval; Lighthouse finds 11 third-party cookies.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Discoverability capture gets HTTP 200 but 0% raw/rendered word coverage, empty #root, and no raw title, H1, or description; crawler screenshot is blank.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Weather overflows by 261 px on mobile and an invalid route renders blank, showing failure to stabilise key runtime states.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/not-found.png"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "MSN is a continuously updated news/weather service; installability is not necessary for the representative anonymous web task, though progressive rendering remains applicable and is judged separately.",
+      "reason": "MSN is a continuously updated news/weather service; installability is not necessary for the representative anonymous web task, though progressive rendering remains applicable and is judged separately."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The representative invalid URL renders a blank page without status, explanation or action.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found.png"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The page correctly sets lang=en-gb and dir=ltr, but captured CSS repeatedly uses left/right/padding-left instead of logical properties.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/objective-probe.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Weather screenshot and localized DOM metadata.",
+      "evidence": "The en-GB weather surface renders Celsius, km/h, localized place names and relative news times.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/weather-mobile.png",
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No event scheduling, absolute appointment time, or other time-zone-sensitive workflow appears in the representative homepage, news, weather, or error surfaces.",
+      "reason": "No event scheduling, absolute appointment time, or other time-zone-sensitive workflow appears in the representative homepage, news, weather, or error surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile consent review.",
+      "evidence": "Consent offers Reject All and Accept with comparable prominence and a direct Manage Preferences link; no confirmshaming observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No authored data-submission form is present in the representative anonymous news/weather scope; search inputs do not expose a validation workflow.",
+      "reason": "No authored data-submission form is present in the representative anonymous news/weather scope; search inputs do not expose a validation workflow."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Home/weather visual review.",
+      "evidence": "The tested public input is web/location search rather than address/payment/sign-in data, and it presents descriptive search affordances without obstructing input.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/weather-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No checkout, subscription purchase, consented account-management, or sensitive account action is part of the representative anonymous news/weather scope.",
+      "reason": "No checkout, subscription purchase, consented account-management, or sensitive account action is part of the representative anonymous news/weather scope."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "HAR transfers 1.59 MB of images and Lighthouse flags under-resolution responsive images.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "The page makes 294 requests and executes six trace long tasks while contacting telemetry, advertising and auth services on anonymous load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "HAR attributes 290 requests and 4,468,134 bytes to other origins; trackers finds 24 third-party origins.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Discoverability reports a 0% raw-content coverage JS shell, and no structured agent capability is exposed in the tested public surfaces.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No user task in the tested anonymous news/weather surfaces requires on-device generative inference; absence is not a failure.",
+      "reason": "No user task in the tested anonymous news/weather surfaces requires on-device generative inference; absence is not a failure."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Separate-session heap summaries grew from 1,362,220 nodes / 78.9 MB baseline to 2,994,283 nodes / 173.4 MB after ten bottom/top traversals. Session variance prevents a definitive leak attribution, but the 2.2x growth is material.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "findingIds": [
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Baseline heap summary contains 1,362,220 nodes and 78.9 MB self size; post-scroll reaches 2,994,283 nodes and 173.4 MB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "findingIds": [
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence gathered on representative paths and compared with mapped guidance.",
+      "evidence": "Node count increases by about 1.63 million after repeated traversal; summaries do not prove detached-node causality, so listener/observer and Detached* retainers require targeted analysis.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "findingIds": [
+        "F36"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F23",
+        "F24",
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F26",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F30",
+        "F31",
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F34",
+        "F35",
+        "F36"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "MSN homepage and consent entry state, representing the primary personalised-news feed and search entry point.",
+      "url": "https://www.msn.com/en-gb",
+      "conditions": [
+        "desktop 1440x900",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "news",
+      "description": "News section listing, representing a category/listing archetype.",
+      "url": "https://www.msn.com/en-gb/news",
+      "conditions": [
+        "desktop 1440x900"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "weather",
+      "description": "Weather application, representing MSN’s data-rich interactive tool at a narrow viewport.",
+      "url": "https://www.msn.com/en-gb/weather",
+      "conditions": [
+        "mobile 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Deliberately invalid route, representing HTTP/navigation recovery.",
+      "url": "https://www.msn.com/en-gb/this-route-should-not-exist-web-uplift",
+      "conditions": [
+        "desktop 1440x900"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Reduced-motion still animates the consent surface",
+      "evidence": "With prefers-reduced-motion: reduce, objective-probe.json reports a 250 ms slideInFromBottom animation.",
+      "artifacts": [
+        "evidence/objective-probe.json"
+      ],
+      "suggestedFix": "Disable non-essential consent entrance animation in the reduce media query.",
+      "effort": "small"
+    },
+    {
+      "id": "F02",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Route and state changes do not expose View Transition styling",
+      "evidence": "The captured page CSS contains no view-transition declarations; navigation is presented as abrupt state replacement.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use same-document or cross-document View Transitions for major route/state changes, with reduced-motion handling.",
+      "effort": "medium"
+    },
+    {
+      "id": "F03",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "scroll-driven-animations",
+      "guidanceId": "scroll-entry-exit-effects",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Scroll-linked experience does not use declarative scroll timelines",
+      "evidence": "DOM/CSS capture contains no animation-timeline declaration despite a long feed.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use CSS scroll-driven animations for any scroll-linked feedback instead of main-thread listeners.",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "physical-gestures",
+      "guidanceId": "pull-to-reveal",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Feed gestures lack declarative snap or overscroll affordances",
+      "evidence": "DOM/CSS capture contains no scroll-snap declaration on the long feed.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use platform scrolling, scroll snap, and overscroll behavior for carousel/feed gestures.",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scroll-position-aware-elements",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Long feeds provide no captured scroll-state-aware progress cue",
+      "evidence": "Desktop/mobile captures show a long feed but no progress indicator, and CSS has no scroll-state query.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add lightweight declarative scroll-state or progress feedback to persistent chrome.",
+      "effort": "medium"
+    },
+    {
+      "id": "F06",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "anchored-positioning",
+      "guidanceId": "position-aware-tooltips",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Overlay positioning is manual rather than anchor-positioned",
+      "evidence": "Captured CSS has no anchor-name/position-anchor declarations; consent and menus use fixed/absolute positioning.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use CSS anchor positioning with position fallbacks for transient attached UI.",
+      "effort": "medium"
+    },
+    {
+      "id": "F07",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Consent interruption obscures the primary content on first load",
+      "evidence": "Desktop and mobile screenshots show a consent surface covering or dimming the personalised-news feed before interaction.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Minimise the consent interruption, keep equal reject/accept choices, and avoid obscuring more content than legally necessary.",
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Consent overlay is not a native dialog",
+      "evidence": "Recon finds role=dialog but objective probe finds zero native dialog/popover elements; dismissal is custom-scripted.",
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/objective-probe.json"
+      ],
+      "suggestedFix": "Use a native dialog for modal consent and declarative controls/focus management.",
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "reduce-style-repetition",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Advertising and navigation chrome compete with content",
+      "evidence": "The first desktop viewport devotes substantial space to shortcut icons, navigation, a sponsored slot, and consent chrome before feed content.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Reduce non-content chrome and reserve prominent space for editorial content.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Weather page forces a desktop-sized layout on mobile",
+      "evidence": "weather-layout.json reports inner/scroll width 621 px against a 360 px visual viewport, 261 px horizontal overflow; the screenshot clips weather text and controls.",
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/weather-mobile.png"
+      ],
+      "suggestedFix": "Use a true 360 px layout viewport, intrinsic sizing, and reflowing weather panels.",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Components do not reliably adapt to their container",
+      "evidence": "The weather component remains 621 px wide at a 360 px visual viewport; captured homepage CSS contains no @container rules.",
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add container queries and intrinsic sizing for reused feed/weather modules.",
+      "effort": "medium"
+    },
+    {
+      "id": "F12",
+      "pathId": "not-found",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Invalid routes fail as a blank screen",
+      "evidence": "The invalid-route screenshot is an unlabelled blank dark page with no 404 explanation, back link, search, or retry.",
+      "artifacts": [
+        "evidence/not-found.png"
+      ],
+      "suggestedFix": "Render an explicit not-found state with search, home navigation, and recovery actions.",
+      "effort": "small"
+    },
+    {
+      "id": "F13",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core Web Vitals and load responsiveness miss the good range",
+      "evidence": "Lighthouse reports LCP 10.0 s, CLS 0.102 and TBT 520 ms; the separate trace reports LCP 3.31 s and 1.19 s blocking, confirming variable but poor load behavior.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritise the LCP content, reduce blocking script, and reserve late content space.",
+      "effort": "large"
+    },
+    {
+      "id": "F14",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Measured layout shift exceeds the good CLS threshold",
+      "evidence": "Lighthouse measured CLS 0.102, just outside the good <=0.1 range.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Reserve stable dimensions for ads/feed modules and preserve font metrics.",
+      "effort": "medium"
+    },
+    {
+      "id": "F15",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Long JavaScript tasks block interaction",
+      "evidence": "Trace reports 6 long tasks, a 1021.94 ms longest task and 1190.48 ms total blocking; Lighthouse TBT is 520 ms.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Split, defer, and prioritise script work; move non-UI processing off the main thread.",
+      "effort": "large"
+    },
+    {
+      "id": "F16",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Network delivery is heavy and script-dominated",
+      "evidence": "HAR summary records 294 requests and 4,499,311 transferred bytes, including 96 scripts / 2,331,227 bytes and parser-inserted high-priority candidates.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Reduce critical chains, defer non-critical bundles, and tighten caching.",
+      "effort": "large"
+    },
+    {
+      "id": "F17",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Large script and third-party payload dominates load",
+      "evidence": "HAR records 96 scripts and 2.33 MB transferred script, led by a 370 KB common bundle plus ads/auth/telemetry bundles.",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Use coverage analysis to remove duplicate/unused code and conditionally load ads/auth features.",
+      "effort": "large"
+    },
+    {
+      "id": "F18",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Advertisement label misses minimum contrast",
+      "evidence": "Lighthouse reports 4.21:1 for #777 text on #111, below the required 4.5:1.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Increase the advertisement-label contrast to at least 4.5:1.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F19",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile reflow fails on the weather tool",
+      "evidence": "At 360 px, weather has 261 px horizontal overflow even though the homepage target-size audit passes.",
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/weather-mobile.png"
+      ],
+      "suggestedFix": "Make every weather panel reflow at 320–360 px and verify zoomed layouts.",
+      "effort": "medium"
+    },
+    {
+      "id": "F20",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "optimize-image-priority",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Some feed images are served below device-density requirements",
+      "evidence": "Lighthouse image-size-responsive audit fails: a 380x199 image is displayed at 380x199 where 570x299 is expected for DPR.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Serve DPR-appropriate responsive image candidates with srcset/sizes.",
+      "effort": "small"
+    },
+    {
+      "id": "F21",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The homepage is ineligible for back/forward cache",
+      "evidence": "Lighthouse reports four BFCache failure reasons, including an unload handler and no-store behavior.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Remove unload handlers and avoid unnecessary no-store responses/cookie mutations on navigation.",
+      "effort": "medium"
+    },
+    {
+      "id": "F22",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Rendered homepage has no canonical URL",
+      "evidence": "Objective probe finds no link[rel=canonical] despite index,follow; public localized routes should state canonical/hreflang relationships.",
+      "artifacts": [
+        "evidence/objective-probe.json"
+      ],
+      "suggestedFix": "Add canonical and appropriate hreflang links consistent with sitemap and robots policy.",
+      "effort": "small"
+    },
+    {
+      "id": "F23",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Cookie and CSP posture weakens otherwise secure transport",
+      "evidence": "Headers show HTTPS/HSTS/nosniff, but CSP allows unsafe-inline and unsafe-eval; cookies audit flags multiple non-Secure cookies including MUIDB and _C_Auth.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Eliminate unsafe CSP sources and mark every HTTPS cookie Secure with the narrowest SameSite policy.",
+      "effort": "large"
+    },
+    {
+      "id": "F24",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Anonymous load has an extensive tracking and third-party footprint",
+      "evidence": "Tracker capture finds 24 third-party origins and DoubleClick; HAR assigns 290/294 requests and 4.47 MB to other origins, including telemetry/ad endpoints.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Minimise pre-consent third parties, batch telemetry, and load advertising only after the applicable consent state.",
+      "effort": "large"
+    },
+    {
+      "id": "F25",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Defensive policy coverage is incomplete",
+      "evidence": "Headers lack Referrer-Policy and Permissions-Policy; CSP permits unsafe-inline/unsafe-eval; Lighthouse finds 11 third-party cookies.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Set strict Referrer-Policy and Permissions-Policy, harden CSP, and remove third-party-cookie dependencies.",
+      "effort": "large"
+    },
+    {
+      "id": "F26",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "html",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Core content is a JavaScript-only shell",
+      "evidence": "Discoverability capture gets HTTP 200 but 0% raw/rendered word coverage, empty #root, and no raw title, H1, or description; crawler screenshot is blank.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render core headlines, links and metadata, then hydrate enhancements.",
+      "effort": "large"
+    },
+    {
+      "id": "F27",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "stabilize-reactive-state",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Runtime layout and navigation states are brittle",
+      "evidence": "Weather overflows by 261 px on mobile and an invalid route renders blank, showing failure to stabilise key runtime states.",
+      "artifacts": [
+        "evidence/weather-layout.json",
+        "evidence/not-found.png"
+      ],
+      "suggestedFix": "Constrain responsive modules and provide robust route/error boundaries.",
+      "effort": "medium"
+    },
+    {
+      "id": "F28",
+      "pathId": "not-found",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Failure routes offer no recovery",
+      "evidence": "The representative invalid URL renders a blank page without status, explanation or action.",
+      "artifacts": [
+        "evidence/not-found.png"
+      ],
+      "suggestedFix": "Add explicit 404/network error UI with retry, search, and return-home actions.",
+      "effort": "small"
+    },
+    {
+      "id": "F29",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Localized page still relies heavily on physical positioning",
+      "evidence": "The page correctly sets lang=en-gb and dir=ltr, but captured CSS repeatedly uses left/right/padding-left instead of logical properties.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/objective-probe.json"
+      ],
+      "suggestedFix": "Replace physical directional properties with inline/block logical equivalents where layout direction matters.",
+      "effort": "medium"
+    },
+    {
+      "id": "F30",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Feed media delivery is not consistently resolution-appropriate",
+      "evidence": "HAR transfers 1.59 MB of images and Lighthouse flags under-resolution responsive images.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Generate modern, DPR-appropriate responsive image variants and tune quality by display size.",
+      "effort": "medium"
+    },
+    {
+      "id": "F31",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Load performs substantial non-content work",
+      "evidence": "The page makes 294 requests and executes six trace long tasks while contacting telemetry, advertising and auth services on anonymous load.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Deprioritise background work and conditionally load non-essential dependencies after user need/consent.",
+      "effort": "large"
+    },
+    {
+      "id": "F32",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party cost is disproportionate on first load",
+      "evidence": "HAR attributes 290 requests and 4,468,134 bytes to other origins; trackers finds 24 third-party origins.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Set a third-party budget and defer/remove advertising, telemetry, auth and assessor scripts that do not serve the first task.",
+      "effort": "large"
+    },
+    {
+      "id": "F33",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Agent and non-JS clients cannot access structured core content",
+      "evidence": "Discoverability reports a 0% raw-content coverage JS shell, and no structured agent capability is exposed in the tested public surfaces.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render semantic content and expose safe structured search/content tools where useful.",
+      "effort": "large"
+    },
+    {
+      "id": "F34",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "no-leak-under-repeated-interaction",
+      "guidanceId": "efficient-background-processing",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "Repeated feed traversal shows large retained growth and needs leak investigation",
+      "evidence": "Separate-session heap summaries grew from 1,362,220 nodes / 78.9 MB baseline to 2,994,283 nodes / 173.4 MB after ten bottom/top traversals. Session variance prevents a definitive leak attribution, but the 2.2x growth is material.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "suggestedFix": "Reproduce in one controlled session with baseline/target/final snapshots, then fix retained feed cards, listeners, observers or caches.",
+      "effort": "large"
+    },
+    {
+      "id": "F35",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Homepage memory footprint is very large",
+      "evidence": "Baseline heap summary contains 1,362,220 nodes and 78.9 MB self size; post-scroll reaches 2,994,283 nodes and 173.4 MB.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "suggestedFix": "Virtualise feed content, bound caches, and unload offscreen modules.",
+      "effort": "large"
+    },
+    {
+      "id": "F36",
+      "pathId": "home",
+      "url": "https://www.msn.com/en-gb",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "no-detached-dom-or-unbounded-listeners",
+      "guidanceId": "manage-recurring-intervals",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "Heap growth indicates unbounded retained state risk",
+      "evidence": "Node count increases by about 1.63 million after repeated traversal; summaries do not prove detached-node causality, so listener/observer and Detached* retainers require targeted analysis.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "suggestedFix": "Instrument listeners/timers and compare constructor-level retained objects in same-session snapshots.",
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Restore crawlable server-rendered content",
+      "priority": 1,
+      "findingIds": [
+        "F26"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Fix mobile weather reflow",
+      "priority": 2,
+      "findingIds": [
+        "F10",
+        "F11",
+        "F19"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Cut script, main-thread and third-party cost",
+      "priority": 3,
+      "findingIds": [
+        "F13",
+        "F15",
+        "F16",
+        "F17",
+        "F31",
+        "F32"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Harden privacy, cookies and browser policies",
+      "priority": 4,
+      "findingIds": [
+        "F23",
+        "F24",
+        "F25"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Add explicit error recovery",
+      "priority": 5,
+      "findingIds": [
+        "F12",
+        "F28"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Investigate and bound feed memory growth",
+      "priority": 6,
+      "findingIds": [
+        "F34",
+        "F35",
+        "F36"
+      ],
+      "guidanceId": "manage-recurring-intervals",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-22T11-21-26-812Z"
+}

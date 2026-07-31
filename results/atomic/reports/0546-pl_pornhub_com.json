@@ -1,0 +1,2352 @@
+{
+  "url": "https://pl.pornhub.com",
+  "auditedAt": "2026-07-21T11:54:37.714Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete report-mode audit of the public unauthenticated entry, listing, media detail, search, age/consent flow, and failure-state surface.",
+  "page": {
+    "appType": "mpa",
+    "framework": "server-rendered multi-page site with jQuery/Vue components",
+    "notes": "A mandatory age gate precedes content. The audited entry flow dismissed it and exercised the essential-only consent path. Authenticated account, payment, upload, and playback completion were not covered because they require credentials, payment, or extended media interaction."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "mobile-layout",
+    "dom",
+    "evaluate-probe",
+    "transition-video",
+    "trace",
+    "har",
+    "lighthouse+axe-core",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "discoverability",
+    "heap-summary",
+    "curl-http-probe",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "anchor-positioning-tab-underline",
+    "directional-navigation-transitions",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "complex-shapes",
+    "fluid-scaling",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "move-dom-element-without-losing-state",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "resilient-context-menus-and-nested-dropdowns",
+    "persistent-toast-notifications",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "search-hidden-content",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals",
+    "interest-triggered-tooltips",
+    "interactive-content-reveal",
+    "highlight-text-ranges",
+    "branded-select-styling",
+    "brand-consistent-forms",
+    "agentic-forms",
+    "passkey-conditional-create",
+    "validate-input-after-interaction",
+    "summarizer",
+    "passkey-management",
+    "faster-spa-view-transitions",
+    "full-session-analytics",
+    "stack-drill-down",
+    "calculate-with-intrinsic-sizes",
+    "performance",
+    "animate-to-intrinsic-sizes"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop first viewport",
+      "condition": "desktop",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile first viewport",
+      "condition": "360x800",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark-preference first viewport",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile overflow and CLS observation",
+      "condition": "360x800",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-probe.json",
+      "caption": "Metadata, links, controls, forms, and document probe",
+      "condition": "entry",
+      "findingIds": [
+        "F05",
+        "F16",
+        "F18",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/platform-probe.json",
+      "caption": "Preferences, CSS features, focus, permissions, and auth probe",
+      "condition": "reduced-motion + increased contrast",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03",
+        "F05",
+        "F06",
+        "F07",
+        "F11",
+        "F13"
+      ]
+    },
+    {
+      "type": "video",
+      "path": "evidence/age-enter.mp4",
+      "caption": "Age-gate transition to consent wall",
+      "condition": "desktop interaction",
+      "findingIds": [
+        "F02",
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/age-enter-contact.png",
+      "caption": "Contact sheet of age-to-consent transition",
+      "condition": "desktop interaction",
+      "findingIds": [
+        "F02",
+        "F04"
+      ]
+    },
+    {
+      "type": "video",
+      "path": "evidence/core-flow.mp4",
+      "caption": "Age and essential-consent flow",
+      "condition": "desktop interaction",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/core-flow-contact.png",
+      "caption": "Contact sheet of core flow",
+      "condition": "desktop interaction",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace",
+      "condition": "navigation",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace metrics",
+      "condition": "navigation",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Full HAR network capture",
+      "condition": "navigation",
+      "findingIds": [
+        "F11",
+        "F23"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR signals",
+      "condition": "navigation",
+      "findingIds": [
+        "F11",
+        "F23",
+        "F28",
+        "F29"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance, accessibility, best practices, SEO",
+      "condition": "mobile",
+      "findingIds": [
+        "F09",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse findings",
+      "condition": "mobile",
+      "findingIds": [
+        "F09",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F17",
+        "F19",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header audit",
+      "condition": "navigation",
+      "findingIds": [
+        "F22",
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security audit",
+      "condition": "navigation",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker audit",
+      "condition": "navigation",
+      "findingIds": [
+        "F23",
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit",
+      "condition": "navigation",
+      "findingIds": [
+        "F16",
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan",
+      "condition": "navigation",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw versus rendered discoverability",
+      "condition": "no-JS crawler",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap snapshot summary",
+      "condition": "before repeated interaction",
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Post-interaction heap snapshot summary",
+      "condition": "after 10 toggles",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and CSS capture",
+      "condition": "entry",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/login-probe.json",
+      "caption": "Public authentication surface probe",
+      "condition": "unauthenticated",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Fetched robots.txt response",
+      "condition": "crawler",
+      "findingIds": [
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-headers.txt",
+      "caption": "robots.txt response headers",
+      "condition": "crawler",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/404.html",
+      "caption": "Nonexistent-route response body",
+      "condition": "failure state",
+      "findingIds": [
+        "F08",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-plan.json",
+      "caption": "Mapped guidance retrieval plan",
+      "condition": "catalog 0.0.172",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Emulated dark screenshot plus CSSOM probe",
+      "evidence": "Dark and default screenshots are pixel-identical in appearance and size (63,936 bytes), while the CSS probe found no color-scheme declaration or prefers-color-scheme rule.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Emulated media evaluate probe",
+      "evidence": "Under prefers-reduced-motion: reduce, document.getAnimations() returned no active animations, so no non-essential load motion remained to suppress.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse axe plus emulated contrast probe",
+      "evidence": "Lighthouse axe color-contrast audit passed, and text and controls remained present under prefers-contrast: more.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Interaction video plus CSSOM probe",
+      "evidence": "The age-gate dismissal and cookie-wall arrival occur as an abrupt state swap in the interaction video; CSS inspection found no view-transition rules.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/age-enter.mp4",
+        "evidence/age-enter-contact.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "No parallax, scrollytelling, or entry/exit reveal interaction was present on the audited entry and representative templates.",
+      "reason": "No parallax, scrollytelling, or entry/exit reveal interaction was present on the audited entry and representative templates."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "No swipe, pull, carousel, or other gesture-driven control was present on the audited entry flow.",
+      "reason": "No swipe, pull, carousel, or other gesture-driven control was present on the audited entry flow."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/CSSOM inspection",
+      "evidence": "The long listing exposes static navigation chrome; CSS inspection found no scroll-state query, scroll timeline, or progress affordance.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "The audited overlays are full-page age/consent dialogs, not anchored tooltips or edge-positioned menus.",
+      "reason": "The audited overlays are full-page age/consent dialogs, not anchored tooltips or edge-positioned menus."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop and mobile screenshots",
+      "evidence": "The age notice places a single prominent heading and two explicit age choices in a centered modal, clearly directing the required next action.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Interaction video/contact sheet",
+      "evidence": "After the mandatory age gate is dismissed, a second full-content cookie wall immediately obscures the page, as shown by the transition contact sheet.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/age-enter.mp4",
+        "evidence/age-enter-contact.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM and platform probe",
+      "evidence": "The visible age modal is a DIV with role=dialog/aria-modal rather than a native dialog; the platform probe found no dialog or popover primitive.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop screenshot",
+      "evidence": "The first viewport is visually restrained: branding, one heading, explanatory copy, and the required age actions dominate, with no application frame crowding the notice.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile layout and screenshot",
+      "evidence": "At 360x800, layout reported scrollWidth 360, clientWidth 360, and 0 px horizontal overflow; the viewport meta is present.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "CSSOM and responsive evidence",
+      "evidence": "The site renders reused card/modal components across desktop and mobile, but CSSOM inspection found no @container or container-type support, leaving adaptation viewport-bound.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Keyboard focus computed-style probe",
+      "evidence": "Programmatically focusing the first visible link produced outline-style none and no box shadow, so keyboard focus is not visibly indicated.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "The entry viewport states that this is an adults-only site and exposes explicit enter and exit actions without requiring exploration.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Recorded interaction flow",
+      "evidence": "The recorded flow dismissed the age gate and exposed the consent choices, including an equally visible essential-only option; the core entry path advances predictably.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/core-flow.mp4",
+        "evidence/core-flow-contact.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HTTP failure-state probe",
+      "evidence": "A deliberately nonexistent URL returned HTTP 200 and the generic site shell rather than a truthful 404 state, making failure indistinguishable from success.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/404.html"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse navigation audit",
+      "evidence": "Mobile Lighthouse measured LCP 14.1 s, FCP 3.0 s, and interactive 14.1 s (performance 0.64), well outside a good load experience.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Mobile layout-shift observer",
+      "evidence": "The 360x800 layout observer recorded CLS 0.1021 from a shift at about 1.59 s, just above the good threshold.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace and Lighthouse",
+      "evidence": "The trace recorded zero long tasks and 0 ms total blocking time; Lighthouse TBT was 90 ms.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary plus script-attribute probe",
+      "evidence": "The load made 170 requests and transferred 5.08 MB; seven parser-inserted stylesheets and multiple non-deferred scripts were confirmed as high-priority render-blocking candidates.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse code coverage",
+      "evidence": "Lighthouse estimated 177 KiB unused JavaScript and 74 KiB unused CSS, including two mobile stylesheets about 97% unused.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse axe and image audit",
+      "evidence": "Lighthouse axe passed button-name, link-name, image-alt, and landmark checks; the image primitive found zero missing alt attributes.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse axe",
+      "evidence": "Lighthouse axe color-contrast passed with no violating nodes.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse structure checks plus focus probe",
+      "evidence": "Although heading order and landmarks passed, the active keyboard target had no outline or box shadow, so focus is not always visible.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "The age-notice heading and body text are large, high-contrast, centered, and readable at desktop and mobile widths without clipping.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audit",
+      "evidence": "Lighthouse found user-scalable=no and maximum-scale=1.0 in the effective mobile viewport meta, preventing user zoom despite target-size passing.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse console audit",
+      "evidence": "Lighthouse captured TypeError: Cannot read properties of null (reading addEventListener) in setInstallButton on initial load.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM and image audit",
+      "evidence": "Doctype/UTF-8 and aspect ratios were sound, but the image audit found three images without explicit dimensions and 33 without responsive srcset.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse best-practices diagnostics",
+      "evidence": "Lighthouse found two deprecated behaviours and four BFCache failure reasons, including a main-frame unload handler and cache-control:no-store.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata probe",
+      "evidence": "The public home page title is only Pornhub and the direct DOM probe found no meta description, providing little page-specific context.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse SEO and direct robots fetch",
+      "evidence": "Lighthouse found javascript:void(0) thumbnail links and treated robots.txt as HTML with 4,067 parse errors; mobile zoom is also disabled.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata and robots response",
+      "evidence": "Although a canonical URL exists, the public home page declares noindex,nofollow and /robots.txt returns a 458 KiB HTML page instead of a valid robots policy.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/robots.txt",
+        "evidence/robots-headers.txt"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata probe",
+      "evidence": "The listing page contains no JSON-LD and no Open Graph tags despite representing a browsable media collection.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Header and cookie audit",
+      "evidence": "HTTPS and HSTS are present, but CSP and X-Content-Type-Options are missing; cookie rp is not Secure and all seven cookies use SameSite=None.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Tracker and HAR audits",
+      "evidence": "The initial load contacted 12 third-party origins, including Google Tag Manager and DoubleClick; 99 third-party requests transferred 2.05 MB before entry.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Permission and authentication probe",
+      "evidence": "No geolocation or notification prompt fired on load, and the page ships a dedicated passkey module and passkey banner while exposing PublicKeyCredential.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/login-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security-header audit",
+      "evidence": "HSTS and X-Frame-Options are present, but CSP/frame-ancestors, Referrer-Policy, Permissions-Policy, and nosniff are absent.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Raw-vs-rendered discoverability capture",
+      "evidence": "The non-JavaScript fetch is not an empty shell, but discoverability coverage is only 28% and the crawler view loses most rendered listing content.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, layout, and flow video",
+      "evidence": "The age and consent overlays remained contained at desktop and 360 px mobile widths with no horizontal overflow, and the essential-only path remained operable.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/core-flow.mp4"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "This streaming media service is intrinsically online; an offline/installable experience is not required for its core content.",
+      "reason": "This streaming media service is intrinsically online; an offline/installable experience is not required for its core content."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HTTP failure-state probe",
+      "evidence": "A guaranteed nonexistent route responded 200 with the general shell rather than a distinct error and recovery state.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/404.html"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM, Lighthouse, and screenshot",
+      "evidence": "The Polish page declares html lang=pl, and Lighthouse validates the language code; the localized age notice renders in Polish.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "No dates, currencies, durations requiring locale formatting, or editable locale-sensitive values were present in the audited entry flow.",
+      "reason": "No dates, currencies, durations requiring locale formatting, or editable locale-sensitive values were present in the audited entry flow."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "The audited entry, listing, search, and media-detail surfaces expose no scheduled event or time-zone-sensitive user data.",
+      "reason": "The audited entry, listing, search, and media-detail surfaces expose no scheduled event or time-zone-sensitive user data."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Flow contact sheet and desktop screenshot",
+      "evidence": "The consent wall presents Accept All, Accept Only Essential, and Customize choices together with comparable visual weight; the age gate provides explicit enter and exit actions.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/age-enter-contact.png",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "The audited public flow contains only a non-required search input; no required data-entry form was present to validate or recover.",
+      "reason": "The audited public flow contains only a non-required search input; no required data-entry form was present to validate or recover."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "The only public input is site search, for which address, payment, sign-in, and identity autofill tokens do not apply.",
+      "reason": "The only public input is site search, for which address, payment, sign-in, and identity autofill tokens do not apply."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/authentication probe",
+      "evidence": "The public entry exposes sign-in without forcing it, ships passkey support, and does not force a purchase or continuity commitment in the audited flow.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/login-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Image audit",
+      "evidence": "Of 37 images, 25 use legacy formats and 33 lack srcset; three lack dimensions, increasing avoidable transfer and layout cost.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR and Lighthouse coverage",
+      "evidence": "The entry load makes 170 requests and ships 251 KiB of estimated unused JS/CSS before the user clears the age and consent gates.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR and tracker audits",
+      "evidence": "Ninety-nine third-party requests transfer 2.05 MB, with TrafficJunky ads alone over 1 MB and known analytics trackers active before entry.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "No agent-facing capability is declared or expected for this public media-browsing surface; the emerging WebMCP opportunity was judged out of scope.",
+      "reason": "No agent-facing capability is declared or expected for this public media-browsing surface; the emerging WebMCP opportunity was judged out of scope."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon and applicability judgement",
+      "evidence": "No summarisation, generation, or other user task on the audited entry flow calls for on-device inference.",
+      "reason": "No summarisation, generation, or other user task on the audited entry flow calls for on-device inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline/post heap comparison",
+      "evidence": "After ten repeated language-wrapper state toggles, heap node count fell from 557,599 to 557,238 and self size fell from 37,489,626 to 37,209,370 bytes, with no retained-growth signal.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Baseline heap summary",
+      "evidence": "The pre-entry page retained 557,599 heap nodes and 37.5 MB self size before the user reached content, a high footprint for an age gate and listing shell.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline/post heap comparison",
+      "evidence": "Across the repeated state-toggle comparison, total heap nodes decreased by 361 rather than accumulating; no aggregate detached/listener-growth symptom appeared in the tested window.",
+      "pathIds": [
+        "entry",
+        "listing",
+        "detail",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F19",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F27",
+        "F28",
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "No agent-facing capability is declared or expected for this public media-browsing surface; the emerging WebMCP opportunity was judged out of scope. No summarisation, generation, or other user task on the audited entry flow calls for on-device inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F30"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry",
+      "description": "Public home/age-gate entry and consent flow; represents global chrome and initial load.",
+      "url": "https://pl.pornhub.com/",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "keyboard focus",
+        "no JavaScript crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "Video listing template discovered from primary navigation; inspected through rendered DOM and shared gate.",
+      "url": "https://pl.pornhub.com/video",
+      "conditions": [
+        "unauthenticated"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "detail",
+      "description": "Representative non-explicit safety-training media detail linked from home; covers detail metadata/player template.",
+      "url": "https://pl.pornhub.com/view_video.php?viewkey=67195717523b3",
+      "conditions": [
+        "unauthenticated"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search results for safety; covers the primary discovery form and result template.",
+      "url": "https://pl.pornhub.com/search?search=safety",
+      "conditions": [
+        "unauthenticated"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "auth",
+      "description": "Public sign-in route/auth surface probe; used to inspect passkey and form signals without credentials.",
+      "url": "https://pl.pornhub.com/login",
+      "conditions": [
+        "unauthenticated"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "failure",
+      "description": "Guaranteed nonexistent route; covers HTTP/error recovery behavior.",
+      "url": "https://pl.pornhub.com/web-uplift-definitely-not-found-404",
+      "conditions": [
+        "direct HTTP request"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The fixed dark palette does not honour the user color-scheme preference.",
+      "evidence": "Dark and default screenshots are pixel-identical in appearance and size (63,936 bytes), while the CSS probe found no color-scheme declaration or prefers-color-scheme rule.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Add color-scheme: light dark and preference-driven surface tokens with light-dark() or prefers-color-scheme.",
+      "effort": "medium"
+    },
+    {
+      "id": "F02",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The age-to-consent state change is abrupt.",
+      "evidence": "The age-gate dismissal and cookie-wall arrival occur as an abrupt state swap in the interaction video; CSS inspection found no view-transition rules.",
+      "artifacts": [
+        "evidence/age-enter.mp4",
+        "evidence/age-enter-contact.png",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Use a same-document View Transition for the gate dismissal, while disabling it under reduced motion.",
+      "effort": "small"
+    },
+    {
+      "id": "F03",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Long-page navigation does not respond to scroll state.",
+      "evidence": "The long listing exposes static navigation chrome; CSS inspection found no scroll-state query, scroll timeline, or progress affordance.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Add a lightweight scroll-state-aware header or progress/scrollability cue without JS scroll handlers.",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "html",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Two consecutive full-content gates interrupt access on every fresh session.",
+      "evidence": "After the mandatory age gate is dismissed, a second full-content cookie wall immediately obscures the page, as shown by the transition contact sheet.",
+      "artifacts": [
+        "evidence/age-enter.mp4",
+        "evidence/age-enter-contact.png"
+      ],
+      "suggestedFix": "Combine required disclosures where legally possible and use a compact, persistent, non-blocking consent surface after the mandatory age decision.",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The modal flow uses custom DIV dialogs instead of native dialog semantics.",
+      "evidence": "The visible age modal is a DIV with role=dialog/aria-modal rather than a native dialog; the platform probe found no dialog or popover primitive.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Implement the modal with <dialog>, showModal(), cancel handling, focus return, and platform dismissal behavior.",
+      "effort": "medium"
+    },
+    {
+      "id": "F06",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Reusable components rely only on viewport styling.",
+      "evidence": "The site renders reused card/modal components across desktop and mobile, but CSSOM inspection found no @container or container-type support, leaving adaptation viewport-bound.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Give reusable cards and modal sections containment and adapt them with size container queries.",
+      "effort": "medium"
+    },
+    {
+      "id": "F07",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus is invisible on the first interactive target.",
+      "evidence": "Programmatically focusing the first visible link produced outline-style none and no box shadow, so keyboard focus is not visibly indicated.",
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Add a high-contrast :focus-visible outline that is not removed, and verify it across all controls.",
+      "effort": "small"
+    },
+    {
+      "id": "F08",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Unknown routes return a misleading successful shell.",
+      "evidence": "A deliberately nonexistent URL returned HTTP 200 and the generic site shell rather than a truthful 404 state, making failure indistinguishable from success.",
+      "artifacts": [
+        "evidence/404.html"
+      ],
+      "suggestedFix": "Return a real 404 status with a localized message, search/home actions, and preserved navigation.",
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile LCP is 14.1 seconds.",
+      "evidence": "Mobile Lighthouse measured LCP 14.1 s, FCP 3.0 s, and interactive 14.1 s (performance 0.64), well outside a good load experience.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Profile the LCP element and its dependency chain, prioritize it, and defer non-critical scripts, ads, and below-fold work.",
+      "effort": "large"
+    },
+    {
+      "id": "F10",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Mobile CLS reaches 0.102.",
+      "evidence": "The 360x800 layout observer recorded CLS 0.1021 from a shift at about 1.59 s, just above the good threshold.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ],
+      "suggestedFix": "Reserve space for late banners/assets and stabilize font and image geometry.",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The entry transfers 5.08 MB through 170 requests with a long blocking chain.",
+      "evidence": "The load made 170 requests and transferred 5.08 MB; seven parser-inserted stylesheets and multiple non-deferred scripts were confirmed as high-priority render-blocking candidates.",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Inline only critical CSS, defer non-critical styles/scripts, reduce duplicate document/XHR delivery, and cache immutable assets.",
+      "effort": "large"
+    },
+    {
+      "id": "F12",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The entry ships about 251 KiB unused JS/CSS.",
+      "evidence": "Lighthouse estimated 177 KiB unused JavaScript and 74 KiB unused CSS, including two mobile stylesheets about 97% unused.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Split page-specific bundles and conditionally load analytics, billing, login, and below-fold component code.",
+      "effort": "large"
+    },
+    {
+      "id": "F13",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus is not visible.",
+      "evidence": "Although heading order and landmarks passed, the active keyboard target had no outline or box shadow, so focus is not always visible.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Define a consistent :focus-visible treatment and test a complete keyboard focus walk.",
+      "effort": "small"
+    },
+    {
+      "id": "F14",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The viewport disables pinch zoom.",
+      "evidence": "Lighthouse found user-scalable=no and maximum-scale=1.0 in the effective mobile viewport meta, preventing user zoom despite target-size passing.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Remove maximum-scale=1 and user-scalable=no; retain width=device-width, initial-scale=1.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F15",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Initial load throws in setInstallButton.",
+      "evidence": "Lighthouse captured TypeError: Cannot read properties of null (reading addEventListener) in setInstallButton on initial load.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Guard the queried install button before adding listeners and cover the absent-button state in tests.",
+      "effort": "small"
+    },
+    {
+      "id": "F16",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Several images omit dimensions and responsive sources.",
+      "evidence": "Doctype/UTF-8 and aspect ratios were sound, but the image audit found three images without explicit dimensions and 33 without responsive srcset.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Add width/height or aspect-ratio and provide srcset/sizes for raster thumbnails.",
+      "effort": "medium"
+    },
+    {
+      "id": "F17",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Deprecated unload/Cast patterns and BFCache blockers remain.",
+      "evidence": "Lighthouse found two deprecated behaviours and four BFCache failure reasons, including a main-frame unload handler and cache-control:no-store.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Replace unload with pagehide/fetchLater where appropriate, use disableRemotePlayback, and remove avoidable no-store blockers.",
+      "effort": "medium"
+    },
+    {
+      "id": "F18",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page lacks descriptive, page-specific title and description metadata.",
+      "evidence": "The public home page title is only Pornhub and the direct DOM probe found no meta description, providing little page-specific context.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Write a localized descriptive title and meta description for each template.",
+      "effort": "small"
+    },
+    {
+      "id": "F19",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "search-hidden-content",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "robots.txt is invalid HTML and several cards use javascript:void(0) links.",
+      "evidence": "Lighthouse found javascript:void(0) thumbnail links and treated robots.txt as HTML with 4,067 parse errors; mobile zoom is also disabled.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/robots.txt"
+      ],
+      "suggestedFix": "Serve a valid text/plain robots.txt and replace pseudo-links with real crawlable href values.",
+      "effort": "medium"
+    },
+    {
+      "id": "F20",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Public indexing signals conflict through noindex/nofollow and malformed robots.txt.",
+      "evidence": "Although a canonical URL exists, the public home page declares noindex,nofollow and /robots.txt returns a 458 KiB HTML page instead of a valid robots policy.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/robots.txt",
+        "evidence/robots-headers.txt"
+      ],
+      "suggestedFix": "Decide the intended indexing policy, then align HTTP status, robots.txt, robots meta, canonical, sitemap, and localized hreflang signals.",
+      "effort": "medium"
+    },
+    {
+      "id": "F21",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The media listing has no structured or social metadata.",
+      "evidence": "The listing page contains no JSON-LD and no Open Graph tags despite representing a browsable media collection.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Add accurate Open Graph/Twitter metadata and appropriate schema.org JSON-LD matching visible content.",
+      "effort": "medium"
+    },
+    {
+      "id": "F22",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core security headers are missing and one cookie is not Secure.",
+      "evidence": "HTTPS and HSTS are present, but CSP and X-Content-Type-Options are missing; cookie rp is not Secure and all seven cookies use SameSite=None.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Deploy CSP in report-only then enforce it, add nosniff, mark every cookie Secure, and tighten SameSite where cross-site use is unnecessary.",
+      "effort": "large"
+    },
+    {
+      "id": "F23",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Tracking and advertising run before entry across 99 third-party requests.",
+      "evidence": "The initial load contacted 12 third-party origins, including Google Tag Manager and DoubleClick; 99 third-party requests transferred 2.05 MB before entry.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Block non-essential analytics/ads until consent, reduce vendors, batch telemetry, and document each third party.",
+      "effort": "large"
+    },
+    {
+      "id": "F24",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Referrer, permissions, CSP, and nosniff defenses are absent.",
+      "evidence": "HSTS and X-Frame-Options are present, but CSP/frame-ancestors, Referrer-Policy, Permissions-Policy, and nosniff are absent.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Add restrictive Referrer-Policy and Permissions-Policy, CSP frame-ancestors/Trusted Types where compatible, and X-Content-Type-Options.",
+      "effort": "large"
+    },
+    {
+      "id": "F25",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "stabilize-reactive-state",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Only 28% of rendered content matches raw HTML.",
+      "evidence": "The non-JavaScript fetch is not an empty shell, but discoverability coverage is only 28% and the crawler view loses most rendered listing content.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render meaningful listing and navigation content, keeping JavaScript as enhancement rather than the source of crawler-visible state.",
+      "effort": "large"
+    },
+    {
+      "id": "F26",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Missing routes return HTTP 200 with no truthful recovery state.",
+      "evidence": "A guaranteed nonexistent route responded 200 with the general shell rather than a distinct error and recovery state.",
+      "artifacts": [
+        "evidence/404.html"
+      ],
+      "suggestedFix": "Return correct failure status and a localized, actionable error page with retry/search/home options.",
+      "effort": "medium"
+    },
+    {
+      "id": "F27",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Most thumbnails use legacy formats without responsive sources.",
+      "evidence": "Of 37 images, 25 use legacy formats and 33 lack srcset; three lack dimensions, increasing avoidable transfer and layout cost.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Serve AVIF/WebP variants with srcset/sizes and preserve intrinsic dimensions.",
+      "effort": "large"
+    },
+    {
+      "id": "F28",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Substantial network and unused code runs before consent and core access.",
+      "evidence": "The entry load makes 170 requests and ships 251 KiB of estimated unused JS/CSS before the user clears the age and consent gates.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Gate non-essential code and requests, split by template, and defer below-fold/ad work until needed.",
+      "effort": "large"
+    },
+    {
+      "id": "F29",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third parties consume 2.05 MB before entry.",
+      "evidence": "Ninety-nine third-party requests transfer 2.05 MB, with TrafficJunky ads alone over 1 MB and known analytics trackers active before entry.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Set a third-party budget, delay ad/analytics media until consent and visibility, and remove low-value vendors.",
+      "effort": "large"
+    },
+    {
+      "id": "F30",
+      "pathId": "entry",
+      "url": "https://pl.pornhub.com/",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "The pre-entry heap footprint is disproportionately large.",
+      "evidence": "The pre-entry page retained 557,599 heap nodes and 37.5 MB self size before the user reached content, a high footprint for an age gate and listing shell.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot"
+      ],
+      "suggestedFix": "Conditionally load content, advertising, account, and billing modules after the gate and release hidden modal/listing state.",
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Stop pre-consent third-party loading and reduce the 5 MB/170-request entry path",
+      "priority": 1,
+      "findingIds": [
+        "F23",
+        "F11",
+        "F28",
+        "F29"
+      ],
+      "guidanceId": "deprioritize-background-fetches",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Restore keyboard focus visibility and user zoom",
+      "priority": 2,
+      "findingIds": [
+        "F07",
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Fix indexing: valid robots.txt, real links, metadata, and aligned robots signals",
+      "priority": 3,
+      "findingIds": [
+        "F18",
+        "F19",
+        "F20",
+        "F21"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Deploy a complete defensive header and cookie baseline",
+      "priority": 4,
+      "findingIds": [
+        "F22",
+        "F24"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Improve LCP/CLS and remove unused or blocking code",
+      "priority": 5,
+      "findingIds": [
+        "F09",
+        "F10",
+        "F12",
+        "F30"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Replace stacked custom modal interruptions with semantic, calmer disclosure UI",
+      "priority": 6,
+      "findingIds": [
+        "F04",
+        "F05",
+        "F02"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Return truthful, recoverable HTTP error states",
+      "priority": 7,
+      "findingIds": [
+        "F08",
+        "F26"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Clean up platform errors, deprecations, BFCache blockers, and responsive assets",
+      "priority": 8,
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17",
+        "F27"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Server-render more meaningful listing content for no-JS clients",
+      "priority": 9,
+      "findingIds": [
+        "F25"
+      ],
+      "guidanceId": "stabilize-reactive-state",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Add component-level and scroll-aware responsive behavior",
+      "priority": 10,
+      "findingIds": [
+        "F06",
+        "F03"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1100,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T11-54-37-714Z"
+}

@@ -1,0 +1,1513 @@
+{
+  "url": "https://service.smt.docomo.ne.jp",
+  "auditedAt": "2026-07-21T13:21:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of the public root. The URL itself returned a rendered HTTP 404, so that error template is the only same-origin archetype available from the requested entry point.",
+  "page": {
+    "appType": "mpa",
+    "framework": "none detected",
+    "notes": "Server-rendered Japanese static error page. No script, form, app route, overlay, or same-origin navigation was exposed."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "DOM+computed styles",
+    "layout metrics",
+    "evaluate probes",
+    "DevTools trace",
+    "HAR",
+    "security headers",
+    "cookies",
+    "trackers",
+    "secrets scan",
+    "image audit",
+    "heap summary",
+    "discoverability crawler comparison",
+    "Lighthouse attempted (blocked by HTTP 404)",
+    "Modern Web Guidance search/retrieve"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "forms",
+    "performance",
+    "security",
+    "fluid-scaling",
+    "html",
+    "translator"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Dark-mode screenshot and computed-style comparison",
+      "evidence": "Dark emulation leaves the body white and color-scheme normal.",
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/dark-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Reduced-motion media emulation plus Web Animations probe",
+      "evidence": "Reduced-motion emulation matched and document.getAnimations() returned zero animations.",
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Forced-colors and prefers-contrast screenshot review",
+      "evidence": "Forced-colors/high-contrast screenshot keeps all error text and the recovery action visible.",
+      "artifacts": [
+        "evidence/high-contrast.png"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM interaction inventory and navigation semantics review",
+      "evidence": "The document has no custom state swap or same-site route transition; its sole cross-origin navigation uses the platform’s native link behavior rather than a jarring scripted replacement.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The short static error document has no scroll-linked motion or scrollytelling surface.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The short static error document has no scroll-linked motion or scrollytelling surface."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The document exposes no gesture-driven component, carousel, swipe action, or disclosure.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The document exposes no gesture-driven component, carousel, swipe action, or disclosure."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The single short error state has no scroll-dependent chrome or multi-section navigation.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The single short error state has no scroll-dependent chrome or multi-section navigation."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "No tooltip, popover, menu, or other anchored overlay exists.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "No tooltip, popover, menu, or other anchored overlay exists."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual hierarchy and navigation-action review",
+      "evidence": "The compact failure state has one underlined, button-shaped recovery action immediately after the explanation, with no competing controls or ambiguous focus destination.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Initial-load screenshot review at desktop and mobile widths",
+      "evidence": "Initial desktop and mobile screenshots show no popup, banner, consent wall, or overlay obscuring content.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/mobile.png"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "No overlay, disclosure, picker, or rich control exists on this error document.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "No overlay, disclosure, picker, or rich control exists on this error document."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual hierarchy and viewport-occupancy review",
+      "evidence": "The viewport contains only a compact error heading, explanation, one recovery action, and footer; no competing application chrome.",
+      "artifacts": [
+        "evidence/home.png"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile screenshot and layout-metrics probe",
+      "evidence": "At 360×800, layout reports scrollWidth=clientWidth=360, horizontalOverflowPx=0, CLS=0, and viewport meta present.",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The page has no component reused in differently sized containers; a container-query adaptation cannot be meaningfully exercised.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The page has no component reused in differently sized containers; a container-query adaptation cannot be meaningfully exercised."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Programmatic focus/computed outline and target-rectangle probe",
+      "evidence": "Keyboard focus is visible, but the only link is about 127×24px, too short for a robust touch target.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "First-viewport screenshot and heading/action DOM review",
+      "evidence": "The root communicates only “Error” and cannot explain or expose the requested service; its sole action leaves for another origin.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR status plus rendered primary-path walkthrough",
+      "evidence": "The main document returns HTTP 404, so no service journey is available to complete.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/home.png"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered error-state and recovery-control review",
+      "evidence": "The failure state is explicit in Japanese and supplies a clearly labelled return action; context is not hidden behind a spinner.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DevTools load trace and layout/long-task observers",
+      "evidence": "Trace measured FCP/LCP 1.755s, TBT 0ms; layout measured CLS 0 and no long tasks. The static page has no eligible INP interaction workload.",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout-shift observer and screenshot",
+      "evidence": "Mobile layout observer measured CLS 0 with no shift entries; all visible content stayed stable.",
+      "artifacts": [
+        "evidence/mobile-layout.json",
+        "evidence/mobile.png"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace long-task summary and rendered DOM inspection",
+      "evidence": "Trace reports zero long tasks and 0ms total blocking time; the DOM contains no scripts.",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary confirmed against stylesheet placement in DOM plus trace summary",
+      "evidence": "For 9.6KB total, load end is 2.732s; document takes 1.421s, three assets lack cache headers, a favicon redirects, and CSS is parser-blocking.",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-004"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR resource inventory and DOM script inspection",
+      "evidence": "HAR transfers only 9.6KB across six first-party requests and the DOM has no JavaScript bundles or third-party code.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM semantics inventory",
+      "evidence": "The only interactive element is a native anchor with visible text; there are no form fields, images, canvas, or unnamed custom controls.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Normal and forced-colors visual review",
+      "evidence": "Normal and forced-color screenshots show black text/actions against white/system surfaces with visible borders and underlines.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/high-contrast.png"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Focused-element style probe and landmark/heading inventory",
+      "evidence": "Focus has a visible browser outline and headings are ordered, but main=0 leaves primary content without a main landmark.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-005"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Multi-viewport screenshot and layout review",
+      "evidence": "Desktop/mobile screenshots show unclipped Japanese text with short lines and no overlap or horizontal scrolling.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Viewport-meta and target-size probe",
+      "evidence": "Viewport explicitly sets maximum-scale=1.0,user-scalable=no and the sole target is 24px high.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM executable-script inventory and HAR error review",
+      "evidence": "Rendered DOM contains no scripts, HAR shows all subresources successful, and no executable application code exists to throw during load.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/load-summary.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Document metadata and image audit",
+      "evidence": "Document has HTML doctype, UTF-8 charset, valid heading text, and no img elements with sizing/aspect-ratio defects.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/images.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM and application-surface inventory",
+      "evidence": "No scripts, permission calls, forms, paste handlers, or application libraries are present; the static markup uses standard elements.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata probe",
+      "evidence": "Title is only エラー and meta description is absent.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-006"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM link and viewport-meta probe",
+      "evidence": "Viewport exists and link text is descriptive, but user scaling is disabled and the sole crawlable destination is insecure HTTP.",
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-003",
+        "F-007"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR status, metadata probe, and raw crawler fetch attempt",
+      "evidence": "Main document is HTTP 404 with no canonical; raw robots/sitemap fetch was blocked by unsafe legacy TLS renegotiation.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/discoverability.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-007"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "This is an error state, not an article, product, event, place, organization profile, or other rich entity requiring structured/share metadata.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "This is an error state, not an article, product, event, place, organization profile, or other rich entity requiring structured/share metadata."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security-header primitive and navigation URL inspection",
+      "evidence": "HTTPS is used, but CSP, HSTS and nosniff are absent and the recovery URL downgrades to HTTP.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-008"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trackers, cookies, secrets and HAR third-party probes",
+      "evidence": "Trackers probe finds zero third-party origins/known trackers; cookies finds zero cookies; secrets scan finds no exposed credentials.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/cookies.json",
+        "evidence/secrets.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "No permission request or authentication surface exists on the error document.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "No permission request or authentication surface exists on the error document."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security-response-header inspection",
+      "evidence": "No clickjacking protection, Referrer-Policy, Permissions-Policy, CSP/frame-ancestors, or HSTS is present.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-008"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM and JavaScript-disabled crawler screenshot comparison",
+      "evidence": "The error content is server-rendered HTML with no scripts or empty SPA mount; browser rendering does not depend on JavaScript.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "No overlay, menu, asynchronous dependency, client state, or background runtime exists to exercise.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "No overlay, menu, asynchronous dependency, client state, or background runtime exists to exercise."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "This public error document is not an app-like surface, so installability and an offline app shell are not proportionate requirements.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "This public error document is not an app-like surface, so installability and an offline app shell are not proportionate requirements."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Observed HTTP failure-state walkthrough",
+      "evidence": "The observed 404 renders an explicit Japanese error, likely causes, and a labelled recovery action rather than a blank shell or spinner.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/load-summary.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM language and stylesheet logical-property probe",
+      "evidence": "html lang=ja is correct, but CSS uses physical left/right properties and no logical inline/block properties.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "root"
+      ],
+      "findingIds": [
+        "F-009"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The error document contains no date, time, number, currency, duration, calendar, or user-entered locale data to format.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The error document contains no date, time, number, currency, duration, calendar, or user-entered locale data to format."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The error document contains no scheduled event, timestamp, recurring interval, or time-zone-sensitive concept.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The error document contains no scheduled event, timestamp, recurring interval, or time-zone-sensitive concept."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered commercial/deceptive-pattern inventory",
+      "evidence": "The page contains one plainly labelled recovery link and no consent, pricing, ad, continuity, nagging, or disguised-control surface.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "There is no form or user input to validate. The HTTP error-state recovery itself is assessed under resilience/core-task checks.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "There is no form or user input to validate. The HTTP error-state recovery itself is assessed under resilience/core-task checks."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "No input, sign-in, address, payment, or account field exists.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "No input, sign-in, address, payment, or account field exists."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "No checkout, subscription, consent, authentication, or account-management flow is exposed.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "No checkout, subscription, consent, authentication, or account-management flow is exposed."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR byte budget and image audit",
+      "evidence": "HAR transfers only 1.3KB of two decorative images and 9.6KB total; image audit finds no img sizing, srcset, lazy-load, or format waste.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/images.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Network, trace, and DOM work inventory",
+      "evidence": "No scripts, background requests, timers, media, or third-party activity exist; trace reports no long tasks.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/load-trace-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR third-party/media inventory and trackers probe",
+      "evidence": "HAR and tracker probes find zero third-party bytes/origins and no audio, video, fonts, autoplay, or animation.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The observed URL is only a public error state with no user capability or form to expose safely to an agent.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The observed URL is only a public error state with no user capability or form to expose safely to an agent."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The minimal static error state has no inference/summarisation task where an on-device model would improve the experience.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The minimal static error state has no inference/summarisation task where an on-device model would improve the experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from rendered DOM and page inventory",
+      "evidence": "The static error page has no modal, route state, feed, editor, or other representative interaction to repeat without fabricating a test.",
+      "pathIds": [
+        "root"
+      ],
+      "reason": "The static error page has no modal, route state, feed, editor, or other representative interaction to repeat without fabricating a test."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap summary footprint measurement",
+      "evidence": "Heap snapshot reports 27,336 nodes, 107,651 edges and 853,204 self-size bytes, proportionate to this tiny static page.",
+      "artifacts": [
+        "evidence/heap-baseline.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap constructor summary plus DOM executable-code inventory",
+      "evidence": "The page has no application scripts or repeated client lifecycle; the heap summary shows a bounded single static state with no app-created listener/timer surface.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "root"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-004"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-005",
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-006",
+        "F-003",
+        "F-007"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-008"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-009"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "The observed URL is only a public error state with no user capability or form to expose safely to an agent. The minimal static error state has no inference/summarisation task where an on-device model would improve the experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "root",
+      "description": "Requested public root and its server-rendered error template; represents the only same-origin page exposed by the entry URL.",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "conditions": [
+        "desktop",
+        "keyboard focus",
+        "load/network/security",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "root-mobile",
+      "description": "Root error template at a narrow mobile viewport to test reflow, overflow and target sizing.",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "root-dark",
+      "description": "Root error template under dark color preference.",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "conditions": [
+        "prefers-color-scheme: dark"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "root-contrast-motion",
+      "description": "Root under high contrast/forced colors and reduced motion preferences.",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "conditions": [
+        "prefers-contrast: more",
+        "forced-colors: active",
+        "prefers-reduced-motion: reduce"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-001",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The requested service root is a 404 error page, so its primary task cannot be completed.",
+      "evidence": "HAR records the main document as HTTP 404. The rendered page says the specified page does not exist and offers only a link to a different, insecure HTTP origin.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/load-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Serve a useful service landing page at this public root, or issue a permanent redirect to the canonical HTTPS destination. Preserve a branded 404 only for genuinely missing paths.",
+      "effort": "medium",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms"
+    },
+    {
+      "id": "F-002",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page ignores the user’s dark color-scheme preference.",
+      "evidence": "Under prefers-color-scheme: dark, the screenshot remains white and the computed body background is rgb(255,255,255); color-scheme remains normal.",
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/dark-dom.json"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and supply preference-driven surface, text, border, and browser-control colors using prefers-color-scheme or light-dark().",
+      "effort": "small",
+      "pathId": "root-dark",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-003",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The viewport blocks zoom and the only action has a 24px-high target.",
+      "evidence": "The viewport is maximum-scale=1.0,user-scalable=no. The page probe measures the dメニューTOP link at about 127×24px, below the common 44×44 CSS-pixel touch target.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ],
+      "suggestedFix": "Remove maximum-scale and user-scalable restrictions, and enlarge the action’s clickable box to at least 44×44 CSS pixels without changing its visible text size.",
+      "effort": "small",
+      "pathId": "root-mobile",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-004",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "A tiny error page has avoidable delivery latency and cache misses.",
+      "evidence": "Trace reports LCP 1.755s and load end 2.732s despite only 9.6KB transferred. HAR shows 1.421s for the document, three static assets without cache headers, a favicon redirect, and a parser-blocking stylesheet.",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Return the correct document without the error/redirect chain, cache immutable static assets, inline the tiny critical error styles or ensure the stylesheet is promptly cacheable, and remove the duplicate favicon fetch.",
+      "effort": "small",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F-005",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The document has no main landmark.",
+      "evidence": "The DOM probe reports header=1 and footer=1 but main=0; the error content is placed in an unlabelled section.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Wrap the primary error/recovery content in <main>; keep one descriptive h1 and expose recovery navigation with semantic structure.",
+      "effort": "trivial",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-006",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The public root has generic, incomplete search metadata.",
+      "evidence": "The title is only エラー, meta description is absent, and the response is a 404. The page probe also finds no canonical URL.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/load-summary.json",
+        "evidence/discoverability.json"
+      ],
+      "suggestedFix": "Restore a successful landing page with a unique descriptive Japanese title, concise meta description, and canonical HTTPS URL.",
+      "effort": "small",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F-007",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Indexing and navigation signals point to a broken or insecure destination.",
+      "evidence": "HAR records HTTP 404 for the root; there is no canonical URL, and the only crawlable link uses http://smt.docomo.ne.jp/. robots.txt and sitemap.xml could not be fetched by the raw client because the endpoint requires unsafe legacy TLS renegotiation.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/page-probe.json",
+        "evidence/discoverability.json"
+      ],
+      "suggestedFix": "Return 200 or a permanent HTTPS redirect, make all recovery links HTTPS, publish a consistent canonical URL, and serve robots/sitemap endpoints over current TLS.",
+      "effort": "medium",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F-008",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The response omits baseline browser security policies.",
+      "evidence": "The headers primitive finds no CSP, HSTS, X-Content-Type-Options, clickjacking protection, Referrer-Policy, or Permissions-Policy. The only recovery action downgrades to HTTP.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add HSTS, CSP including frame-ancestors, nosniff, a strict Referrer-Policy, and a least-privilege Permissions-Policy; make every navigation HTTPS.",
+      "effort": "medium",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security"
+    },
+    {
+      "id": "F-009",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Styles are tied to physical directions rather than writing modes.",
+      "evidence": "The CSS/page probe detects physical left/right margins, padding, floats, and image positioning, and no logical inline/block properties.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Replace layout-relevant left/right properties with margin-inline, padding-inline, inset-inline, and logical alignment so the component survives other writing directions.",
+      "effort": "small",
+      "pathId": "root",
+      "url": "https://service.smt.docomo.ne.jp/",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "internationalization"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-001",
+      "title": "Restore the service root or permanently redirect it to the canonical HTTPS destination",
+      "priority": 1,
+      "findingIds": [
+        "F-001",
+        "F-006",
+        "F-007"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T-002",
+      "title": "Add baseline security response policies and remove the HTTP downgrade link",
+      "priority": 2,
+      "findingIds": [
+        "F-008"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T-003",
+      "title": "Allow zoom and enlarge the recovery target",
+      "priority": 3,
+      "findingIds": [
+        "F-003"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-004",
+      "title": "Add preference-driven dark colors",
+      "priority": 4,
+      "findingIds": [
+        "F-002"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T-005",
+      "title": "Improve static resource caching and remove avoidable delivery hops",
+      "priority": 5,
+      "findingIds": [
+        "F-004"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T-006",
+      "title": "Add main landmark and logical-direction CSS",
+      "priority": 6,
+      "findingIds": [
+        "F-005",
+        "F-009"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered HTML, CSS and computed styles for the public root",
+      "condition": "default",
+      "findingIds": [
+        "F-001",
+        "F-005",
+        "F-009"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home.png",
+      "caption": "Desktop first viewport shows the returned error page",
+      "condition": "desktop",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "Narrow viewport rendering",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-003"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/mobile-layout.json",
+      "caption": "Narrow layout, CLS, long-task and overflow metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/dark.png",
+      "caption": "Page under requested dark color scheme",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dark-dom.json",
+      "caption": "Computed colors under requested dark scheme",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "Forced-color/high-contrast rendering",
+      "condition": "prefers-contrast: more; forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Animation inventory under reduced motion",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/load-trace.json",
+      "caption": "DevTools load performance trace",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/load-trace-summary.json",
+      "caption": "Compact load timing and main-thread summary",
+      "condition": "load",
+      "findingIds": [
+        "F-004"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/load.har",
+      "caption": "Network archive for root load",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/load-summary.json",
+      "caption": "Network totals, status, caching and delivery summary",
+      "condition": "load",
+      "findingIds": [
+        "F-001",
+        "F-004",
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/page-probe.json",
+      "caption": "Metadata, landmarks, link target, focus and CSS-feature probe",
+      "condition": "default",
+      "findingIds": [
+        "F-003",
+        "F-005",
+        "F-006",
+        "F-007",
+        "F-008",
+        "F-009"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header inspection",
+      "condition": "load",
+      "findingIds": [
+        "F-008"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security/privacy inspection",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party and tracker inventory",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Rendered image audit",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-visible secret scan",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Single-state heap summary",
+      "condition": "after load",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-fetch versus browser discoverability result",
+      "condition": "crawler comparison",
+      "findingIds": [
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered discoverability view",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse attempted; audit blocked by the page HTTP 404",
+      "condition": "mobile Lighthouse",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 600,
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T13-18-59-730Z"
+}

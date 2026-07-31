@@ -1,0 +1,2453 @@
+{
+  "url": "https://www.amazon.ca",
+  "auditedAt": "2026-07-28T09:42:36.188Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete. Search, product, cart, and sign-in failures were observed as direct core-flow issues rather than omitted checks.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Amazon AUI / server-rendered MPA with client modules and service worker",
+    "notes": "Public Canadian commerce storefront. Homepage was accessible; representative search, product, cart and sign-in routes failed or challenged fresh browser sessions. Covered homepage, search, one product detail, cart, sign-in, and a synthetic not-found state. Not covered: authenticated account, payment submission, order placement, cancellation/returns completion, and additional category/detail templates because sign-in and purchase routes were unavailable and no destructive or real transaction was attempted."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "Lighthouse",
+    "curl robots/headers",
+    "Modern Web Guidance search/retrieve"
+  ],
+  "guidanceConsulted": [
+    "fluid-scaling",
+    "forms",
+    "html",
+    "autofill-payment-form",
+    "accessibility",
+    "performance",
+    "optimize-image-priority",
+    "security",
+    "privacy",
+    "passkeys",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "dark-mode",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "defer-rendering-heavy-content",
+    "break-up-long-tasks",
+    "identify-heavy-scripts",
+    "webmcp",
+    "same-document-transitions",
+    "carousel-slide-effects",
+    "shrinking-header-on-scroll",
+    "position-aware-tooltips",
+    "component-specific-light-dark-theme",
+    "cross-document-transitions",
+    "scroll-entry-exit-effects",
+    "size-aware-styling"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Initial desktop homepage with dense retail cards and an interest-based ads notice."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at a 360x800 visual viewport; desktop-width content remains and is clipped."
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics reporting no viewport meta and 640px horizontal overflow."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under prefers-color-scheme: dark; main surfaces remain light."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Homepage under prefers-contrast: more."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-motion.json",
+      "caption": "Reduced-motion animation and feature probe."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Image audit covering dimensions, lazy loading, responsive sources, formats, and alt text."
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Raw HAR for the homepage load."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary: 292 requests and 5.39 MB transferred."
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace."
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary with LCP 3.40s and two long tasks."
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/home-lighthouse.json",
+      "caption": "Lighthouse JSON for mobile performance, accessibility, best practices, SEO, and agentic browsing."
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/home-lighthouse-summary.json",
+      "caption": "Compact Lighthouse summary and failed audits."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "CDP response-header audit."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-curl-headers.txt",
+      "caption": "Direct main-document response headers, confirming HSTS while other policies are absent."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Cookie security audit."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Third-party-origin and tracker enumeration."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Client-side secret scan with no sensitive findings."
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw-HTML versus rendered-content discoverability comparison."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Browser-rendered homepage view."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript homepage view."
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM, styles, and computed-style evidence."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-recon.json",
+      "caption": "Homepage metadata, language, canonical URL, links, forms, manifest, and service-worker recon."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-platform.json",
+      "caption": "Document semantics, overlay primitives, metadata, and explicit focus-style probes."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-runtime.json",
+      "caption": "Runtime, memory, DOM count, control-size, service-worker, and manifest probe."
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.json",
+      "caption": "Baseline heap summary."
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap-post-menu.json",
+      "caption": "Heap summary after opening and closing the navigation drawer ten times."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-desktop.png",
+      "caption": "Search route generic error response."
+    },
+    {
+      "type": "dom",
+      "path": "evidence/search-dom.json",
+      "caption": "Search error-page DOM."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-desktop.png",
+      "caption": "Product route automated-access challenge."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-mobile.png",
+      "caption": "Product challenge at a narrow viewport."
+    },
+    {
+      "type": "dom",
+      "path": "evidence/product-dom.json",
+      "caption": "Product challenge DOM."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/cart.png",
+      "caption": "Cart route generic error response."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/signin.png",
+      "caption": "Sign-in route not-found response."
+    },
+    {
+      "type": "dom",
+      "path": "evidence/signin-dom.json",
+      "caption": "Sign-in route probe."
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found.json",
+      "caption": "Synthetic failure-state DOM and recovery-link probe."
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Current robots.txt response, including explicit GPTBot exclusion."
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic 58-check coverage manifest used for planning."
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The dark-mode screenshot remains white/light grey and the computed body color-scheme is normal; no prefers-color-scheme rules were found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-001"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "evaluate under prefers-reduced-motion: reduce",
+      "evidence": "Reduced-motion emulation matched and document.getAnimations() returned no active animations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "prefers-contrast screenshot plus Lighthouse contrast audit",
+      "evidence": "High-contrast screenshot remains legible and Lighthouse color-contrast audit passed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Rendered CSS only contains reset-to-unset view-transition declarations; search/product journeys replace the page abruptly with error or challenge screens.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/product-desktop.png"
+      ],
+      "findingIds": [
+        "AMZ-002"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM CSS inspection and animation probe",
+      "evidence": "CSS/animation probe found no active scroll-linked animation or scroll event-driven visual effect to implement incorrectly.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-motion.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The homepage hero is an arrow-driven carousel; DOM/CSS inspection found no active scroll-snap or overscroll gesture rules, only reset declarations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-003"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The long homepage keeps a fixed two-row header and no animation-timeline or scroll-state query was found in captured CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-004"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The platform probe found 27 role=dialog elements, zero native dialogs/popovers, and no active anchor positioning declarations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-005"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual inspection and DOM focus/landmark probe",
+      "evidence": "Visible carousel arrows, descriptive navigation labels, and a skip-to-main link provide location and movement cues.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The initial screenshot shows a fixed notice covering the lower page before interaction, including product cards.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "AMZ-006"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The notice is a form role=dialog; the probe found zero <dialog>, popover, or details elements and 27 custom role=dialog nodes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-007"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Desktop evidence shows two navigation rows, a large hero, four dense merchandising cards, and a fixed notice in one viewport; mobile retains a 1000px desktop canvas.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "AMZ-008"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "At 360x800, layout reported no viewport meta, a 1000px inner layout, and 640px overflow; the screenshot shows clipped desktop content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "AMZ-009"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "rendered CSS inspection",
+      "evidence": "Captured CSS includes container-type:inline-size and @container rules for the Rufus/card layout.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Explicit focus probes reported outline:none/0px on search, cart, hamburger, account, and the privacy Continue Shopping control; tiny 8x4px disclosure buttons were also found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-runtime.json"
+      ],
+      "findingIds": [
+        "AMZ-010"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "first-viewport screenshot and DOM labels",
+      "evidence": "Amazon branding, a dominant labelled search field, category navigation, and product cards make shopping purpose and next actions immediately clear.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Search returned “Something went wrong”, product detail returned an automated-access challenge, cart returned the same generic error, and sign-in returned not-found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/product-desktop.png",
+        "evidence/cart.png",
+        "evidence/signin.png"
+      ],
+      "findingIds": [
+        "AMZ-011"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "failure-route screenshots and DOM",
+      "evidence": "Search/cart error screens are explicit, bilingual, and link back home; the product challenge offers Continue Shopping.",
+      "pathIds": [
+        "search"
+      ],
+      "artifacts": [
+        "evidence/search-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse measured LCP 10.54s, FCP 6.03s, Speed Index 11.04s, TTI 16.42s, and performance 54; trace LCP was 3.40s in a separate desktop-like run.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-012"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "layout observer and Lighthouse",
+      "evidence": "Layout observer and Lighthouse both measured CLS 0 in captured runs.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse measured 179.5ms TBT and 300ms max potential FID; the trace observed two long tasks up to 66.12ms.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-013"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "HAR captured 292 requests and 5.39MB transferred, including 223 images, 22 fonts, and multiple VeryHigh parser-blocking stylesheets.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "AMZ-014"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse estimated 438KiB unused JavaScript and 213KiB unused CSS; HAR recorded 882.7KB script transfer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-015"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse found disallowed aria-expanded on the searchbox, aria-setsize on a list, and an accessible-name mismatch on Cart.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-016"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse and screenshot",
+      "evidence": "Lighthouse color-contrast audit scored 1 and the contrast-emulated screenshot remained readable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The rendered homepage has no h1 and explicit probes show most primary controls with no visible outline, despite skip links and landmarks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-017"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual review",
+      "evidence": "Visible headings, card labels, navigation, and notice copy are readable with stable alignment in desktop evidence.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "At a 360px visual viewport the document still lays out at 1000px and overflows by 640px; the viewport meta is absent in the rendered homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "AMZ-018"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse captured a console error warning that module @m/mash loaded late.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-019"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The image primitive found 86/100 images without dimensions, 86 without srcset, 99 legacy-format images, 18 missing alt values, and Lighthouse found six incorrect aspect ratios.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-020"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse found synchronous main-thread XHR, deprecated Shared Storage usage, third-party cookie inspector issues, and a 50 best-practices score.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-021"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM metadata probe",
+      "evidence": "Rendered homepage has a descriptive title and a detailed Canada-specific meta description.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The homepage lacks viewport meta in the rendered state and Lighthouse found a javascript:void(0) anchor; robots.txt blocks GPTBot and several paths.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-lighthouse-summary.json",
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "AMZ-022"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM canonical probe and robots fetch",
+      "evidence": "Homepage returns public content in browser, declares canonical https://www.amazon.ca/, and serves a detailed robots.txt.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The platform probe found Open Graph metadata but zero JSON-LD blocks on a public retail/organization homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-platform.json"
+      ],
+      "findingIds": [
+        "AMZ-023"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Direct response evidence confirms HTTPS/HSTS, but no CSP, nosniff, Referrer-Policy, or Permissions-Policy was present; cookie audit found three non-Secure cookies and auth-like cookies without HttpOnly.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-curl-headers.txt",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "AMZ-024"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Lighthouse found 26 third-party cookies and long identity-sync chains; HAR attributed 283/292 requests and 5.12MB to other origins, while the page shows only a Continue Shopping consent action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "AMZ-025"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The direct /ap/signin route returned a not-found page and its DOM contained no form or passkey/WebAuthn path; no permission prompt appeared on homepage load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/signin.png",
+        "evidence/signin-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-026"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "HSTS is present, but CSP/frame-ancestors, nosniff, Referrer-Policy, and Permissions-Policy were absent in captured responses; insecure/SameSite=None cookies remain.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "AMZ-027"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Discoverability fetched status 202 with only 2,007 raw bytes and 0% rendered-word coverage; title, h1, and meta description were absent and crawler view lacked retail content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "AMZ-028"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "repeated drawer interaction and visual review",
+      "evidence": "Navigation drawer survived ten repeated open/close cycles and captured overlays remained within a bounded viewport state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap-post-menu.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "A service worker controls the homepage, but the runtime probe found no web app manifest. For a repeat-use commerce service, this leaves installability and offline intent undefined.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-runtime.json"
+      ],
+      "findingIds": [
+        "AMZ-029"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "failure-route DOM and screenshots",
+      "evidence": "Synthetic and search failures render explicit bilingual recovery content rather than a blank shell.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/search-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM and screenshot inspection",
+      "evidence": "The homepage declares lang=en-ca, offers EN country/language controls, and error states provide English and French recovery copy.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM locale and visual content inspection",
+      "evidence": "The Canada storefront identifies en-CA and presents Canada-specific locale/currency context consistently.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon-based applicability judgement across representative accessible surfaces.",
+      "evidence": "No time-zone-sensitive event, schedule, or stored-time surface was present on the accessible homepage; product/account surfaces were unavailable.",
+      "reason": "No time-zone-sensitive event, schedule, or stored-time surface was present on the accessible homepage; product/account surfaces were unavailable."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The initial notice presents a prominent yellow Continue Shopping action while preference adjustment is only an inline text link; no equally prominent reject/manage choice is shown.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "AMZ-030"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "failure screenshot review",
+      "evidence": "Failure pages use plain bilingual language and provide a route back to the homepage rather than blaming the user.",
+      "pathIds": [
+        "search"
+      ],
+      "artifacts": [
+        "evidence/search-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM input inspection",
+      "evidence": "Search is explicitly labelled, uses type=text with role=searchbox, and supplies appropriate keyboard/search affordances.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-platform.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Fresh anonymous product, cart, and sign-in routes returned a challenge, generic error, and not-found page respectively, preventing verification of pricing, checkout, cancellation, or reauthentication.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/product-desktop.png",
+        "evidence/cart.png",
+        "evidence/signin.png"
+      ],
+      "findingIds": [
+        "AMZ-031"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "Of 100 images, 99 used legacy formats, 86 lacked responsive sources, 85 below-fold images were not lazy, and image transfer totalled 3.36MB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-032"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The homepage made 292 requests, including 283 cross-origin requests, and Lighthouse reported 438KiB unused JS plus 213KiB unused CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "AMZ-033"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "HAR recorded 5.12MB cross-origin transfer, 22 font requests (739.7KB), 223 image requests, and 4 media requests for the initial homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "AMZ-034"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual/objective evidence review against mapped Modern Web Guidance.",
+      "evidence": "The homepage contained no WebMCP/agentic tool registration, the raw crawler view had 0% content coverage, and robots.txt explicitly disallows GPTBot.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/robots.txt",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "AMZ-035"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon-based applicability judgement across representative accessible surfaces.",
+      "evidence": "No summarisation, language-assistance, or other user-facing inference task was present on the audited surfaces, so on-device inference is not warranted.",
+      "reason": "No summarisation, language-assistance, or other user-facing inference task was present on the audited surfaces, so on-device inference is not warranted."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "baseline/post heap summaries after repeated interaction",
+      "evidence": "After ten menu open/close cycles, heap node count fell from 511,691 to 472,863 and self size from 35.40MB to 32.29MB; no retained growth signal appeared.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap-post-menu.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "runtime metrics and heap summary",
+      "evidence": "Runtime used about 21.6MB JS heap and 4,141 live DOM elements; heap snapshot self size was 35.40MB, proportionate for the content-heavy page though sizable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "before/after heap summary comparison",
+      "evidence": "Repeated drawer interaction reduced rather than grew heap node/edge populations; top constructor summaries exposed no growing Detached* population.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap-post-menu.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-001"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-002",
+        "AMZ-003"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-004",
+        "AMZ-005"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-006",
+        "AMZ-007",
+        "AMZ-008"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-009",
+        "AMZ-010"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-011"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-012",
+        "AMZ-013",
+        "AMZ-014",
+        "AMZ-015"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-016",
+        "AMZ-017",
+        "AMZ-018"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-019",
+        "AMZ-020",
+        "AMZ-021"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-022",
+        "AMZ-023"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-024",
+        "AMZ-025",
+        "AMZ-026",
+        "AMZ-027"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-028",
+        "AMZ-029"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-030",
+        "AMZ-031"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-032",
+        "AMZ-033",
+        "AMZ-034"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "AMZ-035"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and global retail navigation, representing the landing template and initial product-discovery entry point.",
+      "url": "https://www.amazon.ca",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus probes"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search for “laptop”, representing the primary product-discovery journey. The route consistently returned Amazon’s generic error page during independent captures.",
+      "url": "https://www.amazon.ca/s?k=laptop",
+      "conditions": [
+        "desktop",
+        "fresh browser session"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "product",
+      "description": "Representative product detail URL discovered from the homepage. Fresh sessions were diverted to an automated-access “Continue shopping” challenge instead of product content.",
+      "url": "https://www.amazon.ca/dp/B0CCZ26B5V",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "cart",
+      "description": "Cart route, representing the purchase funnel. It returned Amazon’s generic “Something went wrong” page.",
+      "url": "https://www.amazon.ca/gp/cart/view.html",
+      "conditions": [
+        "desktop",
+        "fresh browser session"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "signin",
+      "description": "Sign-in route, representing authentication and account entry. It returned a “Looking for Something?” not-found page.",
+      "url": "https://www.amazon.ca/ap/signin",
+      "conditions": [
+        "desktop",
+        "fresh browser session"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "not-found",
+      "description": "Synthetic nonexistent route, representing HTTP/runtime failure recovery. It exposed a bilingual recovery screen with homepage/search routes.",
+      "url": "https://www.amazon.ca/this-route-should-not-exist-web-uplift",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AMZ-009",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Homepage is not mobile-responsive in the captured condition",
+      "evidence": "At 360x800, layout reported no viewport meta, a 1000px inner layout, and 640px overflow; the screenshot shows clipped desktop content.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "suggestedFix": "Add a valid width=device-width viewport and use intrinsic/grid layouts that reflow without horizontal overflow.",
+      "effort": "large"
+    },
+    {
+      "id": "AMZ-011",
+      "pathId": "search",
+      "url": "https://www.amazon.ca",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Primary discovery and purchase routes fail in fresh sessions",
+      "evidence": "Search returned “Something went wrong”, product detail returned an automated-access challenge, cart returned the same generic error, and sign-in returned not-found.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/product-desktop.png",
+        "evidence/cart.png",
+        "evidence/signin.png"
+      ],
+      "suggestedFix": "Stabilise anonymous session/WAF routing so search, product, cart, and sign-in work end-to-end; retain context and provide route-specific retry paths.",
+      "effort": "large"
+    },
+    {
+      "id": "AMZ-018",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Narrow-screen reflow fails",
+      "evidence": "At a 360px visual viewport the document still lays out at 1000px and overflows by 640px; the viewport meta is absent in the rendered homepage.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Restore width=device-width and make all page regions reflow at 320 CSS px and 400% zoom without two-dimensional scrolling.",
+      "effort": "large"
+    },
+    {
+      "id": "AMZ-028",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Core content is invisible to a non-JavaScript crawler",
+      "evidence": "Discoverability fetched status 202 with only 2,007 raw bytes and 0% rendered-word coverage; title, h1, and meta description were absent and crawler view lacked retail content.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "suggestedFix": "Serve meaningful product/navigation HTML and metadata in the initial response, with scripts enhancing rather than creating the core experience.",
+      "effort": "large"
+    },
+    {
+      "id": "AMZ-031",
+      "pathId": "search",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "guidanceId": "autofill-payment-form",
+      "guidanceCategory": "forms",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Commercial and account entry points are not safely completable",
+      "evidence": "Fresh anonymous product, cart, and sign-in routes returned a challenge, generic error, and not-found page respectively, preventing verification of pricing, checkout, cancellation, or reauthentication.",
+      "artifacts": [
+        "evidence/product-desktop.png",
+        "evidence/cart.png",
+        "evidence/signin.png"
+      ],
+      "suggestedFix": "Make these routes reliable, preserve product/cart context through authentication, and show commitments and recovery actions before confirmation.",
+      "effort": "large"
+    },
+    {
+      "id": "AMZ-010",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus is invisible on primary controls",
+      "evidence": "Explicit focus probes reported outline:none/0px on search, cart, hamburger, account, and the privacy Continue Shopping control; tiny 8x4px disclosure buttons were also found.",
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-runtime.json"
+      ],
+      "suggestedFix": "Add strong :focus-visible indicators and ensure every interactive target is at least 24x24 CSS px, preferably 44x44 for touch.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-012",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile loading performance misses the LCP bar",
+      "evidence": "Lighthouse measured LCP 10.54s, FCP 6.03s, Speed Index 11.04s, TTI 16.42s, and performance 54; trace LCP was 3.40s in a separate desktop-like run.",
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritise the LCP resource, reduce critical CSS/script work, and validate field Core Web Vitals by template.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-014",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The homepage ships a heavy, highly fragmented load",
+      "evidence": "HAR captured 292 requests and 5.39MB transferred, including 223 images, 22 fonts, and multiple VeryHigh parser-blocking stylesheets.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Reduce critical dependencies, consolidate font/style delivery, add useful lazy loading, and prioritise only the LCP image.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-017",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Heading and focus structure is incomplete",
+      "evidence": "The rendered homepage has no h1 and explicit probes show most primary controls with no visible outline, despite skip links and landmarks.",
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "suggestedFix": "Add a meaningful page h1 and consistent :focus-visible treatment while preserving logical landmark and tab order.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-022",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Crawler/mobile signals are inconsistent",
+      "evidence": "The homepage lacks viewport meta in the rendered state and Lighthouse found a javascript:void(0) anchor; robots.txt blocks GPTBot and several paths.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-lighthouse-summary.json",
+        "evidence/robots.txt"
+      ],
+      "suggestedFix": "Add the viewport meta, replace pseudo-links with buttons or real hrefs, and review crawler policy by intended audience.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-024",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Security header and cookie posture is incomplete",
+      "evidence": "Direct response evidence confirms HTTPS/HSTS, but no CSP, nosniff, Referrer-Policy, or Permissions-Policy was present; cookie audit found three non-Secure cookies and auth-like cookies without HttpOnly.",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-curl-headers.txt",
+        "evidence/home-cookies.json"
+      ],
+      "suggestedFix": "Deploy an enforcing CSP, nosniff, Referrer-Policy and Permissions-Policy, and set Secure/HttpOnly/SameSite attributes appropriate to each cookie.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-025",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Advertising and identity-sync footprint is excessive by default",
+      "evidence": "Lighthouse found 26 third-party cookies and long identity-sync chains; HAR attributed 283/292 requests and 5.12MB to other origins, while the page shows only a Continue Shopping consent action.",
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Minimise and defer advertising/identity sync until an explicit choice, reduce vendors, and batch essential analytics.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-026",
+      "pathId": "search",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Authentication entry is unavailable and modern-auth support cannot be reached",
+      "evidence": "The direct /ap/signin route returned a not-found page and its DOM contained no form or passkey/WebAuthn path; no permission prompt appeared on homepage load.",
+      "artifacts": [
+        "evidence/signin.png",
+        "evidence/signin-dom.json"
+      ],
+      "suggestedFix": "Restore sign-in routing and expose passkey-first authentication with correct autofill and contextual permission requests.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-030",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Privacy choice is visually one-sided",
+      "evidence": "The initial notice presents a prominent yellow Continue Shopping action while preference adjustment is only an inline text link; no equally prominent reject/manage choice is shown.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Present accept, reject, and manage choices with equal clarity and preserve the user’s decision without nagging.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-032",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Image delivery is materially wasteful",
+      "evidence": "Of 100 images, 99 used legacy formats, 86 lacked responsive sources, 85 below-fold images were not lazy, and image transfer totalled 3.36MB.",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Adopt AVIF/WebP via picture/srcset, right-size by rendered slot, lazy-load below-fold media, and reserve dimensions.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-033",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page performs disproportionate background/network work",
+      "evidence": "The homepage made 292 requests, including 283 cross-origin requests, and Lighthouse reported 438KiB unused JS plus 213KiB unused CSS.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Conditionally fetch below-fold and third-party features, pause background work, and remove unused bundles.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-034",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party and font/media budgets are disproportionate",
+      "evidence": "HAR recorded 5.12MB cross-origin transfer, 22 font requests (739.7KB), 223 image requests, and 4 media requests for the initial homepage.",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Set template budgets, self-host/subset fonts where useful, defer nonessential media, and load advertising only after an informed choice.",
+      "effort": "medium"
+    },
+    {
+      "id": "AMZ-001",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Dark preference is ignored",
+      "evidence": "The dark-mode screenshot remains white/light grey and the computed body color-scheme is normal; no prefers-color-scheme rules were found.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and derive surface/text/control colours with prefers-color-scheme or light-dark().",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-006",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Interest-based ads notice interrupts the initial view",
+      "evidence": "The initial screenshot shows a fixed notice covering the lower page before interaction, including product cards.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Make privacy controls compact and non-obscuring, with clear choices and dismissal that does not block browsing.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-007",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Dismissible UI is implemented with custom role-based forms",
+      "evidence": "The notice is a form role=dialog; the probe found zero <dialog>, popover, or details elements and 27 custom role=dialog nodes.",
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use the native dialog/popover primitives with declarative commands, correct focus management, Escape/light dismiss, and a fallback.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-008",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "defer-rendering-heavy-content",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Dense chrome crowds the shopping content",
+      "evidence": "Desktop evidence shows two navigation rows, a large hero, four dense merchandising cards, and a fixed notice in one viewport; mobile retains a 1000px desktop canvas.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Reduce persistent navigation and promotional chrome, prioritise search and the most relevant products, and progressively disclose secondary controls.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-013",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Script work delays interactivity",
+      "evidence": "Lighthouse measured 179.5ms TBT and 300ms max potential FID; the trace observed two long tasks up to 66.12ms.",
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Break long tasks, defer non-critical modules, and schedule background work at lower priority.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-015",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Large unused JS and CSS payloads are delivered",
+      "evidence": "Lighthouse estimated 438KiB unused JavaScript and 213KiB unused CSS; HAR recorded 882.7KB script transfer.",
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Code-split by page capability, conditionally load dependencies, and remove duplicate/unused AUI and campaign bundles.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-016",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "ARIA semantics are invalid on important controls",
+      "evidence": "Lighthouse found disallowed aria-expanded on the searchbox, aria-setsize on a list, and an accessible-name mismatch on Cart.",
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "suggestedFix": "Use native semantics where possible and align roles, allowed ARIA attributes, visible labels, and accessible names.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-020",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image markup and sizing are unsound",
+      "evidence": "The image primitive found 86/100 images without dimensions, 86 without srcset, 99 legacy-format images, 18 missing alt values, and Lighthouse found six incorrect aspect ratios.",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "suggestedFix": "Reserve image dimensions/aspect ratios and provide responsive modern sources while preserving appropriate alt text.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-021",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Deprecated APIs and browser inspector issues remain",
+      "evidence": "Lighthouse found synchronous main-thread XHR, deprecated Shared Storage usage, third-party cookie inspector issues, and a 50 best-practices score.",
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "suggestedFix": "Remove synchronous XHR and deprecated Shared Storage use, resolve cookie issues, and retest BFCache and inspector warnings.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-027",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser-enforced defence headers are incomplete",
+      "evidence": "HSTS is present, but CSP/frame-ancestors, nosniff, Referrer-Policy, and Permissions-Policy were absent in captured responses; insecure/SameSite=None cookies remain.",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "suggestedFix": "Roll out CSP with frame-ancestors and Trusted Types where appropriate, nosniff, strict referrer/permissions policies, and modern cookie controls.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-035",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "webmcp",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Commerce capabilities are not exposed safely to agents",
+      "evidence": "The homepage contained no WebMCP/agentic tool registration, the raw crawler view had 0% content coverage, and robots.txt explicitly disallows GPTBot.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/robots.txt",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "If agentic commerce is intended, expose bounded WebMCP tools/agentic forms for search, product details, cart, and checkout with confirmation gates.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-002",
+      "pathId": "search",
+      "url": "https://www.amazon.ca",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Page and state changes do not use View Transitions",
+      "evidence": "Rendered CSS only contains reset-to-unset view-transition declarations; search/product journeys replace the page abruptly with error or challenge screens.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/product-desktop.png"
+      ],
+      "suggestedFix": "Use same-document transitions for carousel/menu state and cross-document View Transitions for eligible retail navigation, with reduced-motion fallbacks.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-003",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "physical-gestures",
+      "guidanceId": "carousel-slide-effects",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Carousel/navigation interactions use legacy controls without platform gesture behaviour",
+      "evidence": "The homepage hero is an arrow-driven carousel; DOM/CSS inspection found no active scroll-snap or overscroll gesture rules, only reset declarations.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Implement carousels with scroll snap and overscroll containment while retaining buttons and keyboard operation.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-004",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Navigation chrome does not react to scroll state",
+      "evidence": "The long homepage keeps a fixed two-row header and no animation-timeline or scroll-state query was found in captured CSS.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use container scroll-state queries or a declarative scroll-driven header/progress affordance where the page length warrants it.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-005",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "anchored-positioning",
+      "guidanceId": "position-aware-tooltips",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Overlays are custom-positioned rather than anchored platform popovers",
+      "evidence": "The platform probe found 27 role=dialog elements, zero native dialogs/popovers, and no active anchor positioning declarations.",
+      "artifacts": [
+        "evidence/home-platform.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use popover/dialog plus CSS anchor positioning and position fallbacks for menus, tips, and transient overlays.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-019",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The homepage logs a client error",
+      "evidence": "Lighthouse captured a console error warning that module @m/mash loaded late.",
+      "artifacts": [
+        "evidence/home-lighthouse-summary.json"
+      ],
+      "suggestedFix": "Fix the late module dependency/ordering issue and keep production console error-free.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-023",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Homepage lacks structured entity metadata",
+      "evidence": "The platform probe found Open Graph metadata but zero JSON-LD blocks on a public retail/organization homepage.",
+      "artifacts": [
+        "evidence/home-platform.json"
+      ],
+      "suggestedFix": "Add accurate Organization/WebSite JSON-LD, including SearchAction only if it matches a reliable crawlable search URL.",
+      "effort": "small"
+    },
+    {
+      "id": "AMZ-029",
+      "pathId": "home",
+      "url": "https://www.amazon.ca",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "No installable app metadata is exposed",
+      "evidence": "A service worker controls the homepage, but the runtime probe found no web app manifest. For a repeat-use commerce service, this leaves installability and offline intent undefined.",
+      "artifacts": [
+        "evidence/home-runtime.json"
+      ],
+      "suggestedFix": "Add a valid manifest and a lightweight offline/retry fallback for browsing state, or explicitly document why installability is out of scope.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "TASK-01",
+      "title": "Add a valid width=device-width viewport and use intrinsic/grid layouts that reflow without horizontal overflow.",
+      "priority": 1,
+      "findingIds": [
+        "AMZ-009"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "TASK-02",
+      "title": "Stabilise anonymous session/WAF routing so search, product, cart, and sign-in work end-to-end; retain context and provide route-specific retry paths.",
+      "priority": 2,
+      "findingIds": [
+        "AMZ-011"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "TASK-03",
+      "title": "Restore width=device-width and make all page regions reflow at 320 CSS px and 400% zoom without two-dimensional scrolling.",
+      "priority": 3,
+      "findingIds": [
+        "AMZ-018"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "TASK-04",
+      "title": "Serve meaningful product/navigation HTML and metadata in the initial response, with scripts enhancing rather than creating the core experience.",
+      "priority": 4,
+      "findingIds": [
+        "AMZ-028"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-05",
+      "title": "Make these routes reliable, preserve product/cart context through authentication, and show commitments and recovery actions before confirmation.",
+      "priority": 5,
+      "findingIds": [
+        "AMZ-031"
+      ],
+      "guidanceId": "autofill-payment-form",
+      "status": "open"
+    },
+    {
+      "id": "TASK-06",
+      "title": "Add strong :focus-visible indicators and ensure every interactive target is at least 24x24 CSS px, preferably 44x44 for touch.",
+      "priority": 6,
+      "findingIds": [
+        "AMZ-010"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "TASK-07",
+      "title": "Prioritise the LCP resource, reduce critical CSS/script work, and validate field Core Web Vitals by template.",
+      "priority": 7,
+      "findingIds": [
+        "AMZ-012"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "TASK-08",
+      "title": "Reduce critical dependencies, consolidate font/style delivery, add useful lazy loading, and prioritise only the LCP image.",
+      "priority": 8,
+      "findingIds": [
+        "AMZ-014"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "TASK-09",
+      "title": "Add a meaningful page h1 and consistent :focus-visible treatment while preserving logical landmark and tab order.",
+      "priority": 9,
+      "findingIds": [
+        "AMZ-017"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "TASK-10",
+      "title": "Add the viewport meta, replace pseudo-links with buttons or real hrefs, and review crawler policy by intended audience.",
+      "priority": 10,
+      "findingIds": [
+        "AMZ-022"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-11",
+      "title": "Deploy an enforcing CSP, nosniff, Referrer-Policy and Permissions-Policy, and set Secure/HttpOnly/SameSite attributes appropriate to each cookie.",
+      "priority": 11,
+      "findingIds": [
+        "AMZ-024"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "TASK-12",
+      "title": "Minimise and defer advertising/identity sync until an explicit choice, reduce vendors, and batch essential analytics.",
+      "priority": 12,
+      "findingIds": [
+        "AMZ-025"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "TASK-13",
+      "title": "Restore sign-in routing and expose passkey-first authentication with correct autofill and contextual permission requests.",
+      "priority": 13,
+      "findingIds": [
+        "AMZ-026"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "TASK-14",
+      "title": "Present accept, reject, and manage choices with equal clarity and preserve the user’s decision without nagging.",
+      "priority": 14,
+      "findingIds": [
+        "AMZ-030"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "TASK-15",
+      "title": "Adopt AVIF/WebP via picture/srcset, right-size by rendered slot, lazy-load below-fold media, and reserve dimensions.",
+      "priority": 15,
+      "findingIds": [
+        "AMZ-032"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "TASK-16",
+      "title": "Conditionally fetch below-fold and third-party features, pause background work, and remove unused bundles.",
+      "priority": 16,
+      "findingIds": [
+        "AMZ-033"
+      ],
+      "guidanceId": "deprioritize-background-fetches",
+      "status": "open"
+    },
+    {
+      "id": "TASK-17",
+      "title": "Set template budgets, self-host/subset fonts where useful, defer nonessential media, and load advertising only after an informed choice.",
+      "priority": 17,
+      "findingIds": [
+        "AMZ-034"
+      ],
+      "guidanceId": "deprioritize-background-fetches",
+      "status": "open"
+    },
+    {
+      "id": "TASK-18",
+      "title": "Declare color-scheme: light dark and derive surface/text/control colours with prefers-color-scheme or light-dark().",
+      "priority": 18,
+      "findingIds": [
+        "AMZ-001"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "TASK-19",
+      "title": "Make privacy controls compact and non-obscuring, with clear choices and dismissal that does not block browsing.",
+      "priority": 19,
+      "findingIds": [
+        "AMZ-006"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "TASK-20",
+      "title": "Use the native dialog/popover primitives with declarative commands, correct focus management, Escape/light dismiss, and a fallback.",
+      "priority": 20,
+      "findingIds": [
+        "AMZ-007"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "TASK-21",
+      "title": "Reduce persistent navigation and promotional chrome, prioritise search and the most relevant products, and progressively disclose secondary controls.",
+      "priority": 21,
+      "findingIds": [
+        "AMZ-008"
+      ],
+      "guidanceId": "defer-rendering-heavy-content",
+      "status": "open"
+    },
+    {
+      "id": "TASK-22",
+      "title": "Break long tasks, defer non-critical modules, and schedule background work at lower priority.",
+      "priority": 22,
+      "findingIds": [
+        "AMZ-013"
+      ],
+      "guidanceId": "break-up-long-tasks",
+      "status": "open"
+    },
+    {
+      "id": "TASK-23",
+      "title": "Code-split by page capability, conditionally load dependencies, and remove duplicate/unused AUI and campaign bundles.",
+      "priority": 23,
+      "findingIds": [
+        "AMZ-015"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "TASK-24",
+      "title": "Use native semantics where possible and align roles, allowed ARIA attributes, visible labels, and accessible names.",
+      "priority": 24,
+      "findingIds": [
+        "AMZ-016"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "TASK-25",
+      "title": "Reserve image dimensions/aspect ratios and provide responsive modern sources while preserving appropriate alt text.",
+      "priority": 25,
+      "findingIds": [
+        "AMZ-020"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-26",
+      "title": "Remove synchronous XHR and deprecated Shared Storage use, resolve cookie issues, and retest BFCache and inspector warnings.",
+      "priority": 26,
+      "findingIds": [
+        "AMZ-021"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-27",
+      "title": "Roll out CSP with frame-ancestors and Trusted Types where appropriate, nosniff, strict referrer/permissions policies, and modern cookie controls.",
+      "priority": 27,
+      "findingIds": [
+        "AMZ-027"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "TASK-28",
+      "title": "If agentic commerce is intended, expose bounded WebMCP tools/agentic forms for search, product details, cart, and checkout with confirmation gates.",
+      "priority": 28,
+      "findingIds": [
+        "AMZ-035"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "TASK-29",
+      "title": "Use same-document transitions for carousel/menu state and cross-document View Transitions for eligible retail navigation, with reduced-motion fallbacks.",
+      "priority": 29,
+      "findingIds": [
+        "AMZ-002"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "TASK-30",
+      "title": "Implement carousels with scroll snap and overscroll containment while retaining buttons and keyboard operation.",
+      "priority": 30,
+      "findingIds": [
+        "AMZ-003"
+      ],
+      "guidanceId": "carousel-slide-effects",
+      "status": "open"
+    },
+    {
+      "id": "TASK-31",
+      "title": "Use container scroll-state queries or a declarative scroll-driven header/progress affordance where the page length warrants it.",
+      "priority": 31,
+      "findingIds": [
+        "AMZ-004"
+      ],
+      "guidanceId": "shrinking-header-on-scroll",
+      "status": "open"
+    },
+    {
+      "id": "TASK-32",
+      "title": "Use popover/dialog plus CSS anchor positioning and position fallbacks for menus, tips, and transient overlays.",
+      "priority": 32,
+      "findingIds": [
+        "AMZ-005"
+      ],
+      "guidanceId": "position-aware-tooltips",
+      "status": "open"
+    },
+    {
+      "id": "TASK-33",
+      "title": "Fix the late module dependency/ordering issue and keep production console error-free.",
+      "priority": 33,
+      "findingIds": [
+        "AMZ-019"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "TASK-34",
+      "title": "Add accurate Organization/WebSite JSON-LD, including SearchAction only if it matches a reliable crawlable search URL.",
+      "priority": 34,
+      "findingIds": [
+        "AMZ-023"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-35",
+      "title": "Add a valid manifest and a lightweight offline/retry fallback for browsing state, or explicitly document why installability is out of scope.",
+      "priority": 35,
+      "findingIds": [
+        "AMZ-029"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T09-42-36-188Z"
+}

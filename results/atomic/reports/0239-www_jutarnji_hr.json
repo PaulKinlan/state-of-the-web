@@ -1,0 +1,1957 @@
+{
+  "url": "https://www.jutarnji.hr",
+  "auditedAt": "2026-07-19T09:10:42.299Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete: 58 of 58 checks judged across four representative templates plus a failure state.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Joomla-like server-rendered MPA with extensive third-party advertising and analytics",
+    "notes": "Public Croatian news publisher. Homepage, section, article, subscription offer and 404 were covered; authenticated account, payment submission, newsletter forms and every section brand were not covered because they are secondary or involve personal/payment data."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-css",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "discoverability",
+    "heap-summary",
+    "lighthouse",
+    "raw-http"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "navigation-drawer",
+    "light-dismiss-a-dialog",
+    "fluid-scaling",
+    "forms",
+    "performance",
+    "break-up-long-tasks",
+    "html",
+    "security",
+    "privacy",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "deliver-optimized-decorative-images",
+    "manage-recurring-intervals"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "paths": [
+    {
+      "id": "home",
+      "url": "https://www.jutarnji.hr",
+      "description": "Homepage: primary news discovery template and global header/ads.",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "dark preference",
+        "reduced motion",
+        "load performance",
+        "no JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "section",
+      "url": "https://www.jutarnji.hr/vijesti",
+      "description": "Section/listing archetype representing topic indexes.",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "url": "https://www.jutarnji.hr/sportske/nogomet/sp2026/ostalo-sp2026/engleska-francuska-6-4-bronca-gesta-jason-steele-medalja-15729379",
+      "description": "Article/detail archetype representing the core reading journey.",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "subscription",
+      "url": "https://www.jutarnji.hr/pretplata",
+      "description": "Primary commercial offer-selection surface; payment submission deliberately excluded.",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "error",
+      "url": "https://www.jutarnji.hr/this-route-does-not-exist-web-uplift",
+      "description": "Invalid route for HTTP failure-state behavior.",
+      "conditions": [
+        "raw HTTP"
+      ],
+      "result": "pass"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage at desktop viewport, showing the on-load subscription overlay.",
+      "condition": "desktop",
+      "findingIds": [
+        "F01",
+        "F04",
+        "F05",
+        "F12",
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800, showing responsive layout and inline promotion.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05",
+        "F19"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark-reduced.png",
+      "caption": "Homepage under dark and reduced-motion preferences; colors remain light.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/section-desktop.png",
+      "caption": "News section template with promotion covering lead content.",
+      "condition": "desktop",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-desktop.png",
+      "caption": "Article template with promotion covering article media.",
+      "condition": "desktop",
+      "findingIds": [
+        "F05",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/subscription-desktop.png",
+      "caption": "Premium subscription offer selection surface.",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM, CSS, computed styles.",
+      "condition": "default",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04",
+        "F06",
+        "F11"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/article-dom.json",
+      "caption": "Rendered article DOM and computed styles.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics, CLS and long tasks.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F08",
+        "F14"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "Raw DevTools performance trace.",
+      "condition": "load",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact performance trace summary.",
+      "condition": "load",
+      "findingIds": [
+        "F07",
+        "F09",
+        "F22"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network HAR for homepage load.",
+      "condition": "5-second load",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact network totals and dependency signals.",
+      "condition": "5-second load",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F18",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header audit.",
+      "condition": "load",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security audit.",
+      "condition": "load",
+      "findingIds": [
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker origin audit.",
+      "condition": "load",
+      "findingIds": [
+        "F18",
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Rendered image audit.",
+      "condition": "load",
+      "findingIds": [
+        "F08",
+        "F11",
+        "F14",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-visible secret scan; generic key signal was not escalated without evidence it was sensitive.",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML vs rendered discoverability result.",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler-view screenshot with JavaScript disabled.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser-view screenshot.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary.",
+      "condition": "after load",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll.json",
+      "caption": "Heap after ten full-page scroll cycles.",
+      "condition": "10 repeated scroll cycles",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance, accessibility, best-practices and SEO report.",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F02",
+        "F07",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt response.",
+      "condition": "raw HTTP",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "/sitemap.xml response, which is HTML rather than XML.",
+      "condition": "raw HTTP",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found.html",
+      "caption": "Intentional 404 response body.",
+      "condition": "invalid route",
+      "findingIds": []
+    }
+  ],
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-dark-reduced.png, evidence/home-desktop.png",
+      "evidence": "The dark-mode screenshot is visually identical to the light screenshot, and the computed CSS probe found no prefers-color-scheme rules and color-scheme remained normal.",
+      "findingIds": [
+        "F01"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "CSS + emulated screenshot",
+      "evidence": "CSS inspection found an authored prefers-reduced-motion rule and the reduced-motion condition rendered without additional auto-motion.",
+      "artifacts": [
+        "evidence/home-dark-reduced.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/lighthouse.json, evidence/home-dom.json",
+      "evidence": "The CSS probe found neither prefers-contrast nor forced-colors handling; Lighthouse also found multiple text contrast failures.",
+      "findingIds": [
+        "F02"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-dom.json",
+      "evidence": "The CSS probe found no view-transition rules; representative navigation uses conventional full-document swaps. Browser API availability alone is not authored use.",
+      "findingIds": [
+        "F03"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "CSS/static visual inspection",
+      "evidence": "CSS inspection found no animation-timeline, and representative screenshots showed no scroll-linked parallax/scrollytelling that would require a scroll handler.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "CSS + mobile viewport inspection",
+      "evidence": "CSS inspection found scroll-snap support and the tested reading surfaces retained native scrolling rather than custom pointer-driven navigation.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-dom.json, evidence/home-desktop.png",
+      "evidence": "The DOM shows a fixed 50px navigation bar, while CSS inspection found no scroll-state container query or progress treatment.",
+      "findingIds": [
+        "F04"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "No tooltip, contextual popover, or viewport-edge anchored menu was present on the representative reading and subscription surfaces.",
+      "reason": "No tooltip, contextual popover, or viewport-edge anchored menu was present on the representative reading and subscription surfaces."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual inspection",
+      "evidence": "Persistent branded navigation and descriptive editorial links keep route context and primary reading targets visually clear across homepage, section and article.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "section",
+        "article"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-desktop.png, evidence/home-mobile.png, evidence/section-desktop.png, evidence/article-desktop.png",
+      "evidence": "Desktop homepage, section, and article screenshots show the same large yellow promotion centered over the lead image/headline; on mobile it consumes most of the next viewport.",
+      "findingIds": [
+        "F05"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-desktop.png, evidence/home-mobile.png, evidence/section-desktop.png, evidence/article-desktop.png",
+      "evidence": "Desktop homepage, section, and article screenshots show the same large yellow promotion centered over the lead image/headline; on mobile it consumes most of the next viewport.",
+      "findingIds": [
+        "F05"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-desktop.png, evidence/home-mobile.png, evidence/section-desktop.png, evidence/article-desktop.png",
+      "evidence": "Desktop homepage, section, and article screenshots show the same large yellow promotion centered over the lead image/headline; on mobile it consumes most of the next viewport.",
+      "findingIds": [
+        "F05"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Mobile layout primitive",
+      "evidence": "At 360x800, layout measured scrollWidth 360 against innerWidth 360, with viewport meta present and 0 horizontal overflow.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-dom.json, evidence/section-desktop.png",
+      "evidence": "The CSS probe inspected 1.49 MB of accessible CSS and found no @container rules, although cards are reused in differently sized columns.",
+      "findingIds": [
+        "F06"
+      ],
+      "pathIds": [
+        "section"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/section-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse + mobile visual inspection",
+      "evidence": "Lighthouse target-size/viewport checks did not report failures, and visible header controls retain large touch hit areas in the mobile capture.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative screenshots",
+      "evidence": "Homepage, section and article surfaces clearly present current news headlines and linked stories; the subscription page clearly asks the visitor to choose an offer.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/subscription-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "subscription"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-page journey screenshots",
+      "evidence": "The anonymous core reading journey completed from listing to a full article, and the separate subscription surface loaded its offer selection without an account wall.",
+      "artifacts": [
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/subscription-desktop.png"
+      ],
+      "pathIds": [
+        "section",
+        "article",
+        "subscription"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "HTTP failure-state probe",
+      "evidence": "A deliberately invalid route returned the correct HTTP 404 status and explicit 404 metadata rather than a misleading success or blank shell.",
+      "artifacts": [
+        "evidence/not-found.html"
+      ],
+      "pathIds": [
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-trace.json, evidence/home-trace-summary.json, evidence/lighthouse.json",
+      "evidence": "The trace measured LCP at 11.64s (FCP 1.95s); Lighthouse performance was 0.49 with LCP 4.2s, Speed Index 21.0s, and interactive at 45.6s.",
+      "findingIds": [
+        "F07"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace.json",
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-mobile-layout.json, evidence/images.json",
+      "evidence": "Mobile layout observation measured CLS 0.122 with a 0.092 shift at about 8.23s; all 100 inspected images lacked width and height attributes.",
+      "findingIds": [
+        "F08"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-trace-summary.json, evidence/home-summary.json, evidence/lighthouse.json",
+      "evidence": "Trace recorded 2 long tasks up to 136.5ms and 158.8ms TBT; Lighthouse measured 860ms TBT. The HAR loaded 152 scripts.",
+      "findingIds": [
+        "F09"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home.har, evidence/home-summary.json, evidence/lighthouse.json",
+      "evidence": "HAR measured 29,974,303 transferred bytes: 24.5 MB images, 3.52 MB scripts, 1.54 MB fonts, 236 image requests and 152 script requests.",
+      "findingIds": [
+        "F10"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home.har, evidence/home-summary.json, evidence/lighthouse.json",
+      "evidence": "HAR measured 29,974,303 transferred bytes: 24.5 MB images, 3.52 MB scripts, 1.54 MB fonts, 236 image requests and 152 script requests.",
+      "findingIds": [
+        "F10"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/lighthouse.json, evidence/images.json, evidence/home-dom.json",
+      "evidence": "Lighthouse accessibility was 0.77 and found malformed tablist relationships, untitled iframes and missing image alternatives. The probe found no h1, 32 empty links and 4 unnamed controls.",
+      "findingIds": [
+        "F11"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/lighthouse.json, evidence/home-desktop.png",
+      "evidence": "Lighthouse measured red labels at 3.36:1 to 3.87:1 where 4.5:1 is required.",
+      "findingIds": [
+        "F12"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/lighthouse.json, evidence/images.json, evidence/home-dom.json",
+      "evidence": "Lighthouse accessibility was 0.77 and found malformed tablist relationships, untitled iframes and missing image alternatives. The probe found no h1, 32 empty links and 4 unnamed controls.",
+      "findingIds": [
+        "F11"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "Article and homepage captures use strong typographic hierarchy and comfortable high-size headline/body text without clipping at the tested widths.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/article-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM, mobile layout and media probe",
+      "evidence": "Viewport scaling is enabled, the 360px layout reflows without overflow, and no primary video requiring captions appeared on the tested pages.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/lighthouse.json",
+      "evidence": "Lighthouse found a refused logo resource request and scored the console-errors audit 0.",
+      "findingIds": [
+        "F13"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/images.json, evidence/home-mobile-layout.json",
+      "evidence": "Image audit: 100/100 missing dimensions, 65 below-fold images not lazy, 41 oversized, 40 without srcset, 77 legacy-format, and 14 missing alt.",
+      "findingIds": [
+        "F14"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/lighthouse.json",
+      "evidence": "Lighthouse found five deprecations, unload handlers in main/subframes blocking BFCache, inspector issues, and a broken source map.",
+      "findingIds": [
+        "F15"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM + discoverability",
+      "evidence": "DOM and raw HTML include a descriptive title and Croatian meta description.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/discoverability.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM probe + robots",
+      "evidence": "The rendered DOM contains 401 real href links, viewport meta is present, and robots.txt allows public content.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/robots.txt"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/sitemap.xml, evidence/robots.txt",
+      "evidence": "A request to /sitemap.xml returned a 695 KB HTML page with noindex metadata rather than XML, undermining sitemap consistency.",
+      "findingIds": [
+        "F16"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/sitemap.xml",
+        "evidence/robots.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Metadata DOM inspection",
+      "evidence": "Homepage probe found 3 JSON-LD blocks and 5 Open Graph tags; article HTML and visible headline/image align as a news entity.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/article-dom.json"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/headers.json, evidence/cookies.json",
+      "evidence": "Headers audit found no CSP, HSTS, nosniff, clickjacking protection, Referrer-Policy, or Permissions-Policy. Cookie audit found 23 insecure cookies, including long-lived and SameSite=None cookies.",
+      "findingIds": [
+        "F17"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/trackers.json, evidence/home-summary.json, evidence/cookies.json",
+      "evidence": "Tracker audit saw 47 third-party origins and active Facebook, Google Analytics, Tag Manager and ad trackers; HAR recorded hundreds of third-party requests.",
+      "findingIds": [
+        "F18"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template load observation",
+      "evidence": "No geolocation/notification prompt appeared on load in any capture; authentication was not required for the representative anonymous reading journey.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/headers.json, evidence/cookies.json",
+      "evidence": "Headers audit found no CSP, HSTS, nosniff, clickjacking protection, Referrer-Policy, or Permissions-Policy. Cookie audit found 23 insecure cookies, including long-lived and SameSite=None cookies.",
+      "findingIds": [
+        "F17"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "No-JS discoverability primitive",
+      "evidence": "Discoverability comparison found 96% rendered-content coverage in raw HTML, no empty mount, and matching crawler/browser content.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png",
+        "evidence/discoverability-rendered.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/section-desktop.png, evidence/article-desktop.png, evidence/home-mobile.png",
+      "evidence": "The same custom promotion covers article and listing content and is partially clipped by screenshot boundaries rather than using a resilient top-layer primitive.",
+      "findingIds": [
+        "F19"
+      ],
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "This public news MPA is content-oriented rather than an app-like installable workflow; offline installation is contextual and was not required.",
+      "reason": "This public news MPA is content-oriented rather than an app-like installable workflow; offline installation is contextual and was not required."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "HTTP 404 probe",
+      "evidence": "The invalid-route probe returned an intentional HTTP 404 response with 404 metadata rather than HTTP 200 or a blank JS shell.",
+      "artifacts": [
+        "evidence/not-found.html"
+      ],
+      "pathIds": [
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM language inspection",
+      "evidence": "The document declares lang=hr-hr and dir=ltr; Croatian content and reading direction are coherent across templates.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/article-dom.json"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM/content inspection",
+      "evidence": "Rendered dates and Croatian-language editorial metadata use the expected local convention on the representative pages.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/article-dom.json"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "The representative pages display publication content but no cross-time-zone event coordination or editable time concepts.",
+      "reason": "The representative pages display publication content but no cross-time-zone event coordination or editable time concepts."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/home-desktop.png, evidence/section-desktop.png, evidence/article-desktop.png",
+      "evidence": "A promotion appears automatically on homepage, section and article captures, repeatedly interrupting reading before user intent.",
+      "findingIds": [
+        "F20"
+      ],
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "No user-submitted form was part of the representative anonymous reading or offer-selection journey.",
+      "reason": "No user-submitted form was part of the representative anonymous reading or offer-selection journey."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "No address, payment, sign-in, or sign-up input was present in the representative pre-purchase surfaces.",
+      "reason": "No address, payment, sign-in, or sign-up input was present in the representative pre-purchase surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Subscription screenshot",
+      "evidence": "The subscription surface clearly labels Premium, asks the user to choose an offer, and exposes the annual price before deeper checkout.",
+      "artifacts": [
+        "evidence/subscription-desktop.png"
+      ],
+      "pathIds": [
+        "subscription"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/images.json, evidence/home-summary.json",
+      "evidence": "The image audit found 41 oversized images, 40 missing responsive sources and 77 legacy-format assets; HAR transferred 24.5 MB of images.",
+      "findingIds": [
+        "F21"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/trackers.json, evidence/home-summary.json, evidence/home-trace-summary.json",
+      "evidence": "The page contacted 47 third-party origins, made 519 requests and loaded 152 scripts; video/ad origins dominate request counts despite no primary video in the tested viewport.",
+      "findingIds": [
+        "F22"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/trackers.json, evidence/home-summary.json, evidence/home-trace-summary.json",
+      "evidence": "The page contacted 47 third-party origins, made 519 requests and loaded 152 scripts; video/ad origins dominate request counts despite no primary video in the tested viewport.",
+      "findingIds": [
+        "F22"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "The audited public news reading experience exposes crawlable content but no user-authorized transactional capability that needs an agent tool.",
+      "reason": "The audited public news reading experience exposes crawlable content but no user-authorized transactional capability that needs an agent tool."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon",
+      "evidence": "No summarization or language-model interaction is offered; on-device inference is an emerging optional opportunity, not required for reading articles.",
+      "reason": "No summarization or language-model interaction is offered; on-device inference is an emerging optional opportunity, not required for reading articles."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/post heap comparison",
+      "evidence": "After ten full-page scroll-to-bottom/back cycles, heap self size rose from 101.46 MB to 102.24 MB (+0.77%) and node count +0.86%, not evidence of unbounded growth in this bounded test.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct artifact review using evidence/heap-baseline.json, evidence/heap-post-scroll.json",
+      "evidence": "Baseline heap contained 1,860,037 nodes and 101.5 MB self size for a news homepage. After ten full-page scroll cycles it reached 102.2 MB (+0.8%), suggesting no clear unbounded leak but a very heavy starting footprint.",
+      "findingIds": [
+        "F23"
+      ],
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap constructor comparison",
+      "evidence": "Top constructor summaries showed no Detached* population, while closures remained approximately stable (156,893 to 157,372) after ten scroll cycles.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable to this public editorial reading experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F23"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The site does not adapt to dark color preference.",
+      "evidence": "The dark-mode screenshot is visually identical to the light screenshot, and the computed CSS probe found no prefers-color-scheme rules and color-scheme remained normal.",
+      "suggestedFix": "Declare color-scheme and use prefers-color-scheme or light-dark() for surfaces, text, controls, and embedded promotional UI.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "High-contrast preferences are not explicitly supported.",
+      "evidence": "The CSS probe found neither prefers-contrast nor forced-colors handling; Lighthouse also found multiple text contrast failures.",
+      "suggestedFix": "Add forced-colors and prefers-contrast adaptations and verify controls, icons, focus indicators, and labels remain visible.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Navigation and state changes do not use authored View Transitions.",
+      "evidence": "The CSS probe found no view-transition rules; representative navigation uses conventional full-document swaps. Browser API availability alone is not authored use.",
+      "suggestedFix": "Apply same-document or cross-document View Transitions to meaningful route and state changes, with reduced-motion fallback.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Fixed navigation does not communicate scroll state.",
+      "evidence": "The DOM shows a fixed 50px navigation bar, while CSS inspection found no scroll-state container query or progress treatment.",
+      "suggestedFix": "Use a sticky scroll-state container query or a restrained progress/shrinking treatment so the chrome reflects position.",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "navigation-drawer",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "small",
+      "pathId": "home"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "A subscription promotion obscures primary content across templates.",
+      "evidence": "Desktop homepage, section, and article screenshots show the same large yellow promotion centered over the lead image/headline; on mobile it consumes most of the next viewport.",
+      "suggestedFix": "Do not open the promotion over editorial content on load. Render a compact inline placement or user-triggered semantic dialog with reliable light-dismiss and frequency capping.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F06",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Responsive behavior is viewport-only rather than component-aware.",
+      "evidence": "The CSS probe inspected 1.49 MB of accessible CSS and found no @container rules, although cards are reused in differently sized columns.",
+      "suggestedFix": "Give reusable card/layout components containment and size/container queries, preserving viewport fallbacks.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/section-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "section"
+    },
+    {
+      "id": "F07",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Largest content is extremely slow to render.",
+      "evidence": "The trace measured LCP at 11.64s (FCP 1.95s); Lighthouse performance was 0.49 with LCP 4.2s, Speed Index 21.0s, and interactive at 45.6s.",
+      "suggestedFix": "Prioritize the actual LCP image, simplify its dependency path, and defer non-critical ads, widgets, styles, and scripts until after primary content.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-trace.json",
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Late content causes visible layout shift.",
+      "evidence": "Mobile layout observation measured CLS 0.122 with a 0.092 shift at about 8.23s; all 100 inspected images lacked width and height attributes.",
+      "suggestedFix": "Reserve image and embed space with width/height or aspect-ratio and keep late ad/promo insertion out of the content flow.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The main thread is heavily occupied by scripts.",
+      "evidence": "Trace recorded 2 long tasks up to 136.5ms and 158.8ms TBT; Lighthouse measured 860ms TBT. The HAR loaded 152 scripts.",
+      "suggestedFix": "Remove unnecessary execution, split long tasks, yield between work, and delay third-party initialization until user intent or idle time.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F10",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The homepage transfers a disproportionate 30 MB across 519 requests.",
+      "evidence": "HAR measured 29,974,303 transferred bytes: 24.5 MB images, 3.52 MB scripts, 1.54 MB fonts, 236 image requests and 152 script requests.",
+      "suggestedFix": "Set a page-weight budget; lazy-load below-fold media, remove duplicate/unused third-party bundles, subset fonts, and load advertising widgets conditionally.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core accessibility semantics are malformed or missing.",
+      "evidence": "Lighthouse accessibility was 0.77 and found malformed tablist relationships, untitled iframes and missing image alternatives. The probe found no h1, 32 empty links and 4 unnamed controls.",
+      "suggestedFix": "Restore one logical h1 on the homepage, fix tab/tablist ownership, title iframes, and give every meaningful control/image an accessible name or mark decoration appropriately.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json",
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Editorial labels fail minimum color contrast.",
+      "evidence": "Lighthouse measured red labels at 3.36:1 to 3.87:1 where 4.5:1 is required.",
+      "suggestedFix": "Darken the red token or adjust its background/font size and test all editorial label states at WCAG AA.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "small",
+      "pathId": "home"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page logs browser errors.",
+      "evidence": "Lighthouse found a refused logo resource request and scored the console-errors audit 0.",
+      "suggestedFix": "Remove or repair failing resource references and monitor console/network failures in production.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Image assets are unsized and frequently inefficient.",
+      "evidence": "Image audit: 100/100 missing dimensions, 65 below-fold images not lazy, 41 oversized, 40 without srcset, 77 legacy-format, and 14 missing alt.",
+      "suggestedFix": "Emit intrinsic dimensions, responsive srcset/sizes, modern formats, meaningful alt, and lazy loading below the fold.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-mobile-layout.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Deprecated APIs and BFCache blockers remain.",
+      "evidence": "Lighthouse found five deprecations, unload handlers in main/subframes blocking BFCache, inspector issues, and a broken source map.",
+      "suggestedFix": "Remove unload handlers, update deprecated first/third-party integrations, and resolve DevTools inspector/source-map issues.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The advertised sitemap endpoint is not a sitemap.",
+      "evidence": "A request to /sitemap.xml returned a 695 KB HTML page with noindex metadata rather than XML, undermining sitemap consistency.",
+      "suggestedFix": "Serve a valid XML sitemap at the declared endpoint and reference it from robots.txt.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "seo",
+      "artifacts": [
+        "evidence/sitemap.xml",
+        "evidence/robots.txt"
+      ],
+      "effort": "small",
+      "pathId": "home"
+    },
+    {
+      "id": "F17",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Browser security headers and cookie protections are missing.",
+      "evidence": "Headers audit found no CSP, HSTS, nosniff, clickjacking protection, Referrer-Policy, or Permissions-Policy. Cookie audit found 23 insecure cookies, including long-lived and SameSite=None cookies.",
+      "suggestedFix": "Deploy a tested CSP, HSTS, nosniff, frame-ancestors, Referrer-Policy and Permissions-Policy; mark HTTPS cookies Secure and minimize SameSite=None/lifetimes.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Tracking and third-party execution are excessive by default.",
+      "evidence": "Tracker audit saw 47 third-party origins and active Facebook, Google Analytics, Tag Manager and ad trackers; HAR recorded hundreds of third-party requests.",
+      "suggestedFix": "Gate non-essential vendors on informed consent, consolidate analytics, batch events, and remove vendors that do not provide clear user value.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Overlay runtime behavior is fragile at viewport edges.",
+      "evidence": "The same custom promotion covers article and listing content and is partially clipped by screenshot boundaries rather than using a resilient top-layer primitive.",
+      "suggestedFix": "Use dialog/popover top-layer behavior with focus management, light-dismiss, safe viewport sizing and fallback positioning.",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "article"
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The repeated subscription interruption is a nagging pattern.",
+      "evidence": "A promotion appears automatically on homepage, section and article captures, repeatedly interrupting reading before user intent.",
+      "suggestedFix": "Use honest, frequency-capped inline promotion; preserve a clear dismiss choice and do not re-open automatically across navigation.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "custom-button-actions",
+      "guidanceCategory": "forms",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "article"
+    },
+    {
+      "id": "F21",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Image delivery wastes bandwidth.",
+      "evidence": "The image audit found 41 oversized images, 40 missing responsive sources and 77 legacy-format assets; HAR transferred 24.5 MB of images.",
+      "suggestedFix": "Generate AVIF/WebP variants and correctly sized srcset/sizes candidates, defer below-fold media, and enforce image budgets.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party and background work is disproportionate to a text-news page.",
+      "evidence": "The page contacted 47 third-party origins, made 519 requests and loaded 152 scripts; video/ad origins dominate request counts despite no primary video in the tested viewport.",
+      "suggestedFix": "Load third-party media and ad stacks only near view or after intent, remove redundant vendors, and deprioritize non-user-visible work.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    },
+    {
+      "id": "F23",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The initial memory footprint is disproportionate.",
+      "evidence": "Baseline heap contained 1,860,037 nodes and 101.5 MB self size for a news homepage. After ten full-page scroll cycles it reached 102.2 MB (+0.8%), suggesting no clear unbounded leak but a very heavy starting footprint.",
+      "suggestedFix": "Reduce DOM/card volume, third-party runtimes, closures and caches; virtualize or defer deep feed content and set a memory budget.",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "manage-recurring-intervals",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "effort": "large",
+      "pathId": "home"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Stop the subscription promotion from obscuring editorial content",
+      "priority": 1,
+      "findingIds": [
+        "F05",
+        "F19",
+        "F20"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Cut the 30 MB, 519-request load and defer third-party stacks",
+      "priority": 2,
+      "findingIds": [
+        "F07",
+        "F09",
+        "F10",
+        "F18",
+        "F21",
+        "F22",
+        "F23"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Deploy security headers and secure cookie defaults",
+      "priority": 3,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Fix responsive image delivery and reserve image dimensions",
+      "priority": 4,
+      "findingIds": [
+        "F08",
+        "F14",
+        "F21"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Repair headings, ARIA relationships, names, iframe titles and contrast",
+      "priority": 5,
+      "findingIds": [
+        "F02",
+        "F11",
+        "F12"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T09-10-42-299Z"
+}

@@ -1,0 +1,2084 @@
+{
+  "url": "https://news.google.com",
+  "auditedAt": "2026-07-19T05:58:15.993Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Complete atomic audit of 58 checks over first-visit consent, home, topic, story and missing-route surfaces. Dynamic headlines reflect capture time.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Google c-wiz application shell",
+    "notes": "Public signed-out news aggregator with server metadata, JavaScript-rendered feed, PWA manifest and service worker. The exact URL first redirects a fresh UK profile to consent.google.com."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-styles",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "lighthouse",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "curl"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "performance",
+    "security",
+    "privacy",
+    "css",
+    "schedule-tasks-by-priority",
+    "light-dismiss-a-dialog",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "agentic-javascript-tools",
+    "same-document-transitions",
+    "scroll-position-aware-elements",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "optimize-image-priority",
+    "break-up-long-tasks"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "First-visit consent wall at the requested URL",
+      "condition": "first visit",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and computed styles for the first-visit consent surface",
+      "condition": "first visit",
+      "findingIds": [
+        "F02",
+        "F19",
+        "F21"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/news-home-desktop.png",
+      "caption": "Google News home feed at desktop width",
+      "condition": "1440x900",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon-news.json",
+      "caption": "Home metadata, headings and representative links probe",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/news-home-mobile.png",
+      "caption": "Home feed captured with a 360x800 visual viewport",
+      "condition": "360x800",
+      "findingIds": [
+        "F03",
+        "F20"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/news-home-mobile-layout.json",
+      "caption": "Mobile layout metrics, including 664 px horizontal overflow",
+      "condition": "360x800",
+      "findingIds": [
+        "F03",
+        "F21"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/news-home-dark.png",
+      "caption": "Home feed under a requested dark colour scheme remains light",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "Home feed in forced-colours and high-contrast mode",
+      "condition": "forced-colors: active, prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/ui-probe.json",
+      "caption": "Media preference, animation, landmark, heading and labelling probe",
+      "condition": "dark and reduced motion",
+      "findingIds": [
+        "F01",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/input-probe.json",
+      "caption": "Keyboard focus, target-size and viewport probe",
+      "condition": "default",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace for home load",
+      "condition": "cold load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact performance trace summary",
+      "condition": "cold load",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive for home load",
+      "condition": "cold load",
+      "findingIds": [
+        "F07",
+        "F13"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary with transfer, third-party and blocking signals",
+      "condition": "cold load",
+      "findingIds": [
+        "F07",
+        "F13",
+        "F16"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report for the bypassed-consent home URL",
+      "condition": "mobile simulated load",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Rendered image delivery and alternative-text probe",
+      "condition": "home feed",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/news-discoverability.json",
+      "caption": "Rendered versus raw-HTML discoverability result",
+      "condition": "JavaScript on versus raw response",
+      "findingIds": [
+        "F14",
+        "F17"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/news-discoverability-rendered.png",
+      "caption": "Rendered browser view used in discoverability comparison",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/news-discoverability-crawler.png",
+      "caption": "Crawler view used in discoverability comparison",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header inspection",
+      "condition": "first visit",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie flag and lifetime inspection",
+      "condition": "first visit",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party and tracker-origin inspection",
+      "condition": "first visit",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-visible secret-pattern scan",
+      "condition": "first visit",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/topic.png",
+      "caption": "Representative topic listing",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/topic-dom.json",
+      "caption": "Topic listing DOM and computed styles",
+      "condition": "desktop",
+      "findingIds": [
+        "F19",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/topic-meta.json",
+      "caption": "Topic metadata probe",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/story.png",
+      "caption": "Representative multi-source story overview",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/story-dom.json",
+      "caption": "Story overview DOM and computed styles",
+      "condition": "desktop",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/story-meta.json",
+      "caption": "Story metadata probe",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Readable baseline heap summary before repeated feed scrolling",
+      "condition": "baseline",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Readable heap summary after ten bottom-and-top scroll cycles",
+      "condition": "after repeated interaction",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Scripts, stylesheet, manifest, permission and metadata probe",
+      "condition": "home feed",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/service-worker.json",
+      "caption": "Service-worker registration probe",
+      "condition": "home feed",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/manifest.json",
+      "caption": "Fetched web app manifest",
+      "condition": "home feed",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Fetched robots.txt",
+      "condition": "public crawler",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Fetched sitemap.xml",
+      "condition": "public crawler",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/http-states.json",
+      "caption": "robots and missing-route fetch probe",
+      "condition": "error state",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/error-route.png",
+      "caption": "Direct missing-route navigation outcome",
+      "condition": "fresh profile",
+      "findingIds": [
+        "F18"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "direct evidence review",
+      "evidence": "The dark-mode screenshot remains a light #f6f8fc surface; ui-probe reports prefers-color-scheme: dark matched while root color-scheme is normal and body text remains dark on a light background.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-home-dark.png",
+        "evidence/ui-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "evaluate media and animation probe",
+      "evidence": "prefers-reduced-motion matched and document.getAnimations() returned no active animations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/ui-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "forced-colours screenshot plus Lighthouse contrast audit",
+      "evidence": "Forced-colours mode preserves readable text, controls and boundaries; Lighthouse color-contrast scored 1.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/high-contrast.png",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "direct evidence review",
+      "evidence": "DOM and stylesheet inspection across home, topic and story templates found no view-transition declarations or named transition elements.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/topic-dom.json",
+        "evidence/story-dom.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS and animation probe",
+      "evidence": "No scroll-linked visual effect is present, and no animation-timeline or active animation was found, so the feed does not implement a main-thread scroll-animation anti-pattern.",
+      "pathIds": [
+        "home",
+        "topic"
+      ],
+      "artifacts": [
+        "evidence/ui-probe.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "interaction and screenshot review",
+      "evidence": "The feed uses native document scrolling and ordinary links/buttons; no custom swipe, drag or pointer-driven interaction was present in the representative reading flow.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual and DOM review",
+      "evidence": "The 6,591 px home capture and 26,590 px topic DOM show very long listings, while DOM/CSS inspection found no scroll-state query, scroll progress indicator or adaptive header state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-home-mobile.png",
+        "evidence/topic-dom.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "high",
+      "method": "visual and DOM review",
+      "evidence": "No tooltip or detached floating menu is required for the primary signed-out reading flow; visible controls remain attached and unclipped in the captured states.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/topic.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "multi-template visual review",
+      "evidence": "Descriptive topic links, story titles, section headings and See more headlines controls provide clear orientation from home to topic and story overview.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/topic.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "direct evidence review",
+      "evidence": "Navigating to https://news.google.com redirects to consent.google.com and replaces the feed with a full-page Before you continue decision surface.",
+      "pathIds": [
+        "consent"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM review of interruption and controls",
+      "evidence": "The consent choice uses native buttons with explicit Reject all and Accept all actions; the news reading surfaces do not introduce custom modal divs in the exercised path.",
+      "pathIds": [
+        "consent",
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/news-home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshot review across templates",
+      "evidence": "The home, topic and story templates devote the main viewport to headlines and source context; application chrome is compact relative to the long content feed.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/topic.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual, DOM and layout review",
+      "evidence": "The mobile layout primitive reports visualViewportWidth 360, scrollWidth 1024 and horizontalOverflowPx 664; the full-page capture is 1024 px wide.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-home-mobile-layout.json",
+        "evidence/news-home-mobile.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual, DOM and layout review",
+      "evidence": "Computed styles on home, topic and story report container-type normal, and the captured CSS contains no @container rules; the narrow-viewport run falls back to a 1024 px layout.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/topic-dom.json",
+        "evidence/news-home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual, DOM and layout review",
+      "evidence": "The focus probe reports outline-style none on the first focusable anchor and five rendered links with heights from 12 to 20 px.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/input-probe.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "first-viewport and heading review",
+      "evidence": "Google News, Your briefing, Top stories and source-labelled headlines make the page purpose and next reading actions explicit.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/recon-news.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "home-to-story walkthrough",
+      "evidence": "The exercised home, topic and multi-source story URLs loaded and exposed crawlable headline links without requiring sign-in.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/topic.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "state and signed-out UI review",
+      "evidence": "Signed-out personalisation is clearly labelled with a Sign in action, while source and story states remain understandable; the separate HTTP failure weakness is recorded under resilience.",
+      "pathIds": [
+        "home",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "trace, HAR and Lighthouse",
+      "evidence": "Lighthouse reports performance 0.41, FCP 6.0 s, LCP 10.1 s, TBT 830 ms and time to interactive 14.1 s. The raw-CDP trace corroborates LCP 2.78 s and one 188.83 ms long task in a less-throttled run.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "layout observer and Lighthouse",
+      "evidence": "The layout observer measured CLS 0 in the capture window and Lighthouse measured CLS 0.006.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-home-mobile-layout.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "trace, HAR and Lighthouse",
+      "evidence": "Lighthouse measured 830 ms total blocking time and a 670 ms maximum potential input delay; the CDP trace found a 188.83 ms long task.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "trace, HAR and Lighthouse",
+      "evidence": "The HAR records 120 requests and 1.46 MB transferred, including 367 KB of fonts. The Google Fonts stylesheet is parser-inserted at VeryHigh priority; Lighthouse flags LCP discovery and network dependency failures.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "trace, HAR and Lighthouse",
+      "evidence": "Lighthouse estimates 352 KiB of unused JavaScript and 199 KiB of unused CSS on the audited load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility and visual review",
+      "evidence": "Lighthouse identifies Top stories and Local news anchors where aria-label is prohibited because the elements have no valid role in the computed accessibility model.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse and forced-colours screenshot",
+      "evidence": "Lighthouse color-contrast scored 1 and forced-colours mode kept content readable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility and visual review",
+      "evidence": "Lighthouse fails heading-order for article h4 elements. ui-probe records h1 followed by h3 sections and six empty h3 elements; it also records no nav landmark.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/ui-probe.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "desktop, mobile and high-contrast screenshot review",
+      "evidence": "Headline and metadata text remains readable with clear grouping and no visible clipping on the representative templates, apart from the separately reported viewport overflow.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/high-contrast.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse viewport audit and mobile capture",
+      "evidence": "The viewport meta audit passes and the page permits normal scaling; no essential audio/video requiring captions appeared. Target-size and horizontal reflow issues are separately recorded under input and form-factor checks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/news-home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse runtime audit",
+      "evidence": "Lighthouse errors-in-console scored 1 and reported no console error items.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse document and rendered-image review",
+      "evidence": "Lighthouse doctype, charset, image-alt, aspect-ratio and deprecated API audits pass; observed CLS is low despite missing explicit img dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM inspection",
+      "evidence": "Lighthouse reports a large first-party script without a source map and three BFCache blockers, including cache-control: no-store on the main resource.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "metadata probes on three templates",
+      "evidence": "Home, topic and story each expose descriptive titles and meta descriptions.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/recon-news.json",
+        "evidence/topic-meta.json",
+        "evidence/story-meta.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM, robots and Lighthouse SEO",
+      "evidence": "Headline links have real href values, viewport meta passes, robots allows home/topics/stories for general crawlers, and Lighthouse SEO scores 1.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/recon-news.json",
+        "evidence/robots.txt",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "metadata, status, robots and sitemap inspection",
+      "evidence": "The audited URLs return 200, expose canonical URLs, appear under allowed robots patterns, and the fetched sitemap is populated.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/topic-meta.json",
+        "evidence/story-meta.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.xml"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "JSON-LD and Open Graph probes",
+      "evidence": "Home, topic and story expose Organization or page JSON-LD plus matching Open Graph title, URL, description and image metadata.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/topic-meta.json",
+        "evidence/story-meta.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, network and runtime probes",
+      "evidence": "The headers primitive confirms HTTPS and nosniff, but finds no HSTS or Referrer-Policy and a CSP containing unsafe-inline/unsafe-eval.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, network and runtime probes",
+      "evidence": "The HAR attributes 83 of 120 requests and 1.12 MB of 1.46 MB transferred to other origins, including a 153 KB Google Tag Manager script. The tracker probe found no listed tracker match, but analytics collection appears in the HAR.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "permission and authentication probe",
+      "evidence": "No geolocation, notification or media permission request was detected on load; the platform exposes WebAuthn and sign-in is optional for core reading.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/news-home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, network and runtime probes",
+      "evidence": "The headers primitive confirms HTTPS and nosniff, but finds no HSTS or Referrer-Policy and a CSP containing unsafe-inline/unsafe-eval.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "no-JS, manifest and runtime review",
+      "evidence": "The discoverability primitive reports only 21% rendered-word coverage in raw HTML. Title, h1 and description survive, but the crawler screenshot contains only a small fraction of the rendered feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-discoverability.json",
+        "evidence/news-discoverability-rendered.png",
+        "evidence/news-discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "multi-template rendering review",
+      "evidence": "Home, topic and story templates reached stable rendered states with intact controls and no clipped primary overlays in the desktop captures.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/topic.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "pass",
+      "confidence": "high",
+      "method": "manifest and service-worker probe",
+      "evidence": "A standalone web app manifest with icons and start_url is present, and a service worker controls the news origin.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/service-worker.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "no-JS, manifest and runtime review",
+      "evidence": "The same-origin missing-route fetch failed with TypeError rather than returning a usable error document, while direct navigation was redirected to the consent surface instead of a contextual 404.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/http-states.json",
+        "evidence/error-route.png"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM and locale probe",
+      "evidence": "The document uses lang=en-GB and ltr direction; localized templates render coherently across home, topic and story.",
+      "pathIds": [
+        "home",
+        "topic",
+        "story"
+      ],
+      "artifacts": [
+        "evidence/recon-news.json",
+        "evidence/topic.png",
+        "evidence/story.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "rendered locale review",
+      "evidence": "The UK surface uses en-GB labels, Sunday 19 July, Celsius weather and locale-appropriate relative publication ages.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/news-home-desktop.png",
+        "evidence/recon-news.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "recon and applicability judgement",
+      "evidence": "The audited reading surfaces contain relative publication ages but no scheduling, recurring-event or time-zone conversion flow.",
+      "reason": "The audited reading surfaces contain relative publication ages but no scheduling, recurring-event or time-zone conversion flow.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "consent and signed-out state review",
+      "evidence": "Reject all and Accept all are equally prominent, consent purposes are stated, and reading remains available without signing in once a choice is made.",
+      "pathIds": [
+        "consent",
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/news-home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "recon and applicability judgement",
+      "evidence": "No user-submitted form with validation is present in the public signed-out reading paths; search is a suggestion field rather than a submitted validation flow.",
+      "reason": "No user-submitted form with validation is present in the public signed-out reading paths; search is a suggestion field rather than a submitted validation flow.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "recon and applicability judgement",
+      "evidence": "No address, payment, sign-up or credential form is present in the audited signed-out paths.",
+      "reason": "No address, payment, sign-up or credential form is present in the audited signed-out paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "recon and applicability judgement",
+      "evidence": "No checkout, subscription purchase or account-management flow is present in the audited signed-out scope.",
+      "reason": "No checkout, subscription purchase or account-management flow is present in the audited signed-out scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, images and Lighthouse review",
+      "evidence": "The image probe finds 100 of 100 img elements without width and height attributes and 38 oversized images, commonly 96 px favicon resources displayed at 14 px. Runtime CLS was low, so the risk is primarily waste and future instability rather than observed shift.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/news-home-desktop.png"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, images and Lighthouse review",
+      "evidence": "Lighthouse estimates 352 KiB of unused JavaScript and 199 KiB of unused CSS on the audited load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, images and Lighthouse review",
+      "evidence": "Third-party origins account for 1.12 MB of 1.46 MB transferred; fonts consume 367 KB and Google Tag Manager 153 KB before user interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "robots, Lighthouse and discoverability review",
+      "evidence": "robots.txt explicitly disallows GPTBot, ChatGPT-User, PerplexityBot, anthropic-ai, ClaudeBot and Claude-Web. Lighthouse reports an agentic-browsing score of 0.33 and no llms.txt recommendation; raw content coverage is 21%.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/robots.txt",
+        "evidence/lighthouse.json",
+        "evidence/news-discoverability.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "recon and applicability judgement",
+      "evidence": "No user task in the audited public reading flow requires on-device generation; absence is not itself a failure.",
+      "reason": "No user task in the audited public reading flow requires on-device generation; absence is not itself a failure.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "baseline and post-interaction heap comparison",
+      "evidence": "After ten bottom-to-top feed scroll cycles, heap grew from 32,673,352 to 32,909,762 bytes (0.7%) and node count from 559,430 to 562,219 (0.5%), with no unbounded-growth signal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "heap summary review",
+      "evidence": "The dense feed settles at about 32.7 MB self size; post-interaction growth is small and proportionate to loaded feed content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "constructor and closure comparison",
+      "evidence": "Top constructor populations remain nearly flat after repetition: closures rise 19,964 to 19,973, sets stay 1,570 and no Detached constructor appears in the reported top populations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F21",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F08",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "consent",
+      "description": "First visit to the exact requested URL, representing consent and privacy choice before core content.",
+      "url": "https://news.google.com",
+      "conditions": [
+        "fresh browser profile"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "home",
+      "description": "Signed-out Google News home briefing reached through the non-personalised ucbcb URL, representing discovery and the main reading journey.",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en",
+      "conditions": [
+        "desktop",
+        "360x800 visual viewport",
+        "dark scheme",
+        "reduced motion",
+        "forced colours",
+        "cold load",
+        "repeated scrolling"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "topic",
+      "description": "Headlines topic listing, representing long section/listing templates.",
+      "url": "https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRFZxYUdjU0JXVnVMVWRDR2dKSFFpZ0FQAQ?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "story",
+      "description": "Multi-source story overview, representing story detail and source comparison.",
+      "url": "https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2lUaTduUkVSSHpsOFktUDM1blNpZ0FQAQ?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error",
+      "description": "Missing-route and same-origin fetch exercise, representing HTTP failure recovery.",
+      "url": "https://news.google.com/does-not-exist-web-uplift-404",
+      "conditions": [
+        "fresh profile",
+        "same-origin fetch"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The news experience ignores the requested dark colour scheme.",
+      "evidence": "The dark-mode screenshot remains a light #f6f8fc surface; ui-probe reports prefers-color-scheme: dark matched while root color-scheme is normal and body text remains dark on a light background.",
+      "artifacts": [
+        "evidence/news-home-dark.png",
+        "evidence/ui-probe.json"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and derive surfaces, text, icons and browser chrome from prefers-color-scheme or light-dark().",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F02",
+      "severity": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "summary": "A full-page consent interstitial blocks the requested news content on first visit.",
+      "evidence": "Navigating to https://news.google.com redirects to consent.google.com and replaces the feed with a full-page Before you continue decision surface.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Keep the equally prominent accept and reject choices, but use a compact, accessible consent surface where law and policy permit, preserving access to non-personalised core content.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "consent",
+      "url": "https://news.google.com"
+    },
+    {
+      "id": "F03",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "css",
+      "guidanceCategory": "css",
+      "summary": "The layout exposes a desktop-width canvas in a 360 px visual viewport.",
+      "evidence": "The mobile layout primitive reports visualViewportWidth 360, scrollWidth 1024 and horizontalOverflowPx 664; the full-page capture is 1024 px wide.",
+      "artifacts": [
+        "evidence/news-home-mobile-layout.json",
+        "evidence/news-home-mobile.png"
+      ],
+      "suggestedFix": "Remove the 1024 px minimum layout width, size the main grid intrinsically, and verify scrollWidth equals the visual viewport at narrow widths.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F04",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Keyboard focus is not visibly indicated on the first focusable link and several links have undersized hit areas.",
+      "evidence": "The focus probe reports outline-style none on the first focusable anchor and five rendered links with heights from 12 to 20 px.",
+      "artifacts": [
+        "evidence/input-probe.json"
+      ],
+      "suggestedFix": "Add a clearly visible :focus-visible treatment and provide at least 24 by 24 CSS pixel target areas, preferably 44 by 44 for primary touch controls.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "Cold-load performance is well outside the good range.",
+      "evidence": "Lighthouse reports performance 0.41, FCP 6.0 s, LCP 10.1 s, TBT 830 ms and time to interactive 14.1 s. The raw-CDP trace corroborates LCP 2.78 s and one 188.83 ms long task in a less-throttled run.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritise the LCP content, reduce startup JavaScript, delay non-critical work and set a performance budget against throttled LCP and interaction latency.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "schedule-tasks-by-priority",
+      "guidanceCategory": "performance",
+      "summary": "Startup JavaScript blocks the main thread.",
+      "evidence": "Lighthouse measured 830 ms total blocking time and a 670 ms maximum potential input delay; the CDP trace found a 188.83 ms long task.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Break startup work into sub-50 ms tasks, schedule non-visible work at lower priority and defer modules until their UI is requested.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "Font and script delivery delays the critical path.",
+      "evidence": "The HAR records 120 requests and 1.46 MB transferred, including 367 KB of fonts. The Google Fonts stylesheet is parser-inserted at VeryHigh priority; Lighthouse flags LCP discovery and network dependency failures.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Subset and self-host critical font faces where feasible, preload only the required face, streamline the critical dependency chain and defer non-critical scripts.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F08",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The home feed ships substantial unused JavaScript and CSS.",
+      "evidence": "Lighthouse estimates 352 KiB of unused JavaScript and 199 KiB of unused CSS on the audited load.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Code-split feed, account, feedback and optional feature bundles; remove unused rules from the initial route and load optional dependencies conditionally.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F09",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Some headline links carry prohibited ARIA attributes.",
+      "evidence": "Lighthouse identifies Top stories and Local news anchors where aria-label is prohibited because the elements have no valid role in the computed accessibility model.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Use a valid native anchor role with a real href and visible accessible text, removing ARIA that conflicts with the resulting role.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Heading levels skip from section headings to h4 article headlines, and multiple source headings are empty.",
+      "evidence": "Lighthouse fails heading-order for article h4 elements. ui-probe records h1 followed by h3 sections and six empty h3 elements; it also records no nav landmark.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/ui-probe.json"
+      ],
+      "suggestedFix": "Give sections a sequential h2 structure, make article heading levels follow their section, remove empty headings and expose the primary navigation as a nav landmark.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F11",
+      "severity": "low",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "security",
+      "guidanceCategory": "best-practices",
+      "summary": "Large JavaScript lacks source maps and the page cannot use the back-forward cache.",
+      "evidence": "Lighthouse reports a large first-party script without a source map and three BFCache blockers, including cache-control: no-store on the main resource.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Publish production source maps to authorised tooling and narrow no-store usage so non-sensitive news views can restore from BFCache.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "The observed response weakens browser-enforced transport and script protections.",
+      "evidence": "The headers primitive confirms HTTPS and nosniff, but finds no HSTS or Referrer-Policy and a CSP containing unsafe-inline/unsafe-eval.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Send HSTS and a restrictive Referrer-Policy, remove unsafe-eval, and migrate remaining inline execution to nonces or hashes.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "Third-party delivery and analytics dominate the initial transfer.",
+      "evidence": "The HAR attributes 83 of 120 requests and 1.12 MB of 1.46 MB transferred to other origins, including a 153 KB Google Tag Manager script. The tracker probe found no listed tracker match, but analytics collection appears in the HAR.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Minimise analytics payload and collection, delay it until appropriate consent, consolidate same-operator origins where practical and budget third-party bytes.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "css",
+      "guidanceCategory": "resilience",
+      "summary": "Most live news content is unavailable to a browser or crawler without JavaScript.",
+      "evidence": "The discoverability primitive reports only 21% rendered-word coverage in raw HTML. Title, h1 and description survive, but the crawler screenshot contains only a small fraction of the rendered feed.",
+      "artifacts": [
+        "evidence/news-discoverability.json",
+        "evidence/news-discoverability-rendered.png",
+        "evidence/news-discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render the primary headline list and topic links, then hydrate personalisation and live updates as enhancements.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "Many rendered images lack intrinsic dimensions and small favicons are delivered oversized.",
+      "evidence": "The image probe finds 100 of 100 img elements without width and height attributes and 38 oversized images, commonly 96 px favicon resources displayed at 14 px. Runtime CLS was low, so the risk is primarily waste and future instability rather than observed shift.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/news-home-desktop.png"
+      ],
+      "suggestedFix": "Emit intrinsic width and height, request favicon sizes close to display size, retain responsive srcset for editorial images and lazy-load below-fold media consistently.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "summary": "Third-party scripts and fonts consume a disproportionate share of a text-heavy news feed.",
+      "evidence": "Third-party origins account for 1.12 MB of 1.46 MB transferred; fonts consume 367 KB and Google Tag Manager 153 KB before user interaction.",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Set route-level budgets for third-party JavaScript and fonts, defer analytics and optional support code, and reduce font variants.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "agentic-web",
+      "summary": "The public news surface is intentionally unavailable to major AI agents and exposes no structured action interface.",
+      "evidence": "robots.txt explicitly disallows GPTBot, ChatGPT-User, PerplexityBot, anthropic-ai, ClaudeBot and Claude-Web. Lighthouse reports an agentic-browsing score of 0.33 and no llms.txt recommendation; raw content coverage is 21%.",
+      "artifacts": [
+        "evidence/robots.txt",
+        "evidence/lighthouse.json",
+        "evidence/news-discoverability.json"
+      ],
+      "suggestedFix": "If agent access is an intended channel, define an explicit crawler policy and expose safe read/search/follow capabilities through structured agent tools rather than scraping.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "summary": "A missing same-origin route did not provide a useful recoverable error response in the exercised client context.",
+      "evidence": "The same-origin missing-route fetch failed with TypeError rather than returning a usable error document, while direct navigation was redirected to the consent surface instead of a contextual 404.",
+      "artifacts": [
+        "evidence/http-states.json",
+        "evidence/error-route.png"
+      ],
+      "suggestedFix": "Return a real 404 status with a lightweight Google News error page, home/search recovery links and offline-aware retry messaging.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F19",
+      "severity": "low",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "summary": "Template changes use abrupt full-state swaps rather than declarative view transitions.",
+      "evidence": "DOM and stylesheet inspection across home, topic and story templates found no view-transition declarations or named transition elements.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/topic-dom.json",
+        "evidence/story-dom.json"
+      ],
+      "suggestedFix": "Use same-document View Transitions for feed-to-topic state changes and cross-document transitions where navigation remains on Google News, with reduced-motion handling.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F20",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scroll-position-aware-elements",
+      "guidanceCategory": "css",
+      "summary": "The long feed offers no scroll-state progress or adaptive chrome.",
+      "evidence": "The 6,591 px home capture and 26,590 px topic DOM show very long listings, while DOM/CSS inspection found no scroll-state query, scroll progress indicator or adaptive header state.",
+      "artifacts": [
+        "evidence/news-home-mobile.png",
+        "evidence/topic-dom.json"
+      ],
+      "suggestedFix": "Add a subtle scroll progress or section-position affordance and adapt sticky chrome with CSS scroll-state queries where supported.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "summary": "Reusable feed cards do not expose container-driven responsive behaviour.",
+      "evidence": "Computed styles on home, topic and story report container-type normal, and the captured CSS contains no @container rules; the narrow-viewport run falls back to a 1024 px layout.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/topic-dom.json",
+        "evidence/news-home-mobile-layout.json"
+      ],
+      "suggestedFix": "Make card and rail wrappers query containers and adapt card media, metadata and columns to their allocated inline size, independent of the viewport.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://news.google.com/home?ucbcb=1&hl=en-GB&gl=GB&ceid=GB:en"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Restore narrow-viewport reflow and container-responsive cards",
+      "priority": 1,
+      "findingIds": [
+        "F03",
+        "F21"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Server-render primary headlines and recovery states",
+      "priority": 2,
+      "findingIds": [
+        "F14",
+        "F18"
+      ],
+      "guidanceId": "css",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Reduce startup JavaScript, fonts and critical dependencies",
+      "priority": 3,
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F16"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Make focus, target size, headings and ARIA consistently accessible",
+      "priority": 4,
+      "findingIds": [
+        "F04",
+        "F09",
+        "F10"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Respect dark colour-scheme preference",
+      "priority": 5,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Strengthen response security policies",
+      "priority": 6,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Minimise analytics and third-party transfer",
+      "priority": 7,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Optimise intrinsic image sizing and favicon resolution",
+      "priority": 8,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Reduce first-visit consent interruption while preserving equal choice",
+      "priority": 9,
+      "findingIds": [
+        "F02"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Define a safe, explicit agent access strategy",
+      "priority": 10,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Adopt declarative route and scroll-state transitions",
+      "priority": 11,
+      "findingIds": [
+        "F19",
+        "F20"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Restore BFCache eligibility and production debugging metadata",
+      "priority": 12,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T05-58-15-993Z"
+}

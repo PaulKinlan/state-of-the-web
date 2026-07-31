@@ -1,0 +1,2201 @@
+{
+  "url": "https://www.imagefap.com",
+  "auditedAt": "2026-07-19T10:30:52.583Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of five representative public templates. Detail/gallery item pages, upload after authentication, registration, account settings, forums, and transactional completion were not covered because they require volatile content selection or authenticated/destructive interaction.",
+  "page": {
+    "appType": "mpa",
+    "framework": "server-rendered PHP/jQuery MPA",
+    "notes": "Public adult-media service with a mandatory age gate, large media feeds, account forms and extensive advertising/analytics."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "har",
+    "trace",
+    "Lighthouse",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "discoverability",
+    "heap-summary"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "anchor-positioning-tab-underline",
+    "directional-navigation-transitions",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "complex-shapes",
+    "fluid-scaling",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "move-dom-element-without-losing-state",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "resilient-context-menus-and-nested-dropdowns",
+    "persistent-toast-notifications",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "search-hidden-content",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Under emulated dark preference, `color-scheme` remained `normal`, body text remained black, no relevant preference rules were found, and the dark capture remained light.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json",
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Under emulated reduced motion, `getAnimations()` returned no active animations; no auto-advance motion was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Lighthouse failed the color-contrast audit; no `prefers-contrast` or forced-colors adaptation was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Recon shows a multi-page set of ordinary links; no active transition was observed and no View Transition integration was established for route changes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement against representative paths.",
+      "evidence": "No scroll-linked animation is present, so there is no imperative scroll animation implementation to assess.",
+      "reason": "No scroll-linked animation is present, so there is no imperative scroll animation implementation to assess."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement against representative paths.",
+      "evidence": "The audited desktop-style MPA exposes no custom gesture-driven interaction.",
+      "reason": "The audited desktop-style MPA exposes no custom gesture-driven interaction."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Mobile content height reached 7,140 CSS px while the DOM/CSS probes found no verified sticky progress, scroll-state chrome, or equivalent position cue.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The overlay probe found `#agego-overlay-container` covering 780x493 at z-index 2147483647; the page contains zero `<dialog>` and zero popover elements.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/overlay-noise-probe.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Global navigation uses descriptive text links and browser focus remains visibly outlined.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "The only full-viewport interruption detected was the clearly stated adult-age gate, which is contextually necessary for this site and exposes a close/confirmation path.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The overlay probe found `#agego-overlay-container` covering 780x493 at z-index 2147483647; the page contains zero `<dialog>` and zero popover elements.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/overlay-noise-probe.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The login DOM included locally personalised promotional copy linking back to the login URL, while the homepage loaded several ad networks and three visible ad-like regions.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-recon.json",
+        "evidence/overlay-noise-probe.json",
+        "evidence/home-trackers.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "All four tested templates lacked a viewport meta tag. At a requested 360px viewport, home rendered a 1,292px layout viewport and login/video rendered 1,000px layouts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/gallery-mobile-layout.json",
+        "evidence/login-mobile-layout.json",
+        "evidence/videos-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "All four tested templates lacked a viewport meta tag. At a requested 360px viewport, home rendered a 1,292px layout viewport and login/video rendered 1,000px layouts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/gallery-mobile-layout.json",
+        "evidence/login-mobile-layout.json",
+        "evidence/videos-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "On login, 38 of 44 visible interactive elements were under 24px in at least one dimension and ten text/password controls were unlabeled. Lighthouse also failed target-size.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/accessibility-form-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Titles, H1 headings and navigation directly identify gallery, video, category and sign-in purposes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Anonymous users can reach category, gallery, video and search listings through real links/forms; account recovery links are present on sign-in.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Username/password were not `required`, empty submission produced no `:invalid` controls, and the page had no live region, alert, or status element.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/form-behavior-probe.json",
+        "evidence/login-recon.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Lighthouse measured LCP 8.28s, FCP 4.47s and TTI 8.30s (performance score 0.61), despite a separate warm trace showing no long tasks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Image audit found 79/100 missing dimensions, 58 missing srcset, 98 legacy-format images, and Lighthouse failed image aspect ratio/responsive sizing.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "The DevTools trace recorded zero long tasks and 0ms total blocking time in the measured load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "HAR recorded 146 requests and 11.72MB transferred, including two GIF thumbnails of 5.19MB and 4.70MB. Parser-inserted classic scripts lacked async/defer and CSS was uncompressed/uncached.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Lighthouse reported DevTools inspector issues and 1.35s potential unused-JS savings; the DOM had 92 inline event-handler elements and 16 target=_blank links without noopener/noreferrer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Lighthouse failed image-alt, label and link-name. The image probe found 48 images without alt and the login probe found ten unlabeled text/password controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-images.json",
+        "evidence/accessibility-form-probe.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Lighthouse failed the color-contrast audit; no `prefers-contrast` or forced-colors adaptation was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The login page had no main/nav/header/footer landmarks, no H1, and only an H2, although browser-default focus outline was visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/accessibility-form-probe.json",
+        "evidence/login-recon.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "All four tested templates lacked a viewport meta tag. At a requested 360px viewport, home rendered a 1,292px layout viewport and login/video rendered 1,000px layouts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/gallery-mobile-layout.json",
+        "evidence/login-mobile-layout.json",
+        "evidence/videos-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "No viewport meta was present and Lighthouse failed meta-viewport and target-size; tested mobile pages rendered at 1,000-1,292 CSS px rather than 360px.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/videos-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Lighthouse `errors-in-console` passed with no captured console errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Image audit found 79/100 missing dimensions, 58 missing srcset, 98 legacy-format images, and Lighthouse failed image aspect ratio/responsive sizing.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Lighthouse reported DevTools inspector issues and 1.35s potential unused-JS savings; the DOM had 92 inline event-handler elements and 16 target=_blank links without noopener/noreferrer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Homepage raw HTML contains a descriptive title and meta description; discoverability confirmed both survive without JavaScript.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Raw HTML is crawlable (92% coverage), but no viewport meta exists, multiple links have no discernible name, no canonical was present, sitemap.xml returned 404, and no JSON-LD/Open Graph metadata was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/platform-probe.json",
+        "evidence/lighthouse-home.json",
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Raw HTML is crawlable (92% coverage), but no viewport meta exists, multiple links have no discernible name, no canonical was present, sitemap.xml returned 404, and no JSON-LD/Open Graph metadata was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/platform-probe.json",
+        "evidence/lighthouse-home.json",
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Raw HTML is crawlable (92% coverage), but no viewport meta exists, multiple links have no discernible name, no canonical was present, sitemap.xml returned 404, and no JSON-LD/Open Graph metadata was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/platform-probe.json",
+        "evidence/lighthouse-home.json",
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "All seven cookies lacked Secure; PHPSESSID also lacked HttpOnly and SameSite protection. CSP, frame protection, Referrer-Policy and Permissions-Policy were absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-cookies.json",
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Tracker probe found 18 third-party origins and Google Analytics/Tag Manager/DoubleClick; HAR attributed 121/146 requests and 11.52MB to non-main-origin hosts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The login template contains username/password fields, no WebAuthn/passkey affordance, and blank autocomplete attributes.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-recon.json",
+        "evidence/form-behavior-probe.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "All seven cookies lacked Secure; PHPSESSID also lacked HttpOnly and SameSite protection. CSP, frame protection, Referrer-Policy and Permissions-Policy were absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-cookies.json",
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Discoverability measured 92% raw/rendered content coverage, with title, H1 and description available without JavaScript.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Empty login submission exposed no native invalid state or live feedback; HAR also recorded blocked/aborted ad and image requests without an observed user-facing recovery state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/form-behavior-probe.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement against representative paths.",
+      "evidence": "This public media website is not presented as an installable app; offline media access is not a reasonable core requirement.",
+      "reason": "This public media website is not presented as an installable app; offline media access is not a reasonable core requirement."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Empty login submission exposed no native invalid state or live feedback; HAR also recorded blocked/aborted ad and image requests without an observed user-facing recovery state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/form-behavior-probe.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "The document declares `lang=\"en-GB\"`, and CSS inspection found logical-property usage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The English page rendered a fixed English date while probes found no alternate locale surface or evidence that user-facing date formatting responds to locale.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement against representative paths.",
+      "evidence": "No scheduling, event coordination, or user-facing time-of-day flow was present in the audited templates.",
+      "reason": "No scheduling, event coordination, or user-facing time-of-day flow was present in the audited templates."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The login DOM included locally personalised promotional copy linking back to the login URL, while the homepage loaded several ad networks and three visible ad-like regions.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-recon.json",
+        "evidence/overlay-noise-probe.json",
+        "evidence/home-trackers.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Login fields are not required and empty submission yielded no invalid controls or live error region.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/form-behavior-probe.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Both username and password reported an empty autocomplete value.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/form-behavior-probe.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The login template contains username/password fields, no WebAuthn/passkey affordance, and blank autocomplete attributes.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-recon.json",
+        "evidence/form-behavior-probe.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The homepage transferred 11.72MB, 11.23MB as images; 88 below-fold images were not lazy-loaded, 98/100 used legacy formats, and two GIF thumbnails accounted for 9.88MB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "The network capture started analytics, ad, age-verification and related requests during initial rendering, contributing 121 non-main-origin requests.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active CDP evidence and/or Lighthouse against representative templates.",
+      "evidence": "Tracker probe found 18 third-party origins and Google Analytics/Tag Manager/DoubleClick; HAR attributed 121/146 requests and 11.52MB to non-main-origin hosts. The homepage transferred 11.72MB, 11.23MB as images; 88 below-fold images were not lazy-loaded, 98/100 used legacy formats, and two GIF thumbnails accounted for 9.88MB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F18",
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement against representative paths.",
+      "evidence": "No declared agent-facing capability or tool intent was found for this media-browsing site.",
+      "reason": "No declared agent-facing capability or tool intent was found for this media-browsing site."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement against representative paths.",
+      "evidence": "No summarisation or language-model task is part of the representative journeys.",
+      "reason": "No summarisation or language-model task is part of the representative journeys."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "low",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Ten repeated age-overlay toggle attempts increased the separate-session heap summary by about 3.9% (12.75MB to 13.25MB), not evidence of unbounded retained growth; confidence is low because snapshots used separate browser sessions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "low",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Heap summary reported 12.75MB self size and 190,531 nodes, proportionate to a media-heavy DOM.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "low",
+      "method": "Rendered DOM, targeted evaluate probe, and relevant captured artifact review.",
+      "evidence": "Detached-node constructors did not appear among dominant constructors before or after the repeated interaction; closure counts fell rather than accumulated.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F14",
+        "F10",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F02",
+        "F12",
+        "F06",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23",
+        "F24",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Derived from check-level applicability and execution outcomes."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and discovery hub; represents global navigation, age gate, content feed, preferences, network and rendering.",
+      "url": "https://www.imagefap.com/",
+      "conditions": [
+        "desktop 1365x768",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "categories",
+      "description": "Category index; represents the taxonomy/listing template.",
+      "url": "https://www.imagefap.com/categories.php",
+      "conditions": [
+        "rendered DOM"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "galleries",
+      "description": "Gallery listing and search; represents content listing, filtering and search controls.",
+      "url": "https://www.imagefap.com/gallery.php",
+      "conditions": [
+        "rendered DOM",
+        "mobile 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "videos",
+      "description": "Video listing; represents media listings and late-loading layout.",
+      "url": "https://www.imagefap.com/browse-video.php",
+      "conditions": [
+        "rendered DOM",
+        "mobile 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Sign-in journey; represents account forms, input assistance, validation and recovery.",
+      "url": "https://www.imagefap.com/login.php",
+      "conditions": [
+        "rendered DOM",
+        "mobile 360x800",
+        "keyboard focus",
+        "empty-form validation probe"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "The interface is hard-coded for a light colour scheme.",
+      "evidence": "Under emulated dark preference, `color-scheme` remained `normal`, body text remained black, no relevant preference rules were found, and the dark capture remained light.",
+      "suggestedFix": "Declare `color-scheme: light dark` and use `prefers-color-scheme` or `light-dark()` for surfaces and controls.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/preferences-probe.json",
+        "evidence/home-dark.png"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F02",
+      "severity": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Text and essential controls do not consistently meet contrast requirements.",
+      "evidence": "Lighthouse failed the color-contrast audit; no `prefers-contrast` or forced-colors adaptation was found.",
+      "suggestedFix": "Correct failing colour pairs and add forced-colors/high-contrast-safe control styling.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/preferences-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Navigation swaps are abrupt and do not preserve visual continuity.",
+      "evidence": "Recon shows a multi-page set of ordinary links; no active transition was observed and no View Transition integration was established for route changes.",
+      "suggestedFix": "Add cross-document view transitions for same-origin template navigation, with reduced-motion handling.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/preferences-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Long listing pages provide little position-aware navigation guidance.",
+      "evidence": "Mobile content height reached 7,140 CSS px while the DOM/CSS probes found no verified sticky progress, scroll-state chrome, or equivalent position cue.",
+      "suggestedFix": "Add restrained sticky navigation or a scroll-position/progress affordance that does not obscure content.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F05",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "The mandatory age gate is implemented as a custom top-layer div rather than a semantic dialog.",
+      "evidence": "The overlay probe found `#agego-overlay-container` covering 780x493 at z-index 2147483647; the page contains zero `<dialog>` and zero popover elements.",
+      "suggestedFix": "Implement the age confirmation as a modal `<dialog>` with focus containment, an accessible name, and explicit confirmation action.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/overlay-noise-probe.json",
+        "evidence/platform-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Mobile browsers receive a scaled-down desktop layout instead of a responsive layout.",
+      "evidence": "All four tested templates lacked a viewport meta tag. At a requested 360px viewport, home rendered a 1,292px layout viewport and login/video rendered 1,000px layouts.",
+      "suggestedFix": "Add a standard viewport meta tag, replace fixed desktop widths with intrinsic/fluid layout, and test each template at narrow widths.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/gallery-mobile-layout.json",
+        "evidence/login-mobile-layout.json",
+        "evidence/videos-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F07",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Touch and form controls are too small and many controls lack usable labels.",
+      "evidence": "On login, 38 of 44 visible interactive elements were under 24px in at least one dimension and ten text/password controls were unlabeled. Lighthouse also failed target-size.",
+      "suggestedFix": "Provide at least 24x24 CSS px targets (prefer 44x44 for primary controls), spacing, persistent labels, and visible `:focus-visible` styling.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/accessibility-form-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Sign-in does not expose native required state or accessible recovery feedback before submission.",
+      "evidence": "Username/password were not `required`, empty submission produced no `:invalid` controls, and the page had no live region, alert, or status element.",
+      "suggestedFix": "Use native constraints, validate after interaction, focus a summary on failure, and announce field errors through `aria-live`/`role=alert`.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/form-behavior-probe.json",
+        "evidence/login-recon.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Measured mobile loading is slow.",
+      "evidence": "Lighthouse measured LCP 8.28s, FCP 4.47s and TTI 8.30s (performance score 0.61), despite a separate warm trace showing no long tasks.",
+      "suggestedFix": "Prioritise the LCP asset, defer non-critical ads/scripts, and establish field CWV monitoring.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "The homepage transfers excessive image weight and blocks rendering on legacy resources.",
+      "evidence": "HAR recorded 146 requests and 11.72MB transferred, including two GIF thumbnails of 5.19MB and 4.70MB. Parser-inserted classic scripts lacked async/defer and CSS was uncompressed/uncached.",
+      "suggestedFix": "Replace animated GIFs with modern video/image formats, lazy-load below-fold media, set cache/compression headers, and defer non-critical classic scripts.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Core controls and media lack accessible names.",
+      "evidence": "Lighthouse failed image-alt, label and link-name. The image probe found 48 images without alt and the login probe found ten unlabeled text/password controls.",
+      "suggestedFix": "Add accurate text alternatives, programmatic labels, and discernible names for image links and controls.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-images.json",
+        "evidence/accessibility-form-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "move-dom-element-without-losing-state",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Pages lack semantic landmarks and a consistent heading hierarchy.",
+      "evidence": "The login page had no main/nav/header/footer landmarks, no H1, and only an H2, although browser-default focus outline was visible.",
+      "suggestedFix": "Use semantic landmarks, one clear page H1, ordered headings, and preserve visible focus through overlays.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/accessibility-form-probe.json",
+        "evidence/login-recon.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Zoom/reflow and mobile target requirements are not met.",
+      "evidence": "No viewport meta was present and Lighthouse failed meta-viewport and target-size; tested mobile pages rendered at 1,000-1,292 CSS px rather than 360px.",
+      "suggestedFix": "Provide a scalable viewport, responsive reflow, larger targets, and captions/equivalents for any user-uploaded video where available.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/videos-mobile-layout.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Images are frequently unsized, distorted, and served without responsive variants.",
+      "evidence": "Image audit found 79/100 missing dimensions, 58 missing srcset, 98 legacy-format images, and Lighthouse failed image aspect ratio/responsive sizing.",
+      "suggestedFix": "Set intrinsic dimensions/aspect-ratio and provide responsive modern-format sources.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "The page has browser hygiene issues despite avoiding console exceptions.",
+      "evidence": "Lighthouse reported DevTools inspector issues and 1.35s potential unused-JS savings; the DOM had 92 inline event-handler elements and 16 target=_blank links without noopener/noreferrer.",
+      "suggestedFix": "Resolve Inspector issues, remove stale inline wiring, trim legacy/unused JS, and add safe external-link rel values.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/platform-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Search metadata is incomplete across public templates.",
+      "evidence": "Raw HTML is crawlable (92% coverage), but no viewport meta exists, multiple links have no discernible name, no canonical was present, sitemap.xml returned 404, and no JSON-LD/Open Graph metadata was found.",
+      "suggestedFix": "Add viewport and descriptive link names, canonical URLs, a sitemap, and accurate Open Graph/structured metadata for gallery/media entities.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/platform-probe.json",
+        "evidence/lighthouse-home.json",
+        "evidence/robots.txt"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F17",
+      "severity": "critical",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Session and analytics cookies are not protected and key browser security headers are absent.",
+      "evidence": "All seven cookies lacked Secure; PHPSESSID also lacked HttpOnly and SameSite protection. CSP, frame protection, Referrer-Policy and Permissions-Policy were absent.",
+      "suggestedFix": "Mark session cookies Secure, HttpOnly and SameSite=Lax/Strict; deploy an enforcing CSP plus frame-ancestors, Referrer-Policy and Permissions-Policy.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-cookies.json",
+        "evidence/home-headers.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "The first page load exposes users to a large advertising and analytics footprint.",
+      "evidence": "Tracker probe found 18 third-party origins and Google Analytics/Tag Manager/DoubleClick; HAR attributed 121/146 requests and 11.52MB to non-main-origin hosts.",
+      "suggestedFix": "Minimise vendors, gate non-essential analytics/ads on informed consent, proxy or self-host necessary assets, and shorten retention.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Authentication is password-only and lacks modern input assistance.",
+      "evidence": "The login template contains username/password fields, no WebAuthn/passkey affordance, and blank autocomplete attributes.",
+      "suggestedFix": "Add passkey sign-in/registration and correct `autocomplete=\"username\"` and `autocomplete=\"current-password\"` fallback tokens.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/login-recon.json",
+        "evidence/form-behavior-probe.json"
+      ],
+      "pathId": "login",
+      "url": "https://www.imagefap.com/login.php"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Representative error and failure states are not actionable or accessible.",
+      "evidence": "Empty login submission exposed no native invalid state or live feedback; HAR also recorded blocked/aborted ad and image requests without an observed user-facing recovery state.",
+      "suggestedFix": "Design explicit inline and summary errors, retry affordances, and graceful placeholders for failed media/network requests.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/form-behavior-probe.json",
+        "evidence/home-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F21",
+      "severity": "low",
+      "principleId": "be-internationalised",
+      "principleCheckId": "locale-aware-data",
+      "guidanceId": "support-global-calendar-systems",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Rendered dates are not demonstrably locale-aware.",
+      "evidence": "The English page rendered a fixed English date while probes found no alternate locale surface or evidence that user-facing date formatting responds to locale.",
+      "suggestedFix": "Format dates/numbers with `Intl` and keep stored timestamps unambiguous.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "custom-button-actions",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Advertising competes with account tasks and is not always clearly distinguishable from site content.",
+      "evidence": "The login DOM included locally personalised promotional copy linking back to the login URL, while the homepage loaded several ad networks and three visible ad-like regions.",
+      "suggestedFix": "Clearly label and visually separate ads, remove misleading self-links, and keep account actions dominant.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/login-recon.json",
+        "evidence/overlay-noise-probe.json",
+        "evidence/home-trackers.json"
+      ],
+      "pathId": "login",
+      "url": "https://www.imagefap.com/login.php"
+    },
+    {
+      "id": "F23",
+      "severity": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Forms neither prevent nor explain common mistakes humanely.",
+      "evidence": "Login fields are not required and empty submission yielded no invalid controls or live error region.",
+      "suggestedFix": "Use post-interaction native validation, specific field messages, an accessible error summary, and non-destructive retry.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/form-behavior-probe.json"
+      ],
+      "pathId": "login",
+      "url": "https://www.imagefap.com/login.php"
+    },
+    {
+      "id": "F24",
+      "severity": "medium",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Sign-in fields omit autofill tokens.",
+      "evidence": "Both username and password reported an empty autocomplete value.",
+      "suggestedFix": "Set `autocomplete=\"username\"` and `autocomplete=\"current-password\"`; preserve password-manager and paste support.",
+      "effort": "trivial",
+      "artifacts": [
+        "evidence/form-behavior-probe.json"
+      ],
+      "pathId": "login",
+      "url": "https://www.imagefap.com/login.php"
+    },
+    {
+      "id": "F25",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Media delivery is disproportionately wasteful even for an image-heavy service.",
+      "evidence": "The homepage transferred 11.72MB, 11.23MB as images; 88 below-fold images were not lazy-loaded, 98/100 used legacy formats, and two GIF thumbnails accounted for 9.88MB.",
+      "suggestedFix": "Transcode animated thumbnails, serve responsive AVIF/WebP, lazy-load below-fold content, and budget each feed page.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-images.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    },
+    {
+      "id": "F26",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "modern-web-guidance",
+      "confidence": "high",
+      "summary": "Non-essential third-party work begins immediately on load.",
+      "evidence": "The network capture started analytics, ad, age-verification and related requests during initial rendering, contributing 121 non-main-origin requests.",
+      "suggestedFix": "Defer and batch non-essential work until consent, visibility, or interaction; remove duplicate ad/analytics loaders.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json"
+      ],
+      "pathId": "home",
+      "url": "https://www.imagefap.com/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Secure session state and deploy browser security policies",
+      "priority": 1,
+      "guidanceId": "security",
+      "findingIds": [
+        "F17"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Rebuild all templates as genuine responsive layouts",
+      "priority": 2,
+      "guidanceId": "fluid-scaling",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F13"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Cut initial media and third-party transfer cost",
+      "priority": 3,
+      "guidanceId": "optimize-image-priority",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F18",
+        "F25",
+        "F26"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Add accessible names, labels, landmarks and contrast",
+      "priority": 4,
+      "guidanceId": "accessibility",
+      "findingIds": [
+        "F02",
+        "F07",
+        "F11",
+        "F12"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Make sign-in validation, recovery, autofill and passkeys humane",
+      "priority": 5,
+      "guidanceId": "forms",
+      "findingIds": [
+        "F08",
+        "F19",
+        "F20",
+        "F23",
+        "F24"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Complete canonical, sitemap and share/entity metadata",
+      "priority": 6,
+      "guidanceId": "html",
+      "findingIds": [
+        "F16"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Use a semantic modal dialog for age confirmation",
+      "priority": 7,
+      "guidanceId": "declarative-dialog-popover-control",
+      "findingIds": [
+        "F05"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Reserve and responsively serve image space",
+      "priority": 8,
+      "guidanceId": "deliver-optimized-decorative-images",
+      "findingIds": [
+        "F14"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Add preference-aware colours and route continuity",
+      "priority": 9,
+      "guidanceId": "dark-mode",
+      "findingIds": [
+        "F01",
+        "F03"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Clearly separate ads from site/account controls",
+      "priority": 10,
+      "guidanceId": "custom-button-actions",
+      "findingIds": [
+        "F22"
+      ],
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and computed style evidence",
+      "condition": "desktop",
+      "findingIds": [
+        "F04",
+        "F10"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage first viewport",
+      "condition": "1365x768",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage rendered at requested mobile viewport",
+      "condition": "360x800",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Homepage narrow-viewport layout metrics",
+      "condition": "360x800",
+      "findingIds": [
+        "F04",
+        "F06",
+        "F13"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/gallery-mobile-layout.json",
+      "caption": "Gallery narrow-viewport layout metrics",
+      "condition": "360x800",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/login-mobile-layout.json",
+      "caption": "Login narrow-viewport layout metrics",
+      "condition": "360x800",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/videos-mobile-layout.json",
+      "caption": "Video listing narrow-viewport layout and CLS",
+      "condition": "360x800",
+      "findingIds": [
+        "F06",
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-probe.json",
+      "caption": "Preference and animation probe",
+      "condition": "dark + reduced motion",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/accessibility-form-probe.json",
+      "caption": "Login labels, landmarks, target and focus probe",
+      "condition": "keyboard",
+      "findingIds": [
+        "F07",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/form-behavior-probe.json",
+      "caption": "Login native validation and autofill probe",
+      "condition": "empty submission",
+      "findingIds": [
+        "F08",
+        "F19",
+        "F20",
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Platform, metadata and CSS feature probe",
+      "condition": "desktop",
+      "findingIds": [
+        "F05",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/overlay-noise-probe.json",
+      "caption": "Visible fixed overlay and ad-region probe",
+      "condition": "after load",
+      "findingIds": [
+        "F05",
+        "F22"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Homepage network archive",
+      "condition": "load",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact homepage network signals",
+      "condition": "load",
+      "findingIds": [
+        "F10",
+        "F18",
+        "F20",
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace timings and long tasks",
+      "condition": "load",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Lighthouse mobile report",
+      "condition": "mobile",
+      "findingIds": [
+        "F02",
+        "F07",
+        "F09",
+        "F11",
+        "F13",
+        "F14",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Security headers audit",
+      "condition": "main document",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Cookie security audit",
+      "condition": "after load",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Third-party tracker inventory",
+      "condition": "load",
+      "findingIds": [
+        "F18",
+        "F22",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Image delivery and alt audit",
+      "condition": "homepage",
+      "findingIds": [
+        "F11",
+        "F14",
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Client-side secret scan, zero findings",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered coverage",
+      "condition": "JavaScript disabled comparison",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler view with JavaScript disabled",
+      "condition": "crawler",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "condition": "browser",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap summary",
+      "condition": "after load",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Heap summary after ten overlay toggle attempts",
+      "condition": "repeated interaction",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/recon.json",
+      "caption": "Homepage structure and route recon",
+      "condition": "homepage",
+      "findingIds": [
+        "F03",
+        "F21"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/login-recon.json",
+      "caption": "Login form and route recon",
+      "condition": "login",
+      "findingIds": [
+        "F08",
+        "F12",
+        "F19",
+        "F22"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/galleries-recon.json",
+      "caption": "Gallery template recon",
+      "condition": "gallery",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/videos-recon.json",
+      "caption": "Video listing recon",
+      "condition": "video",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt response",
+      "condition": "crawler",
+      "findingIds": [
+        "F16"
+      ]
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T10-21-31-294Z"
+}

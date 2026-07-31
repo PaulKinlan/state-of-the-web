@@ -1,0 +1,1790 @@
+{
+  "url": "https://www.apuestatotal.com",
+  "auditedAt": "2026-07-25T23:58:30.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic audit completed across accessible promotion and registration templates. The homepage intermittently returned a Cloudflare challenge; this is recorded as a discoverability/resilience issue rather than hidden.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Next.js plus a separate registration application",
+    "notes": "Representative public marketing and registration routes were accessible; homepage access was challenged. Not covered: authenticated wagering, deposit, withdrawal, cancellation, and real-money completion because no test account or identity/payment data was supplied."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "har",
+    "trace",
+    "heap-summary",
+    "lighthouse",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "autofill-sign-in-form",
+    "break-up-long-tasks",
+    "consistent-cross-document-transitions",
+    "coordinate-global-events",
+    "css-layout",
+    "dark-mode",
+    "declarative-dialog-popover-control",
+    "deliver-optimized-decorative-images",
+    "efficient-background-processing",
+    "forms",
+    "html",
+    "identify-heavy-scripts",
+    "improve-text-layout-and-legibility",
+    "language-model",
+    "light-dismiss-a-dialog",
+    "manage-recurring-intervals",
+    "navigation-drawer",
+    "optimize-image-priority",
+    "passkeys",
+    "performance",
+    "position-aware-tooltips",
+    "privacy",
+    "same-document-transitions",
+    "scrollytelling",
+    "security",
+    "shrinking-header-on-scroll",
+    "support-global-calendar-systems",
+    "translator",
+    "validate-input-after-interaction",
+    "webmcp"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage intercepted by Cloudflare human-verification challenge",
+      "condition": "desktop viewport",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/promo-desktop.png",
+      "caption": "Promotion detail at desktop width",
+      "condition": "1440x900",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/promo-dark-reduced-mobile.png",
+      "caption": "Promotion detail remains light under dark preference",
+      "condition": "360x800, prefers-color-scheme: dark, reduced motion",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/registro-mobile.png",
+      "caption": "Registration first step",
+      "condition": "360x800",
+      "findingIds": [
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/registro-empty-submit.png",
+      "caption": "Registration after empty Continue action; no visible validation appears",
+      "condition": "360x800",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/promo-layout-mobile.json",
+      "caption": "Promotion mobile layout; CLS 1.649, no overflow",
+      "condition": "360x800",
+      "findingIds": [
+        "F05",
+        "F07"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/registro-layout-mobile.json",
+      "caption": "Registration mobile layout; CLS 0.0047, no overflow",
+      "condition": "360x800",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/promo-images.json",
+      "caption": "Image audit: 100 images, 98 without dimensions/srcset, 97 below-fold not lazy, 75 oversized, 7 missing alt",
+      "condition": "promotion",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/promo.har",
+      "caption": "294-request HAR for promotion detail",
+      "condition": "desktop load",
+      "findingIds": [
+        "F06",
+        "F12"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/promo-summary.json",
+      "caption": "4.83 MB transferred; 128 third-party requests and 2.76 MB third-party bytes",
+      "condition": "desktop load",
+      "findingIds": [
+        "F06",
+        "F12"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/promo-trace.json",
+      "caption": "DevTools trace for promotion detail",
+      "condition": "desktop load",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/promo-trace-summary.json",
+      "caption": "FCP 1.23 s, LCP 2.44 s and one 66.8 ms long task in a warm trace",
+      "condition": "desktop load",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/promo-lighthouse.json",
+      "caption": "Lighthouse report for promotion detail",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F05",
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/promo-lighthouse-summary.json",
+      "caption": "Compact Lighthouse summary: performance 13, accessibility 78, SEO 85",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F05",
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/registro-lighthouse.json",
+      "caption": "Lighthouse report for registration",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F03",
+        "F05",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/registro-lighthouse-summary.json",
+      "caption": "Registration Lighthouse summary: LCP 10 s, TBT 710 ms, empty title and description",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F05",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/promo-discoverability.json",
+      "caption": "Raw HTML is a JS shell with empty #__next and 0% content coverage",
+      "condition": "no-JS crawler",
+      "findingIds": [
+        "F10",
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/promo-discoverability-rendered.png",
+      "caption": "Rendered promotion detail",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F10",
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/promo-discoverability-crawler.png",
+      "caption": "Blank crawler view of promotion detail",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F10",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header audit: HSTS missing and CSP permits unsafe-eval/unsafe-inline",
+      "condition": "main document",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit of Cloudflare challenge cookie",
+      "condition": "main document",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/promo-trackers.json",
+      "caption": "57 third-party origins and 17 known tracker domains",
+      "condition": "promotion",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/promo-secrets.json",
+      "caption": "Secret scan; one unconfirmed pattern in third-party ad script",
+      "condition": "promotion",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/promo-probe.json",
+      "caption": "Document, metadata, modern CSS feature and script attribute probe",
+      "condition": "promotion",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F10",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/registro-probe.json",
+      "caption": "Registration semantics, preference and keyboard-focus probe",
+      "condition": "registration",
+      "findingIds": [
+        "F03",
+        "F13",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/registro-validation.json",
+      "caption": "Empty registration submission produced no invalid fields or populated live-region message",
+      "condition": "registration",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/registro-heap-baseline.json",
+      "caption": "Registration baseline heap summary: 1,000,145 nodes, 52,597,263 self bytes",
+      "condition": "baseline",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/registro-heap-post.json",
+      "caption": "After 10 select open/close cycles: 995,770 nodes, 52,446,938 self bytes",
+      "condition": "repeated interaction",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-open.png",
+      "caption": "Login action produced no visible state change in the test window",
+      "condition": "desktop",
+      "findingIds": [
+        "F13"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Emulated dark screenshot plus CSS feature probe",
+      "evidence": "Dark preference produced the same white promotion surface; live CSS had no color-scheme media rule.",
+      "artifacts": [
+        "evidence/promo-dark-reduced-mobile.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Emulated reduced-motion screenshot and CSS/animation probe",
+      "evidence": "Both templates contain prefers-reduced-motion handling; under reduce the captured page had no essential animated transition blocking use.",
+      "artifacts": [
+        "evidence/promo-dark-reduced-mobile.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse contrast audit plus CSS feature probe",
+      "evidence": "Lighthouse found multiple 4.16:1 blue links and 3.91:1 footer links below WCAG AA; no forced-colors/high-contrast CSS was found.",
+      "artifacts": [
+        "evidence/promo-lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "CSS feature probe and route screenshots",
+      "evidence": "Rendered CSS contains view-transition rules and route content changes without an abrupt full-page blank on accessible routes.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "CSS probe plus trace/layout observers",
+      "evidence": "Rendered CSS includes animation-timeline rules; load/scroll observation recorded only one short long task rather than continuous scroll-handler blocking.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "CSS and mobile layout probe",
+      "evidence": "Rendered CSS includes scroll-snap; the mobile templates use native scrolling with no horizontal overflow or observed custom pointer trap.",
+      "artifacts": [
+        "evidence/promo-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshot plus CSS probe",
+      "evidence": "Header chrome remains static and no scroll-state/container rule was found.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Rendered CSS feature probe",
+      "evidence": "No anchor-name/position-anchor rules were found for floating or menu UI.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Navigation and login screenshots",
+      "evidence": "Current promotion location lacks active navigation styling and login activation produced no visible state change.",
+      "artifacts": [
+        "evidence/login-open.png"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Initial-load screenshots",
+      "evidence": "Accessible promotion and registration routes loaded without an obscuring consent wall or interstitial; the chat control stays at the edge.",
+      "artifacts": [
+        "evidence/promo-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM semantics and Lighthouse control audit",
+      "evidence": "No dialog/popover/details primitives were present; login failed to expose a semantic dialog and chat uses a custom unnamed button.",
+      "artifacts": [
+        "evidence/registro-probe.json"
+      ],
+      "findingIds": [
+        "F03",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "On mobile the promotion gives most of the viewport to article content and collapses desktop navigation behind one menu control.",
+      "artifacts": [
+        "evidence/promo-dark-reduced-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile layout metrics",
+      "evidence": "Both tested mobile templates reported scrollWidth=clientWidth=360 with viewport metadata present.",
+      "artifacts": [
+        "evidence/promo-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Rendered CSS feature probe",
+      "evidence": "The rendered stylesheet contains no @container rules; reusable site chrome relies only on viewport behavior.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Programmatic focus walk and viewport probe",
+      "evidence": "Registration input/buttons lose native outline without a consistent replacement; 30px controls and user-scalable=0 were observed.",
+      "artifacts": [
+        "evidence/registro-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport screenshots",
+      "evidence": "Promotion heading/copy explains early payout immediately; registration clearly presents REGÍSTRATE and a Continue action.",
+      "artifacts": [
+        "evidence/registro-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Primary registration walkthrough",
+      "evidence": "The first registration Continue action with required data absent neither advances nor explains the blocked step.",
+      "artifacts": [
+        "evidence/registro-empty-submit.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Invalid-state screenshot and DOM state probe",
+      "evidence": "Empty submission produced no visible error, invalid state, populated alert, retry instruction, or focus movement.",
+      "artifacts": [
+        "evidence/registro-validation.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse plus independent trace/layout evidence",
+      "evidence": "Mobile Lighthouse measured LCP 18.0 s/10.0 s and promotion CLS 1.636.",
+      "artifacts": [
+        "evidence/promo-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse plus independent trace/layout evidence",
+      "evidence": "Promotion CLS was 1.649 with eight observed shifts.",
+      "artifacts": [
+        "evidence/promo-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse plus independent trace/layout evidence",
+      "evidence": "Mobile Lighthouse TBT reached 1,000 ms on promotion and 710 ms on registration.",
+      "artifacts": [
+        "evidence/promo-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, image audit and Lighthouse",
+      "evidence": "294 requests transferred 4.83 MB; image sizing/caching issues and large dependency chains delay content.",
+      "artifacts": [
+        "evidence/promo-summary.json"
+      ],
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR weight and origin analysis",
+      "evidence": "123 scripts transferred 3.83 MB with multiple analytics containers and route-irrelevant chunks.",
+      "artifacts": [
+        "evidence/promo-summary.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility and image audits",
+      "evidence": "Lighthouse found an unnamed fixed chat button and image audit found seven missing alt attributes.",
+      "artifacts": [
+        "evidence/promo-lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse axe color-contrast audit",
+      "evidence": "Blue and red links fail the 4.5:1 normal-text contrast requirement.",
+      "artifacts": [
+        "evidence/promo-lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Heading and keyboard-focus probes",
+      "evidence": "Promotion has no h1 and registration focus styling disappears on inputs/buttons.",
+      "artifacts": [
+        "evidence/registro-probe.json"
+      ],
+      "findingIds": [
+        "F03",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile screenshot and layout metrics",
+      "evidence": "Body copy reflows to a readable single column with no clipping or horizontal overflow at 360px.",
+      "artifacts": [
+        "evidence/promo-dark-reduced-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Viewport and target-size focus probe",
+      "evidence": "Registration sets user-scalable=0 and includes 30px controls, although narrow reflow itself has no overflow.",
+      "artifacts": [
+        "evidence/registro-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse best-practices audit",
+      "evidence": "Both Lighthouse runs recorded CORS failures, failed resources and 404s.",
+      "artifacts": [
+        "evidence/registro-lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM and image audit",
+      "evidence": "Doctype is valid, but 98/100 images lack dimensions and most are oversized or legacy format.",
+      "artifacts": [
+        "evidence/promo-images.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse console and HAR hygiene",
+      "evidence": "Repeated CORS and resource failures plus large third-party integrations indicate unresolved browser/platform hygiene problems.",
+      "artifacts": [
+        "evidence/registro-lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/Lighthouse metadata probes",
+      "evidence": "Registration has an empty title and no description; promotion description is empty.",
+      "artifacts": [
+        "evidence/registro-lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Homepage screenshot, robots fetch and crawler fetch",
+      "evidence": "Deep links and viewport work, but the homepage returned a human-verification challenge/403 to automated access.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM metadata plus robots/sitemap fetch",
+      "evidence": "Promotion returned 200 with canonical self-link, index/follow, valid robots.txt and sitemap entry.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Metadata/JSON-LD probe",
+      "evidence": "JSON-LD and Open Graph exist, but og:description and meta description are empty and page-specific heading structure is absent.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security headers and cookies audit",
+      "evidence": "HTTPS is used, but HSTS is absent and CSP allows unsafe-eval/unsafe-inline styles.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Tracker and HAR origin analysis",
+      "evidence": "57 third-party origins and 17 known trackers generated 128 requests and 2.76 MB.",
+      "artifacts": [
+        "evidence/promo-trackers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Authentication DOM probe and interaction screenshot",
+      "evidence": "No permission prompt appeared, but no passkey/WebAuthn affordance was found and login activation gave no visible state.",
+      "artifacts": [
+        "evidence/login-open.png"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security header audit",
+      "evidence": "X-Frame-Options, Referrer-Policy and Permissions-Policy are present, but HSTS is missing and CSP remains weakened.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Raw HTML/rendered DOM diff and crawler screenshot",
+      "evidence": "Raw HTTP 200 HTML contains an empty #__next; crawler content coverage is 0% and the no-JS view is blank.",
+      "artifacts": [
+        "evidence/promo-discoverability.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile screenshots and layout metrics",
+      "evidence": "Accessible templates completed initial rendering and mobile chrome/menus were not clipped at the tested viewport edge.",
+      "artifacts": [
+        "evidence/promo-dark-reduced-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Manifest/service-worker platform probe",
+      "evidence": "This app-like betting service has no manifest, active service-worker registration, or verified offline fallback.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Homepage and registration failure-state walkthrough",
+      "evidence": "Homepage challenge, broken vendor requests and registration dead state show no user-facing recovery path for key failures.",
+      "artifacts": [
+        "evidence/registro-empty-submit.png"
+      ],
+      "findingIds": [
+        "F04",
+        "F14",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-template language probe",
+      "evidence": "The Spanish promotion document has empty html lang/dir while registration alone declares lang=es.",
+      "artifacts": [
+        "evidence/promo-probe.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered content and time/currency probe",
+      "evidence": "Visible Peruvian currency is rendered with the local S/ notation and no hand-rolled date output was present on representative pages.",
+      "artifacts": [
+        "evidence/registro-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM inspection for time/date content",
+      "evidence": "No dates, schedules, recurring events, or time-zone-sensitive values appear in the audited promotion/registration templates.",
+      "reason": "Representative templates contain no time-zone-sensitive data to evaluate."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Commercial-content screenshots and flow review",
+      "evidence": "The promotion states its mechanics and the footer exposes responsible-gambling/legal information; no consent wall, confirmshaming, forced continuity or disguised ad appeared.",
+      "artifacts": [
+        "evidence/promo-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Invalid form interaction and live-region probe",
+      "evidence": "Empty registration submission gives no visible or announced guidance.",
+      "artifacts": [
+        "evidence/registro-validation.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Form/autocomplete DOM probe",
+      "evidence": "Registration controls are not inside a semantic form and expose no useful captured autocomplete intent.",
+      "artifacts": [
+        "evidence/registro-probe.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Login and registration walkthrough",
+      "evidence": "Login action provides no visible response and registration cannot explain blocked progress, undermining account-flow predictability.",
+      "artifacts": [
+        "evidence/login-open.png"
+      ],
+      "findingIds": [
+        "F04",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Image audit",
+      "evidence": "98 images lack responsive sources/dimensions; 75 are oversized and 92 use legacy formats.",
+      "artifacts": [
+        "evidence/promo-images.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR and Lighthouse console evidence",
+      "evidence": "A static promotion loads 123 scripts and numerous failed/retried background vendor calls.",
+      "artifacts": [
+        "evidence/promo-summary.json"
+      ],
+      "findingIds": [
+        "F06",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR third-party budget",
+      "evidence": "Third parties contribute 128 requests and 2.76 MB, disproportionate to the article’s user value.",
+      "artifacts": [
+        "evidence/promo-summary.json"
+      ],
+      "findingIds": [
+        "F06",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Site-purpose and DOM capability review",
+      "evidence": "Automated wagering capabilities or AI inference would add safety/regulatory risk and no declared agent-facing intent was found.",
+      "reason": "This regulated gambling site has no declared safe agent-facing use case; absence is not penalised."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Site-purpose and DOM capability review",
+      "evidence": "Automated wagering capabilities or AI inference would add safety/regulatory risk and no declared agent-facing intent was found.",
+      "reason": "This regulated gambling site has no declared safe agent-facing use case; absence is not penalised."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline and post-interaction heap summaries",
+      "evidence": "After ten document-selector open/close cycles, heap node count and self size decreased slightly rather than accumulating.",
+      "artifacts": [
+        "evidence/registro-heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Baseline heap summary",
+      "evidence": "Baseline was about 1.0 million heap nodes and 52.6 MB self size for a one-step registration view, disproportionate to its visible complexity.",
+      "artifacts": [
+        "evidence/registro-heap-baseline.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Before/after heap comparison",
+      "evidence": "The repeated selector cycle did not increase total nodes or heap self size, providing no accumulation signal in the tested interaction.",
+      "artifacts": [
+        "evidence/registro-heap-post.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F04",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F16",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F06",
+        "F09",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable to this regulated site’s declared/observed purpose."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Public entry page and crawler entry point; selected as the primary landing archetype. Cloudflare challenge was itself recorded as a user/crawler access issue.",
+      "url": "https://www.apuestatotal.com",
+      "conditions": [
+        "desktop",
+        "crawler without JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "promotion",
+      "description": "Promotion/detail content template representing indexable marketing and rules content.",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "registration",
+      "description": "Primary account-creation journey; first-step interaction, empty submission, keyboard focus, performance and repeated selector interaction tested.",
+      "url": "https://www.apuestatotal.com/registro",
+      "conditions": [
+        "360x800",
+        "keyboard focus",
+        "empty submission",
+        "10x select open/close"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "Public content is hard-coded to a light theme.",
+      "evidence": "The dark-mode mobile screenshot remains white, and the CSS feature probe found no prefers-color-scheme rule on the promotion template.",
+      "artifacts": [
+        "evidence/promo-dark-reduced-mobile.png",
+        "evidence/promo-probe.json"
+      ],
+      "suggestedFix": "Declare color-scheme and provide preference-driven surface, text, control, and browser-chrome colors using prefers-color-scheme or light-dark().",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F02",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "css",
+      "summary": "Navigation and reusable components do not adapt to scroll state or container context.",
+      "evidence": "The live CSS probe found View Transition and scroll-timeline rules but no @container, anchor-name, or position-anchor; screenshots show static header chrome and no active-location cue.",
+      "artifacts": [
+        "evidence/promo-desktop.png",
+        "evidence/promo-probe.json"
+      ],
+      "suggestedFix": "Add scroll-state-aware header behavior, clear current-location styling, container queries for reused components, and anchor positioning for overlays where applicable.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F03",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Keyboard focus and control semantics are inconsistent on registration.",
+      "evidence": "The focus probe found text inputs and several buttons with outline none and no replacement box shadow; some submit buttons are 30x30 px. The viewport also declares user-scalable=0.",
+      "artifacts": [
+        "evidence/registro-mobile.png",
+        "evidence/registro-probe.json",
+        "evidence/registro-lighthouse-summary.json"
+      ],
+      "suggestedFix": "Use :focus-visible with a high-contrast indicator, keep targets at least 44 CSS px, and remove user-scalable=0.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F04",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "forms",
+      "summary": "The registration flow does not explain why an empty submission cannot continue.",
+      "evidence": "After Continue was activated with no document type or number, the screenshot was unchanged; the probe found no :user-invalid/aria-invalid controls and the live region remained empty.",
+      "artifacts": [
+        "evidence/registro-empty-submit.png",
+        "evidence/registro-validation.json"
+      ],
+      "suggestedFix": "Validate after interaction, attach visible field-level guidance, set aria-invalid, focus the first error, and announce a concise summary through a populated live region.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "registration",
+      "url": "https://www.apuestatotal.com/registro"
+    },
+    {
+      "id": "F05",
+      "severity": "critical",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "Key public templates are slow and the promotion page is extremely unstable.",
+      "evidence": "Mobile Lighthouse measured promotion LCP 18.0 s, CLS 1.636 and TBT 1,000 ms; registration LCP was 10.0 s and TBT 710 ms. The independent mobile layout observer measured promotion CLS 1.649.",
+      "artifacts": [
+        "evidence/promo-layout-mobile.json",
+        "evidence/promo-lighthouse-summary.json",
+        "evidence/registro-lighthouse-summary.json",
+        "evidence/promo-trace-summary.json"
+      ],
+      "suggestedFix": "Profile the LCP chain, reserve all media space, prioritize the hero, remove or defer nonessential scripts, and break long tasks; verify against mobile CWV budgets.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "summary": "A simple promotion article loads a disproportionate script and third-party payload.",
+      "evidence": "The HAR recorded 294 requests and 4.83 MB transferred: 123 scripts used 3.83 MB, while third parties contributed 128 requests and 2.76 MB. Multiple GTM/gtag instances and a 644 KB app chunk dominate.",
+      "artifacts": [
+        "evidence/promo.har",
+        "evidence/promo-summary.json"
+      ],
+      "suggestedFix": "Inventory tags by user value, remove duplicate analytics containers, consent-gate marketing tags, split the app bundle, and load route-irrelevant code only on demand.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F07",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "Images are largely unbounded, unresponsive, eager, and oversized.",
+      "evidence": "Of 100 images, 98 lack dimensions and srcset, 97 below-fold images are not lazy-loaded, 75 are more than twice display size, and 92 use legacy formats. This aligns with the measured CLS.",
+      "artifacts": [
+        "evidence/promo-images.json",
+        "evidence/promo-layout-mobile.json"
+      ],
+      "suggestedFix": "Generate responsive AVIF/WebP srcsets, add intrinsic width/height or aspect-ratio, lazy-load below-fold assets, and serve each image near its rendered dimensions.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Important controls and content lack accessible names or alternatives, and text contrast fails.",
+      "evidence": "Promotion Lighthouse scored accessibility 78, found the fixed chat button without an accessible name and multiple links below 4.5:1 contrast; the image audit found 7 images without alt text.",
+      "artifacts": [
+        "evidence/promo-lighthouse.json",
+        "evidence/promo-images.json"
+      ],
+      "suggestedFix": "Name the chat control, provide meaningful alt or empty alt for decorative images, and adjust link/red text colors to meet WCAG AA.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F09",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Pages log repeated CORS, failed-resource, and 404 errors.",
+      "evidence": "Both Lighthouse runs failed the console-errors audit; registration logged repeated mida.so CORS failures, a Kaptcha failure, and 404 responses.",
+      "artifacts": [
+        "evidence/promo-lighthouse.json",
+        "evidence/registro-lighthouse.json"
+      ],
+      "suggestedFix": "Remove broken integrations, correct CORS and endpoint configuration, and ensure optional vendors fail silently without repeated retries.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Indexable pages lack page-specific metadata and ship core content as an empty JavaScript shell.",
+      "evidence": "Registration has an empty title and no description; promotion has an empty description, no h1 and no html lang. Raw promotion HTML contains an empty #__next with 0% content coverage and a blank crawler screenshot.",
+      "artifacts": [
+        "evidence/registro-lighthouse-summary.json",
+        "evidence/promo-probe.json",
+        "evidence/promo-discoverability.json",
+        "evidence/promo-discoverability-rendered.png",
+        "evidence/promo-discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render meaningful route content and metadata, add unique titles/descriptions and one logical h1, and set html lang on every template.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Browser-enforced transport and XSS defenses are incomplete.",
+      "evidence": "The header audit found no Strict-Transport-Security and a CSP permitting unsafe-eval and unsafe-inline styles. HTTPS, nosniff, SAMEORIGIN, Referrer-Policy and Permissions-Policy were present.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Enable HSTS after subdomain review, remove unsafe-eval, migrate inline styles to nonces/hashes, and prefer frame-ancestors in CSP.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "The promotion page exposes users to an unusually broad tracking surface.",
+      "evidence": "The tracker probe observed 57 third-party origins and 17 known tracker domains; the HAR measured 128 third-party requests and 2.76 MB, including Google, Meta, TikTok, Criteo, Taboola, Bing and others.",
+      "artifacts": [
+        "evidence/promo-trackers.json",
+        "evidence/promo-summary.json"
+      ],
+      "suggestedFix": "Adopt data minimisation, remove redundant vendors, load nonessential trackers only after valid consent, and publish a clear purpose/retention inventory.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "security",
+      "summary": "Modern authentication could not be found and the visible login action gave no feedback.",
+      "evidence": "The registration/auth probes found no passkey, WebAuthn, or navigator.credentials affordance; activating “Inicia sesión” produced no visible dialog or state change during the capture window.",
+      "artifacts": [
+        "evidence/registro-probe.json",
+        "evidence/login-open.png"
+      ],
+      "suggestedFix": "Offer passkey sign-in/registration alongside recovery options and ensure the login control produces an immediate, accessible state change.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "consistent-cross-document-transitions",
+      "guidanceCategory": "user-experience",
+      "summary": "Core public content disappears without JavaScript and the app has no verified offline fallback.",
+      "evidence": "The discoverability run returned HTTP 200 but raw HTML had an empty #__next and 0 content words; the no-JS screenshot is blank. The platform probe found no manifest and no active service-worker registration.",
+      "artifacts": [
+        "evidence/promo-discoverability.json",
+        "evidence/promo-discoverability-crawler.png",
+        "evidence/promo-probe.json"
+      ],
+      "suggestedFix": "Server-render core content and links, progressively enhance interactions, add explicit network-error states, and provide an offline fallback if the app is promoted as installable.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "internationalization",
+      "summary": "Language metadata is inconsistent across Spanish-language templates.",
+      "evidence": "Registration declares lang=es, but the Spanish promotion page has an empty html lang and no dir; this impairs pronunciation and language tooling.",
+      "artifacts": [
+        "evidence/promo-probe.json",
+        "evidence/registro-probe.json"
+      ],
+      "suggestedFix": "Set lang=es and an appropriate dir in the shared document shell, and use logical properties so translated/bidirectional layouts remain robust.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-up-form",
+      "guidanceCategory": "forms",
+      "summary": "Registration is not implemented as a semantic form and does not expose autofill intent.",
+      "evidence": "The registration probe found visible inputs but zero document.forms entries; the controls exposed no useful autocomplete tokens in the captured step.",
+      "artifacts": [
+        "evidence/registro-probe.json",
+        "evidence/registro-mobile.png"
+      ],
+      "suggestedFix": "Use a real form with labels, native submit behavior, stable names and correct autocomplete tokens for identity/sign-up fields.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "registration",
+      "url": "https://www.apuestatotal.com/registro"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The homepage intermittently blocks automated and non-interactive access behind a human challenge.",
+      "evidence": "The homepage rendered a Cloudflare “Verify you are human” interstitial and the discoverability fetch received HTTP 403, while deeper routes were accessible.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Tune bot protection so legitimate crawlers and accessibility tooling receive stable public content; use verified-bot allowances and avoid challenging indexable entry pages.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.apuestatotal.com"
+    },
+    {
+      "id": "F18",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "guidanceId": "navigation-drawer",
+      "guidanceCategory": "user-experience",
+      "summary": "Current location and interaction outcomes receive weak visual guidance.",
+      "evidence": "Desktop and mobile screenshots show no active navigation state for the current promotion, and the login action produced no visible attention cue.",
+      "artifacts": [
+        "evidence/promo-desktop.png",
+        "evidence/login-open.png"
+      ],
+      "suggestedFix": "Expose aria-current and a visible active style, and use focused state changes or transitions to make navigation outcomes clear.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    },
+    {
+      "id": "F19",
+      "severity": "low",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "manage-recurring-intervals",
+      "guidanceCategory": "performance",
+      "summary": "The registration page has a large baseline heap despite no leak appearing in the repeated control test.",
+      "evidence": "The baseline heap contained about 1.0 million nodes and 52.6 MB self size; after ten select cycles it fell slightly, so no accumulation was observed but the initial footprint is high for a one-step form.",
+      "artifacts": [
+        "evidence/registro-heap-baseline.json",
+        "evidence/registro-heap-post.json"
+      ],
+      "suggestedFix": "Profile route-level dependencies and third-party allocations, remove unused code, and keep monitoring repeated interactions for retained detached nodes.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "promotion",
+      "url": "https://www.apuestatotal.com/promociones/pagoanticipado/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Cut third-party/script payload and repair Core Web Vitals",
+      "priority": 1,
+      "findingIds": [
+        "F05",
+        "F06",
+        "F12"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Server-render public content and complete route metadata",
+      "priority": 2,
+      "findingIds": [
+        "F10",
+        "F14",
+        "F17"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Reserve, resize and responsively deliver every image",
+      "priority": 3,
+      "findingIds": [
+        "F07"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Make registration errors, focus and inputs semantic and accessible",
+      "priority": 4,
+      "findingIds": [
+        "F03",
+        "F04",
+        "F08",
+        "F16"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Reduce tracking and tighten browser security policies",
+      "priority": 5,
+      "findingIds": [
+        "F11",
+        "F12"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Add preference-driven dark/high-contrast styling and adaptive navigation",
+      "priority": 6,
+      "findingIds": [
+        "F01",
+        "F02",
+        "F18"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Repair console failures and authentication feedback/passkeys",
+      "priority": 7,
+      "findingIds": [
+        "F09",
+        "F13"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Set consistent Spanish language metadata",
+      "priority": 8,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "translator",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Profile and reduce the registration baseline heap",
+      "priority": 9,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "manage-recurring-intervals",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-25T23-53-36-234Z"
+}

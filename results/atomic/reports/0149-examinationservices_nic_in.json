@@ -1,0 +1,2362 @@
+{
+  "url": "https://examinationservices.nic.in",
+  "auditedAt": "2026-07-18T18:49:12.947Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage complete. Public Angular entry plus representative services, examination, contact, and login routes were exercised; all destination routes redirected to a shared #/500 state.",
+  "page": {
+    "appType": "spa",
+    "framework": "Angular",
+    "notes": "Production entry redirects to /ExaminationServices/. Representative route requests redirect cross-origin to testservices.nic.in/ExaminationServices/#/500 while re-rendering the homepage shell."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse",
+    "curl"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "accessible-error-announcement",
+    "batch-analytics-events",
+    "css-layout",
+    "dark-mode",
+    "deliver-optimized-decorative-images",
+    "fluid-scaling",
+    "forms",
+    "html",
+    "improve-text-layout-and-legibility",
+    "light-dismiss-a-dialog",
+    "manage-recurring-intervals",
+    "optimize-image-priority",
+    "optimize-script-priority",
+    "performance",
+    "privacy",
+    "reduce-style-repetition",
+    "same-document-transitions",
+    "security",
+    "shrinking-header-on-scroll",
+    "stabilize-reactive-state",
+    "translator",
+    "validate-input-after-interaction",
+    "webmcp"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Paired screenshots under default and prefers-color-scheme: dark",
+      "evidence": "The dark-condition screenshot is pixel-identical in palette and file size (179,048 bytes) to the default capture; no color-scheme media rule was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F-01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Emulated reduced-motion probe",
+      "evidence": "The probe matched reduced motion, found no active document animations, and found framework reduced-motion rules.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse contrast audit plus stylesheet preference probe",
+      "evidence": "Lighthouse failed color-contrast and the stylesheet probe found no prefers-contrast handling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F-02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct navigation of representative routes and rendered-state comparison",
+      "evidence": "Every tested route jumped to testservices.nic.in/ExaminationServices/#/500 with no transition or destination state.",
+      "pathIds": [
+        "services",
+        "examinations",
+        "contact",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "findingIds": [
+        "F-03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Reduced-motion/runtime animation and stylesheet probe",
+      "evidence": "No active animations or scroll-linked animation timelines were present, so no main-thread scroll-animation anti-pattern was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Visual and DOM inspection",
+      "evidence": "The page exposes native scrolling and explicit carousel controls; no custom pointer gesture surface was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Desktop/mobile screenshots and DOM inspection",
+      "evidence": "The large government banner and navigation remain static chrome; no progress or scroll-state response was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F-04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No tooltip, popover, or viewport-edge menu exists on the audited public surface.",
+      "reason": "No tooltip, popover, or viewport-edge menu exists on the audited public surface."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct route traversal and link probe",
+      "evidence": "Services, Examinations, Contact, and Login all redirect to the same #/500 state while rendering the homepage, with no error or destination cue.",
+      "pathIds": [
+        "services",
+        "examinations",
+        "contact",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "findingIds": [
+        "F-05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Load screenshots on desktop and mobile",
+      "evidence": "No popup, consent wall, or load-time overlay obscured content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No overlay or disclosure component requiring dialog, popover, or details was present.",
+      "reason": "No overlay or disclosure component requiring dialog, popover, or details was present."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "First-viewport screenshots",
+      "evidence": "Government masthead, oversized title block, full-width navigation, carousel, chart, and statistic cards crowd the first view before useful exam links.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F-06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Layout primitive at 360x800 and mobile screenshot",
+      "evidence": "The layout reported scrollWidth 751 against a 360px visual viewport, 391px horizontal overflow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F-07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Mobile layout metrics and stylesheet probe",
+      "evidence": "Reusable masthead/navigation/chart components remain 751px wide at a 360px viewport; no container-query evidence was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F-08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Programmatic focus walk and target measurement",
+      "evidence": "Many links, carousel controls, cards, logo links, and footer links computed to outline:none and box-shadow:none; footer links are only 17px tall.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/focus-targets.json"
+      ],
+      "findingIds": [
+        "F-09"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "First-viewport screenshot and anchor probe",
+      "evidence": "The platform purpose is stated, but the visible exam URLs have no href and the “Home” item points to /login.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "findingIds": [
+        "F-10"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct traversal of four primary navigation destinations",
+      "evidence": "All four representative destinations ended at testservices.nic.in/ExaminationServices/#/500 and displayed the same shell instead of their requested content.",
+      "pathIds": [
+        "services",
+        "examinations",
+        "contact",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "findingIds": [
+        "F-11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Error-route screenshot and URL/DOM comparison",
+      "evidence": "The #/500 URL shows the normal homepage with no error explanation, retry, back, or recovery action.",
+      "pathIds": [
+        "services"
+      ],
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "findingIds": [
+        "F-12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse plus DevTools trace",
+      "evidence": "Lighthouse measured LCP 4.82s and TBT 203ms; the trace measured LCP 3.94s and two long tasks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "findingIds": [
+        "F-13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout observer and Lighthouse CLS",
+      "evidence": "Observed CLS was 0 and Lighthouse CLS was 0.000037, despite missing image dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trace and Lighthouse main-thread diagnostics",
+      "evidence": "The trace recorded 2 long tasks (99ms longest); Lighthouse reported 2.8s main-thread work and 203ms TBT.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-14"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary confirmed against DOM/Lighthouse",
+      "evidence": "The page transfers 1.72MB; a 928KB uncompressed stylesheet lacks cache headers, parser scripts are high priority, and font-display costs about 1.02s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "findingIds": [
+        "F-15"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse code diagnostics and HAR",
+      "evidence": "Lighthouse estimated 147KiB unused CSS and 146KiB unused JS; the page also ships jQuery, Bootstrap, admin scripts, and Angular.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F-16"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audit and image/DOM probes",
+      "evidence": "Lighthouse failed aria-input-field-name, aria-required-children, image-alt and link-name; 3 of 6 images lack alt.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/images.json",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "findingIds": [
+        "F-17"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse color-contrast audit",
+      "evidence": "Lighthouse failed the color-contrast audit on the rendered homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-18"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse structure audits plus semantic/focus probes",
+      "evidence": "There is no h1 or main landmark; heading order fails, and many focused controls have no visible outline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/focus-targets.json"
+      ],
+      "findingIds": [
+        "F-19"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "At desktop the title/subtitle is clipped behind the navigation, and the mobile page is wider than the viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F-20"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Mobile reflow metrics, Lighthouse, and focus target probe",
+      "evidence": "At 360px the page overflows by 391px; multiple footer targets are 17px tall.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/focus-targets.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-21"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse browser-error audit",
+      "evidence": "Lighthouse reported browser errors in the console.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-22"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM, images primitive, and Lighthouse",
+      "evidence": "Document/charset are valid, but all 6 images omit dimensions, 5 use legacy PNG/JPG, and one is oversized.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/images.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-23"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse best-practices diagnostics",
+      "evidence": "Lighthouse found missing source maps for large first-party JavaScript and browser console errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-24"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM and Lighthouse SEO audits",
+      "evidence": "The title is descriptive, but meta description is absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-25"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Discoverability, semantic link probe, robots fetch, and Lighthouse",
+      "evidence": "Non-JS coverage is 2%; several visible links have no href; robots.txt returns an error redirect document and Lighthouse reports 14 robots errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-26"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM, robots/sitemap fetch, and direct response inspection",
+      "evidence": "No canonical is present; robots.txt and sitemap.xml both return a JavaScript error redirect with HTTP 200.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/robots.txt.txt",
+        "evidence/sitemap.xml.txt"
+      ],
+      "findingIds": [
+        "F-27"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Metadata probe",
+      "evidence": "The organization/examination page exposes no JSON-LD or Open Graph metadata.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "findingIds": [
+        "F-28"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers, cookies, and secrets primitives",
+      "evidence": "HTTPS, HSTS, nosniff, and secure no-cookie state pass, but CSP permits unsafe-inline for scripts and styles.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "findingIds": [
+        "F-29"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR, trackers, cookies, and secrets primitives",
+      "evidence": "No known trackers, cookies, or exposed secrets were found; third-party traffic was limited to 43KB of exam API data from nta.nic.in.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No permission prompt or reachable authentication form was present on the audited public surface; the advertised login route is broken and is covered as a core-flow issue.",
+      "reason": "No permission prompt or reachable authentication form was present on the audited public surface; the advertised login route is broken and is covered as a core-flow issue."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security headers primitive",
+      "evidence": "Permissions-Policy is missing, Referrer-Policy is legacy no-referrer-when-downgrade, and CSP has unsafe-inline, although HSTS and X-Frame-Options are present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "findingIds": [
+        "F-30"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Discoverability no-JS comparison",
+      "evidence": "Raw HTML provides only 2% of rendered content and the crawler screenshot is blank; the Angular page is a JS shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F-31"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct route traversal",
+      "evidence": "Every tested destination resolves to a #/500 state and silently re-renders the homepage.",
+      "pathIds": [
+        "services",
+        "examinations",
+        "contact",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "findingIds": [
+        "F-32"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "This informational public portal is not an app-like workflow requiring installation; no offline/PWA intent was declared.",
+      "reason": "This informational public portal is not an app-like workflow requiring installation; no offline/PWA intent was declared."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Representative error-route traversal",
+      "evidence": "The #/500 state contains no visible error, retry, stale-data warning, or recovery action.",
+      "pathIds": [
+        "services"
+      ],
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "findingIds": [
+        "F-33"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "DOM and visual inspection",
+      "evidence": "The page mixes Hindi and English branding while declaring only lang=en; no direction metadata or translation affordance is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/entry-desktop.png"
+      ],
+      "findingIds": [
+        "F-34"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No user-facing dates, currencies, formatted numbers, or locale selector were exposed in the reachable representative content.",
+      "reason": "No user-facing dates, currencies, formatted numbers, or locale selector were exposed in the reachable representative content."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No user-facing event times or time-zone-sensitive workflow was exposed in the reachable representative content.",
+      "reason": "No user-facing event times or time-zone-sensitive workflow was exposed in the reachable representative content."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual review of load and navigation surfaces",
+      "evidence": "No consent nag, disguised advertisement, forced continuity, or confirmshaming was present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No reachable form exists; the broken login/destination routes are reported under core task and resilience rather than fabricating form validation evidence.",
+      "reason": "No reachable form exists; the broken login/destination routes are reported under core task and resilience rather than fabricating form validation evidence."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No reachable input form exists on the representative public surfaces.",
+      "reason": "No reachable input form exists on the representative public surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No checkout, subscription, consent, or reachable account-management flow exists on the representative public surfaces.",
+      "reason": "No checkout, subscription, consent, or reachable account-management flow exists on the representative public surfaces."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Images primitive and HAR",
+      "evidence": "Five of six images are legacy PNG/JPG, four below-fold images are not lazy, four lack responsive sources, and one is oversized.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F-35"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR and Lighthouse code diagnostics",
+      "evidence": "A 928KB uncompressed stylesheet and roughly 293KiB estimated unused CSS/JS are shipped for a simple portal homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F-36"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR resource budget",
+      "evidence": "The 1.72MB load is dominated by 928KB CSS, 184KB fonts, and a 179KB hero image; major hashed assets lack cache headers.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F-37"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "WebMCP capability exposure is emerging and not required for this informational portal; its crawlability opportunity is already covered under discoverability.",
+      "reason": "WebMCP capability exposure is emerging and not required for this informational portal; its crawlability opportunity is already covered under discoverability."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No summarization or language-model task needs on-device inference on this simple portal.",
+      "reason": "No summarization or language-model task needs on-device inference on this simple portal."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline and post heap summaries after 10 repeated full-page scroll cycles",
+      "evidence": "Heap self size rose only 143,819 bytes (0.77%) and nodes 1,438 (0.40%) across separate controlled runs, with no unbounded pattern established.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json",
+        "evidence/runtime-metrics.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap summary and runtime metrics",
+      "evidence": "The rendered page has 254 DOM elements, about 11.7MB used JS heap at runtime, and an 18.6MB snapshot self-size, proportionate for the Angular page.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json",
+        "evidence/runtime-metrics.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Before/after heap constructor comparison",
+      "evidence": "No Detached* constructor appeared among retained-size leaders; closure count changed by 7 after repeated scrolling, not evidence of accumulation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json",
+        "evidence/runtime-metrics.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-01",
+        "F-02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-04",
+        "F-05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-07",
+        "F-08",
+        "F-09"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-10",
+        "F-11",
+        "F-12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-13",
+        "F-14",
+        "F-15",
+        "F-16"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-17",
+        "F-18",
+        "F-19",
+        "F-20",
+        "F-21"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-22",
+        "F-23",
+        "F-24"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-25",
+        "F-26",
+        "F-27",
+        "F-28"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-29",
+        "F-30"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-31",
+        "F-32",
+        "F-33"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-34"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-35",
+        "F-36",
+        "F-37"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "WebMCP capability exposure is emerging and not required for this informational portal; its crawlability opportunity is already covered under discoverability. No summarization or language-model task needs on-device inference on this simple portal."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Public entry and dashboard template; tested desktop, 360x800, dark/reduced preferences, keyboard semantics, performance, network, security, no-JS, and memory.",
+      "url": "https://examinationservices.nic.in/ExaminationServices/",
+      "conditions": [
+        "desktop",
+        "viewport 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "services",
+      "description": "Primary service/detail navigation archetype; direct route traversal.",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services",
+      "conditions": [
+        "direct navigation"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "examinations",
+      "description": "Exam listing archetype and core discovery journey; direct route traversal.",
+      "url": "https://examinationservices.nic.in/ExaminationServices/examination",
+      "conditions": [
+        "direct navigation"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "contact",
+      "description": "Support/contact journey and recovery surface; direct route traversal.",
+      "url": "https://examinationservices.nic.in/ExaminationServices/contact",
+      "conditions": [
+        "direct navigation"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "login",
+      "description": "Authentication entry and primary transactional journey; direct route traversal.",
+      "url": "https://examinationservices.nic.in/ExaminationServices/login",
+      "conditions": [
+        "direct navigation"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The interface ignores the user’s dark color-scheme preference.",
+      "evidence": "The dark-condition screenshot is pixel-identical in palette and file size (179,048 bytes) to the default capture; no color-scheme media rule was found.",
+      "artifacts": [
+        "evidence/home-dark.png"
+      ],
+      "suggestedFix": "Declare color-scheme and retint surfaces with prefers-color-scheme or light-dark().",
+      "effort": "small",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Text and controls do not consistently survive enhanced-contrast needs.",
+      "evidence": "Lighthouse failed color-contrast and the stylesheet probe found no prefers-contrast handling.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/preferences-probe.json"
+      ],
+      "suggestedFix": "Correct failing contrast pairs and add forced-colors/prefers-contrast adaptations.",
+      "effort": "small",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-03",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Route changes are abrupt and, more importantly, fail before a meaningful transition can occur.",
+      "evidence": "Every tested route jumped to testservices.nic.in/ExaminationServices/#/500 with no transition or destination state.",
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "suggestedFix": "Repair routing first, then use same-document view transitions for stable route changes.",
+      "effort": "small",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "services",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services"
+    },
+    {
+      "id": "F-04",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Navigation chrome does not respond to scroll position.",
+      "evidence": "The large government banner and navigation remain static chrome; no progress or scroll-state response was found.",
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "suggestedFix": "Use sticky state-aware chrome or a compact progress affordance when users move down the long page.",
+      "effort": "small",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-05",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Primary navigation loses the user in an undifferentiated error route.",
+      "evidence": "Services, Examinations, Contact, and Login all redirect to the same #/500 state while rendering the homepage, with no error or destination cue.",
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "suggestedFix": "Fix route targets and expose current-page state, focus movement, and a visible failure message.",
+      "effort": "medium",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "services",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services"
+    },
+    {
+      "id": "F-06",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "The first viewport gives more space to institutional chrome and dashboard decoration than direct exam actions.",
+      "evidence": "Government masthead, oversized title block, full-width navigation, carousel, chart, and statistic cards crowd the first view before useful exam links.",
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "suggestedFix": "Compress the masthead and prioritize a concise, task-oriented exam list.",
+      "effort": "small",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-07",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The page renders a desktop-width layout on mobile.",
+      "evidence": "The layout reported scrollWidth 751 against a 360px visual viewport, 391px horizontal overflow.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "suggestedFix": "Replace fixed widths with intrinsic/fluid layout and verify no overflow at narrow widths.",
+      "effort": "large",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-08",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Components do not adapt to their available container.",
+      "evidence": "Reusable masthead/navigation/chart components remain 751px wide at a 360px viewport; no container-query evidence was found.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/preferences-probe.json"
+      ],
+      "suggestedFix": "Introduce container boundaries and size-aware component rules.",
+      "effort": "small",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "css-layout",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-09",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus is frequently invisible and several targets are undersized.",
+      "evidence": "Many links, carousel controls, cards, logo links, and footer links computed to outline:none and box-shadow:none; footer links are only 17px tall.",
+      "artifacts": [
+        "evidence/focus-targets.json"
+      ],
+      "suggestedFix": "Apply a consistent :focus-visible ring and enlarge compact touch targets.",
+      "effort": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-10",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Users can see exam information but cannot identify a reliable primary action.",
+      "evidence": "The platform purpose is stated, but the visible exam URLs have no href and the “Home” item points to /login.",
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "suggestedFix": "Make each current exam a descriptive real link and correct the Home destination.",
+      "effort": "medium",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-11",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Primary navigation and login flows cannot be completed.",
+      "evidence": "All four representative destinations ended at testservices.nic.in/ExaminationServices/#/500 and displayed the same shell instead of their requested content.",
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "suggestedFix": "Correct production routing/base href and add route smoke tests for all public and login destinations.",
+      "effort": "large",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "services",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services"
+    },
+    {
+      "id": "F-12",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The system hides a server/error state instead of helping users recover.",
+      "evidence": "The #/500 URL shows the normal homepage with no error explanation, retry, back, or recovery action.",
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "suggestedFix": "Render an explicit accessible error state with retry, Home, and contact/support paths.",
+      "effort": "medium",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "services",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services"
+    },
+    {
+      "id": "F-13",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Largest Contentful Paint is outside the good range.",
+      "evidence": "Lighthouse measured LCP 4.82s and TBT 203ms; the trace measured LCP 3.94s and two long tasks.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "suggestedFix": "Prioritize the LCP resource, compress critical delivery, and defer non-critical work.",
+      "effort": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-14",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Main-thread work delays interactivity.",
+      "evidence": "The trace recorded 2 long tasks (99ms longest); Lighthouse reported 2.8s main-thread work and 203ms TBT.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Chunk non-critical work, remove redundant libraries, and schedule low-priority tasks later.",
+      "effort": "small",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-15",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Critical resources are oversized, uncached, and render delaying.",
+      "evidence": "The page transfers 1.72MB; a 928KB uncompressed stylesheet lacks cache headers, parser scripts are high priority, and font-display costs about 1.02s.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "suggestedFix": "Compress and cache hashed assets, inline only critical CSS, defer classic scripts, and set font-display.",
+      "effort": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-16",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Substantial unused and overlapping code ships on the entry page.",
+      "evidence": "Lighthouse estimated 147KiB unused CSS and 146KiB unused JS; the page also ships jQuery, Bootstrap, admin scripts, and Angular.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Remove unused CSS/JS and eliminate legacy libraries where Angular/platform code already provides the behavior.",
+      "effort": "small",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "reduce-style-repetition",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-17",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Controls, links, and images lack reliable accessible names and roles.",
+      "evidence": "Lighthouse failed aria-input-field-name, aria-required-children, image-alt and link-name; 3 of 6 images lack alt.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/images.json",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "suggestedFix": "Provide semantic controls, names, required ARIA children, and appropriate alt text.",
+      "effort": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-18",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Foreground/background contrast is insufficient in visible content.",
+      "evidence": "Lighthouse failed the color-contrast audit on the rendered homepage.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Adjust color tokens until all normal and large text meet WCAG contrast thresholds.",
+      "effort": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-19",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Heading, landmark, and focus structure does not provide a coherent keyboard/AT path.",
+      "evidence": "There is no h1 or main landmark; heading order fails, and many focused controls have no visible outline.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/focus-targets.json"
+      ],
+      "suggestedFix": "Add main and h1, repair heading order, and enforce visible focus in DOM order.",
+      "effort": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-20",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Text is clipped or forced into an oversized layout.",
+      "evidence": "At desktop the title/subtitle is clipped behind the navigation, and the mobile page is wider than the viewport.",
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "suggestedFix": "Use fluid type/spacing and allow masthead text to wrap without overlap.",
+      "effort": "small",
+      "principleId": "be-inclusive",
+      "principleCheckId": "legible-text",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-21",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page does not reflow and compact targets are hard to activate.",
+      "evidence": "At 360px the page overflows by 391px; multiple footer targets are 17px tall.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/focus-targets.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Meet 400% zoom/reflow behavior and enlarge interactive hit areas.",
+      "effort": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-22",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The production page logs browser errors.",
+      "evidence": "Lighthouse reported browser errors in the console.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Resolve failing requests/runtime exceptions and enforce a clean-console smoke test.",
+      "effort": "small",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-23",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image assets are not robustly sized or delivered.",
+      "evidence": "Document/charset are valid, but all 6 images omit dimensions, 5 use legacy PNG/JPG, and one is oversized.",
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/images.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Add width/height, responsive sources, lazy loading, and modern formats where useful.",
+      "effort": "small",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-24",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Production diagnostics are incomplete and platform errors remain.",
+      "evidence": "Lighthouse found missing source maps for large first-party JavaScript and browser console errors.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Publish protected source maps to monitoring and remove browser errors/deprecations.",
+      "effort": "small",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-25",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page has no search-result description.",
+      "evidence": "The title is descriptive, but meta description is absent.",
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Add a concise unique meta description matching the public examination service.",
+      "effort": "small",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-26",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core content and navigation are not reliably crawlable.",
+      "evidence": "Non-JS coverage is 2%; several visible links have no href; robots.txt returns an error redirect document and Lighthouse reports 14 robots errors.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Server-render meaningful content and real links; serve a valid robots.txt.",
+      "effort": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-27",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Canonical, robots, and sitemap signals are inconsistent or missing.",
+      "evidence": "No canonical is present; robots.txt and sitemap.xml both return a JavaScript error redirect with HTTP 200.",
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/robots.txt.txt",
+        "evidence/sitemap.xml.txt"
+      ],
+      "suggestedFix": "Serve valid robots/sitemap resources and add a canonical for the public route.",
+      "effort": "small",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-28",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Search and share clients receive no structured entity or preview metadata.",
+      "evidence": "The organization/examination page exposes no JSON-LD or Open Graph metadata.",
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json"
+      ],
+      "suggestedFix": "Add accurate Organization/WebSite and relevant exam metadata plus Open Graph fields.",
+      "effort": "small",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-29",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The CSP weakens XSS protection with unsafe-inline.",
+      "evidence": "HTTPS, HSTS, nosniff, and secure no-cookie state pass, but CSP permits unsafe-inline for scripts and styles.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "suggestedFix": "Move inline code/styles to nonce/hash-protected resources and tighten CSP.",
+      "effort": "small",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-30",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser-enforced policy defenses are only partial.",
+      "evidence": "Permissions-Policy is missing, Referrer-Policy is legacy no-referrer-when-downgrade, and CSP has unsafe-inline, although HSTS and X-Frame-Options are present.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "suggestedFix": "Set a restrictive Permissions-Policy, strict-origin-when-cross-origin or stricter referrer policy, and nonce/hash CSP.",
+      "effort": "small",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-31",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core public exam content disappears without JavaScript.",
+      "evidence": "Raw HTML provides only 2% of rendered content and the crawler screenshot is blank; the Angular page is a JS shell.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render or prerender core headings, exam links, and navigation, then enhance with Angular.",
+      "effort": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "stabilize-reactive-state",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-32",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Runtime routing is fragile across the primary navigation.",
+      "evidence": "Every tested destination resolves to a #/500 state and silently re-renders the homepage.",
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "suggestedFix": "Fix route configuration and add production-origin navigation tests with explicit error boundaries.",
+      "effort": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "services",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services"
+    },
+    {
+      "id": "F-33",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "HTTP/runtime failure states are misleading and unrecoverable.",
+      "evidence": "The #/500 state contains no visible error, retry, stale-data warning, or recovery action.",
+      "artifacts": [
+        "evidence/services.png",
+        "evidence/examination.png",
+        "evidence/contact.png",
+        "evidence/login.png"
+      ],
+      "suggestedFix": "Render explicit 404/500/network states with retry and safe navigation.",
+      "effort": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "services",
+      "url": "https://examinationservices.nic.in/ExaminationServices/services"
+    },
+    {
+      "id": "F-34",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "Mixed-language content is not semantically identified for assistive technology.",
+      "evidence": "The page mixes Hindi and English branding while declaring only lang=en; no direction metadata or translation affordance is present.",
+      "artifacts": [
+        "evidence/entry-dom.json",
+        "evidence/semantic-probe.json",
+        "evidence/entry-desktop.png"
+      ],
+      "suggestedFix": "Mark language changes, retain correct html lang/dir, and use logical layout properties.",
+      "effort": "small",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-35",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image delivery wastes bytes and misses responsive/lazy loading.",
+      "evidence": "Five of six images are legacy PNG/JPG, four below-fold images are not lazy, four lack responsive sources, and one is oversized.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Use responsive modern images, explicit dimensions, and lazy loading below the fold.",
+      "effort": "small",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-36",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page transfers substantial unused work.",
+      "evidence": "A 928KB uncompressed stylesheet and roughly 293KiB estimated unused CSS/JS are shipped for a simple portal homepage.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Purge unused CSS/JS, compress text, and defer non-essential code.",
+      "effort": "small",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "reduce-style-repetition",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    },
+    {
+      "id": "F-37",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The resource budget is disproportionate to a mostly static portal.",
+      "evidence": "The 1.72MB load is dominated by 928KB CSS, 184KB fonts, and a 179KB hero image; major hashed assets lack cache headers.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Set a lean page budget, subset fonts, optimize the hero, and cache immutable assets.",
+      "effort": "small",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "pathId": "home",
+      "url": "https://examinationservices.nic.in/ExaminationServices/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-01",
+      "title": "Repair production routes and explicit failure recovery",
+      "priority": 1,
+      "findingIds": [
+        "F-05",
+        "F-11",
+        "F-12",
+        "F-32",
+        "F-33"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T-02",
+      "title": "Rebuild the narrow layout and visible focus system",
+      "priority": 2,
+      "findingIds": [
+        "F-07",
+        "F-08",
+        "F-09",
+        "F-20",
+        "F-21"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T-03",
+      "title": "Server-render public exam content and crawl signals",
+      "priority": 3,
+      "findingIds": [
+        "F-25",
+        "F-26",
+        "F-27",
+        "F-28",
+        "F-31"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T-04",
+      "title": "Fix semantic structure, names, labels, contrast, and image alternatives",
+      "priority": 4,
+      "findingIds": [
+        "F-02",
+        "F-17",
+        "F-18",
+        "F-19"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-05",
+      "title": "Reduce LCP and delivery cost",
+      "priority": 5,
+      "findingIds": [
+        "F-13",
+        "F-14",
+        "F-15",
+        "F-16"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T-06",
+      "title": "Optimize and cache assets",
+      "priority": 6,
+      "findingIds": [
+        "F-23",
+        "F-35",
+        "F-36",
+        "F-37"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T-07",
+      "title": "Tighten CSP and browser policies",
+      "priority": 7,
+      "findingIds": [
+        "F-29",
+        "F-30"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T-08",
+      "title": "Respect theme and language preferences",
+      "priority": 8,
+      "findingIds": [
+        "F-01",
+        "F-34"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T-09",
+      "title": "Clarify the primary action and reduce first-view chrome",
+      "priority": 9,
+      "findingIds": [
+        "F-04",
+        "F-06",
+        "F-10"
+      ],
+      "guidanceId": "improve-text-layout-and-legibility",
+      "status": "open"
+    },
+    {
+      "id": "T-10",
+      "title": "Clean production console and diagnostics",
+      "priority": 10,
+      "findingIds": [
+        "F-22",
+        "F-24"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "dom",
+      "path": "evidence/contact-dom.json",
+      "caption": "contact dom"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/contact.png",
+      "caption": "contact"
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "cookies"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "discoverability crawler"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "discoverability rendered"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "discoverability"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/entry-desktop.png",
+      "caption": "entry desktop"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/entry-dom.json",
+      "caption": "entry dom"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/examination-dom.json",
+      "caption": "examination dom"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/examination.png",
+      "caption": "examination"
+    },
+    {
+      "type": "other",
+      "path": "evidence/focus-targets.json",
+      "caption": "focus targets"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-search.json",
+      "caption": "guidance search"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "headers"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "heap baseline"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll.json",
+      "caption": "heap post scroll"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "home dark"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "home layout mobile"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary"
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home trace"
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "images"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "lighthouse summary"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "lighthouse"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/login-dom.json",
+      "caption": "login dom"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login.png",
+      "caption": "login"
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-probe.json",
+      "caption": "preferences probe"
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw-headers.txt",
+      "caption": "raw headers"
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw.html",
+      "caption": "raw"
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt.txt",
+      "caption": "robots.txt"
+    },
+    {
+      "type": "other",
+      "path": "evidence/runtime-metrics.json",
+      "caption": "runtime metrics"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "secrets"
+    },
+    {
+      "type": "other",
+      "path": "evidence/semantic-probe.json",
+      "caption": "semantic probe"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/services-dom.json",
+      "caption": "services dom"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/services.png",
+      "caption": "services"
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml.txt",
+      "caption": "sitemap.xml"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "trackers"
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-18T18-49-12-947Z"
+}

@@ -1,0 +1,2596 @@
+{
+  "url": "https://evikas.mpkrishi.mp.gov.in",
+  "auditedAt": "2026-07-26T19:16:36.864Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete across 58/58 checks. Representative public templates and the primary registration surface were inspected; authenticated/real-identity submission and external admin login were not covered.",
+  "page": {
+    "appType": "mpa",
+    "framework": "ASP.NET MVC with jQuery, Bootstrap and AngularJS on the tracking surface",
+    "notes": "Public Madhya Pradesh agricultural service portal. Five representative public routes were audited. Excluded: external HTTP admin login, APK/app-store execution, video playback, authenticated OTP completion, and exhaustive policy/video URLs because they are external, require real credentials, or duplicate inspected templates."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse",
+    "direct HTTP fetch",
+    "modern-web-guidance"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "accessible-error-announcement",
+    "adapt-scrollbar-to-contrast-preferences",
+    "anchor-positioning-tab-underline",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "break-up-long-tasks",
+    "complex-shapes",
+    "coordinate-global-events",
+    "css",
+    "dark-mode",
+    "declarative-dialog-popover-control",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "directional-navigation-transitions",
+    "flicker-free-client-side-ab-testing",
+    "fluid-scaling",
+    "forms",
+    "html",
+    "identify-heavy-scripts",
+    "identify-inp-causes",
+    "improve-text-layout-and-legibility",
+    "language-model",
+    "light-dismiss-a-dialog",
+    "manage-recurring-intervals",
+    "move-dom-element-without-losing-state",
+    "optimize-image-priority",
+    "passkeys",
+    "persistent-toast-notifications",
+    "physics-based-easing",
+    "privacy",
+    "resilient-context-menus-and-nested-dropdowns",
+    "same-document-transitions",
+    "scrollytelling",
+    "search-hidden-content",
+    "security",
+    "shrinking-header-on-scroll",
+    "size-aware-styling",
+    "support-global-calendar-systems",
+    "translator",
+    "visually-stable-font-fallbacks",
+    "webmcp"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Under prefers-color-scheme: dark, the dark probe still measured the body as rgb(255,255,255) with rgb(33,37,41) text, and the screenshot remained light.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The reduced-motion probe found six of seven animations still running, including ripple, aiGlow, slideroll and slide; only the scroll animation paused.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "DOM/CSS inspection found no contrast preference or forced-colors adaptation, while the site relies on pale green/orange decorative treatments.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The inspected MPA pages use ordinary navigation and DOM/CSS inspection found no view-transition-name or @view-transition rules.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The animation probe found long-running CSS animations (3–15 seconds), but no authored animation-timeline usage was found.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Visual and DOM inspection found click handlers and generic Bootstrap animation, but no snap, gesture, overscroll or physics-based interaction on the card-heavy landing surface.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The mobile landing page is 4,315 CSS pixels tall, while the screenshot shows a full-height modal and no page progress or clear continuation cue.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "No tooltip, contextual menu, anchored popover, or other floating control requiring anchor-relative positioning appears on the representative paths.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "No tooltip, contextual menu, anchored popover, or other floating control requiring anchor-relative positioning appears on the representative paths."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Both desktop and mobile first views are blocked by a large modal before the user can see or choose the main registration and tracking tasks.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The first screenshot at both viewport sizes shows a modal and backdrop covering the page; the notice is lengthy and not tied to a user action.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The semantic probe found the visible role=dialog had neither aria-label nor aria-labelledby; Lighthouse also failed aria-dialog-name.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The clear-page and crawler screenshots show banners, portraits, ticker, video control, floating accessibility control and multiple card treatments before core tasks; the automatic modal adds another layer.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Mobile layout captures at 360×800 reported 0px horizontal overflow on home, registration and tracking.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The probe found zero stylesheets containing @container; the same card/form components are tightly coupled to page-width utility classes such as w-50.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The form probes found 19–23px-high links/radios and many controls without programmatic labels; focus was visible, but target size remains small.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "At first load, the registration and tracking actions are outside the visible interaction layer because the automatic notice occupies the viewport.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The registration DOM contains duplicate id values (OtpType, aadharNo, chk_OTP), 14 unlabeled controls, and onpaste handlers on Aadhaar inputs, undermining reliable completion and assistive technology.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The tracking page reports that home delivery is unavailable as static body copy, and the primary form controls lack the labeling/error associations needed for actionable validation recovery.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse measured LCP 8.4s, FCP 4.3s and TTI 9.5s (performance 0.63); the local trace corroborated 2.27s FCP/LCP on the faster unthrottled run.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The images audit found all 14 images missing complete width/height dimensions; mobile CLS was 0.061 and showed many late shifts.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse estimated 293 KiB unused JavaScript; the trace recorded a 96.9ms long task and 46.9ms TBT.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "HAR recorded 56 requests and 1.78MB transferred, including 384KB third-party fonts; seven parser-inserted stylesheets and synchronous scripts were confirmed by HAR and the DOM probe.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse estimated 179 KiB unused CSS and 293 KiB unused JS, including 99.9% of animate.min.css and 88.8% of fancybox.umd.js.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse failed dialog name, image alt and link name checks; the registration probe found 14 unlabeled controls and the images audit found two missing alt values.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse color-contrast audit passed on the rendered landing page.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The home page has no doctype, lang, h1, main or nav; Lighthouse failed heading order and positive tabindex checks.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Mobile screenshots show readable Devanagari body text with adequate line spacing on forms and content pages.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The viewport uses maximum-scale=1; Lighthouse failed meta-viewport and the form probes found interactive targets only 19–23px high.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse errors-in-console audit reported no console errors.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The DOM probe found no doctype and Lighthouse failed the doctype audit; the image audit found 14/14 images without complete intrinsic dimensions.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The viewport caps zoom, Aadhaar fields block paste, and all seven external scripts are classic synchronous scripts without async/defer/module.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Home, registration, tracking, about and privacy DOM captures all use “ई-विकास प्रणाली”; descriptions use the internal acronym “MP-FDCMS”.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The probe found visible anchors without href and href=\"#\" placeholders; Lighthouse failed crawlable-anchors. Raw HTML coverage was only 15%, despite not being an empty JS shell.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The metadata probe found no canonical or robots meta; /robots.txt and /sitemap.xml returned the site’s HTML 404 page rather than valid files.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The probe found zero JSON-LD scripts and zero Open Graph tags on the landing page.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Headers include HTTPS, HSTS and nosniff, but CSP script-src allows unsafe-inline and unsafe-eval; Permissions-Policy is missing.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Trackers found no known tracker domains; cookies found zero cookies and secrets found no exposed credentials.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "No browser permission prompt was triggered on any inspected path, and identity is requested only inside the user-opened registration flow.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The headers audit found no Permissions-Policy and a weakened CSP, although frame and referrer protections were present.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Discoverability measured only 15% overlap between rendered content words and raw HTML; crawler and rendered views differ materially.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "All five representative routes loaded without runtime failure; modal dismissal, focus, and responsive layout remained operational.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "This live government transaction portal does not declare offline/installable intent; authoritative identity and stock operations require current server data.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "This live government transaction portal does not declare offline/installable intent; authoritative identity and stock operations require current server data."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The tracking path displays an unavailable-service paragraph without retry, status timestamp, or alternative action; requested robots/sitemap paths return generic framework 404 HTML.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The Hindi home page has no lang attribute; inner routes declare lang=\"Eng\", which is not a valid BCP 47 code and does not match the predominantly Hindi UI.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Representative pages do not format dates, currency, measurements, or locale-sensitive numeric data.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "Representative pages do not format dates, currency, measurements, or locale-sensitive numeric data."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "No scheduled user event or cross-time-zone date/time entry is exposed; the static “10:00” notice is explicitly local service information.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "No scheduled user event or cross-time-zone date/time entry is exposed; the static “10:00” notice is explicitly local service information."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The notice appears without user initiation and blocks the task; Aadhaar fields attach onpaste handlers returning false.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F36"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The registration controls lack programmatic labels, duplicate IDs and block paste; the tracking state gives no actionable retry.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F37"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Aadhaar fields use autocomplete=\"off\" and onpaste=false; several controls lack labels and duplicate IDs.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F38"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "No checkout, subscription, payment, cancellation, or authenticated account-management step was entered in the public representative scope.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "No checkout, subscription, payment, cancellation, or authenticated account-management step was entered in the public representative scope."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The images audit found 12 legacy-format assets, three oversized images, six without srcset and eight below-fold images not lazy-loaded.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F39"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Lighthouse estimated 472 KiB combined unused CSS/JS, while the reduced-motion probe found perpetual animations still running.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F40"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "HAR measured 1.78MB and 56 requests; 384KB came from third-party font origins and images transferred 581KB.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "findingIds": [
+        "F41"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "No declared intent asks this public portal to expose WebMCP or agent-callable tools; ordinary semantic web/forms remain covered by other principles.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "No declared intent asks this public portal to expose WebMCP or agent-callable tools; ordinary semantic web/forms remain covered by other principles."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "The inspected registration, tracking and policy tasks have no user-facing summarisation or language-model use case.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ],
+      "reason": "The inspected registration, tracking and policy tasks have no user-facing summarisation or language-model use case."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Baseline versus post-interaction heap totals grew only 60,411 bytes (0.48%) and 299 nodes after ten modal hide/show cycles, with no Detached constructor among top retained entries.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Heap summary measured a 12.47MB baseline self-size for this bounded MPA page, proportionate to the observed surface.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-path DOM/evaluate probes, visual inspection, and the relevant retained objective artifact described in evidence.",
+      "evidence": "Post-interaction heap summary showed no Detached DOM constructor among top retained entries and only bounded 0.48% total growth.",
+      "pathIds": [
+        "home",
+        "registration",
+        "tracking",
+        "about",
+        "privacy"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F27",
+        "F28",
+        "F29",
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F31",
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F33",
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F36",
+        "F37",
+        "F38"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F39",
+        "F40",
+        "F41"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable for this portal and its declared/observed intent."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Entry page and primary navigation, including the automatic important-notice modal; represents the public landing template.",
+      "url": "https://evikas.mpkrishi.mp.gov.in/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "non-JS crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "registration",
+      "description": "Primary farmer registration, e-token and login form; represents the highest-risk transactional journey.",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification",
+      "conditions": [
+        "viewport: 360x800",
+        "keyboard focus",
+        "form semantics"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "tracking",
+      "description": "Fertilizer tracking/status surface; represents lookup and service-state messaging.",
+      "url": "https://evikas.mpkrishi.mp.gov.in/FarmerProfile/FertilizerTracking",
+      "conditions": [
+        "viewport: 360x800",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "about",
+      "description": "About Us page; represents the long-form content template.",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Policy/About_Us",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "privacy",
+      "description": "Privacy policy; represents policy and trust content.",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Policy/PrivacyPolicy",
+      "conditions": [
+        "DOM and metadata inspection"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The interface ignores the system color scheme.",
+      "evidence": "Under prefers-color-scheme: dark, the dark probe still measured the body as rgb(255,255,255) with rgb(33,37,41) text, and the screenshot remained light.",
+      "suggestedFix": "Declare color-scheme and derive surfaces, text, controls and imagery from light/dark tokens; use light-dark() or a prefers-color-scheme fallback.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/dark-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Most continuous animation remains active when reduced motion is requested.",
+      "evidence": "The reduced-motion probe found six of seven animations still running, including ripple, aiGlow, slideroll and slide; only the scroll animation paused.",
+      "suggestedFix": "In prefers-reduced-motion: reduce, remove non-essential animation and use short opacity-only state changes where feedback is needed.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/reduced-motion-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "No high-contrast adaptation is evident.",
+      "evidence": "DOM/CSS inspection found no contrast preference or forced-colors adaptation, while the site relies on pale green/orange decorative treatments.",
+      "suggestedFix": "Add forced-colors and prefers-contrast styles that retain boundaries, focus indicators and readable text.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "adapt-scrollbar-to-contrast-preferences",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Primary route changes have no continuity.",
+      "evidence": "The inspected MPA pages use ordinary navigation and DOM/CSS inspection found no view-transition-name or @view-transition rules.",
+      "suggestedFix": "Use same-origin cross-document View Transitions with a no-motion fallback for stable shared page elements.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "cross-document-transitions",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/aadhar-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F05",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Animations are timer-driven rather than scroll/state-driven.",
+      "evidence": "The animation probe found long-running CSS animations (3–15 seconds), but no authored animation-timeline usage was found.",
+      "suggestedFix": "Tie any motion that communicates scroll progress to scroll timelines; remove decorative perpetual motion.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "scroll-driven-animations",
+      "guidanceId": "scrollytelling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F06",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Interactive cards and media do not provide natural direct-manipulation feedback.",
+      "evidence": "Visual and DOM inspection found click handlers and generic Bootstrap animation, but no snap, gesture, overscroll or physics-based interaction on the card-heavy landing surface.",
+      "suggestedFix": "Use direct-manipulation patterns only where they improve the task, with accessible button alternatives and reduced-motion support.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "physical-gestures",
+      "guidanceId": "physics-based-easing",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Long mobile pages provide weak progress and continuation cues.",
+      "evidence": "The mobile landing page is 4,315 CSS pixels tall, while the screenshot shows a full-height modal and no page progress or clear continuation cue.",
+      "suggestedFix": "Expose scrollability and current location with a restrained sticky header, progress cue, or section navigation.",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scrollability-affordance-hints",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/layout-mobile.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Attention is captured by an automatic notice instead of guided toward the primary service.",
+      "evidence": "Both desktop and mobile first views are blocked by a large modal before the user can see or choose the main registration and tracking tasks.",
+      "suggestedFix": "Put the short service notice inline near the relevant action and let the primary task remain visible; reserve modal interruption for urgent, time-critical blocking information.",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "guidanceId": "navigation-drawer",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "An unsolicited modal blocks all landing-page content on every fresh load.",
+      "evidence": "The first screenshot at both viewport sizes shows a modal and backdrop covering the page; the notice is lengthy and not tied to a user action.",
+      "suggestedFix": "Replace the automatic modal with an inline, dismissible notice that remembers dismissal and does not block navigation.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The notice dialog is unnamed and implemented as a generic role-based container.",
+      "evidence": "The semantic probe found the visible role=dialog had neither aria-label nor aria-labelledby; Lighthouse also failed aria-dialog-name.",
+      "suggestedFix": "Use a native dialog (or fully conforming modal pattern), label it from its heading, manage focus, and provide Esc and light-dismiss behavior where appropriate.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Competing decorative chrome obscures the core services.",
+      "evidence": "The clear-page and crawler screenshots show banners, portraits, ticker, video control, floating accessibility control and multiple card treatments before core tasks; the automatic modal adds another layer.",
+      "suggestedFix": "Reduce decorative bands and duplicated visual treatments; establish one compact service-first hierarchy.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "reduce-style-repetition",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-closed.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F12",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Responsiveness is viewport-only rather than component-aware.",
+      "evidence": "The probe found zero stylesheets containing @container; the same card/form components are tightly coupled to page-width utility classes such as w-50.",
+      "suggestedFix": "Use container queries for reusable cards and forms so they adapt to their allocated space, not only the viewport.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/aadhar-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Several interactive targets are below recommended touch size and field labeling is fragile.",
+      "evidence": "The form probes found 19–23px-high links/radios and many controls without programmatic labels; focus was visible, but target size remains small.",
+      "suggestedFix": "Provide at least 24×24 CSS pixel targets (prefer 44×44 for primary touch controls), preserve focus-visible styling and attach explicit labels.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/aadhar-form-probe.json",
+        "evidence/tracking-form-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "registration",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The landing page hides its primary purpose and actions behind a notice.",
+      "evidence": "At first load, the registration and tracking actions are outside the visible interaction layer because the automatic notice occupies the viewport.",
+      "suggestedFix": "Lead with two clearly named primary tasks and place service status as compact supporting information.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "guidanceId": "direct-user-attention-primary-action-visual-hierarchy-task-success",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The primary identity flow uses duplicate IDs, inaccessible controls and blocked paste.",
+      "evidence": "The registration DOM contains duplicate id values (OtpType, aadharNo, chk_OTP), 14 unlabeled controls, and onpaste handlers on Aadhaar inputs, undermining reliable completion and assistive technology.",
+      "suggestedFix": "Give every control a unique ID and explicit label, allow paste, use inputmode/numeric constraints without blocking assistive input, and test the end-to-end OTP states.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/aadhar-form-probe.json",
+        "evidence/aadhar-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "registration",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification"
+    },
+    {
+      "id": "F16",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Service and validation states lack robust recovery semantics.",
+      "evidence": "The tracking page reports that home delivery is unavailable as static body copy, and the primary form controls lack the labeling/error associations needed for actionable validation recovery.",
+      "suggestedFix": "Use role=status for service state, associate validation messages with fields, focus the first invalid field, and provide a clear retry or alternate channel.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/tracking-mobile.png",
+        "evidence/aadhar-form-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "tracking",
+      "url": "https://evikas.mpkrishi.mp.gov.in/FarmerProfile/FertilizerTracking"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile loading performance is poor.",
+      "evidence": "Lighthouse measured LCP 8.4s, FCP 4.3s and TTI 9.5s (performance 0.63); the local trace corroborated 2.27s FCP/LCP on the faster unthrottled run.",
+      "suggestedFix": "Prioritise the LCP image, reduce render-blocking dependencies, subset fonts, and set a performance budget tested under mobile throttling.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Images do not reserve intrinsic layout space.",
+      "evidence": "The images audit found all 14 images missing complete width/height dimensions; mobile CLS was 0.061 and showed many late shifts.",
+      "suggestedFix": "Set width and height or aspect-ratio on every image and reserve stable space for banners, tickers and injected widgets.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "prevent-layout-shift-reserve-space-cls-aspect-ratio",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/layout-mobile.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page ships substantial unused JS and records long work.",
+      "evidence": "Lighthouse estimated 293 KiB unused JavaScript; the trace recorded a 96.9ms long task and 46.9ms TBT.",
+      "suggestedFix": "Remove unused libraries, load route-specific behavior only when needed and break remaining work into schedulable tasks.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Resource delivery is heavy and render-blocking.",
+      "evidence": "HAR recorded 56 requests and 1.78MB transferred, including 384KB third-party fonts; seven parser-inserted stylesheets and synchronous scripts were confirmed by HAR and the DOM probe.",
+      "suggestedFix": "Inline critical CSS, defer non-critical assets, self-host/subset fonts, lazy-load below-fold images and provide responsive AVIF/WebP sources.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/home-probe.json",
+        "evidence/images.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Most framework CSS and several libraries are unused on the landing route.",
+      "evidence": "Lighthouse estimated 179 KiB unused CSS and 293 KiB unused JS, including 99.9% of animate.min.css and 88.8% of fancybox.umd.js.",
+      "suggestedFix": "Bundle per route, remove jQuery migration where no longer needed, and purge unused framework/icon styles.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Names, roles and labels are incomplete across key paths.",
+      "evidence": "Lighthouse failed dialog name, image alt and link name checks; the registration probe found 14 unlabeled controls and the images audit found two missing alt values.",
+      "suggestedFix": "Use semantic controls, unique IDs, explicit labels, meaningful alternative text and accessible names for every dialog/link.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/aadhar-form-probe.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "registration",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification"
+    },
+    {
+      "id": "F23",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Document structure is malformed for assistive navigation.",
+      "evidence": "The home page has no doctype, lang, h1, main or nav; Lighthouse failed heading order and positive tabindex checks.",
+      "suggestedFix": "Add a valid doctype and language, one descriptive h1, semantic landmarks and DOM-order keyboard navigation without positive tabindex.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F24",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The viewport configuration restricts zoom and touch targets are too small.",
+      "evidence": "The viewport uses maximum-scale=1; Lighthouse failed meta-viewport and the form probes found interactive targets only 19–23px high.",
+      "suggestedFix": "Remove maximum-scale/minimum-scale restrictions, verify 200–400% reflow, enlarge targets, and caption instructional media.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/aadhar-form-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F25",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The entry document is in quirks mode and image markup omits intrinsic dimensions.",
+      "evidence": "The DOM probe found no doctype and Lighthouse failed the doctype audit; the image audit found 14/14 images without complete intrinsic dimensions.",
+      "suggestedFix": "Emit <!doctype html>, validate the rendered markup, and include width/height plus responsive sources for images.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F26",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page disables user capabilities and relies on legacy synchronous libraries.",
+      "evidence": "The viewport caps zoom, Aadhaar fields block paste, and all seven external scripts are classic synchronous scripts without async/defer/module.",
+      "suggestedFix": "Do not block zoom or paste; modernise and defer scripts, and retain progressive fallbacks.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/aadhar-form-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Every inspected route reuses a generic title and opaque description.",
+      "evidence": "Home, registration, tracking, about and privacy DOM captures all use “ई-विकास प्रणाली”; descriptions use the internal acronym “MP-FDCMS”.",
+      "suggestedFix": "Give each route a distinct descriptive title and a useful Hindi/English summary matching its task.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "page-title-meta-description-seo",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/aadhar-dom.json",
+        "evidence/about-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F28",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Many visible links are not crawlable and crawler-visible content coverage is low.",
+      "evidence": "The probe found visible anchors without href and href=\"#\" placeholders; Lighthouse failed crawlable-anchors. Raw HTML coverage was only 15%, despite not being an empty JS shell.",
+      "suggestedFix": "Use real href URLs for navigation, remove placeholder links, allow zoom, and ensure meaningful content is server-rendered.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "crawlable-links-viewport-meta-robots-descriptive-link-text",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/discoverability.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F29",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Canonical, robots and sitemap signals are absent.",
+      "evidence": "The metadata probe found no canonical or robots meta; /robots.txt and /sitemap.xml returned the site’s HTML 404 page rather than valid files.",
+      "suggestedFix": "Publish valid robots.txt and sitemap.xml, add self-referencing canonicals, and add hreflang if Hindi and English routes coexist.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "canonical-hreflang-http-status-robots-sitemap-noindex-seo-indexing",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.xml"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F30",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The site provides no structured or social metadata.",
+      "evidence": "The probe found zero JSON-LD scripts and zero Open Graph tags on the landing page.",
+      "suggestedFix": "Add appropriate GovernmentService/WebSite JSON-LD and Open Graph metadata with stable titles, descriptions and images.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "structured-data-schema-org-json-ld-open-graph-social-preview-metadata",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F31",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The CSP permits unsafe script execution and Permissions-Policy is absent.",
+      "evidence": "Headers include HTTPS, HSTS and nosniff, but CSP script-src allows unsafe-inline and unsafe-eval; Permissions-Policy is missing.",
+      "suggestedFix": "Move inline code to nonce/hash-authorised scripts, remove unsafe-eval, and deploy a least-privilege Permissions-Policy.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F32",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser policy hardening is incomplete.",
+      "evidence": "The headers audit found no Permissions-Policy and a weakened CSP, although frame and referrer protections were present.",
+      "suggestedFix": "Harden CSP, add Permissions-Policy, and consider Trusted Types after removing legacy unsafe-eval dependencies.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F33",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Most rendered content is not represented as equivalent raw HTML.",
+      "evidence": "Discoverability measured only 15% overlap between rendered content words and raw HTML; crawler and rendered views differ materially.",
+      "suggestedFix": "Render primary service content and links in server HTML, then enhance behavior with JavaScript without replacing semantic content.",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "progressive-enhancement-graceful-degradation-no-javascript-baseline-fallback",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F34",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Failure and unavailable-service states do not offer recovery actions.",
+      "evidence": "The tracking path displays an unavailable-service paragraph without retry, status timestamp, or alternative action; requested robots/sitemap paths return generic framework 404 HTML.",
+      "suggestedFix": "Provide explicit offline/error states with retry, last-updated data and alternative contact/lookup routes.",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "http-error-network-failure-timeout-retry-stale-data-resilient-state",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/tracking-mobile.png",
+        "evidence/robots.txt"
+      ],
+      "effort": "medium",
+      "pathId": "tracking",
+      "url": "https://evikas.mpkrishi.mp.gov.in/FarmerProfile/FertilizerTracking"
+    },
+    {
+      "id": "F35",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Language declarations are missing or invalid across Hindi content.",
+      "evidence": "The Hindi home page has no lang attribute; inner routes declare lang=\"Eng\", which is not a valid BCP 47 code and does not match the predominantly Hindi UI.",
+      "suggestedFix": "Set lang=\"hi\" (or the correct BCP 47 value) per page/segment, use dir where needed and prefer logical CSS properties.",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/aadhar-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F36",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The forced notice and disabled paste reduce user control.",
+      "evidence": "The notice appears without user initiation and blocks the task; Aadhaar fields attach onpaste handlers returning false.",
+      "suggestedFix": "Keep notices non-blocking, preserve dismissal, and allow standard paste/password-manager/assistive input behavior.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "custom-button-actions",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/aadhar-form-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "registration",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification"
+    },
+    {
+      "id": "F37",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Form constraints are enforced without accessible, humane feedback.",
+      "evidence": "The registration controls lack programmatic labels, duplicate IDs and block paste; the tracking state gives no actionable retry.",
+      "suggestedFix": "Validate after interaction, connect specific errors with aria-describedby, announce summaries, preserve values and provide recovery.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/aadhar-form-probe.json",
+        "evidence/tracking-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "registration",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification"
+    },
+    {
+      "id": "F38",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The identity form disables useful input assistance.",
+      "evidence": "Aadhaar fields use autocomplete=\"off\" and onpaste=false; several controls lack labels and duplicate IDs.",
+      "suggestedFix": "Allow paste, choose appropriate autocomplete/inputmode tokens, and make labels and instructions programmatically determinable.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/aadhar-form-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "registration",
+      "url": "https://evikas.mpkrishi.mp.gov.in/Registration/AadharVerification"
+    },
+    {
+      "id": "F39",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Images are legacy, oversized and non-responsive.",
+      "evidence": "The images audit found 12 legacy-format assets, three oversized images, six without srcset and eight below-fold images not lazy-loaded.",
+      "suggestedFix": "Generate AVIF/WebP variants and srcset/sizes, right-size assets, lazy-load below-fold media and keep intrinsic dimensions.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F40",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The route downloads substantial code and animation work that is not needed for the core task.",
+      "evidence": "Lighthouse estimated 472 KiB combined unused CSS/JS, while the reduced-motion probe found perpetual animations still running.",
+      "suggestedFix": "Remove unused route code and stop decorative/background work when hidden or reduced motion is requested.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/reduced-motion-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    },
+    {
+      "id": "F41",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Fonts and media lack a disciplined transfer budget.",
+      "evidence": "HAR measured 1.78MB and 56 requests; 384KB came from third-party font origins and images transferred 581KB.",
+      "suggestedFix": "Set per-route budgets, subset/self-host fonts, consolidate icon systems and defer non-critical media.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://evikas.mpkrishi.mp.gov.in/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Keep the landing page task-first and replace the automatic modal",
+      "priority": 1,
+      "findingIds": [
+        "F08",
+        "F09",
+        "F11",
+        "F14",
+        "F36"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Repair registration semantics, labels, validation, paste and autofill",
+      "priority": 2,
+      "findingIds": [
+        "F13",
+        "F15",
+        "F16",
+        "F22",
+        "F37",
+        "F38"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Cut LCP and transfer cost by optimising images, fonts and route bundles",
+      "priority": 3,
+      "findingIds": [
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F21",
+        "F39",
+        "F40",
+        "F41"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Restore semantic document structure, zoom and valid language",
+      "priority": 4,
+      "findingIds": [
+        "F23",
+        "F24",
+        "F25",
+        "F26",
+        "F35"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Publish crawlable navigation and complete discovery metadata",
+      "priority": 5,
+      "findingIds": [
+        "F27",
+        "F28",
+        "F29",
+        "F30",
+        "F33"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Respect dark, reduced-motion and contrast preferences",
+      "priority": 6,
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Harden CSP and browser policies",
+      "priority": 7,
+      "findingIds": [
+        "F31",
+        "F32"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add clear resilient service and failure states",
+      "priority": 8,
+      "findingIds": [
+        "F16",
+        "F34"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Modernise responsive and interaction patterns",
+      "priority": 9,
+      "findingIds": [
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F12"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Landing page first view at desktop",
+      "condition": "desktop",
+      "findingIds": [
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Landing page first view blocked by notice",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F14",
+        "F36"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Landing page under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-closed.png",
+      "caption": "Landing page after dismissing notice",
+      "condition": "desktop",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/aadhar-mobile.png",
+      "caption": "Primary registration form",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/tracking-mobile.png",
+      "caption": "Tracking service state",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F16",
+        "F34",
+        "F37"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/about-mobile.png",
+      "caption": "Long-form About template",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser rendered view",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F11",
+        "F33"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Landing rendered DOM",
+      "condition": "default",
+      "findingIds": [
+        "F03",
+        "F04",
+        "F06",
+        "F27",
+        "F35"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/aadhar-dom.json",
+      "caption": "Registration rendered DOM",
+      "condition": "default",
+      "findingIds": [
+        "F04",
+        "F12",
+        "F15",
+        "F27",
+        "F35"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/tracking-dom.json",
+      "caption": "Tracking rendered DOM",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/about-dom.json",
+      "caption": "About rendered DOM",
+      "condition": "default",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/privacy-dom.json",
+      "caption": "Privacy rendered DOM",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Landing layout metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F07",
+        "F18"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/aadhar-layout.json",
+      "caption": "Registration layout metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/tracking-layout.json",
+      "caption": "Tracking layout metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Semantic, metadata, script and animation probe",
+      "condition": "default",
+      "findingIds": [
+        "F05",
+        "F10",
+        "F12",
+        "F20",
+        "F23",
+        "F25",
+        "F26",
+        "F28",
+        "F29",
+        "F30"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/dark-probe.json",
+      "caption": "Color preference probe",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Animation state probe",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F02",
+        "F40"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/aadhar-form-probe.json",
+      "caption": "Labels, targets, focus and form assistance probe",
+      "condition": "registration",
+      "findingIds": [
+        "F13",
+        "F15",
+        "F16",
+        "F22",
+        "F24",
+        "F26",
+        "F36",
+        "F37",
+        "F38"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/tracking-form-probe.json",
+      "caption": "Labels, targets and focus probe",
+      "condition": "tracking",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers audit",
+      "condition": "main response",
+      "findingIds": [
+        "F31",
+        "F32"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secret scan",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker scan",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit",
+      "condition": "default",
+      "findingIds": [
+        "F18",
+        "F20",
+        "F22",
+        "F25",
+        "F39"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered discoverability",
+      "condition": "non-JS crawler",
+      "findingIds": [
+        "F28",
+        "F33"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive",
+      "condition": "landing load",
+      "findingIds": [
+        "F20",
+        "F41"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary",
+      "condition": "landing load",
+      "findingIds": [
+        "F20",
+        "F41"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace",
+      "condition": "landing load",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace summary",
+      "condition": "landing load",
+      "findingIds": [
+        "F17",
+        "F19"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary",
+      "condition": "landing after load",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "Heap after ten modal cycles",
+      "condition": "repeated interaction",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse mobile audit",
+      "condition": "mobile throttling",
+      "findingIds": [
+        "F10",
+        "F17",
+        "F19",
+        "F21",
+        "F22",
+        "F23",
+        "F24",
+        "F25",
+        "F28",
+        "F40"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Response body requested from /robots.txt",
+      "condition": "direct request",
+      "findingIds": [
+        "F29",
+        "F34"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Response body requested from /sitemap.xml",
+      "condition": "direct request",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/coverage-manifest.json",
+      "caption": "Atomic check coverage plan",
+      "condition": "catalog",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "Pinned guidance catalog listing",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 2400,
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-26T19-16-36-864Z"
+}

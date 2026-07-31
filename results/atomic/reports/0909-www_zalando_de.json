@@ -1,0 +1,1262 @@
+{
+  "url": "https://www.zalando.de",
+  "auditedAt": "2026-07-28T11:44:20.101Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "The consent UI loaded, but continuing with either consent choice produced a temporary-unavailable/anti-automation response. Per the audit method, recon stopped and all atomic checks are recorded as blocked rather than guessed.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "Only Zalando’s consent interstitial was inspectable. Storefront templates and journeys were not reachable."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "HTTP robots/sitemap fetch",
+    "modern-web-guidance catalog"
+  ],
+  "guidanceConsulted": [],
+  "artifacts": [
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic 58-check coverage manifest and per-check evidence plan."
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "Pinned Modern Web Guidance 0.0.172 catalog consulted before evidence collection."
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Initial rendered DOM behind the consent interstitial."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop first-load state showing the consent interstitial.",
+      "condition": "desktop viewport; initial load"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile first-load state showing the consent interstitial.",
+      "condition": "viewport: 360x800; initial load"
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-recon.json",
+      "caption": "DOM recon after selecting Only essential; the origin returned a temporary-unavailable error with no links or page content."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-content.png",
+      "caption": "Second desktop capture from a fresh profile remained at the consent gate.",
+      "condition": "desktop viewport; attempted consent interaction"
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-after-accept.json",
+      "caption": "DOM recon after selecting Accept all; the origin returned the same temporary-unavailable error and no page content."
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted desktop/mobile screenshots plus media-emulated DOM/evaluate probes under prefers-color-scheme: dark; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted desktop/mobile screenshots plus media-emulated DOM/evaluate probes under prefers-reduced-motion: reduce; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted desktop/mobile screenshots plus media-emulated DOM/evaluate probes under prefers-contrast: more / forced colors; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/CSS inspection and scroll/interaction video under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/CSS inspection and scroll/interaction video under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/CSS inspection and scroll/interaction video under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/CSS inspection, scrolling and overlay screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/CSS inspection, scrolling and overlay screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/CSS inspection, scrolling and overlay screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted load screenshots and semantic overlay DOM probe under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted load screenshots and semantic overlay DOM probe under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted load screenshots and semantic overlay DOM probe under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile layout/screenshot and focus/target evaluate probe under mobile 360x800 and desktop; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile layout/screenshot and focus/target evaluate probe under mobile 360x800 and desktop; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile layout/screenshot and focus/target evaluate probe under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted representative journey walkthrough screenshots/DOM under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted representative journey walkthrough screenshots/DOM under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted representative journey walkthrough screenshots/DOM under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted trace, layout, HAR summary and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted trace, layout, HAR summary and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted trace, layout, HAR summary and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted trace, layout, HAR summary and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted trace, layout, HAR summary and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted axe/Lighthouse, focus probe, images audit and screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted axe/Lighthouse, focus probe, images audit and screenshots under prefers-contrast: more / forced colors; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted axe/Lighthouse, focus probe, images audit and screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted axe/Lighthouse, focus probe, images audit and screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted axe/Lighthouse, focus probe, images audit and screenshots under mobile 360x800 and desktop; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted Lighthouse, DOM metadata and console evaluate probes under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted Lighthouse, DOM metadata and console evaluate probes under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted Lighthouse, DOM metadata and console evaluate probes under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability, DOM metadata, robots/sitemap and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability, DOM metadata, robots/sitemap and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability, DOM metadata, robots/sitemap and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability, DOM metadata, robots/sitemap and Lighthouse under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers, cookies, trackers, secrets and HAR under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers, cookies, trackers, secrets and HAR under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers, cookies, trackers, secrets and HAR under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers, cookies, trackers, secrets and HAR under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability/no-JS evidence, runtime journey, manifest/SW and failure path under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability/no-JS evidence, runtime journey, manifest/SW and failure path under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability/no-JS evidence, runtime journey, manifest/SW and failure path under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted discoverability/no-JS evidence, runtime journey, manifest/SW and failure path under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM lang/dir/CSS and rendered locale data inspection under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM lang/dir/CSS and rendered locale data inspection under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM lang/dir/CSS and rendered locale data inspection under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted consent, form, checkout/account journey DOM/screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted consent, form, checkout/account journey DOM/screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted consent, form, checkout/account journey DOM/screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted consent, form, checkout/account journey DOM/screenshots under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted HAR, images, trace/layout under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted HAR, images, trace/layout under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted HAR, images, trace/layout under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/source probe for agent APIs and raw HTML semantics under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM/source probe for agent APIs and raw HTML semantics under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted baseline/post-interaction heap summaries and metrics under baseline then representative interaction repeated about 10x; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted baseline/post-interaction heap summaries and metrics under default plus applicable interaction state; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted baseline/post-interaction heap summaries and metrics under baseline then representative interaction repeated about 10x; execution stopped during homepage recon before the target surface could be reached.",
+      "evidence": "Initial desktop/mobile screenshots reached only the consent interstitial. After either consent choice, evaluate probes returned an empty storefront with the message “Site can’t be reached right now” and meta robots=noindex.",
+      "reason": "Execution was attempted from Chrome after both “Only essential” and “Accept all” consent choices, but the origin replaced the storefront with “Site can’t be reached right now” and exposed no links, headings, or core content. This external anti-automation/service response prevented representative-route discovery and check execution.",
+      "pathIds": [
+        "homepage-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-recon.json",
+        "evidence/home-after-accept.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered check(s) were blocked by the external storefront response during recon; no pass or issue verdict was inferred."
+    }
+  ],
+  "paths": [
+    {
+      "id": "homepage-recon",
+      "description": "Homepage recon at desktop and mobile, including both available consent continuations. This was intended to discover representative listing, product, search/form, cart/checkout, and account archetypes; those were not covered because the storefront was replaced by an external temporary-unavailable response.",
+      "url": "https://www.zalando.de",
+      "conditions": [
+        "desktop initial load",
+        "viewport 360x800",
+        "Only essential consent",
+        "Accept all consent"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "representative-storefront-templates",
+      "description": "Planned coverage of homepage, category/listing, product detail, search/form, cart/checkout, and account flows. Explicitly skipped because no internal links or storefront content remained after consent.",
+      "url": "https://www.zalando.de",
+      "conditions": [
+        "planned representative archetypes"
+      ],
+      "result": "skipped"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 2,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T11-40-10-111Z"
+}

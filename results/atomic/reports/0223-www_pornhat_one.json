@@ -1,0 +1,2066 @@
+{
+  "url": "https://www.pornhat.one/",
+  "auditedAt": "2026-07-19T06:17:02.904Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of four representative MPA templates. Mandatory third-party age verification prevented entry to underlying interactive content, but the gate and server-rendered DOM/network surfaces remained auditable.",
+  "page": {
+    "appType": "mpa",
+    "framework": "server-rendered",
+    "notes": "Adult media catalog with a mandatory AgeGO verification overlay. Home listing, video detail, models index, and privacy/legal template sampled; account, payment, favorites/history, and deeper post-verification playback were not covered because they require verification/authentication and duplicate template families."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "Lighthouse",
+    "axe-core",
+    "HTTP robots/manifest/status probes",
+    "Modern Web Guidance search/retrieve"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "declarative-dialog-popover-control",
+    "improve-text-layout-and-legibility",
+    "performance",
+    "optimize-image-priority",
+    "break-up-long-tasks",
+    "security",
+    "privacy",
+    "batch-analytics-events",
+    "forms",
+    "webmcp",
+    "manage-recurring-intervals",
+    "css-layout",
+    "size-aware-styling",
+    "persistent-toast-notifications",
+    "html",
+    "optimize-script-priority",
+    "identify-heavy-scripts",
+    "fluid-scaling",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F1.",
+      "findingIds": [
+        "F1"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dark-reduced.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "evaluate under reduced-motion condition",
+      "evidence": "No active Web Animations were present on the verification state; there was no motion to suppress.",
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F2.",
+      "findingIds": [
+        "F2"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "DOM/CSS inspection",
+      "evidence": "CSS includes view-transition styling and no abrupt in-page route transition was exposed on this MPA.",
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "DOM/CSS and long-task inspection",
+      "evidence": "CSS includes scroll-timeline/animation-timeline support and no custom scroll-handler failure was observed.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-layout-desktop.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "mobile screenshot and CSS inspection",
+      "evidence": "The mobile page uses native scrolling without horizontal overflow or pointer-drag interception.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "mobile layout and screenshot",
+      "evidence": "The verification state has no competing sticky chrome and preserves native scrolling.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "No author-controlled tooltip, menu, or anchored overlay is exposed before the mandatory verification flow.",
+      "reason": "No author-controlled tooltip, menu, or anchored overlay is exposed before the mandatory verification flow."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "first-viewport screenshot",
+      "evidence": "The heading and single green Verify Age action establish an obvious visual hierarchy.",
+      "artifacts": [
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "first-load screenshot and context review",
+      "evidence": "The only interruption is the safety-critical age gate, which is appropriate to the site content and includes an underage exit.",
+      "artifacts": [
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F3.",
+      "findingIds": [
+        "F3"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "first-viewport screenshot",
+      "evidence": "The gate limits chrome to safety copy, one primary action, one underage action, and language branding.",
+      "artifacts": [
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "layout at 360x800 across four templates",
+      "evidence": "All four mobile layout captures reported zero horizontal overflow.",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/video-layout-mobile.json",
+        "evidence/models-layout-mobile.json",
+        "evidence/privacy-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F4.",
+      "findingIds": [
+        "F4"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "Lighthouse target-size plus control geometry",
+      "evidence": "Lighthouse passed target-size; the primary gate button is large and keyboard-native.",
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "first-viewport screenshot",
+      "evidence": "The page clearly states adults-only access and labels Verify Age as the primary action.",
+      "artifacts": [
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F5.",
+      "findingIds": [
+        "F5"
+      ],
+      "artifacts": [
+        "evidence/video.png",
+        "evidence/privacy.png",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F5.",
+      "findingIds": [
+        "F5"
+      ],
+      "artifacts": [
+        "evidence/video.png",
+        "evidence/privacy.png",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F6.",
+      "findingIds": [
+        "F6"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F7.",
+      "findingIds": [
+        "F7"
+      ],
+      "artifacts": [
+        "evidence/video-layout-mobile.json",
+        "evidence/models-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F6.",
+      "findingIds": [
+        "F6"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F8.",
+      "findingIds": [
+        "F8"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F9.",
+      "findingIds": [
+        "F9"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F10.",
+      "findingIds": [
+        "F10"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F2.",
+      "findingIds": [
+        "F2"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F11.",
+      "findingIds": [
+        "F11"
+      ],
+      "artifacts": [
+        "evidence/axe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F2.",
+      "findingIds": [
+        "F2"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F12.",
+      "findingIds": [
+        "F12"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "Lighthouse console audit",
+      "evidence": "Lighthouse errors-in-console audit passed with no items.",
+      "artifacts": [
+        "evidence/lighthouse-details.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F13.",
+      "findingIds": [
+        "F13"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F14.",
+      "findingIds": [
+        "F14"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/recon-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F15.",
+      "findingIds": [
+        "F15"
+      ],
+      "artifacts": [
+        "evidence/video-dom.json",
+        "evidence/video-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "discoverability and Lighthouse SEO",
+      "evidence": "Raw HTML retained 77-97% content coverage, viewport exists, and Lighthouse passed crawlable anchors.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/video-discoverability.json",
+        "evidence/lighthouse-details.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "Lighthouse, robots, HTTP probes",
+      "evidence": "Lighthouse passed canonical; representative pages returned 200, robots.txt was reachable, and a nonexistent URL returned 404.",
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/robots.txt",
+        "evidence/404-status.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F16.",
+      "findingIds": [
+        "F16"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/video-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F17.",
+      "findingIds": [
+        "F17"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F18.",
+      "findingIds": [
+        "F18"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "DOM/network review",
+      "evidence": "No browser permission prompt fired on load and no authentication flow was exposed in the representative anonymous path.",
+      "artifacts": [
+        "evidence/recon-dom.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F17.",
+      "findingIds": [
+        "F17"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "discoverability raw-HTML comparison",
+      "evidence": "Pages are server rendered rather than JS shells, with 77-97% rendered-token coverage in raw HTML.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/video-discoverability.json",
+        "evidence/models-discoverability.json",
+        "evidence/privacy-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F5.",
+      "findingIds": [
+        "F5"
+      ],
+      "artifacts": [
+        "evidence/video.png",
+        "evidence/privacy.png",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "An offline/installable experience is contextual and was not treated as a requirement for this public streaming MPA; the manifest has icons but no app scope/start URL or service worker evidence.",
+      "reason": "An offline/installable experience is contextual and was not treated as a requirement for this public streaming MPA; the manifest has icons but no app scope/start URL or service worker evidence."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F5.",
+      "findingIds": [
+        "F5"
+      ],
+      "artifacts": [
+        "evidence/video.png",
+        "evidence/privacy.png",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "DOM and CSS inspection",
+      "evidence": "html declares en-GB, the gate includes a labelled language switch, alternate-language routes exist, and CSS uses logical properties.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/recon-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "No user-visible dates, numbers, currency, or calendar data appeared in the representative surfaces.",
+      "reason": "No user-visible dates, numbers, currency, or calendar data appeared in the representative surfaces."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "No events, deadlines, or time-zone-sensitive data appeared in the representative surfaces.",
+      "reason": "No events, deadlines, or time-zone-sensitive data appeared in the representative surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "visual review of safety gate",
+      "evidence": "The gate states the requirement plainly and provides a visible “I am not 18 years old” exit without confirmshaming.",
+      "artifacts": [
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "No authored data-entry form beyond site search was reachable before mandatory verification.",
+      "reason": "No authored data-entry form beyond site search was reachable before mandatory verification."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "DOM form inspection",
+      "evidence": "The only search input uses a native text control; no identity/address/payment field requiring autofill was present.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "Checkout, subscription, and account flows were outside the anonymous representative set and not exposed before verification.",
+      "reason": "Checkout, subscription, and account flows were outside the anonymous representative set and not exposed before verification."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F19.",
+      "findingIds": [
+        "F19"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F20.",
+      "findingIds": [
+        "F20"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F20.",
+      "findingIds": [
+        "F20"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/recon.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "Agent-facing actions are contextual; this public media catalog exposes crawlable server-rendered pages but no meaningful transactional agent surface was identified.",
+      "reason": "Agent-facing actions are contextual; this public media catalog exposes crawlable server-rendered pages but no meaningful transactional agent surface was identified."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "On-device inference is contextual and not necessary for the site’s core media-catalog task.",
+      "reason": "On-device inference is contextual and not necessary for the site’s core media-catalog task."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "confidence": "high",
+      "status": "not-applicable",
+      "method": "recon applicability judgement",
+      "evidence": "No safe repeatable authored interaction was available: the mandatory third-party age-verification journey did not reliably initialize, so a repeat loop would fabricate a test.",
+      "reason": "No safe repeatable authored interaction was available: the mandatory third-party age-verification journey did not reliably initialize, so a repeat loop would fabricate a test."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "issues",
+      "method": "targeted evidence review",
+      "evidence": "Direct evidence shows the divergence described by linked finding(s): F21.",
+      "findingIds": [
+        "F21"
+      ],
+      "artifacts": [
+        "evidence/home-heap.heapsnapshot",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "confidence": "high",
+      "pathIds": [
+        "home",
+        "video",
+        "models",
+        "privacy"
+      ],
+      "status": "pass",
+      "method": "heap constructor summary",
+      "evidence": "No Detached* constructor appeared among the retained constructors in the captured stable gate state; confidence is limited to this state.",
+      "artifacts": [
+        "evidence/home-heap.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F4"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F5"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F6",
+        "F7",
+        "F8",
+        "F9"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F12",
+        "F2"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F5"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Agent-facing actions are contextual; this public media catalog exposes crawlable server-rendered pages but no meaningful transactional agent surface was identified.; On-device inference is contextual and not necessary for the site’s core media-catalog task."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F21"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage/listing and mandatory verification entry; representative navigation and feed template.",
+      "url": "https://www.pornhat.one/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "video",
+      "description": "Representative video-detail/playback template and primary content journey.",
+      "url": "https://www.pornhat.one/video/bffs-aviana-and-isabella-hire-a-private-yoga-instructor-to-improve-their-flexibility-freeuse-yoga/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "crawler/no JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "models",
+      "description": "Models directory, representing index/taxonomy templates.",
+      "url": "https://www.pornhat.one/models/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "crawler/no JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "privacy",
+      "description": "Privacy policy, representing long-form legal/content template.",
+      "url": "https://www.pornhat.one/privacy/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "crawler/no JavaScript"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The site does not respond to the user color-scheme preference.",
+      "evidence": "The platform probe found no prefers-color-scheme rules, and the dark-condition screenshot is visually identical to the default gate.",
+      "suggestedFix": "Declare color-scheme and use prefers-color-scheme or light-dark() for page and overlay surfaces.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dark-reduced.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Text and links fail minimum contrast.",
+      "evidence": "axe found 9 serious color-contrast failures; Lighthouse also failed its color-contrast audit.",
+      "suggestedFix": "Adjust foreground/background tokens to meet WCAG AA and test every gate and footer state.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F3",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The full-screen age gate is a custom fixed div rather than a modal dialog.",
+      "evidence": "DOM evidence shows #agego-overlay-container is a div with no dialog role, aria-modal, or native dialog element.",
+      "suggestedFix": "Implement the gate as a modal <dialog> with an accessible name and deliberate focus management.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/recon.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "Components rely on viewport rules rather than container-aware adaptation.",
+      "evidence": "The CSS probe found no @container or container-type declarations across the rendered styles.",
+      "suggestedFix": "Use container queries for reusable cards, navigation, and the verification panel where component width controls layout.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F5",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The mandatory verification flow intermittently renders as an empty panel.",
+      "evidence": "Video and privacy screenshots show a blank dark verification panel while home/models render controls; the HAR records the AgeGO authorization request aborted.",
+      "suggestedFix": "Fail closed with locally rendered explanatory copy and retry/exit controls when the verification provider does not initialize.",
+      "artifacts": [
+        "evidence/video.png",
+        "evidence/privacy.png",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "video",
+      "url": "https://www.pornhat.one/video/bffs-aviana-and-isabella-hire-a-private-yoga-instructor-to-improve-their-flexibility-freeuse-yoga/"
+    },
+    {
+      "id": "F6",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Loading performance is poor on the primary entry path.",
+      "evidence": "Lighthouse measured LCP 8.4s, FCP 4.2s, TBT 580ms and performance 44; trace corroborated LCP 3.51s and 189ms TBT under a separate run.",
+      "suggestedFix": "Prioritize the real LCP, defer non-critical scripts/media, and split long tasks.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F7",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Mobile detail and listing templates shift materially after load.",
+      "evidence": "Layout evidence measured CLS 0.117 on the video page and 0.101 on models.",
+      "suggestedFix": "Reserve stable dimensions for late content, ads, embeds, media, and verification UI.",
+      "artifacts": [
+        "evidence/video-layout-mobile.json",
+        "evidence/models-layout-mobile.json"
+      ],
+      "effort": "medium",
+      "pathId": "video",
+      "url": "https://www.pornhat.one/video/bffs-aviana-and-isabella-hire-a-private-yoga-instructor-to-improve-their-flexibility-freeuse-yoga/"
+    },
+    {
+      "id": "F8",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "The entry page loads a large, mostly third-party dependency graph before verification.",
+      "evidence": "HAR captured 145 requests and 4.52 MB, including parser-blocking verification, ad, language, and multiple main scripts; Lighthouse estimates 2.21s render-blocking savings.",
+      "suggestedFix": "Remove duplicate/nonessential scripts, defer parser-blocking code, and delay ads/media until after consent and intent.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F9",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "A substantial share of JavaScript is unused.",
+      "evidence": "Lighthouse reports an estimated 874 KiB of unused JavaScript and 53 KiB legacy-JS savings.",
+      "suggestedFix": "Use coverage to remove unused bundles, avoid duplicate main.min versions, and conditionally load route features.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Some interactive and embedded content lacks accessible names.",
+      "evidence": "axe found an unnamed iframe and an unnamed link; the custom age gate also lacks dialog semantics.",
+      "suggestedFix": "Give every iframe a concise title, every link an accessible name, and expose the gate as a named modal.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Landmark coverage and keyboard access are incomplete.",
+      "evidence": "axe reports 287 elements outside landmarks and #agego-prompt-about as a non-focusable scrollable region.",
+      "suggestedFix": "Use header/nav/main/footer landmarks and make the scrollable gate copy keyboard focusable with visible focus.",
+      "artifacts": [
+        "evidence/axe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The viewport declaration restricts browser zoom.",
+      "evidence": "Lighthouse and axe both fail the viewport rule because maximum-scale=1 is below the required zoom range.",
+      "suggestedFix": "Remove maximum-scale and allow pinch zoom while preserving responsive reflow.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "trivial",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Images have sizing and aspect-ratio defects.",
+      "evidence": "The image audit found 6 images without dimensions; Lighthouse failed incorrect aspect ratio and unsized-image audits.",
+      "suggestedFix": "Set intrinsic width/height or aspect-ratio and preserve the source ratio at render time.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "A synchronous main-thread XHR uses a deprecated, blocking API.",
+      "evidence": "Lighthouse pinpoints a synchronous XMLHttpRequest at the home document line 129.",
+      "suggestedFix": "Replace synchronous XHR with async fetch and render a safe pending/failure state.",
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/recon-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Video metadata is incomplete and low quality.",
+      "evidence": "The representative video page has no h1 and its meta description is only “About ♦”; other templates have meaningful title/description metadata.",
+      "suggestedFix": "Generate a descriptive H1 and unique, content-specific meta description for every video detail page.",
+      "artifacts": [
+        "evidence/video-dom.json",
+        "evidence/video-discoverability.json"
+      ],
+      "effort": "small",
+      "pathId": "video",
+      "url": "https://www.pornhat.one/video/bffs-aviana-and-isabella-hire-a-private-yoga-instructor-to-improve-their-flexibility-freeuse-yoga/"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Social metadata is absent on representative templates.",
+      "evidence": "DOM inspection found zero Open Graph tags across home, video, models, and privacy; the video page also has no JSON-LD.",
+      "suggestedFix": "Add accurate Open Graph/Twitter cards and VideoObject structured data matching visible detail content.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/video-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "video",
+      "url": "https://www.pornhat.one/video/bffs-aviana-and-isabella-hire-a-private-yoga-instructor-to-improve-their-flexibility-freeuse-yoga/"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "confidence": "high",
+      "summary": "Important security headers and cookie protections are missing.",
+      "evidence": "Headers evidence found no CSP, HSTS, nosniff, Referrer-Policy, or Permissions-Policy; all four observed cookies lacked Secure and used SameSite=None.",
+      "suggestedFix": "Deploy CSP in report-only then enforce it, add HSTS/nosniff/referrer/permissions policies, and set Secure with the narrowest viable SameSite.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "confidence": "high",
+      "summary": "Tracking and advertising execute before age verification completes.",
+      "evidence": "Tracker evidence saw 17 third-party origins including Google Analytics; HAR attributed 138/145 requests and 4.44 MB to third parties while the gate was still active.",
+      "suggestedFix": "Do not initialize analytics, ad networks, or preview media until lawful consent/verification and user intent; reduce vendors and retention.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Image delivery is not responsive or size-efficient.",
+      "evidence": "The image audit found 97/100 images without srcset, 9 oversized images, 11 legacy-format images, and 6 without dimensions.",
+      "suggestedFix": "Generate AVIF/WebP responsive variants with srcset/sizes and correct intrinsic dimensions.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Media and third-party work is loaded behind the blocking age gate.",
+      "evidence": "HAR transferred 4.52 MB, including 1.56 MB media and 1.44 MB XHR/fetch; 4.44 MB was attributed to third-party origins before access.",
+      "suggestedFix": "Set a pre-verification budget near zero: load only the gate, then fetch thumbnails/media and advertising after verified intent.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/recon.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "manage-recurring-intervals",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The blocked entry state has a disproportionately large DOM/heap footprint.",
+      "evidence": "The heap summary reports 250,354 heap nodes, 900,942 edges and 17.48 MB self-size while only an age gate is usable; DOM probe counted 3,047 elements.",
+      "suggestedFix": "Avoid constructing the underlying feed, players, and ad widgets until verification succeeds; clean up provider listeners and timers.",
+      "artifacts": [
+        "evidence/home-heap.heapsnapshot",
+        "evidence/home-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.pornhat.one/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Make verification resilient and accessible",
+      "priority": 1,
+      "findingIds": [
+        "F3",
+        "F5",
+        "F10",
+        "F11"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Stop pre-verification ads, trackers, media, and nonessential scripts",
+      "priority": 2,
+      "findingIds": [
+        "F6",
+        "F8",
+        "F9",
+        "F18",
+        "F20",
+        "F21"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Harden transport headers and cookies",
+      "priority": 3,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Fix contrast and unrestricted zoom",
+      "priority": 4,
+      "findingIds": [
+        "F2",
+        "F12"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Stabilize mobile layouts and image geometry",
+      "priority": 5,
+      "findingIds": [
+        "F7",
+        "F13"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Ship responsive modern images",
+      "priority": 6,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Improve video-page and social metadata",
+      "priority": 7,
+      "findingIds": [
+        "F15",
+        "F16"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Add preference and component-aware CSS",
+      "priority": 8,
+      "findingIds": [
+        "F1",
+        "F4"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Replace synchronous XHR",
+      "priority": 9,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "other",
+      "path": "evidence/404-status.txt",
+      "caption": "404 status.txt"
+    },
+    {
+      "type": "other",
+      "path": "evidence/axe.json",
+      "caption": "axe.json"
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "cookies.json"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "guidance list.json"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "guidance retrieved.md"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-searches.jsonl",
+      "caption": "guidance searches.jsonl"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "headers.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark-reduced.png",
+      "caption": "home dark reduced.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "home discoverability crawler.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "home discoverability rendered.png"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "home discoverability.json"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.heapsnapshot",
+      "caption": "home heap.heapsnapshot"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-desktop.json",
+      "caption": "home layout desktop.json"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "home layout mobile.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile.png"
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "home probe.json"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary.json"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary.json"
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home trace.json"
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home.har"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "images.json"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-details.json",
+      "caption": "lighthouse details.json"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "lighthouse summary.json"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "lighthouse.json"
+    },
+    {
+      "type": "other",
+      "path": "evidence/manifest.json",
+      "caption": "manifest.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/models-discoverability-crawler.png",
+      "caption": "models discoverability crawler.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/models-discoverability-rendered.png",
+      "caption": "models discoverability rendered.png"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/models-discoverability.json",
+      "caption": "models discoverability.json"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/models-dom.json",
+      "caption": "models dom.json"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/models-layout-mobile.json",
+      "caption": "models layout mobile.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/models.png",
+      "caption": "models.png"
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "platform probe.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/privacy-discoverability-crawler.png",
+      "caption": "privacy discoverability crawler.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/privacy-discoverability-rendered.png",
+      "caption": "privacy discoverability rendered.png"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/privacy-discoverability.json",
+      "caption": "privacy discoverability.json"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/privacy-dom.json",
+      "caption": "privacy dom.json"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/privacy-layout-mobile.json",
+      "caption": "privacy layout mobile.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/privacy.png",
+      "caption": "privacy.png"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/recon-dom.json",
+      "caption": "recon dom.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/recon.png",
+      "caption": "recon.png"
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "secrets.json"
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "sitemap.xml"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "trackers.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/video-discoverability-crawler.png",
+      "caption": "video discoverability crawler.png"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/video-discoverability-rendered.png",
+      "caption": "video discoverability rendered.png"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/video-discoverability.json",
+      "caption": "video discoverability.json"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/video-dom.json",
+      "caption": "video dom.json"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/video-layout-mobile.json",
+      "caption": "video layout mobile.json"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/video.png",
+      "caption": "video.png"
+    }
+  ],
+  "budget": {
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T06-17-02-904Z"
+}

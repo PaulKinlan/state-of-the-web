@@ -1,0 +1,1200 @@
+{
+  "url": "https://www.wnacg.com",
+  "auditedAt": "2026-07-28T06:22:06.937Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Recon reached a Cloudflare human-verification interstitial (HTTP 403), not the requested site. No attempt was made to bypass the anti-bot control. Atomic outcome rows are retained as blocked.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "Origin architecture and templates could not be identified through the Cloudflare challenge."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "headers",
+    "raw-http-fetch",
+    "modern-web-guidance"
+  ],
+  "guidanceConsulted": [
+    "accessibility"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop entry navigation showing Cloudflare “Performing security verification” and Verify you are human control.",
+      "condition": "default desktop viewport"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/recon-dom.json",
+      "caption": "Rendered DOM/CSS of the Cloudflare challenge document, not the origin site."
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon-links.json",
+      "caption": "Entry-page evaluation showing title “Just a moment...” and only Cloudflare links."
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Headers observed on the challenge response; these must not be treated as verified origin application policy."
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw-response-headers.txt",
+      "caption": "Raw fetch response headers recording HTTP/2 403."
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw-response.html",
+      "caption": "Raw HTTP response body containing the Cloudflare challenge."
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-accessibility.md",
+      "caption": "Pinned Modern Web Guidance accessibility guide consulted before the run stopped."
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic 58-check manifest and planned evidence method for every expected pair."
+    },
+    {
+      "type": "other",
+      "path": "validator-output.txt",
+      "caption": "Atomic coverage validator output. Exit 1 is expected because all 58 checks are externally blocked and the publication gate correctly rejects completion."
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Navigate, then compare screenshots and computed colors under prefers-color-scheme: light and dark.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned respects-color-scheme test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Navigate, emulate prefers-reduced-motion: reduce, and compare getAnimations() with the default condition.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned respects-reduced-motion test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Navigate, emulate prefers-contrast/forced-colors, and inspect computed contrast and a screenshot.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned respects-contrast test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Navigate representative routes and record state/route changes on video while inspecting View Transition usage.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned view-transitions test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect rendered CSS and scroll handlers, then record a representative scroll interaction.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned scroll-driven-animations test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect pointer/gesture handlers and CSS scroll-snap/overscroll behavior on representative controls.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned physical-gestures test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Record scrolling on listing/detail templates and inspect scroll-state behavior.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned scroll-state-aware-chrome test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Open menus/tooltips near viewport edges and inspect anchor-positioning CSS and fallback placement.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned anchored-positioning test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Exercise navigation and in-page jumps while recording focus and visual attention cues.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned directs-attention test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture the origin page on load and probe for viewport-obscuring overlays.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned no-intrusive-interruptions test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin overlays and rich controls for dialog, popover, and details semantics.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned semantic-dismissible-primitives test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Compare first-viewport screenshots and layout allocation across representative origin templates.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned reduced-chrome test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Run layout and screenshot captures at 360x800 and compare scrollWidth with innerWidth.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned responsive-no-horizontal-scroll test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect component CSS for container queries and compare reused components at narrow and wide sizes.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned component-level-responsiveness test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Walk interactive controls by keyboard, inspect focus visibility, hover fallbacks, and target sizes.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned input-modality-aware test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Review the first viewport, heading structure, navigation labels, and primary action on representative origin pages.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned clear-purpose-and-primary-action test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Walk the site primary flow end-to-end and capture each state.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned primary-flow-completion test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Exercise loading, invalid, empty, error, and recovery states in the primary flow.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned clear-system-state-and-recovery test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture layout observers and a performance trace for representative origin templates.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned good-core-web-vitals test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Run the layout-shift observer and video the initial origin-page load.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned visual-stability test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture a trace and long-task observations during load and representative interaction.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned efficient-main-thread test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture a HAR, read its summary, and confirm blocking candidates against the origin DOM.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned efficient-resource-delivery test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect HAR/trace/code-coverage signals for unused, duplicate, legacy, and third-party code.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned trim-unused-and-duplicate-code test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Run an accessibility DOM probe/axe on representative origin templates.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned names-roles-labels test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Run a contrast probe/axe and inspect origin-page screenshots.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned sufficient-contrast test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect landmarks/headings and perform a keyboard focus walk.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned structure-and-focus test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Review screenshots and computed typography at desktop and narrow viewports.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned legible-text test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Test narrow/zoomed reflow, target sizes, viewport policy, and media alternatives.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned zoom-reflow-targets-and-media test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Collect Runtime and Log errors while loading and interacting with origin pages.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned no-console-errors test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin doctype, charset, markup, CSS, and image dimensions/aspect ratios.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned sound-document-and-assets test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect deprecations, BFCache blockers, libraries, paste handlers, and permission timing.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned browser-platform-hygiene test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Read title and meta description from representative origin pages.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned title-and-description test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin links, viewport metadata, robots policy, and descriptive link text.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned crawlable-and-mobile-friendly test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin status, canonical/hreflang, robots.txt, sitemap.xml, and indexing directives.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned canonical-and-indexing-signals test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Parse origin JSON-LD and social metadata and compare it with visible content.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned structured-and-shareable-metadata test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin response headers, protocol, cookies, mixed content, and CSP.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned secure-transport-and-headers test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture origin HAR, cookies, trackers, and data-collection requests.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned data-minimisation-and-third-parties test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Exercise origin auth/permission flows and inspect WebAuthn and prompt timing.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned in-context-permissions-and-modern-auth test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin HSTS, framing, Trusted Types, isolation, referrer, permissions, and cookie policies.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned defensive-browser-policies test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Compare raw origin HTML/crawler view with the rendered page and test with JavaScript disabled.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned progressive-enhancement test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Exercise origin overlays, async dependencies, visibility changes, and DOM-state moves.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned resilient-runtime-behaviour test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin manifest/service worker and test offline behavior where applicable.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned offline-and-installable test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Simulate origin HTTP/network failures and inspect recovery states.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned network-and-http-failure-states test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin lang/dir attributes and CSS logical properties.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned lang-dir-and-logical-properties test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect rendered locale-sensitive values and formatting implementation.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned locale-aware-data test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Exercise origin time/date displays under alternate time zones and DST boundaries.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned time-zone-correctness test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Review origin consent, continuity, choice, and cancellation flows for deceptive patterns.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned no-dark-patterns test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Trigger origin form and flow errors and inspect message tone, focus, persistence, and recovery.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned humane-error-handling test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin forms for labels, autofill, validation timing, and appropriate input modes.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned trustworthy-input-assistance test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Exercise any origin account/payment flow and inspect confirmation, reversal, and sensitive-field handling.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned safe-commercial-and-account-flows test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Run origin image and HAR probes for responsive formats, dimensions, priority, and bytes.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned optimised-assets test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture origin trace/long tasks and inspect unnecessary animation, polling, and background work.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned no-wasteful-work test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Capture origin HAR/trackers and assess first/third-party and media bytes against page purpose.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned third-party-and-media-budget test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin structured data and any declared WebMCP/agent capabilities with consent boundaries.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned structured-agent-capabilities test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Inspect origin inference features for on-device execution, progress, fallback, and model reuse where applicable.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned on-device-inference test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Take baseline and post-interaction heap summaries after repeating a representative origin interaction about ten times.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned no-leak-under-repeated-interaction test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Compare origin heap/DOM/resource footprint before and after a bounded representative usage window.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned bounded-footprint test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Compare detached-node, listener, timer, and DOM counts before and after origin interaction.",
+      "evidence": "Entry navigation was attempted before this check. Cloudflare returned an interactive “Verify you are human” challenge (HTTP 403) instead of the origin experience. The auditor did not bypass the anti-bot control, so origin-page evidence could not be obtained.",
+      "reason": "The planned no-detached-dom-or-unbounded-listeners test requires the origin experience, but only Cloudflare's challenge document was reachable.",
+      "pathIds": [
+        "entry-recon"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-dom.json",
+        "evidence/raw-response-headers.txt"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks are blocked because the origin experience is behind an interactive Cloudflare human-verification challenge."
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry-recon",
+      "description": "Entry-page recon intended to discover representative templates and core journeys. Navigation was intercepted by Cloudflare human verification, so no origin routes could be selected.",
+      "url": "https://www.wnacg.com/",
+      "conditions": [
+        "default desktop viewport",
+        "JavaScript enabled",
+        "3 second post-load wait"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T06-19-33-162Z"
+}

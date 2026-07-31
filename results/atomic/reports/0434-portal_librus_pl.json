@@ -1,0 +1,1222 @@
+{
+  "url": "https://portal.librus.pl",
+  "auditedAt": "2026-07-27T22:50:39.613Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The actual application never became observable. Only an external Web Page Blocked response was rendered."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "trace",
+    "har",
+    "headers",
+    "cookies",
+    "discoverability",
+    "Modern Web Guidance"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "component-specific-light-dark-theme",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "cross-document-transitions",
+    "group-element-transitions",
+    "faster-spa-view-transitions",
+    "scrollytelling",
+    "parallax-scroll-effects",
+    "scroll-entry-exit-effects",
+    "carousel-slide-effects",
+    "physics-based-easing",
+    "individual-transform-properties",
+    "animate-element-entry-exit",
+    "animate-to-from-top-layer",
+    "animate-to-intrinsic-sizes",
+    "dynamic-sibling-animations",
+    "interactive-content-reveal",
+    "pull-to-reveal",
+    "swipe-to-remove",
+    "shrinking-header-on-scroll",
+    "scroll-progress-indicator",
+    "scroll-position-aware-elements",
+    "scroll-snap-realtime-feedback",
+    "scroll-snap-state-sync",
+    "scroll-target-on-load",
+    "soft-edge-content-fade",
+    "scrollability-affordance-hints",
+    "anchor-positioning-tab-underline",
+    "position-aware-tooltips",
+    "interest-triggered-tooltips",
+    "interest-triggered-action-previews",
+    "directional-navigation-transitions",
+    "carousel-snap-highlights",
+    "navigation-drawer",
+    "stack-drill-down",
+    "persistent-app-tours",
+    "persistent-toast-notifications",
+    "light-dismiss-a-dialog"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/desktop.png",
+      "caption": "Desktop raw-CDP navigation showing the external Web Page Blocked response.",
+      "condition": "viewport: 1440x900"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "Mobile raw-CDP navigation showing the same external block response.",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/dark.png",
+      "caption": "Dark-preference capture of the block response, not the target portal.",
+      "condition": "prefers-color-scheme: dark"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom.json",
+      "caption": "Rendered DOM/CSS of the external block page, not portal content."
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile layout metrics for the external block page."
+    },
+    {
+      "type": "trace",
+      "path": "evidence/perf-trace.json",
+      "caption": "DevTools trace of the external block response."
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/perf-trace-summary.json",
+      "caption": "Compact trace summary of the external block response."
+    },
+    {
+      "type": "har",
+      "path": "evidence/network.har",
+      "caption": "HAR showing the intercepted request and 500 response."
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/network-summary.json",
+      "caption": "Compact HAR summary showing one 500 response among three requests."
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw/rendered comparison affected by the external block response."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered-browser view of the block response."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JS view; not usable as portal evidence due to interception."
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Headers observed on the interception response, not safely attributable to the portal application."
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie capture from the interception response."
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "Pinned Modern Web Guidance catalog listing consulted before judgement."
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic 58-check coverage manifest with catalog checksum and per-check evidence plan."
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-CDP navigation and recon at desktop and mobile viewports; stopped after confirming the external WAF interception.",
+      "evidence": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "reason": "The attempted raw-CDP navigation was intercepted by an external web application firewall page stating “Web Page Blocked!” for portal.librus.pl (Attack ID 20000051), so the requested portal, representative routes, and user flows could not be observed.",
+      "pathIds": [
+        "entry-attempt"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external WAF before the actual portal could be inspected."
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry-attempt",
+      "description": "Attempt the public portal entry page for recon; representative route discovery and flows could not begin because an external WAF intercepted the request.",
+      "url": "https://portal.librus.pl",
+      "conditions": [
+        "viewport: 1440x900",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T22-50-27-748Z"
+}

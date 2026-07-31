@@ -1,105 +1,97 @@
 # State of the Web
 
-An automated audit of the top 1,000 websites using the [web-uplift](https://github.com/PaulKinlan/web-uplift) methodology. Measures the web's health across 17 modern quality principles — from performance and accessibility to privacy, resilience, and UX.
+A reproducible atomic audit inventory for 1,000 web origins against 17 modern-web principles and 58 authoritative checks from `principles.json`.
 
-## What this is
+## Final bounded-run disposition
 
-This project is auditing the top 1,000 Tranco sites (2026) against 17 principles and 58 authoritative checks from the vendored `principles.json`, using the representative routes and states required by each check. The current dataset is incomplete: 499 sites have broad principle-level judgements, but the earlier run did not retain an outcome for every check. Those judgements are useful evidence, not proof of complete 58-check coverage. Evidence was collected in two modes:
+The run `2026-07-17T17-27-24-856Z` exhausted its retry queue on 28 July 2026. The exact fixed denominator is:
 
-1. **CDP evidence pass** (automated, scalable): CLS, horizontal overflow, JS-shell detection, discoverability, layout metrics. Covers 870/1000 sites.
-2. **Vision-based principle analysis** (AI agent with screenshot review): broad pass/issues/not-applicable judgements and findings for 499 sites. This predates the atomic-test schema and therefore does not establish that all checks passed.
+| Disposition | Origins | Meaning |
+|---|---:|---|
+| Coverage complete | **705** | All 58 checks have a judged outcome |
+| Blocked after retries | **257** | All 58 checks remained blocked after at most three attempts |
+| Partial after retries | **38** | Some checks were judged; remaining blocked/not-run rows stay explicit |
+| Queued / retry eligible / invalid | **0** | The bounded run has no remaining work |
+| **Total** | **1,000** | Every manifest origin appears exactly once |
 
-## Labelled atomic checkpoint (2026-07-25)
+Across all targets, the publication retains exactly **58,000 check rows**: 42,752 judged (16,521 pass, 20,799 issues, 5,432 not applicable), 15,209 blocked, and 39 not run. Blocked and partial outcomes are not scores, passes, or inferred not-applicable outcomes. Aggregate outcome observations use only the selection-biased 705-report complete subset.
 
-The retained top-1,000 run currently has **631 coverage-complete sites** with exactly **36,598 judged check outcomes** (58 per completed site), plus 277 fully blocked sites, 91 partially judged sites, and one site with no report. The completed subset is selection-biased, so its percentages are not an overall score or a result for the whole top 1,000. See [`checkpoint.html`](checkpoint.html) and the machine-readable [`atomic-checkpoint.json`](atomic-checkpoint.json).
+Browse the [exact 1,000-target inventory](index.html), download the [machine-readable inventory](results/atomic/inventory.json), or read the [final run summary](checkpoint.html).
 
-The checkpoint generator is reproducible against the retained local run:
+## Source and ordering
+
+The source is the [Chrome UX Report global top list](https://github.com/zakird/crux-top-lists), repository commit `650c9d833e0de62ef004b827b02be3aaef1eedd3`. The manifest contains all 1,000 unique origins in the CrUX `rank=1000` bucket, preserving source-file order. CrUX does not publish exact ordering within that bucket, so the published `position` is provenance, not an exact popularity rank.
+
+- Manifest: [`results/atomic/manifest.csv`](results/atomic/manifest.csv)
+- Manifest SHA-256: `af3d02a5a1466181c5900104795e25cd8d3838375702520260cdaede5078791d`
+- Catalog: `modern-web-guidance@0.0.172`
+- Catalog SHA-256: `78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7`
+- Retry budget: at most three report-bearing attempts per origin
+
+## Published artifacts
+
+```text
+results/atomic/
+├── inventory.json       # exact 1,000-target disposition and provenance index
+├── manifest.csv         # immutable source inventory
+├── manifest.sha256
+├── run.json             # finished run metadata
+├── retry-status.json    # final retry counters (records live in inventory.json)
+└── reports/             # 1,000 byte-identical retained report JSON files
+sites/                   # 1,000 static per-target pages
+principles/              # 17 complete-subset/check-total pages
+atomic-checkpoint.json   # concise final run summary
+checkpoint.html          # human-readable final run summary
+```
+
+Each inventory target records its canonical report SHA-256, original local report path, and local evidence root. The canonical reports are committed because they are the structured result. Raw screenshots, HARs, traces, heap snapshots, videos, and other browser evidence remain locally retained under:
+
+```text
+runs/2026-07-17T17-27-24-856Z/atomic-reports/<slug>/<attempt>/
+```
+
+Those passive artifacts are approximately 33 GB and are intentionally not committed. Artifact paths inside each report are relative to the target's recorded `evidenceRoot`.
+
+## Reconcile and validate
+
+The reconciler copies the retained report selected by the final retry status, verifies it against the exact catalog used by the run, generates the canonical inventory/reports, and rebuilds the static site.
 
 ```bash
-python3 scripts/generate_atomic_checkpoint.py \
-  runs/2026-07-17T17-27-24-856Z --out .
+python3 scripts/reconcile_atomic_run.py \
+  runs/2026-07-17T17-27-24-856Z \
+  --catalog /home/paulkinlan/web-uplift/knowledge/principles.json
+
+python3 scripts/build_atomic_db.py
+python3 scripts/validate_atomic_publication.py
+python3 -m unittest scripts/test_reconcile_atomic_run.py
 ```
 
-## Legacy results
-
-| Metric | Finding |
-|---|---|
-| JS shells (invisible to crawlers) | 6.8% of sites |
-| High CLS (>0.1, fails Core Web Vitals) | 4.9% |
-| Horizontal overflow on desktop | 2.3% |
-| Sites blocking headless audit | 2.9% |
-
-Notable: Wikipedia is the gold standard (score 100, CLS 0, 6 requests). Amazon is one of the worst (score 8, discoverability 1%, JS shell, 10 principle issues). Most top sites are clean.
-
-## Directory structure
-
-```
-state-of-the-web/
-├── README.md                 — this file
-├── AGENTS.md                 — instructions for AI agents running audits
-├── principles.json           — authoritative 17-principle / 58-check catalog
-├── principles/               — generated per-principle result pages
-├── schemas/
-│   ├── schema.sql            — SQLite schema, including atomic test results
-│   └── schema.example.json   — example per-site JSON output
-├── scripts/
-│   ├── audit_runner2.py      — CDP evidence batch runner (automated metrics)
-│   ├── run_gpt_batch.py      — disabled legacy partial-evidence collector; not an audit
-│   ├── validate_atomic_report.mjs — exact check-coverage publication gate
-│   └── batch-001-sites.tsv   — site list for batch 001
-├── results/
-│   ├── cdp/                  — CDP evidence results (870 sites, JSON)
-│   └── gpt/                  — Vision-based principle results (per-site JSON)
-├── evidence/                 — Screenshots and artifacts (not in git — too large)
-└── state-of-the-web.db       — Merged SQLite database (regenerated from JSON)
-```
-
-## How to run
-
-### CDP evidence pass (fast, scalable, no vision needed)
-```bash
-# Audit 50 sites starting at rank 0
-python3 scripts/audit_runner2.py /tmp/tranco-top1000.txt 0 50
-
-# Results saved to results/cdp/results-batch-{start}.json
-```
-
-### Atomic-check audit (requires a vision-capable AI agent)
-See `AGENTS.md` and the web-uplift skill for the full methodology. Before import or publication, validate every report:
+The existing per-report validator is intentionally fail-closed for incomplete reports. Across the canonical report set, its expected result is exactly 705 exit-zero reports and 295 exit-one reports. Every exit-one report must be one of the published 257 blocked or 38 partial dispositions; an incomplete report must never pass the publication gate or carry a score.
 
 ```bash
-node scripts/validate_atomic_report.mjs principles.json results/gpt/example.com.json
+node scripts/validate_atomic_report.mjs principles.json \
+  results/atomic/reports/0001-lectormangass_net.json
 ```
 
-Only reports with complete exact coverage may be scored or described as audited.
+The publication validator independently checks:
 
-### Merge results into SQLite
-```bash
-python3 scripts/rebuild_db.py
-# Produces state-of-the-web.db
-```
+- manifest/catalog SHA-256 and exact 1,000-origin denominator;
+- one unique canonical report and static page per manifest position;
+- all 58 catalog pairs and 17 derived principle outcomes per report;
+- evidence/path/finding references and literal coverage counters;
+- exact 705 / 257 / 38 dispositions and zero queue/retry/invalid counts;
+- exactly 58,000 database test rows, 17,000 principle rows, and zero scores.
 
-## Methodology
+## Methodology and limitations
 
-- **17 principles / 58 checks**: the exact IDs, applicability criteria, evidence hints, and guidance references are vendored in `principles.json`. New reports must retain pass/issues/N/A/blocked/not-run for every defined check; broad principle summaries are derived, not substitutes.
-- **CDP evidence**: Raw Chrome DevTools Protocol via [web-uplift evidence primitives](https://github.com/PaulKinlan/web-uplift) — screenshots, Lighthouse, axe-core, heap snapshots, layout/CLS, discoverability, HAR, performance traces.
-- **Domain classification**: Public Suffix List (tldextract) for proper registrable-domain handling.
-- **SPA detection**: Pages with <300 chars of visible text in raw HTML flagged as JavaScript-rendered shells.
+- Audits use the [web-uplift](https://github.com/PaulKinlan/web-uplift) atomic-check methodology with representative routes, states, and active interactions where reachable.
+- A coverage-complete report means every check has a judged outcome; it does **not** mean the site passed every check.
+- Completion is correlated with whether an origin permits meaningful headless inspection. The 705-report complete subset is therefore selection-biased.
+- Results are point-in-time observations under the recorded routes and conditions.
+- Authenticated, destructive, sensitive, or unavailable flows remain limited as documented in each report.
 
-## Limitations
-
-- The legacy dataset was homepage-oriented and therefore could not support several interaction- and journey-level checks. New complete audits require representative routes and states.
-- Single point-in-time snapshot per site
-- Headless Chrome — some sites block automated access (2.9%)
-- Lighthouse/INP not available for all sites (CSP may block injection)
-- The legacy principle-level run does not contain a complete per-site 58-check matrix. Principle pages expose this as `not run`; missing evidence is not counted as a test pass.
+The older homepage-oriented CDP and principle-level files remain in `results/cdp/` and `results/gpt/` for history, but they are not merged into, scored with, or presented as the final atomic dataset.
 
 ## License
 
 MIT
-
-## Links
-
-- [Live data explorer](https://paulkinlan.github.io/are-links-dying/) (external link study using the same methodology)
-- [web-uplift skill](https://github.com/PaulKinlan/web-uplift)
-- [Tranco list](https://tranco-list.eu)

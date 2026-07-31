@@ -1,0 +1,2392 @@
+{
+  "url": "https://uranai.nosv.org",
+  "auditedAt": "2026-07-21T13:27:21.313Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete agentic audit of four representative templates plus a not-found recovery state.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Legacy server-rendered MPA with jQuery",
+    "notes": "Japanese user-generated fortune/story creation and reading service. Fresh loads show a Google consent interstitial."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "scroll-progress-indicator",
+    "light-dismiss-a-dialog",
+    "fluid-scaling",
+    "forms",
+    "performance",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "security",
+    "privacy",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The dark/reduced-motion probe matched dark mode but body colors remained the light palette (rgb(179, 213, 13), black text); the dark screenshot is byte-identical to the default capture.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Emulated prefers-reduced-motion: reduce matched and document.getAnimations() returned zero animations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Forced-colors and prefers-contrast emulation produced black/white system colors with visible bordered controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-forced-colors.png",
+        "evidence/forced-colors-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The DOM/CSS probe found no view-transition CSS or startViewTransition usage across the MPA entry surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "No scroll-linked animation exists on the representative templates, so there is no implementation to evaluate.",
+      "reason": "No scroll-linked animation exists on the representative templates, so there is no implementation to evaluate.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "The representative MPA pages expose no swipe, pull, carousel, or gesture-driven interaction.",
+      "reason": "The representative MPA pages expose no swipe, pull, carousel, or gesture-driven interaction.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The home page is over 2,100 CSS px tall, while CSS inspection found no scroll-state container rules, progress indicator, or animation timeline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "No site-owned tooltip, popover, or anchored menu was present on the representative paths.",
+      "reason": "No site-owned tooltip, popover, or anchored menu was present on the representative paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The DOM contains hundreds of hash-only links and no View Transition, highlight, or scroll-marker signal; the crawler screenshot also shows overlapping in-page navigation over content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/discover-home-crawler.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Desktop, mobile, detail, listing, and creation screenshots all open behind a modal consent wall for personalised advertising and 210 partners.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/create.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The probe found four role=dialog overlays but zero dialog or popover elements; the first layer offers only Consent and Manage options.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The desktop/crawler screenshots show multiple stacked navigation strips, boxed regions, sidebars, icon rows, and overlapping in-page navigation competing with the main content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discover-home-crawler.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "At a requested 360x800 viewport, layout reported no viewport meta and a 980px layout/client width at scale 0.367; text and controls are tiny in the mobile screenshot.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/detail-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "CSS inspection across the representative page found zero @container rules; the whole desktop composition is merely scaled on mobile.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Programmatic focus on the first link computed outline: none 0px and no box shadow; the absent viewport meta shrinks controls to 36.7% on mobile.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Every fresh-load screenshot places the advertising-consent decision above the site’s search, read, and create actions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/create.png"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The homepage, sample story, listing, and 329-control creation form are all blocked visually until the visitor opens consent options or accepts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/detail.png",
+        "evidence/create.png"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "The tested unknown URL returns a concise Japanese not-found state with a working “back to top” recovery link; the create page also explains editing and recovery constraints.",
+      "pathIds": [
+        "not-found",
+        "create"
+      ],
+      "artifacts": [
+        "evidence/not-found-probe.json",
+        "evidence/create-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Lighthouse measured FCP 4.5s, LCP 5.7s, Speed Index 7.4s, and performance 0.63; the independent trace measured LCP 3.77s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Layout observers measured CLS 0.00095 on home and 0 on detail; images with dimensions reserve the main hero area.",
+      "pathIds": [
+        "home",
+        "detail"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/detail-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Trace and layout evidence recorded zero long tasks and 0ms total blocking time during load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "HAR recorded 94 requests and identified parser-inserted jQuery 1.4.4, jquery-cookie, localStorage, analytics, and other scripts; DOM confirmation shows these scripts are neither async nor defer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/resource-dom-probe.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "HAR measured 633,623 script bytes; ads (190KB), GTM (158KB), and consent scripts (about 144KB) are the largest resources, with 92 of 94 requests classed third-party.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The image audit found 40 of 44 images without alt. Lighthouse failed image-alt, link-name, and frame-title. The creation form has 179 visible non-button controls without labels.",
+      "pathIds": [
+        "create"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse.json",
+        "evidence/create-probe.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Lighthouse’s color-contrast audit failed, and its link-in-text-block audit found links relying on color alone.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "There is no main/nav/header/footer landmark, Lighthouse failed heading order and main-landmark checks, and focused links compute no outline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "At 360px, Chrome lays out 980 CSS px and scales the page to 0.367, making body copy and controls too small to read comfortably.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Lighthouse failed meta-viewport; both homepage and detail layout captures remained 980px wide at a requested 360px viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/detail-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Lighthouse errors-in-console audit passed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Lighthouse reported a doctype failure; 38 of 44 images lack dimensions, 43 use legacy formats, and 34 below-fold images are not lazy-loaded.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Lighthouse deprecation and BFCache audits passed, and the probe found no permission requests on load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "All four representative DOM captures have descriptive Japanese titles; the homepage has a substantive meta description.",
+      "pathIds": [
+        "home",
+        "listing",
+        "detail",
+        "create"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/listing-dom.json",
+        "evidence/detail-dom.json",
+        "evidence/create-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "All four templates lack a viewport meta tag; mobile evidence renders a 980px page at 36.7% scale. Robots.txt is reachable and Lighthouse says anchors are crawlable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/site-files.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The home probe found no canonical link; /sitemap.xml returns 404. The discoverability fetch also reported an unexpected finalUrl using http although the browser remained on HTTPS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/site-files.json",
+        "evidence/discover-home"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The homepage has Open Graph tags but zero JSON-LD blocks; the sample content page represents a creative work that could expose schema.org metadata.",
+      "pathIds": [
+        "detail"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/detail-dom.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Headers found no CSP, HSTS, or nosniff. All 12 observed cookies lack Secure and use SameSite=None, including several 390–400 day cookies.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Tracker evidence found 11 third-party origins and four known tracker domains; the consent UI names 210 partners and the HAR assigns 859,735 of 879,977 transferred bytes to third parties.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The creation flow exposes a password field and current-page probes found no WebAuthn/PublicKeyCredential usage; no permission calls fire on load.",
+      "pathIds": [
+        "create"
+      ],
+      "artifacts": [
+        "evidence/create-probe.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Headers found no clickjacking protection, Referrer-Policy, Permissions-Policy, CSP/frame-ancestors, HSTS, or nosniff.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "Crawler screenshots with JavaScript disabled show server-rendered homepage and story content; neither path is a JS shell.",
+      "pathIds": [
+        "home",
+        "detail"
+      ],
+      "artifacts": [
+        "evidence/discover-home-crawler.png",
+        "evidence/discover-detail-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "All four server-rendered templates loaded to usable DOM states, and the consent overlay remained within the captured viewport under tested sizes.",
+      "pathIds": [
+        "home",
+        "listing",
+        "detail",
+        "create"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "/manifest.json exists, but the DOM has no manifest link and there is no controlling service worker.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/site-files.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "A representative missing URL returned an explicit not-found message and a working recovery link instead of a blank shell.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found-probe.json",
+        "evidence/not-found.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "This is a deliberately Japanese-language service; no alternate-language or bidi surface was found in scope.",
+      "reason": "This is a deliberately Japanese-language service; no alternate-language or bidi surface was found in scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "No locale-switching or user-facing currency/date formatting flow was present in the representative scope.",
+      "reason": "No locale-switching or user-facing currency/date formatting flow was present in the representative scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "No event scheduling, time-zone, or DST-sensitive surface was present in the representative scope.",
+      "reason": "No event scheduling, time-zone, or DST-sensitive surface was present in the representative scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The first layer presents a prominent Consent button and Manage options, but no Reject/Decline button, while requesting personalised processing by 210 partners.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/consent-options.json"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The 329-control form has zero required controls and 179 visible unlabelled controls; this prevents dependable native validation and accessible error association.",
+      "pathIds": [
+        "create"
+      ],
+      "artifacts": [
+        "evidence/create-probe.json"
+      ],
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "Only one of 267 visible controls has a non-empty autocomplete value; email and password/account-adjacent inputs do not expose appropriate tokens in the captured DOM.",
+      "pathIds": [
+        "create"
+      ],
+      "artifacts": [
+        "evidence/create-probe.json"
+      ],
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The create flow asks for email and an editing password while the site offers no passkey signal; users are warned that guessed passwords permit unauthorised editing.",
+      "pathIds": [
+        "create"
+      ],
+      "artifacts": [
+        "evidence/create-probe.json"
+      ],
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "The image audit found 43 legacy-format images, zero modern-format images, eight missing srcset, and 34 below-fold images without lazy loading.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "HAR records 92 third-party requests and 633KB of scripts for a text/listing page; tracker evidence confirms active analytics and ad domains.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser evidence and guidance-backed inspection",
+      "evidence": "859,735 of 879,977 transferred bytes are attributed to third-party origins; ads, tag management, consent, and a 48KB font dominate a largely text-based page.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F36"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "No declared agent-facing intent or transactional agent surface was found; this emerging capability is out of scope.",
+      "reason": "No declared agent-facing intent or transactional agent surface was found; this emerging capability is out of scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "No user task in the representative scope requires or clearly benefits from on-device inference.",
+      "reason": "No user task in the representative scope requires or clearly benefits from on-device inference.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-route recon",
+      "evidence": "The audited site uses full-document navigation and no safe, bounded, representative in-page interaction suitable for a 10x repeat was identified; no synthetic interaction was fabricated.",
+      "reason": "The audited site uses full-document navigation and no safe, bounded, representative in-page interaction suitable for a 10x repeat was identified; no synthetic interaction was fabricated.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "The heap summary measured about 18.2MB self size for the content page plus consent UI, proportionate to the captured third-party-heavy state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct browser evidence and representative-path inspection",
+      "evidence": "The heap constructor summary exposed no Detached* constructor among retained top constructors in the single tested state; no repeated interaction was available.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "This is a deliberately Japanese-language service; no alternate-language or bidi surface was found in scope. No locale-switching or user-facing currency/date formatting flow was present in the representative scope. No event scheduling, time-zone, or DST-sensitive surface was present in the representative scope."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F30",
+        "F31",
+        "F32",
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F34",
+        "F35",
+        "F36"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "No declared agent-facing intent or transactional agent surface was found; this emerging capability is out of scope. No user task in the representative scope requires or clearly benefits from on-device inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage: discovery, search, navigation, consent, global performance/security and main content archetype.",
+      "url": "https://uranai.nosv.org/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "Popular-content listing archetype, representing rankings and index pages.",
+      "url": "https://uranai.nosv.org/hot.php",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "detail",
+      "description": "Sample story/detail archetype, representing user-generated reading pages.",
+      "url": "https://uranai.nosv.org/u.php/novel/sample/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "create",
+      "description": "Primary creation form and anonymous editing/account-assistance journey.",
+      "url": "https://uranai.nosv.org/gen.php/novel/",
+      "conditions": [
+        "desktop",
+        "form semantics inspection"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Unknown-route recovery state for HTTP/runtime resilience.",
+      "url": "https://uranai.nosv.org/definitely-not-a-real-page-20260721",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "summary": "The site ignores the user’s dark-theme preference.",
+      "evidence": "The dark/reduced-motion probe matched dark mode but body colors remained the light palette (rgb(179, 213, 13), black text); the dark screenshot is byte-identical to the default capture.",
+      "suggestedFix": "Declare color-scheme and provide preference-driven light/dark surface and text tokens.",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/preferences-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "summary": "Page and state changes have no View Transition treatment.",
+      "evidence": "The DOM/CSS probe found no view-transition CSS or startViewTransition usage across the MPA entry surface.",
+      "suggestedFix": "Add cross-document View Transitions for same-origin navigation, with reduced-motion-safe fallbacks.",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "summary": "Long pages provide no scroll-state-aware navigation or progress feedback.",
+      "evidence": "The home page is over 2,100 CSS px tall, while CSS inspection found no scroll-state container rules, progress indicator, or animation timeline.",
+      "suggestedFix": "Add a lightweight scroll progress or scroll-state-aware sticky header where it improves orientation.",
+      "guidanceId": "scroll-progress-indicator",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "summary": "In-page navigation does not clearly cue the destination or focus change.",
+      "evidence": "The DOM contains hundreds of hash-only links and no View Transition, highlight, or scroll-marker signal; the crawler screenshot also shows overlapping in-page navigation over content.",
+      "suggestedFix": "Use real destination links and visible target/focus highlighting for in-page jumps.",
+      "guidanceId": "scroll-progress-indicator",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/discover-home-crawler.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "summary": "A consent interstitial obscures the entire primary experience on every fresh visit.",
+      "evidence": "Desktop, mobile, detail, listing, and creation screenshots all open behind a modal consent wall for personalised advertising and 210 partners.",
+      "suggestedFix": "Replace the blocking first-load wall with a compact, equally actionable consent surface and keep core content usable.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/create.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "summary": "Consent UI uses custom role dialogs rather than native dialog semantics and has no direct dismiss/decline action.",
+      "evidence": "The probe found four role=dialog overlays but zero dialog or popover elements; the first layer offers only Consent and Manage options.",
+      "suggestedFix": "Use a native dialog for the modal decision, include an immediate decline/close action, and restore focus on dismissal.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "summary": "Dense legacy chrome and repeated sidebars crowd the content.",
+      "evidence": "The desktop/crawler screenshots show multiple stacked navigation strips, boxed regions, sidebars, icon rows, and overlapping in-page navigation competing with the main content.",
+      "suggestedFix": "Simplify repeated navigation and framing, prioritising the current page’s main content and primary action.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/discover-home-crawler.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F08",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "summary": "Mobile devices receive a 980px desktop layout scaled down to fit.",
+      "evidence": "At a requested 360x800 viewport, layout reported no viewport meta and a 980px layout/client width at scale 0.367; text and controls are tiny in the mobile screenshot.",
+      "suggestedFix": "Add a standard width=device-width viewport and rebuild fixed desktop regions with fluid intrinsic layouts.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/detail-mobile-layout.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F09",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "summary": "Components do not adapt to their available container.",
+      "evidence": "CSS inspection across the representative page found zero @container rules; the whole desktop composition is merely scaled on mobile.",
+      "suggestedFix": "Introduce container queries for reusable cards, rankings, sidebars, and creation-form groups.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "summary": "Keyboard focus is not visibly styled and scaled mobile targets are too small.",
+      "evidence": "Programmatic focus on the first link computed outline: none 0px and no box shadow; the absent viewport meta shrinks controls to 36.7% on mobile.",
+      "suggestedFix": "Add strong :focus-visible styling and maintain at least 44 CSS px touch targets in a real mobile layout.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "summary": "The consent wall hides the site purpose and primary actions on arrival.",
+      "evidence": "Every fresh-load screenshot places the advertising-consent decision above the site’s search, read, and create actions.",
+      "suggestedFix": "Keep the purpose and core actions available while presenting a proportionate privacy choice.",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/create.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "summary": "Reading and creation journeys begin with an avoidable consent detour.",
+      "evidence": "The homepage, sample story, listing, and 329-control creation form are all blocked visually until the visitor opens consent options or accepts.",
+      "suggestedFix": "Let visitors continue to reading and creation without accepting personalised advertising.",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/detail.png",
+        "evidence/create.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "summary": "Largest Contentful Paint is well outside the good range.",
+      "evidence": "Lighthouse measured FCP 4.5s, LCP 5.7s, Speed Index 7.4s, and performance 0.63; the independent trace measured LCP 3.77s.",
+      "suggestedFix": "Prioritise the actual LCP resource and defer consent, ads, analytics, and non-critical scripts.",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "summary": "Legacy synchronous scripts and dependency chains delay rendering.",
+      "evidence": "HAR recorded 94 requests and identified parser-inserted jQuery 1.4.4, jquery-cookie, localStorage, analytics, and other scripts; DOM confirmation shows these scripts are neither async nor defer.",
+      "suggestedFix": "Remove obsolete dependencies and defer or conditionally load non-critical scripts.",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/resource-dom-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "summary": "Third-party JavaScript dominates the transfer budget.",
+      "evidence": "HAR measured 633,623 script bytes; ads (190KB), GTM (158KB), and consent scripts (about 144KB) are the largest resources, with 92 of 94 requests classed third-party.",
+      "suggestedFix": "Audit third-party value, remove duplicate ad loads, and load optional scripts only after a relevant consent/action.",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F16",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "summary": "Core images, links, frames, and creation inputs lack accessible names.",
+      "evidence": "The image audit found 40 of 44 images without alt. Lighthouse failed image-alt, link-name, and frame-title. The creation form has 179 visible non-button controls without labels.",
+      "suggestedFix": "Give meaningful images alt text, decorative images empty alt, title frames, name links, and associate every form control with a label.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse.json",
+        "evidence/create-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "create",
+      "url": "https://uranai.nosv.org/gen.php/novel/"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "summary": "Text and essential links fail minimum contrast.",
+      "evidence": "Lighthouse’s color-contrast audit failed, and its link-in-text-block audit found links relying on color alone.",
+      "suggestedFix": "Adopt contrast-tested color tokens and add non-color link affordances.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "summary": "Document structure and keyboard focus are not reliable.",
+      "evidence": "There is no main/nav/header/footer landmark, Lighthouse failed heading order and main-landmark checks, and focused links compute no outline.",
+      "suggestedFix": "Add semantic landmarks and ordered headings, then provide a visible :focus-visible indicator.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "legible-text",
+      "summary": "Mobile text is rendered as a miniaturised desktop page.",
+      "evidence": "At 360px, Chrome lays out 980 CSS px and scales the page to 0.367, making body copy and controls too small to read comfortably.",
+      "suggestedFix": "Use a real responsive viewport and fluid type/spacing with comfortable line lengths.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "summary": "The page does not reflow for a narrow viewport.",
+      "evidence": "Lighthouse failed meta-viewport; both homepage and detail layout captures remained 980px wide at a requested 360px viewport.",
+      "suggestedFix": "Add width=device-width and ensure content reflows without relying on whole-page scaling.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/detail-mobile-layout.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "summary": "Document and image asset hygiene is poor.",
+      "evidence": "Lighthouse reported a doctype failure; 38 of 44 images lack dimensions, 43 use legacy formats, and 34 below-fold images are not lazy-loaded.",
+      "suggestedFix": "Serve a standards-mode HTML5 doctype consistently and add intrinsic dimensions, lazy loading, and modern image formats.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "summary": "The public site is not mobile-friendly despite crawlable links.",
+      "evidence": "All four templates lack a viewport meta tag; mobile evidence renders a 980px page at 36.7% scale. Robots.txt is reachable and Lighthouse says anchors are crawlable.",
+      "suggestedFix": "Add the standard responsive viewport and preserve descriptive real-href links.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/site-files.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "summary": "Canonical and sitemap signals are incomplete.",
+      "evidence": "The home probe found no canonical link; /sitemap.xml returns 404. The discoverability fetch also reported an unexpected finalUrl using http although the browser remained on HTTPS.",
+      "suggestedFix": "Publish a canonical HTTPS URL per public template and a sitemap consistent with robots.txt.",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/site-files.json",
+        "evidence/discover-home"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F24",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "summary": "Entity pages lack structured data.",
+      "evidence": "The homepage has Open Graph tags but zero JSON-LD blocks; the sample content page represents a creative work that could expose schema.org metadata.",
+      "suggestedFix": "Add accurate WebSite/Organization metadata and CreativeWork or Article JSON-LD on content pages.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/detail-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "detail",
+      "url": "https://uranai.nosv.org/u.php/novel/sample/"
+    },
+    {
+      "id": "F25",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "summary": "HTTPS is undermined by missing security headers and insecure cookies.",
+      "evidence": "Headers found no CSP, HSTS, or nosniff. All 12 observed cookies lack Secure and use SameSite=None, including several 390–400 day cookies.",
+      "suggestedFix": "Set CSP, HSTS, nosniff, and secure least-privilege cookie attributes; retire obsolete analytics cookies.",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F26",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "summary": "The page has an excessive tracking and third-party footprint.",
+      "evidence": "Tracker evidence found 11 third-party origins and four known tracker domains; the consent UI names 210 partners and the HAR assigns 859,735 of 879,977 transferred bytes to third parties.",
+      "suggestedFix": "Reduce partners and analytics to the minimum, delay optional requests until consent, and prefer aggregate first-party measurement.",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "summary": "Account and anonymous-edit flows rely on passwords without phishing-resistant authentication.",
+      "evidence": "The creation flow exposes a password field and current-page probes found no WebAuthn/PublicKeyCredential usage; no permission calls fire on load.",
+      "suggestedFix": "Offer passkeys for accounts and secure recovery; retain contextual permission timing.",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/create-probe.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "create",
+      "url": "https://uranai.nosv.org/gen.php/novel/"
+    },
+    {
+      "id": "F28",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "summary": "Browser-enforced defensive policies are absent.",
+      "evidence": "Headers found no clickjacking protection, Referrer-Policy, Permissions-Policy, CSP/frame-ancestors, HSTS, or nosniff.",
+      "suggestedFix": "Deploy a restrictive CSP with frame-ancestors plus HSTS, Referrer-Policy, Permissions-Policy, and nosniff.",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F29",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "summary": "The app-like creation service is neither linked as installable nor available offline.",
+      "evidence": "/manifest.json exists, but the DOM has no manifest link and there is no controlling service worker.",
+      "suggestedFix": "Link the manifest, provide suitable icons, register a service worker, and offer a lightweight offline fallback.",
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/site-files.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F30",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "summary": "The consent choice is asymmetric and a direct refusal is hidden.",
+      "evidence": "The first layer presents a prominent Consent button and Manage options, but no Reject/Decline button, while requesting personalised processing by 210 partners.",
+      "suggestedFix": "Present Accept and Reject with equal prominence and make withdrawal as easy as acceptance.",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/consent-options.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F31",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "summary": "The creation form lacks robust field semantics for preventing and explaining mistakes.",
+      "evidence": "The 329-control form has zero required controls and 179 visible unlabelled controls; this prevents dependable native validation and accessible error association.",
+      "suggestedFix": "Label fields, mark actual requirements, validate after interaction, and announce a concise error summary.",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/create-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "create",
+      "url": "https://uranai.nosv.org/gen.php/novel/"
+    },
+    {
+      "id": "F32",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "summary": "The large creation form provides almost no autocomplete assistance.",
+      "evidence": "Only one of 267 visible controls has a non-empty autocomplete value; email and password/account-adjacent inputs do not expose appropriate tokens in the captured DOM.",
+      "suggestedFix": "Add correct autocomplete tokens such as email, current-password/new-password, name, and url where applicable.",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/create-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "create",
+      "url": "https://uranai.nosv.org/gen.php/novel/"
+    },
+    {
+      "id": "F33",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "summary": "Password-based anonymous editing creates avoidable account and recovery risk.",
+      "evidence": "The create flow asks for email and an editing password while the site offers no passkey signal; users are warned that guessed passwords permit unauthorised editing.",
+      "suggestedFix": "Move editing ownership into secured accounts, add passkeys and clear recovery/revocation controls.",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/create-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "create",
+      "url": "https://uranai.nosv.org/gen.php/novel/"
+    },
+    {
+      "id": "F34",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "summary": "Most images use legacy formats and lack responsive delivery.",
+      "evidence": "The image audit found 43 legacy-format images, zero modern-format images, eight missing srcset, and 34 below-fold images without lazy loading.",
+      "suggestedFix": "Convert photographic/decorative assets to AVIF/WebP, add responsive sources, dimensions, and lazy loading.",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F35",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "summary": "Optional advertising and analytics create disproportionate background work.",
+      "evidence": "HAR records 92 third-party requests and 633KB of scripts for a text/listing page; tracker evidence confirms active analytics and ad domains.",
+      "suggestedFix": "Remove redundant trackers and gate optional fetches and processing behind explicit consent or interaction.",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    },
+    {
+      "id": "F36",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "summary": "Third-party resources consume nearly the entire page budget.",
+      "evidence": "859,735 of 879,977 transferred bytes are attributed to third-party origins; ads, tag management, consent, and a 48KB font dominate a largely text-based page.",
+      "suggestedFix": "Set a strict third-party budget, self-host/subset fonts, and defer ads until they can provide user value.",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://uranai.nosv.org/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Build a genuine mobile layout and visible keyboard focus",
+      "priority": 1,
+      "guidanceId": "fluid-scaling",
+      "status": "open",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10",
+        "F19",
+        "F20",
+        "F22"
+      ]
+    },
+    {
+      "id": "T02",
+      "title": "Make consent non-blocking, symmetric, and privacy-minimised",
+      "priority": 2,
+      "guidanceId": "privacy",
+      "status": "open",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F11",
+        "F12",
+        "F26",
+        "F30"
+      ]
+    },
+    {
+      "id": "T03",
+      "title": "Fix accessible names, labels, landmarks, contrast, and form errors",
+      "priority": 3,
+      "guidanceId": "accessibility",
+      "status": "open",
+      "findingIds": [
+        "F16",
+        "F17",
+        "F18",
+        "F31",
+        "F32"
+      ]
+    },
+    {
+      "id": "T04",
+      "title": "Reduce LCP and remove/defer legacy and third-party scripts",
+      "priority": 4,
+      "guidanceId": "performance",
+      "status": "open",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "id": "T05",
+      "title": "Deploy defensive headers and secure cookie attributes",
+      "priority": 5,
+      "guidanceId": "security",
+      "status": "open",
+      "findingIds": [
+        "F25",
+        "F27",
+        "F28",
+        "F33"
+      ]
+    },
+    {
+      "id": "T06",
+      "title": "Modernise image delivery and enforce a third-party budget",
+      "priority": 6,
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open",
+      "findingIds": [
+        "F21",
+        "F34",
+        "F35",
+        "F36"
+      ]
+    },
+    {
+      "id": "T07",
+      "title": "Add canonical, sitemap, and structured metadata",
+      "priority": 7,
+      "guidanceId": "accessibility",
+      "status": "open",
+      "findingIds": [
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "id": "T08",
+      "title": "Modernise navigation feedback and page transitions",
+      "priority": 8,
+      "guidanceId": "same-document-transitions",
+      "status": "open",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "id": "T09",
+      "title": "Add install/offline support for the creation experience",
+      "priority": 9,
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "status": "open",
+      "findingIds": [
+        "F29"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "other",
+      "path": "evidence/consent-options.json",
+      "caption": "consent-options.json",
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "cookies.json",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/create-dom.json",
+      "caption": "create-dom.json",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/create-probe.json",
+      "caption": "create-probe.json",
+      "findingIds": [
+        "F16",
+        "F27",
+        "F31",
+        "F32",
+        "F33"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/create.png",
+      "caption": "create.png",
+      "findingIds": [
+        "F05",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/detail-dom.json",
+      "caption": "detail-dom.json",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/detail-mobile-layout.json",
+      "caption": "detail-mobile-layout.json",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F08",
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/detail-mobile.png",
+      "caption": "detail-mobile.png",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/detail.png",
+      "caption": "detail.png",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discover-detail",
+      "caption": "discover-detail",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discover-detail-crawler.png",
+      "caption": "discover-detail-crawler.png",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discover-detail-rendered.png",
+      "caption": "discover-detail-rendered.png",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discover-home",
+      "caption": "discover-home",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discover-home-crawler.png",
+      "caption": "discover-home-crawler.png",
+      "findingIds": [
+        "F04",
+        "F07"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discover-home-rendered.png",
+      "caption": "discover-home-rendered.png",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/forced-colors-probe.json",
+      "caption": "forced-colors-probe.json",
+      "condition": "forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "headers.json",
+      "findingIds": [
+        "F25",
+        "F28"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-after-decline.png",
+      "caption": "home-after-decline.png",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark-reduced.png",
+      "caption": "home-dark-reduced.png",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "home-desktop.png",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F11",
+        "F26",
+        "F30"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home-dom.json",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-forced-colors.png",
+      "caption": "home-forced-colors.png",
+      "condition": "forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.json",
+      "caption": "home-heap.json",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "home-mobile-layout.json",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03",
+        "F08",
+        "F19",
+        "F20",
+        "F22"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home-mobile.png",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "home-probe.json",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04",
+        "F06",
+        "F09",
+        "F10",
+        "F18",
+        "F23",
+        "F24",
+        "F27",
+        "F29"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home-summary.json",
+      "findingIds": [
+        "F14",
+        "F15",
+        "F26",
+        "F35",
+        "F36"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-text.json",
+      "caption": "home-text.json",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home-trace-summary.json",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home-trace.json",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home.har",
+      "findingIds": [
+        "F15",
+        "F36"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "images.json",
+      "findingIds": [
+        "F16",
+        "F21",
+        "F34"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "lighthouse.json",
+      "findingIds": [
+        "F13",
+        "F16",
+        "F17",
+        "F18",
+        "F21"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/listing-dom.json",
+      "caption": "listing-dom.json",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/listing.png",
+      "caption": "listing.png",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found-probe.json",
+      "caption": "not-found-probe.json",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/not-found.png",
+      "caption": "not-found.png",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-probe.json",
+      "caption": "preferences-probe.json",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/resource-dom-probe.json",
+      "caption": "resource-dom-probe.json",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "secrets.json",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/site-files.json",
+      "caption": "site-files.json",
+      "findingIds": [
+        "F22",
+        "F23",
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "trackers.json",
+      "findingIds": [
+        "F26",
+        "F35"
+      ]
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T13-27-21-313Z"
+}

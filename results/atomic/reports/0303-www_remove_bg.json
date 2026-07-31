@@ -1,0 +1,2371 @@
+{
+  "url": "https://www.remove.bg",
+  "auditedAt": "2026-07-19T20:18:49.549Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete representative audit of six page/flow archetypes plus a recovery route. Excluded authenticated account management, payment completion, bulk editing, plugin internals, every locale, and destructive account actions because they require credentials, payment, or broad template duplication.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Vue-enhanced multi-page application",
+    "notes": "Public image background-removal service with marketing, editor/upload, pricing, documentation, blog and external account surfaces."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-styles",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "lighthouse",
+    "axe-core",
+    "heap-summary",
+    "robots/sitemap/manifest"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "dark-mode",
+    "css",
+    "accessible-error-announcement",
+    "physics-based-easing",
+    "scroll-snap-realtime-feedback",
+    "directional-navigation-transitions",
+    "navigation-drawer",
+    "stabilize-reactive-state",
+    "persistent-app-tours",
+    "scroll-position-aware-elements",
+    "performance",
+    "html",
+    "defer-rendering-heavy-content",
+    "efficient-background-processing",
+    "interactive-content-reveal",
+    "forms",
+    "fluid-scaling",
+    "visually-stable-font-fallbacks",
+    "css-layout",
+    "cross-document-transitions",
+    "visually-stable-mixed-fonts",
+    "optimize-preload-priority",
+    "search-hidden-content",
+    "scrollability-affordance-hints",
+    "faster-spa-view-transitions",
+    "security",
+    "privacy",
+    "passkey-registration",
+    "passkey-reauthentication",
+    "resilient-context-menus-and-nested-dropdowns",
+    "support-global-calendar-systems",
+    "translator",
+    "autofill-payment-form",
+    "autofill-sign-up-form",
+    "autofill-sign-in-form",
+    "agentic-javascript-tools",
+    "agentic-forms",
+    "webmcp",
+    "language-model",
+    "full-session-analytics",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "light-dismiss-a-dialog"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The dark-mode screenshot is visually identical to the light page, and the computed root color-scheme remains “normal” under prefers-color-scheme: dark.",
+      "evidence": "The dark-mode screenshot is visually identical to the light page, and the computed root color-scheme remains “normal” under prefers-color-scheme: dark.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "RUP-1"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Under prefers-reduced-motion: reduce, the autoplay video remained unpaused and advanced from 3.145s to 4.646s in 1.5 seconds.",
+      "evidence": "Under prefers-reduced-motion: reduce, the autoplay video remained unpaused and advanced from 3.145s to 4.646s in 1.5 seconds.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion-video.json"
+      ],
+      "findingIds": [
+        "RUP-2"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "axe-core and screenshot under prefers-contrast: more",
+      "evidence": "Axe plus prefers-contrast screenshot showed the main UI and controls remain visible under higher contrast; the separate base-color contrast defect is recorded under be-inclusive.",
+      "artifacts": [
+        "evidence/home-high-contrast.png",
+        "evidence/axe-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: DOM/CSS inspection found no ::view-transition styles, while representative navigation is conventional full-document replacement.",
+      "evidence": "DOM/CSS inspection found no ::view-transition styles, while representative navigation is conventional full-document replacement.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "NAT-1"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-path feature inventory",
+      "evidence": "No parallax, scrollytelling, or scroll-linked animation was identified on representative paths, so there is no scroll-linked implementation to evaluate.",
+      "reason": "No parallax, scrollytelling, or scroll-linked animation was identified on representative paths, so there is no scroll-linked implementation to evaluate."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM/control inspection",
+      "evidence": "The UI uses native buttons, tabs, links and range input with no custom pointer-gesture surface found; controls preserve platform interaction semantics.",
+      "artifacts": [
+        "evidence/interaction-controls.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Computed DOM evidence shows a fixed 72px nav, but CSS inspection found no scroll-state query or progress treatment across a 9,528px mobile page.",
+      "evidence": "Computed DOM evidence shows a fixed 72px nav, but CSS inspection found no scroll-state query or progress treatment across a 9,528px mobile page.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "NAV-1"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-path feature inventory",
+      "evidence": "No tooltip or edge-sensitive anchored transient UI was present on the representative paths; modal consent uses a dialog instead.",
+      "reason": "No tooltip or edge-sensitive anchored transient UI was present on the representative paths; modal consent uses a dialog instead."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative screenshots and heading profiles",
+      "evidence": "Selected tab states, the API active sidebar, descriptive headings and article table of contents visibly orient users after navigation.",
+      "artifacts": [
+        "evidence/api.png",
+        "evidence/article.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: At 360×800 the banner occupies roughly the bottom third of the first viewport and covers the upload card; it also obscures pricing, API, blog, and signup content in retained screenshots.",
+      "evidence": "At 360×800 the banner occupies roughly the bottom third of the first viewport and covers the upload card; it also obscures pricing, API, blog, and signup content in retained screenshots.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/signup.png"
+      ],
+      "findingIds": [
+        "NOISE-1"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM primitive and control inspection",
+      "evidence": "The settings surface is implemented with a native dialog and has a named Dismiss button; FAQs use accessible button/disclosure controls.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/interaction-controls.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Visual review across representative screenshots",
+      "evidence": "Outside the consent banner, representative pages devote the viewport to the task/content with restrained navigation and content-first cards.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/pricing.png",
+        "evidence/api.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Mobile layout metrics and screenshots",
+      "evidence": "At 360px, layout metrics report scrollWidth=clientWidth=360, no horizontal overflow, and a valid viewport meta tag; mobile screenshots show reflowed layouts.",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/home-mobile.png",
+        "evidence/blog.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-viewport screenshot comparison",
+      "evidence": "Cards, navigation, upload surface and article/list layouts visibly adapt from multi-column desktop to single-column mobile without clipping; no reused component failed at its observed containers.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/pricing.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Control geometry and focus probe",
+      "evidence": "Primary mobile controls are 44–56px high, sample targets are 48px, and programmatic keyboard focus produces a visible 5px blue focus ring.",
+      "artifacts": [
+        "evidence/preferences-controls.json",
+        "evidence/interaction-controls.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "First-viewport visual review",
+      "evidence": "The first viewport states “Remove Image Background” and presents a prominent Upload Image action; pricing/API pages likewise have clear primary actions.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/pricing.png",
+        "evidence/api.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Exercised sample-image flow",
+      "evidence": "Selecting a supplied sample navigated to /upload, produced an edited result and exposed Download/Edit in Canva controls without an account wall.",
+      "artifacts": [
+        "evidence/sample-flow.json",
+        "evidence/sample-result.png"
+      ],
+      "pathIds": [
+        "upload-flow"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Success flow plus 404 recovery test",
+      "evidence": "The completed sample exposes next actions, and an invalid route shows a clear not-found message plus “Go to start page” recovery.",
+      "artifacts": [
+        "evidence/sample-flow.json",
+        "evidence/404.json",
+        "evidence/404.png"
+      ],
+      "pathIds": [
+        "upload-flow",
+        "error-404"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Mobile Lighthouse measured LCP 19.4s, FCP 2.8s, TBT 320ms and performance 0.56; the independent trace measured LCP 8.06s. The LCP video lacked fetchpriority=high.",
+      "evidence": "Mobile Lighthouse measured LCP 19.4s, FCP 2.8s, TBT 320ms and performance 0.56; the independent trace measured LCP 8.06s. The LCP video lacked fetchpriority=high.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace"
+      ],
+      "findingIds": [
+        "PERF-1"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The 360×800 layout observer recorded CLS 0.109 with a late shift at 5.54s; 26 of 27 images omit explicit width/height attributes.",
+      "evidence": "The 360×800 layout observer recorded CLS 0.109 with a late shift at 5.54s; 26 of 27 images omit explicit width/height attributes.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "PERF-2"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Lighthouse measured 320ms TBT; the trace found a 205ms long task and the layout observer recorded a 276ms long task.",
+      "evidence": "Lighthouse measured 320ms TBT; the trace found a 205ms long task and the layout observer recorded a 276ms long task.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "PERF-3"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: HAR evidence records 6,033,124 transferred bytes: 4.47MB images and 1.32MB scripts. A 1.96MB PNG and a 1.50MB PNG dominate transfer; the font stylesheet is parser-blocking.",
+      "evidence": "HAR evidence records 6,033,124 transferred bytes: 4.47MB images and 1.32MB scripts. A 1.96MB PNG and a 1.50MB PNG dominate transfer; the font stylesheet is parser-blocking.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "PERF-4"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Route-split application code and CSS, conditionally load editing and analytics dependencies, and remove duplicate/legacy payload.",
+      "evidence": "Route-split application code and CSS, conditionally load editing and analytics dependencies, and remove duplicate/legacy payload.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [],
+      "findingIds": [
+        "PERF-5"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: axe found critical missing labels on the before/after range input and missing alt text on two meaningful feature images; the image primitive found seven images without alt.",
+      "evidence": "axe found critical missing labels on the before/after range input and missing alt text on two meaningful feature images; the image primitive found seven images without alt.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "A11Y-1"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: axe measured 3.78:1 for “Information & Settings” and “Reject all” against #c1e7c2, below the required 4.5:1.",
+      "evidence": "axe measured 3.78:1 for “Information & Settings” and “Reject all” against #c1e7c2, below the required 4.5:1.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/home-high-contrast.png"
+      ],
+      "findingIds": [
+        "A11Y-2"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: axe and Lighthouse found a focusable “English” button inside aria-hidden=true, producing an accessibility-tree failure.",
+      "evidence": "axe and Lighthouse found a focusable “English” button inside aria-hidden=true, producing an accessibility-tree failure.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "A11Y-3"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Visual review",
+      "evidence": "Representative desktop/mobile screenshots show readable hierarchy, comfortable line lengths on content pages, and no observed text clipping at 360px.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/api.png",
+        "evidence/article.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Viewport, layout, control and media probes",
+      "evidence": "Viewport scaling is permitted, mobile reflow has no horizontal overflow, primary targets meet roughly 44px, and autoplay video is muted with no audio dependency.",
+      "artifacts": [
+        "evidence/platform-seo.json",
+        "evidence/home-layout-mobile.json",
+        "evidence/preferences-controls.json",
+        "evidence/interaction-controls.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse errors-in-console audit",
+      "evidence": "Lighthouse recorded no browser console errors on load.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The images primitive found 26 images without dimensions and Lighthouse reported deprecated -internal-media-controls-overlay-cast-button usage.",
+      "evidence": "The images primitive found 26 images without dimensions and Lighthouse reported deprecated -internal-media-controls-overlay-cast-button usage.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "BEST-1"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Lighthouse could not obtain source maps for the large first-party JavaScript bundles, reducing production diagnosability.",
+      "evidence": "Lighthouse could not obtain source maps for the large first-party JavaScript bundles, reducing production diagnosability.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "BEST-2"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Rendered and raw profile evidence found a title and H1 for /blog but no meta[name=description].",
+      "evidence": "Rendered and raw profile evidence found a title and H1 for /blog but no meta[name=description].",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/profile-blog.json"
+      ],
+      "findingIds": [
+        "SEO-1"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse, DOM and robots inspection",
+      "evidence": "Lighthouse passes crawlable anchors, descriptive link text and robots; viewport meta is present and robots.txt permits Googlebot.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/robots.json",
+        "evidence/platform-seo.json"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Page profiles, robots and sitemap inspection",
+      "evidence": "Public representative pages return index/follow and self-canonical URLs; robots points to a sitemap index. Signup is intentionally noindex.",
+      "artifacts": [
+        "evidence/platform-seo.json",
+        "evidence/profile-pricing.json",
+        "evidence/profile-article.json",
+        "evidence/sitemap.xml"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The article, blog, pricing, and API profiles contain zero JSON-LD blocks. The article has descriptive visible content but no Article schema.",
+      "evidence": "The article, blog, pricing, and API profiles contain zero JSON-LD blocks. The article has descriptive visible content but no Article schema.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/profile-article.json",
+        "evidence/profile-pricing.json"
+      ],
+      "findingIds": [
+        "SEO-2"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Header evidence confirms HTTPS, HSTS, nosniff and X-Frame-Options, but Content-Security-Policy is absent.",
+      "evidence": "Header evidence confirms HTTPS, HSTS, nosniff and X-Frame-Options, but Content-Security-Policy is absent.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "SEC-1"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Tracker evidence found 9 third-party origins including Google Tag Manager and Google Analytics; HAR attributes 36 of 41 requests and 6.01MB to cross-origin hosts.",
+      "evidence": "Tracker evidence found 9 third-party origins including Google Tag Manager and Google Analytics; HAR attributes 36 of 41 requests and 6.01MB to cross-origin hosts.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "SEC-2"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The signup profile exposes password/new-password fields and Facebook/Google login; no WebAuthn/passkey control or credential-registration path was present. Permission prompts were not fired on load.",
+      "evidence": "The signup profile exposes password/new-password fields and Facebook/Google login; no WebAuthn/passkey control or credential-registration path was present. Permission prompts were not fired on load.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/profile-signup.json"
+      ],
+      "findingIds": [
+        "SEC-3"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Headers contain no Permissions-Policy; the first-party consent and session cookies use SameSite=None, although both are Secure and the session is HttpOnly.",
+      "evidence": "Headers contain no Permissions-Policy; the first-party consent and session cookies use SameSite=None, although both are Secure and the session is HttpOnly.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "SEC-4"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: Discoverability measured only 54% word coverage; the crawler screenshot contains only “Remove Image Background / 100% Automatically and” with no upload action, navigation, or supporting content.",
+      "evidence": "Discoverability measured only 54% word coverage; the crawler screenshot contains only “Remove Image Background / 100% Automatically and” with no upload action, navigation, or supporting content.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png",
+        "evidence/discoverability-rendered.png"
+      ],
+      "findingIds": [
+        "RES-1"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Interaction walkthrough and Lighthouse",
+      "evidence": "Native dialog/menu/tab states remained usable in tested viewports, the sample processing route completed, and no console/runtime errors were recorded.",
+      "artifacts": [
+        "evidence/sample-flow.json",
+        "evidence/lighthouse.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "upload-flow"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: A standalone web manifest is present, but after load navigator.serviceWorker.getRegistrations() returned none and Cache Storage was empty.",
+      "evidence": "A standalone web manifest is present, but after load navigator.serviceWorker.getRegistrations() returned none and Cache Storage was empty.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/service-worker.json"
+      ],
+      "findingIds": [
+        "RES-2"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "404 route exercise",
+      "evidence": "A nonexistent URL renders a specific error heading and a direct recovery link instead of a blank shell.",
+      "artifacts": [
+        "evidence/404.json",
+        "evidence/404.png"
+      ],
+      "pathIds": [
+        "error-404"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The language control exposes 13 locales, but stylesheet inspection found zero logical-property rules and five physical left/right rules; html has lang=en but no explicit dir.",
+      "evidence": "The language control exposes 13 locales, but stylesheet inspection found zero logical-property rules and five physical left/right rules; html has lang=en but no explicit dir.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/i18n-agent-resilience.json",
+        "evidence/platform-seo.json"
+      ],
+      "findingIds": [
+        "I18N-1"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Locale control, DOM and pricing visual inspection",
+      "evidence": "The UI exposes 13 language choices, declares lang=en, and pricing rendered locale-appropriate GBP values under the audit locale.",
+      "artifacts": [
+        "evidence/i18n-agent-resilience.json",
+        "evidence/pricing.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-path feature inventory",
+      "evidence": "Representative public paths expose no event scheduling, stored times, or cross-zone temporal task.",
+      "reason": "Representative public paths expose no event scheduling, stored times, or cross-zone temporal task."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Pricing/signup/home visual walkthrough",
+      "evidence": "Pricing shows monthly/yearly amounts, annual totals, free and pay-as-you-go options, a cancellation FAQ, and equal first-layer consent acceptance/rejection.",
+      "artifacts": [
+        "evidence/pricing.png",
+        "evidence/signup.png",
+        "evidence/home-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: After rejecting consent and activating Sign up with all fields empty, the page remained unchanged: no :invalid fields, no alert/error nodes, and no focused invalid control.",
+      "evidence": "After rejecting consent and activating Sign up with all fields empty, the page remained unchanged: no :invalid fields, no alert/error nodes, and no focused invalid control.",
+      "pathIds": [
+        "signup"
+      ],
+      "artifacts": [
+        "evidence/signup-validation-2.json",
+        "evidence/signup-invalid-2.png"
+      ],
+      "findingIds": [
+        "TRUST-1"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Signup DOM profile",
+      "evidence": "Signup fields have explicit labels and correct email/new-password autocomplete tokens; consent and newsletter choices are separate.",
+      "artifacts": [
+        "evidence/profile-signup.json"
+      ],
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Pricing and signup walkthrough",
+      "evidence": "Plans show per-month and annual totals, “Most Popular” is identified without hiding alternatives, cancellation is findable, and account consent is explicit and optional newsletter consent is separate.",
+      "artifacts": [
+        "evidence/pricing.png",
+        "evidence/signup.png"
+      ],
+      "pathIds": [
+        "pricing",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The image audit found 8 oversized images, 9 without responsive sources, 21 legacy-format assets and 7 eager below-fold images; HAR shows 4.47MB image transfer.",
+      "evidence": "The image audit found 8 oversized images, 9 without responsive sources, 21 legacy-format assets and 7 eager below-fold images; HAR shows 4.47MB image transfer.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "SUS-1"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The muted hero video autoplays without controls and continued advancing under reduced motion; this spends network and decode work before user intent.",
+      "evidence": "The muted hero video autoplays without controls and continued advancing under reduced motion; this spends network and decode work before user intent.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion-video.json",
+        "evidence/interaction-controls.json"
+      ],
+      "findingIds": [
+        "SUS-2"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: HAR records 6.01MB cross-origin transfer, including multi-megabyte images, autoplay video requests, and 176KB Google Tag Manager before interaction.",
+      "evidence": "HAR records 6.01MB cross-origin transfer, including multi-megabyte images, autoplay video requests, and 176KB Google Tag Manager before interaction.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "SUS-3"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct evidence review: The page has an upload form but no WebMCP registration, agentic form metadata, schema tool hints, or equivalent structured capability.",
+      "evidence": "The page has an upload form but no WebMCP registration, agentic form metadata, schema tool hints, or equivalent structured capability.",
+      "pathIds": [
+        "home",
+        "pricing",
+        "api",
+        "blog",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/i18n-agent-resilience.json"
+      ],
+      "findingIds": [
+        "AGENT-1"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-path feature inventory",
+      "evidence": "Specialised background segmentation is a server/product capability; a generic on-device language model or summariser would not improve the audited task.",
+      "reason": "Specialised background segmentation is a server/product capability; a generic on-device language model or summariser would not improve the audited task."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/post heap-summary comparison",
+      "evidence": "After 10 open/close menu cycles, heap self size rose only 492KB (1.4%) and node count 0.6%, with stable dominant constructor counts; no unbounded pattern was evidenced.",
+      "artifacts": [
+        "evidence/heap-baseline",
+        "evidence/heap-post-menu"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap summary totals",
+      "evidence": "The loaded landing page heap was 34.6MB self-size; post-interaction was 35.1MB, proportionate to this media-rich Vue application.",
+      "artifacts": [
+        "evidence/heap-baseline",
+        "evidence/heap-post-menu"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Before/after constructor comparison",
+      "evidence": "Repeated menu interaction did not create a material constructor/closure increase (closures +100, Sets +1); summaries exposed no growing Detached* population.",
+      "artifacts": [
+        "evidence/heap-baseline",
+        "evidence/heap-post-menu"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "RUP-1",
+        "RUP-2"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "NAT-1"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "NAV-1"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "NOISE-1"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "PERF-1",
+        "PERF-2",
+        "PERF-3",
+        "PERF-4",
+        "PERF-5"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "A11Y-1",
+        "A11Y-2",
+        "A11Y-3"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "BEST-1",
+        "BEST-2"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "SEO-1",
+        "SEO-2"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "SEC-1",
+        "SEC-2",
+        "SEC-3",
+        "SEC-4"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "RES-1",
+        "RES-2"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "I18N-1"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TRUST-1"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "SUS-1",
+        "SUS-2",
+        "SUS-3"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "AGENT-1"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and primary uploader entry; covers first impression, responsive layout, preferences, privacy, performance and global chrome.",
+      "url": "https://www.remove.bg",
+      "conditions": [
+        "1440x1000",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "upload-flow",
+      "description": "Primary journey using a supplied sample image through processing to result/download controls.",
+      "url": "https://www.remove.bg/upload",
+      "conditions": [
+        "360x800",
+        "sample-image interaction"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "pricing",
+      "description": "Commercial/pricing archetype, plan comparison, consent and cancellation discoverability.",
+      "url": "https://www.remove.bg/pricing",
+      "conditions": [
+        "1440x1000"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "api",
+      "description": "Developer documentation/detail archetype with in-page navigation and primary API-key action.",
+      "url": "https://www.remove.bg/api",
+      "conditions": [
+        "1440x1000"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "blog",
+      "description": "Content listing/index archetype and newsletter surface.",
+      "url": "https://www.remove.bg/blog",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Long-form content/detail archetype with table of contents and comment form.",
+      "url": "https://www.remove.bg/b/remove-the-background-in-gimp",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "signup",
+      "description": "Account creation form, consent, labels, autocomplete and invalid submission.",
+      "url": "https://accounts.kaleido.ai/users/sign_up",
+      "conditions": [
+        "360x800",
+        "empty submission"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error-404",
+      "description": "HTTP/navigation recovery state for a nonexistent route.",
+      "url": "https://www.remove.bg/definitely-not-a-real-route-web-uplift",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "RUP-1",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The site ignores the user’s dark-color preference.",
+      "evidence": "The dark-mode screenshot is visually identical to the light page, and the computed root color-scheme remains “normal” under prefers-color-scheme: dark.",
+      "suggestedFix": "Declare color-scheme and provide preference-driven dark surface, text, control, image, and browser-UI colors.",
+      "artifacts": [
+        "evidence/home-dark.png"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "RUP-2",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The hero video keeps autoplaying when reduced motion is requested.",
+      "evidence": "Under prefers-reduced-motion: reduce, the autoplay video remained unpaused and advanced from 3.145s to 4.646s in 1.5 seconds.",
+      "suggestedFix": "Replace autoplay motion with the poster under reduced motion, or pause it and offer an explicit play control.",
+      "artifacts": [
+        "evidence/reduced-motion-video.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "NAT-1",
+      "severity": "low",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "cross-document-transitions",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Navigation does not expose a View Transitions treatment.",
+      "evidence": "DOM/CSS inspection found no ::view-transition styles, while representative navigation is conventional full-document replacement.",
+      "suggestedFix": "Add a progressively enhanced cross-document View Transition for stable shared chrome and route content, respecting reduced motion.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "NAV-1",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scroll-position-aware-elements",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The fixed header does not communicate scroll state.",
+      "evidence": "Computed DOM evidence shows a fixed 72px nav, but CSS inspection found no scroll-state query or progress treatment across a 9,528px mobile page.",
+      "suggestedFix": "Use a scroll-state container query or a lightweight progress/shrinking treatment so long pages preserve context without consuming unnecessary space.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-layout-mobile.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "NOISE-1",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The cookie banner obscures the primary task on load.",
+      "evidence": "At 360×800 the banner occupies roughly the bottom third of the first viewport and covers the upload card; it also obscures pricing, API, blog, and signup content in retained screenshots.",
+      "suggestedFix": "Use a compact, non-obscuring consent surface with equal first-layer choices, preserve settings access, and avoid covering the primary action.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/signup.png"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "PERF-1",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Largest Contentful Paint is far outside the good range.",
+      "evidence": "Mobile Lighthouse measured LCP 19.4s, FCP 2.8s, TBT 320ms and performance 0.56; the independent trace measured LCP 8.06s. The LCP video lacked fetchpriority=high.",
+      "suggestedFix": "Prioritise the LCP poster/video discovery, reduce its bytes, add an appropriate fetch-priority hint, and defer non-critical work.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "PERF-2",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The mobile page shifts after initial rendering.",
+      "evidence": "The 360×800 layout observer recorded CLS 0.109 with a late shift at 5.54s; 26 of 27 images omit explicit width/height attributes.",
+      "suggestedFix": "Reserve image/media space with width/height or aspect-ratio and stabilise late consent/media insertion.",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/images.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "PERF-3",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Main-thread work creates avoidable blocking.",
+      "evidence": "Lighthouse measured 320ms TBT; the trace found a 205ms long task and the layout observer recorded a 276ms long task.",
+      "suggestedFix": "Profile the long tasks, split work into smaller scheduled tasks, and defer code unrelated to the first interaction.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-layout-mobile.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "PERF-4",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The landing page transfers a disproportionate 6.03MB.",
+      "evidence": "HAR evidence records 6,033,124 transferred bytes: 4.47MB images and 1.32MB scripts. A 1.96MB PNG and a 1.50MB PNG dominate transfer; the font stylesheet is parser-blocking.",
+      "suggestedFix": "Serve correctly sized AVIF/WebP responsive assets, avoid eager below-fold media, and shorten the critical font/resource chain.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "PERF-5",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "Large bundles contain mostly unused code.",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Lighthouse estimates 791KiB unused JavaScript and 107KiB unused CSS; the main 943KB script is 65% unused and three stylesheets are 96–100% unused.",
+      "evidence": "Route-split application code and CSS, conditionally load editing and analytics dependencies, and remove duplicate/legacy payload.",
+      "suggestedFix": [
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "artifacts": [],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "A11Y-1",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Core controls and images have accessibility semantics defects.",
+      "evidence": "axe found critical missing labels on the before/after range input and missing alt text on two meaningful feature images; the image primitive found seven images without alt.",
+      "suggestedFix": "Give the range an accessible name and state, and add meaningful alt text or explicit presentation semantics as appropriate.",
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/images.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "A11Y-2",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Cookie controls fail WCAG AA contrast.",
+      "evidence": "axe measured 3.78:1 for “Information & Settings” and “Reject all” against #c1e7c2, below the required 4.5:1.",
+      "suggestedFix": "Darken the consent text/control color or adjust its surface so normal text reaches at least 4.5:1.",
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/home-high-contrast.png"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "A11Y-3",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "A hidden language control remains focusable.",
+      "evidence": "axe and Lighthouse found a focusable “English” button inside aria-hidden=true, producing an accessibility-tree failure.",
+      "suggestedFix": "Remove hidden controls from the tab order, use inert/hidden for inactive UI, and restore focus only when the control becomes visible.",
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "BEST-1",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Image sizing and a deprecated media technique weaken platform hygiene.",
+      "evidence": "The images primitive found 26 images without dimensions and Lighthouse reported deprecated -internal-media-controls-overlay-cast-button usage.",
+      "suggestedFix": "Emit intrinsic image dimensions and replace the deprecated selector with disableRemotePlayback where needed.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "BEST-2",
+      "severity": "low",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Large first-party bundles lack usable source maps.",
+      "evidence": "Lighthouse could not obtain source maps for the large first-party JavaScript bundles, reducing production diagnosability.",
+      "suggestedFix": "Publish correct production source maps to an access-controlled error-monitoring path or make public maps available if policy permits.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SEO-1",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The blog listing has no meta description.",
+      "evidence": "Rendered and raw profile evidence found a title and H1 for /blog but no meta[name=description].",
+      "suggestedFix": "Add a unique concise description for the blog index and verify all representative templates emit one server-side.",
+      "artifacts": [
+        "evidence/profile-blog.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SEO-2",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Rich pages omit structured entity metadata.",
+      "evidence": "The article, blog, pricing, and API profiles contain zero JSON-LD blocks. The article has descriptive visible content but no Article schema.",
+      "suggestedFix": "Add accurate JSON-LD for Article, Organization/WebSite, and applicable Product/Offer entities, matching visible content.",
+      "artifacts": [
+        "evidence/profile-article.json",
+        "evidence/profile-pricing.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SEC-1",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The main document has no Content-Security-Policy.",
+      "evidence": "Header evidence confirms HTTPS, HSTS, nosniff and X-Frame-Options, but Content-Security-Policy is absent.",
+      "suggestedFix": "Deploy a nonce/hash-based CSP, start in Report-Only, then enforce least-privilege script/style/connect/frame policies.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SEC-2",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The default page load has a broad third-party and analytics footprint.",
+      "evidence": "Tracker evidence found 9 third-party origins including Google Tag Manager and Google Analytics; HAR attributes 36 of 41 requests and 6.01MB to cross-origin hosts.",
+      "suggestedFix": "Reduce vendors, self-host stable assets where practical, defer analytics until allowed/needed, and batch minimised events.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SEC-3",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkey-registration",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Authentication offers passwords and federated login but no visible passkey path.",
+      "evidence": "The signup profile exposes password/new-password fields and Facebook/Google login; no WebAuthn/passkey control or credential-registration path was present. Permission prompts were not fired on load.",
+      "suggestedFix": "Offer passkey registration and sign-in alongside recovery-safe existing methods, with reauthentication for sensitive account actions.",
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/profile-signup.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SEC-4",
+      "severity": "low",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Permissions Policy is absent and cookie scope is broader than necessary.",
+      "evidence": "Headers contain no Permissions-Policy; the first-party consent and session cookies use SameSite=None, although both are Secure and the session is HttpOnly.",
+      "suggestedFix": "Set a restrictive Permissions-Policy and use Lax/Strict SameSite where cross-site flows do not require None.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "RES-1",
+      "severity": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "stabilize-reactive-state",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The no-JavaScript experience loses the core task and most content.",
+      "evidence": "Discoverability measured only 54% word coverage; the crawler screenshot contains only “Remove Image Background / 100% Automatically and” with no upload action, navigation, or supporting content.",
+      "suggestedFix": "Server-render the primary uploader shell, navigation and meaningful content, then enhance processing and editing with JavaScript.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png",
+        "evidence/discoverability-rendered.png"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "RES-2",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The app advertises installability but has no offline worker or cache.",
+      "evidence": "A standalone web manifest is present, but after load navigator.serviceWorker.getRegistrations() returned none and Cache Storage was empty.",
+      "suggestedFix": "Register a service worker with a small offline shell/fallback and intentionally cache only safe static resources.",
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/service-worker.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "I18N-1",
+      "severity": "medium",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The multilingual UI is not built with writing-mode resilient CSS.",
+      "evidence": "The language control exposes 13 locales, but stylesheet inspection found zero logical-property rules and five physical left/right rules; html has lang=en but no explicit dir.",
+      "suggestedFix": "Set dir with locale, replace physical layout properties with logical equivalents, and test an RTL locale plus long translated labels.",
+      "artifacts": [
+        "evidence/i18n-agent-resilience.json",
+        "evidence/platform-seo.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "TRUST-1",
+      "severity": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "forms",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Empty signup submission fails without visible or announced feedback.",
+      "evidence": "After rejecting consent and activating Sign up with all fields empty, the page remained unchanged: no :invalid fields, no alert/error nodes, and no focused invalid control.",
+      "suggestedFix": "Use native required constraints or post-interaction validation, show field-specific guidance, move focus to the first error, and announce a summary through a live region.",
+      "artifacts": [
+        "evidence/signup-validation-2.json",
+        "evidence/signup-invalid-2.png"
+      ],
+      "pathId": "signup",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SUS-1",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Decorative and sample media are substantially over-delivered.",
+      "evidence": "The image audit found 8 oversized images, 9 without responsive sources, 21 legacy-format assets and 7 eager below-fold images; HAR shows 4.47MB image transfer.",
+      "suggestedFix": "Generate responsive AVIF/WebP variants, use sizes/srcset, lazy-load below-fold media, and avoid multi-megabyte PNGs for small rendered elements.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SUS-2",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Background media continues despite an explicit reduced-motion preference.",
+      "evidence": "The muted hero video autoplays without controls and continued advancing under reduced motion; this spends network and decode work before user intent.",
+      "suggestedFix": "Use a static poster by default under reduced motion/data-saving conditions and start media only when visible and useful.",
+      "artifacts": [
+        "evidence/reduced-motion-video.json",
+        "evidence/interaction-controls.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "SUS-3",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "Third-party and media cost is disproportionate to the landing task.",
+      "evidence": "HAR records 6.01MB cross-origin transfer, including multi-megabyte images, autoplay video requests, and 176KB Google Tag Manager before interaction.",
+      "suggestedFix": "Set an explicit route budget, defer nonessential third parties/media, and load marketing proof and ratings near viewport entry.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    },
+    {
+      "id": "AGENT-1",
+      "severity": "low",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "modern-web-guidance",
+      "summary": "The background-removal capability is not exposed as a structured agent tool.",
+      "evidence": "The page has an upload form but no WebMCP registration, agentic form metadata, schema tool hints, or equivalent structured capability.",
+      "suggestedFix": "Offer a narrowly scoped agent tool that declares accepted image inputs, consent, cost, result format, and confirmation boundaries.",
+      "artifacts": [
+        "evidence/i18n-agent-resilience.json"
+      ],
+      "pathId": "home",
+      "confidence": "high",
+      "effort": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Fix LCP and route payload",
+      "priority": 1,
+      "findingIds": [
+        "PERF-1",
+        "PERF-3",
+        "PERF-4",
+        "PERF-5",
+        "SUS-1",
+        "SUS-3"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Restore accessible names, contrast and focus containment",
+      "priority": 2,
+      "findingIds": [
+        "A11Y-1",
+        "A11Y-2",
+        "A11Y-3"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Add humane, announced signup validation",
+      "priority": 3,
+      "findingIds": [
+        "TRUST-1"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Progressively render the core uploader and add offline fallback",
+      "priority": 4,
+      "findingIds": [
+        "RES-1",
+        "RES-2"
+      ],
+      "guidanceId": "stabilize-reactive-state",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Deploy CSP and tighten browser policies",
+      "priority": 5,
+      "findingIds": [
+        "SEC-1",
+        "SEC-4"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Respect dark mode and reduced motion",
+      "priority": 6,
+      "findingIds": [
+        "RUP-1",
+        "RUP-2",
+        "SUS-2"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Reduce and defer third-party tracking",
+      "priority": 7,
+      "findingIds": [
+        "SEC-2"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Make consent compact and non-obscuring",
+      "priority": 8,
+      "findingIds": [
+        "NOISE-1"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Add complete metadata to blog and rich pages",
+      "priority": 9,
+      "findingIds": [
+        "SEO-1",
+        "SEO-2"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Use logical CSS and verify RTL",
+      "priority": 10,
+      "findingIds": [
+        "I18N-1"
+      ],
+      "guidanceId": "translator",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Add passkey authentication",
+      "priority": 11,
+      "findingIds": [
+        "SEC-3"
+      ],
+      "guidanceId": "passkey-registration",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Expose a safe structured background-removal tool",
+      "priority": 12,
+      "findingIds": [
+        "AGENT-1"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "T13",
+      "title": "Improve route and scroll-state continuity",
+      "priority": 13,
+      "findingIds": [
+        "NAT-1",
+        "NAV-1"
+      ],
+      "guidanceId": "cross-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T14",
+      "title": "Clean image dimensions, deprecated media CSS and source maps",
+      "priority": 14,
+      "findingIds": [
+        "BEST-1",
+        "BEST-2"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage, desktop, full page"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage, 360×800, full page"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under prefers-color-scheme: dark",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "RUP-1"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Homepage under prefers-contrast: more",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "A11Y-2"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/pricing.png",
+      "caption": "Pricing archetype"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/api.png",
+      "caption": "API documentation archetype"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/blog.png",
+      "caption": "Blog listing at 360px"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article.png",
+      "caption": "Long-form article at 360px"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/signup.png",
+      "caption": "Signup flow at 360px"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/sample-result.png",
+      "caption": "Processed sample flow result"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/signup-invalid-2.png",
+      "caption": "Signup after empty submission",
+      "findingIds": [
+        "TRUST-1"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/404.png",
+      "caption": "Recoverable 404 page"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and computed styles"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile overflow, CLS and long tasks",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "PERF-2",
+        "PERF-3"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace",
+      "caption": "DevTools performance trace"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace timing summary",
+      "findingIds": [
+        "PERF-1",
+        "PERF-3"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Homepage network archive"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network totals, third parties and offenders",
+      "findingIds": [
+        "PERF-4",
+        "SEC-2",
+        "SUS-1",
+        "SUS-3"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered content",
+      "findingIds": [
+        "RES-1"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "No-JS crawler view",
+      "findingIds": [
+        "RES-1"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "findingIds": [
+        "RES-1"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report"
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse summary"
+    },
+    {
+      "type": "other",
+      "path": "evidence/axe-home.json",
+      "caption": "axe-core accessibility results"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers"
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie posture"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Tracker origins"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline",
+      "caption": "Baseline heap summary"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-menu",
+      "caption": "Heap after 10 menu cycles"
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-video.json",
+      "caption": "Video progression under reduced motion"
+    },
+    {
+      "type": "other",
+      "path": "evidence/service-worker.json",
+      "caption": "Service worker/cache registration probe"
+    },
+    {
+      "type": "other",
+      "path": "evidence/signup-validation-2.json",
+      "caption": "Empty signup validation state"
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic check manifest"
+    },
+    {
+      "type": "other",
+      "path": "evidence/interaction-controls.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-controls.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/sample-flow.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/404.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-seo.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/profile-blog.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/profile-pricing.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/profile-article.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/profile-signup.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/manifest.json",
+      "caption": "Supporting audit evidence"
+    },
+    {
+      "type": "other",
+      "path": "evidence/i18n-agent-resilience.json",
+      "caption": "Supporting audit evidence"
+    }
+  ],
+  "budget": {
+    "pathCount": 8,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T20-05-54-353Z"
+}

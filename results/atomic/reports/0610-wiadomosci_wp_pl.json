@@ -1,0 +1,2274 @@
+{
+  "url": "https://wiadomosci.wp.pl/",
+  "auditedAt": "2026-07-21T22:19:47.403Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of representative public news templates and the initial consent journey.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "React-like server-rendered MPA/hybrid (data-react-helmet markers)",
+    "notes": "Polish public news site with SSR content, client hydration, consent gating, service worker and web manifest."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "discoverability",
+    "har",
+    "trace",
+    "lighthouse",
+    "heap-summary",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "modern-web-guidance"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "performance",
+    "html",
+    "css",
+    "security",
+    "privacy",
+    "forms",
+    "optimize-image-priority",
+    "efficient-background-processing",
+    "navigation-drawer",
+    "passkeys",
+    "translator",
+    "webmcp",
+    "manage-recurring-intervals",
+    "same-document-transitions",
+    "declarative-dialog-popover-control",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "optimize-script-priority",
+    "validate-input-after-interaction",
+    "agentic-forms"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Light and prefers-color-scheme:dark screenshots are byte-identical and retain a white consent surface even though the underlying site exposes a manual dark-mode control.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F004"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Reduced-motion emulation reported no active animations; no auto-advancing media was observed.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Lighthouse accessibility did not report color-contrast failures and the consent/content screenshots remain legible.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "DOM and CSS probes found no View Transition usage, while the representative flow uses conventional full-document links between the listing and article.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json",
+        "evidence/article-structured-probe.json"
+      ],
+      "findingIds": [
+        "F005"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "No scroll-linked animation or JavaScript-driven parallax was observed in CSS/animation probes or long-page captures.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Representative reading, navigation and menu controls use ordinary browser scrolling/clicking; no custom pointer gesture that fights platform behavior was observed.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The 10,834 px homepage screenshot shows a long feed, while DOM/CSS inspection found no scroll-state query or progress affordance.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-after-consent-full.png",
+        "evidence/home-content-dom.json"
+      ],
+      "findingIds": [
+        "F006"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative path recon",
+      "evidence": "No edge-attached tooltip or contextual popover was present on the representative news, article, latest, or video surfaces.",
+      "reason": "No edge-attached tooltip or contextual popover was present on the representative news, article, latest, or video surfaces.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Breadcrumbs, one H1, section headings, descriptive links and clear article hierarchy guide attention across listing and article paths.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/article-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Desktop and mobile screenshots show the consent dialog occupying the usable viewport before any article or headline can be read.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F001"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The structured probe found a DIV role=dialog for navigation and LABEL role=button controls; Lighthouse also flagged the menu label role as inappropriate.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F007"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The full-page capture shows repeated WP placeholder blocks, dense recommendation modules, and a large red promotional panel interleaved with headlines.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-after-consent-full.png"
+      ],
+      "findingIds": [
+        "F008"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "At a 360×800 viewport the layout primitive measured scrollWidth 964 px versus clientWidth 360 px, with horizontalOverflowPx 604. The mobile screenshot is visibly clipped.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F003"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The CSS probe counted zero container rules across a homepage that reuses news cards in hero, narrow-column, and grid contexts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json",
+        "evidence/home-after-consent-full.png"
+      ],
+      "findingIds": [
+        "F009"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse found footer links with safe clickable height about 20.8 px, below the 24 px audit floor, and reported two target-size failures.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F010"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The title, H1 and headline hierarchy clearly identify a Polish news service and make article links prominent.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The homepage-to-article walkthrough cannot reach content until the user accepts tracking or continues into a paid rejection path.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/consent-after-reject.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F011"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The tested 404 has a clear Polish explanation, countdown, pause control, destination link and alternative headlines.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse measured LCP 9,193 ms, FCP 5,554 ms and performance score 0.56; the separate trace measured LCP 3,045 ms and FCP 1,927 ms, still above the 2.5 s good LCP threshold.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "findingIds": [
+        "F012"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The layout observer measured CLS 0 with no recorded shifts during the mobile observation window.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The trace recorded two long tasks, longest 165 ms and TBT 126 ms; Lighthouse reported 212 ms TBT and 40.7 ms forced reflow in the main bundle.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F013"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse says fetchpriority=high is absent on the discoverable eager LCP image; the longest network dependency chain is 2,719 ms. HAR also identified a parser-inserted high-priority script candidate.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F014"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse estimated 226,505 bytes of unused JavaScript with up to 1,630 ms savings; HAR recorded 605,982 transferred script bytes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F015"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse found a UL with a direct SPAN child and an inappropriate role=button on a LABEL; the image audit found 5 images without alt text.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F016"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Lighthouse accessibility found no contrast-rule failure; screenshots show high-contrast text and controls.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse agent accessibility reported the menu LABEL role=button as an inappropriate role, and the list audit found invalid child structure.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F017"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Article typography uses clear hierarchy and comfortable body width; no clipping was observed in the crawler article view.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/article-discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse inspected a viewport declaration containing maximum-scale=1 and user-scalable=no, which prevents low-vision users from zooming.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F018"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Lighthouse best-practices scored 1.0 and did not report console errors or uncaught exceptions.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The image audit found 40 of 100 images without both dimensions; Lighthouse found invalid UL child markup.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F019"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Lighthouse reported three BFCache blockers, including cache-control:no-store on the main resource and a cookie-modifying no-store response.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F020"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Home and article probes found unique descriptive titles and non-empty meta descriptions.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/article-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Rendered links have real href values, viewport metadata is present, and robots permits public pages.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "/sitemap.xml returned 404. Discoverability found the article title and description in raw HTML but no raw H1, with 67% rendered-word coverage.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/robots-sitemap-manifest.json",
+        "evidence/article-discoverability.json",
+        "evidence/article-discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F021"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The article exposes matching Open Graph metadata and NewsArticle JSON-LD with headline, author, dates and image.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/article-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Cookie audit found STabid without Secure and all 10 observed cookies using SameSite=None; several identifiers last 390–400 days.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F022"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Tracker evidence observed 8 third-party origins and DoubleClick on initial load; HAR attributes 69 requests and 667,124 transferred bytes to third parties.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F023"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "No browser permission prompt fired on load; sign-in is delegated to a distinct SSO endpoint rather than embedded in the reading flow.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Headers evidence found no HSTS or Permissions-Policy; Referrer-Policy is the legacy no-referrer-when-downgrade value. CSP, nosniff and frame protection are present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F024"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Raw HTML is not a JS shell and preserves 72% of home and 67% of article content words plus titles/descriptions.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/article-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The menu survived ten open/close cycles and returned to unchecked state; no cut-off overlay or runtime dead end appeared after consent.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/memory-metrics-post.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "A valid manifest and active /sw.js registration exist, but Cache Storage returned no cache names after the page loaded.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/pwa-probe.json",
+        "evidence/robots-sitemap-manifest.json"
+      ],
+      "findingIds": [
+        "F025"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The tested 404 explains the failure, offers pause/navigation controls and supplies alternative content links.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The document declares lang=pl and the manifest declares pl-PL/ltr; reading order is correct on audited pages.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/home-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "Article JSON-LD stores an ISO timestamp while visible publication text is localized in Polish.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/article-structured-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative path recon",
+      "evidence": "The audited public news surfaces display publication timestamps but expose no scheduling or cross-time-zone event flow requiring user-entered time-zone coordination.",
+      "reason": "The audited public news surfaces display publication timestamps but expose no scheduling or cross-time-zone event flow requiring user-entered time-zone coordination.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "The active consent walkthrough changed “Odrzucam” into two choices: “Nie chcę płacić, jednak akceptuję zgody” or “Nadal odrzucam, chcę zapłacić”. Core content remains gated.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/consent-after-reject.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F002"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative path recon",
+      "evidence": "No user-editable form was present in the representative public news-reading paths.",
+      "reason": "No user-editable form was present in the representative public news-reading paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative path recon",
+      "evidence": "No address, payment, sign-in credential, or other editable input was present in the audited public reading paths; sign-in leaves for a separate SSO journey.",
+      "reason": "No address, payment, sign-in credential, or other editable input was present in the audited public reading paths; sign-in leaves for a separate SSO journey.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative path recon",
+      "evidence": "Checkout, subscription completion, cancellation, and account management were not part of the public news-reading scope; the observed coercive consent choice is recorded under no-dark-patterns.",
+      "reason": "Checkout, subscription completion, cancellation, and account management were not part of the public news-reading scope; the observed coercive consent choice is recorded under no-dark-patterns.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Of 100 images, 61 lacked srcset and 56 below-fold images lacked lazy loading; 40 lacked complete dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F026"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "HAR loaded ad/video SDKs and 69 third-party requests on initial load; Lighthouse found 226 KB unused JavaScript and forced reflow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F027"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "HAR measured 667,124 third-party bytes out of 1,320,746 total; IMA SDK alone transferred 154,248 bytes before a video was requested.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F028"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Active walkthrough plus retained visual/objective evidence",
+      "evidence": "Robots explicitly blocks GPTBot and CCBot while allowing OAI-SearchBot and Perplexity; Lighthouse agentic browsing score is 0.5 and reports a malformed accessibility tree. No structured WebMCP capability was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/robots-sitemap-manifest.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "F029"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative path recon",
+      "evidence": "No user-facing summarisation or language-model task was offered, so on-device inference is not applicable to the current interface.",
+      "reason": "No user-facing summarisation or language-model task was offered, so on-device inference is not applicable to the current interface.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "After ten menu open/close cycles heap self-size rose only 301,751 bytes (0.80%) and heap node count 3,346 (0.48%) versus a same-content baseline, consistent with bounded warm-up rather than unbounded growth.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/heap-content-baseline.json",
+        "evidence/heap-post-menu.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "After consent the page had 1,851 live DOM elements and about 38 MB heap self-size, proportionate to a media-rich news homepage.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/heap-content-baseline.json",
+        "evidence/memory-metrics-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative DOM, screenshot, Lighthouse or active-flow inspection",
+      "evidence": "The repeated-interaction heap summaries showed closure count changing only 33,487 to 33,528 and no Detached* constructor among the dominant populations.",
+      "pathIds": [
+        "home",
+        "article",
+        "latest",
+        "video"
+      ],
+      "artifacts": [
+        "evidence/heap-content-baseline.json",
+        "evidence/heap-post-menu.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F004"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F005"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F006"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F001",
+        "F007",
+        "F008"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F003",
+        "F009",
+        "F010"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F011"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F012",
+        "F013",
+        "F014",
+        "F015"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F016",
+        "F017",
+        "F018"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F019",
+        "F020"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F021"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F022",
+        "F023",
+        "F024"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F025"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F002"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F026",
+        "F027",
+        "F028"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F029"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and initial consent journey; represents primary news discovery, navigation, preference and privacy surfaces.",
+      "url": "https://wiadomosci.wp.pl/",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus probe"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Representative NewsArticle from a prominent homepage link; covers reading, metadata and crawler visibility.",
+      "url": "https://wiadomosci.wp.pl/wrze-w-kijowie-tysiace-ludzi-na-ulicach-przeciwko-decyzji-zelenskiego-7308028075038720a",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "JavaScript on/off"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "latest",
+      "description": "Latest-news listing; represents chronological index/feed template.",
+      "url": "https://wiadomosci.wp.pl/najnowsze",
+      "conditions": [
+        "desktop full page"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "video",
+      "description": "Video listing; represents media-heavy template and third-party/media risk.",
+      "url": "https://wiadomosci.wp.pl/wideo",
+      "conditions": [
+        "desktop full page"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Deliberately invalid route; covers HTTP failure messaging and recovery.",
+      "url": "https://wiadomosci.wp.pl/definitely-not-a-real-page-web-uplift",
+      "conditions": [
+        "desktop",
+        "post-consent"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F001",
+      "severity": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "A full-viewport consent wall hides all news on first load.",
+      "evidence": "Desktop and mobile screenshots show the consent dialog occupying the usable viewport before any article or headline can be read.",
+      "suggestedFix": "Replace the blocking wall with a compact, non-modal privacy notice and defer optional processing until an explicit choice.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F002",
+      "severity": "critical",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "privacy",
+      "confidence": "high",
+      "summary": "Rejecting tracking leads to a pay-or-consent choice rather than a straightforward refusal.",
+      "evidence": "The active consent walkthrough changed “Odrzucam” into two choices: “Nie chcę płacić, jednak akceptuję zgody” or “Nadal odrzucam, chcę zapłacić”. Core content remains gated.",
+      "suggestedFix": "Offer an equally prominent, free “reject optional processing” path; separate essential access, subscription value, and tracking consent.",
+      "artifacts": [
+        "evidence/consent-after-reject.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F003",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "css",
+      "confidence": "high",
+      "summary": "The narrow layout overflows by 604 px.",
+      "evidence": "At a 360×800 viewport the layout primitive measured scrollWidth 964 px versus clientWidth 360 px, with horizontalOverflowPx 604. The mobile screenshot is visibly clipped.",
+      "suggestedFix": "Remove fixed desktop-width constraints from the consent and page shell; use intrinsic sizing, min-inline-size:0, and responsive max-inline-size:100%.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F004",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "confidence": "high",
+      "summary": "The first-load privacy UI ignores the requested dark color scheme.",
+      "evidence": "Light and prefers-color-scheme:dark screenshots are byte-identical and retain a white consent surface even though the underlying site exposes a manual dark-mode control.",
+      "suggestedFix": "Apply color-scheme and preference-driven surface/text tokens to the consent layer as well as the main site.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F005",
+      "severity": "low",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "confidence": "medium",
+      "summary": "Navigation changes are abrupt rather than transition-guided.",
+      "evidence": "DOM and CSS probes found no View Transition usage, while the representative flow uses conventional full-document links between the listing and article.",
+      "suggestedFix": "Use cross-document View Transitions for same-origin listing-to-article navigation, with a reduced-motion fallback.",
+      "artifacts": [
+        "evidence/home-structured-probe.json",
+        "evidence/article-structured-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "article",
+      "url": "https://wiadomosci.wp.pl/wrze-w-kijowie-tysiace-ludzi-na-ulicach-przeciwko-decyzji-zelenskiego-7308028075038720a"
+    },
+    {
+      "id": "F006",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "navigation-drawer",
+      "confidence": "medium",
+      "summary": "Long pages provide no visible scroll progress or scroll-state-aware chrome.",
+      "evidence": "The 10,834 px homepage screenshot shows a long feed, while DOM/CSS inspection found no scroll-state query or progress affordance.",
+      "suggestedFix": "Add a lightweight declarative reading/feed progress affordance and adapt sticky chrome using scroll-state queries where supported.",
+      "artifacts": [
+        "evidence/home-after-consent-full.png",
+        "evidence/home-content-dom.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F007",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "confidence": "high",
+      "summary": "Overlays use custom role-based elements rather than native dialog/popover primitives.",
+      "evidence": "The structured probe found a DIV role=dialog for navigation and LABEL role=button controls; Lighthouse also flagged the menu label role as inappropriate.",
+      "suggestedFix": "Use button plus popover for the navigation drawer and dialog for truly modal consent, preserving native focus and dismissal behavior.",
+      "artifacts": [
+        "evidence/home-structured-probe.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F008",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "html",
+      "confidence": "medium",
+      "summary": "Repeated promotional and placeholder modules dilute the news feed.",
+      "evidence": "The full-page capture shows repeated WP placeholder blocks, dense recommendation modules, and a large red promotional panel interleaved with headlines.",
+      "suggestedFix": "Reserve the primary feed for editorial content, collapse empty ad slots, and defer secondary recommendation modules until requested or near viewport.",
+      "artifacts": [
+        "evidence/home-after-consent-full.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F009",
+      "severity": "low",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "confidence": "medium",
+      "summary": "Reusable cards rely on viewport styling only.",
+      "evidence": "The CSS probe counted zero container rules across a homepage that reuses news cards in hero, narrow-column, and grid contexts.",
+      "suggestedFix": "Give reusable cards containment and adapt their composition with @container rather than duplicating viewport breakpoints.",
+      "artifacts": [
+        "evidence/home-structured-probe.json",
+        "evidence/home-after-consent-full.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F010",
+      "severity": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Some touch targets are too small or too tightly spaced.",
+      "evidence": "Lighthouse found footer links with safe clickable height about 20.8 px, below the 24 px audit floor, and reported two target-size failures.",
+      "suggestedFix": "Increase target padding and spacing to at least 24×24 CSS px, preferably 44×44 for primary controls.",
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F011",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "privacy",
+      "confidence": "high",
+      "summary": "The primary read-news journey is blocked by a two-step consent/payment detour.",
+      "evidence": "The homepage-to-article walkthrough cannot reach content until the user accepts tracking or continues into a paid rejection path.",
+      "suggestedFix": "Let users read core content after a direct optional-processing refusal; make subscription an independent offer.",
+      "artifacts": [
+        "evidence/consent-after-reject.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F012",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "confidence": "high",
+      "summary": "Lab loading performance misses the good LCP range.",
+      "evidence": "Lighthouse measured LCP 9,193 ms, FCP 5,554 ms and performance score 0.56; the separate trace measured LCP 3,045 ms and FCP 1,927 ms, still above the 2.5 s good LCP threshold.",
+      "suggestedFix": "Profile the LCP render delay, prioritize the hero image, and remove nonessential work from the critical path.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F013",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "performance",
+      "confidence": "high",
+      "summary": "Main-thread work includes long tasks and forced reflow.",
+      "evidence": "The trace recorded two long tasks, longest 165 ms and TBT 126 ms; Lighthouse reported 212 ms TBT and 40.7 ms forced reflow in the main bundle.",
+      "suggestedFix": "Batch DOM reads/writes, break up long tasks, and schedule noncritical personalization and ad work after content is interactive.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F014",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "confidence": "high",
+      "summary": "The LCP resource is not priority-hinted and the critical chain is long.",
+      "evidence": "Lighthouse says fetchpriority=high is absent on the discoverable eager LCP image; the longest network dependency chain is 2,719 ms. HAR also identified a parser-inserted high-priority script candidate.",
+      "suggestedFix": "Add fetchpriority=high to the LCP image and defer confirmed noncritical scripts and dependency chains.",
+      "artifacts": [
+        "evidence/lighthouse-failures.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F015",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "optimize-script-priority",
+      "confidence": "high",
+      "summary": "The page ships substantial unused JavaScript.",
+      "evidence": "Lighthouse estimated 226,505 bytes of unused JavaScript with up to 1,630 ms savings; HAR recorded 605,982 transferred script bytes.",
+      "suggestedFix": "Code-split by feature, load ad/video SDKs on demand, and remove duplicated or unused bundles.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F016",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Some semantics and alternatives are malformed or missing.",
+      "evidence": "Lighthouse found a UL with a direct SPAN child and an inappropriate role=button on a LABEL; the image audit found 5 images without alt text.",
+      "suggestedFix": "Use valid list children, real buttons for actions, and empty or meaningful alt attributes according to image purpose.",
+      "artifacts": [
+        "evidence/lighthouse-failures.json",
+        "evidence/images.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F017",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "The accessibility tree is not well formed.",
+      "evidence": "Lighthouse agent accessibility reported the menu LABEL role=button as an inappropriate role, and the list audit found invalid child structure.",
+      "suggestedFix": "Replace role-patched labels with semantic buttons and correct list markup, then keyboard-walk the resulting focus order.",
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F018",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "The production viewport disables user zoom.",
+      "evidence": "Lighthouse inspected a viewport declaration containing maximum-scale=1 and user-scalable=no, which prevents low-vision users from zooming.",
+      "suggestedFix": "Remove maximum-scale and user-scalable restrictions; verify reflow at 200% and 400%.",
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "trivial",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F019",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "Image sizing and list structure are not consistently sound.",
+      "evidence": "The image audit found 40 of 100 images without both dimensions; Lighthouse found invalid UL child markup.",
+      "suggestedFix": "Set width and height or aspect-ratio for content images and make every UL child an LI.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F020",
+      "severity": "low",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "Cache policy prevents back/forward cache restoration.",
+      "evidence": "Lighthouse reported three BFCache blockers, including cache-control:no-store on the main resource and a cookie-modifying no-store response.",
+      "suggestedFix": "Use no-store only for truly sensitive responses and move personalized volatile data behind cacheable page-shell boundaries.",
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F021",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "The site has no sitemap at the conventional endpoint and raw article HTML lacks its H1.",
+      "evidence": "/sitemap.xml returned 404. Discoverability found the article title and description in raw HTML but no raw H1, with 67% rendered-word coverage.",
+      "suggestedFix": "Publish and reference an XML sitemap, and server-render the article H1 alongside its metadata.",
+      "artifacts": [
+        "evidence/robots-sitemap-manifest.json",
+        "evidence/article-discoverability.json",
+        "evidence/article-discoverability-crawler.png"
+      ],
+      "effort": "small",
+      "pathId": "article",
+      "url": "https://wiadomosci.wp.pl/wrze-w-kijowie-tysiace-ludzi-na-ulicach-przeciwko-decyzji-zelenskiego-7308028075038720a"
+    },
+    {
+      "id": "F022",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "confidence": "high",
+      "summary": "Cookie transport and same-site posture is too permissive.",
+      "evidence": "Cookie audit found STabid without Secure and all 10 observed cookies using SameSite=None; several identifiers last 390–400 days.",
+      "suggestedFix": "Mark every HTTPS cookie Secure, use Lax/Strict unless cross-site use is essential, and shorten identifier lifetimes.",
+      "artifacts": [
+        "evidence/cookies.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F023",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "confidence": "high",
+      "summary": "Tracking and third-party activity start before a privacy choice.",
+      "evidence": "Tracker evidence observed 8 third-party origins and DoubleClick on initial load; HAR attributes 69 requests and 667,124 transferred bytes to third parties.",
+      "suggestedFix": "Block optional analytics, ad, and video SDK requests until consent; reduce vendors and batch first-party measurement.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F024",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "confidence": "high",
+      "summary": "Defensive response headers are incomplete.",
+      "evidence": "Headers evidence found no HSTS or Permissions-Policy; Referrer-Policy is the legacy no-referrer-when-downgrade value. CSP, nosniff and frame protection are present.",
+      "suggestedFix": "Add HSTS after subdomain readiness, deploy a least-privilege Permissions-Policy, and adopt strict-origin-when-cross-origin or stricter.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F025",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "efficient-background-processing",
+      "confidence": "high",
+      "summary": "The installable site does not expose an offline cache.",
+      "evidence": "A valid manifest and active /sw.js registration exist, but Cache Storage returned no cache names after the page loaded.",
+      "suggestedFix": "Precache a small offline shell and recent/headline fallback, and show an explicit offline recovery state.",
+      "artifacts": [
+        "evidence/pwa-probe.json",
+        "evidence/robots-sitemap-manifest.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F026",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "confidence": "high",
+      "summary": "Responsive image delivery is incomplete.",
+      "evidence": "Of 100 images, 61 lacked srcset and 56 below-fold images lacked lazy loading; 40 lacked complete dimensions.",
+      "suggestedFix": "Generate responsive source sets, lazy-load below-fold editorial images, and retain dimensions for stable layout.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F027",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "confidence": "high",
+      "summary": "Nonessential work competes with the initial news experience.",
+      "evidence": "HAR loaded ad/video SDKs and 69 third-party requests on initial load; Lighthouse found 226 KB unused JavaScript and forced reflow.",
+      "suggestedFix": "Gate optional SDKs behind consent and interaction, and pause/deprioritize offscreen or background processing.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F028",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "confidence": "high",
+      "summary": "Third-party code consumes roughly half of transferred bytes.",
+      "evidence": "HAR measured 667,124 third-party bytes out of 1,320,746 total; IMA SDK alone transferred 154,248 bytes before a video was requested.",
+      "suggestedFix": "Set a third-party byte budget and load video/ad SDKs only when their surface approaches the viewport or the user starts playback.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    },
+    {
+      "id": "F029",
+      "severity": "low",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "confidence": "medium",
+      "summary": "The public news corpus is only partly agent-ready.",
+      "evidence": "Robots explicitly blocks GPTBot and CCBot while allowing OAI-SearchBot and Perplexity; Lighthouse agentic browsing score is 0.5 and reports a malformed accessibility tree. No structured WebMCP capability was observed.",
+      "suggestedFix": "Keep crawler policy intentional, repair the accessibility tree, and consider structured agent actions for search, topics, and article retrieval.",
+      "artifacts": [
+        "evidence/robots-sitemap-manifest.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://wiadomosci.wp.pl/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T001",
+      "title": "Replace forced pay-or-track gating with free, direct optional-consent rejection",
+      "priority": 1,
+      "findingIds": [
+        "F001",
+        "F002",
+        "F011"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T002",
+      "title": "Fix 360 px overflow and restore user zoom",
+      "priority": 2,
+      "findingIds": [
+        "F003",
+        "F018"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T003",
+      "title": "Cut LCP and critical-path work",
+      "priority": 3,
+      "findingIds": [
+        "F012",
+        "F013",
+        "F014",
+        "F015"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T004",
+      "title": "Defer trackers, ad/video SDKs, and other optional third-party work",
+      "priority": 4,
+      "findingIds": [
+        "F023",
+        "F027",
+        "F028"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T005",
+      "title": "Harden cookies and browser security policies",
+      "priority": 5,
+      "findingIds": [
+        "F022",
+        "F024"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T006",
+      "title": "Repair semantic controls, lists, image alternatives, and target sizing",
+      "priority": 6,
+      "findingIds": [
+        "F007",
+        "F010",
+        "F016",
+        "F017",
+        "F019"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T007",
+      "title": "Complete responsive image delivery and dimensions",
+      "priority": 7,
+      "findingIds": [
+        "F014",
+        "F019",
+        "F026"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T008",
+      "title": "Publish sitemap and server-render article H1",
+      "priority": 8,
+      "findingIds": [
+        "F021"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T009",
+      "title": "Add a useful offline fallback",
+      "priority": 9,
+      "findingIds": [
+        "F025"
+      ],
+      "guidanceId": "efficient-background-processing",
+      "status": "open"
+    },
+    {
+      "id": "T010",
+      "title": "Apply preference-driven theming to the consent surface",
+      "priority": 10,
+      "findingIds": [
+        "F004"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T011",
+      "title": "Modernize component/navigation behavior and reduce feed noise",
+      "priority": 11,
+      "findingIds": [
+        "F005",
+        "F006",
+        "F008",
+        "F009",
+        "F020"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T012",
+      "title": "Repair agent accessibility and document intentional agent access",
+      "priority": 12,
+      "findingIds": [
+        "F029"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "First-load desktop consent wall",
+      "condition": "desktop",
+      "findingIds": [
+        "F001",
+        "F002",
+        "F004",
+        "F011"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "First-load mobile consent wall and clipping",
+      "condition": "360x800",
+      "findingIds": [
+        "F001",
+        "F003"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Consent wall under requested dark scheme",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F004"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Narrow viewport overflow and CLS observation",
+      "condition": "360x800",
+      "findingIds": [
+        "F003"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-after-consent-full.png",
+      "caption": "Full homepage/feed capture",
+      "condition": "full page",
+      "findingIds": [
+        "F006",
+        "F008",
+        "F009"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/latest-full.png",
+      "caption": "Latest-news archetype",
+      "condition": "full page",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/video-listing-full.png",
+      "caption": "Video-listing archetype",
+      "condition": "full page",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Home raw/rendered comparison",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered home crawler comparison",
+      "condition": "JavaScript on",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler home comparison",
+      "condition": "JavaScript off",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "Article raw/rendered comparison",
+      "condition": "JavaScript on/off",
+      "findingIds": [
+        "F021"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "Rendered article comparison",
+      "condition": "JavaScript on",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "Crawler-visible article",
+      "condition": "JavaScript off",
+      "findingIds": [
+        "F021"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Initial-load network archive",
+      "condition": "6 seconds",
+      "findingIds": [
+        "F014",
+        "F023",
+        "F028"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact network summary",
+      "condition": "6 seconds",
+      "findingIds": [
+        "F014",
+        "F015",
+        "F023",
+        "F027",
+        "F028"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace",
+      "condition": "load",
+      "findingIds": [
+        "F012"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact performance trace metrics",
+      "condition": "load",
+      "findingIds": [
+        "F012",
+        "F013"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report",
+      "condition": "mobile simulated",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Lighthouse compact summary",
+      "condition": "mobile simulated",
+      "findingIds": [
+        "F012",
+        "F015",
+        "F027",
+        "F029"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-failures.json",
+      "caption": "Lighthouse failing audit detail",
+      "condition": "mobile simulated",
+      "findingIds": [
+        "F007",
+        "F010",
+        "F013",
+        "F014",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020",
+        "F027",
+        "F029"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-content-baseline.json",
+      "caption": "Heap after entering content",
+      "condition": "baseline",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-menu.json",
+      "caption": "Heap after ten menu cycles",
+      "condition": "post interaction",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response headers",
+      "condition": "initial load",
+      "findingIds": [
+        "F024"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie flags and lifetime",
+      "condition": "initial load",
+      "findingIds": [
+        "F022"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker origins",
+      "condition": "initial load",
+      "findingIds": [
+        "F023"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image element audit",
+      "condition": "home",
+      "findingIds": [
+        "F016",
+        "F019",
+        "F026"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secrets scan",
+      "condition": "home",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-structured-probe.json",
+      "caption": "Article metadata and content probe",
+      "condition": "article",
+      "findingIds": [
+        "F005"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-sitemap-manifest.json",
+      "caption": "Robots, sitemap and manifest probe",
+      "condition": "home",
+      "findingIds": [
+        "F021",
+        "F025",
+        "F029"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/404-probe.json",
+      "caption": "404 recovery state",
+      "condition": "invalid route",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/pwa-probe.json",
+      "caption": "Service worker and cache storage",
+      "condition": "home",
+      "findingIds": [
+        "F025"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/consent-after-reject.json",
+      "caption": "Second-step consent/paywall state",
+      "condition": "after reject",
+      "findingIds": [
+        "F002",
+        "F011"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-content-dom.json",
+      "caption": "Rendered homepage DOM capture",
+      "condition": "post-consent",
+      "findingIds": [
+        "F006"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-structured-probe.json",
+      "caption": "Homepage semantics and metadata probe",
+      "condition": "post-consent",
+      "findingIds": [
+        "F005",
+        "F007",
+        "F009"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-reduced-motion.json",
+      "caption": "Reduced-motion animation probe",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-recon.json",
+      "caption": "Homepage routes and overlays recon",
+      "condition": "initial load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics-post.json",
+      "caption": "Runtime and heap metrics after menu cycles",
+      "condition": "post interaction",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "Pinned Modern Web Guidance consulted",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T22-19-47-403Z"
+}

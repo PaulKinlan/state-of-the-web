@@ -1,0 +1,2069 @@
+{
+  "url": "https://www.temu.com",
+  "auditedAt": "2026-07-20T11:30:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit. Direct deep links repeatedly redirected to sign-in, so search/cart/error-path behavior is reported as observed rather than silently omitted.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "minified client application (framework not reliably identifiable)",
+    "notes": "Public commerce feed was observable on one mobile load; other fresh sessions and direct search/cart/error routes redirected to login. The site uses client rendering, cross-document view-transition CSS and a manifest link."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "lighthouse",
+    "curl control-file fetches",
+    "Modern Web Guidance search"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "accessible-error-announcement",
+    "html",
+    "css",
+    "defer-rendering-heavy-content",
+    "agentic-forms",
+    "agentic-javascript-tools",
+    "translator",
+    "language-model",
+    "webmcp",
+    "performance",
+    "deprioritize-background-fetches",
+    "schedule-tasks-by-priority",
+    "optimize-preload-priority",
+    "dark-mode",
+    "component-specific-light-dark-theme",
+    "adapt-scrollbar-to-contrast-preferences",
+    "visually-texture-content",
+    "persistent-app-tours",
+    "directional-navigation-transitions",
+    "pull-to-reveal",
+    "navigation-drawer",
+    "coordinate-global-events",
+    "capture-location-agnostic-data",
+    "support-global-calendar-systems",
+    "calculate-event-differentials",
+    "declarative-dialog-popover-control",
+    "platform-controls-dismiss-dialog",
+    "light-dismiss-a-dialog",
+    "move-dom-element-without-losing-state",
+    "persistent-top-layer-ui",
+    "security",
+    "defer-work-until-scroll-ends",
+    "scroll-position-aware-elements",
+    "size-aware-styling",
+    "scrollability-affordance-hints",
+    "privacy",
+    "passkeys",
+    "passkey-authentication",
+    "passkey-reauthentication",
+    "passkey-management",
+    "search-hidden-content",
+    "forms",
+    "validate-input-after-interaction",
+    "required-field-feedback",
+    "autofill-sign-up-form",
+    "carousel-slide-effects",
+    "scroll-entry-exit-effects"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage at 780px: cookie dialog obscures the commerce feed.",
+      "condition": "viewport: 780x493",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile product feed with a wide cookie dialog clipped at the right edge.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Narrow layout reports 409px horizontal overflow.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark-preference capture remains a light-themed sign-in/cookie surface.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast.png",
+      "caption": "Forced-colors capture keeps dialog text and actions visible.",
+      "condition": "prefers-contrast: more; forced-colors: active"
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Reduced-motion probe matched the preference and found no running animations.",
+      "condition": "prefers-reduced-motion: reduce"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and CSS, including view-transition rules, document metadata and responsive styles."
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Metadata, semantics, controls, target sizes, form attributes and CSS feature probe.",
+      "findingIds": [
+        "F02",
+        "F04",
+        "F10",
+        "F15",
+        "F17",
+        "F19"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace for initial load.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: 5 long tasks, 200ms TBT and 1.84s observed LCP.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR with 214 requests and 3.32MB transferred.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F07",
+        "F13"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network summary: 2.68MB scripts, 145 third-party requests and four render-blocking stylesheets.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F07",
+        "F13"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/home-lighthouse.json",
+      "caption": "Lighthouse: performance 46, accessibility 78, best practices 69 and SEO 85.",
+      "condition": "mobile simulated load",
+      "findingIds": [
+        "F06",
+        "F08",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Security headers: CSP, nosniff, framing, referrer and permissions policies absent.",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Cookie audit: __tclr lacks Secure and all observed cookies use SameSite=None.",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Tracker inventory: nine third-party origins including Facebook.",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Image audit: 37/37 omit dimensions, 17 omit alt, and 35 below-fold images are not lazy.",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Client secret scan found no exposed sensitive credentials."
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML has 0% content coverage and is a JavaScript shell.",
+      "findingIds": [
+        "F11",
+        "F14",
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered browser view for discoverability comparison.",
+      "findingIds": [
+        "F11",
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript view is blank.",
+      "findingIds": [
+        "F11",
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search.png",
+      "caption": "Direct search route redirected to sign-in and was covered by the cookie wall.",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/search-dom.json",
+      "caption": "Rendered DOM confirms direct search URL redirected to login.",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/cart.png",
+      "caption": "Direct cart route redirected to sign-in and was covered by the cookie wall.",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/cart-dom.json",
+      "caption": "Rendered DOM confirms direct cart URL redirected to login.",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/404.png",
+      "caption": "Unknown route redirected to sign-in instead of showing a recoverable not-found state.",
+      "findingIds": [
+        "F05",
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/about.png",
+      "caption": "Public brand-assets/content archetype, also obscured by the cookie dialog.",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/about-mobile-layout.json",
+      "caption": "Mobile content archetype layout metrics.",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-empty-submit.png",
+      "caption": "Attempted empty login submission; cookie wall still prevented reaching validation feedback.",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-focus-form-probe.json",
+      "caption": "Login controls report no visible outline/box-shadow and the email/phone field has no autocomplete token.",
+      "findingIds": [
+        "F04",
+        "F15",
+        "F19"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary: 433,162 nodes and 25.64MB self size.",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "After ten repeated scroll cycles: 491,443 nodes and 34.54MB self size.",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt request returned a JavaScript challenge instead of robots directives.",
+      "findingIds": [
+        "F11",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/app.webmanifest",
+      "caption": "Manifest request returned a JavaScript challenge instead of JSON.",
+      "findingIds": [
+        "F14"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The dark-mode screenshot remains white/grey, and the CSS probe found no prefers-color-scheme rule.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "evaluate under prefers-reduced-motion: reduce",
+      "evidence": "Reduced-motion emulation matched and the active-animation probe returned an empty list.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshot under forced colors",
+      "evidence": "Forced-colors screenshot retained legible dialog text, links and all three consent actions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS inspection",
+      "evidence": "Rendered homepage CSS declares @view-transition { navigation:auto } and a 0.3s root transition group.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon reviewed the sampled surfaces for a relevant feature or use case.",
+      "evidence": "No scroll-linked animation was present on the sampled pages, so implementation technique is not applicable.",
+      "reason": "No scroll-linked animation was present on the sampled pages, so implementation technique is not applicable."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS interaction-pattern inspection",
+      "evidence": "The product feed uses native document scrolling and CSS any-hover/none fallbacks; no page-level pointermove gesture override was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The long commerce feed has persistent multi-row chrome, but rendered CSS contains no scroll-state container query or scroll-timeline rule.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon reviewed the sampled surfaces for a relevant feature or use case.",
+      "evidence": "No tooltip, transient menu or anchored popover was present in the sampled states.",
+      "reason": "No tooltip, transient menu or anchored popover was present in the sampled states."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "visual and DOM navigation review",
+      "evidence": "The visible product feed has labelled category/search/account/cart navigation and CSS cross-document view transitions to preserve route continuity.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Desktop, mobile, search, cart and brand-assets screenshots all show a large modal covering the page before interaction; on mobile it is clipped.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/about.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Desktop, mobile, search, cart and brand-assets screenshots all show a large modal covering the page before interaction; on mobile it is clipped.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/about.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Desktop, mobile, search, cart and brand-assets screenshots all show a large modal covering the page before interaction; on mobile it is clipped.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/about.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The layout primitive measured scrollWidth 769px against visualViewportWidth 360px, a 409px overflow; the cookie actions are clipped in the mobile screenshot.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The DOM/CSS probe found no @container rules while the captured CSS contains many max-width viewport media queries.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The active focus probe reported outline:none and no box shadow for input, Continue, role=button controls and links; 34 of the first 50 controls were below 44px in one dimension.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/login-focus-form-probe.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "first-viewport task review",
+      "evidence": "The mobile first viewport clearly presents Temu search, shopping categories, product cards, prices, ratings and add-to-cart controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Direct search, cart and unknown-route requests all redirected to a generic sign-in page; the originally requested state was unavailable and the consent wall blocked interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/search.png",
+        "evidence/search-dom.json",
+        "evidence/cart.png",
+        "evidence/cart-dom.json",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Direct search, cart and unknown-route requests all redirected to a generic sign-in page; the originally requested state was unavailable and the consent wall blocked interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/search.png",
+        "evidence/search-dom.json",
+        "evidence/cart.png",
+        "evidence/cart-dom.json",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse measured 14.8s LCP, 7.0s FCP and 500ms TBT (performance 46); the raw-CDP trace independently found five long tasks and 200ms TBT.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "layout-shift observer",
+      "evidence": "The layout observer measured CLS 0 with no recorded shifts during the capture window.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse measured 14.8s LCP, 7.0s FCP and 500ms TBT (performance 46); the raw-CDP trace independently found five long tasks and 200ms TBT.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "HAR recorded 214 requests and 3.32MB transferred, including 2.68MB of script, four parser-inserted high-priority stylesheets and several 0/403/424/429 responses.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "HAR recorded 214 requests and 3.32MB transferred, including 2.68MB of script, four parser-inserted high-priority stylesheets and several 0/403/424/429 responses.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse found unnamed dialogs, prohibited ARIA, missing required role parents/children, label/name mismatch, invalid list structure and insufficient contrast; accessibility scored 78. The image primitive found all 37 images without width/height, 17 without alt and 35 below-fold images without lazy loading; Lighthouse also flagged wrong aspect ratios and low-resolution delivery.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse found unnamed dialogs, prohibited ARIA, missing required role parents/children, label/name mismatch, invalid list structure and insufficient contrast; accessibility scored 78.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The active focus probe reported outline:none and no box shadow for input, Continue, role=button controls and links; 34 of the first 50 controls were below 44px in one dimension. Lighthouse found unnamed dialogs, prohibited ARIA, missing required role parents/children, label/name mismatch, invalid list structure and insufficient contrast; accessibility scored 78.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/login-focus-form-probe.json",
+        "evidence/home-probe.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F04",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "visual legibility review",
+      "evidence": "Product names, prices, ratings and consent copy remain readable in the sampled desktop/mobile captures without text clipping inside content cards.",
+      "pathIds": [
+        "home",
+        "about"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The layout primitive measured scrollWidth 769px against visualViewportWidth 360px, a 409px overflow; the cookie actions are clipped in the mobile screenshot. The active focus probe reported outline:none and no box shadow for input, Continue, role=button controls and links; 34 of the first 50 controls were below 44px in one dimension.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/login-focus-form-probe.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse reported console errors, one deprecated API, a BFCache failure, forced reflow and a failed network dependency-tree insight; best practices scored 69.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The image primitive found all 37 images without width/height, 17 without alt and 35 below-fold images without lazy loading; Lighthouse also flagged wrong aspect ratios and low-resolution delivery.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse reported console errors, one deprecated API, a BFCache failure, forced reflow and a failed network dependency-tree insight; best practices scored 69.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Discoverability measured 0% raw/rendered word coverage and classified the response as a JS shell; crawler screenshot is blank. robots.txt is a JavaScript challenge, and Lighthouse flagged invalid robots and canonical signals.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Discoverability measured 0% raw/rendered word coverage and classified the response as a JS shell; crawler screenshot is blank. robots.txt is a JavaScript challenge, and Lighthouse flagged invalid robots and canonical signals.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Discoverability measured 0% raw/rendered word coverage and classified the response as a JS shell; crawler screenshot is blank. robots.txt is a JavaScript challenge, and Lighthouse flagged invalid robots and canonical signals.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Discoverability measured 0% raw/rendered word coverage and classified the response as a JS shell; crawler screenshot is blank. robots.txt is a JavaScript challenge, and Lighthouse flagged invalid robots and canonical signals.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "HTTPS and HSTS are present, but CSP, nosniff, frame protection, Referrer-Policy and Permissions-Policy are absent. Cookie __tclr lacks Secure and every observed cookie uses SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "HAR attributed 145 requests and 2.95MB to third-party origins; the tracker probe found nine third-party origins including Facebook, plus 49 pftk and 22 thtk requests.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The sign-in surface offers email/phone continuation; the form/source probe found no passkey/WebAuthn registration or authentication affordance despite browser support.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/login-focus-form-probe.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "HTTPS and HSTS are present, but CSP, nosniff, frame protection, Referrer-Policy and Permissions-Policy are absent. Cookie __tclr lacks Secure and every observed cookie uses SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Raw HTML contains no content, the crawler view is blank, and both robots.txt and app.webmanifest return challenge HTML. The unknown route redirects to login instead of a useful error state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/app.webmanifest",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Desktop, mobile, search, cart and brand-assets screenshots all show a large modal covering the page before interaction; on mobile it is clipped. The layout primitive measured scrollWidth 769px against visualViewportWidth 360px, a 409px overflow; the cookie actions are clipped in the mobile screenshot.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/about.png",
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Raw HTML contains no content, the crawler view is blank, and both robots.txt and app.webmanifest return challenge HTML. The unknown route redirects to login instead of a useful error state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/app.webmanifest",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Direct search, cart and unknown-route requests all redirected to a generic sign-in page; the originally requested state was unavailable and the consent wall blocked interaction. Raw HTML contains no content, the crawler view is blank, and both robots.txt and app.webmanifest return challenge HTML. The unknown route redirects to login instead of a useful error state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/search.png",
+        "evidence/search-dom.json",
+        "evidence/cart.png",
+        "evidence/cart-dom.json",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F05",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS inspection",
+      "evidence": "Rendered HTML declares lang=en-GB; CSS probe found logical properties and locale-specific UK routes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "rendered content and DOM configuration review",
+      "evidence": "The UK locale renders pound-denominated prices and en-GB content, and the page configuration exposes region/language/currency locale switching.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "cookie and rendered-content inspection",
+      "evidence": "The page maintains an explicit timezone cookie/config signal and no ambiguous event time or recurring schedule was present in sampled surfaces.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "visual consent review",
+      "evidence": "The consent dialog gives Reject All and Accept All equal-size, equal-emphasis controls plus Customise Cookies; no preselected paid continuity was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The email/phone input reports required:false and an empty autocomplete token; the attempted empty submission remained blocked by the consent dialog, so actionable validation could not be reached.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/login-focus-form-probe.json",
+        "evidence/login-empty-submit.png"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The email/phone input reports required:false and an empty autocomplete token; the attempted empty submission remained blocked by the consent dialog, so actionable validation could not be reached.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/login-focus-form-probe.json",
+        "evidence/login-empty-submit.png"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Direct search, cart and unknown-route requests all redirected to a generic sign-in page; the originally requested state was unavailable and the consent wall blocked interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/search.png",
+        "evidence/search-dom.json",
+        "evidence/cart.png",
+        "evidence/cart-dom.json",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The image primitive found all 37 images without width/height, 17 without alt and 35 below-fold images without lazy loading; Lighthouse also flagged wrong aspect ratios and low-resolution delivery.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse measured 14.8s LCP, 7.0s FCP and 500ms TBT (performance 46); the raw-CDP trace independently found five long tasks and 200ms TBT. HAR recorded 214 requests and 3.32MB transferred, including 2.68MB of script, four parser-inserted high-priority stylesheets and several 0/403/424/429 responses.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json",
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "HAR recorded 214 requests and 3.32MB transferred, including 2.68MB of script, four parser-inserted high-priority stylesheets and several 0/403/424/429 responses. HAR attributed 145 requests and 2.95MB to third-party origins; the tracker probe found nine third-party origins including Facebook, plus 49 pftk and 22 thtk requests.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json"
+      ],
+      "findingIds": [
+        "F07",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "Lighthouse agentic-browsing scored 33, the raw response is an empty JS shell, and the probe found no structured tool surface or machine-readable form metadata beyond rendered controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-discoverability.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon reviewed the sampled surfaces for a relevant feature or use case.",
+      "evidence": "No summarisation, generation or other inference use case was exposed on the sampled commerce and account surfaces.",
+      "reason": "No summarisation, generation or other inference use case was exposed on the sampled commerce and account surfaces."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "issues",
+      "confidence": "low",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The baseline heap summary had 433,162 nodes/25.64MB; after ten bottom-to-top scroll cycles it had 491,443 nodes/34.54MB, increases of 58,281 nodes and 8.89MB. Separate primitive sessions and route variability reduce confidence.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "low",
+      "method": "Triangulated visual, DOM and objective evidence for this check.",
+      "evidence": "The baseline heap summary had 433,162 nodes/25.64MB; after ten bottom-to-top scroll cycles it had 491,443 nodes/34.54MB, increases of 58,281 nodes and 8.89MB. Separate primitive sessions and route variability reduce confidence.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "constructor comparison in heap summaries",
+      "evidence": "Neither readable heap summary listed Detached* constructors among retained populations; no direct detached-DOM signal was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-post.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F17",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F04",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F02",
+        "F03",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F06",
+        "F07",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and commerce-feed archetype; covers discovery, product browsing, preferences, responsiveness, privacy, performance and memory.",
+      "url": "https://www.temu.com/",
+      "conditions": [
+        "desktop",
+        "viewport 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "10 repeated scroll cycles"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search/listing journey; direct shoes query tested to represent result listings.",
+      "url": "https://www.temu.com/search_result.html?search_key=shoes",
+      "conditions": [
+        "desktop direct navigation"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "cart",
+      "description": "Cart/checkout entry journey; direct cart route tested as the highest-risk commerce flow.",
+      "url": "https://www.temu.com/cart.html",
+      "conditions": [
+        "desktop direct navigation"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Account/form archetype; inspected fields, focus and empty-submission behavior.",
+      "url": "https://www.temu.com/login.html",
+      "conditions": [
+        "keyboard focus",
+        "empty submit"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "about",
+      "description": "Public informational/content archetype represented by the resolved brand-assets page.",
+      "url": "https://www.temu.com/uk/about_temu_home.html",
+      "conditions": [
+        "desktop",
+        "viewport 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error",
+      "description": "Unknown URL used to inspect HTTP/not-found recovery behavior.",
+      "url": "https://www.temu.com/this-page-should-not-exist-web-uplift",
+      "conditions": [
+        "desktop direct navigation"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The interface does not honor the user’s dark color-scheme preference.",
+      "evidence": "The dark-mode screenshot remains white/grey, and the CSS probe found no prefers-color-scheme rule.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and retint surfaces, text, controls and overlays with prefers-color-scheme or light-dark().",
+      "effort": "medium"
+    },
+    {
+      "id": "F02",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "summary": "A cookie wall obscures the primary content on every sampled archetype.",
+      "evidence": "Desktop, mobile, search, cart and brand-assets screenshots all show a large modal covering the page before interaction; on mobile it is clipped.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/about.png"
+      ],
+      "suggestedFix": "Use a compact, accessible consent surface that preserves access to essential content, supports light-dismiss where lawful, and never overflows the viewport.",
+      "effort": "medium"
+    },
+    {
+      "id": "F03",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "summary": "The homepage overflows horizontally on a 360px viewport.",
+      "evidence": "The layout primitive measured scrollWidth 769px against visualViewportWidth 360px, a 409px overflow; the cookie actions are clipped in the mobile screenshot.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Remove fixed desktop widths, constrain dialogs to 100% of the visual viewport, and use intrinsic sizing/container queries for the product grid and chrome.",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Keyboard focus is not visibly indicated and many controls are undersized.",
+      "evidence": "The active focus probe reported outline:none and no box shadow for input, Continue, role=button controls and links; 34 of the first 50 controls were below 44px in one dimension.",
+      "artifacts": [
+        "evidence/login-focus-form-probe.json",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Add a high-contrast :focus-visible indicator and provide at least 44×44 CSS-pixel hit areas or equivalent spacing for pointer targets.",
+      "effort": "small"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "summary": "Representative shopping routes do not preserve a predictable browse-to-buy path.",
+      "evidence": "Direct search, cart and unknown-route requests all redirected to a generic sign-in page; the originally requested state was unavailable and the consent wall blocked interaction.",
+      "artifacts": [
+        "evidence/search.png",
+        "evidence/search-dom.json",
+        "evidence/cart.png",
+        "evidence/cart-dom.json",
+        "evidence/404.png"
+      ],
+      "suggestedFix": "Keep public search and product discovery reachable without account creation, preserve return URLs and cart state, and provide explicit recovery when authentication is genuinely required.",
+      "effort": "large"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The measured load is slow and main-thread heavy.",
+      "evidence": "Lighthouse measured 14.8s LCP, 7.0s FCP and 500ms TBT (performance 46); the raw-CDP trace independently found five long tasks and 200ms TBT.",
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "suggestedFix": "Prioritize the LCP resource, reduce boot-time JavaScript, split long tasks, and defer nonessential account, analytics and recommendation code.",
+      "effort": "large"
+    },
+    {
+      "id": "F07",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-preload-priority",
+      "guidanceCategory": "performance",
+      "summary": "The initial load ships a large script-heavy dependency graph.",
+      "evidence": "HAR recorded 214 requests and 3.32MB transferred, including 2.68MB of script, four parser-inserted high-priority stylesheets and several 0/403/424/429 responses.",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Remove unused/duplicate bundles, conditionally load authentication and tracking SDKs, consolidate critical CSS and set explicit cache policies.",
+      "effort": "large"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The rendered interface has multiple accessibility-tree and contrast failures.",
+      "evidence": "Lighthouse found unnamed dialogs, prohibited ARIA, missing required role parents/children, label/name mismatch, invalid list structure and insufficient contrast; accessibility scored 78.",
+      "artifacts": [
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Give dialogs accessible names, repair role ownership, align visible labels with accessible names, use semantic lists and remediate every reported contrast pair.",
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Images lack intrinsic dimensions and meaningful alternatives.",
+      "evidence": "The image primitive found all 37 images without width/height, 17 without alt and 35 below-fold images without lazy loading; Lighthouse also flagged wrong aspect ratios and low-resolution delivery.",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Emit intrinsic width/height or aspect-ratio, accurate alt text, loading=lazy below the fold, and resolution-appropriate responsive sources.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The page emits browser errors and blocks platform optimizations.",
+      "evidence": "Lighthouse reported console errors, one deprecated API, a BFCache failure, forced reflow and a failed network dependency-tree insight; best practices scored 69.",
+      "artifacts": [
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Resolve console/network errors, replace the deprecated API, remove unload or other BFCache blockers, and batch DOM reads/writes to avoid forced reflow.",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Public content is effectively invisible to non-JavaScript crawlers.",
+      "evidence": "Discoverability measured 0% raw/rendered word coverage and classified the response as a JS shell; crawler screenshot is blank. robots.txt is a JavaScript challenge, and Lighthouse flagged invalid robots and canonical signals.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Server-render meaningful page content and metadata, serve plain-text robots.txt plus a real sitemap, and emit stable canonical and social/structured metadata per route.",
+      "effort": "large"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Important browser-enforced security policies are missing.",
+      "evidence": "HTTPS and HSTS are present, but CSP, nosniff, frame protection, Referrer-Policy and Permissions-Policy are absent. Cookie __tclr lacks Secure and every observed cookie uses SameSite=None.",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "suggestedFix": "Deploy a nonce/hash-based CSP with frame-ancestors, nosniff, strict referrer and permissions policies; mark every transport cookie Secure and narrow SameSite where cross-site use is unnecessary.",
+      "effort": "medium"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "Third-party and tracking activity dominates the initial request surface.",
+      "evidence": "HAR attributed 145 requests and 2.95MB to third-party origins; the tracker probe found nine third-party origins including Facebook, plus 49 pftk and 22 thtk requests.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Gate nonessential tracking on consent, remove redundant SDKs, proxy or self-host essential assets, batch analytics and document the purpose/retention of each endpoint.",
+      "effort": "large"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "defer-rendering-heavy-content",
+      "guidanceCategory": "performance",
+      "summary": "Core content and machine-readable control files depend on JavaScript challenges.",
+      "evidence": "Raw HTML contains no content, the crawler view is blank, and both robots.txt and app.webmanifest return challenge HTML. The unknown route redirects to login instead of a useful error state.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/robots.txt",
+        "evidence/app.webmanifest",
+        "evidence/404.png"
+      ],
+      "suggestedFix": "Render core catalog/navigation HTML on the server, return standards-compliant control files without script challenges, and provide resilient 404/offline/retry states.",
+      "effort": "large"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "medium",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "validate-input-after-interaction",
+      "guidanceCategory": "forms",
+      "summary": "The sign-in form lacks visible native constraints and input assistance.",
+      "evidence": "The email/phone input reports required:false and an empty autocomplete token; the attempted empty submission remained blocked by the consent dialog, so actionable validation could not be reached.",
+      "artifacts": [
+        "evidence/login-focus-form-probe.json",
+        "evidence/login-empty-submit.png"
+      ],
+      "suggestedFix": "Use an explicit required constraint, suitable autocomplete tokens, validation after interaction, aria-describedby/aria-live error messaging and preserve the entered value on recovery.",
+      "effort": "small"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "low",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "no-leak-under-repeated-interaction",
+      "guidanceId": "defer-work-until-scroll-ends",
+      "guidanceCategory": "performance",
+      "summary": "Repeated scrolling correlates with substantial retained heap growth.",
+      "evidence": "The baseline heap summary had 433,162 nodes/25.64MB; after ten bottom-to-top scroll cycles it had 491,443 nodes/34.54MB, increases of 58,281 nodes and 8.89MB. Separate primitive sessions and route variability reduce confidence.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ],
+      "suggestedFix": "Reproduce in one stable session with baseline/target/final snapshots, then inspect retained lazy-list items, observers, closures and caches; release objects when cards leave the live session.",
+      "effort": "large"
+    },
+    {
+      "id": "F17",
+      "severity": "low",
+      "confidence": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "summary": "Components rely on viewport breakpoints rather than container-level adaptation.",
+      "evidence": "The DOM/CSS probe found no @container rules while the captured CSS contains many max-width viewport media queries.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare containment on reusable grids/cards/dialog shells and adapt them with @container queries while retaining a viewport fallback.",
+      "effort": "medium"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "medium",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scroll-position-aware-elements",
+      "guidanceCategory": "user-experience",
+      "summary": "Navigation chrome is not declaratively aware of scroll state.",
+      "evidence": "The long commerce feed has persistent multi-row chrome, but rendered CSS contains no scroll-state container query or scroll-timeline rule.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Reduce sticky chrome after scrolling and expose position/progress using scroll-state queries or a lightweight declarative progress affordance.",
+      "effort": "medium"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "security",
+      "summary": "The sampled account entry does not expose phishing-resistant authentication.",
+      "evidence": "The sign-in surface offers email/phone continuation; the form/source probe found no passkey/WebAuthn registration or authentication affordance despite browser support.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/login-focus-form-probe.json"
+      ],
+      "suggestedFix": "Offer passkey sign-in and registration with email/phone recovery, and request any browser permissions only after a clear user action.",
+      "effort": "large"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "agentic-forms",
+      "guidanceCategory": "agentic-browsing",
+      "summary": "The commerce capabilities are not exposed in a structured agent-readable form.",
+      "evidence": "Lighthouse agentic-browsing scored 33, the raw response is an empty JS shell, and the probe found no structured tool surface or machine-readable form metadata beyond rendered controls.",
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-discoverability.json",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "First server-render product and form semantics, then expose narrowly scoped, confirmable search/cart/account capabilities with agentic forms or WebMCP.",
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Server-render public catalog content and standards-compliant robots, sitemap, manifest and metadata",
+      "priority": 1,
+      "findingIds": [
+        "F11",
+        "F14",
+        "F20"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore predictable public search/cart/error journeys and preserve state across authentication",
+      "priority": 2,
+      "findingIds": [
+        "F05",
+        "F15"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Reduce boot JavaScript, third-party SDKs, long tasks and render-blocking dependencies",
+      "priority": 3,
+      "findingIds": [
+        "F06",
+        "F07",
+        "F13",
+        "F16"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Deploy CSP and complete browser security/cookie policies",
+      "priority": 4,
+      "findingIds": [
+        "F12",
+        "F19"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Make the consent surface compact, semantic, named and viewport-safe",
+      "priority": 5,
+      "findingIds": [
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Repair accessibility semantics, contrast, visible focus and target sizes",
+      "priority": 6,
+      "findingIds": [
+        "F04",
+        "F08",
+        "F09"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Add system-driven dark mode and container-level responsive rules",
+      "priority": 7,
+      "findingIds": [
+        "F01",
+        "F17",
+        "F18"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Resolve console, deprecated API, BFCache and forced-reflow failures",
+      "priority": 8,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-20T11-21-22-947Z"
+}

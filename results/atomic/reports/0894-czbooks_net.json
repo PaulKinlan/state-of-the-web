@@ -1,0 +1,1049 @@
+{
+  "url": "https://czbooks.net",
+  "auditedAt": "2026-07-28T10:59:55.385Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "The entry URL is protected by a Cloudflare managed challenge that returned HTTP 403 to both Chrome and raw crawler requests. No target-site archetype could be reached, so all 58 atomic checks are blocked and no quality verdict or score is published.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The rendered document was Cloudflare’s “Just a moment...” challenge. The site architecture and page templates could not be established. Homepage-only coverage was not silently assumed."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "headers",
+    "discoverability",
+    "har",
+    "curl-response-headers",
+    "modern-web-guidance"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "same-document-transitions",
+    "scroll-progress-indicator",
+    "light-dismiss-a-dialog",
+    "css-layout",
+    "forms",
+    "performance",
+    "accessibility",
+    "html",
+    "security",
+    "privacy",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop entry page showing the Cloudflare security verification wall.",
+      "condition": "default desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile entry page showing the same Cloudflare security verification wall.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and styles belong to the Cloudflare challenge, not the target product UI.",
+      "condition": "default desktop",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Recon probe records title “Just a moment...” and no usable internal links from the challenged page.",
+      "condition": "default desktop",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Headers observed for the challenge response; not treated as target application evidence.",
+      "condition": "HTTP 403 challenge response",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw crawler fetch returned HTTP 403 and zero target-content coverage.",
+      "condition": "crawler user agent and JavaScript-disabled comparison",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view of the challenge.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view of the challenge response.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network capture of the Cloudflare challenge sequence, including the 403 document.",
+      "condition": "3-second load window",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary for the blocked entry attempt.",
+      "condition": "3-second load window",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic 58-check coverage manifest and planned evidence methods.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "guidance/catalog.json",
+      "caption": "Pinned Modern Web Guidance catalog consulted before the attempted audit.",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned screenshot, computed-style, and animation probes under emulated user preferences after entry navigation.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned screenshot, computed-style, and animation probes under emulated user preferences after entry navigation.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned screenshot, computed-style, and animation probes under emulated user preferences after entry navigation.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/CSS inspection and interaction video on a representative navigable content route.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/CSS inspection and interaction video on a representative navigable content route.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/CSS inspection and interaction video on a representative navigable content route.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/CSS inspection and interaction video on a representative navigable content route.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/CSS inspection and interaction video on a representative navigable content route.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/CSS inspection and interaction video on a representative navigable content route.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned narrow-viewport layout, screenshot, target-size, and keyboard-focus probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned narrow-viewport layout, screenshot, target-size, and keyboard-focus probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned narrow-viewport layout, screenshot, target-size, and keyboard-focus probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, and performance interaction evidence on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, and performance interaction evidence on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, and performance interaction evidence on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, and performance interaction evidence on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, and performance interaction evidence on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM accessibility, keyboard-focus, contrast, and visual probes on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM accessibility, keyboard-focus, contrast, and visual probes on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM accessibility, keyboard-focus, contrast, and visual probes on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM accessibility, keyboard-focus, contrast, and visual probes on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned narrow-viewport layout, screenshot, target-size, and keyboard-focus probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned document, runtime console, image, and browser-platform hygiene probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned document, runtime console, image, and browser-platform hygiene probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned document, runtime console, image, and browser-platform hygiene probes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-fetch/discoverability and route metadata inspection; representative content remained behind the challenge.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-fetch/discoverability and route metadata inspection; representative content remained behind the challenge.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-fetch/discoverability and route metadata inspection; representative content remained behind the challenge.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw-fetch/discoverability and route metadata inspection; representative content remained behind the challenge.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers/HAR inspection, with planned cookies, trackers, secrets, and permission/auth flow inspection after entry.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers/HAR inspection, with planned cookies, trackers, secrets, and permission/auth flow inspection after entry.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers/HAR inspection, with planned cookies, trackers, secrets, and permission/auth flow inspection after entry.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted headers/HAR inspection, with planned cookies, trackers, secrets, and permission/auth flow inspection after entry.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JavaScript, runtime, offline, and HTTP-failure-state tests on representative content routes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JavaScript, runtime, offline, and HTTP-failure-state tests on representative content routes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JavaScript, runtime, offline, and HTTP-failure-state tests on representative content routes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JavaScript, runtime, offline, and HTTP-failure-state tests on representative content routes.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, logical-property, locale-data, and time-zone probes on rendered content.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, logical-property, locale-data, and time-zone probes on rendered content.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, logical-property, locale-data, and time-zone probes on rendered content.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual review and representative user-flow walkthrough after route discovery.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned HAR, image, media, and background-work inspection on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned HAR, image, media, and background-work inspection on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned HAR, image, media, and background-work inspection on representative pages.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned source/DOM inspection for structured agent capabilities and on-device inference opportunities.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned source/DOM inspection for structured agent capabilities and on-device inference opportunities.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline/post-interaction heap summaries and Performance.getMetrics comparison on a representative interaction.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline/post-interaction heap summaries and Performance.getMetrics comparison on a representative interaction.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline/post-interaction heap summaries and Performance.getMetrics comparison on a representative interaction.",
+      "evidence": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/discoverability.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Cloudflare bot verification blocked the audit entry point. Browser navigation rendered only “Performing security verification”; the raw document returned HTTP 403 with cf-mitigated: challenge, so the site UI and representative routes could not be inspected without misjudging the challenge page as the product.",
+      "findingIds": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry-home",
+      "description": "Homepage entry and route-recon attempt. Intended to identify navigation and representative archetypes; blocked by Cloudflare before target content loaded.",
+      "url": "https://czbooks.net/",
+      "conditions": [
+        "default desktop",
+        "viewport: 360x800",
+        "raw HTTP fetch",
+        "crawler view without JavaScript"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "representative-templates",
+      "description": "Planned listing, book/detail, reading, search, and account/form archetypes. Not covered because no target-site links or content were reachable through the challenge.",
+      "url": "https://czbooks.net/",
+      "conditions": [
+        "planned only"
+      ],
+      "result": "skipped"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 2,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T10-57-29-341Z"
+}

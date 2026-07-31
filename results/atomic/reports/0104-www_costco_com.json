@@ -1,0 +1,1128 @@
+{
+  "url": "https://www.costco.com",
+  "auditedAt": "2026-07-27T14:46:49.080Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The origin returned HTML to curl, with x-nextjs-cache and x-next-i18n-router-locale headers suggesting Next.js, but the browser page never rendered. Framework is therefore not asserted."
+  },
+  "evidenceUsed": [
+    "raw-CDP navigation",
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "curl headers"
+  ],
+  "guidanceConsulted": [],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop Chrome error page after navigation to Costco.",
+      "condition": "viewport: default; wait: 5s",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile-retry.png",
+      "caption": "Independent mobile retry showing the same navigation failure.",
+      "condition": "viewport: 360x800; wait: 10s",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "DOM capture contains Chrome internal network error UI rather than Costco-authored content.",
+      "condition": "wait: 5s",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/navigation-probe.json",
+      "caption": "Runtime probe records chrome-error://chromewebdata/ and ERR_HTTP2_PROTOCOL_ERROR.",
+      "condition": "independent CDP session; wait: 5s",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic manifest of all 58 expected principle/check pairs, including evidence plans.",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT (not mandatory): a screenshot or computed background under an emulated prefers-color-scheme: dark condition will reveal whether surfaces re-tint; the page CSS / a color-scheme declaration is corroborating evidence. The model chooses the method.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for respects-color-scheme.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a transition video, or an in-page probe of getAnimations()/computed animation under an emulated prefers-reduced-motion: reduce condition, can show whether motion stops. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for respects-reduced-motion.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a screenshot under emulated prefers-contrast: more / forced-colors, or an axe/contrast probe, can show whether controls and text survive. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for respects-contrast.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a transition video of a route/state change shows whether it animates; the page source / ::view-transition usage corroborates. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for view-transitions.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: source/CSS inspection for animation-timeline: scroll()/view(); a long-task / scroll-handler probe can flag the main-thread anti-pattern. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for scroll-driven-animations.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: CSS inspection for scroll-snap / overscroll-behavior / physics-based easing vs custom pointermove listeners. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for physical-gestures.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a transition video of scrolling, or CSS inspection for scroll-state container queries. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for scroll-state-aware-chrome.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: CSS inspection for anchor-name / position-anchor / position-try on overlays; a screenshot of an open overlay near a viewport edge can show drift. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for anchored-positioning.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: CSS inspection for ::highlight / scroll-marker; a transition video can show whether attention is cued after navigation. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for directs-attention.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a screenshot on load, or a DOM probe for full-viewport overlays present before interaction. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for no-intrusive-interruptions.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: DOM/source inspection for popover / <dialog> / <details> vs custom overlay divs with manual dismiss handling. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for semantic-dismissible-primitives.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a screenshot plus layout metrics can show the proportion of the viewport given to chrome vs content. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for reduced-chrome.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: layout metrics (scrollWidth vs innerWidth) and a screenshot at an emulated narrow mobile viewport reveal overflow. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for responsive-no-horizontal-scroll.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: CSS inspection for @container / container-type; a computed-style probe of the same component in a wide vs narrow container shows whether it adapts. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for component-level-responsiveness.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a focus probe (focus an element, read the computed outline) or an axe target-size check; a screenshot of a focused control corroborates. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for input-modality-aware.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: screenshot the first viewport and key scrolled states; inspect heading structure, nav labels, button text, and visual hierarchy; a task walkthrough can show whether the next action is obvious. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for clear-purpose-and-primary-action.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: run the flow manually with screenshots/DOM snapshots at each step; compare expected vs actual path length; inspect form requirements, navigation continuity, and blockers. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for primary-flow-completion.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: exercise network delay/failure, invalid input, empty data and success states; screenshot the state messaging and recovery controls; inspect whether browser history and focus remain sensible. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for clear-system-state-and-recovery.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: Lighthouse reports LCP/CLS/TBT directly and the model may run it; layout metrics + a layout-shift observer + a long-task observer (the evidence primitives) give the same signal first-party. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for good-core-web-vitals.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: the layout primitive's CLS observer captures shifts; a transition video of the first seconds shows content jumping. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for visual-stability.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: the layout primitive records long tasks; a heap summary shows the object population; Lighthouse reports TBT. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for efficient-main-thread.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a HAR summary can reveal cache headers, redirects, render-blocking candidates, weight offenders and dependency shape; a trace/Lighthouse insight report can corroborate LCP discovery, render-blocking, font-display and document latency. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for efficient-resource-delivery.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: Lighthouse/trace/code-coverage style evidence can flag unused JS/CSS, duplicated JavaScript and legacy code; a HAR summary shows third-party byte cost and request count. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for trim-unused-and-duplicate-code.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: axe-core (injectable via the evaluate primitive) or Lighthouse's a11y audits enumerate these; a DOM probe of the accessibility-relevant attributes is a first-party alternative. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for names-roles-labels.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: axe contrast rules, a Lighthouse contrast audit, or an in-page probe computing contrast ratios from computed colours. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for sufficient-contrast.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: axe/Lighthouse structural audits; a focus-walk probe (tab through, read activeElement + computed outline) is a first-party alternative. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for structure-and-focus.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a screenshot of body and heading text, plus CSS inspection for text-wrap / text alignment / font fallback handling. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for legible-text.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: Lighthouse/axe target-size, meta-viewport and media-caption audits are useful signals; screenshots at narrow and zoomed conditions plus DOM/media inspection can corroborate. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for zoom-reflow-targets-and-media.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: capture Runtime/Log CDP events, or a probe that reads collected errors; Lighthouse reports this too. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for no-console-errors.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a DOM/source probe for doctype/charset/img dimensions; CSS inspection for repetition; Lighthouse best-practices audits cover the rest. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for sound-document-and-assets.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: Lighthouse best-practices audits and DevTools inspector/deprecation signals can surface these; DOM/source probes can verify paste handlers and prompt timing. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for browser-platform-hygiene.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a DOM probe reads <title> and meta[name=description]; Lighthouse SEO audits cover the same ground. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for title-and-description.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a DOM probe for anchor hrefs, viewport meta, and robots; Lighthouse SEO audits corroborate. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for crawlable-and-mobile-friendly.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: inspect response status and headers, <link rel=canonical>, hreflang links, robots meta, robots.txt and sitemap.xml; Lighthouse SEO audits cover several of these. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for canonical-and-indexing-signals.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: inspect JSON-LD/microdata and social preview tags against visible content; Lighthouse has a manual structured-data audit, and ad-hoc probes can parse schema.org blocks. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for structured-and-shareable-metadata.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: inspect response headers / page protocol via an evaluate probe or the network layer; Lighthouse best-practices flags HTTPS and CSP issues. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for secure-transport-and-headers.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: inspect network requests and third-party origins; a probe of analytics/beacon calls. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for data-minimisation-and-third-parties.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a probe for permission requests fired on load; source inspection for passkey / WebAuthn / navigator.credentials usage in auth flows. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for in-context-permissions-and-modern-auth.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: inspect response headers and browser security state; Lighthouse/DevTools security audits can corroborate HSTS, clickjacking, Trusted Types, origin isolation and third-party cookie findings. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for defensive-browser-policies.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: load with scripting disabled or compare a no-JS fetch of the HTML against the rendered page; check for Baseline-aware fallbacks in source. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for progressive-enhancement.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: exercise menus near viewport edges with a screenshot; a probe of async/visibility behaviour. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for resilient-runtime-behaviour.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a probe for a service worker registration and a web app manifest; test behaviour offline. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for offline-and-installable.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: simulate failed fetches/offline mode or inspect representative 404/500 routes; screenshots and DOM snapshots of error/loading/empty states show whether recovery is possible. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for network-and-http-failure-states.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a DOM probe for <html lang>/dir and CSS inspection for logical vs physical properties. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for lang-dir-and-logical-properties.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: source inspection for Intl.* usage vs hand-rolled formatting; a probe of rendered dates/numbers under a different locale. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for locale-aware-data.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: source inspection for time-zone-aware date handling vs naive local Date math. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for time-zone-correctness.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a screenshot of consent/upsell/cancel flows; source inspection for declarative button actions vs misleading controls. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for no-dark-patterns.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: exercise a form, submit invalid input, and observe timing and clarity of errors via a screenshot or a :user-invalid / aria-invalid probe. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for humane-error-handling.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: source/DOM inspection for autocomplete attributes on form fields; a probe of autofill affordances. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for trustworthy-input-assistance.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: walkthrough checkout/subscription/auth/account flows when present; screenshot pricing, confirmation, cancellation and reauthentication states; inspect passkey/autocomplete support for sign-in and payment. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for safe-commercial-and-account-flows.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: inspect transferred image bytes vs displayed size; source inspection for modern formats and resolution handling. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for optimised-assets.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a long-task / network probe for background fetches and processing while idle or backgrounded. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for no-wasteful-work.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a HAR summary shows third-party bytes, font/media weight and caching; screenshots/video reveal autoplay and decorative media; trace/layout evidence shows whether media/animation keeps work running. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for third-party-and-media-budget.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: source inspection for WebMCP / agentic-tool registration and agent-readable affordances. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for structured-agent-capabilities.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: source inspection for built-in AI (language model / summariser) usage. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for on-device-inference.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT (not mandatory): compare heap snapshots for retained growth - a baseline, then one taken after repeating the interaction with `--interact` about 10x (the memory-tracer methodology: baseline -> repeat -> post -> compare). Performance.getMetrics (JSHeapUsedSize, Nodes) across the same before/after window is corroboration. If Chrome DevTools MCP is available, follow its memory-leak-debugging skill: capture baseline, target, and final snapshots, then use memlab or the provided comparison workflow rather than reading raw .heapsnapshot files directly. The package-native `heap` primitive remains the default path. This check is only meaningful where the page has a real interaction to repeat; for a static page with none, mark it not-applicable with a rationale rather than fabricating one. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for no-leak-under-repeated-interaction.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: a single `heap` summary's totals (nodeCount, totalSelfSizeBytes, constructor population) plus Performance.getMetrics (Nodes, JSHeapUsedSize) give the current footprint to judge against the page's purpose. Chrome DevTools MCP heap snapshots and memlab snapshot analysis can provide the same memory distribution when available. Read summaries or derived analysis, never raw snapshots unless a dedicated heap-analysis tool is doing the analysis. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for bounded-footprint.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation over raw CDP before executing the planned check-specific method: HINT: the `heap` summary by constructor (Detached* nodes) compared across a before/after pair shows a growing detached-DOM population; an `evaluate` probe can sample listener/timer counts (e.g. getEventListeners-style counting, or instrumenting addEventListener/setInterval) before and after the repeated interaction to spot growth. Chrome DevTools MCP heap snapshots plus the memory-leak-debugging skill's common-leak guidance can corroborate detached DOM, listeners, closures, globals, and unbounded caches. Caveat from the memory-tracer and Chrome DevTools MCP guidance: detached nodes can be intentional caches, so judge confidence rather than asserting a bug. The model chooses.",
+      "evidence": "Navigation prerequisite failed with ERR_HTTP2_PROTOCOL_ERROR; no Costco-authored DOM or rendered state was available for no-detached-dom-or-unbounded-listeners.",
+      "reason": "Chrome navigation reached chrome-error://chromewebdata/ with ERR_HTTP2_PROTOCOL_ERROR on repeated desktop, mobile, DOM, and evaluate attempts, although curl reached the origin over HTTP/2. The target page never rendered, so site evidence could not be gathered.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/navigation-probe.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 check(s) were blocked by the external HTTP/2 navigation failure; no verdict was inferred from absent evidence."
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage entry path and recon prerequisite. Desktop, mobile, DOM, and runtime retries all failed before Costco content rendered. Candidate product, listing/search, account, cart, and checkout archetypes were not selected or exercised because route discovery was impossible.",
+      "url": "https://www.costco.com",
+      "conditions": [
+        "desktop viewport",
+        "viewport 360x800",
+        "independent browser sessions",
+        "5s and 10s waits"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T14-45-11-415Z"
+}

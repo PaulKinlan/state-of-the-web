@@ -1,0 +1,1719 @@
+{
+  "url": "https://uidai.gov.in",
+  "auditedAt": "2026-07-23T23:15:51.239Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage is complete. Dynamic locale pages repeatedly failed to settle; that observed failure is recorded as an issue rather than an unexecuted check.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Legacy Joomla-like server HTML plus a newer Next.js locale application observed during the same run",
+    "notes": "The exact root response changed during evidence gathering: initial loads produced a static language selector, while a later HAR redirected / to /hi. English content was still available as full raw HTML, but Chrome load events did not settle."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "discoverability",
+    "trace",
+    "har",
+    "heap-summary",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "Lighthouse",
+    "curl/raw-HTML inspection"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "forms",
+    "fluid-scaling",
+    "optimize-image-priority",
+    "optimize-preload-priority",
+    "break-up-long-tasks",
+    "identify-heavy-scripts",
+    "security",
+    "privacy",
+    "passkeys",
+    "translator",
+    "validate-input-after-interaction",
+    "accessible-error-announcement",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals",
+    "html",
+    "cross-document-transitions",
+    "size-aware-styling",
+    "loading"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home.png",
+      "caption": "Language-selection entry page at desktop width",
+      "condition": "desktop",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Language-selection entry page at 360x800",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Entry page remains light when dark preference is emulated",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered entry page used for crawler comparison",
+      "condition": "JavaScript enabled"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view preserves the language-selection content",
+      "condition": "JavaScript disabled"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered-content discoverability results"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered entry-page DOM and page CSS",
+      "findingIds": [
+        "F01",
+        "F03",
+        "F04",
+        "F09"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Metadata, focus visibility, target dimensions and platform-feature probe",
+      "condition": "keyboard focus",
+      "findingIds": [
+        "F05",
+        "F09",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Reduced-motion animation probe",
+      "condition": "prefers-reduced-motion: reduce"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics show no horizontal overflow or observed shifts",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace for the entry page"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Entry-page FCP/LCP and main-thread summary"
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network capture that redirected from the entry URL to the Hindi application"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact network summary: 88 requests, 2.37 MB, backend timeouts and third parties",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F08",
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report for the language-selection entry page",
+      "findingIds": [
+        "F02",
+        "F05",
+        "F07",
+        "F08",
+        "F10",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-failures.txt",
+      "caption": "Readable extract of failed Lighthouse audits",
+      "findingIds": [
+        "F02",
+        "F07",
+        "F08",
+        "F10",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Entry-page image sizing and alternative-text probe",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers observed on the exact entry URL",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit for the entry URL"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Initial tracker probe for the language-selector response"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secret scan found no exposed secrets"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline entry-page heap summary"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "Heap summary after ten rounds of focus/hover interactions"
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw-pages-summary.json",
+      "caption": "Static summaries for home, task, forms, search and 404 archetypes",
+      "findingIds": [
+        "F04",
+        "F09",
+        "F10",
+        "F12",
+        "F13",
+        "F14",
+        "F17"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/en-home-raw.html",
+      "caption": "Raw English home document"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/en-my-aadhaar-get-aadhaar.html.html",
+      "caption": "Raw Get Aadhaar task-page document"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/en-my-aadhaar-downloads-enrolment-and-update-forms.html.html",
+      "caption": "Raw enrolment/update forms listing document"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/en-component-search--searchword-Aadhaar-searchphrase-all-Itemid-2376.html",
+      "caption": "Raw search-results document"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/not-found.html",
+      "caption": "Raw not-found response",
+      "findingIds": [
+        "F06",
+        "F10",
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt request returned an HTML error page",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "sitemap.xml request returned an HTML 404 fragment",
+      "findingIds": [
+        "F13"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "emulated-media screenshot/evaluate",
+      "evidence": "Dark-preference screenshot is visually and byte-for-byte identical to the light screenshot; no colour preference CSS was found.",
+      "pathIds": [
+        "entry"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "emulated-media screenshot/evaluate",
+      "evidence": "With prefers-reduced-motion: reduce active, the entry page reported zero running animations.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "emulated-media screenshot/evaluate",
+      "evidence": "Lighthouse measured two instruction-text nodes at 4.02:1, below 4.5:1.",
+      "pathIds": [
+        "entry"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/CSS and interaction inspection",
+      "evidence": "Language buttons use document.location.replace and source has no view-transition styles.",
+      "pathIds": [
+        "entry"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS and interaction inspection",
+      "evidence": "DOM/CSS inspection found no scroll-linked motion and no scroll-event-driven animation on the selector, so no main-thread scroll animation anti-pattern is present.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM/CSS and interaction inspection",
+      "evidence": "The selector exposes ordinary large buttons and no custom pointer, swipe, drag or overscroll interaction that fights native input.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual/DOM navigation inspection",
+      "evidence": "The short selector fits one page and has no affixed chrome requiring scroll-state adaptation; mobile layout remained stable.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "visual/DOM navigation inspection",
+      "evidence": "No tooltip, popover or floating menu was present on the selector or the representative static pages, so there is no anchored overlay to evaluate.",
+      "reason": "No tooltip, popover or floating menu was present on the selector or the representative static pages, so there is no anchored overlay to evaluate."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual/DOM navigation inspection",
+      "evidence": "Language navigation provides no directional transition or destination focus cue.",
+      "pathIds": [
+        "entry"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "desktop/mobile screenshots and DOM inspection",
+      "evidence": "Desktop and mobile screenshots show content immediately with no popup, consent wall or interstitial obscuring it.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "desktop/mobile screenshots and DOM inspection",
+      "evidence": "No overlay or rich disclosure appeared on the evaluated selector or representative raw task pages, so no ad-hoc overlay was observed.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "desktop/mobile screenshots and DOM inspection",
+      "evidence": "The selector devotes the viewport to one instruction and language choices with minimal framing.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "360x800 layout plus focus probe and CSS inspection",
+      "evidence": "At 360x800, layout metrics report scrollWidth 360, innerWidth 360 and horizontalOverflowPx 0.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "360x800 layout plus focus probe and CSS inspection",
+      "evidence": "Captured selector CSS and representative source contain no container query usage for repeated controls.",
+      "pathIds": [
+        "entry"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "360x800 layout plus focus probe and CSS inspection",
+      "evidence": "All 13 focused buttons compute to outline none and no box shadow.",
+      "pathIds": [
+        "entry"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "first-viewport review and repeated language-flow attempts",
+      "evidence": "The first viewport plainly asks users to select a preferred language and presents all language actions immediately.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "first-viewport review and repeated language-flow attempts",
+      "evidence": "Repeated /en loads timed out at 120 seconds and direct Chrome timed out at 300 seconds.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "first-viewport review and repeated language-flow attempts",
+      "evidence": "The stalled locale load exposed no actionable loading/error/retry state.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout and images probes",
+      "evidence": "Lighthouse measured LCP 1.3 s, CLS 0.009 and TBT 0 ms; the independent trace measured LCP 2366 ms and TBT 0 ms.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout and images probes",
+      "evidence": "Two entry images and most representative-page images omit intrinsic dimensions, creating avoidable shift risk despite low observed CLS.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout and images probes",
+      "evidence": "Trace summary recorded no long tasks and zero total blocking time; Lighthouse TBT was also 0 ms.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout and images probes",
+      "evidence": "Lighthouse found render-blocking/cache issues; HAR captured six backend resources timing out around five minutes.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout and images probes",
+      "evidence": "98% of Bootstrap CSS was unused; the application HAR included 39 scripts and duplicate Google tags.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility, visual inspection, focus/structure and raw-DOM probes",
+      "evidence": "Representative raw task/forms pages include images without alt; entry grouping is generically named “Basic example”.",
+      "pathIds": [
+        "entry",
+        "get-aadhaar",
+        "forms"
+      ],
+      "findingIds": [
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility, visual inspection, focus/structure and raw-DOM probes",
+      "evidence": "Lighthouse measured two text failures at 4.02:1.",
+      "pathIds": [
+        "entry",
+        "get-aadhaar",
+        "forms"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility, visual inspection, focus/structure and raw-DOM probes",
+      "evidence": "Entry has no heading/landmark structure and all focused language buttons have no visible indicator.",
+      "pathIds": [
+        "entry",
+        "get-aadhaar",
+        "forms"
+      ],
+      "findingIds": [
+        "F05",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility, visual inspection, focus/structure and raw-DOM probes",
+      "evidence": "The primary instruction text fails minimum normal-text contrast at 4.02:1.",
+      "pathIds": [
+        "entry",
+        "get-aadhaar",
+        "forms"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility, visual inspection, focus/structure and raw-DOM probes",
+      "evidence": "The 360px screenshot reflows to two columns without horizontal overflow, Lighthouse target-size passed, and the viewport permits scaling.",
+      "pathIds": [
+        "entry",
+        "get-aadhaar",
+        "forms"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and raw-document/assets inspection",
+      "evidence": "Lighthouse logged a 404 for the locale favicon.",
+      "pathIds": [
+        "entry",
+        "not-found"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and raw-document/assets inspection",
+      "evidence": "Images omit intrinsic dimensions and the 404 response lacks a complete HTML document structure.",
+      "pathIds": [
+        "entry",
+        "not-found"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse and raw-document/assets inspection",
+      "evidence": "Lighthouse best-practices scored 0.96; aside from the separately recorded favicon console error, no permission prompt, paste prevention or deprecated-platform failure was observed.",
+      "pathIds": [
+        "entry",
+        "not-found"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability primitive, raw HTML, metadata, robots and sitemap requests",
+      "evidence": "Entry has no description; representative pages reuse one generic description and no canonical.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "get-aadhaar",
+        "forms",
+        "search"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability primitive, raw HTML, metadata, robots and sitemap requests",
+      "evidence": "robots/sitemap endpoints return error HTML and search output includes anchors without href.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "get-aadhaar",
+        "forms",
+        "search"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability primitive, raw HTML, metadata, robots and sitemap requests",
+      "evidence": "No canonical/hreflang signals were found and robots/sitemap endpoints are invalid.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "get-aadhaar",
+        "forms",
+        "search"
+      ],
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability primitive, raw HTML, metadata, robots and sitemap requests",
+      "evidence": "Four public organization/service archetypes contain Open Graph but zero JSON-LD blocks.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "get-aadhaar",
+        "forms",
+        "search"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, secrets and HAR third-party analysis",
+      "evidence": "Exact selector response omitted CSP, HSTS, nosniff, frame, referrer and permissions headers.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, secrets and HAR third-party analysis",
+      "evidence": "Application HAR captured 31 third-party requests/627 KB, duplicate analytics and failed translation calls.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "headers, cookies, secrets and HAR third-party analysis",
+      "evidence": "The audited UIDAI information surfaces expose neither a permission request nor an authentication form; account/authentication is handed to separate MyAadhaar origins outside this run.",
+      "reason": "The audited UIDAI information surfaces expose neither a permission request nor an authentication form; account/authentication is handed to separate MyAadhaar origins outside this run."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, secrets and HAR third-party analysis",
+      "evidence": "The selector template lacks all browser-enforced policies inspected by the headers primitive.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "no-JS/raw HTML comparison, route attempts and 404/network failure inspection",
+      "evidence": "Discoverability measured 100% rendered-word coverage in raw HTML and no JavaScript shell; raw task pages contain full headings, links and content.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "not-found"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "no-JS/raw HTML comparison, route attempts and 404/network failure inspection",
+      "evidence": "Locale application loads never settled and multiple backend resources timed out after about five minutes.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "not-found"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "no-JS/raw HTML comparison, route attempts and 404/network failure inspection",
+      "evidence": "The audited surface is a public information/service gateway rather than a standalone app, so installability is not required; progressive enhancement and failure handling were judged separately.",
+      "reason": "The audited surface is a public information/service gateway rather than a standalone app, so installability is not required; progressive enhancement and failure handling were judged separately."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "no-JS/raw HTML comparison, route attempts and 404/network failure inspection",
+      "evidence": "Timed-out backend resources produced no useful recovery UI; error templates are incomplete.",
+      "pathIds": [
+        "entry",
+        "english-home",
+        "not-found"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "lang/dir and raw CSS/markup inspection",
+      "evidence": "Multilingual labels, including Urdu, have no per-language dir, and sampled source showed no logical CSS.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "lang/dir and raw CSS/markup inspection",
+      "evidence": "No locale-sensitive date, currency, duration or calendar value appeared in the evaluated selector and selected task/form archetypes.",
+      "reason": "No locale-sensitive date, currency, duration or calendar value appeared in the evaluated selector and selected task/form archetypes."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "lang/dir and raw CSS/markup inspection",
+      "evidence": "The representative pages expose no event scheduling or time-zone-sensitive data.",
+      "reason": "The representative pages expose no event scheduling or time-zone-sensitive data."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "choice and representative form/flow inspection",
+      "evidence": "The selector presents all 13 languages at equal visual weight with no preselected, shaming or coercive choice.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "choice and representative form/flow inspection",
+      "evidence": "No data-entry or required-field workflow exists on the selector; the search field has no validation semantics to exercise.",
+      "reason": "No data-entry or required-field workflow exists on the selector; the search field has no validation semantics to exercise."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "choice and representative form/flow inspection",
+      "evidence": "The sampled forms contain only search/hidden controls; no address, payment, sign-in or sign-up field requires autofill tokens.",
+      "reason": "The sampled forms contain only search/hidden controls; no address, payment, sign-in or sign-up field requires autofill tokens."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "choice and representative form/flow inspection",
+      "evidence": "No checkout, subscription, consent, authentication or account-management flow is hosted on the audited UIDAI pages.",
+      "reason": "No checkout, subscription, consent, authentication or account-management flow is hosted on the audited UIDAI pages."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR bytes, media and failed-work analysis",
+      "evidence": "Application HAR includes a 440 KB chatbot GIF and roughly 444 KB of decorative backgrounds.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR bytes, media and failed-work analysis",
+      "evidence": "Repeated translation requests returned 401 while six media requests ran for around five minutes before timing out.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR bytes, media and failed-work analysis",
+      "evidence": "2.37 MB initial transfer includes 627 KB third-party code, duplicate analytics, a 440 KB GIF and large decorative media.",
+      "pathIds": [
+        "entry",
+        "english-home"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "raw source capability inspection and applicability judgement",
+      "evidence": "No declared agent-facing surface was found; this emerging capability is optional and its absence is not penalised.",
+      "reason": "No declared agent-facing surface was found; this emerging capability is optional and its absence is not penalised."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "raw source capability inspection and applicability judgement",
+      "evidence": "No on-device inference use case is declared or needed for the audited selector and content templates.",
+      "reason": "No on-device inference use case is declared or needed for the audited selector and content templates."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "baseline/post heap-summary comparison",
+      "evidence": "The selector has no reversible stateful interaction to repeat; language selection is a one-way navigation that failed to settle, so a synthetic leak cycle was not fabricated.",
+      "reason": "The selector has no reversible stateful interaction to repeat; language selection is a one-way navigation that failed to settle, so a synthetic leak cycle was not fabricated."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "baseline/post heap-summary comparison",
+      "evidence": "Baseline heap was 2.84 MB self size with 58,659 nodes, proportionate for the selector; the post-interaction snapshot remained 3.23 MB.",
+      "pathIds": [
+        "entry"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "baseline/post heap-summary comparison",
+      "evidence": "Neither heap summary lists Detached* constructors; ten focus/hover rounds produced no detached-DOM population.",
+      "pathIds": [
+        "entry"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F06",
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F02",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable for this public information/service scope."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry",
+      "description": "Public entry and language-selection archetype; tested visually, on mobile, under dark/reduced-motion preferences, with performance/security/accessibility probes.",
+      "url": "https://uidai.gov.in/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard-only"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "english-home",
+      "description": "English locale homepage and destination of the primary language journey; raw HTML inspected and browser navigation attempted repeatedly.",
+      "url": "https://uidai.gov.in/en",
+      "conditions": [
+        "JavaScript enabled",
+        "raw HTML/no-JS"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "get-aadhaar",
+      "description": "Primary service/task-list archetype representing how residents start an Aadhaar journey.",
+      "url": "https://uidai.gov.in/en/my-aadhaar/get-aadhaar.html",
+      "conditions": [
+        "raw HTML/no-JS"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "forms",
+      "description": "Forms/download listing archetype representing enrolment and update paperwork.",
+      "url": "https://uidai.gov.in/en/my-aadhaar/downloads/enrolment-and-update-forms.html",
+      "conditions": [
+        "raw HTML/no-JS"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search-results/form archetype representing content discovery.",
+      "url": "https://uidai.gov.in/en/component/search/?searchword=Aadhaar&searchphrase=all&Itemid=2376",
+      "conditions": [
+        "raw HTML/no-JS"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Invalid-route recovery archetype.",
+      "url": "https://uidai.gov.in/en/definitely-not-a-real-page-web-uplift",
+      "conditions": [
+        "HTTP error response",
+        "raw HTML/no-JS"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The entry page ignores the user’s dark-colour preference.",
+      "evidence": "The normal and prefers-color-scheme: dark screenshots are byte-identical (51,328 bytes in the initial captures), and the DOM/CSS evidence contains no prefers-color-scheme or color-scheme rule.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and define accessible surface/text colours with prefers-color-scheme or light-dark(), while retaining a light fallback.",
+      "effort": "small"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Instruction text misses WCAG minimum contrast.",
+      "evidence": "Lighthouse measured #137eb2 text on #f2f2f2 at 4.02:1 for both English and Hindi instructions, below the required 4.5:1.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-failures.txt",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Darken the blue text or lighten its background until normal text reaches at least 4.5:1 in every theme and contrast mode.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "cross-document-transitions",
+      "guidanceCategory": "user-experience",
+      "summary": "Language changes are abrupt document replacements with no transition or attention cue.",
+      "evidence": "The DOM wires every language button to document.location.replace(), contains no view-transition CSS, and the entry screenshots show no state or directional cue beyond the button grid.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home.png"
+      ],
+      "suggestedFix": "Use cross-document View Transitions with a reduced-motion fallback, and preserve/focus the destination heading after language selection.",
+      "effort": "small"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "medium",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "summary": "Responsive behaviour is viewport-driven rather than component-driven.",
+      "evidence": "The captured entry CSS and static representative documents contain no @container or container-type usage; repeated cards and controls are sized through Bootstrap viewport columns.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/raw-pages-summary.json"
+      ],
+      "suggestedFix": "Give reusable card/control regions containment and use size container queries for their internal layout, retaining viewport rules as a broad-page fallback.",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Keyboard focus is not visibly indicated on any language button.",
+      "evidence": "The active focus probe found outline: none 0px and no box-shadow for all 13 buttons. Lighthouse confirms target sizes are adequate, so the failure is specifically keyboard focus visibility.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Add a strong :focus-visible indicator with at least a 2px contrasting outline and offset; do not remove the browser outline without an equivalent.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F06",
+      "severity": "critical",
+      "confidence": "high",
+      "pathId": "english-home",
+      "url": "https://uidai.gov.in/en",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "loading",
+      "guidanceCategory": "user-experience",
+      "summary": "The primary language-entry journey did not complete in Chrome because the destination load never settled.",
+      "evidence": "Six raw-CDP attempts to load /en timed out after 120 seconds and a direct Chrome attempt timed out after 300 seconds. A later HAR of the root redirect to /hi recorded six backend image requests taking roughly 297–303 seconds and failing with ERR_TIMED_OUT; no useful recovery state appeared.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/not-found.html"
+      ],
+      "suggestedFix": "Remove blocking dependency on the timing-out backend, enforce short request timeouts, render the core page shell/content independently, and expose an actionable retry/error state.",
+      "effort": "large"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-preload-priority",
+      "guidanceCategory": "performance",
+      "summary": "Resource delivery has avoidable blocking and cache inefficiency.",
+      "evidence": "Lighthouse reports 430 ms potential savings from render-blocking styles and 39 KiB from missing cache lifetimes; the HAR summary also identifies uncompressed translation JS/CSS with no cache headers.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-failures.txt",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Inline only critical entry styles, defer non-critical CSS, set long immutable caching for versioned assets, and compress/cache the translation bundle.",
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "summary": "The entry journey ships substantial unused and duplicate client code.",
+      "evidence": "Lighthouse found 98% (23 KiB) of Bootstrap CSS unused on the selector. The later application HAR transferred 2.37 MB across 88 requests, including three Google tag scripts totalling about 460 KiB and 39 script requests overall.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-failures.txt",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Replace full Bootstrap on the selector with scoped critical CSS, load one analytics configuration, and split/defer application code by route and user intent.",
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The entry surface lacks semantic page structure and visible keyboard orientation.",
+      "evidence": "The rendered entry has no h1–h6, header, nav, main or footer landmark, and the only named role is a generic group labelled “Basic example”; all focused controls have no visible outline.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use a main landmark and a real h1 for the language prompt, give the group a descriptive label, and provide a persistent :focus-visible treatment.",
+      "effort": "small"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Images lack intrinsic dimensions and the error template is not a sound HTML document.",
+      "evidence": "Both entry images omit width and height; Lighthouse fails unsized-images. The representative raw pages contain many more dimensionless images, while the 404 response has no doctype, html lang, title, viewport or h1.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse.json",
+        "evidence/raw-pages-summary.json",
+        "evidence/not-found.html"
+      ],
+      "suggestedFix": "Add numeric intrinsic width/height to every img and serve the 404 through the normal document template with doctype, language, metadata, landmarks and an h1.",
+      "effort": "small"
+    },
+    {
+      "id": "F11",
+      "severity": "low",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The entry page logs a failed favicon request.",
+      "evidence": "Lighthouse captured a 404 console/network error for /en/uidai-website/templates/tjbase/favicon.ico.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-failures.txt"
+      ],
+      "suggestedFix": "Correct the favicon URL and verify the asset returns 200 on every locale route.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Metadata is incomplete and insufficiently unique across representative pages.",
+      "evidence": "The language selector has no meta description. Four English archetypes use distinct titles but the same generic UIDAI description, and none exposes a canonical URL.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/raw-pages-summary.json"
+      ],
+      "suggestedFix": "Give the selector and each template a concise page-specific description and emit a self-referencing canonical URL.",
+      "effort": "small"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "search",
+      "url": "https://uidai.gov.in/sitemap.xml",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Crawler discovery and indexing signals are internally inconsistent.",
+      "evidence": "Requests to /robots.txt and /sitemap.xml returned styled 404/error HTML rather than valid directives/XML; representative pages expose no canonical or hreflang links, and the search HTML includes three anchors without href.",
+      "artifacts": [
+        "evidence/robots.txt",
+        "evidence/sitemap.xml",
+        "evidence/raw-pages-summary.json"
+      ],
+      "suggestedFix": "Serve valid robots.txt and XML sitemap files, add self-canonicals plus locale hreflang alternates, and ensure navigational links have real href values.",
+      "effort": "medium"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "english-home",
+      "url": "https://uidai.gov.in/en/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Public organization and service pages lack structured entity metadata.",
+      "evidence": "The four raw English archetypes include Open Graph tags but zero application/ld+json blocks despite representing a government organization, services and forms.",
+      "artifacts": [
+        "evidence/raw-pages-summary.json"
+      ],
+      "suggestedFix": "Add accurate JSON-LD for GovernmentOrganization/WebSite and relevant service or article entities, matching the visible page content.",
+      "effort": "small"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "The exact entry response omits browser security headers even though the newer locale response supplies them.",
+      "evidence": "The headers primitive found no CSP, HSTS, nosniff, clickjacking, referrer or permissions policy on the language selector. A separate curl response for /en did include these controls, showing inconsistent policy by template.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Apply the same CSP, HSTS, nosniff, frame-ancestors, Referrer-Policy and Permissions-Policy at the edge to every response, including selector and error templates.",
+      "effort": "small"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "english-home",
+      "url": "https://uidai.gov.in/hi",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "Third-party analytics and translation traffic is disproportionate on initial entry.",
+      "evidence": "The HAR records 31 third-party requests and 627,109 transferred bytes, including three Google tag scripts and repeated translation calls that returned 401.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Consolidate analytics to one consent-aware endpoint, delay it until needed/allowed, self-host or trim translation assets, and prevent unauthorized retry traffic.",
+      "effort": "medium"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "entry",
+      "url": "https://uidai.gov.in/",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "built-in-ai",
+      "summary": "The multilingual selector does not mark per-language direction and uses no logical layout properties.",
+      "evidence": "The page html language is en, but all 13 language labels, including RTL Urdu, are rendered without dir attributes. Static summaries found physical CSS and no logical-property evidence.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/raw-pages-summary.json"
+      ],
+      "suggestedFix": "Set lang and dir on each language label (dir=rtl for Urdu) and migrate reusable spacing/positioning to inline/block logical properties.",
+      "effort": "small"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "english-home",
+      "url": "https://uidai.gov.in/hi",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "Media and third-party cost is excessive for a government service gateway.",
+      "evidence": "The application HAR transfers 2.37 MB: a 440 KiB chatbot GIF, 444 KiB of decorative background WebP images, 627 KiB of third-party resources and duplicated analytics. Six backend media requests ran for about five minutes before timeout.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Replace the GIF with a small static/modern animation, remove or sharply compress decorative backgrounds, consolidate analytics, lazy-load optional tools and cancel timed-out media requests quickly.",
+      "effort": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Make locale entry and backend-dependent content load reliably",
+      "priority": 1,
+      "findingIds": [
+        "F06"
+      ],
+      "guidanceId": "loading",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore visible keyboard focus and semantic page structure",
+      "priority": 2,
+      "findingIds": [
+        "F05",
+        "F09"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Apply security headers consistently to every template",
+      "priority": 3,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Reduce, defer and deduplicate scripts, media and third parties",
+      "priority": 4,
+      "findingIds": [
+        "F07",
+        "F08",
+        "F16",
+        "F18"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Repair crawler infrastructure and indexing metadata",
+      "priority": 5,
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Meet text contrast and user colour preferences",
+      "priority": 6,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Add intrinsic media dimensions and repair error/favicon assets",
+      "priority": 7,
+      "findingIds": [
+        "F10",
+        "F11"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Make multilingual layout direction-aware and interaction transitions clear",
+      "priority": 8,
+      "findingIds": [
+        "F03",
+        "F04",
+        "F17"
+      ],
+      "guidanceId": "translator",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 2500,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-23T22-50-14-618Z"
+}

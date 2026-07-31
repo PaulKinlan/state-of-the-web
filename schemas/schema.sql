@@ -1,8 +1,12 @@
 // State of the Web — SQLite schema for web-uplift audit results
 CREATE TABLE IF NOT EXISTS sites (
     site TEXT PRIMARY KEY,
-    source TEXT DEFAULT 'cdp',  -- 'gpt' (vision-audited) or 'cdp' (CDP evidence only)
+    source TEXT DEFAULT 'cdp',  -- 'atomic', legacy 'gpt', or legacy 'cdp'
     rank INTEGER,
+    manifest_position INTEGER UNIQUE,
+    crux_rank_bucket INTEGER,
+    disposition TEXT,  -- complete | exhaustedBlocked | exhaustedPartial
+    attempts INTEGER,
     audited_at TEXT,
     url TEXT,
     final_url TEXT,
@@ -24,13 +28,23 @@ CREATE TABLE IF NOT EXISTS sites (
     has_viewport INTEGER,
     has_meta_description INTEGER,
     https_only INTEGER,
-    hsts INTEGER
+    hsts INTEGER,
+    -- Canonical atomic publication provenance and literal coverage.
+    report_path TEXT,
+    report_sha256 TEXT,
+    coverage_expected INTEGER,
+    coverage_recorded INTEGER,
+    coverage_judged INTEGER,
+    coverage_blocked INTEGER,
+    coverage_not_run INTEGER,
+    coverage_complete INTEGER,
+    status_detail TEXT
 );
 
 CREATE TABLE IF NOT EXISTS principles (
     site TEXT,
     principle_id TEXT,
-    status TEXT,  -- pass | issues | not-applicable
+    status TEXT,  -- pass | issues | incomplete | not-applicable | opted-out
     confidence TEXT,
     summary TEXT,
     finding_count INTEGER,
@@ -60,7 +74,7 @@ CREATE TABLE IF NOT EXISTS test_results (
     site TEXT,
     principle_id TEXT,
     test_id TEXT,
-    status TEXT,  -- pass | issues | not-applicable | blocked | not-run
+    status TEXT,  -- pass | issues | not-applicable | opted-out | blocked | not-run
     confidence TEXT,
     summary TEXT,
     evidence TEXT,

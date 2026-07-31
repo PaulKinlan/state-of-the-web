@@ -1,0 +1,2510 @@
+{
+  "url": "https://www.amazon.co.uk",
+  "auditedAt": "2026-07-19T14:04:54.798Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete across 58 checks and six representative public paths. Purchase was not irreversibly submitted; checkout entry and sign-in were inspected.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Amazon server-rendered templates with client enhancement",
+    "notes": "Large UK commerce site. Coverage includes home, search, product, basket, sign-in entry and error recovery. Account settings, seller tools, Prime Video, order history and post-auth checkout were not covered because they are distinct authenticated/product surfaces and no credentials were provided."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "video",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "lighthouse",
+    "heap-summary comparison",
+    "robots/sitemap fetch"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "scrollytelling",
+    "navigation-drawer",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "fluid-scaling",
+    "size-aware-styling",
+    "forms",
+    "performance",
+    "identify-heavy-scripts",
+    "optimize-image-priority",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "The dark-emulated screenshot remains the same white/light catalogue as the normal capture; DOM computed styles report color-scheme: normal and product CSS contains no prefers-color-scheme rule.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "The reduced-motion probe reports 34 running _aXZlL_loadingShimmer animations, each 1500 ms, while matchMedia confirms prefers-reduced-motion: reduce; product CSS has no matching media rule.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/product-reduced-motion.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Product CSS contains no prefers-contrast or forced-colors rules; controls rely heavily on custom sprite colours. Lighthouse found no ordinary text contrast failure, so this is a preference-support gap rather than a general contrast failure.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/product-dom.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "DOM/CSS inspection found no view-transition CSS or scroll animation timeline; the add-to-basket screencast produced only two abrupt state frames.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/product-add-to-cart.mp4",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "DOM/CSS inspection found no view-transition CSS or scroll animation timeline; the add-to-basket screencast produced only two abrupt state frames.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/product-add-to-cart.mp4",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Product CSS contains 10 scroll-snap/overscroll-behavior signals and no custom pointer-move gesture was observed.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Homepage/product CSS has no @container scroll-state, anchor-name, position-anchor, or position-try signals despite numerous role=dialog/menu surfaces.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Homepage/product CSS has no @container scroll-state, anchor-name, position-anchor, or position-try signals despite numerous role=dialog/menu surfaces.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Search results, product title/price, skip navigation and Add to basket controls provide clear visual and keyboard attention cues.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Fresh-profile homepage and product screenshots show a fixed consent form covering roughly the lower 40% of a 1000 px viewport. The overlay is dismissible and offers equal Accept/Decline controls, but content is substantially obscured.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/product-desktop.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "The platform probe found 25 role-dialog/aria-modal surfaces but zero dialog and zero popover elements; the consent UI is a fixed form.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Homepage screenshots devote two navigation bars plus multiple full-height promotional rails to chrome; at 360 px the desktop canvas is clipped and adjacent cards remain visible off-screen.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "All home/search/product/cart DOM captures report hasViewportMeta=false. At 360x800 the homepage layout reports a 1000 px inner canvas and 640 px horizontal overflow; the screenshot shows clipped desktop navigation and cards.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/search-mobile-layout.json",
+        "evidence/product-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "DOM/CSS probes found no @container rules, while the same catalogue and product modules remain desktop-sized in narrow captures.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse target-size failed on two groups; the product focus probe counted 19 sub-24 px targets and showed several global links/buttons with outline:none after programmatic focus, including Add to basket shortcuts.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json",
+        "evidence/product-probe.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Search clearly labels Results; product exposes title, price, stock and Add to basket; cart clearly explains its empty state.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Search, product, basket and sign-in entry were reached in sequence; visible controls and stable URLs support discovery through checkout entry without an avoidable dead end before credential entry.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Empty basket explains state and offers shopping/sign-in choices; invalid product screenshot gives an explicit apology and homepage recovery link.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse performance scored 0.37 with FCP 6.5 s, LCP 15.2 s, TBT 840 ms and TTI 19.1 s. The raw-CDP trace corroborated FCP 4.51 s, LCP 4.57 s and two long tasks.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-lighthouse-failures.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Layout observer reported CLS 0 with no recorded shifts; Lighthouse also reports CLS 0.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse performance scored 0.37 with FCP 6.5 s, LCP 15.2 s, TBT 840 ms and TTI 19.1 s. The raw-CDP trace corroborated FCP 4.51 s, LCP 4.57 s and two long tasks.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-lighthouse-failures.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "HAR recorded 127 requests and 2.89 MB transferred, including 1.06 MB script, 735 KB fonts, 10 grounded render-blocking candidates, and 2.43 MB from non-main origins; a WAF challenge script alone transferred 591 KB.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "HAR recorded 127 requests and 2.89 MB transferred, including 1.06 MB script, 735 KB fonts, 10 grounded render-blocking candidates, and 2.43 MB from non-main origins; a WAF challenge script alone transferred 591 KB.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse found aria-allowed-attr, aria-prohibited-attr and label-content-name-mismatch failures; image probes found 2 missing alts on home, 7 on search and 38 on product.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "signin"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json",
+        "evidence/home-images.json",
+        "evidence/search-images.json",
+        "evidence/product-images.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Lighthouse accessibility scored 0.90 and did not report a colour-contrast failure; screenshots show readable primary text/control contrast.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "signin"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse reports a malformed agent accessibility tree; focus probing showed multiple visible controls with no outline, and the consent Accept/Decline inputs computed outline:none.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "signin"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json",
+        "evidence/product-probe.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Desktop search/product screenshots show readable line lengths, hierarchy and unclipped product copy.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "signin"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Every representative DOM lacked viewport meta, narrow layouts retained 980–1000 px canvases, and Lighthouse failed target size.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "signin"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse errors-in-console failed with one recorded error.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse found six incorrect-aspect-ratio instances; image probes found 41/42 home images and 89/100 product images without both dimensions. Doctype and UTF-8 charset pass.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/product-images.json",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Lighthouse deprecations failed with two items; browser console errors also occurred.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "DOM metadata summary shows search and cart have no meta description or canonical; search also has no structured/share metadata. Lighthouse reports one non-crawlable anchor.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/dom-metadata-summary.tsv",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "DOM metadata summary shows search and cart have no meta description or canonical; search also has no structured/share metadata. Lighthouse reports one non-crawlable anchor.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/dom-metadata-summary.tsv",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "DOM metadata summary shows search and cart have no meta description or canonical; search also has no structured/share metadata. Lighthouse reports one non-crawlable anchor.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/dom-metadata-summary.tsv",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Product probe found zero JSON-LD and zero Open Graph tags despite a visible named product, price, rating and availability.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/product-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "HTTPS passes, but the headers primitive found no CSP, HSTS, nosniff, frame protection, Referrer-Policy or Permissions-Policy. Cookie audit found 7/8 cookies insecure and auth-like session-id/session-id-time not HttpOnly.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Consent copy names 129 third parties. HAR attributes 112/127 requests and 2.43 MB to non-main origins, though the tracker primitive found no known third-party tracker domains and secrets scan found no credentials.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json",
+        "evidence/home-secrets.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "No notification/geolocation prompt appeared on load; sign-in markup includes WebAuthn/passkey support strings and username autocomplete.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "HTTPS passes, but the headers primitive found no CSP, HSTS, nosniff, frame protection, Referrer-Policy or Permissions-Policy. Cookie audit found 7/8 cookies insecure and auth-like session-id/session-id-time not HttpOnly.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Discoverability captures report homepage 1% raw/rendered word coverage (HTTP 202) and search 0%, both isJsShell=true; by contrast product content is 96% present, showing the resilient product pattern is achievable.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/search-discoverability.json",
+        "evidence/search-discoverability-rendered.png",
+        "evidence/search-discoverability-crawler.png",
+        "evidence/product-discoverability.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Consent, search filters, product commerce panel and cart state remained visible and were not cut off in desktop captures.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Platform probe found an active service-worker controller but no manifest link; no installable identity or offline fallback was exposed on the commerce entry page.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-platform-probe.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Invalid product path presents a clear, compact error and a working route back to the homepage.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Rendered documents use lang=en-gb and platform probe found logical CSS properties; UK currency/date strings are localized.",
+      "pathIds": [
+        "home",
+        "search",
+        "product"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Product/search pages consistently render UK pound currency and localized delivery-date phrasing.",
+      "pathIds": [
+        "home",
+        "search",
+        "product"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of selected page archetypes and rendered locale-sensitive concepts.",
+      "evidence": "The selected public shopping archetypes expose relative delivery dates but no cross-time-zone event or recurring-time concept to evaluate.",
+      "reason": "The selected public shopping archetypes expose relative delivery dates but no cross-time-zone event or recurring-time concept to evaluate.",
+      "pathIds": [
+        "home",
+        "search",
+        "product"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Consent gives Accept, Decline and Customise together without confirmshaming; product price, APR disclosure, stock, returns and seller are visible.",
+      "pathIds": [
+        "product",
+        "cart",
+        "signin",
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Invalid URL error is plain-language and actionable; sign-in labels the required identifier before continuation.",
+      "pathIds": [
+        "product",
+        "cart",
+        "signin",
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Sign-in identifier uses autocomplete=username; search has an accessible label and intentionally disables unrelated autofill.",
+      "pathIds": [
+        "product",
+        "cart",
+        "signin",
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Product shows total price, stock, delivery, returns, seller and finance disclosure before purchase; account creation and help are visible at sign-in.",
+      "pathIds": [
+        "product",
+        "cart",
+        "signin",
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Home uses 35 legacy images and 40 images without srcset; product uses 91 legacy images, 51 oversized images and 89 missing dimensions.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/product-images.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "HAR shows 127 requests/2.89 MB, 24 scripts/1.06 MB and 112 non-main-origin requests; Lighthouse TBT is 840 ms and TTI 19.1 s.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "HAR shows 127 requests/2.89 MB, 24 scripts/1.06 MB and 112 non-main-origin requests; Lighthouse TBT is 840 ms and TTI 19.1 s.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "The public product/search flows are relevant to agents, but the platform probe found no WebMCP surface and Lighthouse found the agent accessibility tree malformed.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct multimodal evidence gathered under the check-specific planned condition; see linked finding.",
+      "evidence": "Chrome exposes LanguageModel and Summarizer globals in the probe, but the page registered no observable on-device summarisation or product-comparison capability.",
+      "pathIds": [
+        "home",
+        "search",
+        "product",
+        "cart"
+      ],
+      "artifacts": [
+        "evidence/home-platform-probe.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Same-page 10-cycle scroll probe kept DOM nodes exactly 1612 and animations exactly 3; JS heap rose only 4.63%, not evidence of unbounded retained growth.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Heap baseline was 393,510 nodes and 23.9 MB self size; proportionate for this complex catalogue page, though optimisation remains desirable.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct screenshot, DOM/evaluate, Lighthouse, layout, flow-state, security, network, discoverability or memory evidence appropriate to this check.",
+      "evidence": "Across ten same-page scroll cycles DOM nodes and animation count were flat; separate snapshots varied only 1.01% in node count, with no accumulating visible session state.",
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F24",
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F26",
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F28",
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and first-visit consent experience, representing discovery and global chrome.",
+      "url": "https://www.amazon.co.uk/",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "no JavaScript crawler",
+        "fresh profile"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search/listing archetype for the primary product-discovery journey.",
+      "url": "https://www.amazon.co.uk/s?k=headphones",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "no JavaScript crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "product",
+      "description": "Product-detail archetype, pricing, availability, media, and add-to-basket controls.",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "no JavaScript crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "cart",
+      "description": "Basket/checkout entry state and recovery from an empty basket.",
+      "url": "https://www.amazon.co.uk/gp/cart/view.html",
+      "conditions": [
+        "desktop",
+        "anonymous session"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "signin",
+      "description": "Authentication entry reached from basket, inspected for labels, autocomplete and passkey/WebAuthn support.",
+      "url": "https://www.amazon.co.uk/ap/signin?openid.mode=checkid_setup",
+      "conditions": [
+        "desktop",
+        "anonymous session"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "error",
+      "description": "Invalid product URL representing an HTTP/application error recovery state.",
+      "url": "https://www.amazon.co.uk/dp/INVALIDASIN404",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The experience ignores the user’s dark colour preference.",
+      "evidence": "The dark-emulated screenshot remains the same white/light catalogue as the normal capture; DOM computed styles report color-scheme: normal and product CSS contains no prefers-color-scheme rule.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare color-scheme and provide preference-driven surface/text tokens using prefers-color-scheme or light-dark().",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Loading shimmer motion continues under reduced-motion.",
+      "evidence": "The reduced-motion probe reports 34 running _aXZlL_loadingShimmer animations, each 1500 ms, while matchMedia confirms prefers-reduced-motion: reduce; product CSS has no matching media rule.",
+      "artifacts": [
+        "evidence/product-reduced-motion.json"
+      ],
+      "suggestedFix": "Disable or replace non-essential shimmer animations inside prefers-reduced-motion: reduce.",
+      "effort": "small",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "No explicit high-contrast or forced-colours adaptation is present.",
+      "evidence": "Product CSS contains no prefers-contrast or forced-colors rules; controls rely heavily on custom sprite colours. Lighthouse found no ordinary text contrast failure, so this is a preference-support gap rather than a general contrast failure.",
+      "artifacts": [
+        "evidence/product-dom.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Add forced-colors and prefers-contrast adaptations for essential custom controls and focus indicators.",
+      "effort": "medium",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "State changes do not use modern declarative transition primitives.",
+      "evidence": "DOM/CSS inspection found no view-transition CSS or scroll animation timeline; the add-to-basket screencast produced only two abrupt state frames.",
+      "artifacts": [
+        "evidence/product-add-to-cart.mp4",
+        "evidence/product-dom.json"
+      ],
+      "suggestedFix": "Use View Transitions for meaningful state changes and CSS animation timelines for genuinely scroll-linked effects, with reduced-motion fallbacks.",
+      "effort": "medium",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F05",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Global navigation does not use scroll-state or anchor positioning for contextual chrome.",
+      "evidence": "Homepage/product CSS has no @container scroll-state, anchor-name, position-anchor, or position-try signals despite numerous role=dialog/menu surfaces.",
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "suggestedFix": "Progressively enhance sticky chrome with scroll-state queries and attach menus/tooltips with CSS anchor positioning plus fallbacks.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "navigation-drawer",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The first-visit consent panel obscures a large share of the core page.",
+      "evidence": "Fresh-profile homepage and product screenshots show a fixed consent form covering roughly the lower 40% of a 1000 px viewport. The overlay is dismissible and offers equal Accept/Decline controls, but content is substantially obscured.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/product-desktop.png"
+      ],
+      "suggestedFix": "Reduce the panel footprint, preserve equal choices, and use a semantic dismissible dialog pattern that keeps context visible.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Overlay infrastructure is largely custom rather than native semantic primitives.",
+      "evidence": "The platform probe found 25 role-dialog/aria-modal surfaces but zero dialog and zero popover elements; the consent UI is a fixed form.",
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Migrate modal flows to dialog and transient menus to popover with declarative light-dismiss.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Dense global chrome and horizontal card rails crowd primary content.",
+      "evidence": "Homepage screenshots devote two navigation bars plus multiple full-height promotional rails to chrome; at 360 px the desktop canvas is clipped and adjacent cards remain visible off-screen.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Prioritise a compact mobile header and stack or snap content modules so the core task dominates each viewport.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "navigation-drawer",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F09",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Public templates omit the viewport meta tag and render a desktop canvas on phones.",
+      "evidence": "All home/search/product/cart DOM captures report hasViewportMeta=false. At 360x800 the homepage layout reports a 1000 px inner canvas and 640 px horizontal overflow; the screenshot shows clipped desktop navigation and cards.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/search-mobile-layout.json",
+        "evidence/product-mobile-layout.json"
+      ],
+      "suggestedFix": "Add a valid width=device-width viewport declaration and rebuild global/header/card layouts with intrinsic fluid sizing and narrow-screen reflow.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Reusable modules do not demonstrate component-level adaptation.",
+      "evidence": "DOM/CSS probes found no @container rules, while the same catalogue and product modules remain desktop-sized in narrow captures.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/product-dom.json"
+      ],
+      "suggestedFix": "Introduce size containers and container queries for reused cards, nav modules and commerce panels.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Some controls are undersized or lose visible keyboard focus.",
+      "evidence": "Lighthouse target-size failed on two groups; the product focus probe counted 19 sub-24 px targets and showed several global links/buttons with outline:none after programmatic focus, including Add to basket shortcuts.",
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json",
+        "evidence/product-probe.json"
+      ],
+      "suggestedFix": "Ensure at least 24x24 CSS px targets with spacing and preserve a strong :focus-visible indicator on every interactive control.",
+      "effort": "medium",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Cold-load performance is poor.",
+      "evidence": "Lighthouse performance scored 0.37 with FCP 6.5 s, LCP 15.2 s, TBT 840 ms and TTI 19.1 s. The raw-CDP trace corroborated FCP 4.51 s, LCP 4.57 s and two long tasks.",
+      "artifacts": [
+        "evidence/home-lighthouse.json",
+        "evidence/home-lighthouse-failures.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace"
+      ],
+      "suggestedFix": "Profile the LCP dependency chain, prioritise the LCP asset, and break up/defer non-critical main-thread work.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The load ships a heavy blocking resource graph.",
+      "evidence": "HAR recorded 127 requests and 2.89 MB transferred, including 1.06 MB script, 735 KB fonts, 10 grounded render-blocking candidates, and 2.43 MB from non-main origins; a WAF challenge script alone transferred 591 KB.",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Shorten blocking CSS chains, subset/preload only critical fonts, defer scripts, and conditionally load non-critical dependencies.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Accessible names and ARIA semantics contain defects.",
+      "evidence": "Lighthouse found aria-allowed-attr, aria-prohibited-attr and label-content-name-mismatch failures; image probes found 2 missing alts on home, 7 on search and 38 on product.",
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json",
+        "evidence/home-images.json",
+        "evidence/search-images.json",
+        "evidence/product-images.json"
+      ],
+      "suggestedFix": "Correct role/ARIA combinations and accessible names; give meaningful images accurate alt and decorative images empty alt.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard and accessibility-tree quality is inconsistent.",
+      "evidence": "Lighthouse reports a malformed agent accessibility tree; focus probing showed multiple visible controls with no outline, and the consent Accept/Decline inputs computed outline:none.",
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json",
+        "evidence/product-probe.json"
+      ],
+      "suggestedFix": "Repair tree semantics and apply consistent :focus-visible styling without suppressing native outlines.",
+      "effort": "medium",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F16",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Zoom/reflow support is undermined by the missing viewport and small targets.",
+      "evidence": "Every representative DOM lacked viewport meta, narrow layouts retained 980–1000 px canvases, and Lighthouse failed target size.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "suggestedFix": "Use a scalable viewport, reflow layouts at narrow widths, and enlarge/space touch targets.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The homepage logs browser errors.",
+      "evidence": "Lighthouse errors-in-console failed with one recorded error.",
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "suggestedFix": "Remove the underlying runtime/network error or handle the expected failure without emitting a console error.",
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image and document asset hygiene is inconsistent.",
+      "evidence": "Lighthouse found six incorrect-aspect-ratio instances; image probes found 41/42 home images and 89/100 product images without both dimensions. Doctype and UTF-8 charset pass.",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/product-images.json",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "suggestedFix": "Provide intrinsic width/height or aspect-ratio and avoid distorting responsive images.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Deprecated APIs and inspector hygiene failures remain.",
+      "evidence": "Lighthouse deprecations failed with two items; browser console errors also occurred.",
+      "artifacts": [
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "suggestedFix": "Replace deprecated APIs and keep the page free of DevTools deprecation/console issues.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Search and basket templates omit essential metadata and indexing signals.",
+      "evidence": "DOM metadata summary shows search and cart have no meta description or canonical; search also has no structured/share metadata. Lighthouse reports one non-crawlable anchor.",
+      "artifacts": [
+        "evidence/dom-metadata-summary.tsv",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "suggestedFix": "Add unique descriptions and appropriate canonical/indexing signals to public templates and keep navigation anchors crawlable.",
+      "effort": "medium",
+      "pathId": "search",
+      "url": "https://www.amazon.co.uk/s?k=headphones",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F21",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Product entities lack structured and social-preview metadata.",
+      "evidence": "Product probe found zero JSON-LD and zero Open Graph tags despite a visible named product, price, rating and availability.",
+      "artifacts": [
+        "evidence/product-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "suggestedFix": "Emit accurate schema.org Product/Offer JSON-LD plus Open Graph preview metadata matching visible content.",
+      "effort": "medium",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core browser security headers and cookie protections are missing.",
+      "evidence": "HTTPS passes, but the headers primitive found no CSP, HSTS, nosniff, frame protection, Referrer-Policy or Permissions-Policy. Cookie audit found 7/8 cookies insecure and auth-like session-id/session-id-time not HttpOnly.",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "suggestedFix": "Deploy a tested CSP, HSTS, nosniff, frame-ancestors, Referrer-Policy and Permissions-Policy; mark sensitive cookies Secure, HttpOnly and with the narrowest SameSite.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The first load has a broad third-party/data-processing footprint.",
+      "evidence": "Consent copy names 129 third parties. HAR attributes 112/127 requests and 2.43 MB to non-main origins, though the tracker primitive found no known third-party tracker domains and secrets scan found no credentials.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json",
+        "evidence/home-secrets.json"
+      ],
+      "suggestedFix": "Minimise pre-consent requests, audit each vendor/affiliate origin, and defer optional analytics or advertising until informed consent.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy"
+    },
+    {
+      "id": "F24",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Homepage and search content collapse for non-JavaScript crawlers.",
+      "evidence": "Discoverability captures report homepage 1% raw/rendered word coverage (HTTP 202) and search 0%, both isJsShell=true; by contrast product content is 96% present, showing the resilient product pattern is achievable.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/search-discoverability.json",
+        "evidence/search-discoverability-rendered.png",
+        "evidence/search-discoverability-crawler.png",
+        "evidence/product-discoverability.json"
+      ],
+      "suggestedFix": "Server-render meaningful homepage/search content and crawlable links, then progressively enhance interactivity.",
+      "effort": "large",
+      "pathId": "search",
+      "url": "https://www.amazon.co.uk/s?k=headphones",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F25",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "No installable/offline product surface was exposed.",
+      "evidence": "Platform probe found an active service-worker controller but no manifest link; no installable identity or offline fallback was exposed on the commerce entry page.",
+      "artifacts": [
+        "evidence/home-platform-probe.json"
+      ],
+      "suggestedFix": "Provide a manifest and intentional offline/failure fallback for app-like shopping surfaces, or explicitly scope this capability out.",
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F26",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Image delivery is wasteful across key templates.",
+      "evidence": "Home uses 35 legacy images and 40 images without srcset; product uses 91 legacy images, 51 oversized images and 89 missing dimensions.",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/product-images.json"
+      ],
+      "suggestedFix": "Serve AVIF/WebP where useful, right-size sources with srcset/sizes, reserve dimensions and lazy-load below-fold media.",
+      "effort": "large",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F27",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Background and third-party work exceeds a proportionate first-load budget.",
+      "evidence": "HAR shows 127 requests/2.89 MB, 24 scripts/1.06 MB and 112 non-main-origin requests; Lighthouse TBT is 840 ms and TTI 19.1 s.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-lighthouse.json"
+      ],
+      "suggestedFix": "Set per-template budgets, conditionally load optional code, and deprioritise background fetch/analytics.",
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.amazon.co.uk/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F28",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Agentic commerce capabilities are not exposed as structured tools.",
+      "evidence": "The public product/search flows are relevant to agents, but the platform probe found no WebMCP surface and Lighthouse found the agent accessibility tree malformed.",
+      "artifacts": [
+        "evidence/home-platform-probe.json",
+        "evidence/home-lighthouse-binary-failures.json"
+      ],
+      "suggestedFix": "Pilot narrow, safe WebMCP tools or agentic forms for search, product facts and basket actions with explicit confirmation.",
+      "effort": "large",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "webmcp"
+    },
+    {
+      "id": "F29",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "No page-owned on-device inference enhancement was observed.",
+      "evidence": "Chrome exposes LanguageModel and Summarizer globals in the probe, but the page registered no observable on-device summarisation or product-comparison capability.",
+      "artifacts": [
+        "evidence/home-platform-probe.json"
+      ],
+      "suggestedFix": "Treat this as an opportunity: evaluate private on-device summarisation/comparison only where it improves the shopping task and has a non-AI fallback.",
+      "effort": "large",
+      "pathId": "product",
+      "url": "https://www.amazon.co.uk/dp/B09B8YWXDF",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "on-device-inference",
+      "guidanceId": "translator",
+      "guidanceCategory": "built-in-ai"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Restore true mobile reflow and target/focus usability",
+      "priority": 1,
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11",
+        "F16"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Reduce LCP, blocking code and first-load network cost",
+      "priority": 2,
+      "findingIds": [
+        "F12",
+        "F13",
+        "F27"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Harden response headers and cookie attributes",
+      "priority": 3,
+      "findingIds": [
+        "F22"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Server-render homepage and search content",
+      "priority": 4,
+      "findingIds": [
+        "F20",
+        "F24"
+      ],
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Fix ARIA, accessible names, focus and image alternatives",
+      "priority": 5,
+      "findingIds": [
+        "F14",
+        "F15"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Optimise and dimension responsive images",
+      "priority": 6,
+      "findingIds": [
+        "F18",
+        "F26"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Reduce and semantically implement the consent interruption",
+      "priority": 7,
+      "findingIds": [
+        "F06",
+        "F07"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add dark, reduced-motion and forced-colour preference support",
+      "priority": 8,
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Add product structured/share metadata",
+      "priority": 9,
+      "findingIds": [
+        "F21"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Clean console/deprecation/platform hygiene",
+      "priority": 10,
+      "findingIds": [
+        "F17",
+        "F19"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Minimise pre-consent and non-main-origin data flows",
+      "priority": 11,
+      "findingIds": [
+        "F23"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Pilot safe structured agent capabilities",
+      "priority": 12,
+      "findingIds": [
+        "F28",
+        "F29"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "T13",
+      "title": "Progressively adopt declarative navigation and transitions",
+      "priority": 13,
+      "findingIds": [
+        "F04",
+        "F05"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T14",
+      "title": "Reduce chrome density on primary surfaces",
+      "priority": 14,
+      "findingIds": [
+        "F08"
+      ],
+      "guidanceId": "navigation-drawer",
+      "status": "open"
+    },
+    {
+      "id": "T15",
+      "title": "Add manifest and intentional offline fallback",
+      "priority": 15,
+      "findingIds": [
+        "F25"
+      ],
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "dom",
+      "path": "evidence/cart-dom.json",
+      "caption": "cart dom",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/cart.png",
+      "caption": "cart",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom-metadata-summary.tsv",
+      "caption": "dom metadata summary",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/error-state.png",
+      "caption": "error state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "home cookies",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "home dark",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "home desktop",
+      "findingIds": [
+        "F06",
+        "F08",
+        "F23"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "home discoverability crawler",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "home discoverability rendered",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "home discoverability",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home dom",
+      "findingIds": [
+        "F01",
+        "F07"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "home headers",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap-comparison.json",
+      "caption": "home heap comparison",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "home images",
+      "findingIds": [
+        "F14",
+        "F18",
+        "F26"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/home-lighthouse-binary-failures.json",
+      "caption": "home lighthouse binary failures",
+      "findingIds": [
+        "F11",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F28"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/home-lighthouse-failures.json",
+      "caption": "home lighthouse failures",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/home-lighthouse.json",
+      "caption": "home lighthouse",
+      "findingIds": [
+        "F03",
+        "F12",
+        "F27"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-memory-metrics.json",
+      "caption": "home memory metrics",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "home mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F09",
+        "F16"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-platform-probe.json",
+      "caption": "home platform probe",
+      "findingIds": [
+        "F05",
+        "F07",
+        "F25",
+        "F28",
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-recon.json",
+      "caption": "home recon",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "home secrets",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary",
+      "findingIds": [
+        "F13",
+        "F23",
+        "F27"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace",
+      "caption": "home trace",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "home trackers",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "video",
+      "path": "evidence/product-add-to-cart.mp4",
+      "caption": "product add to cart",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-add-to-cart.png",
+      "caption": "product add to cart",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-desktop.png",
+      "caption": "product desktop",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-discoverability-crawler.png",
+      "caption": "product discoverability crawler",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-discoverability-rendered.png",
+      "caption": "product discoverability rendered",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/product-discoverability.json",
+      "caption": "product discoverability",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/product-dom.json",
+      "caption": "product dom",
+      "findingIds": [
+        "F03",
+        "F04",
+        "F05",
+        "F10",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/product-images.json",
+      "caption": "product images",
+      "findingIds": [
+        "F14",
+        "F18",
+        "F26"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/product-mobile-layout.json",
+      "caption": "product mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/product-probe.json",
+      "caption": "product probe",
+      "findingIds": [
+        "F11",
+        "F15",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/product-reduced-motion.json",
+      "caption": "product reduced motion",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-headers.txt",
+      "caption": "robots headers",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-add-to-cart.png",
+      "caption": "search add to cart",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-desktop.png",
+      "caption": "search desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-discoverability-crawler.png",
+      "caption": "search discoverability crawler",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-discoverability-rendered.png",
+      "caption": "search discoverability rendered",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/search-discoverability.json",
+      "caption": "search discoverability",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/search-dom.json",
+      "caption": "search dom",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-images.json",
+      "caption": "search images",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/search-mobile-layout.json",
+      "caption": "search mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/signin-dom.json",
+      "caption": "signin dom",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/signin.png",
+      "caption": "signin",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "sitemap",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T14-04-54-798Z"
+}

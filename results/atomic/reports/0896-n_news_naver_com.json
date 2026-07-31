@@ -1,0 +1,1923 @@
+{
+  "url": "https://n.news.naver.com",
+  "auditedAt": "2026-07-23T17:16:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete representative audit of the news homepage/listing, an article, and an invalid-route recovery state.",
+  "page": {
+    "appType": "mpa",
+    "framework": "server-rendered multi-page application",
+    "notes": "The entry URL redirects to news.naver.com for the homepage; article URLs remain under n.news.naver.com. Korean public news listing and article templates."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "images",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "discoverability",
+    "heap-summary",
+    "lighthouse"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "anchor-positioning-tab-underline",
+    "directional-navigation-transitions",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "complex-shapes",
+    "fluid-scaling",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "move-dom-element-without-losing-state",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "resilient-context-menus-and-nested-dropdowns",
+    "persistent-toast-notifications",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "search-hidden-content",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals",
+    "highlight-text-ranges",
+    "passkey-management",
+    "faster-spa-view-transitions",
+    "calculate-with-intrinsic-sizes"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/recon-desktop.png",
+      "caption": "Homepage at desktop viewport",
+      "findingIds": [
+        "F-01"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/recon-dom.json",
+      "caption": "Rendered homepage DOM and CSS",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360×800",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Homepage narrow-layout metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast.png",
+      "caption": "Homepage under increased contrast",
+      "condition": "prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-mobile.png",
+      "caption": "Article at 360×800",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-desktop.png",
+      "caption": "Article at desktop viewport",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/article-dom.json",
+      "caption": "Rendered article DOM and CSS",
+      "findingIds": [
+        "F-14"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/article-mobile-layout.json",
+      "caption": "Article narrow-layout metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Homepage network archive",
+      "findingIds": [
+        "F-08",
+        "F-17",
+        "F-19"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact homepage network summary",
+      "findingIds": [
+        "F-08",
+        "F-13",
+        "F-17",
+        "F-18",
+        "F-19"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "Homepage DevTools performance trace",
+      "findingIds": [
+        "F-07"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact homepage performance summary",
+      "findingIds": [
+        "F-07"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Homepage image audit",
+      "findingIds": [
+        "F-18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Homepage security-header audit",
+      "findingIds": [
+        "F-15",
+        "F-16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Homepage cookie audit",
+      "findingIds": [
+        "F-15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Homepage origin/tracker inventory",
+      "findingIds": [
+        "F-17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Client-exposed secret scan",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Homepage raw/rendered discoverability comparison",
+      "findingIds": [
+        "F-12"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Homepage browser view",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Homepage no-JS crawler view",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "Article raw/rendered discoverability comparison",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "Article browser view",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "Article no-JS crawler view",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Homepage metadata, semantics, focus and feature probe",
+      "findingIds": [
+        "F-03",
+        "F-06",
+        "F-11",
+        "F-13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-probe.json",
+      "caption": "Article metadata, semantics, focus and feature probe",
+      "findingIds": [
+        "F-03",
+        "F-06",
+        "F-11",
+        "F-13",
+        "F-14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-reduced-motion.json",
+      "caption": "Runtime animation probe under reduced motion",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F-02"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-delivery-probe.json",
+      "caption": "Script/style delivery and viewport probe",
+      "findingIds": [
+        "F-05",
+        "F-08"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap-baseline.heapsnapshot",
+      "caption": "Baseline heap summary",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap-post.heapsnapshot",
+      "caption": "Heap summary after ten scroll cycles",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Full Lighthouse report",
+      "findingIds": [
+        "F-04",
+        "F-09",
+        "F-10",
+        "F-12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-home-summary.json",
+      "caption": "Compact Lighthouse summary",
+      "findingIds": [
+        "F-04",
+        "F-05",
+        "F-06",
+        "F-07",
+        "F-09",
+        "F-10",
+        "F-11"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/error-mobile.png",
+      "caption": "Invalid article recovery state",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/error-dom.json",
+      "caption": "Invalid article recovery DOM",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The desktop screenshot captured with prefers-color-scheme: dark remains a white/light-gray interface, visually matching the default capture.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/recon-desktop.png"
+      ],
+      "findingIds": [
+        "F-01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The reduced-motion runtime probe still found six 400 ms animations. No evidence showed those non-essential animations being removed or shortened.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-reduced-motion.json"
+      ],
+      "findingIds": [
+        "F-02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The high-contrast screenshot retained visible text and controls, and focus outlines were visible in computed styles.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The live computed-style probe found non-none view-transition names; sampled navigation uses ordinary crawlable links rather than abrupt custom state swaps.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "No scroll-linked animation was present in the sampled templates, and the probe found no animation timelines or custom scrollytelling requirement.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The layouts use native document scrolling and links; no custom pointer-driven gesture that fights platform behavior was observed.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Screenshots and DOM inspection show stable, conventional navigation chrome with no broken JS scroll-state toggles.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "No tooltip/menu overlay was open or required for the core listing/article task; no detached or clipped overlay was observed.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/recon-desktop.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Active section styling, descriptive links, and article hierarchy visibly orient the user across listing and article paths.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Load screenshots show content immediately with no full-screen interstitial or consent wall.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/recon-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "No modal flow was required for the sampled core task and no ad-hoc blocking overlay appeared on load.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Desktop and mobile screenshots devote the large majority of the viewport to headlines/article content, with compact navigation.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/recon-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Layout evidence at 360×800 reports 0 px horizontal overflow on both homepage and article.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/article-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The same listing/article templates visibly reflow into single-column mobile layouts without overflow; CSS supports container queries.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The focus/geometry probe measured subscription buttons at about 46×22 px and article print at 16×17.5 px, despite visible keyboard outlines.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json"
+      ],
+      "findingIds": [
+        "F-03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The first viewport clearly identifies Naver News, exposes topic navigation, headlines, and subscription/read actions.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/recon-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "A headline from the homepage was opened as a complete article without login, modal, or dead end.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The invalid article route shows a clear “page not found” message with Back and Press navigation recovery actions.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/error-mobile.png",
+        "evidence/error-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Lighthouse measured FCP 5.7 s, LCP 6.4 s, and time to interactive 9.3 s. A less-throttled trace measured LCP 1.58 s, so the risk is condition-sensitive but material.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "findingIds": [
+        "F-07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Layout evidence measured CLS 0 on the homepage and 0.00044 on the article, with image dimensions reserved.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/article-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Trace evidence measured one long task, 107 ms TBT, and Lighthouse measured 45.5 ms TBT; scripting did not dominate interaction readiness.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The HAR recorded two redirects before the final page, parser-inserted blocking CSS and synchronous classic scripts, 114 requests, and 2.16 MB transferred.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/home-delivery-probe.json"
+      ],
+      "findingIds": [
+        "F-08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Lighthouse estimated 161 KiB unused JavaScript and 100 KiB unused CSS, including news.css at 88% waste and library/read bundles over 60% waste.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "findingIds": [
+        "F-09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Lighthouse passed image-alt and the probes found visible accessible names on sampled controls and native labelled checkboxes.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Lighthouse accessibility reported failing color-contrast nodes and an accessibility score of 0.91.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F-04"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The homepage probe found header/footer but no main/nav landmark; the article contains duplicate/empty H1s and uses H2 for its title. Lighthouse reports the skip link is not focusable.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "findingIds": [
+        "F-06"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Mobile and desktop screenshots show readable Korean text, clear line spacing, and no clipping or horizontal overflow.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The live viewport meta sets maximum-scale=1.0 and user-scalable=no; Lighthouse failed the meta-viewport accessibility audit.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-delivery-probe.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "findingIds": [
+        "F-05"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Lighthouse passed the errors-in-console audit.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "DOM probes confirm HTML doctype and UTF-8; images evidence found explicit dimensions and Lighthouse found no aspect-ratio failure.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-images.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Lighthouse found a deprecated unload listener and four BFCache failure reasons, including UnloadHandlerExistsInMainFrame.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "findingIds": [
+        "F-10"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Both DOM probes returned description: null; Lighthouse failed meta-description. Titles are descriptive.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "findingIds": [
+        "F-11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Lighthouse failed is-crawlable with “Page is blocked from indexing,” despite 100% raw-HTML content coverage and crawlable hrefs.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-discoverability.json"
+      ],
+      "findingIds": [
+        "F-12"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Both probes returned canonical: null, and the HAR shows n.news.naver.com → m.news.naver.com → news.naver.com redirects.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F-13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The article probe found six Open Graph tags and zero JSON-LD blocks on a page representing a news article.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-probe.json",
+        "evidence/article-dom.json"
+      ],
+      "findingIds": [
+        "F-14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Headers evidence found no CSP or HSTS. Cookie evidence found two cookies without Secure and all six with SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F-15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Trackers evidence observed 14 non-host origins; HAR attribution counted 108 cross-origin requests and 2.16 MB, including ad and logging endpoints. No known third-party tracker signature was matched.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F-17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "No permission prompt appeared on load and the sampled public reading flow requires no authentication.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/recon-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "Headers evidence found no Permissions-Policy or CSP, no HSTS, and Referrer-Policy: unsafe-url; X-Frame-Options and nosniff were present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F-16"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Discoverability evidence reports 100% raw-HTML content coverage for homepage and article with non-empty H1/title and no JS shell.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/article-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Core listing and article content remained usable with native links; sampled views showed no clipped menus or fragile blank state.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from site recon and sampled task surfaces.",
+      "evidence": "This public news website is content-first rather than an installable application; offline/PWA support is contextual.",
+      "reason": "This public news website is content-first rather than an installable application; offline/PWA support is contextual.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The invalid article route renders a useful localized error message with recovery links instead of a blank shell.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/error-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from site recon and sampled task surfaces.",
+      "evidence": "The audited Korean-language service is deliberately single-locale; correct lang=ko is present, but cross-language/writing-mode support was not part of this site’s represented intent.",
+      "reason": "The audited Korean-language service is deliberately single-locale; correct lang=ko is present, but cross-language/writing-mode support was not part of this site’s represented intent.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from site recon and sampled task surfaces.",
+      "evidence": "The sampled Korean news templates expose no user-selectable locale or transactional locale-sensitive data flow.",
+      "reason": "The sampled Korean news templates expose no user-selectable locale or transactional locale-sensitive data flow.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from site recon and sampled task surfaces.",
+      "evidence": "The sampled templates show publication timestamps but no cross-time-zone scheduling or event-coordination task.",
+      "reason": "The sampled templates show publication timestamps but no cross-time-zone scheduling or event-coordination task.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Load and article screenshots show no consent nag, forced continuity, disguised primary ad, or confirmshaming in the sampled reading flow.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/recon-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "No user-entry form is part of the core reading journey; the invalid-route error is clear and provides recovery controls.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/error-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The sampled core reading journey has no address, payment, signup, or other personal-data form requiring autofill tokens.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "No checkout, subscription payment, authentication, or account-management commitment appears in the sampled public reading journey.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The images primitive found 98 legacy-format images, no modern-format images, and 23 sources over twice their rendered width.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F-18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Trace TBT is low and no autoplay audio/video was found, but network efficiency is addressed separately by asset and budget findings.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-delivery-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/runtime/network/Lighthouse evidence on representative homepage and article templates.",
+      "evidence": "The HAR recorded 2.16 MB transferred, with 2.158 MB attributed outside the n.news.naver.com origin and large sprite/analytics/ad resources among the top offenders.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F-19"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from site recon and sampled task surfaces.",
+      "evidence": "No declared agent-facing product intent was found; this emerging capability is an opportunity, not a baseline failure.",
+      "reason": "No declared agent-facing product intent was found; this emerging capability is an opportunity, not a baseline failure.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from site recon and sampled task surfaces.",
+      "evidence": "No user task in the sampled news templates requires on-device inference, and no agent intent was declared.",
+      "reason": "No user task in the sampled news templates requires on-device inference, and no agent intent was declared.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "After ten top-to-bottom scroll cycles, heap self size decreased by 53,877 bytes (33,640,777 → 33,586,900); node count changed only +259.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-heap-baseline.heapsnapshot",
+        "evidence/home-heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "Heap summaries show a stable ~33.6 MB self-size footprint for a content-heavy listing.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-heap-baseline.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct evidence review using the planned modality for this check.",
+      "evidence": "The repeated-scroll heap comparison remained effectively flat, with no unbounded retained-size signal in the summary.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-heap-baseline.heapsnapshot",
+        "evidence/home-heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-01",
+        "F-02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-07",
+        "F-08",
+        "F-09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-04",
+        "F-06",
+        "F-05"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-10"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-11",
+        "F-12",
+        "F-13",
+        "F-14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-15",
+        "F-17",
+        "F-16"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "The audited Korean-language service is deliberately single-locale; correct lang=ko is present, but cross-language/writing-mode support was not part of this site’s represented intent. The sampled Korean news templates expose no user-selectable locale or transactional locale-sensitive data flow. The sampled templates show publication timestamps but no cross-time-zone scheduling or event-coordination task."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-18",
+        "F-19"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "No declared agent-facing product intent was found; this emerging capability is an opportunity, not a baseline failure. No user task in the sampled news templates requires on-device inference, and no agent intent was declared."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "News homepage and publisher-card listing; represents discovery/navigation and the initial load.",
+      "url": "https://n.news.naver.com",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "no-JS crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Representative current news article opened from the homepage; represents the core reading journey and article template.",
+      "url": "https://n.news.naver.com/article/586/0000134395",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "keyboard focus",
+        "no-JS crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error",
+      "description": "Invalid article URL; represents HTTP/application recovery behavior.",
+      "url": "https://n.news.naver.com/article/000/0000000",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The news surfaces ignore the user’s dark color-scheme preference.",
+      "evidence": "The desktop screenshot captured with prefers-color-scheme: dark remains a white/light-gray interface, visually matching the default capture.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/recon-desktop.png"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and map surfaces, text, borders, icons, and embedded content to theme tokens or light-dark().",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-02",
+      "severity": "low",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Animations remain configured when reduced motion is requested.",
+      "evidence": "The reduced-motion runtime probe still found six 400 ms animations. No evidence showed those non-essential animations being removed or shortened.",
+      "artifacts": [
+        "evidence/home-reduced-motion.json"
+      ],
+      "suggestedFix": "Use @media (prefers-reduced-motion: reduce) to remove non-essential transitions and stop auto-advance.",
+      "effort": "small",
+      "confidence": "medium",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-03",
+      "severity": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Several interactive targets are smaller than a comfortable touch target.",
+      "evidence": "The focus/geometry probe measured subscription buttons at about 46×22 px and article print at 16×17.5 px, despite visible keyboard outlines.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json"
+      ],
+      "suggestedFix": "Increase interactive hit areas to at least 44×44 CSS px while retaining visible :focus-visible styling and non-hover affordances.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "article",
+      "url": "https://n.news.naver.com/article/586/0000134395"
+    },
+    {
+      "id": "F-04",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Some text and UI colors fail minimum contrast.",
+      "evidence": "Lighthouse accessibility reported failing color-contrast nodes and an accessibility score of 0.91.",
+      "artifacts": [
+        "evidence/lighthouse-home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "suggestedFix": "Adjust muted text, border, and control tokens to meet WCAG contrast ratios in every supported theme.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-05",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "summary": "The viewport configuration prevents user zoom.",
+      "evidence": "The live viewport meta sets maximum-scale=1.0 and user-scalable=no; Lighthouse failed the meta-viewport accessibility audit.",
+      "artifacts": [
+        "evidence/home-delivery-probe.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "suggestedFix": "Use width=device-width, initial-scale=1 and remove maximum-scale, minimum-scale, and user-scalable=no.",
+      "effort": "trivial",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-06",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Landmark and heading structure is incomplete and the skip link fails accessibility checks.",
+      "evidence": "The homepage probe found header/footer but no main/nav landmark; the article contains duplicate/empty H1s and uses H2 for its title. Lighthouse reports the skip link is not focusable.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "suggestedFix": "Expose main/nav landmarks, make the article title the sole meaningful H1, and ensure the skip link becomes visible and focusable and targets an existing focus destination.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "article",
+      "url": "https://n.news.naver.com/article/586/0000134395"
+    },
+    {
+      "id": "F-07",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "guidanceCategory": "performance",
+      "summary": "Lab loading performance misses the good LCP range.",
+      "evidence": "Lighthouse measured FCP 5.7 s, LCP 6.4 s, and time to interactive 9.3 s. A less-throttled trace measured LCP 1.58 s, so the risk is condition-sensitive but material.",
+      "artifacts": [
+        "evidence/lighthouse-home-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "suggestedFix": "Profile the LCP element and prioritize its request; reduce redirect, render-blocking, and non-critical work before first content.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-08",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "summary": "Redirects and parser-blocking resources add avoidable work to the critical path.",
+      "evidence": "The HAR recorded two redirects before the final page, parser-inserted blocking CSS and synchronous classic scripts, 114 requests, and 2.16 MB transferred.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/home-delivery-probe.json"
+      ],
+      "suggestedFix": "Link directly to the final canonical URL, defer non-critical classic scripts, and keep only critical CSS/resources in the initial dependency chain.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-09",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "summary": "The page ships substantial unused CSS and JavaScript.",
+      "evidence": "Lighthouse estimated 161 KiB unused JavaScript and 100 KiB unused CSS, including news.css at 88% waste and library/read bundles over 60% waste.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "suggestedFix": "Split bundles by template and interaction, remove unused selectors/modules, and load analytics or optional UI only when needed.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-10",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Deprecated unload handling blocks the back/forward cache.",
+      "evidence": "Lighthouse found a deprecated unload listener and four BFCache failure reasons, including UnloadHandlerExistsInMainFrame.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "suggestedFix": "Replace unload with pagehide/visibilitychange where necessary and remove avoidable no-store/BFCache blockers.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-11",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Homepage and article omit meta descriptions.",
+      "evidence": "Both DOM probes returned description: null; Lighthouse failed meta-description. Titles are descriptive.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json",
+        "evidence/lighthouse-home-summary.json"
+      ],
+      "suggestedFix": "Emit a unique concise meta description for the homepage and each article.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "article",
+      "url": "https://n.news.naver.com/article/586/0000134395"
+    },
+    {
+      "id": "F-12",
+      "severity": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "search-hidden-content",
+      "guidanceCategory": "html",
+      "summary": "The public news page is blocked from indexing.",
+      "evidence": "Lighthouse failed is-crawlable with “Page is blocked from indexing,” despite 100% raw-HTML content coverage and crawlable hrefs.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-discoverability.json"
+      ],
+      "suggestedFix": "Align robots headers/meta and robots.txt with the intended public indexing policy while preserving SSR content.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-13",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Canonical signals are absent while the entry URL redirects across hosts.",
+      "evidence": "Both probes returned canonical: null, and the HAR shows n.news.naver.com → m.news.naver.com → news.naver.com redirects.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-probe.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Publish self-consistent canonical URLs per template and make internal links point directly to those URLs.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-14",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Article pages provide Open Graph tags but no article structured data.",
+      "evidence": "The article probe found six Open Graph tags and zero JSON-LD blocks on a page representing a news article.",
+      "artifacts": [
+        "evidence/article-probe.json",
+        "evidence/article-dom.json"
+      ],
+      "suggestedFix": "Add accurate schema.org NewsArticle JSON-LD matching the visible headline, publisher, author, dates, image, and canonical URL.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "article",
+      "url": "https://n.news.naver.com/article/586/0000134395"
+    },
+    {
+      "id": "F-15",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Transport is HTTPS but baseline security headers and cookie protections are incomplete.",
+      "evidence": "Headers evidence found no CSP or HSTS. Cookie evidence found two cookies without Secure and all six with SameSite=None.",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "suggestedFix": "Deploy an enforcing CSP and HSTS, mark HTTPS cookies Secure, and use Lax/Strict SameSite unless cross-site behavior is essential.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-16",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Defensive policy coverage is weak and Referrer-Policy is overly permissive.",
+      "evidence": "Headers evidence found no Permissions-Policy or CSP, no HSTS, and Referrer-Policy: unsafe-url; X-Frame-Options and nosniff were present.",
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "suggestedFix": "Use strict-origin-when-cross-origin (or stricter), add Permissions-Policy, retain clickjacking/nosniff protection, and deploy CSP/HSTS.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-17",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "The initial page load has a broad cross-origin analytics/advertising footprint.",
+      "evidence": "Trackers evidence observed 14 non-host origins; HAR attribution counted 108 cross-origin requests and 2.16 MB, including ad and logging endpoints. No known third-party tracker signature was matched.",
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Inventory every logging/ad request, remove low-value calls, batch analytics, and defer non-essential collection until contextual consent or interaction.",
+      "effort": "large",
+      "confidence": "medium",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-18",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "Image delivery relies heavily on legacy formats and oversized sources.",
+      "evidence": "The images primitive found 98 legacy-format images, no modern-format images, and 23 sources over twice their rendered width.",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Serve AVIF/WebP variants and select source dimensions close to rendered size while retaining explicit dimensions and lazy loading.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    },
+    {
+      "id": "F-19",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "summary": "Third-party-style cross-origin assets dominate the page budget.",
+      "evidence": "The HAR recorded 2.16 MB transferred, with 2.158 MB attributed outside the n.news.naver.com origin and large sprite/analytics/ad resources among the top offenders.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Set an explicit per-template byte/request budget, consolidate same-company hosts where practical, and defer ads, analytics, and below-fold media.",
+      "effort": "large",
+      "confidence": "medium",
+      "pathId": "home",
+      "url": "https://n.news.naver.com"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-01",
+      "title": "Restore zoom, contrast, semantic structure, and target sizing",
+      "priority": 1,
+      "guidanceId": "accessibility",
+      "findingIds": [
+        "F-03",
+        "F-04",
+        "F-05",
+        "F-06"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T-02",
+      "title": "Fix public indexing, canonical, description, and NewsArticle metadata",
+      "priority": 2,
+      "guidanceId": "html",
+      "findingIds": [
+        "F-11",
+        "F-12",
+        "F-13",
+        "F-14"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T-03",
+      "title": "Deploy CSP/HSTS and safer browser/cookie policies",
+      "priority": 3,
+      "guidanceId": "security",
+      "findingIds": [
+        "F-15",
+        "F-16"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T-04",
+      "title": "Reduce critical-path, unused code, and LCP cost",
+      "priority": 4,
+      "guidanceId": "identify-heavy-scripts",
+      "findingIds": [
+        "F-07",
+        "F-08",
+        "F-09"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T-05",
+      "title": "Add preference-driven dark and reduced-motion modes",
+      "priority": 5,
+      "guidanceId": "dark-mode",
+      "findingIds": [
+        "F-01",
+        "F-02"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T-06",
+      "title": "Modernize image delivery and enforce a cross-origin page budget",
+      "priority": 6,
+      "guidanceId": "deliver-optimized-decorative-images",
+      "findingIds": [
+        "F-17",
+        "F-18",
+        "F-19"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T-07",
+      "title": "Remove unload/BFCache blockers",
+      "priority": 7,
+      "guidanceId": "html",
+      "findingIds": [
+        "F-10"
+      ],
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 520,
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-23T17-12-48-527Z"
+}

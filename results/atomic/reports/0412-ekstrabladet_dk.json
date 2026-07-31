@@ -1,0 +1,1775 @@
+{
+  "url": "https://ekstrabladet.dk",
+  "auditedAt": "2026-07-20T15:16:07.128Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete representative-template audit. No local source was supplied; critique only.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Server-rendered MPA with Svelte components and legacy/custom modules",
+    "notes": "Public Danish news publication. The homepage is unusually long and media-heavy. A consent interstitial appeared on every fresh browser profile."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-style",
+    "evaluate-probe",
+    "layout-metrics",
+    "har",
+    "trace",
+    "lighthouse",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "curl robots/sitemap/ai policy",
+    "Modern Web Guidance"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "break-up-long-tasks",
+    "css-layout",
+    "dark-mode",
+    "declarative-dialog-popover-control",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "forms",
+    "html",
+    "language-model",
+    "manage-recurring-intervals",
+    "navigation-drawer",
+    "optimize-image-priority",
+    "performance",
+    "physics-based-easing",
+    "privacy",
+    "same-document-transitions",
+    "scrollytelling",
+    "security",
+    "size-aware-styling",
+    "stabilize-reactive-state",
+    "support-global-calendar-systems",
+    "translator",
+    "validate-input-after-interaction",
+    "webmcp"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage at large viewport; consent dialog overlays content.",
+      "condition": "viewport: 1440x1000",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800; fixed 940 CSS-pixel viewport is scaled down and consent dialog obscures content.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F04",
+        "F05",
+        "F09"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under dark preference remains light behind the same light consent dialog.",
+      "condition": "prefers-color-scheme: dark; viewport: 360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics report a 940 CSS-pixel layout viewport at a requested 360px device width.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and computed-style capture for homepage.",
+      "condition": "default",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-recon.json",
+      "caption": "DOM/CSS recon: metadata, links, active animations, container rules and absent View Transition rules.",
+      "condition": "default",
+      "findingIds": [
+        "F03",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences.json",
+      "caption": "Reduced-motion probe reports five running blinker animations while reduce is active.",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR of homepage load (60 requests, 5.19 MB transferred).",
+      "condition": "8 second load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary including 2.91 MB media, render-blocking candidates and cache gaps.",
+      "condition": "8 second load",
+      "findingIds": [
+        "F07",
+        "F12"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace.",
+      "condition": "load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP 1.24s in this run, one 170ms task, TBT 120ms.",
+      "condition": "load",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse mobile audit: performance 60, accessibility 83, SEO 92; LCP 6.0s and TTI 12.1s.",
+      "condition": "mobile",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML vs rendered homepage comparison: 82% content coverage, not a JS shell.",
+      "condition": "JavaScript on/off",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered homepage view.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript homepage view.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header probe: no CSP or Referrer-Policy; HSTS/nosniff/XFO present.",
+      "condition": "main response",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie probe before consent: no cookies set.",
+      "condition": "pre-consent",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Network origin probe: 10 third-party origins before consent.",
+      "condition": "pre-consent",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image probe for loaded state.",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client resource secret scan: no findings.",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/listing-mobile.png",
+      "caption": "News listing at mobile device width, overlaid by consent UI.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-mobile.png",
+      "caption": "Article at mobile device width, with readable article content behind consent UI.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/subscription-mobile.png",
+      "caption": "Subscription landing surface: benefits and CTA shown without visible pricing, behind consent UI.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F04",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-probe.json",
+      "caption": "Article metadata probe: H1, canonical, description, Open Graph and NewsArticle JSON-LD present.",
+      "condition": "article",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/listing-probe.json",
+      "caption": "Listing metadata and landmark probe; no H1/main landmark observed.",
+      "condition": "listing",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/subscription-probe.json",
+      "caption": "Subscription metadata and landmark probe; no H1/main landmark observed.",
+      "condition": "subscription",
+      "findingIds": [
+        "F10",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/404-probe.json",
+      "caption": "404 state has explicit error, homepage recovery link and feedback mail link.",
+      "condition": "invalid route",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Doctype, charset, fixed viewport, script loading, focus outline and CSS-feature probe.",
+      "condition": "homepage",
+      "findingIds": [
+        "F05",
+        "F07"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary: 323,993 heap nodes and 23.94 MB self size.",
+      "condition": "homepage baseline",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "Post-scroll heap summary: 324,887 nodes and 24.14 MB after ten repeated scroll cycles.",
+      "condition": "10 repeated scroll cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "Performance memory/DOM snapshot: 8.8 MB used JS heap and 12,120 DOM elements.",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/ai.txt",
+      "caption": "Publisher AI policy explicitly disallows automated AI utilisation.",
+      "condition": "crawler policy",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "The dark-preference screenshot remains a light surface and the computed html color-scheme is normal; no dark retint is visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "The reduced-motion probe reports five running 1,000ms blinker animations while matchMedia(prefers-reduced-motion: reduce) is true.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Lighthouse contrast analysis directly identified controls/text that do not survive even the standard contrast baseline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "CSS/DOM recon across the multi-route site found no View Transition rules.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No scroll-linked parallax, scrollytelling, or reveal interaction was present on the sampled templates, so there was no scroll-linked implementation to assess.",
+      "reason": "No scroll-linked parallax, scrollytelling, or reveal interaction was present on the sampled templates, so there was no scroll-linked implementation to assess."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No swipe, pull-to-reveal, draggable, or gesture-driven control was present in the representative paths.",
+      "reason": "No swipe, pull-to-reveal, draggable, or gesture-driven control was present in the representative paths."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Mobile screenshots show persistent top navigation and an active-section underline, keeping location visible across homepage, listing and article templates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No tooltip or edge-sensitive anchored popover was present in the representative paths; the consent modal is not an anchored overlay use case.",
+      "reason": "No tooltip or edge-sensitive anchored popover was present in the representative paths; the consent modal is not an anchored overlay use case."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Section tabs expose current-location underlines and article/listing links use direct descriptive labels.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Four mobile template screenshots directly show the consent interstitial obscuring core content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/listing-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/subscription-mobile.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "DOM computed capture shows the consent modal is a div with role=dialog rather than a native dialog; it requires custom handling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/listing-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/subscription-mobile.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "First-viewport screenshots are dominated by consent chrome, animated tickers and promotional framing rather than unobscured content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/listing-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/subscription-mobile.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Mobile layout metrics show a 940px layout viewport scaled to a 360px device.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "CSS recon found multiple @container rules adapting article images, podcast embeds and section-list imagery by container width/aspect ratio.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Although focus outlines were visible, the forced 0.383 scale makes many mobile navigation/link targets visually tiny.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Homepage/listing headlines and article H1 make the publication purpose and next reading actions immediately identifiable behind the consent layer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "The representative article URL loaded complete headline, summary, image and body text with direct crawlable navigation; reading did not require an account.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "The invalid route returned a titled 404 with explicit explanation, a homepage recovery link and a feedback email action.",
+      "pathIds": [
+        "error404"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Lighthouse mobile LCP is 6.0s and TTI 12.1s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Layout observer measured CLS 0.00029 and Lighthouse measured CLS 0, with no meaningful visual shift in the sampled load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Trace measured TBT 120ms with one 170ms task, and Lighthouse scored TBT at 0.97; scripting was not the dominant load bottleneck.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "HAR and DOM confirmation show multiple parser styles and synchronous classic scripts plus cache gaps.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Lighthouse estimates 300KiB unused JavaScript and 47KiB unused CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Lighthouse lists unnamed focusable links and images missing alt.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Lighthouse gives concrete failing ratios from 2.35:1 to 3.47:1.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Template probes found missing main/H1 structure while focus probe confirmed outlines.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json",
+        "evidence/listing-probe.json",
+        "evidence/subscription-probe.json",
+        "evidence/article-probe.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "The fixed 940px viewport scales text and navigation to 38% on a 360px device.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "The fixed width=940 viewport prevents true 320/360px reflow and creates undersized effective targets.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Lighthouse errors-in-console audit passed with no logged browser errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Platform probe found HTML doctype and UTF-8 charset; observed CLS was effectively zero and Lighthouse best-practices score was 1.0.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Lighthouse best-practices score was 1.0 and BFCache audit passed; no notification/geolocation prompt appeared on load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Homepage, listing and article probes all found unique descriptive titles and meta descriptions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Links are crawlable and robots allows indexing, but the width=940 viewport is not mobile-friendly.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Canonical signals are present, but /sitemap.xml returned 404 and googlebot nosnippet is declared.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Article probe found matching NewsArticle JSON-LD, canonical URL, Open Graph title and visible H1.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "HTTPS/HSTS are present, but header probe reports missing CSP and Referrer-Policy.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Pre-consent tracker capture observed 10 third-party origins and HAR recorded large third-party media delivery.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No permission request or authentication surface was part of the public reading/subscription landing paths sampled.",
+      "reason": "No permission request or authentication surface was part of the public reading/subscription landing paths sampled."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "X-Frame-Options and Permissions-Policy exist, but CSP/frame-ancestors and explicit Referrer-Policy are absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Discoverability comparison found 82% rendered-content coverage in raw server HTML and no empty JS shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Core MPA pages rendered server content without a fragile shell; sampled fixed navigation and consent dialog remained within the visual viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "This public news MPA is primarily a content site rather than an installed app; offline installability is contextual and was not treated as required.",
+      "reason": "This public news MPA is primarily a content site rather than an installed app; offline installability is contextual and was not treated as required."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "The exercised 404 route provides a useful explanation, homepage recovery and direct feedback channel rather than a blank shell.",
+      "pathIds": [
+        "error404"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "All sampled pages declare lang=da; platform CSS probe found logical block/inline sizing rules and text order was correct for Danish.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "The audited publication is deliberately Danish-language/Denmark-locale; no multi-locale data-entry or formatting surface was present in sampled paths.",
+      "reason": "The audited publication is deliberately Danish-language/Denmark-locale; no multi-locale data-entry or formatting surface was present in sampled paths."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No scheduling, recurring event, or user-entered time-zone workflow was present in the sampled news and subscription templates.",
+      "reason": "No scheduling, recurring event, or user-entered time-zone workflow was present in the sampled news and subscription templates."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Consent offers necessary-only, selected and all choices together and provides a persistent withdrawal control; no preselected marketing toggles were observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No required user-data form was part of the core reading flow; the only sampled input was optional search, so invalid-submit behaviour did not apply.",
+      "reason": "No required user-data form was part of the core reading flow; the only sampled input was optional search, so invalid-submit behaviour did not apply."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "The optional search input has a programmatic Danish label and an appropriate search type; no address/payment/sign-in fields were present on the landing surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Subscription landing evidence shows benefits and CTA without visible price, billing cadence or renewal commitment.",
+      "pathIds": [
+        "subscription"
+      ],
+      "artifacts": [
+        "evidence/subscription-mobile.png",
+        "evidence/subscription-probe.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "HAR shows responsive WebP image variants in use and image recon found srcset on sampled editorial images; the larger sustainability cost is eager media, recorded separately.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-recon.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "HAR records 2.91MB of media fetched during initial load before user initiation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence review using the cited primitive or audit artifact.",
+      "evidence": "Initial transfer is 5.19MB with 10 third-party origins and 2.91MB media.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "The publisher explicitly disallows AI use in robots.txt and ai.txt, so exposing agent actions conflicts with its declared public policy.",
+      "reason": "The publisher explicitly disallows AI use in robots.txt and ai.txt, so exposing agent actions conflicts with its declared public policy."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative templates and applicable interaction inventory.",
+      "evidence": "No user task in the sampled public news surfaces called for built-in on-device inference, and the publisher explicitly opts out of AI utilisation via ai.txt.",
+      "reason": "No user task in the sampled public news surfaces called for built-in on-device inference, and the publisher explicitly opts out of AI utilisation via ai.txt."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Across comparable baseline and ten-scroll captures, heap self size rose only 194KB (0.8%), closures stayed at 11,511 and object count did not grow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Heap summary measured 24.0MB self size and performance.memory reported 8.8MB used JS heap; sizable DOM complexity is proportionate to the long news front page and remained bounded.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct review of representative-path objective and visual evidence.",
+      "evidence": "Baseline/post summaries show no Detached* constructors; closure count remained exactly 11,511 and object count fell by two after repeated scrolling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "findingIds": [],
+      "reason": "The publisher explicitly disallows AI use in robots.txt and ai.txt, so exposing agent actions conflicts with its declared public policy. No user task in the sampled public news surfaces called for built-in on-device inference, and the publisher explicitly opts out of AI utilisation via ai.txt."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and primary news discovery surface; tested at desktop/mobile, preference conditions, keyboard focus, load, network and memory.",
+      "url": "https://ekstrabladet.dk/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "crawler without JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "News section listing archetype representing section/index pages.",
+      "url": "https://ekstrabladet.dk/nyheder/",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "NewsArticle detail archetype and core reading journey.",
+      "url": "https://ekstrabladet.dk/sport/kevin-keegan-er-doed/11238293",
+      "conditions": [
+        "viewport: 360x800",
+        "crawler without JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "subscription",
+      "description": "Commercial subscription landing surface representing the primary paid conversion journey.",
+      "url": "https://ekstrabladet.dk/kampagner/abonnement/",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error404",
+      "description": "Invalid route used to exercise HTTP error messaging and recovery.",
+      "url": "https://ekstrabladet.dk/definitely-not-a-real-page-web-uplift",
+      "conditions": [
+        "HTTP 404"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The site ignores the user’s dark colour-scheme preference.",
+      "evidence": "The dark-preference screenshot remains a light surface and the computed html color-scheme is normal; no dark retint is visible.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare color-scheme: light dark and provide preference-driven surface/text tokens with prefers-color-scheme or light-dark().",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Non-essential animation continues when reduced motion is requested.",
+      "evidence": "The reduced-motion probe reports five running 1,000ms blinker animations while matchMedia(prefers-reduced-motion: reduce) is true.",
+      "artifacts": [
+        "evidence/preferences.json"
+      ],
+      "suggestedFix": "Under prefers-reduced-motion: reduce, remove blinking/looping animation and disable non-essential auto-motion.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "summary": "Route and prominent state changes do not use View Transitions.",
+      "evidence": "CSS recon found no view-transition rules on a multi-route site; navigation is implemented as conventional document swaps.",
+      "artifacts": [
+        "evidence/home-recon.json"
+      ],
+      "suggestedFix": "Add same-document or cross-document View Transitions to preserve spatial continuity, with a reduced-motion fallback.",
+      "effort": "medium",
+      "confidence": "medium",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F04",
+      "severity": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "summary": "A large consent interstitial obscures the primary content on every sampled entry page.",
+      "evidence": "Mobile screenshots show a fixed role=dialog covering most of the viewport before users can read or act on homepage, listing, article, or subscription content.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/listing-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/subscription-mobile.png"
+      ],
+      "suggestedFix": "Use a compact, content-first consent surface with equal, immediately actionable choices and avoid re-covering each fresh page context.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "css-layout",
+      "guidanceCategory": "css",
+      "summary": "The mobile page uses a fixed 940px layout viewport and scales the desktop layout down.",
+      "evidence": "At a requested 360x800 viewport, layout metrics report clientWidth/innerWidth 940 and visual scale 0.383; screenshots show tiny navigation and body text rather than true reflow.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Set viewport content to width=device-width, initial-scale=1 and replace fixed desktop sizing with fluid/intrinsic responsive layouts.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "Mobile loading is slow despite acceptable visual stability.",
+      "evidence": "Lighthouse reports LCP 6.0s, Speed Index 8.2s, TTI 12.1s and performance 60; the trace corroborates 120ms TBT and one 170ms long task.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritise the LCP asset, shorten critical chains, defer below-fold scripts/media, and measure field LCP/INP after release.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "summary": "Critical delivery includes multiple blocking styles/scripts and substantial unused code.",
+      "evidence": "HAR flags six VeryHigh-priority parser styles plus synchronous scripts; Lighthouse estimates 300 KiB unused JS and 47 KiB unused CSS, and HAR lists missing cache headers.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Inline only critical CSS, defer non-critical styles/scripts, split per-template bundles, and add durable caching to versioned assets.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Some interactive links and images lack accessible names or alternatives.",
+      "evidence": "Lighthouse finds four focusable links without discernible names and four dashboard images without alt attributes.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Give every focusable link a meaningful accessible name; add informative alt text or alt=\"\"/presentation for decorative images.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Consent controls and editorial labels fail minimum colour contrast.",
+      "evidence": "Lighthouse reports consent links at 3.47:1, reject button at 3.02:1, green headline text at 2.65:1 and sponsored-content text at 2.35:1.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Darken foreground/accent colours or adjust backgrounds to meet WCAG AA in normal, dark and high-contrast conditions.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Key templates lack a clear main landmark and/or page-level heading.",
+      "evidence": "DOM probes found no main landmark on sampled pages and no H1 on homepage, news listing, or subscription landing page; the article alone exposes an H1.",
+      "artifacts": [
+        "evidence/home-recon.json",
+        "evidence/listing-probe.json",
+        "evidence/subscription-probe.json",
+        "evidence/article-probe.json"
+      ],
+      "suggestedFix": "Wrap primary content in main and add one descriptive H1 per template while retaining the existing visible keyboard outlines.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "listing",
+      "url": "https://ekstrabladet.dk/nyheder/"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "The main response lacks a Content-Security-Policy and Referrer-Policy.",
+      "evidence": "Header probe confirms HTTPS, HSTS, nosniff and SAMEORIGIN, but reports CSP missing and Referrer-Policy missing.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Deploy a nonce/hash-based CSP (including frame-ancestors) and an explicit strict-origin-when-cross-origin or stricter Referrer-Policy.",
+      "effort": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "summary": "The initial page spends most transferred bytes on media and reaches many third-party origins before consent.",
+      "evidence": "HAR transfers 5.19 MB across 60 requests, including 2.91 MB media and 1.01 MB images; tracker recon sees 10 third-party origins in the pre-consent state.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Do not fetch video until it is visible or user-initiated, use posters first, enforce media/third-party budgets, and defer non-essential origins until consent.",
+      "effort": "large",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The public site has no sitemap at the conventional sitemap.xml endpoint and suppresses snippets.",
+      "evidence": "robots.txt is reachable and allows general indexing, but /sitemap.xml returns HTTP 404; homepage metadata includes googlebot nosnippet.",
+      "artifacts": [
+        "evidence/discoverability.json"
+      ],
+      "suggestedFix": "Publish a current XML sitemap and reference it from robots.txt; reconsider nosnippet where rich result/search preview reach matters.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://ekstrabladet.dk/"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "summary": "The subscription landing surface promotes benefits and a purchase CTA without showing price or commitment in the visible offer.",
+      "evidence": "The subscription mobile screenshot and text probe show feature bullets and “Prøv Ekstra Bladet+”/purchase actions but no price, billing period or renewal terms on the landing surface.",
+      "artifacts": [
+        "evidence/subscription-mobile.png",
+        "evidence/subscription-probe.json"
+      ],
+      "suggestedFix": "Place price, billing cadence, trial/renewal terms and cancellation path adjacent to the primary subscription CTA before checkout.",
+      "effort": "small",
+      "confidence": "high",
+      "pathId": "subscription",
+      "url": "https://ekstrabladet.dk/kampagner/abonnement/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Replace the fixed 940px mobile viewport with genuine responsive reflow",
+      "priority": 1,
+      "findingIds": [
+        "F05"
+      ],
+      "guidanceId": "css-layout",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Stop eager media/third-party loading and improve the LCP critical path",
+      "priority": 2,
+      "findingIds": [
+        "F06",
+        "F07",
+        "F12"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Make the consent experience compact, accessible and content-first",
+      "priority": 3,
+      "findingIds": [
+        "F04",
+        "F09"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Fix accessible names, alt text, landmarks and headings",
+      "priority": 4,
+      "findingIds": [
+        "F08",
+        "F10"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Add dark and reduced-motion preference support",
+      "priority": 5,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Deploy CSP and explicit referrer policy",
+      "priority": 6,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Publish sitemap/indexing signals and expose complete subscription terms",
+      "priority": 7,
+      "findingIds": [
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Add View Transitions with reduced-motion fallback",
+      "priority": 8,
+      "findingIds": [
+        "F03"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1100,
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-20T15-16-07-128Z"
+}

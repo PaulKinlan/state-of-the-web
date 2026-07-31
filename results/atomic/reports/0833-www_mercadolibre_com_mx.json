@@ -1,0 +1,1284 @@
+{
+  "url": "https://www.mercadolibre.com.mx",
+  "auditedAt": "2026-07-28T08:47:54.886Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Target edge denied both Chrome and direct HTTP access with HTTP 403 (rps: w403). Only the branded error document was rendered, so representative templates and core flows could not be audited.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The delivered 403 error document contains legacy React markers, but the production application was not reachable and no framework inference is made."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "discoverability",
+    "headers",
+    "har",
+    "curl HTTP response inspection",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "autofill-sign-in-form",
+    "break-up-long-tasks",
+    "dark-mode",
+    "declarative-dialog-popover-control",
+    "deliver-optimized-decorative-images",
+    "fluid-scaling",
+    "forms",
+    "html",
+    "identify-inp-causes",
+    "improve-text-layout-and-legibility",
+    "language-detection",
+    "light-dismiss-a-dialog",
+    "manage-recurring-intervals",
+    "navigation-drawer",
+    "optimize-image-priority",
+    "passkeys",
+    "performance",
+    "physics-based-easing",
+    "position-aware-tooltips",
+    "privacy",
+    "same-document-transitions",
+    "scrollytelling",
+    "security",
+    "shrinking-header-on-scroll",
+    "size-aware-styling",
+    "stabilize-reactive-state",
+    "validate-input-after-interaction",
+    "webmcp"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop entry navigation shows the Mercado Libre 403 error state.",
+      "condition": "viewport: 1365x768",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile entry navigation shows the same 403 error state and lacks a viewport meta tag.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark-preference capture is still the edge error state, not the production surface.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM is the edge error document, with no title, lang, viewport, production navigation, or forms.",
+      "condition": "entry navigation after 5s",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Layout metrics for the edge error document only.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Ad-hoc DOM and platform probe confirms only the error page was available.",
+      "condition": "entry navigation after 5s",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Security headers observed on the 403 response; not treated as production-page evidence.",
+      "condition": "HTTP 403 response",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw-fetch/render comparison; browser render remained blocked while a crawler-like raw fetch received different content.",
+      "condition": "crawler raw fetch versus browser render",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Browser-side rendered screenshot from discoverability capture shows the edge error.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "No-JavaScript browser screenshot also shows the edge error.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR records four requests, including two HTTP 403 responses.",
+      "condition": "entry load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary records status breakdown 200:2 and 403:2.",
+      "condition": "entry load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Pre-evidence atomic coverage manifest and per-check evidence plan.",
+      "condition": "modern-web-guidance@0.0.172; 58 expected checks",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "validation.log",
+      "caption": "Atomic coverage validator output showing 58 blocked checks and no missing, unknown, or duplicate rows.",
+      "condition": "publication gate",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Baseline and post-interaction heap summaries plus Performance.getMetrics; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned HAR/headers/cookies/trackers plus DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Trace, layout, HAR, Lighthouse, and DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned DOM, screenshots, and an ad-hoc evaluate probe on representative paths; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned HAR/headers/cookies/trackers plus DOM corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Conditioned screenshot plus DOM/evaluate corroboration; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Rendered DOM/CSS and ad-hoc evaluate probe; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Baseline and post-interaction heap summaries plus Performance.getMetrics; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Baseline and post-interaction heap summaries plus Performance.getMetrics; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page navigation and planned Baseline and post-interaction heap summaries plus Performance.getMetrics; navigation failed before representative evidence could be gathered.",
+      "evidence": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "reason": "The audit browser and direct HTTP request were denied by the target edge (HTTP 403, response header rps: w403) and received only “Hubo un error accediendo a esta pagina...”. The production page, representative routes, and user flows were therefore unavailable for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/home.har"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks were blocked because the target returned its HTTP 403 edge error document instead of the production experience."
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry",
+      "description": "Homepage and route-discovery recon. Intended to identify homepage, listing, product/detail, search, checkout/account, and error-state archetypes; route selection could not proceed because the edge served a 403 error document. No production templates or user journeys are covered.",
+      "url": "https://www.mercadolibre.com.mx/",
+      "conditions": [
+        "desktop 1365x768",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T08-44-26-933Z"
+}

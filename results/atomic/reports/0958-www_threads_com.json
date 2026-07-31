@@ -1,0 +1,2192 @@
+{
+  "url": "https://www.threads.com",
+  "auditedAt": "2026-07-24T03:41:50.417Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete external audit of anonymous public surfaces. Authenticated posting, settings, notifications, account deletion and live checkout/commercial flows were not covered because no credentials were provided.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Meta server payload with client hydration (framework not exposed by primitive)",
+    "notes": "Public social feed/PWA with home, search, profile, thread and login archetypes. Representative dynamic content varies between sessions."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "transition-video",
+    "dom+computed-css",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "lighthouse",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "robots/sitemap/manifest"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "same-document-transitions",
+    "shrinking-header-on-scroll",
+    "light-dismiss-a-dialog",
+    "fluid-scaling",
+    "forms",
+    "performance",
+    "accessibility",
+    "html",
+    "security",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "custom-button-actions",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals",
+    "persistent-toast-notifications",
+    "accessible-error-announcement",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "stabilize-reactive-state"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/entry-desktop.png",
+      "caption": "Consent overlay on initial desktop load",
+      "condition": "desktop",
+      "findingIds": [
+        "WU-002"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile-declined.png",
+      "caption": "Consent overlay at 360x800",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "WU-002"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-light.png",
+      "caption": "Initial surface under light scheme",
+      "condition": "prefers-color-scheme: light",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Initial surface under dark scheme",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-clean-desktop.png",
+      "caption": "Public feed after declining optional cookies",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-clean-mobile.png",
+      "caption": "Responsive feed after declining optional cookies",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "WU-004"
+      ]
+    },
+    {
+      "type": "video",
+      "path": "evidence/consent-dismiss-desktop.mp4",
+      "caption": "Consent dismissal and feed reveal",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "video",
+      "path": "evidence/consent-dismiss-mobile.mp4",
+      "caption": "Consent dismissal and feed reveal",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile overflow, CLS and long-task observation",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "WU-008"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace plus feed scroll",
+      "condition": "desktop",
+      "findingIds": [
+        "WU-007"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact FCP/LCP/TBT trace summary",
+      "condition": "desktop",
+      "findingIds": [
+        "WU-007",
+        "WU-009"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Initial-load network archive",
+      "condition": "desktop",
+      "findingIds": [
+        "WU-009",
+        "WU-025"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Request, byte, third-party and weight summary",
+      "condition": "desktop",
+      "findingIds": [
+        "WU-009",
+        "WU-025"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance/accessibility/best-practices/SEO run",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "WU-007",
+        "WU-008",
+        "WU-010",
+        "WU-011",
+        "WU-012",
+        "WU-014"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/entry-dom.json",
+      "caption": "Rendered DOM and CSS evidence",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Semantics, focus, CSS features and runtime probe",
+      "condition": "desktop",
+      "findingIds": [
+        "WU-003",
+        "WU-004",
+        "WU-005",
+        "WU-013",
+        "WU-014",
+        "WU-021"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Animation probe under reduced-motion",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "WU-001"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability-home.json",
+      "caption": "Raw HTML vs rendered home comparison",
+      "condition": "JavaScript on/off",
+      "findingIds": [
+        "WU-017",
+        "WU-020"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-home-rendered.png",
+      "caption": "Rendered browser home",
+      "condition": "JavaScript on",
+      "findingIds": [
+        "WU-017"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-home-crawler.png",
+      "caption": "Crawler home",
+      "condition": "JavaScript off",
+      "findingIds": [
+        "WU-017"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability-profile.json",
+      "caption": "Raw HTML vs rendered profile",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability-post.json",
+      "caption": "Raw HTML vs rendered thread",
+      "condition": "JavaScript on/off",
+      "findingIds": [
+        "WU-017",
+        "WU-020"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-post-crawler.png",
+      "caption": "Crawler thread detail",
+      "condition": "JavaScript off",
+      "findingIds": [
+        "WU-017"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline readable heap summary",
+      "condition": "settled home",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Heap summary after ten scroll cycles",
+      "condition": "ten bottom/top cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers",
+      "findingIds": [
+        "WU-019"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie attributes",
+      "findingIds": [
+        "WU-019"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party and tracker origins",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image dimensions, loading, format and alt audit",
+      "findingIds": [
+        "WU-011",
+        "WU-015",
+        "WU-024"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Robots directives",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Public sitemap",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/manifest.json",
+      "caption": "Web app manifest",
+      "findingIds": [
+        "WU-021"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-invalid.json",
+      "caption": "Empty-login error behavior",
+      "findingIds": [
+        "WU-023"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-flow.json",
+      "caption": "Anonymous search submission",
+      "findingIds": [
+        "WU-006"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/404-probe.json",
+      "caption": "Unknown-route behavior",
+      "findingIds": [
+        "WU-006",
+        "WU-022"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-consulted.md",
+      "caption": "Pinned Modern Web Guidance retrieved for the audit",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/consent-semantics.json",
+      "caption": "Supporting evidence: consent-semantics.json",
+      "condition": "",
+      "findingIds": [
+        "WU-003",
+        "WU-011"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-failures.json",
+      "caption": "Supporting evidence: lighthouse-failures.json",
+      "condition": "",
+      "findingIds": [
+        "WU-010",
+        "WU-015",
+        "WU-016"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/profile-probe.json",
+      "caption": "Supporting evidence: profile-probe.json",
+      "condition": "",
+      "findingIds": [
+        "WU-018"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/post-probe.json",
+      "caption": "Supporting evidence: post-probe.json",
+      "condition": "",
+      "findingIds": [
+        "WU-018"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Supporting evidence: recon.json",
+      "condition": "",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-probe.json",
+      "caption": "Supporting evidence: login-probe.json",
+      "condition": "",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-probe.json",
+      "caption": "Supporting evidence: search-probe.json",
+      "condition": "",
+      "findingIds": []
+    }
+  ],
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Paired light/dark screenshots",
+      "evidence": "The consent and underlying application surfaces switch from white/black in light mode to #101010/dark surfaces in dark mode.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-light.png",
+        "evidence/home-dark.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "With prefers-reduced-motion: reduce matched, the evaluate probe still found a running 800 ms animation plus multiple 0.2–0.5 s transitions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "findingIds": [
+        "WU-001"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse contrast audit under default dark theme",
+      "evidence": "Default rendering already fails normal-text contrast, so preference/contrast robustness is not met.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "WU-012"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered CSS feature inspection",
+      "evidence": "Loaded CSS contains view-transition rules and route/navigation surfaces remain continuous.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "CSS and visual inspection",
+      "evidence": "No parallax, scrollytelling, or scroll-linked animation is present on the representative public surfaces, so there is no scroll-driven motion to implement.",
+      "reason": "No parallax, scrollytelling, or scroll-linked animation is present on the representative public surfaces, so there is no scroll-driven motion to implement."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Mobile screenshots and DOM/CSS inspection",
+      "evidence": "The public feed uses native vertical scrolling and standard link/button activation; no custom pointer-drag surface was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-clean-mobile.png",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "CSS inspection found no scroll timeline or scroll-state behavior; desktop and mobile captures show static navigation with no progress or state-aware header treatment.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-clean-mobile.png"
+      ],
+      "findingIds": [
+        "WU-004"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Loaded CSS feature inspection",
+      "evidence": "The loaded stylesheet contains anchor positioning/position-try declarations for overlay placement.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Visual and semantic navigation inspection",
+      "evidence": "The selected Home label, page h1, profile headings and Thread heading consistently identify the current location.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Desktop and 360 px screenshots show the consent dialog obscuring the entire feed before any interaction; the mobile dialog consumes nearly the full viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile-declined.png"
+      ],
+      "findingIds": [
+        "WU-002"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "DOM probes found zero native dialog/popover/details elements; consent is a div with role=dialog and its actions are div role=button controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/consent-semantics.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "WU-003"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile visual review",
+      "evidence": "After consent dismissal, content occupies the main surface with restrained navigation and minimal borders; the mobile feed gives almost all space to posts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout primitive at 360x800 and screenshot",
+      "evidence": "scrollWidth, clientWidth and innerWidth were all 360 px, horizontalOverflowPx was 0, and the feed reflowed into a single mobile column.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered CSS inspection and desktop/mobile comparison",
+      "evidence": "Loaded CSS contains @container rules; the feed/navigation components materially reorganise between desktop sidebar and mobile bottom navigation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-clean-desktop.png",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "The focus probe reported many anchors and role=button controls with outline-style none; panorama buttons measured only 10 px wide, below a usable touch target.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "WU-005"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport visual review across home/profile/post",
+      "evidence": "Home, profile identity and Thread headings clearly communicate each surface; Log in is visible while public browsing remains available.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Anonymous journey from feed to profile/thread plus search submission",
+      "evidence": "Public feed, profile and thread details loaded end-to-end without login; search accepted a query and navigated to the expected query URL.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json",
+        "evidence/search-flow.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "A submitted search navigated to a query URL but exposed only the query and footer after 2.5 s, with no loading/empty guidance; an unknown URL silently redirected to login instead of a clear not-found state.",
+      "pathIds": [
+        "search"
+      ],
+      "artifacts": [
+        "evidence/search-flow.json",
+        "evidence/404-probe.json"
+      ],
+      "findingIds": [
+        "WU-006"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse measured FCP 7.0 s, LCP 16.2 s, Speed Index 13.9 s and performance score 0.30; the raw CDP trace independently measured FCP 6.70 s and LCP 11.34 s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "findingIds": [
+        "WU-007"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse measured CLS 1.0 and reported one large layout shift, far above the 0.1 good threshold, although the settled mobile primitive observed no later shifts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/layout-mobile.json"
+      ],
+      "findingIds": [
+        "WU-008"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse and CDP trace",
+      "evidence": "Lighthouse TBT was 70 ms and the trace summary found zero >50 ms long tasks and 0 ms total blocking time in its captured window.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "HAR captured 105 requests and 3,191,522 transferred bytes; 29 scripts transferred 1.52 MB and the parser-inserted stylesheet took 5.20 s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "WU-009"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse estimated 871 KiB unused JavaScript and 103 KiB unused CSS, including 96.5% of the main stylesheet.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "WU-010"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse found an unnamed role=dialog; the image primitive found five of eleven images without alt text, including content imagery.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json",
+        "evidence/consent-semantics.json"
+      ],
+      "findingIds": [
+        "WU-011"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse found timestamps at 4.24:1 on #101010 and promo copy at 3.96:1 on #181818, below the required 4.5:1 for normal text.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "WU-012"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Programmatic focus on navigation and feed controls repeatedly produced outline-style none and no box shadow; the DOM also relies heavily on generic div role=button controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "WU-013"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop/mobile screenshot review",
+      "evidence": "Primary post text uses readable line lengths, stable wrapping and unclipped 15–16 px body text on both viewports; contrast defects are recorded separately.",
+      "pathIds": [
+        "home",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse failed meta-viewport because maximum-scale was below 5; the probe also found 10 px-wide focusable panorama controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "WU-014"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse console-error audit",
+      "evidence": "Lighthouse scored the console-errors audit 1.0 with no logged browser errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse reported a missing/late charset; image inspection found seven oversized images and nine legacy-format images.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "WU-015"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Lighthouse reported an unload event listener in the primary Instagram CDN bundle, an API Chrome is removing.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "findingIds": [
+        "WU-016"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM metadata probes across archetypes",
+      "evidence": "Home, profile and post each expose a descriptive title and meta description; the profile/post values reflect visible content.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Discoverability measured only 6% raw-HTML coverage on home (isJsShell=true) and 16% on the thread detail; the crawler screenshots expose far less content than rendered views.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-home.json",
+        "evidence/discoverability-home-rendered.png",
+        "evidence/discoverability-home-crawler.png",
+        "evidence/discoverability-post.json",
+        "evidence/discoverability-post-crawler.png"
+      ],
+      "findingIds": [
+        "WU-017"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "HTTP fetch, canonical probes, robots and sitemap review",
+      "evidence": "Representative pages returned 200, exposed self-canonicals, and public profile/post routes are represented by a substantial sitemap; robots restrictions are deliberate and agent-specific restrictions are judged under agent readiness.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.xml"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Profile and thread probes found useful Open Graph metadata but zero JSON-LD blocks for ProfilePage/Person or SocialMediaPosting entities.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json"
+      ],
+      "findingIds": [
+        "WU-018"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Headers show HTTPS, HSTS and CSP, but style-src allows unsafe-inline, Referrer-Policy is absent, and the 400-day csrftoken uses SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "WU-019"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "HAR, tracker and secret scans",
+      "evidence": "No known tracker domains or exposed secrets were found; observed cross-origin requests were Meta/Instagram asset and media CDNs disclosed by the consent surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/secrets.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Permissions policy and login DOM inspection",
+      "evidence": "No permission prompt appeared on load; Permissions-Policy disables most capabilities, and login markup includes username/current-password autocomplete plus WebAuthn/passkey-related code.",
+      "pathIds": [
+        "home",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/login-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security-header and cookie primitives",
+      "evidence": "HSTS, X-Frame-Options DENY, nosniff and a broad Permissions-Policy are present, but the missing Referrer-Policy, unsafe-inline style policy and SameSite=None CSRF cookie leave gaps.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "WU-019"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Raw server HTML retained only 6% of rendered home words and 16% on the thread detail, leaving important public content unavailable to non-JS and failure conditions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-home.json",
+        "evidence/discoverability-post.json"
+      ],
+      "findingIds": [
+        "WU-020"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative route and responsive interaction review",
+      "evidence": "Home, profile, post and search rendered without clipped primary chrome or runtime errors at desktop/mobile widths; CSS includes anchored positioning and container queries.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/layout-mobile.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "A valid standalone manifest and icons exist, but the runtime probe found no active service-worker controller on the app-like home experience.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "WU-021"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "The intentionally unknown public URL redirected to /login/?next=... with no 404 explanation, recovery action, or indication that the requested resource does not exist.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ],
+      "findingIds": [
+        "WU-022"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM and rendered CSS inspection",
+      "evidence": "The document declares lang=en and dir=ltr; loaded CSS includes logical inline properties and content spans use dir=auto where appropriate.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered content inspection",
+      "evidence": "Public time values are human-readable relative durations such as 8h/16h rather than hard-coded locale-specific absolute date strings; no currency or numeric form entry appears in audited surfaces.",
+      "pathIds": [
+        "home",
+        "profile",
+        "post"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Surface inventory",
+      "evidence": "The audited public feed/profile/thread surfaces expose relative ages only and no scheduled event, recurrence, calendar input, or absolute cross-zone time requiring DST coordination.",
+      "reason": "The audited public feed/profile/thread surfaces expose relative ages only and no scheduled event, recurrence, calendar input, or absolute cross-zone time requiring DST coordination."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Consent and anonymous journey visual review",
+      "evidence": "Consent presents both Allow all and Decline optional choices without confirmshaming, and public browsing does not force account creation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile-declined.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "After empty submission, focus moved to the username field but the probe found no :invalid elements, aria-invalid state, alert or live-region message.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-invalid.json"
+      ],
+      "findingIds": [
+        "WU-023"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Login/search input DOM inspection",
+      "evidence": "Login uses autocomplete=username and current-password; the search field uses the native search input type.",
+      "pathIds": [
+        "login",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/login-probe.json",
+        "evidence/search-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Anonymous login/account entry review",
+      "evidence": "The visible account entry offers direct login, password recovery and Continue with Instagram without pricing, forced subscription or disguised commercial commitment.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "Image inspection found seven oversized images, nine legacy-format images and seven below-fold images without lazy loading.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "WU-024"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Trace and HAR activity review",
+      "evidence": "Despite a heavy startup payload, the captured trace had no long tasks and no known third-party trackers; waste attributable to unused code/assets is recorded in adjacent checks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted primitive/tool evidence described in linked finding",
+      "evidence": "HAR attributed 3.02 MB and 87 of 105 requests to CDN origins outside www.threads.com, including 1.27 MB of images and media fetched during initial load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "WU-025"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Robots and surface-intent inspection",
+      "evidence": "Threads explicitly disallows major AI agents in robots.txt and exposes no intended agent-facing action surface; this emerging capability is therefore judged outside the declared public surface.",
+      "artifacts": [
+        "evidence/robots.txt"
+      ],
+      "reason": "Threads explicitly disallows major AI agents in robots.txt and exposes no intended agent-facing action surface; this emerging capability is therefore judged outside the declared public surface."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Surface inventory and DOM inspection",
+      "evidence": "No summarisation/composition inference feature is offered on the audited anonymous surfaces, so on-device inference has no applicable user task here.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "reason": "No summarisation/composition inference feature is offered on the audited anonymous surfaces, so on-device inference has no applicable user task here."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap summary before and after ten repeated full-feed scroll cycles",
+      "evidence": "After ten bottom/top scroll cycles, heap self-size decreased from 35,314,814 to 34,996,483 bytes and snapshot node count decreased from 696,984 to 675,806; no retained-growth signal appeared.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap summary proportionality review",
+      "evidence": "The settled anonymous feed used about 35 MB V8 self-size; its largest categories were native/code/object allocations and the footprint remained bounded after exercise.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Before/after heap constructor comparison",
+      "evidence": "Neither summary exposed Detached* constructors among top retained constructors, and closure/object counts fell after repeated scrolling rather than accumulating.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-001",
+        "WU-012"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-004"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-002",
+        "WU-003"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-005"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-006"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-007",
+        "WU-008",
+        "WU-009",
+        "WU-010"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-011",
+        "WU-012",
+        "WU-013",
+        "WU-014"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-015",
+        "WU-016"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-017",
+        "WU-018"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-019"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "WU-020",
+        "WU-021",
+        "WU-022"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "WU-023"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "WU-024",
+        "WU-025"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Threads explicitly disallows major AI agents in robots.txt and exposes no intended agent-facing action surface; this emerging capability is therefore judged outside the declared public surface. No summarisation/composition inference feature is offered on the audited anonymous surfaces, so on-device inference has no applicable user task here."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Public home feed, consent gate, anonymous browsing, desktop/mobile and preference conditions",
+      "url": "https://www.threads.com/",
+      "conditions": [
+        "desktop 780x493",
+        "mobile 360x800",
+        "prefers-color-scheme light/dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "profile",
+      "description": "Representative public profile/listing archetype",
+      "url": "https://www.threads.com/@utdnews_insta",
+      "conditions": [
+        "desktop",
+        "JavaScript on/off crawler comparison"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "post",
+      "description": "Representative public thread/detail archetype and related-content journey",
+      "url": "https://www.threads.com/@utdnews_insta/post/DbJanY0Aprf",
+      "conditions": [
+        "desktop",
+        "JavaScript on/off crawler comparison"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Anonymous search form and query submission journey",
+      "url": "https://www.threads.com/search",
+      "conditions": [
+        "desktop",
+        "query submission"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Authentication form, autofill, invalid empty submission and recovery",
+      "url": "https://www.threads.com/login?show_choice_screen=false",
+      "conditions": [
+        "desktop",
+        "empty submit"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "failure",
+      "description": "Unknown-route handling and recovery",
+      "url": "https://www.threads.com/this-route-should-not-exist-web-uplift",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "WU-001",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Reduced-motion preference still leaves non-essential motion running",
+      "evidence": "With prefers-reduced-motion: reduce matched, the evaluate probe still found a running 800 ms animation plus multiple 0.2–0.5 s transitions.",
+      "suggestedFix": "Disable or substantially shorten non-essential animations and transitions inside prefers-reduced-motion: reduce.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-002",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "summary": "A full-page cookie dialog interrupts every first visit",
+      "evidence": "Desktop and 360 px screenshots show the consent dialog obscuring the entire feed before any interaction; the mobile dialog consumes nearly the full viewport.",
+      "suggestedFix": "Use a compact, non-obscuring consent surface where legally possible, preserve equal accept/decline choices, and remember the decision immediately.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/entry-desktop.png",
+        "evidence/home-mobile-declined.png"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-003",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "summary": "Consent and promotional overlays are custom div dialogs",
+      "evidence": "DOM probes found zero native dialog/popover/details elements; consent is a div with role=dialog and its actions are div role=button controls.",
+      "suggestedFix": "Use dialog/showModal() for modal consent and native button elements for actions, with an accessible name and platform focus/dismiss behavior.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/consent-semantics.json",
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-004",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "user-experience",
+      "summary": "Feed chrome does not expose scroll-state feedback",
+      "evidence": "CSS inspection found no scroll timeline or scroll-state behavior; desktop and mobile captures show static navigation with no progress or state-aware header treatment.",
+      "suggestedFix": "Add subtle scroll-state feedback only where it improves orientation, using declarative scroll-state/container techniques rather than scroll handlers.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-clean-mobile.png"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-005",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Several focusable controls have invisible focus and tiny geometry",
+      "evidence": "The focus probe reported many anchors and role=button controls with outline-style none; panorama buttons measured only 10 px wide, below a usable touch target.",
+      "suggestedFix": "Use native controls, add a clearly visible :focus-visible treatment, and provide at least a 44×44 CSS px activation area.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-006",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "summary": "Search and unknown-route states do not explain what happened",
+      "evidence": "A submitted search navigated to a query URL but exposed only the query and footer after 2.5 s, with no loading/empty guidance; an unknown URL silently redirected to login instead of a clear not-found state.",
+      "suggestedFix": "Render explicit loading, empty, error, and 404 states with retry, edit-query, home, and back actions while preserving context.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/search-flow.json",
+        "evidence/404-probe.json"
+      ],
+      "pathId": "search"
+    },
+    {
+      "id": "WU-007",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "Initial rendering is extremely slow",
+      "evidence": "Lighthouse measured FCP 7.0 s, LCP 16.2 s, Speed Index 13.9 s and performance score 0.30; the raw CDP trace independently measured FCP 6.70 s and LCP 11.34 s.",
+      "suggestedFix": "Prioritise the feed LCP resource, reduce startup payload, and defer non-critical scripts/media until after primary content.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-008",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The loading experience produces a severe layout shift",
+      "evidence": "Lighthouse measured CLS 1.0 and reported one large layout shift, far above the 0.1 good threshold, although the settled mobile primitive observed no later shifts.",
+      "suggestedFix": "Reserve exact space for consent/promo/feed content and prevent late state swaps from moving the primary viewport.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/layout-mobile.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-009",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The anonymous feed has a heavy and slow critical delivery path",
+      "evidence": "HAR captured 105 requests and 3,191,522 transferred bytes; 29 scripts transferred 1.52 MB and the parser-inserted stylesheet took 5.20 s.",
+      "suggestedFix": "Reduce critical dependencies, split anonymous-feed bundles, inline only critical CSS, and preload only confirmed LCP-critical resources.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/home-trace-summary.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-010",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "summary": "Most shipped CSS and substantial JavaScript are unused on the audited view",
+      "evidence": "Lighthouse estimated 871 KiB unused JavaScript and 103 KiB unused CSS, including 96.5% of the main stylesheet.",
+      "suggestedFix": "Produce an anonymous-feed entry bundle, remove duplicate/legacy modules, and load interaction code conditionally.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-failures.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-011",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Dialogs and media lack accessible names or alternatives",
+      "evidence": "Lighthouse found an unnamed role=dialog; the image primitive found five of eleven images without alt text, including content imagery.",
+      "suggestedFix": "Name every dialog with aria-labelledby/aria-label and provide meaningful alt text or empty alt for decorative media.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json",
+        "evidence/consent-semantics.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-012",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Muted text fails WCAG contrast",
+      "evidence": "Lighthouse found timestamps at 4.24:1 on #101010 and promo copy at 3.96:1 on #181818, below the required 4.5:1 for normal text.",
+      "suggestedFix": "Raise muted-text luminance or adjust its surface token so all normal text reaches at least 4.5:1 in each theme.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-013",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Keyboard focus is not consistently visible",
+      "evidence": "Programmatic focus on navigation and feed controls repeatedly produced outline-style none and no box shadow; the DOM also relies heavily on generic div role=button controls.",
+      "suggestedFix": "Apply a high-contrast :focus-visible ring and replace generic clickable divs with native links/buttons in logical DOM order.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-014",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Mobile zoom is restricted and some targets are too small",
+      "evidence": "Lighthouse failed meta-viewport because maximum-scale was below 5; the probe also found 10 px-wide focusable panorama controls.",
+      "suggestedFix": "Remove maximum-scale restrictions and enlarge narrow controls without changing their visual footprint.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-015",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Document and image hygiene has avoidable defects",
+      "evidence": "Lighthouse reported a missing/late charset; image inspection found seven oversized images and nine legacy-format images.",
+      "suggestedFix": "Place UTF-8 charset first in head and serve correctly sized AVIF/WebP variants with responsive sources.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse-failures.json",
+        "evidence/images.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-016",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "A deprecated unload listener harms platform hygiene and BFCache readiness",
+      "evidence": "Lighthouse reported an unload event listener in the primary Instagram CDN bundle, an API Chrome is removing.",
+      "suggestedFix": "Replace unload with pagehide/visibilitychange where required and avoid unload entirely for telemetry.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/lighthouse-failures.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-017",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The home feed and thread content are largely absent without JavaScript",
+      "evidence": "Discoverability measured only 6% raw-HTML coverage on home (isJsShell=true) and 16% on the thread detail; the crawler screenshots expose far less content than rendered views.",
+      "suggestedFix": "Server-render meaningful feed/thread content and crawlable anchors, then hydrate interactions progressively.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/discoverability-home.json",
+        "evidence/discoverability-home-rendered.png",
+        "evidence/discoverability-home-crawler.png",
+        "evidence/discoverability-post.json",
+        "evidence/discoverability-post-crawler.png"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-018",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Rich public entities have social metadata but no structured data",
+      "evidence": "Profile and thread probes found useful Open Graph metadata but zero JSON-LD blocks for ProfilePage/Person or SocialMediaPosting entities.",
+      "suggestedFix": "Add accurate schema.org JSON-LD that matches visible public profile and post content.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/profile-probe.json",
+        "evidence/post-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-019",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Security policy has avoidable gaps",
+      "evidence": "Headers show HTTPS, HSTS and CSP, but style-src allows unsafe-inline, Referrer-Policy is absent, and the 400-day csrftoken uses SameSite=None.",
+      "suggestedFix": "Move styles behind hashes/nonces, set a strict Referrer-Policy, and narrow the CSRF cookie scope/SameSite/retention where cross-site use is not essential.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-020",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "stabilize-reactive-state",
+      "guidanceCategory": "user-experience",
+      "summary": "Core public content depends heavily on JavaScript",
+      "evidence": "Raw server HTML retained only 6% of rendered home words and 16% on the thread detail, leaving important public content unavailable to non-JS and failure conditions.",
+      "suggestedFix": "Render core feed/thread text and navigation in server HTML, then layer reactions, media controls, and transitions as enhancements.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/discoverability-home.json",
+        "evidence/discoverability-post.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-021",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The app manifest is present but the page is not controlled for offline use",
+      "evidence": "A valid standalone manifest and icons exist, but the runtime probe found no active service-worker controller on the app-like home experience.",
+      "suggestedFix": "Register a service worker that provides a bounded offline shell and a clear offline fallback for previously viewed content.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-022",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "summary": "Unknown routes fail into an unrelated login screen",
+      "evidence": "The intentionally unknown public URL redirected to /login/?next=... with no 404 explanation, recovery action, or indication that the requested resource does not exist.",
+      "suggestedFix": "Return the correct HTTP status and a resilient not-found screen with home/search/back recovery actions.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/404-probe.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-023",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "accessibility",
+      "summary": "Empty login submission gives no explicit accessible feedback",
+      "evidence": "After empty submission, focus moved to the username field but the probe found no :invalid elements, aria-invalid state, alert or live-region message.",
+      "suggestedFix": "Validate after interaction, mark the field invalid, and announce a concise corrective message in an aria-live region.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/login-invalid.json"
+      ],
+      "pathId": "login"
+    },
+    {
+      "id": "WU-024",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "Images are frequently oversized, legacy-format, and eagerly loaded",
+      "evidence": "Image inspection found seven oversized images, nine legacy-format images and seven below-fold images without lazy loading.",
+      "suggestedFix": "Use responsive AVIF/WebP sources and lazy-load below-fold media while keeping the first visible post eager and prioritised.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "pathId": "home"
+    },
+    {
+      "id": "WU-025",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "summary": "Anonymous browsing transfers a disproportionate third-party/media payload",
+      "evidence": "HAR attributed 3.02 MB and 87 of 105 requests to CDN origins outside www.threads.com, including 1.27 MB of images and media fetched during initial load.",
+      "suggestedFix": "Set an anonymous-feed byte budget, defer below-fold media, and fetch only the first viewport until the user scrolls.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "pathId": "home"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "TASK-01",
+      "title": "Make the anonymous feed fast and stable",
+      "priority": 1,
+      "findingIds": [
+        "WU-007",
+        "WU-008",
+        "WU-009",
+        "WU-010"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "TASK-02",
+      "title": "Server-render public feed and thread content",
+      "priority": 2,
+      "findingIds": [
+        "WU-017",
+        "WU-020"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-03",
+      "title": "Repair accessible dialogs, focus, contrast, zoom and media alternatives",
+      "priority": 3,
+      "findingIds": [
+        "WU-003",
+        "WU-005",
+        "WU-011",
+        "WU-012",
+        "WU-013",
+        "WU-014"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "TASK-04",
+      "title": "Optimise and defer feed media",
+      "priority": 4,
+      "findingIds": [
+        "WU-024",
+        "WU-025"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "TASK-05",
+      "title": "Replace the blocking consent experience with semantic, labelled controls",
+      "priority": 5,
+      "findingIds": [
+        "WU-002"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "TASK-06",
+      "title": "Add explicit empty, 404 and login-error recovery states",
+      "priority": 6,
+      "findingIds": [
+        "WU-006",
+        "WU-022",
+        "WU-023"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "TASK-07",
+      "title": "Harden browser security policy and cookie scope",
+      "priority": 7,
+      "findingIds": [
+        "WU-019"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "TASK-08",
+      "title": "Add an offline fallback and active service worker",
+      "priority": 8,
+      "findingIds": [
+        "WU-021"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-09",
+      "title": "Clean up deprecated APIs, charset and asset markup",
+      "priority": 9,
+      "findingIds": [
+        "WU-015",
+        "WU-016"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "TASK-10",
+      "title": "Respect reduced motion and improve navigation feedback",
+      "priority": 10,
+      "findingIds": [
+        "WU-001",
+        "WU-004"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "TASK-11",
+      "title": "Add structured data for profiles and posts",
+      "priority": 11,
+      "findingIds": [
+        "WU-018"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1500,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-24T03-41-50-417Z"
+}

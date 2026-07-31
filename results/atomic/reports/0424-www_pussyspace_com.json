@@ -1,0 +1,1458 @@
+{
+  "url": "https://www.pussyspace.com",
+  "auditedAt": "2026-07-26T10:08:25.375Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Completed audit of the UK HTTP 451 access-restriction surface. The underlying service and non-UK templates were not reachable from this region and are explicitly outside this run.",
+  "page": {
+    "appType": "mpa",
+    "framework": "none on audited surface",
+    "notes": "The UK endpoint intentionally returns HTTP 451 and a single server-rendered legal restriction page."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "DOM/CSS inspection",
+    "evaluate probes",
+    "layout metrics",
+    "DevTools trace",
+    "HAR",
+    "discoverability raw/rendered comparison",
+    "security headers",
+    "cookies",
+    "trackers",
+    "secrets scan",
+    "image audit",
+    "heap snapshot",
+    "raw CDP console capture",
+    "Lighthouse attempted (blocked by intentional HTTP 451)",
+    "robots/sitemap fetch",
+    "Modern Web Guidance search/retrieve"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "security",
+    "html",
+    "performance",
+    "fluid-scaling",
+    "size-aware-styling",
+    "declarative-dialog-popover-control",
+    "privacy",
+    "forms",
+    "webmcp",
+    "language-model",
+    "coordinate-global-events"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Rendered UK access-restriction page at desktop size.",
+      "condition": "desktop",
+      "findingIds": [
+        "F4",
+        "F5"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Rendered page at 360x800; no horizontal overflow.",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics: 0px horizontal overflow and CLS 0.",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-short-viewport.png",
+      "caption": "At 320x300 the fixed-height, overflow-hidden body clips the logo and footer.",
+      "condition": "viewport: 320x300",
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-short-layout.json",
+      "caption": "Short viewport layout reports 327px content in a 300px viewport while scrolling is disabled.",
+      "condition": "viewport: 320x300",
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark-reduced.png",
+      "caption": "Page under dark scheme and reduced-motion preferences.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-probe.json",
+      "caption": "Computed preference probe: three CSS animations remain active under reduced motion; color-scheme is normal.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-forced-colors.png",
+      "caption": "Forced-colors rendering remains legible.",
+      "condition": "forced-colors: active; prefers-contrast: more"
+    },
+    {
+      "type": "other",
+      "path": "evidence/contrast-probe.json",
+      "caption": "Computed forced-colors values for body, heading and link.",
+      "condition": "forced-colors: active; prefers-contrast: more"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered HTML and CSS for the restriction surface.",
+      "condition": "default",
+      "findingIds": [
+        "F1",
+        "F2",
+        "F4",
+        "F5",
+        "F6",
+        "F7"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/page-probe.json",
+      "caption": "Document metadata, semantics, focus, feature and memory probe.",
+      "condition": "default",
+      "findingIds": [
+        "F5",
+        "F7"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace.",
+      "condition": "default"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP 1.62s, no long tasks, TBT 0ms.",
+      "condition": "default"
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive: three requests, 19,033 transferred bytes.",
+      "condition": "default"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network summary including intended HTTP 451 response and no render-blocking candidates.",
+      "condition": "default"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw/rendered comparison: 100% content coverage without JavaScript, HTTP 451.",
+      "condition": "crawler without JavaScript",
+      "findingIds": [
+        "F7"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered restriction page.",
+      "condition": "JavaScript enabled"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view of the server-rendered restriction page.",
+      "condition": "JavaScript disabled"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security-header probe: HTTPS but CSP, HSTS, nosniff, framing, referrer and permissions policies absent.",
+      "condition": "default",
+      "findingIds": [
+        "F8",
+        "F9"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie probe: no cookies set.",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Tracker probe: no known trackers; one static asset subdomain.",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Secret scan found no exposed credentials.",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image probe: logo has alt text but no intrinsic dimensions and uses PNG.",
+      "condition": "default",
+      "findingIds": [
+        "F6"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap snapshot: 27,314 nodes and 840,468 bytes self size.",
+      "condition": "settled static page"
+    },
+    {
+      "type": "other",
+      "path": "evidence/console-probe.json",
+      "caption": "Raw CDP console probe: no exceptions or script console calls; one expected network log for HTTP 451.",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/indexing-signals.txt",
+      "caption": "robots.txt and sitemap request evidence; robots is available and sitemap is legally blocked in the audited region.",
+      "condition": "default"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse attempt retained; category scoring was blocked by the intentional HTTP 451 response.",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-searches.jsonl",
+      "caption": "Pinned Modern Web Guidance searches for all 17 principles.",
+      "condition": "modern-web-guidance@0.0.172"
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/CSS inspection plus emulated color-scheme probe",
+      "evidence": "Fixed dark colors are used with no preference query; computed color-scheme is normal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F1"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Emulated reduced-motion getAnimations() probe",
+      "evidence": "Three animations remain running, including two infinite animations, when reduce is requested.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F2"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Forced-colors screenshot and computed-color probe",
+      "evidence": "Forced colors maps body and heading to white on black and the link to yellow; all content remains visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-forced-colors.png",
+        "evidence/contrast-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and journey recon",
+      "evidence": "The audited surface is a single static legal-restriction document with no route or state transition to animate.",
+      "reason": "The audited surface is a single static legal-restriction document with no route or state transition to animate."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered CSS and script inspection",
+      "evidence": "The page has no scroll-linked effect, no scripts, and no scroll event handlers; it does not impose main-thread scroll motion.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS interaction inspection",
+      "evidence": "There are no custom gesture handlers or gesture-driven controls; the only anchor retains platform-native interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Desktop/mobile page recon",
+      "evidence": "The restriction notice has no sticky or affixed chrome and no normal scroll journey requiring scroll-state feedback.",
+      "reason": "The restriction notice has no sticky or affixed chrome and no normal scroll journey requiring scroll-state feedback."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM overlay inventory",
+      "evidence": "There are no tooltips, menus, popovers, or anchored overlays on this surface.",
+      "reason": "There are no tooltips, menus, popovers, or anchored overlays on this surface."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop and mobile visual hierarchy review",
+      "evidence": "A centered logo, single H1, and two short explanatory paragraphs direct attention clearly to the restriction state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Initial-load screenshot and DOM overlay inventory",
+      "evidence": "No popup, interstitial, consent banner, or overlay obscures the restriction message.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM control inventory",
+      "evidence": "The page has no modal, disclosure, picker, select, or transient overlay requiring a semantic dismissible primitive.",
+      "reason": "The page has no modal, disclosure, picker, select, or transient overlay requiring a semantic dismissible primitive."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshot review",
+      "evidence": "The viewport is almost entirely the short restriction message; there is no navigation or application chrome competing with it.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout primitive at 360x800",
+      "evidence": "scrollWidth and innerWidth are both 360px; horizontal overflow is 0 and viewport metadata is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "CSS and narrow/desktop visual comparison",
+      "evidence": "The sole card adapts intrinsically through max-width, percentage width, max-width on the image, and a narrow breakpoint; no reusable multi-container component exists.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-mobile.png",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Programmatic focus and target inspection",
+      "evidence": "The only interactive element is an inline text link, with a visible browser focus outline and no hover-only information.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport hierarchy review",
+      "evidence": "The H1 immediately states Access Restricted and the next two paragraphs explain the UK restriction and why it exists.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Restriction-state journey review",
+      "evidence": "The only available task in the audited region is understanding the legal restriction; the complete reason is visible without interaction or detours.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HTTP and rendered-state review",
+      "evidence": "HTTP 451 accurately communicates legal unavailability and the page explains that UK access ended because age-verification requirements cannot be met.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace and layout measurements",
+      "evidence": "Trace LCP is 1.62s, TBT 0ms with no long tasks; observed CLS is 0. The static page has no interaction workload.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout-shift observer",
+      "evidence": "The settled mobile load recorded CLS 0 with no shift entries.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace long-task analysis",
+      "evidence": "Trace reports zero long tasks and 0ms total blocking time; the document ships no JavaScript.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR summary and DOM confirmation",
+      "evidence": "Only three requests transfer 19,033 bytes, no render-blocking candidates are present, and cache-header hygiene is clear.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR and authored response inspection",
+      "evidence": "No JavaScript or external CSS ships; the complete page transfers about 19KB in three requests with no duplicate bundles.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM semantics and image audit",
+      "evidence": "The only image has alt text, the only control is a native anchor with text, and there are no form fields or canvas elements.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Computed CSS contrast calculation and screenshot review",
+      "evidence": "The 14px #777 footer text on #1a1a1a is about 3.7:1, below 4.5:1.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F4"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Heading/landmark/focus probe",
+      "evidence": "A logical H1 and visible link focus exist, but the primary content has no main landmark.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F5"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshot and CSS review",
+      "evidence": "Body copy uses 15–16px text at 1.6 line-height with short centered lines and no horizontal clipping at 360px.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Short-viewport reflow test",
+      "evidence": "At 320x300 the 327px content is clipped because the body is fixed to 100vh with overflow hidden.",
+      "pathIds": [
+        "home-short"
+      ],
+      "artifacts": [
+        "evidence/home-short-viewport.png",
+        "evidence/home-short-layout.json"
+      ],
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Raw CDP Runtime and Log event capture",
+      "evidence": "No uncaught exceptions or script console calls occurred; the sole log entry is the intentional main-document HTTP 451 response.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/console-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Rendered document and image audit",
+      "evidence": "Doctype and charset are valid, but the logo omits intrinsic width and height attributes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F6"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Source, runtime, and permission-surface inspection",
+      "evidence": "The page has no scripts, deprecated API calls, paste handlers, source maps, libraries, or permission prompts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/console-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata and raw HTML inspection",
+      "evidence": "The title is Access Restricted, but no meta description is present in rendered or raw HTML.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/discoverability.json"
+      ],
+      "findingIds": [
+        "F7"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM, robots.txt, and viewport inspection",
+      "evidence": "The only link has a real HTTPS href, viewport metadata is present, and robots.txt permits general crawling of this path.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/indexing-signals.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HTTP, robots, and sitemap inspection",
+      "evidence": "HTTP 451 is the correct indexing signal for legal unavailability in the audited region; robots.txt is reachable and declares the sitemap.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/indexing-signals.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Visible-entity and metadata inspection",
+      "evidence": "This is a transient jurisdictional error document, not an article, product, event, organization profile, or other rich entity requiring structured/share metadata.",
+      "reason": "This is a transient jurisdictional error document, not an article, product, event, organization profile, or other rich entity requiring structured/share metadata."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security headers, cookies, and secret probes",
+      "evidence": "HTTPS is used and no cookies/secrets are present, but CSP, HSTS and nosniff are absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/secrets.json"
+      ],
+      "findingIds": [
+        "F8"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR, tracker, cookie, and secret inspection",
+      "evidence": "No known trackers or cookies are present; the sole other origin is the site static-asset subdomain serving a 12.6KB logo.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/cookies.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM/runtime surface inspection",
+      "evidence": "The restriction page requests no permissions and exposes no authentication or account flow in the audited region.",
+      "reason": "The restriction page requests no permissions and exposes no authentication or account flow in the audited region."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Response-header inspection",
+      "evidence": "No framing defense, Referrer-Policy, or Permissions-Policy is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F9"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Raw versus rendered discoverability comparison",
+      "evidence": "All 26 rendered content tokens, the title and H1 are present in raw HTML; content coverage without JavaScript is 100%.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Runtime and DOM complexity inspection",
+      "evidence": "The surface has 17 elements, no JavaScript, no async dependencies, and no overlays that can lose state or be cut off.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/console-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Site-type and capability probe",
+      "evidence": "The audited surface is a static legal restriction notice, not an app; installability and offline app behavior do not support its core purpose.",
+      "reason": "The audited surface is a static legal restriction notice, not an app; installability and offline app behavior do not support its core purpose."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HTTP 451 state review",
+      "evidence": "Rather than a blank or generic failure, the legal HTTP error renders a complete explanation of what happened and why.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS internationalisation inspection",
+      "evidence": "The document declares lang=en; its simple centered layout uses no directional left/right properties or ordering assumptions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Content/data inventory",
+      "evidence": "The restriction message contains no dates, numbers, currencies, durations, calendars, or locale-sensitive data.",
+      "reason": "The restriction message contains no dates, numbers, currencies, durations, calendars, or locale-sensitive data."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Content/data inventory",
+      "evidence": "The page models and displays no times or events.",
+      "reason": "The page models and displays no times or events."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual and interaction review",
+      "evidence": "The page makes no offer, consent request, continuity choice, or manipulative action; it states the restriction plainly.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Restriction error-state review",
+      "evidence": "The error state is immediate, plain-language, and gives the specific legal reason; there is no invalid-input flow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Form inventory",
+      "evidence": "There are no input or form fields on the audited restriction surface.",
+      "reason": "There are no input or form fields on the audited restriction surface."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Flow inventory",
+      "evidence": "No pricing, payment, subscription, sign-in, account, or cancellation flow is exposed in the audited region.",
+      "reason": "No pricing, payment, subscription, sign-in, account, or cancellation flow is exposed in the audited region."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR and image-size review",
+      "evidence": "The entire page transfers 19KB; its only content image transfers 12.6KB and is not oversized relative to display.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace/HAR/source review",
+      "evidence": "There are no scripts, background fetches, long tasks, analytics calls, or repeated work.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Tracker/HAR/media inventory",
+      "evidence": "No trackers, fonts, video or audio load; the only other origin is the site static subdomain and total transfer is 19KB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Task and capability inspection",
+      "evidence": "A static jurisdictional restriction message exposes no user operation that an agent tool could meaningfully perform.",
+      "reason": "A static jurisdictional restriction message exposes no user operation that an agent tool could meaningfully perform."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Task and capability inspection",
+      "evidence": "The fixed legal notice has no summarisation, generation, translation, or other inference feature where on-device AI would add value.",
+      "reason": "The fixed legal notice has no summarisation, generation, translation, or other inference feature where on-device AI would add value."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Interaction inventory before heap testing",
+      "evidence": "The page has no repeatable representative state interaction, modal, route, feed, or script behavior; fabricating repetition would not test a real journey.",
+      "reason": "The page has no repeatable representative state interaction, modal, route, feed, or script behavior; fabricating repetition would not test a real journey."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap snapshot and Performance.memory probe",
+      "evidence": "The static 17-element page settles at a heap snapshot of 27,314 nodes and 840,468 self-size bytes; JSHeapUsedSize is about 1.1MB, proportionate to the surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap/source/runtime inspection",
+      "evidence": "The page contains no JavaScript, listeners, timers or DOM mutation code; the settled DOM has 17 elements and no mechanism for accumulation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F4",
+        "F5",
+        "F3"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F6"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F7"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F8",
+        "F9"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All registered checks are inapplicable to this static legal-restriction surface."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "UK HTTP 451 restriction page: the only reachable template; exercised at desktop, mobile, preference, crawler and security/network conditions.",
+      "url": "https://www.pussyspace.com/",
+      "conditions": [
+        "desktop",
+        "viewport 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "home-short",
+      "description": "Short/zoom-equivalent viewport reflow stress case for the same restriction template.",
+      "url": "https://www.pussyspace.com/",
+      "conditions": [
+        "viewport 320x300"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "excluded-underlying-site",
+      "description": "Main content, listings, details, search, forms and account/commercial journeys were not covered because the audited UK region consistently receives the intentional legal HTTP 451 response.",
+      "url": "https://www.pussyspace.com/",
+      "conditions": [
+        "UK network region"
+      ],
+      "result": "skipped"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The page hard-codes a dark palette rather than adapting to the user’s color-scheme preference.",
+      "evidence": "DOM/CSS shows fixed #0d0d0d and #1a1a1a surfaces with no prefers-color-scheme rule; the emulated dark probe reports computed color-scheme \"normal\", so browser UI is not explicitly coordinated either.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-dark-reduced.png",
+        "evidence/preferences-probe.json"
+      ],
+      "suggestedFix": "Declare an appropriate color-scheme and use prefers-color-scheme or light-dark() tokens to offer a usable light variant while retaining the current dark design.",
+      "effort": "small"
+    },
+    {
+      "id": "F2",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Infinite pulsing and glowing animations continue when reduced motion is requested.",
+      "evidence": "Under prefers-reduced-motion: reduce, getAnimations() still reports fadeIn (1.2s), logoPulse (2.5s infinite), and glow (1.5s infinite) as running; no reduced-motion CSS exists.",
+      "artifacts": [
+        "evidence/preferences-probe.json",
+        "evidence/home-dark-reduced.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add @media (prefers-reduced-motion: reduce) to remove the entrance transform and disable the infinite logo and glow animations.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F3",
+      "pathId": "home-short",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Short or highly zoomed viewports clip content and provide no way to scroll to it.",
+      "evidence": "At 320x300 the screenshot clips the top of the logo and bottom link; layout reports 327px of content in a 300px viewport while body uses height:100vh and overflow:hidden.",
+      "artifacts": [
+        "evidence/home-short-viewport.png",
+        "evidence/home-short-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use min-height:100dvh rather than fixed height, allow vertical overflow, and align to the top when content exceeds the viewport.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F4",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The small footer text is too dim against its dark card.",
+      "evidence": "DOM/CSS sets 14px footer text to #777 on #1a1a1a, a contrast ratio of about 3.7:1, below WCAG AA’s 4.5:1 requirement for normal text; the desktop screenshot shows the low-emphasis text.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Raise the footer text color to at least approximately #929292 on #1a1a1a, and verify all states meet 4.5:1.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F5",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The restriction message has no main landmark.",
+      "evidence": "The semantic probe found one H1 but no main, header, nav, footer or aside landmark; the entire message is nested in generic div elements.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/home-dom.json",
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Wrap the primary restriction card in <main>; use <footer> for the closing note only if it represents page-level footer content.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F6",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The logo image does not declare intrinsic dimensions.",
+      "evidence": "The image probe reports missing width and height attributes for the 335px-wide PNG. Measured CLS was 0 in this run, but intrinsic dimensions are still absent and can permit shifts under different cache/network timing.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add the logo’s intrinsic width and height attributes while retaining max-width:100%; optionally provide a compact WebP/AVIF alternative if it is smaller.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F7",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The public restriction response has no meta description.",
+      "evidence": "DOM and discoverability probes find title \"Access Restricted\" but no meta[name=description]; the message is otherwise fully server-rendered with 100% raw-content coverage.",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/discoverability.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add a concise description stating that PussySpace is unavailable in the United Kingdom because of age-verification requirements.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F8",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The HTTPS response lacks baseline content and transport security headers.",
+      "evidence": "The headers primitive confirms HTTPS but reports no Content-Security-Policy, Strict-Transport-Security, or X-Content-Type-Options.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Deploy a restrictive CSP for this static page, HSTS after confirming all subdomains support HTTPS, and X-Content-Type-Options: nosniff.",
+      "effort": "small"
+    },
+    {
+      "id": "F9",
+      "pathId": "home",
+      "url": "https://www.pussyspace.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The response provides no clickjacking, referrer, or permissions policy.",
+      "evidence": "The headers primitive reports no X-Frame-Options or CSP frame-ancestors, no Referrer-Policy, and no Permissions-Policy.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Set CSP frame-ancestors (or X-Frame-Options as legacy coverage), strict-origin-when-cross-origin or stricter Referrer-Policy, and a Permissions-Policy disabling unused capabilities.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Allow vertical reflow in short and zoomed viewports",
+      "priority": 1,
+      "findingIds": [
+        "F3"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Deploy baseline security and defensive response headers",
+      "priority": 2,
+      "findingIds": [
+        "F8",
+        "F9"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Respect reduced-motion and color-scheme preferences",
+      "priority": 3,
+      "findingIds": [
+        "F2",
+        "F1"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Fix footer contrast and add a main landmark",
+      "priority": 4,
+      "findingIds": [
+        "F4",
+        "F5"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Complete restriction-page metadata and image dimensions",
+      "priority": 5,
+      "findingIds": [
+        "F7",
+        "F6"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 2,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-26T10-08-25-375Z"
+}

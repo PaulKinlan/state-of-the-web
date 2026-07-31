@@ -1,0 +1,1235 @@
+{
+  "url": "https://www.avito.ru",
+  "auditedAt": "2026-07-27T14:32:40.000Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The underlying homepage briefly rendered in some sessions, but a mandatory IP-restriction dialog and HTTP 429 made it non-representative and prevented route coverage."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "discoverability",
+    "evaluate-probe",
+    "trace",
+    "headers",
+    "cookies",
+    "secrets",
+    "images",
+    "curl HTTP probe",
+    "robots/sitemap fetch",
+    "Modern Web Guidance live catalog"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "improve-next-page-load-performance",
+    "identify-inp-causes",
+    "css-layout",
+    "security",
+    "privacy",
+    "webmcp"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered homepage with an IP restriction dialog obscuring the primary UI",
+      "condition": "desktop browser",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler-view screenshot showing an access-denied illustration instead of representative content",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-versus-rendered discoverability probe captured under the restricted response",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Restricted homepage under dark preference; retained only as blocker context",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Load trace summary for the restricted response, not representative site performance",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools trace for the restricted response, not used to judge site performance",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/block-probe.json",
+      "caption": "Rendered text and links showing the homepage behind the restriction interstitial",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/quality-probe.json",
+      "caption": "Document semantics probe of the restricted state",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Reduced-motion probe of the restricted state",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers observed on the restricted response",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookies observed while receiving the restricted response",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Secret scan of the restricted response",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image inspection from an inconsistent restricted/home response; not representative",
+      "condition": "restricted response",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt fetched during route discovery",
+      "condition": "direct fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "sitemap endpoint response retained during route discovery",
+      "condition": "direct fetch",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Emulated color-scheme, reduced-motion, and contrast preferences with screenshot/evaluate probes across representative paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Emulated color-scheme, reduced-motion, and contrast preferences with screenshot/evaluate probes across representative paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Emulated color-scheme, reduced-motion, and contrast preferences with screenshot/evaluate probes across representative paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned pointer, touch, scroll, and transition interaction probes on listing and detail templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned pointer, touch, scroll, and transition interaction probes on listing and detail templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned pointer, touch, scroll, and transition interaction probes on listing and detail templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual and keyboard review of navigation, scroll affordances, overlays, and journey state. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual and keyboard review of navigation, scroll affordances, overlays, and journey state. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned visual and keyboard review of navigation, scroll affordances, overlays, and journey state. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned screenshots and DOM/style inspection of content hierarchy, overlays, and control density. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned screenshots and DOM/style inspection of content hierarchy, overlays, and control density. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned screenshots and DOM/style inspection of content hierarchy, overlays, and control density. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned desktop/mobile layout captures, overflow metrics, and component responsiveness inspection. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned desktop/mobile layout captures, overflow metrics, and component responsiveness inspection. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned desktop/mobile layout captures, overflow metrics, and component responsiveness inspection. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned search, listing, item-detail, and sign-in/add-item journey replay with state/error review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned search, listing, item-detail, and sign-in/add-item journey replay with state/error review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned search, listing, item-detail, and sign-in/add-item journey replay with state/error review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started trace, layout, image, and HAR evidence plan; representative page and interaction measurements were prevented by the access interstitial. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started trace, layout, image, and HAR evidence plan; representative page and interaction measurements were prevented by the access interstitial. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started trace, layout, image, and HAR evidence plan; representative page and interaction measurements were prevented by the access interstitial. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started trace, layout, image, and HAR evidence plan; representative page and interaction measurements were prevented by the access interstitial. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started trace, layout, image, and HAR evidence plan; representative page and interaction measurements were prevented by the access interstitial. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned semantic, keyboard/focus, label, contrast, alt-text, zoom/reflow, and axe-style probes across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned semantic, keyboard/focus, label, contrast, alt-text, zoom/reflow, and axe-style probes across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned semantic, keyboard/focus, label, contrast, alt-text, zoom/reflow, and axe-style probes across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned semantic, keyboard/focus, label, contrast, alt-text, zoom/reflow, and axe-style probes across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned semantic, keyboard/focus, label, contrast, alt-text, zoom/reflow, and axe-style probes across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM, console, document metadata, deprecated API, and runtime error inspection. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM, console, document metadata, deprecated API, and runtime error inspection. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM, console, document metadata, deprecated API, and runtime error inspection. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started raw/rendered discoverability and metadata probes; planned listing/detail, robots, sitemap, and structured-data confirmation. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started raw/rendered discoverability and metadata probes; planned listing/detail, robots, sitemap, and structured-data confirmation. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started raw/rendered discoverability and metadata probes; planned listing/detail, robots, sitemap, and structured-data confirmation. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started raw/rendered discoverability and metadata probes; planned listing/detail, robots, sitemap, and structured-data confirmation. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started headers, cookies, secrets, and third-party/network probes; representative application responses and journeys were unavailable. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started headers, cookies, secrets, and third-party/network probes; representative application responses and journeys were unavailable. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started headers, cookies, secrets, and third-party/network probes; representative application responses and journeys were unavailable. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started headers, cookies, secrets, and third-party/network probes; representative application responses and journeys were unavailable. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS, offline/error, refresh, back/forward, and overlay-state probes on core journeys. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS, offline/error, refresh, back/forward, and overlay-state probes on core journeys. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS, offline/error, refresh, back/forward, and overlay-state probes on core journeys. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS, offline/error, refresh, back/forward, and overlay-state probes on core journeys. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, locale formatting, translated expansion, logical layout, and time-zone/data-entry review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, locale formatting, translated expansion, logical layout, and time-zone/data-entry review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, locale formatting, translated expansion, logical layout, and time-zone/data-entry review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, pricing, permission, form error/recovery, cancellation, and dark-pattern review on transactional paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, pricing, permission, form error/recovery, cancellation, and dark-pattern review on transactional paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, pricing, permission, form error/recovery, cancellation, and dark-pattern review on transactional paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, pricing, permission, form error/recovery, cancellation, and dark-pattern review on transactional paths. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started image and trace plan; planned HAR weight, third-party cost, caching, and background-work review across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started image and trace plan; planned HAR weight, third-party cost, caching, and background-work review across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started image and trace plan; planned HAR weight, third-party cost, caching, and background-work review across templates. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started crawler/raw HTML probe; planned machine-readable content, form semantics, and agent-tool surface review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Started crawler/raw HTML probe; planned machine-readable content, form semantics, and agent-tool surface review. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline/post-interaction heaps and metric sampling over repeated search, modal, and route interactions. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline/post-interaction heaps and metric sampling over repeated search, modal, and route interactions. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline/post-interaction heaps and metric sampling over repeated search, modal, and route interactions. Check target: undefined",
+      "evidence": "Recon evidence shows the IP-restriction modal over the homepage; the crawler capture shows an access-denied illustration, and curl returned HTTP 429 from QRATOR.",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "The target served an IP-restriction interstitial (\"Доступ ограничен: проблема с IP\") to the audit browser and curl received HTTP 429 from QRATOR. This external access-control state obscured the primary UI and prevented representative journeys, so the site itself could not be judged."
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage recon and primary search entry point. Attempted first; blocked by an IP-restriction interstitial and inconsistent 429/access-control responses.",
+      "url": "https://www.avito.ru",
+      "conditions": [
+        "desktop",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "crawler/no JavaScript"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "listing",
+      "description": "Representative category/listing template (planned: /all/transport). Not exercised because the entry session was access-restricted.",
+      "url": "https://www.avito.ru/all/transport",
+      "conditions": [
+        "desktop",
+        "mobile",
+        "keyboard-only"
+      ],
+      "result": "skipped"
+    },
+    {
+      "id": "detail",
+      "description": "Representative item-detail template. Not selected or exercised because the access-control state made discovered inventory unstable and non-representative.",
+      "result": "skipped"
+    },
+    {
+      "id": "core-flow",
+      "description": "Primary search-to-listing-to-detail journey plus sign-in/add-item overlays. Not exercised because the restriction modal prevented a valid session.",
+      "result": "skipped"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T14-31-11-564Z"
+}

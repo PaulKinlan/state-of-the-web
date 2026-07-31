@@ -1,0 +1,1612 @@
+{
+  "url": "https://www.ipat.jra.go.jp",
+  "auditedAt": "2026-07-27T23:10:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Complete atomic audit of the publicly reachable out-of-hours service notice. The active betting/authenticated transaction flow was not exposed at this time and is explicitly outside this path judgement.",
+  "page": {
+    "appType": "mpa",
+    "framework": "none",
+    "notes": "Server-rendered Japanese out-of-hours notice. No JavaScript, forms, internal same-host links, manifest, or exposed transaction flow. All arbitrary paths currently soft-fall back to the same 200 notice."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "Lighthouse",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "HTTP probes",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "fluid-scaling",
+    "performance",
+    "html",
+    "security",
+    "deliver-optimized-decorative-images"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop first viewport",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "360x800 mobile viewport",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark preference capture",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast-more.png",
+      "caption": "Increased contrast preference capture",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered HTML and CSS",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/dom-probe.json",
+      "caption": "Metadata, semantics, links, focus, feature probe",
+      "findingIds": [
+        "F03",
+        "F05",
+        "F06",
+        "F08",
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Reduced-motion animation probe",
+      "condition": "prefers-reduced-motion: reduce"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile layout, CLS, overflow metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact performance trace metrics",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network totals, latency, caching, and third-party summary",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Full Lighthouse report"
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse scores and failures",
+      "findingIds": [
+        "F03",
+        "F04",
+        "F08"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-details.json",
+      "caption": "Lighthouse audit node details",
+      "findingIds": [
+        "F02",
+        "F05",
+        "F06",
+        "F07",
+        "F10",
+        "F13"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered discoverability comparison"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JS view",
+      "condition": "JavaScript disabled"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "condition": "JavaScript enabled"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response headers",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party/tracker audit"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.json",
+      "caption": "V8 heap summary"
+    },
+    {
+      "type": "other",
+      "path": "evidence/http-probes.txt",
+      "caption": "robots, sitemap, manifest, and nonexistent-path HTTP probes",
+      "findingIds": [
+        "F07",
+        "F10"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The dark-mode screenshot is pixel-for-pixel equivalent in palette to the light capture; the body remains white and the notice panel remains light peach.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Reduced-motion emulation reports zero animations and zero transitions, so no unavoidable motion is present.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "Lighthouse/axe reports both red #ff0000 spans on white at 3.99:1, below the required 4.5:1 for 16px normal text.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/home-contrast-more.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The observed out-of-hours notice has no route or state transition to animate.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The short static notice has no scrollytelling or scroll-linked state.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The notice uses native anchors for pointer/touch activation and has no custom pointer handlers, gesture traps, or scroll interference.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The complete notice fits in one scaled mobile viewport and has no persistent scrolling chrome.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "No tooltip, menu, popover, or anchored overlay exists on this surface.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Desktop screenshot clearly prioritises the red out-of-hours status and bordered schedule panel immediately after the “お知らせ” heading.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Initial screenshot and DOM show content directly, with no overlay or interstitial.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "No dismissible overlay, picker, disclosure, or dialog exists.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The viewport is almost entirely status content and links, with only a compact branded header/footer.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The title, “お知らせ” heading, red status line, and schedule make the current purpose explicit.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The captured URL is explicitly an out-of-hours status surface; it offers no transaction flow to execute at the audited time.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The page names the out-of-hours state, gives exact opening times, and links to troubleshooting when shown during reception hours.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "Lighthouse records LCP 2.6s and a 740ms root response; HAR records the document at 2297ms and all three images missing cache headers despite only 15KB total transfer.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Mobile layout observation records CLS 0 with no shift entries.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Trace records zero long tasks and 0ms total blocking time; the page has no scripts.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "Lighthouse records LCP 2.6s and a 740ms root response; HAR records the document at 2297ms and all three images missing cache headers despite only 15KB total transfer.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "DOM probe finds zero scripts and HAR contains only one document plus three images/favicon, with no duplicate JS/CSS payload.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Both images have non-empty alt text and all eight anchors have accessible text; Lighthouse did not report name/role failures.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "Lighthouse/axe reports both red #ff0000 spans on white at 3.99:1, below the required 4.5:1 for 16px normal text.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/home-contrast-more.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The DOM probe finds no header/nav/main/aside/footer landmarks, and Lighthouse reports landmark-one-main failure on the html element.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-details.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The script-free page completed Lighthouse and CDP evaluation without an uncaught runtime/console error audit.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The active DOM reports doctype null and compatMode BackCompat; Lighthouse’s doctype audit fails.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-details.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "Direct HTTP probes show /robots.txt, /sitemap.xml, /manifest.webmanifest, and /nonexistent-audit-probe all return 200 text/html with the same notice; Lighthouse also reports bfcache disabled by no-store.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/http-probes.txt",
+        "evidence/lighthouse-details.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The DOM probe reports description null and Lighthouse’s meta-description audit fails, although the title is present.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls. The DOM probe lists seven of eight anchors with identical text “こちら”, obscuring destination and purpose when scanned or read out of context.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F03",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "/robots.txt and /sitemap.xml return the service notice as 200 text/html; Lighthouse reports 83 robots.txt errors, and the DOM has no canonical URL.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/http-probes.txt",
+        "evidence/lighthouse-details.json",
+        "evidence/dom-probe.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The DOM probe finds zero JSON-LD blocks and zero Open Graph properties.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The headers primitive reports no CSP, HSTS, X-Content-Type-Options, X-Frame-Options/frame-ancestors, Referrer-Policy, or Permissions-Policy.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "HAR/trackers/cookies report zero third-party origins, zero trackers, and zero cookies; secrets scan finds no exposed credential.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The observed status surface has no sign-in or permission request flow.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The headers primitive reports no CSP, HSTS, X-Content-Type-Options, X-Frame-Options/frame-ancestors, Referrer-Policy, or Permissions-Policy.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Discoverability comparison reports 100% visible content without JavaScript and isJsShell false.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The page uses no scripts, asynchronous UI, menus, or overlays; its visible notice is available directly in server HTML.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "An offline/installable mode is not appropriate evidence for this time-sensitive regulated transaction entry notice.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "Direct HTTP probes show /robots.txt, /sitemap.xml, /manifest.webmanifest, and /nonexistent-audit-probe all return 200 text/html with the same notice; Lighthouse also reports bfcache disabled by no-store.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/http-probes.txt",
+        "evidence/lighthouse-details.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The document declares html lang=\"ja\" and the Japanese-only LTR notice renders coherently.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/dom-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "All visible dates, weekdays, and times are presented consistently in Japanese notation for the site’s Japanese audience.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The static schedule uses explicit local clock times and weekday labels without client-side Date conversion or ambiguous offset math.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The status page contains no consent, upsell, disguised control, forced action, or preselected choice.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The unavailable state is explained in plain language with schedules and a troubleshooting link rather than blame or a dead end.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "No input fields exist on the observed notice surface.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "No purchase, subscription, sign-in, or account-management controls are exposed on the observed notice surface.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct comparison of captured page evidence against the mapped Modern Web Guidance and check outcome.",
+      "evidence": "The images primitive finds two legacy PNG images, no modern formats, and no srcset for the larger logo; Lighthouse flags low-resolution responsive image delivery.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-details.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "HAR shows five small first-party requests and the trace shows no long tasks; there is no script or background processing.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "HAR totals 14,987 transferred bytes with zero third-party bytes, fonts, audio, or video.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "Agent-executable betting capabilities are not judged appropriate for this safety-sensitive, time-restricted transaction surface.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The static service-status notice has no user need for on-device language-model inference.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and interaction-surface applicability review.",
+      "evidence": "No applicable surface was present.",
+      "reason": "The page contains no repeatable stateful interaction; only outbound links are present.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "Heap summary is proportionate for this static page: 27,563 nodes/heap records and 863,948 bytes self size, with no application framework.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced artifact and mapped guidance.",
+      "evidence": "The single-state heap summary contains no Detached* constructor among reported populations, and the page has zero scripts that could register accumulating listeners/timers.",
+      "pathIds": [
+        "out-of-hours-notice"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F05",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F03",
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Agent-executable betting capabilities are not judged appropriate for this safety-sensitive, time-restricted transaction surface. The static service-status notice has no user need for on-device language-model inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "out-of-hours-notice",
+      "description": "Public entry URL in its current out-of-hours state; represents the only same-host page/template discoverable because all paths return this notice. Audited desktop, narrow mobile, dark, increased-contrast, reduced-motion, no-JS, performance, network, security, accessibility, and memory conditions. Authenticated/in-hours betting and external linked JRA services were not covered because they were not exposed by this host/state.",
+      "url": "https://www.ipat.jra.go.jp/",
+      "conditions": [
+        "desktop viewport",
+        "viewport 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "JavaScript disabled",
+        "cold-load performance/network"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The service notice ignores the user’s dark color-scheme preference.",
+      "evidence": "The dark-mode screenshot is pixel-for-pixel equivalent in palette to the light capture; the body remains white and the notice panel remains light peach.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Declare color-scheme and provide dark surface, text, link, border, and alert colors through prefers-color-scheme or light-dark().",
+      "effort": "small"
+    },
+    {
+      "id": "F02",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Important red status and recovery text fails WCAG AA contrast.",
+      "evidence": "Lighthouse/axe reports both red #ff0000 spans on white at 3.99:1, below the required 4.5:1 for 16px normal text.",
+      "artifacts": [
+        "evidence/lighthouse-details.json",
+        "evidence/home-contrast-more.png"
+      ],
+      "suggestedFix": "Use a darker alert red with at least 4.5:1 contrast on white and verify under increased-contrast/forced-colors conditions.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F03",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page has no mobile viewport and is rendered as a 980px desktop canvas scaled down to 360px.",
+      "evidence": "At a 360x800 device viewport, layout reports clientWidth 980 and visual scale 0.367 because no viewport meta exists; the screenshot shows tiny text and controls.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Add width=device-width, initial-scale=1 and use fluid layout/type so content reflows at narrow widths without browser-wide downscaling.",
+      "effort": "small"
+    },
+    {
+      "id": "F04",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "A tiny static notice is delayed by document latency and uncached assets.",
+      "evidence": "Lighthouse records LCP 2.6s and a 740ms root response; HAR records the document at 2297ms and all three images missing cache headers despite only 15KB total transfer.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Reduce origin response time, compress the HTML, and give versioned static images long-lived immutable caching while preserving no-store only where transaction state requires it.",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The document has no main landmark.",
+      "evidence": "The DOM probe finds no header/nav/main/aside/footer landmarks, and Lighthouse reports landmark-one-main failure on the html element.",
+      "artifacts": [
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-details.json"
+      ],
+      "suggestedFix": "Wrap the central notice in <main> and use semantic header/footer elements without disrupting the existing heading.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F06",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The response omits an HTML doctype and renders in quirks mode.",
+      "evidence": "The active DOM reports doctype null and compatMode BackCompat; Lighthouse’s doctype audit fails.",
+      "artifacts": [
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-details.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Serve a valid <!doctype html>, modern UTF-8 charset metadata near the start of head, and standards-mode markup.",
+      "effort": "small"
+    },
+    {
+      "id": "F07",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Every tested utility and nonexistent path returns the out-of-service HTML with HTTP 200.",
+      "evidence": "Direct HTTP probes show /robots.txt, /sitemap.xml, /manifest.webmanifest, and /nonexistent-audit-probe all return 200 text/html with the same notice; Lighthouse also reports bfcache disabled by no-store.",
+      "artifacts": [
+        "evidence/http-probes.txt",
+        "evidence/lighthouse-details.json"
+      ],
+      "suggestedFix": "Return accurate 404/5xx status codes and content types for unavailable resources, provide a real error page, and scope no-store to genuinely sensitive responses.",
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page has no meta description.",
+      "evidence": "The DOM probe reports description null and Lighthouse’s meta-description audit fails, although the title is present.",
+      "artifacts": [
+        "evidence/dom-probe.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Add a concise Japanese meta description that explains this is the JRA internet voting status/entry page.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F09",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Most links use the repeated generic label “こちら” (“here”).",
+      "evidence": "The DOM probe lists seven of eight anchors with identical text “こちら”, obscuring destination and purpose when scanned or read out of context.",
+      "artifacts": [
+        "evidence/dom-probe.json"
+      ],
+      "suggestedFix": "Use destination-specific link text such as “即PATの受付時間” and “投票履歴を確認” while keeping real href values.",
+      "effort": "small"
+    },
+    {
+      "id": "F10",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Indexing endpoints and canonical signals are malformed or absent.",
+      "evidence": "/robots.txt and /sitemap.xml return the service notice as 200 text/html; Lighthouse reports 83 robots.txt errors, and the DOM has no canonical URL.",
+      "artifacts": [
+        "evidence/http-probes.txt",
+        "evidence/lighthouse-details.json",
+        "evidence/dom-probe.json"
+      ],
+      "suggestedFix": "Serve valid text/plain robots.txt and XML sitemap responses, add a canonical link, and preserve truthful HTTP status/content types during service downtime.",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The public service notice has no structured or social-preview metadata.",
+      "evidence": "The DOM probe finds zero JSON-LD blocks and zero Open Graph properties.",
+      "artifacts": [
+        "evidence/dom-probe.json"
+      ],
+      "suggestedFix": "Add accurate Open Graph metadata and minimal Organization/WebSite JSON-LD consistent with visible JRA content.",
+      "effort": "small"
+    },
+    {
+      "id": "F12",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "HTTPS is used, but all audited defensive response headers are absent.",
+      "evidence": "The headers primitive reports no CSP, HSTS, X-Content-Type-Options, X-Frame-Options/frame-ancestors, Referrer-Policy, or Permissions-Policy.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Deploy HSTS, nosniff, a restrictive CSP including frame-ancestors, Referrer-Policy, and a least-privilege Permissions-Policy after staged compatibility testing.",
+      "effort": "medium"
+    },
+    {
+      "id": "F13",
+      "pathId": "out-of-hours-notice",
+      "url": "https://www.ipat.jra.go.jp/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Small decorative raster assets lack modern/resolution-aware variants.",
+      "evidence": "The images primitive finds two legacy PNG images, no modern formats, and no srcset for the larger logo; Lighthouse flags low-resolution responsive image delivery.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-details.json"
+      ],
+      "suggestedFix": "Prefer SVG for logos or provide appropriately sized 1x/2x AVIF/WebP/image-set variants, while retaining intrinsic dimensions.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Make the entry/status page genuinely responsive and legible on mobile",
+      "priority": 1,
+      "findingIds": [
+        "F03"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Deploy layered security headers for the transaction origin",
+      "priority": 2,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Fix alert contrast and semantic page structure",
+      "priority": 3,
+      "findingIds": [
+        "F02",
+        "F05"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Serve truthful HTTP status, robots, sitemap, and canonical signals",
+      "priority": 4,
+      "findingIds": [
+        "F07",
+        "F10"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Move the response into standards mode with modern metadata",
+      "priority": 5,
+      "findingIds": [
+        "F06",
+        "F08",
+        "F09",
+        "F11"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Reduce root latency and cache versioned static assets",
+      "priority": 6,
+      "findingIds": [
+        "F04",
+        "F13"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Respect the user’s dark color-scheme preference",
+      "priority": 7,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T23-06-35-179Z"
+}

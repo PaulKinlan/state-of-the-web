@@ -1,0 +1,1654 @@
+{
+  "url": "https://news.yahoo.co.jp",
+  "auditedAt": "2026-07-28T08:35:53.000Z",
+  "mode": "report",
+  "status": "partial",
+  "statusDetail": "The EEA/UK geographic HTTP 403 gate allowed a complete audit of the delivered notice but blocked the representative Yahoo News reading flow and normal robots/sitemap/indexing signals.",
+  "page": {
+    "appType": "mpa",
+    "framework": "static server-rendered HTML (no page JavaScript)",
+    "notes": "From this audit location every tested news.yahoo.co.jp path, including robots.txt and sitemap.xml, returned the same bilingual EEA/UK access notice with HTTP 403. Coverage therefore represents the delivered gate page, not Yahoo News article/listing/search templates."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "DOM inspection",
+    "evaluate probes",
+    "layout metrics/CLS observer",
+    "discoverability/raw HTML comparison",
+    "DevTools trace",
+    "HAR/network analysis",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets scan",
+    "image audit",
+    "axe-core 4.10.3",
+    "heap summary",
+    "Lighthouse attempted (blocked by HTTP 403)"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "accessible-error-announcement",
+    "adapt-scrollbar-to-contrast-preferences",
+    "agentic-javascript-tools",
+    "autofill-sign-in-form",
+    "coordinate-global-events",
+    "dark-mode",
+    "declarative-dialog-popover-control",
+    "deliver-optimized-decorative-images",
+    "detect-initial-visibility-state",
+    "fluid-scaling",
+    "forms",
+    "html",
+    "identify-heavy-scripts",
+    "light-dismiss-a-dialog",
+    "manage-recurring-intervals",
+    "optimize-image-priority",
+    "passkeys",
+    "performance",
+    "position-aware-tooltips",
+    "privacy",
+    "same-document-transitions",
+    "scroll-position-aware-elements",
+    "search-hidden-content",
+    "security",
+    "support-global-calendar-systems",
+    "validate-input-after-interaction"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop first viewport of the EEA/UK access notice",
+      "condition": "viewport: 780x493",
+      "findingIds": [
+        "F-CONTRAST"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile first viewport shows fluid single-column reflow",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-MOBILE-A11Y"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout.json",
+      "caption": "Desktop layout metrics: CLS 0.0159 and no horizontal overflow",
+      "condition": "viewport: 780x493",
+      "findingIds": [
+        "F-ASSET"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics: no horizontal overflow and CLS 0",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/mobile-targets.json",
+      "caption": "Mobile activation-area geometry for links and controls",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-MOBILE-A11Y",
+        "F-INPUT-TARGETS"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Page remains light under a requested dark color scheme",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Forced-colors rendering keeps text and links visible",
+      "condition": "forced-colors: active; prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-probe.json",
+      "caption": "Computed preference probe: color-scheme normal and no animations",
+      "condition": "dark + reduced motion",
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered HTML and document structure for the access notice",
+      "condition": "default",
+      "findingIds": [
+        "F-RESOURCE-CHAIN",
+        "F-STRUCTURE",
+        "F-META",
+        "F-LANG"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Document metadata, focus, landmarks, and feature-use probe",
+      "condition": "default",
+      "findingIds": [
+        "F-INPUT-TARGETS",
+        "F-META",
+        "F-SHARE"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/a11y-probe.json",
+      "caption": "Names, headings, roles, image alt, and target geometry probe",
+      "condition": "default",
+      "findingIds": [
+        "F-STRUCTURE"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/axe.json",
+      "caption": "axe-core 4.10.3 accessibility results",
+      "condition": "default",
+      "findingIds": [
+        "F-MOBILE-A11Y",
+        "F-CONTRAST",
+        "F-STRUCTURE",
+        "F-LANG"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace",
+      "condition": "default",
+      "findingIds": [
+        "F-PERF"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP/FCP 2885 ms, TBT 0",
+      "condition": "default",
+      "findingIds": [
+        "F-PERF"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR 1.2 network capture",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "HAR summary: 9 requests, 73.7 KB, five parser-blocking stylesheets",
+      "condition": "default",
+      "findingIds": [
+        "F-PERF",
+        "F-RESOURCE-CHAIN",
+        "F-SUSTAINABLE-IMAGE"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header inspection",
+      "condition": "default",
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie inspection found no cookies",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party origin inspection found no known trackers",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secret scan found no credentials",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit of the single logo asset",
+      "condition": "default",
+      "findingIds": [
+        "F-ASSET",
+        "F-SUSTAINABLE-IMAGE"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered DOM discoverability comparison",
+      "condition": "JavaScript enabled/disabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Browser-rendered notice",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript notice",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.json",
+      "caption": "Heap summary: 1.92 MB self size, 44,072 snapshot nodes",
+      "condition": "single steady state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/i18n-probe.json",
+      "caption": "Language, direction, date text, and CSS logical-property probe",
+      "condition": "default",
+      "findingIds": [
+        "F-LANG"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/capabilities-probe.json",
+      "caption": "Service worker, manifest, forms, scripts, permission, auth, and agent capability probe",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/error-route.json",
+      "caption": "Unknown route also resolves to the geographic access notice",
+      "condition": "non-existent path",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Attempted robots.txt inspection; geographic gate returned the notice",
+      "condition": "robots.txt",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.txt",
+      "caption": "Attempted sitemap inspection; geographic gate returned the notice",
+      "condition": "sitemap.xml",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse attempt failed because the main document returned HTTP 403",
+      "condition": "default",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "paths": [
+    {
+      "id": "geo-notice",
+      "description": "Delivered desktop EEA/UK geographic access notice; represents the only reachable template from this region.",
+      "url": "https://news.yahoo.co.jp/",
+      "conditions": [
+        "default",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "geo-notice-mobile",
+      "description": "Narrow/reflowed form-factor condition for the delivered notice.",
+      "url": "https://news.yahoo.co.jp/",
+      "conditions": [
+        "viewport: 360x800",
+        "touch target geometry"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "geo-error-route",
+      "description": "Unknown-path/error-state probe; the geographic gate intercepted it with the same notice.",
+      "url": "https://news.yahoo.co.jp/this-path-does-not-exist-web-uplift",
+      "conditions": [
+        "default"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-DARK",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The notice ignores the user’s dark color-scheme preference.",
+      "evidence": "The dark-mode screenshot is pixel-identical in palette to the light capture; the computed probe reports colorScheme \"normal\" and the white surface remains unchanged.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/preferences-probe.json"
+      ],
+      "suggestedFix": "Declare `color-scheme: light dark` and use preference-aware surface, text, link, and border colors as described by the dark-mode guidance.",
+      "effort": "small",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-MOBILE-A11Y",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Mobile zoom is disabled and many links have undersized activation areas.",
+      "evidence": "axe reports a critical meta-viewport violation for `user-scalable=no`. The 360 px target probe measures many links at only 14–24 px high, including footer links at 14 px.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/mobile-targets.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Remove `user-scalable=no`; preserve reflow at zoom and give standalone links a target area near 44×44 CSS px through padding or spacing without changing inline text-link semantics.",
+      "effort": "small",
+      "pathId": "geo-notice-mobile",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-INPUT-TARGETS",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Touch targets are too short even though keyboard focus remains visible.",
+      "evidence": "At 360×800, the mobile probe reports service links at 21 px high and footer links at 14 px high; focused anchors use only the browser’s 1 px auto outline.",
+      "artifacts": [
+        "evidence/mobile-targets.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Increase target padding/spacing for standalone navigation links and add a clearly visible `:focus-visible` treatment while retaining non-hover affordances.",
+      "effort": "small",
+      "pathId": "geo-notice-mobile",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-PERF",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The small static notice misses the good LCP threshold in the captured load.",
+      "evidence": "The trace summary records FCP/LCP at 2885 ms. The HAR shows the 403 document taking 2181 ms and five parser-inserted stylesheets before the page is fully styled.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/home-trace.json"
+      ],
+      "suggestedFix": "Reduce document latency, inline the tiny critical styles for this access notice, and defer or consolidate non-critical stylesheet/font work.",
+      "effort": "medium",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-RESOURCE-CHAIN",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-preload-priority",
+      "guidanceCategory": "performance",
+      "summary": "Five parser-blocking stylesheets and an icon font delay a 99-element static document.",
+      "evidence": "The HAR summary identifies five parser-inserted stylesheet candidates and a 19,161-byte icon font; the DOM confirms these are ordinary stylesheet links without conditional loading.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Consolidate and inline only critical notice-page CSS, remove unused icon-font delivery, and load any remaining non-critical styles without extending the critical chain.",
+      "effort": "medium",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-CONTRAST",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Blue links do not meet WCAG AA contrast against white.",
+      "evidence": "axe reports 21 affected nodes. Link contrast is 4.04:1 or 4.17:1 where 4.5:1 is required, including the primary help and alternative-service links.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Use a darker link color that reaches at least 4.5:1 in every link style and verify normal, visited, hover, focus, and forced-color states.",
+      "effort": "trivial",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-STRUCTURE",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The document has no H1 and nests the contentinfo landmark inside main.",
+      "evidence": "axe reports `page-has-heading-one` and `landmark-contentinfo-is-top-level`. The DOM heading sequence starts at H3, then moves to H2.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/home-dom.json",
+        "evidence/a11y-probe.json"
+      ],
+      "suggestedFix": "Make the notice title the single H1, arrange subsequent headings hierarchically, and move the footer outside `<main>`.",
+      "effort": "trivial",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-ASSET",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "The only image is oversized and lacks an intrinsic height.",
+      "evidence": "The image audit finds the logo’s 1933 px natural width displayed at 170 px, no height attribute, no srcset, and legacy PNG delivery. The page recorded a small CLS of 0.0159.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-layout.json"
+      ],
+      "suggestedFix": "Export a right-sized WebP/AVIF or compact SVG logo, provide responsive sources if needed, and set both intrinsic width and height.",
+      "effort": "small",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-META",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The notice has a descriptive title but no meta description.",
+      "evidence": "The DOM and platform probe both report no `meta[name=\"description\"]`.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add a concise Japanese/English-aware meta description that explains the regional availability notice and available alternatives.",
+      "effort": "trivial",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-SHARE",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The public notice exposes no share-preview or structured metadata.",
+      "evidence": "The metadata probe finds zero Open Graph tags and zero JSON-LD blocks despite the page containing dated notice articles.",
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Add accurate Open Graph/Twitter preview fields and, if treating this as a published notice, matching schema.org Article or WebPage JSON-LD.",
+      "effort": "small",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-HEADERS",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "The geographic-gate response omits several baseline browser security headers.",
+      "evidence": "The headers primitive confirms HTTPS and X-Frame-Options: SAMEORIGIN, but finds no CSP, HSTS, X-Content-Type-Options, Referrer-Policy, or Permissions-Policy.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Set HSTS, `X-Content-Type-Options: nosniff`, a restrictive CSP (including `frame-ancestors`), a privacy-preserving Referrer-Policy, and a minimal Permissions-Policy on the gate response.",
+      "effort": "small",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-LANG",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The bilingual Japanese/English document does not declare its language.",
+      "evidence": "Both the DOM and axe report that `<html>` has no `lang`; the English article also has no local language annotation.",
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/i18n-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Set `<html lang=\"ja\">` and wrap the English section in an element with `lang=\"en\"`; add `dir` only where direction differs.",
+      "effort": "trivial",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    },
+    {
+      "id": "F-SUSTAINABLE-IMAGE",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "summary": "The logo transfers far more source pixels than its rendered size needs.",
+      "evidence": "The image primitive reports a 1933 px PNG rendered at 170 px, with no srcset or modern format. It transfers 13,018 bytes on a 73,701-byte page.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Serve a correctly sized modern-format asset (or SVG) and declare responsive/intrinsic dimensions.",
+      "effort": "small",
+      "pathId": "geo-notice",
+      "url": "https://news.yahoo.co.jp/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-1",
+      "title": "Restore browser-enforced security headers on the geographic-gate response",
+      "priority": 1,
+      "findingIds": [
+        "F-HEADERS"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T-2",
+      "title": "Restore zoom, enlarge standalone targets, and strengthen focus treatment",
+      "priority": 2,
+      "findingIds": [
+        "F-MOBILE-A11Y",
+        "F-INPUT-TARGETS"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-3",
+      "title": "Fix link contrast and repair heading/landmark semantics",
+      "priority": 3,
+      "findingIds": [
+        "F-CONTRAST",
+        "F-STRUCTURE"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-4",
+      "title": "Declare Japanese and English language boundaries",
+      "priority": 4,
+      "findingIds": [
+        "F-LANG"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-5",
+      "title": "Reduce gate-page latency and collapse the render-blocking CSS/font chain",
+      "priority": 5,
+      "findingIds": [
+        "F-PERF",
+        "F-RESOURCE-CHAIN"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T-6",
+      "title": "Add a preference-driven dark palette",
+      "priority": 6,
+      "findingIds": [
+        "F-DARK"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T-7",
+      "title": "Right-size the logo and declare both intrinsic dimensions",
+      "priority": 7,
+      "findingIds": [
+        "F-ASSET",
+        "F-SUSTAINABLE-IMAGE"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T-8",
+      "title": "Add description and accurate share metadata to the access notice",
+      "priority": 8,
+      "findingIds": [
+        "F-META",
+        "F-SHARE"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 56,
+    "blocked": 2,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Dark emulation screenshot plus computed-style probe",
+      "evidence": "Dark preference was active but color-scheme remained normal and the light palette did not retint.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Reduced-motion emulation plus getAnimations()",
+      "evidence": "The page has no scripts, no auto-advance, and getAnimations() returned an empty list under reduce.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Forced-colors/high-contrast screenshot",
+      "evidence": "Text, links, rules, and focusable content remain visible in forced colors.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM/CSS feature inspection",
+      "evidence": "The delivered geographic notice has no same-document state change or same-origin route transition to animate.",
+      "reason": "The delivered geographic notice has no same-document state change or same-origin route transition to animate."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "CSS and script inspection",
+      "evidence": "The notice has no scroll-linked animation, parallax, reveal, or scroll listener.",
+      "reason": "The notice has no scroll-linked animation, parallax, reveal, or scroll listener."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS/script inspection",
+      "evidence": "The page uses native document scrolling and ordinary anchors with no custom pointer handlers that fight platform gestures.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/capabilities-probe.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Scroll and DOM inspection",
+      "evidence": "The single static notice has no sticky or affixed chrome whose state needs to react to scrolling.",
+      "reason": "The single static notice has no sticky or affixed chrome whose state needs to react to scrolling."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Overlay primitive and DOM inspection",
+      "evidence": "No tooltip, popover, menu, or floating overlay exists on the delivered page.",
+      "reason": "No tooltip, popover, menu, or floating overlay exists on the delivered page."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual hierarchy, descriptive-link, and focus inspection",
+      "evidence": "Clear headings, blue link styling, descriptive Japanese service/help labels, and visible browser focus direct attention without in-page jumps.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Load screenshot and overlay probe",
+      "evidence": "No popup, banner overlay, or interstitial obscures the notice.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/capabilities-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM primitive inspection",
+      "evidence": "No disclosure, transient overlay, modal flow, custom select, or rich control is present.",
+      "reason": "No disclosure, transient overlay, modal flow, custom select, or rich control is present."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile screenshots",
+      "evidence": "The page is content-first with a compact brand header and simple cards; no app frame crowds the notice.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile layout metrics and screenshot",
+      "evidence": "At 360 px the content reflows to one column; horizontalOverflowPx is 0 and viewport meta is present.",
+      "pathIds": [
+        "geo-notice-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Wide/narrow visual and CSS feature inspection",
+      "evidence": "The notice has no reused component shown in independently sized containers; its single card context does not establish a container-query requirement.",
+      "reason": "The notice has no reused component shown in independently sized containers; its single card context does not establish a container-query requirement."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Mobile target geometry plus keyboard-focus probe",
+      "evidence": "Multiple standalone links are only 14–24 px high; keyboard focus exists but is only the 1 px browser auto outline.",
+      "pathIds": [
+        "geo-notice-mobile"
+      ],
+      "artifacts": [
+        "evidence/mobile-targets.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F-INPUT-TARGETS"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport screenshot and heading/link inspection",
+      "evidence": "The page immediately explains the EEA/UK restriction and presents available services and help links.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted homepage, robots, sitemap, and unknown-route navigation",
+      "evidence": "The audit host is in a restricted region: every news route returns the same HTTP 403 geographic notice, so the representative news-reading flow and normal templates cannot be exercised.",
+      "reason": "The audit host is in a restricted region: every news route returns the same HTTP 403 geographic notice, so the representative news-reading flow and normal templates cannot be exercised.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/error-route.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Notice and error-route walkthrough",
+      "evidence": "The restriction state is plainly stated in Japanese and English and provides alternative service and support links.",
+      "pathIds": [
+        "geo-notice",
+        "geo-error-route"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/error-route.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DevTools trace plus layout observer",
+      "evidence": "Lab LCP/FCP was 2885 ms, above the 2500 ms good threshold; CLS was low and TBT was zero.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-layout.json"
+      ],
+      "findingIds": [
+        "F-PERF"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile layout-shift observers",
+      "evidence": "CLS measured 0.0159 desktop and 0 mobile, both in the good range.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-layout.json",
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace long-task analysis",
+      "evidence": "The trace recorded no long tasks and 0 ms total blocking time.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR initiator/priority analysis confirmed against DOM",
+      "evidence": "Five ordinary parser-inserted stylesheet links are on the critical path; a 19 KB icon font is also fetched.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F-RESOURCE-CHAIN"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR weight and script inspection",
+      "evidence": "No JavaScript is shipped and the complete transfer is only 73.7 KB; there is no evidence of a large duplicate or legacy bundle.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/capabilities-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "axe-core plus DOM semantic probe",
+      "evidence": "The image has alt text, all 20 links have text names, and no invalid roles or unlabeled form controls were found.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/a11y-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core contrast analysis",
+      "evidence": "axe identifies 21 blue link nodes at 4.04:1 or 4.17:1, below the 4.5:1 WCAG AA minimum.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/axe.json"
+      ],
+      "findingIds": [
+        "F-CONTRAST"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core, heading extraction, and focus styles",
+      "evidence": "There is no H1, the sequence starts H3 then H2, and contentinfo is nested inside main; focus itself remains visible.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/a11y-probe.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F-STRUCTURE"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile visual inspection",
+      "evidence": "Body text reflows cleanly with comfortable line height and no clipping at desktop or 360 px.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe meta-viewport rule and mobile target geometry",
+      "evidence": "user-scalable=no disables zoom; many standalone links are 14–24 px high.",
+      "pathIds": [
+        "geo-notice-mobile"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/mobile-targets.json"
+      ],
+      "findingIds": [
+        "F-MOBILE-A11Y"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Runtime surface and network inspection",
+      "evidence": "The delivered page contains no scripts or inline handlers, so there is no page JavaScript capable of throwing; no failed subresource appears in the HAR.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/capabilities-probe.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM, image, and layout inspection",
+      "evidence": "Doctype and UTF-8 are valid, but the lone 1933 px PNG is displayed at 170 px and omits intrinsic height.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F-ASSET"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/platform capability inspection",
+      "evidence": "No scripts, deprecated API use, paste prevention, or load-time permission prompts were present on this notice.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/capabilities-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata probe",
+      "evidence": "The title is descriptive but meta description is absent.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F-META"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM link/viewport inspection",
+      "evidence": "All 20 links have real href values with visible text, the viewport declares device width, and the rendered page reflows without horizontal overflow. Zoom policy is recorded separately under inclusion.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted status, canonical, robots.txt, and sitemap.xml inspection",
+      "evidence": "The current region receives HTTP 403 and the geographic notice for the homepage, robots.txt, sitemap.xml, and unknown paths, so normal indexing policy and sitemap consistency cannot be determined.",
+      "reason": "The current region receives HTTP 403 and the geographic notice for the homepage, robots.txt, sitemap.xml, and unknown paths, so normal indexing policy and sitemap consistency cannot be determined.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Open Graph and JSON-LD probe",
+      "evidence": "The dated notice contains zero Open Graph tags and zero JSON-LD blocks.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F-SHARE"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security header, cookie, and mixed-resource inspection",
+      "evidence": "HTTPS is used and no cookies/mixed content were observed, but CSP, HSTS, and nosniff are absent.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR, tracker, cookie, and secrets inspection",
+      "evidence": "No cookies, known trackers, analytics calls, or exposed secrets were found; the only other origin is Yahoo’s static asset host.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/cookies.json",
+        "evidence/secrets.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Permission/auth surface inspection",
+      "evidence": "The geographic notice has no permission request or authentication surface on which passkey support can be judged.",
+      "reason": "The geographic notice has no permission request or authentication surface on which passkey support can be judged."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Response-header inspection",
+      "evidence": "X-Frame-Options is present, but HSTS, CSP/frame-ancestors, Referrer-Policy, and Permissions-Policy are missing.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Raw HTML/rendered DOM comparison with JavaScript disabled",
+      "evidence": "100% of rendered content tokens are present in raw HTML; the page has no JavaScript shell.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/script/overlay inspection",
+      "evidence": "The static page has no fragile async dependency, overlay, menu, or client state; content remains available without scripts.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/capabilities-probe.json",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Manifest/service-worker inspection",
+      "evidence": "The delivered surface is a static access notice rather than an app; installability and an offline app shell are not proportionate requirements for this page.",
+      "reason": "The delivered surface is a static access notice rather than an app; installability and an offline app shell are not proportionate requirements for this page."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HTTP 403 and unknown-route walkthrough",
+      "evidence": "The server intentionally renders a complete explanatory notice with support links rather than a blank shell for the regional 403 state.",
+      "pathIds": [
+        "geo-notice",
+        "geo-error-route"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/error-route.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/axe language and direction inspection",
+      "evidence": "The bilingual document has no html lang and no language marker on its English section.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/i18n-probe.json"
+      ],
+      "findingIds": [
+        "F-LANG"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered Japanese/English date comparison",
+      "evidence": "The fixed publication dates are rendered in conventional Japanese and English forms in their respective content sections; there is no dynamic numeric/currency input.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/i18n-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Content and data-type inspection",
+      "evidence": "The notice contains calendar dates but no event time, recurring interval, deadline, or cross-zone timestamp.",
+      "reason": "The notice contains calendar dates but no event time, recurring interval, deadline, or cross-zone timestamp."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual and DOM review",
+      "evidence": "The restriction is explained directly, alternatives are clearly labeled, and there is no consent wall, upsell, disguised ad, or forced continuity.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Form inspection",
+      "evidence": "No form or editable input exists on the delivered notice.",
+      "reason": "No form or editable input exists on the delivered notice."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Form/autocomplete inspection",
+      "evidence": "No input exists on the delivered notice.",
+      "reason": "No input exists on the delivered notice."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Commercial/auth flow inspection",
+      "evidence": "No checkout, subscription, consent, authentication, or account-management flow is exposed by this notice.",
+      "reason": "No checkout, subscription, consent, authentication, or account-management flow is exposed by this notice."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Image natural/display size and transfer inspection",
+      "evidence": "A 1933 px PNG is rendered at 170 px without responsive sources and accounts for 13 KB of the 73.7 KB page.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F-SUSTAINABLE-IMAGE"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace/network/background-work inspection",
+      "evidence": "The page ships no JavaScript, performs only nine requests, and has no long tasks or background analytics.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HAR and tracker inspection",
+      "evidence": "There is no video/audio/autoplay or known tracker; total transfer is 73.7 KB and third-party traffic is limited to Yahoo static assets.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM and capability inspection",
+      "evidence": "The delivered notice exposes information and outbound links but no transactional capability for WebMCP or agentic tools; raw semantic content is already machine-readable.",
+      "reason": "The delivered notice exposes information and outbound links but no transactional capability for WebMCP or agentic tools; raw semantic content is already machine-readable."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Feature-use and page-purpose inspection",
+      "evidence": "On-device inference would not improve this fixed, short access notice; no summarization or language-model workflow is needed.",
+      "reason": "On-device inference would not improve this fixed, short access notice; no summarization or language-model workflow is needed."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Interaction inventory before heap capture",
+      "evidence": "The static, script-free notice has no representative stateful interaction to repeat ten times; synthetic scrolling would not test a real allocation lifecycle.",
+      "reason": "The static, script-free notice has no representative stateful interaction to repeat ten times; synthetic scrolling would not test a real allocation lifecycle."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap summary plus DOM count",
+      "evidence": "The steady-state heap summary is 1.92 MB self size with 44,072 snapshot nodes for a 99-element, script-free page, a proportionate footprint.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Heap constructor and script/listener surface inspection",
+      "evidence": "No Detached* constructor appears among retained constructors, and the page has no scripts, inline handlers, timers, or client observers that can accumulate.",
+      "pathIds": [
+        "geo-notice"
+      ],
+      "artifacts": [
+        "evidence/home-heap.json",
+        "evidence/capabilities-probe.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-INPUT-TARGETS"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "One or more checks were blocked by the regional HTTP 403 gate."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-PERF",
+        "F-RESOURCE-CHAIN"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-CONTRAST",
+        "F-STRUCTURE",
+        "F-MOBILE-A11Y"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-ASSET"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-META",
+        "F-SHARE"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-LANG"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-SUSTAINABLE-IMAGE"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Both emerging agent-facing checks were judged not applicable to this static access notice."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "agent": "pi",
+  "runId": "2026-07-28T08-32-59-935Z"
+}

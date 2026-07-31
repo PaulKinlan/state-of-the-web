@@ -1,0 +1,1855 @@
+{
+  "url": "https://nl.pornhub.com",
+  "auditedAt": "2026-07-22T09:17:39.083Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete atomic audit of the mandatory first-visit gate plus representative listing, category, video-detail and failure routes. Listing/category content remained gated or redirected in fresh sessions; DOM and metadata beneath the gate were still inspected.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Vue and legacy server-rendered scripts on a server-rendered MPA",
+    "notes": "Public Dutch adult media site with a mandatory age gate and cookie consent. No local source was supplied."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-style",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse",
+    "curl/http-probe",
+    "Modern Web Guidance"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "scrollytelling",
+    "shrinking-header-on-scroll",
+    "position-aware-tooltips",
+    "navigation-drawer",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "fluid-scaling",
+    "size-aware-styling",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "support-global-calendar-systems",
+    "webmcp",
+    "manage-recurring-intervals",
+    "performance",
+    "adapt-scrollbar-to-contrast-preferences",
+    "validate-input-after-interaction",
+    "efficient-background-processing"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop first-visit age gate.",
+      "condition": "viewport: 1440x1000",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F13"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile-gate.png",
+      "caption": "Mobile age gate showing clipped fixed-width content.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01",
+        "F10"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark-reduced.png",
+      "caption": "Gate under dark and reduced-motion preferences.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-forced-colors.png",
+      "caption": "Gate under forced colors/high contrast.",
+      "condition": "forced-colors: active; prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM, CSS and computed styles.",
+      "findingIds": [
+        "F01",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Document/platform/accessibility probe.",
+      "findingIds": [
+        "F03",
+        "F06",
+        "F07",
+        "F09",
+        "F10",
+        "F13"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance, accessibility, best-practices, SEO and agentic report.",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F06",
+        "F11",
+        "F15"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile viewport overflow and CLS metrics.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "First-load HAR.",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact first-load network summary.",
+      "findingIds": [
+        "F02",
+        "F05",
+        "F12"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace.",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace timing/long-task summary.",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header inspection.",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie posture inspection.",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party/tracker origin inspection.",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image sizing, format and responsive-delivery inspection.",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered discoverability evidence.",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view used by discoverability.",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JS view used by discoverability.",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary.",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-cookie-panel.json",
+      "caption": "Heap after ten cookie-panel open/back interactions.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/detail-probe.json",
+      "caption": "Representative video-detail metadata/media probe.",
+      "findingIds": [
+        "F03",
+        "F06"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/listing-probe.json",
+      "caption": "Listing/search form and metadata probe.",
+      "findingIds": [
+        "F13",
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Response served for /robots.txt, which is homepage HTML.",
+      "findingIds": [
+        "F06",
+        "F14"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Normal and prefers-color-scheme:dark captures are identical, computed color-scheme is normal, and DOM/CSS inspection found no prefers-color-scheme rule.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark-reduced.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "Reduced-motion emulation showed no active animations; getAnimations() returned an empty list on the first-visit surface.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-dark-reduced.png"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "The forced-colors/prefers-contrast screenshot preserved legible text, visible borders and both age actions.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-forced-colors.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The platform/CSS probe found no View Transition rules, scroll timelines or scroll-state/container behavior. Clicking the age action navigated the inspected target; route changes have no transition or attention cue in the captured first-visit flow.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The platform/CSS probe found no View Transition rules, scroll timelines or scroll-state/container behavior. Clicking the age action navigated the inspected target; route changes have no transition or attention cue in the captured first-visit flow.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "Observed first-visit interactions use native buttons, links and scrolling; no custom pointer-driven gesture surface was present.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The platform/CSS probe found no View Transition rules, scroll timelines or scroll-state/container behavior. Clicking the age action navigated the inspected target; route changes have no transition or attention cue in the captured first-visit flow.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The desktop screenshot shows the mandatory age gate while DOM evidence also exposes a full cookie overlay. The platform probe found one role=dialog but zero dialog, popover or details elements; cookie controls are assembled with custom div/button scripting.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The platform/CSS probe found no View Transition rules, scroll timelines or scroll-state/container behavior. Clicking the age action navigated the inspected target; route changes have no transition or attention cue in the captured first-visit flow.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The desktop screenshot shows the mandatory age gate while DOM evidence also exposes a full cookie overlay. The platform probe found one role=dialog but zero dialog, popover or details elements; cookie controls are assembled with custom div/button scripting.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The desktop screenshot shows the mandatory age gate while DOM evidence also exposes a full cookie overlay. The platform probe found one role=dialog but zero dialog, popover or details elements; cookie controls are assembled with custom div/button scripting.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "The mandatory age gate itself is visually focused with a single bordered panel and clear legal content.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The 360x800 screenshot shows the logo, heading, legal text, second age choice and footer cut off to the right. Layout metrics report no document overflow only because html/body are fixed to the viewport, so the clipped fixed-width panel cannot be reached by horizontal scrolling.",
+      "pathIds": [
+        "home-gate-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-gate.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The CSS/platform probes found no @container use; DOM computed styles show fixed 780px html/body sizing while the 360px screenshot clips the gate.",
+      "pathIds": [
+        "home-gate-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json",
+        "evidence/home-mobile-gate.png"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse failed button-name, frame-title, label-content-name-mismatch and meta-viewport. The platform probe found no main/nav landmarks, no h1 on the entry page, three unnamed controls and no visible outline on the first focused link. The video detail exposed no caption tracks.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json",
+        "evidence/detail-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "The first viewport clearly states that this is an adults-only site and labels the continue and exit choices.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "The desktop gate presents both required age choices; activating the adult action triggered navigation, confirming the flow is wired, although CDP lost the old target.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "The gate explains the blocked state and offers continue, exit, parental-control, legal and terms links.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse measured LCP 13.1s and CLS 0.626 (performance 0.43). HAR captured 170 requests and 5,408,745 transferred bytes; Lighthouse reports 178 KiB unused JS and 74 KiB unused CSS.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse measured LCP 13.1s and CLS 0.626 (performance 0.43). HAR captured 170 requests and 5,408,745 transferred bytes; Lighthouse reports 178 KiB unused JS and 74 KiB unused CSS.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "The trace recorded zero long tasks and 0ms total blocking time; Lighthouse TBT was 40ms.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse measured LCP 13.1s and CLS 0.626 (performance 0.43). HAR captured 170 requests and 5,408,745 transferred bytes; Lighthouse reports 178 KiB unused JS and 74 KiB unused CSS.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse measured LCP 13.1s and CLS 0.626 (performance 0.43). HAR captured 170 requests and 5,408,745 transferred bytes; Lighthouse reports 178 KiB unused JS and 74 KiB unused CSS.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse failed button-name, frame-title, label-content-name-mismatch and meta-viewport. The platform probe found no main/nav landmarks, no h1 on the entry page, three unnamed controls and no visible outline on the first focused link. The video detail exposed no caption tracks.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json",
+        "evidence/detail-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "Forced-colors capture preserved high-contrast text and control outlines; Lighthouse did not flag color contrast.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-forced-colors.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse failed button-name, frame-title, label-content-name-mismatch and meta-viewport. The platform probe found no main/nav landmarks, no h1 on the entry page, three unnamed controls and no visible outline on the first focused link. The video detail exposed no caption tracks.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json",
+        "evidence/detail-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The 360x800 screenshot shows the logo, heading, legal text, second age choice and footer cut off to the right. Layout metrics report no document overflow only because html/body are fixed to the viewport, so the clipped fixed-width panel cannot be reached by horizontal scrolling.",
+      "pathIds": [
+        "home-gate-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-gate.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse failed button-name, frame-title, label-content-name-mismatch and meta-viewport. The platform probe found no main/nav landmarks, no h1 on the entry page, three unnamed controls and no visible outline on the first focused link. The video detail exposed no caption tracks.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json",
+        "evidence/detail-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse recorded a SyntaxError, a null addEventListener TypeError, two deprecated API warnings and four BFCache failure reasons including an unload handler.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "HAR transferred 5.4MB before content access, including 2.03MB third party. Image evidence found 33 of 37 images without srcset, 24 legacy-format images, three without dimensions and two below-fold images not lazy-loaded.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Lighthouse recorded a SyntaxError, a null addEventListener TypeError, two deprecated API warnings and four BFCache failure reasons including an unload handler.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The page has no meta description and declares noindex,nofollow; /robots.txt redirects to HTML (Lighthouse reports 4,069 parse errors), /sitemap.xml returns 404, multiple links use javascript:void(0), and discoverability coverage is 30%. The representative detail page has no JSON-LD or Open Graph metadata and canonicalizes to the homepage.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The page has no meta description and declares noindex,nofollow; /robots.txt redirects to HTML (Lighthouse reports 4,069 parse errors), /sitemap.xml returns 404, multiple links use javascript:void(0), and discoverability coverage is 30%. The representative detail page has no JSON-LD or Open Graph metadata and canonicalizes to the homepage.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F06",
+        "F01"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The page has no meta description and declares noindex,nofollow; /robots.txt redirects to HTML (Lighthouse reports 4,069 parse errors), /sitemap.xml returns 404, multiple links use javascript:void(0), and discoverability coverage is 30%. The representative detail page has no JSON-LD or Open Graph metadata and canonicalizes to the homepage.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The page has no meta description and declares noindex,nofollow; /robots.txt redirects to HTML (Lighthouse reports 4,069 parse errors), /sitemap.xml returns 404, multiple links use javascript:void(0), and discoverability coverage is 30%. The representative detail page has no JSON-LD or Open Graph metadata and canonicalizes to the homepage.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The headers primitive found no CSP, X-Content-Type-Options, Referrer-Policy or Permissions-Policy. Cookie evidence found the first-party rp cookie lacking Secure and seven cookies using SameSite=None; HSTS and X-Frame-Options were present.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "Tracker evidence observed 12 third-party origins including Google Tag Manager and DoubleClick. HAR attributed 99 requests and 2,032,739 bytes to third parties, including 31 requests and 976,157 bytes to trafficjunky.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No permission prompt fired on load, and authentication was not part of the unauthenticated representative flow, so passkey/password posture was not applicable to this path.",
+      "reason": "No permission prompt fired on load, and authentication was not part of the unauthenticated representative flow, so passkey/password posture was not applicable to this path."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The headers primitive found no CSP, X-Content-Type-Options, Referrer-Policy or Permissions-Policy. Cookie evidence found the first-party rp cookie lacking Secure and seven cookies using SameSite=None; HSTS and X-Frame-Options were present.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The page has no meta description and declares noindex,nofollow; /robots.txt redirects to HTML (Lighthouse reports 4,069 parse errors), /sitemap.xml returns 404, multiple links use javascript:void(0), and discoverability coverage is 30%. The representative detail page has no JSON-LD or Open Graph metadata and canonicalizes to the homepage.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The 360x800 screenshot shows the logo, heading, legal text, second age choice and footer cut off to the right. Layout metrics report no document overflow only because html/body are fixed to the viewport, so the clipped fixed-width panel cannot be reached by horizontal scrolling.",
+      "pathIds": [
+        "home-gate-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-gate.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F01",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "This streaming/media service is intrinsically network-dependent; an offline/installable experience was judged out of scope, while progressive enhancement and failure states were evaluated separately.",
+      "reason": "This streaming/media service is intrinsically network-dependent; an offline/installable experience was judged out of scope, while progressive enhancement and failure states were evaluated separately."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "A request to a deliberately nonexistent route followed redirects and ended at https://nl.pornhub.com/ with HTTP 200 and homepage HTML. /robots.txt follows the same behavior.",
+      "pathIds": [
+        "error-route"
+      ],
+      "artifacts": [
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "html lang is nl, but the first-visit cookie controls are English (Accept All Cookies, Accept Only Essential Cookies, Customize Cookies), several visible content titles remain English, and no dir attribute is present.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json",
+        "evidence/listing-probe.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No dates, currencies, numbers or durations requiring locale formatting appeared in the exercised first-visit surfaces.",
+      "reason": "No dates, currencies, numbers or durations requiring locale formatting appeared in the exercised first-visit surfaces."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No scheduled events or stored time concepts appeared in the exercised surfaces.",
+      "reason": "No scheduled events or stored time concepts appeared in the exercised surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative-path screenshot, DOM and evaluate/Lighthouse probe.",
+      "evidence": "Consent offers Accept All, Essential Only and Customize as peer buttons, and the age gate provides clear continue and exit choices without confirmshaming.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "The exercised public first-visit surfaces contained search but no validation/submit error workflow to judge.",
+      "reason": "The exercised public first-visit surfaces contained search but no validation/submit error workflow to judge."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "The listing/home probe found a text input named search with no associated label and autocomplete=off; Lighthouse also found accessible-name mismatches.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/listing-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No checkout, subscription or authenticated account-management flow was entered in the unauthenticated audit.",
+      "reason": "No checkout, subscription or authenticated account-management flow was entered in the unauthenticated audit."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "HAR transferred 5.4MB before content access, including 2.03MB third party. Image evidence found 33 of 37 images without srcset, 24 legacy-format images, three without dimensions and two below-fold images not lazy-loaded.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "HAR transferred 5.4MB before content access, including 2.03MB third party. Image evidence found 33 of 37 images without srcset, 24 legacy-format images, three without dimensions and two below-fold images not lazy-loaded.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted screenshot/DOM/evaluate/Lighthouse/network evidence mapped to this check.",
+      "evidence": "HAR transferred 5.4MB before content access, including 2.03MB third party. Image evidence found 33 of 37 images without srcset, 24 legacy-format images, three without dimensions and two below-fold images not lazy-loaded.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No declared agent-facing intent or safe transactional agent surface was present; this emerging contextual opportunity was judged out of scope.",
+      "reason": "No declared agent-facing intent or safe transactional agent surface was present; this emerging contextual opportunity was judged out of scope."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative-path recon.",
+      "evidence": "No summarisation or language-model task was part of the first-visit/site-navigation experience; on-device inference was not applicable.",
+      "reason": "No summarisation or language-model task was part of the first-visit/site-navigation experience; on-device inference was not applicable."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline and post-interaction heap-summary comparison.",
+      "evidence": "After ten open/back cookie-customisation interactions, heap self size rose only 1.48MB (about 4%) and no Detached constructor appeared; this single-window result showed no unbounded-retention signal.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-cookie-panel.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline and post-interaction heap-summary comparison.",
+      "evidence": "Baseline heap self size was 37.27MB and post-interaction 38.75MB, proportionate to the media listing and not near the browser heap limit.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-cookie-panel.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline and post-interaction heap-summary comparison.",
+      "evidence": "Neither heap summary reported Detached constructors, and closure growth was small (50,355 to 50,560) after ten panel interactions.",
+      "pathIds": [
+        "home-gate-desktop"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-cookie-panel.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F10",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F01"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F01"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F01",
+        "F07",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "No declared agent-facing intent or safe transactional agent surface was present; this emerging contextual opportunity was judged out of scope. No summarisation or language-model task was part of the first-visit/site-navigation experience; on-device inference was not applicable."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home-gate-desktop",
+      "description": "Entry page and mandatory age/consent gate at desktop, representing first-visit access to the site.",
+      "url": "https://nl.pornhub.com/",
+      "conditions": [
+        "first visit",
+        "viewport: 1440x1000",
+        "keyboard focus probe",
+        "dark/reduced-motion",
+        "forced colors"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "home-gate-mobile",
+      "description": "First-visit age gate at 360px, representing narrow mobile access and reflow.",
+      "url": "https://nl.pornhub.com/",
+      "conditions": [
+        "first visit",
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing-route",
+      "description": "Videos listing route selected from primary navigation; it redirected to the gated homepage in a fresh session.",
+      "url": "https://nl.pornhub.com/video",
+      "conditions": [
+        "fresh session",
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "video-detail",
+      "description": "Representative video detail/player page discovered from homepage links; metadata, headings, controls and caption tracks inspected beneath the gate.",
+      "url": "https://nl.pornhub.com/view_video.php?viewkey=6897d9bd86671",
+      "conditions": [
+        "fresh session",
+        "viewport: 1440x1000"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "categories-route",
+      "description": "Category/index archetype selected from primary navigation; it redirected to the gated homepage in a fresh session.",
+      "url": "https://nl.pornhub.com/categories",
+      "conditions": [
+        "fresh session",
+        "viewport: 1440x1000"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error-route",
+      "description": "A deliberately unknown route was requested to inspect failure/recovery behavior; it returned HTTP 200 and the homepage.",
+      "url": "https://nl.pornhub.com/definitely-not-a-real-route-web-uplift",
+      "conditions": [
+        "HTTP request"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "pathId": "home-gate-mobile",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "summary": "The mandatory age gate is fixed at desktop width and clipped on a 360px viewport.",
+      "evidence": "The 360x800 screenshot shows the logo, heading, legal text, second age choice and footer cut off to the right. Layout metrics report no document overflow only because html/body are fixed to the viewport, so the clipped fixed-width panel cannot be reached by horizontal scrolling.",
+      "artifacts": [
+        "evidence/home-mobile-gate.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Make the gate panel inline-size: min(100% - 2rem, 780px), remove fixed 780px body/html sizing, stack both age choices at narrow widths, and verify 320px reflow.",
+      "effort": "small"
+    },
+    {
+      "id": "F02",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "First-visit loading is slow and visually unstable.",
+      "evidence": "Lighthouse measured LCP 13.1s and CLS 0.626 (performance 0.43). HAR captured 170 requests and 5,408,745 transferred bytes; Lighthouse reports 178 KiB unused JS and 74 KiB unused CSS.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/home-trace.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritize the actual LCP resource, reserve space for late content, defer non-critical scripts/styles and ads, and remove unused bundles before the age gate becomes interactive.",
+      "effort": "large"
+    },
+    {
+      "id": "F03",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Accessible names, structure, focus, scaling and media alternatives are incomplete.",
+      "evidence": "Lighthouse failed button-name, frame-title, label-content-name-mismatch and meta-viewport. The platform probe found no main/nav landmarks, no h1 on the entry page, three unnamed controls and no visible outline on the first focused link. The video detail exposed no caption tracks.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json",
+        "evidence/detail-probe.json"
+      ],
+      "suggestedFix": "Name every control/frame, add semantic landmarks and a logical h1, restore a strong :focus-visible indicator, allow zoom, and provide caption/subtitle tracks or an equivalent transcript for videos.",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Important browser-enforced security policies are missing and one cookie is not Secure.",
+      "evidence": "The headers primitive found no CSP, X-Content-Type-Options, Referrer-Policy or Permissions-Policy. Cookie evidence found the first-party rp cookie lacking Secure and seven cookies using SameSite=None; HSTS and X-Frame-Options were present.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Deploy CSP in report-only then enforcement, add nosniff, a strict referrer policy and least-privilege permissions policy, and mark rp Secure with the narrowest workable SameSite policy.",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "A first visit contacts a broad advertising and tracking footprint before the user reaches content.",
+      "evidence": "Tracker evidence observed 12 third-party origins including Google Tag Manager and DoubleClick. HAR attributed 99 requests and 2,032,739 bytes to third parties, including 31 requests and 976,157 bytes to trafficjunky.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Do not load advertising/analytics until the matching consent exists, minimize vendors and event volume, batch analytics, and proxy or self-host essential assets where practical.",
+      "effort": "large"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Public pages provide contradictory or missing indexing and sharing signals.",
+      "evidence": "The page has no meta description and declares noindex,nofollow; /robots.txt redirects to HTML (Lighthouse reports 4,069 parse errors), /sitemap.xml returns 404, multiple links use javascript:void(0), and discoverability coverage is 30%. The representative detail page has no JSON-LD or Open Graph metadata and canonicalizes to the homepage.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/lighthouse.json",
+        "evidence/platform-probe.json",
+        "evidence/detail-probe.json",
+        "evidence/robots.txt"
+      ],
+      "suggestedFix": "Serve a valid robots.txt and sitemap, give each indexable route a unique title/description/canonical, use real href links, render core metadata/content server-side, and add accurate VideoObject/Open Graph metadata.",
+      "effort": "large"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Two custom full-screen interruptions are stacked on first visit and the age modal is not a native dialog.",
+      "evidence": "The desktop screenshot shows the mandatory age gate while DOM evidence also exposes a full cookie overlay. The platform probe found one role=dialog but zero dialog, popover or details elements; cookie controls are assembled with custom div/button scripting.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Sequence consent and age verification instead of stacking them, use a native dialog for the mandatory modal, preserve focus/return focus, and keep equal access to essential-only consent.",
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The UI is hard-coded dark rather than participating in the user color-scheme preference.",
+      "evidence": "Normal and prefers-color-scheme:dark captures are identical, computed color-scheme is normal, and DOM/CSS inspection found no prefers-color-scheme rule.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark-reduced.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare color-scheme and provide preference-driven light/dark tokens with light-dark() or a prefers-color-scheme query while preserving the established dark default if desired.",
+      "effort": "small"
+    },
+    {
+      "id": "F09",
+      "severity": "low",
+      "confidence": "medium",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "summary": "Route/state changes and navigation cues use abrupt legacy behavior rather than declarative transitions.",
+      "evidence": "The platform/CSS probe found no View Transition rules, scroll timelines or scroll-state/container behavior. Clicking the age action navigated the inspected target; route changes have no transition or attention cue in the captured first-visit flow.",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Add reduced-motion-safe same/cross-document View Transitions for age-gate dismissal and route changes, and provide visible current-location/attention cues.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "pathId": "home-gate-mobile",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "summary": "Reusable surfaces rely on global media queries and fixed dimensions rather than container-aware adaptation.",
+      "evidence": "The CSS/platform probes found no @container use; DOM computed styles show fixed 780px html/body sizing while the 360px screenshot clips the gate.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/platform-probe.json",
+        "evidence/home-mobile-gate.png"
+      ],
+      "suggestedFix": "Give independently reused cards, header controls and modal content containment and size-aware @container rules, with intrinsic widths as the baseline.",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The page emits runtime errors, deprecated API warnings and blocks BFCache.",
+      "evidence": "Lighthouse recorded a SyntaxError, a null addEventListener TypeError, two deprecated API warnings and four BFCache failure reasons including an unload handler.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Fix the parse/null-reference errors, remove unload listeners, replace deprecated media styling, and eliminate avoidable no-store/BFCache blockers.",
+      "effort": "medium"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "summary": "The first-visit resource and media budget is disproportionate to an age-gate view.",
+      "evidence": "HAR transferred 5.4MB before content access, including 2.03MB third party. Image evidence found 33 of 37 images without srcset, 24 legacy-format images, three without dimensions and two below-fold images not lazy-loaded.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Do not fetch the underlying feed/ads before age confirmation, deliver responsive AVIF/WebP sources with dimensions, lazy-load below-fold media, and enforce a first-gate byte budget.",
+      "effort": "large"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "translator",
+      "guidanceCategory": "user-experience",
+      "summary": "The Dutch locale mixes substantial untranslated English UI and content.",
+      "evidence": "html lang is nl, but the first-visit cookie controls are English (Accept All Cookies, Accept Only Essential Cookies, Customize Cookies), several visible content titles remain English, and no dir attribute is present.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/platform-probe.json",
+        "evidence/listing-probe.json"
+      ],
+      "suggestedFix": "Localize every first-visit control/content label consistently, set explicit direction where needed, and use logical CSS properties so translated text can expand safely.",
+      "effort": "medium"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "pathId": "error-route",
+      "url": "https://nl.pornhub.com/definitely-not-a-real-route-web-uplift",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Unknown routes silently return the homepage with HTTP 200 instead of a recoverable not-found state.",
+      "evidence": "A request to a deliberately nonexistent route followed redirects and ended at https://nl.pornhub.com/ with HTTP 200 and homepage HTML. /robots.txt follows the same behavior.",
+      "artifacts": [
+        "evidence/robots.txt"
+      ],
+      "suggestedFix": "Return an actual 404 for unknown resources/routes and render a focused recovery page with search, home navigation and retry guidance.",
+      "effort": "small"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "pathId": "home-gate-desktop",
+      "url": "https://nl.pornhub.com/",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The primary search field is unlabeled and explicitly disables autocomplete.",
+      "evidence": "The listing/home probe found a text input named search with no associated label and autocomplete=off; Lighthouse also found accessible-name mismatches.",
+      "artifacts": [
+        "evidence/listing-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Provide a persistent or accessible label, a descriptive search autocomplete token/behavior, and keep browser input assistance enabled unless there is a documented necessity.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Fix mobile gate reflow, semantic modal focus and zoom/accessibility",
+      "priority": 1,
+      "findingIds": [
+        "F01",
+        "F03",
+        "F07"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Stop preloading the feed/ads and repair LCP, CLS and bundle delivery",
+      "priority": 2,
+      "findingIds": [
+        "F02",
+        "F12"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Reduce and consent-gate third parties",
+      "priority": 3,
+      "findingIds": [
+        "F05"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Deploy missing security policies and harden cookies",
+      "priority": 4,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Repair robots, metadata, canonicals and server-rendered discoverability",
+      "priority": 5,
+      "findingIds": [
+        "F06"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Resolve console errors, deprecated APIs and BFCache blockers",
+      "priority": 6,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Complete Dutch localization and input assistance",
+      "priority": 7,
+      "findingIds": [
+        "F13",
+        "F15"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add preference-aware theme and modern navigation transitions",
+      "priority": 8,
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Return real, recoverable HTTP error states",
+      "priority": 9,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1700,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-22T09-17-39-083Z"
+}

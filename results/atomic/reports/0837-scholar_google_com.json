@@ -1,0 +1,956 @@
+{
+  "url": "https://scholar.google.com",
+  "auditedAt": "2026-07-28T08:49:25.817Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Google Scholar’s homepage was reachable, but a representative search query returned an unusual-traffic interstitial. Per the audit method, execution stopped because the core results archetype and primary journey could not be inspected.",
+  "page": {
+    "appType": "mpa",
+    "framework": "none detected",
+    "notes": "Server-rendered search homepage. Results and downstream archetypes were blocked by Google anti-automation controls."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "discoverability",
+    "layout-metrics",
+    "Modern Web Guidance live feed"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "translator"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Google Scholar homepage at the default desktop viewport",
+      "condition": "default",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage with prefers-color-scheme: dark; surface remains light",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM, CSS, and selected computed styles",
+      "condition": "default",
+      "findingIds": [
+        "F-001",
+        "F-002"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-HTML versus rendered-content discoverability evidence",
+      "condition": "JavaScript and no-JavaScript",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view from discoverability capture",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view from discoverability capture",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/results-desktop.png",
+      "caption": "Attempted results route showing unusual-traffic interstitial",
+      "condition": "viewport: 1280x900",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/results-mobile.png",
+      "caption": "Attempted results route showing unusual-traffic interstitial",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/results-dom.json",
+      "caption": "DOM of unusual-traffic interstitial returned for results route",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/results-mobile-layout.json",
+      "caption": "Layout capture of blocker, not representative results",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic manifest of all expected principle/check pairs",
+      "condition": "catalog modern-web-guidance@0.0.172",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 13,
+    "blocked": 10,
+    "notRun": 35,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshot comparison and computed-style inspection under prefers-color-scheme: dark.",
+      "evidence": "The dark-condition screenshot is visually identical to the light screenshot; DOM evidence reports body background rgb(255, 255, 255) and color-scheme normal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a transition video, or an in-page probe of getAnimations()/computed animation under an emulated prefers-reduced-motion: reduce condition, can show whether motion stops. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a screenshot under emulated prefers-contrast: more / forced-colors, or an axe/contrast probe, can show whether controls and text survive. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a transition video of a route/state change shows whether it animates; the page source / ::view-transition usage corroborates. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: source/CSS inspection for animation-timeline: scroll()/view(); a long-task / scroll-handler probe can flag the main-thread anti-pattern. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: CSS inspection for scroll-snap / overscroll-behavior / physics-based easing vs custom pointermove listeners. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a transition video of scrolling, or CSS inspection for scroll-state container queries. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: CSS inspection for anchor-name / position-anchor / position-try on overlays; a screenshot of an open overlay near a viewport edge can show drift. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: CSS inspection for ::highlight / scroll-marker; a transition video can show whether attention is cued after navigation. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-load desktop and mobile screenshot review.",
+      "evidence": "The homepage loads directly into the search task with no modal, interstitial, consent wall, or obscuring banner.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: DOM/source inspection for popover / <dialog> / <details> vs custom overlay divs with manual dismiss handling. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport visual hierarchy review.",
+      "evidence": "The sparse homepage gives the main search field most visual emphasis and limits chrome to menu, sign-in, language, and policy links.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop/mobile screenshot comparison at 780px and 360px.",
+      "evidence": "The 360x800 homepage screenshot reflows the logo and search controls inside the viewport without visible clipping or horizontal scroll.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: CSS inspection for @container / container-type; a computed-style probe of the same component in a wide vs narrow container shows whether it adapts. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a focus probe (focus an element, read the computed outline) or an axe target-size check; a screenshot of a focused control corroborates. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport screenshot and DOM metadata review.",
+      "evidence": "The Google Scholar identity, single prominent search field, search button, and Articles/Case law choice make the page purpose and next action clear.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted the primary search journey by navigating to /scholar?q=web+performance.",
+      "evidence": "Google returned an unusual-traffic interstitial instead of results.",
+      "reason": "External anti-automation blocking prevented end-to-end search validation.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted to inspect the search-result/error state after submitting a representative query.",
+      "evidence": "The only reachable result state was Google’s unusual-traffic block, not the product’s normal loading, empty, success, or recoverable error states.",
+      "reason": "External anti-automation blocking prevented representative state testing.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile layout/performance observation on the representative results URL.",
+      "evidence": "Navigation reached the unusual-traffic page, so measurements would describe the blocker rather than Scholar results.",
+      "reason": "External anti-automation blocking invalidated results-template performance evidence.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted a 3-second layout-shift observation on the representative results URL.",
+      "evidence": "The captured CLS 0 belongs to the unusual-traffic interstitial, not the Scholar results template.",
+      "reason": "External anti-automation blocking invalidated the intended template measurement.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted long-task observation on the representative results URL.",
+      "evidence": "The observer loaded the unusual-traffic interstitial, so it cannot establish main-thread behavior for search results.",
+      "reason": "External anti-automation blocking invalidated the intended template measurement.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned network delivery evidence for the results template after route recon.",
+      "evidence": "The primary results route was replaced by an unusual-traffic interstitial before representative network evidence could be gathered.",
+      "reason": "External anti-automation blocking prevented representative delivery analysis.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned code/network coverage inspection for the results template after route recon.",
+      "evidence": "The primary results route was replaced by an unusual-traffic interstitial.",
+      "reason": "External anti-automation blocking prevented representative code-cost analysis.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: axe-core (injectable via the evaluate primitive) or Lighthouse's a11y audits enumerate these; a DOM probe of the accessibility-relevant attributes is a first-party alternative. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: axe contrast rules, a Lighthouse contrast audit, or an in-page probe computing contrast ratios from computed colours. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: axe/Lighthouse structural audits; a focus-walk probe (tab through, read activeElement + computed outline) is a first-party alternative. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a screenshot of body and heading text, plus CSS inspection for text-wrap / text alignment / font fallback handling. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: Lighthouse/axe target-size, meta-viewport and media-caption audits are useful signals; screenshots at narrow and zoomed conditions plus DOM/media inspection can corroborate. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: capture Runtime/Log CDP events, or a probe that reads collected errors; Lighthouse reports this too. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a DOM/source probe for doctype/charset/img dimensions; CSS inspection for repetition; Lighthouse best-practices audits cover the rest. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: Lighthouse best-practices audits and DevTools inspector/deprecation signals can surface these; DOM/source probes can verify paste handlers and prompt timing. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM and raw-HTML discoverability inspection.",
+      "evidence": "The homepage has title “Google Scholar” and a descriptive meta description, both present in raw HTML.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM/HTML inspection plus mobile screenshot.",
+      "evidence": "The homepage has a viewport meta tag, real linked navigation, and raw HTML content visible without JavaScript; the 360px view remains usable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-mobile.png",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: inspect response status and headers, <link rel=canonical>, hreflang links, robots meta, robots.txt and sitemap.xml; Lighthouse SEO audits cover several of these. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability review of homepage content type.",
+      "evidence": "The homepage is a search utility, not an article, product, event, organization profile, or other rich entity requiring page-specific structured/share metadata.",
+      "reason": "This check is conditional on the page representing a rich entity.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: inspect response headers / page protocol via an evaluate probe or the network layer; Lighthouse best-practices flags HTTPS and CSP issues. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: inspect network requests and third-party origins; a probe of analytics/beacon calls. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a probe for permission requests fired on load; source inspection for passkey / WebAuthn / navigator.credentials usage in auth flows. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: inspect response headers and browser security state; Lighthouse/DevTools security audits can corroborate HSTS, clickjacking, Trusted Types, origin isolation and third-party cookie findings. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Raw server HTML versus rendered DOM and no-JavaScript crawler screenshot comparison.",
+      "evidence": "Discoverability evidence reports 100% rendered-content coverage in raw HTML, no empty mount, and no JS shell; the crawler screenshot retains the core search UI.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: exercise menus near viewport edges with a screenshot; a probe of async/visibility behaviour. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability review for a live scholarly search service.",
+      "evidence": "Google Scholar’s core value depends on a live remote index; installability and a meaningful offline search fallback are not proportionate expectations for this public search utility.",
+      "reason": "The catalog explicitly makes offline/installable behavior contextual.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted the primary results route to inspect failure/recovery behavior.",
+      "evidence": "The anti-automation interstitial prevented access to the product’s representative network and HTTP failure states.",
+      "reason": "External anti-automation blocking prevented product-state testing.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Rendered DOM inspection of document-language metadata.",
+      "evidence": "The DOM artifact reports page.lang as null: the root html element has no lang attribute on an interface that exposes language selection.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "medium",
+      "method": "Planned inspection of years, result metadata, and localized values on the representative results page.",
+      "evidence": "The results page was replaced by an unusual-traffic interstitial.",
+      "reason": "External anti-automation blocking prevented locale-sensitive result inspection.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "medium",
+      "method": "Planned applicability and rendering inspection on result/profile archetypes.",
+      "evidence": "The representative results route was replaced by an unusual-traffic interstitial.",
+      "reason": "External anti-automation blocking prevented inspection of any time-bearing product surface.",
+      "pathIds": [
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a screenshot of consent/upsell/cancel flows; source inspection for declarative button actions vs misleading controls. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: exercise a form, submit invalid input, and observe timing and clarity of errors via a screenshot or a :user-invalid / aria-invalid probe. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: source/DOM inspection for autocomplete attributes on form fields; a probe of autofill affordances. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: walkthrough checkout/subscription/auth/account flows when present; screenshot pricing, confirmation, cancellation and reauthentication states; inspect passkey/autocomplete support for sign-in and payment. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: inspect transferred image bytes vs displayed size; source inspection for modern formats and resolution handling. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a long-task / network probe for background fetches and processing while idle or backgrounded. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a HAR summary shows third-party bytes, font/media weight and caching; screenshots/video reveal autoplay and decorative media; trace/layout evidence shows whether media/animation keeps work running. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from public surface and automation response.",
+      "evidence": "No developer intent indicates an agent-facing surface, and automated search requests are explicitly blocked rather than supported through a structured capability.",
+      "reason": "This emerging check is contextual and absence is not a failure without agent-facing intent.",
+      "pathIds": [
+        "home",
+        "results"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from the search utility’s visible task.",
+      "evidence": "The observed core task is deterministic literature search; there is no evidenced user need for on-device language-model or summarization features on the homepage.",
+      "reason": "This emerging check is contextual and no applicable inference use case was observed.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT (not mandatory): compare heap snapshots for retained growth - a baseline, then one taken after repeating the interaction with `--interact` about 10x (the memory-tracer methodology: baseline -> repeat -> post -> compare). Performance.getMetrics (JSHeapUsedSize, Nodes) across the same before/after window is corroboration. If Chrome DevTools MCP is available, follow its memory-leak-debugging skill: capture baseline, target, and final snapshots, then use memlab or the provided comparison workflow rather than reading raw .heapsnapshot files directly. The package-native `heap` primitive remains the default path. This check is only meaningful where the page has a real interaction to repeat; for a static page with none, mark it not-applicable with a rationale rather than fabricating one. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: a single `heap` summary's totals (nodeCount, totalSelfSizeBytes, constructor population) plus Performance.getMetrics (Nodes, JSHeapUsedSize) give the current footprint to judge against the page's purpose. Chrome DevTools MCP heap snapshots and memlab snapshot analysis can provide the same memory distribution when available. Read summaries or derived analysis, never raw snapshots unless a dedicated heap-analysis tool is doing the analysis. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "not-run",
+      "confidence": "high",
+      "method": "Planned evidence method from catalog hint: HINT: the `heap` summary by constructor (Detached* nodes) compared across a before/after pair shows a growing detached-DOM population; an `evaluate` probe can sample listener/timer counts (e.g. getEventListeners-style counting, or instrumenting addEventListener/setInterval) before and after the repeated interaction to spot growth. Chrome DevTools MCP heap snapshots plus the memory-leak-debugging skill's common-leak guidance can corroborate detached DOM, listeners, closures, globals, and unbounded caches. Caveat from the memory-tracer and Chrome DevTools MCP guidance: detached nodes can be intentional caches, so judge confidence rather than asserting a bug. The model chooses.",
+      "evidence": "Audit execution stopped after the representative search-results route returned Google’s unusual-traffic interstitial.",
+      "reason": "Not executed because the skill requires stopping on a bot block that prevents representative multi-template coverage."
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged contextual and not applicable to the observed surface."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "Representative search-results coverage was blocked by Google’s unusual-traffic interstitial, and the audit stopped as required."
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Public search homepage, representing the entry point and primary query form.",
+      "url": "https://scholar.google.com/",
+      "conditions": [
+        "default desktop",
+        "prefers-color-scheme: dark",
+        "viewport: 360x800",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "results",
+      "description": "Representative literature-results template and primary search completion, attempted with “web performance”.",
+      "url": "https://scholar.google.com/scholar?q=web+performance",
+      "conditions": [
+        "default desktop",
+        "viewport: 360x800"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-001",
+      "pathId": "home",
+      "url": "https://scholar.google.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The homepage does not honor the user’s dark color-scheme preference.",
+      "evidence": "The dark-mode screenshot remains white and matches the default capture; the DOM artifact reports body background rgb(255,255,255) and computed color-scheme normal.",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Declare light and dark support early with meta[name=color-scheme], set color-scheme: light dark on :root, and use adaptive surface/text tokens such as light-dark() or a prefers-color-scheme fallback.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-002",
+      "pathId": "home",
+      "url": "https://scholar.google.com/",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The homepage omits the document language.",
+      "evidence": "The rendered DOM artifact reports page.lang as null even though this is a localized interface with a language selector.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Set the correct BCP 47 language on the root element for each localized response, for example <html lang=\"en\">, and set dir where a locale requires it.",
+      "effort": "trivial"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-001",
+      "title": "Add user-preference-driven dark color support",
+      "priority": 1,
+      "findingIds": [
+        "F-001"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T-002",
+      "title": "Declare the localized document language on html",
+      "priority": 2,
+      "findingIds": [
+        "F-002"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 2,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T08-49-25-817Z"
+}

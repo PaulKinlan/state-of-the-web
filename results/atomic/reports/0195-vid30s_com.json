@@ -1,0 +1,2021 @@
+{
+  "url": "https://vid30s.com",
+  "auditedAt": "2026-07-19T02:27:48.459Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete. The requested host redirects through xpvid.cc and vidoy.com to the audited final origin https://vidoy.asia/.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Server-rendered HTML with Hotwire Turbo on public pages",
+    "notes": "Public auth, recovery, legal and 404 templates audited. Authenticated dashboard, upload, playback, earnings and account-management pages were not covered because no credentials were supplied; those distinct gated archetypes require a separate authenticated audit."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "images",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "lighthouse",
+    "axe-core",
+    "heap-summary"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "search-hidden-content",
+    "passkeys",
+    "capture-location-agnostic-data",
+    "coordinate-global-events",
+    "html",
+    "privacy",
+    "agentic-javascript-tools",
+    "move-dom-element-without-losing-state",
+    "scroll-snap-realtime-feedback",
+    "accessibility",
+    "declarative-dialog-popover-control",
+    "pull-to-reveal",
+    "stabilize-reactive-state",
+    "performance",
+    "same-document-transitions",
+    "size-aware-styling",
+    "optimize-image-priority",
+    "passkey-authentication",
+    "visually-stable-font-fallbacks",
+    "forms",
+    "required-field-feedback",
+    "batch-analytics-events",
+    "deprioritize-background-fetches",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Public authentication landing page at desktop size.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Authentication page reflows without horizontal overflow.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-light-preference.png",
+      "caption": "The page remains hard-coded dark under a light system preference.",
+      "condition": "prefers-color-scheme: light",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "High-contrast preference produces no visible adaptation.",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/register-mobile.png",
+      "caption": "Captured mobile state after activating Register; capture is visually empty and treated as low-confidence corroboration only.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/forgot-password-.png",
+      "caption": "Password recovery form.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/terms-conditions-.png",
+      "caption": "Long-form Terms of Service template.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/definitely-not-a-real-page-.png",
+      "caption": "404 state provides a clear Back action.",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage HTML and CSS.",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/terms-conditions--dom.json",
+      "caption": "Rendered Terms HTML and CSS.",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile layout metrics: 360px content width, no overflow, CLS 0.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Metadata, routes, forms, interaction primitives, and feature probe.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/focus-targets.json",
+      "caption": "Programmatic focus and target-size measurements.",
+      "condition": "keyboard focus",
+      "findingIds": [
+        "F05",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Reduced-motion probe found no active animations and CSS reduces transition duration.",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/load-trace.json",
+      "caption": "DevTools load trace.",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/load-trace-summary.json",
+      "caption": "Trace summary: FCP/LCP 2.95s in this run, one 89.7ms task, 39.7ms TBT.",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/load.har",
+      "caption": "HAR 1.2 network capture.",
+      "findingIds": [
+        "F08",
+        "F19",
+        "F27"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/load-summary.json",
+      "caption": "Network summary: 20 requests, 1,007,587 bytes, four navigation redirects, 862KB hero PNG.",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F19",
+        "F27"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML contains 98% of rendered content; not a JavaScript shell.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript view remains content-complete.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit: one oversized 1250px PNG shown at 178px, no srcset, missing height.",
+      "findingIds": [
+        "F14",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security-header audit: CSP, HSTS, nosniff, frame protection, Referrer-Policy and Permissions-Policy absent.",
+      "findingIds": [
+        "F18",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "No cookies set on the public landing page.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Eight third-party origins, including FingerprintJS delivery origin; no known analytics tracker match.",
+      "findingIds": [
+        "F19",
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "No exposed client-side secrets detected.",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse JSON: performance 62, accessibility 90, best practices 92, SEO 100.",
+      "findingIds": [
+        "F04",
+        "F07",
+        "F09",
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse findings: LCP 8.9s, FCP 4.5s, contrast failure, Turnstile exception, BFCache blockers.",
+      "findingIds": [
+        "F04",
+        "F07",
+        "F09",
+        "F12",
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/axe.json",
+      "caption": "axe-core: serious button contrast, critical zoom restriction, nested complementary landmark.",
+      "findingIds": [
+        "F02",
+        "F11",
+        "F13"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap summary: 68,388 nodes and 3,206,792 self-size bytes.",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-valid.heapsnapshot",
+      "caption": "Heap after 20 login/register toggles: 69,326 nodes and 3,284,353 bytes; no Detached* constructor among top results.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "Twenty tab toggles left DOM count unchanged (143); sampled heap increased 47,686 bytes.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/pwa.json",
+      "caption": "Manifest exists, but no active service-worker registration.",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/routes.json",
+      "caption": "robots.txt allows general search but sitemap.xml returns 404.",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform.json",
+      "caption": "Doctype/charset pass; no logical CSS detected and 12 physical-direction rules found.",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/scripts.json",
+      "caption": "Script loading attributes used to confirm the Turbo module is deferred by module semantics.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/register-state.json",
+      "caption": "Register form becomes a visible 380x528 grid after tab activation.",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for respects-color-scheme",
+      "evidence": "The light-preference screenshot is pixel-identical to the default dark page, and :root declares only color-scheme: dark.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-light-preference.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for respects-reduced-motion",
+      "evidence": "Computed animation probe under reduce found zero active animations; CSS sets animation and transition duration to 0.01ms.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for respects-contrast",
+      "evidence": "The prefers-contrast screenshot is unchanged; axe reports white on #fb5d80 at 3:1 for the Login button.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png",
+        "evidence/axe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for view-transitions",
+      "evidence": "DOM/script inspection finds Turbo and class-based tab swapping but no startViewTransition call, @view-transition rule, or view-transition-name.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "No scroll-linked parallax, scrollytelling, reveal, or carousel motion exists on the audited templates.",
+      "reason": "No scroll-linked parallax, scrollytelling, reveal, or carousel motion exists on the audited templates."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "No gesture-driven carousel, swipe, pull-to-refresh, or overscroll interaction exists on the audited public templates.",
+      "reason": "No gesture-driven carousel, swipe, pull-to-refresh, or overscroll interaction exists on the audited public templates."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for scroll-state-aware-chrome",
+      "evidence": "The templates use minimal non-sticky chrome; mobile content remains oriented by visible Login/Register active state and the legal page has a persistent page heading.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/terms-conditions-.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "No tooltip, popover, menu, or other anchored overlay exists on the audited public templates.",
+      "reason": "No tooltip, popover, menu, or other anchored overlay exists on the audited public templates."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for directs-attention",
+      "evidence": "The active auth tab has both text and an underline, and the 404 state presents one clear Back action.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/definitely-not-a-real-page-.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for no-intrusive-interruptions",
+      "evidence": "Initial desktop and mobile captures show no popup, interstitial, consent wall, or content-obscuring banner.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "No overlay or disclosure component exists on these public templates, so there is no primitive choice to judge.",
+      "reason": "No overlay or disclosure component exists on these public templates, so there is no primitive choice to judge."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for reduced-chrome",
+      "evidence": "The first viewport is content-first: brand, concise value proposition, and one auth card without competing navigation or decorative frames.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for responsive-no-horizontal-scroll",
+      "evidence": "At 360x800, layout metrics report scrollWidth/clientWidth 360, horizontalOverflowPx 0, and the mobile screenshot shows a single-column form.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for component-level-responsiveness",
+      "evidence": "The CSS probe finds no @container rules; the auth card is adapted exclusively with max/min-width media queries.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for input-modality-aware",
+      "evidence": "The focus probe reports outline none and no focus box-shadow for the auth tabs, submit button, eye button and Create account action; several footer/action links measure 16px high.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/focus-targets.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for clear-purpose-and-primary-action",
+      "evidence": "The first viewport states “Make money by sharing videos” and presents Login/Register as the dominant next actions.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for primary-flow-completion",
+      "evidence": "Lighthouse captured an uncaught Cloudflare Turnstile Error 110200 while the registration form depends on cf-turnstile-response, making successful completion unreliable.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for clear-system-state-and-recovery",
+      "evidence": "Required controls use native validation; the forgot-password journey is explicit, and a 404 shows “Page not found!” with a Back action.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/forgot-password-.png",
+        "evidence/definitely-not-a-real-page-.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for good-core-web-vitals",
+      "evidence": "Lighthouse measured FCP 4.5s and LCP 8.9s (performance 62); the separate trace still measured LCP 2.95s, showing material run/network sensitivity.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for visual-stability",
+      "evidence": "Mobile layout observation reports CLS 0 with no shifts; Lighthouse reports CLS 0.001.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for efficient-main-thread",
+      "evidence": "The trace reports one 89.7ms long task and 39.7ms TBT; Lighthouse TBT is 140ms, acceptable despite slow network/LCP.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for efficient-resource-delivery",
+      "evidence": "The HAR shows vid30s.com -> xpvid.cc -> vidoy.com -> vidoy.asia plus four parser-inserted VeryHigh-priority stylesheets and 1,007,587 transferred bytes.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/load.har",
+        "evidence/load-summary.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for trim-unused-and-duplicate-code",
+      "evidence": "Lighthouse estimates 23,270 of 27,543 bytes of Turbo JavaScript are unused (84.5%), with about 150ms LCP savings.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for names-roles-labels",
+      "evidence": "axe passes labels, link names, button names, image alt, heading order and main landmarks; the image has meaningful alt text.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/axe.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for sufficient-contrast",
+      "evidence": "axe and Lighthouse both report the Login control at 3:1 instead of the required 4.5:1 for normal-size text.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for structure-and-focus",
+      "evidence": "The focus probe finds multiple buttons with outline none and no replacement; axe reports the complementary aside nested inside another landmark.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/axe.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for legible-text",
+      "evidence": "Screenshots show start-aligned text, bounded line lengths, readable spacing and no clipping on desktop/mobile/legal templates.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/terms-conditions-.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for zoom-reflow-targets-and-media",
+      "evidence": "The viewport meta includes maximum-scale=1; axe marks this as a critical violation even though 360px reflow itself has no overflow.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/focus-targets.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for no-console-errors",
+      "evidence": "Lighthouse recorded Uncaught TurnstileError 110200 from challenges.cloudflare.com during load.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/axe.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for sound-document-and-assets",
+      "evidence": "The image probe reports a 1250px PNG rendered at 178px, no srcset, and no height attribute.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for browser-platform-hygiene",
+      "evidence": "Lighthouse reports cache-control:no-store with cookie modification and a live Turnstile MediaStreamTrack as actionable BFCache blockers.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for title-and-description",
+      "evidence": "DOM captures show the Terms page uses “Vidoy - Make money by sharing video” and “Login or create your Vidoy creator account,” identical to the landing page.",
+      "pathIds": [
+        "terms"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for crawlable-and-mobile-friendly",
+      "evidence": "Links use real href values, viewport metadata exists, robots allows general crawling, and the discoverability probe recovers 98% of content without JS.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/routes.json",
+        "evidence/discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for canonical-and-indexing-signals",
+      "evidence": "No canonical link is present, sitemap.xml returns 404, and the requested host traverses three other domains before the final page; robots otherwise allows search.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/routes.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for structured-and-shareable-metadata",
+      "evidence": "The recon probe finds zero Open Graph tags and zero JSON-LD blocks despite a public branded service landing page.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for secure-transport-and-headers",
+      "evidence": "HTTPS is used, but the header probe finds no CSP, HSTS, nosniff, clickjacking protection, Referrer-Policy, or Permissions-Policy.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/load.har",
+        "evidence/load-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for data-minimisation-and-third-parties",
+      "evidence": "The network evidence finds eight third-party origins and loads openfpcdn.io/fingerprintjs before any user action; 19 of 20 requests are classified cross-origin from the requested host.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for in-context-permissions-and-modern-auth",
+      "evidence": "The auth DOM exposes username/password forms, while scripts and probes show no WebAuthn/passkey path; this is directly relevant to an account dashboard.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for defensive-browser-policies",
+      "evidence": "The response lacks HSTS, frame-ancestors/X-Frame-Options, Referrer-Policy and Permissions-Policy; no CSP is available for Trusted Types or script restriction.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/pwa.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for progressive-enhancement",
+      "evidence": "Raw server HTML contains 98% of rendered content, including title, H1 and meta description; crawler view remains complete without JavaScript.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for resilient-runtime-behaviour",
+      "evidence": "Login/Register tab toggling preserves a stable 143-element DOM and the active register form remains a visible 380x528 grid.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/register-state.json",
+        "evidence/memory-metrics.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for offline-and-installable",
+      "evidence": "The manifest has display: standalone and start_url /overview, but navigator.serviceWorker.getRegistrations() returns an empty list.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/platform.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for network-and-http-failure-states",
+      "evidence": "The representative unknown route returns a purpose-built error screen with a clear Back recovery action instead of a blank shell.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/definitely-not-a-real-page-.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for lang-dir-and-logical-properties",
+      "evidence": "html lang=en is correct, but dir is absent, no logical CSS property was found, and the probe counts 12 physical left/right rules.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "The audited unauthenticated and legal surfaces render no dates, currencies, durations, or locale-sensitive numeric data beyond a fixed legal update date.",
+      "reason": "The audited unauthenticated and legal surfaces render no dates, currencies, durations, or locale-sensitive numeric data beyond a fixed legal update date."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "The audited unauthenticated and legal surfaces expose no events, schedules, or time-zone-sensitive values.",
+      "reason": "The audited unauthenticated and legal surfaces expose no events, schedules, or time-zone-sensitive values."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for no-dark-patterns",
+      "evidence": "No consent nag, disguised ad, preselected upsell or forced continuity appears on the audited public/auth/legal surfaces; terms acceptance is unchecked and explicit.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/terms-conditions-.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for humane-error-handling",
+      "evidence": "Forms use required constraints and typed email/password fields; account recovery explains the action and provides a return-to-login path.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/forgot-password-.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual/DOM/tool evidence for trustworthy-input-assistance",
+      "evidence": "Login and registration fields use username, email, current-password and new-password autocomplete tokens appropriately.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for safe-commercial-and-account-flows",
+      "evidence": "The audited public surfaces provide Terms, support and abuse email links but no visible privacy notice, account-deletion route, cancellation flow, or passkey reauthentication path.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for optimised-assets",
+      "evidence": "The 862,424-byte hero PNG is 85.6% of transferred bytes and is rendered at only 178px without responsive alternatives.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for no-wasteful-work",
+      "evidence": "The initial page performs four redirects and loads FingerprintJS and Turnstile before the user begins registration.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/load.har",
+        "evidence/load-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted visual/DOM/network/tool evidence for third-party-and-media-budget",
+      "evidence": "The HAR totals about 1.01MB across 20 requests, including an 862KB PNG and requests to eight third-party origins.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "The audited surface is a gated authentication/legal entry point, not an agent-facing capability surface; no safe public action is available to expose.",
+      "reason": "The audited surface is a gated authentication/legal entry point, not an agent-facing capability surface; no safe public action is available to expose."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and surface inventory against the check applicability",
+      "evidence": "No summarisation, language-model, or inference use case is present on the audited authentication and legal entry surfaces.",
+      "reason": "No summarisation, language-model, or inference use case is present on the audited authentication and legal entry surfaces."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual/DOM/tool evidence for no-leak-under-repeated-interaction",
+      "evidence": "After 20 representative Login/Register toggles, DOM count stayed 143 and sampled heap increased only 47,686 bytes; heap summary growth was about 77KB with stable Object/Array counts.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/memory-metrics.json",
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post-valid.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual/DOM/tool evidence for bounded-footprint",
+      "evidence": "Baseline heap is proportionate for the simple page at 68,388 snapshot nodes and 3.21MB self size.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual/DOM/tool evidence for no-detached-dom-or-unbounded-listeners",
+      "evidence": "Before/after heap top constructors contain no Detached* population; repeated toggling did not add DOM nodes, and common Object/Array counts remained unchanged.",
+      "pathIds": [
+        "home-auth"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post-valid.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F26",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "The audited public surface is a gated authentication/legal entry point with no agent-facing capability or on-device inference use case."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home-auth",
+      "description": "Public landing and primary login/register journey; represents the acquisition and authentication surface.",
+      "url": "https://vid30s.com (redirects to https://vidoy.asia/)",
+      "conditions": [
+        "desktop 780x493",
+        "mobile 360x800",
+        "prefers-color-scheme: light",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "register",
+      "description": "Registration tab and client-side form state; represents account creation. Submission was not completed because it would create a real account, but the loaded anti-bot dependency was inspected.",
+      "url": "https://vidoy.asia/",
+      "conditions": [
+        "desktop",
+        "mobile 360x800",
+        "tab toggled repeatedly"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "forgot-password",
+      "description": "Password-reset page; represents account recovery.",
+      "url": "https://vidoy.asia/forgot-password",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "terms",
+      "description": "Terms page; represents the long-form legal/content template.",
+      "url": "https://vidoy.asia/terms-conditions",
+      "conditions": [
+        "desktop",
+        "DOM/CSS inspection"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Unknown route; represents HTTP/navigation failure recovery.",
+      "url": "https://vidoy.asia/definitely-not-a-real-page",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F12",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The viewport disables user zoom",
+      "evidence": "The viewport meta includes maximum-scale=1; axe marks this as a critical violation even though 360px reflow itself has no overflow.",
+      "artifacts": [
+        "evidence/focus-targets.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Remove maximum-scale and any user-scalable restriction; retain width=device-width, initial-scale=1.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F05",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Several controls have no visible keyboard focus and some targets are only 16px high",
+      "evidence": "The focus probe reports outline none and no focus box-shadow for the auth tabs, submit button, eye button and Create account action; several footer/action links measure 16px high.",
+      "artifacts": [
+        "evidence/focus-targets.json"
+      ],
+      "suggestedFix": "Add a high-contrast :focus-visible treatment and expand pointer target hit areas to at least 44px without changing visual density.",
+      "effort": "small"
+    },
+    {
+      "id": "F06",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The registration dependency throws during the primary account-creation journey",
+      "evidence": "Lighthouse captured an uncaught Cloudflare Turnstile Error 110200 while the registration form depends on cf-turnstile-response, making successful completion unreliable.",
+      "artifacts": [],
+      "suggestedFix": "Correct the Turnstile site/domain configuration, catch and explain challenge failures, and offer a retry path that preserves entered data.",
+      "effort": "medium"
+    },
+    {
+      "id": "F07",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Cold-load Largest Contentful Paint is slow",
+      "evidence": "Lighthouse measured FCP 4.5s and LCP 8.9s (performance 62); the separate trace still measured LCP 2.95s, showing material run/network sensitivity.",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Remove redirect latency, prioritize the actual LCP content, and reduce blocking CSS and oversized image transfer.",
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Four redirects and multiple blocking styles delay useful content",
+      "evidence": "The HAR shows vid30s.com -> xpvid.cc -> vidoy.com -> vidoy.asia plus four parser-inserted VeryHigh-priority stylesheets and 1,007,587 transferred bytes.",
+      "artifacts": [
+        "evidence/load.har",
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Serve the canonical origin directly, collapse redirects, inline only critical CSS, and defer/split non-critical styles.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Primary action text does not meet minimum contrast",
+      "evidence": "axe and Lighthouse both report the Login control at 3:1 instead of the required 4.5:1 for normal-size text.",
+      "artifacts": [],
+      "suggestedFix": "Darken the accent behind white text or use a dark foreground while preserving clear hover, active and disabled states.",
+      "effort": "small"
+    },
+    {
+      "id": "F19",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core transport security headers are absent",
+      "evidence": "HTTPS is used, but the header probe finds no CSP, HSTS, nosniff, clickjacking protection, Referrer-Policy, or Permissions-Policy.",
+      "artifacts": [
+        "evidence/load.har",
+        "evidence/load-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Add a restrictive CSP, HSTS, nosniff, frame-ancestors, strict referrer policy, and least-privilege permissions policy.",
+      "effort": "medium"
+    },
+    {
+      "id": "F20",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The login page loads a fingerprinting library and a broad third-party footprint by default",
+      "evidence": "The network evidence finds eight third-party origins and loads openfpcdn.io/fingerprintjs before any user action; 19 of 20 requests are classified cross-origin from the requested host.",
+      "artifacts": [],
+      "suggestedFix": "Remove covert fingerprinting unless strictly necessary and disclosed; gate non-essential third parties behind purpose-specific user action and minimize origins.",
+      "effort": "medium"
+    },
+    {
+      "id": "F22",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Browser-enforced defensive policies are not configured",
+      "evidence": "The response lacks HSTS, frame-ancestors/X-Frame-Options, Referrer-Policy and Permissions-Policy; no CSP is available for Trusted Types or script restriction.",
+      "artifacts": [
+        "evidence/pwa.json"
+      ],
+      "suggestedFix": "Deploy the defense-in-depth policy set and test it in report-only mode before enforcement.",
+      "effort": "medium"
+    },
+    {
+      "id": "F26",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "A single oversized legacy image dominates page weight",
+      "evidence": "The 862,424-byte hero PNG is 85.6% of transferred bytes and is rendered at only 178px without responsive alternatives.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Generate AVIF/WebP variants sized for actual slots and select them with picture/srcset/sizes.",
+      "effort": "small"
+    },
+    {
+      "id": "F28",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party and media cost is disproportionate for a simple auth landing page",
+      "evidence": "The HAR totals about 1.01MB across 20 requests, including an 862KB PNG and requests to eight third-party origins.",
+      "artifacts": [],
+      "suggestedFix": "Set a landing-page byte/origin budget, self-host critical assets, compress the hero, and defer non-essential third parties.",
+      "effort": "medium"
+    },
+    {
+      "id": "F01",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Hard-coded dark theme ignores a light system preference",
+      "evidence": "The light-preference screenshot is pixel-identical to the default dark page, and :root declares only color-scheme: dark.",
+      "artifacts": [
+        "evidence/home-light-preference.png"
+      ],
+      "suggestedFix": "Declare light and dark support in early metadata and root CSS, then use preference-driven tokens or light-dark().",
+      "effort": "medium"
+    },
+    {
+      "id": "F02",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Contrast preference is not honoured and the primary button is below WCAG AA",
+      "evidence": "The prefers-contrast screenshot is unchanged; axe reports white on #fb5d80 at 3:1 for the Login button.",
+      "artifacts": [
+        "evidence/home-high-contrast.png",
+        "evidence/axe.json"
+      ],
+      "suggestedFix": "Raise primary-control contrast to at least 4.5:1 and reinforce subtle borders/text under prefers-contrast: more or forced colors.",
+      "effort": "small"
+    },
+    {
+      "id": "F09",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Most of the Turbo module is unused on the landing page",
+      "evidence": "Lighthouse estimates 23,270 of 27,543 bytes of Turbo JavaScript are unused (84.5%), with about 150ms LCP savings.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Load Turbo only on routes that benefit from it or replace the landing-page behavior with a smaller route-specific module.",
+      "effort": "small"
+    },
+    {
+      "id": "F11",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Focus styling and landmark nesting weaken keyboard and assistive-tech navigation",
+      "evidence": "The focus probe finds multiple buttons with outline none and no replacement; axe reports the complementary aside nested inside another landmark.",
+      "artifacts": [
+        "evidence/axe.json"
+      ],
+      "suggestedFix": "Use explicit :focus-visible styles and simplify the auth card to a section or top-level complementary landmark as appropriate.",
+      "effort": "small"
+    },
+    {
+      "id": "F13",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page throws an uncaught Turnstile exception",
+      "evidence": "Lighthouse recorded Uncaught TurnstileError 110200 from challenges.cloudflare.com during load.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/axe.json"
+      ],
+      "suggestedFix": "Fix the Turnstile origin configuration and handle initialization errors without uncaught exceptions.",
+      "effort": "small"
+    },
+    {
+      "id": "F14",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "optimize-image-priority",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The hero image is oversized and incompletely dimensioned",
+      "evidence": "The image probe reports a 1250px PNG rendered at 178px, no srcset, and no height attribute.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Serve responsive AVIF/WebP sources with srcset/sizes and explicit intrinsic width and height.",
+      "effort": "small"
+    },
+    {
+      "id": "F16",
+      "pathId": "terms",
+      "url": "https://vidoy.asia/terms-conditions",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Distinct pages reuse the login page title and description",
+      "evidence": "DOM captures show the Terms page uses “Vidoy - Make money by sharing video” and “Login or create your Vidoy creator account,” identical to the landing page.",
+      "artifacts": [],
+      "suggestedFix": "Generate route-specific titles and descriptions, such as “Terms of Service | Vidoy,” matching each page’s visible purpose.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F17",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Canonical and sitemap signals are incomplete across a multi-domain redirect chain",
+      "evidence": "No canonical link is present, sitemap.xml returns 404, and the requested host traverses three other domains before the final page; robots otherwise allows search.",
+      "artifacts": [
+        "evidence/routes.json"
+      ],
+      "suggestedFix": "Choose one canonical public origin, redirect to it in one hop, emit canonical links, and publish a consistent sitemap.",
+      "effort": "small"
+    },
+    {
+      "id": "F21",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkey-authentication",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Authentication offers passwords only and no phishing-resistant option",
+      "evidence": "The auth DOM exposes username/password forms, while scripts and probes show no WebAuthn/passkey path; this is directly relevant to an account dashboard.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Offer passkey authentication and registration alongside existing recovery, using native WebAuthn browser APIs and vetted server verification.",
+      "effort": "large"
+    },
+    {
+      "id": "F23",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The app advertises installability but has no service worker or offline fallback",
+      "evidence": "The manifest has display: standalone and start_url /overview, but navigator.serviceWorker.getRegistrations() returns an empty list.",
+      "artifacts": [
+        "evidence/platform.json"
+      ],
+      "suggestedFix": "Register a scoped service worker with network-first navigation and an intentional offline fallback, or stop advertising standalone app behavior.",
+      "effort": "medium"
+    },
+    {
+      "id": "F24",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The layout is not prepared for bidirectional or alternate writing modes",
+      "evidence": "html lang=en is correct, but dir is absent, no logical CSS property was found, and the probe counts 12 physical left/right rules.",
+      "artifacts": [],
+      "suggestedFix": "Set an appropriate direction strategy and replace physical spacing/positioning with inline/block logical properties.",
+      "effort": "medium"
+    },
+    {
+      "id": "F25",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "guidanceId": "privacy",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Public account terms do not expose key user-control paths",
+      "evidence": "The audited public surfaces provide Terms, support and abuse email links but no visible privacy notice, account-deletion route, cancellation flow, or passkey reauthentication path.",
+      "artifacts": [],
+      "suggestedFix": "Publish privacy/data-rights information and make account deletion, payout dispute, cancellation, and sensitive-action reauthentication paths easy to find.",
+      "effort": "large"
+    },
+    {
+      "id": "F27",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Default-load work includes avoidable fingerprinting, challenge and redirect overhead",
+      "evidence": "The initial page performs four redirects and loads FingerprintJS and Turnstile before the user begins registration.",
+      "artifacts": [
+        "evidence/load.har",
+        "evidence/load-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Land directly on the canonical page and defer security/identity scripts until the corresponding form or action is actually used.",
+      "effort": "medium"
+    },
+    {
+      "id": "F03",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Route and tab changes do not use View Transitions",
+      "evidence": "DOM/script inspection finds Turbo and class-based tab swapping but no startViewTransition call, @view-transition rule, or view-transition-name.",
+      "artifacts": [],
+      "suggestedFix": "Layer same-document and cross-document View Transitions onto tab and Turbo navigation, with reduced-motion handling.",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Reusable auth components rely only on viewport breakpoints",
+      "evidence": "The CSS probe finds no @container rules; the auth card is adapted exclusively with max/min-width media queries.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Give reusable shells a containment context and adapt internal layout with size-aware container queries.",
+      "effort": "medium"
+    },
+    {
+      "id": "F15",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "performance",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The page is ineligible for BFCache under common navigation conditions",
+      "evidence": "Lighthouse reports cache-control:no-store with cookie modification and a live Turnstile MediaStreamTrack as actionable BFCache blockers.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Limit no-store to genuinely sensitive responses and tear down challenge media resources before pagehide where possible.",
+      "effort": "medium"
+    },
+    {
+      "id": "F18",
+      "pathId": "home-auth",
+      "url": "https://vid30s.com",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The public organization landing page has no social or structured metadata",
+      "evidence": "The recon probe finds zero Open Graph tags and zero JSON-LD blocks despite a public branded service landing page.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Add accurate Open Graph/Twitter preview fields and Organization/WebSite JSON-LD that match visible content.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Remove maximum-scale and any user-scalable restriction; retain width=device-width, initial-scale=1.",
+      "priority": 1,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Add a high-contrast :focus-visible treatment and expand pointer target hit areas to at least 44px without changing visual density.",
+      "priority": 2,
+      "findingIds": [
+        "F05"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Correct the Turnstile site/domain configuration, catch and explain challenge failures, and offer a retry path that preserves entered data.",
+      "priority": 3,
+      "findingIds": [
+        "F06"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Remove redirect latency, prioritize the actual LCP content, and reduce blocking CSS and oversized image transfer.",
+      "priority": 4,
+      "findingIds": [
+        "F07"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Serve the canonical origin directly, collapse redirects, inline only critical CSS, and defer/split non-critical styles.",
+      "priority": 5,
+      "findingIds": [
+        "F08"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Darken the accent behind white text or use a dark foreground while preserving clear hover, active and disabled states.",
+      "priority": 6,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Add a restrictive CSP, HSTS, nosniff, frame-ancestors, strict referrer policy, and least-privilege permissions policy.",
+      "priority": 7,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Remove covert fingerprinting unless strictly necessary and disclosed; gate non-essential third parties behind purpose-specific user action and minimize origins.",
+      "priority": 8,
+      "findingIds": [
+        "F20"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Deploy the defense-in-depth policy set and test it in report-only mode before enforcement.",
+      "priority": 9,
+      "findingIds": [
+        "F22"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Generate AVIF/WebP variants sized for actual slots and select them with picture/srcset/sizes.",
+      "priority": 10,
+      "findingIds": [
+        "F26"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Set a landing-page byte/origin budget, self-host critical assets, compress the hero, and defer non-essential third parties.",
+      "priority": 11,
+      "findingIds": [
+        "F28"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Declare light and dark support in early metadata and root CSS, then use preference-driven tokens or light-dark().",
+      "priority": 12,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T02-18-26-532Z"
+}

@@ -1,0 +1,2074 @@
+{
+  "url": "https://www.twitch.tv",
+  "auditedAt": "2026-07-18T10:45:50.962Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete anonymous public-surface audit across homepage, directory, live channel, narrow viewport, preference conditions, and an error route.",
+  "page": {
+    "appType": "spa",
+    "framework": "React-like",
+    "notes": "Public livestream discovery/player SPA. Dynamic content and live metrics vary by capture time."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-styles",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "HAR",
+    "Lighthouse",
+    "discoverability/raw-HTML",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "curl robots/sitemap",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "scrollytelling",
+    "position-aware-tooltips",
+    "navigation-drawer",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "fluid-scaling",
+    "size-aware-styling",
+    "forms",
+    "identify-inp-causes",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "improve-text-layout-and-legibility",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "stabilize-reactive-state",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "validate-input-after-interaction",
+    "autofill-sign-in-form",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage first viewport with consent surface",
+      "condition": "desktop load",
+      "findingIds": [
+        "TW-04",
+        "TW-05",
+        "TW-19",
+        "TW-24"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800 showing shrink-to-fit desktop UI",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "TW-06",
+        "TW-08",
+        "TW-14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/directory-desktop.png",
+      "caption": "Directory archetype after consent interaction",
+      "condition": "viewport: 1280x800",
+      "findingIds": [
+        "TW-07"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/channel-desktop.png",
+      "caption": "Live channel/player archetype",
+      "condition": "viewport: 1280x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-light-preference.png",
+      "caption": "Homepage under requested light scheme remains dark",
+      "condition": "prefers-color-scheme: light",
+      "findingIds": [
+        "TW-01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Homepage under forced colors remains legible",
+      "condition": "prefers-contrast: more; forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM, styles, and page CSS",
+      "findingIds": [
+        "TW-02",
+        "TW-03",
+        "TW-05",
+        "TW-07",
+        "TW-08",
+        "TW-12",
+        "TW-13"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile layout metrics and shift observer",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "TW-06",
+        "TW-10",
+        "TW-14",
+        "TW-17"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-directory.json",
+      "caption": "Directory layout metrics and shift observer",
+      "condition": "viewport: 1280x800",
+      "findingIds": [
+        "TW-10"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace",
+      "caption": "DevTools performance trace",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace timing and main-thread summary",
+      "findingIds": [
+        "TW-09",
+        "TW-11",
+        "TW-23"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home-network",
+      "caption": "HAR 1.2 network capture",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-network-summary.json",
+      "caption": "Compact network, dependency, and transfer summary",
+      "findingIds": [
+        "TW-12",
+        "TW-13",
+        "TW-19",
+        "TW-23",
+        "TW-24"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse mobile audit",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse summary",
+      "findingIds": [
+        "TW-09",
+        "TW-11",
+        "TW-16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image delivery and accessibility inventory",
+      "findingIds": [
+        "TW-10",
+        "TW-15",
+        "TW-22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header evidence",
+      "findingIds": [
+        "TW-18",
+        "TW-20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie attribute inventory",
+      "findingIds": [
+        "TW-18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party origin/tracker inventory",
+      "findingIds": [
+        "TW-19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secret scan with zero findings",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability",
+      "caption": "Raw HTML versus rendered-content result",
+      "findingIds": [
+        "TW-17",
+        "TW-21",
+        "TW-25"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view for discoverability comparison",
+      "findingIds": [
+        "TW-17"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JS view with no meaningful stream content",
+      "findingIds": [
+        "TW-17",
+        "TW-21",
+        "TW-25"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline",
+      "caption": "Baseline V8 heap summary",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll-valid",
+      "caption": "Heap after ten feed traversals",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/error-state.png",
+      "caption": "Unavailable-channel error and recovery state",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-dialog-valid.png",
+      "caption": "Attempted login/consent interaction state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-sitemap.txt",
+      "caption": "robots.txt and sitemap response evidence",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-search.json",
+      "caption": "Modern Web Guidance search result",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "Retrieved pinned Modern Web Guidance corpus used to set the bar",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The light-preference screenshot remains dark, and computed CSS reports body color-scheme: dark with no prefers-color-scheme rule.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-light-preference.png"
+      ],
+      "findingIds": [
+        "TW-01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The reduced-motion probe found thirteen running animations, mostly 2 seconds long, and no prefers-reduced-motion rule in accessible stylesheets.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "TW-02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Forced-colors screenshot inspection",
+      "evidence": "Under prefers-contrast:more and forced-colors:active, text, controls, player chrome, links, and focus-relevant edges remain visible with strong system colors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "CSS inspection found no view-transition rules or names across the rendered homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "TW-03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "DOM/CSS and visual inspection",
+      "evidence": "No parallax, scrollytelling, or entry/exit reveal surface was present on the representative routes, so there is no scroll-linked animation to implement declaratively.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "reason": "No parallax, scrollytelling, or entry/exit reveal surface was present on the representative routes, so there is no scroll-linked animation to implement declaratively."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop and mobile visual walkthrough",
+      "evidence": "Representative discovery and channel paths expose standard click, keyboard, range, and native scroll interactions; no custom pointer-drag surface fighting native scrolling was observed.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/channel-desktop.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "DOM/CSS inspection found no scroll-state container query, progress cue, or declarative scroll-position response on a long discovery feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "TW-04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "DOM and route walkthrough",
+      "evidence": "No edge-positioned tooltip or context-menu state was opened in the audited anonymous discovery/watch journey; the observed consent surface is not an anchored overlay.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "reason": "No edge-positioned tooltip or context-menu state was opened in the audited anonymous discovery/watch journey; the observed consent surface is not an anchored overlay."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-route screenshot walkthrough",
+      "evidence": "Browse tabs, live-state badges, channel identity, active category tabs, and the unavailable-content recovery CTA consistently direct attention after navigation.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel",
+        "error"
+      ],
+      "artifacts": [
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png",
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "First-load screenshot inspection",
+      "evidence": "The consent surface is large but does not fully interstitial-block the product, offers equally visible Accept/Customize/Reject actions, and the stream discovery UI remains visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The live DOM reported 0 dialog elements and 0 popover elements while the page displayed a large consent surface and custom transient controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "TW-05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative screenshots",
+      "evidence": "Homepage, directory, and channel layouts devote the central region to streams/categories/player while persistent chrome is compact and functional.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "At a requested 360x800 viewport, layout reported hasViewportMeta:false and a 980 CSS-pixel layout viewport; the screenshot shows tiny desktop text and controls.",
+      "pathIds": [
+        "home-mobile"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "TW-06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Accessible stylesheet inspection found no @container rules while the same cards/sidebar patterns appear across homepage and directory layouts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/directory-desktop.png"
+      ],
+      "findingIds": [
+        "TW-07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The interaction probe found many controls below 24px high, including 17px links and 20px tags; shrink-to-fit mobile rendering makes them smaller still.",
+      "pathIds": [
+        "home-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "TW-08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport and route screenshots",
+      "evidence": "The homepage immediately exposes live streams and Browse/Search; directory says Browse and channel pages center the live player.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Anonymous browse-to-watch walkthrough",
+      "evidence": "The representative flow from homepage to directory to a live channel completes without login; a live player and channel details are visible on the channel route.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Invalid-channel recovery walkthrough",
+      "evidence": "A nonexistent channel renders a clear unavailable state and a prominent Browse channels recovery action rather than a blank shell.",
+      "pathIds": [
+        "error"
+      ],
+      "artifacts": [
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Lighthouse measured LCP 9.2s, FCP 6.4s, TBT 540ms, and time-to-interactive 12.3s, producing a 0.44 performance score.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "TW-09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The layout primitive measured CLS 0.373 on the homepage mobile condition and 1.122 on the directory, with multiple shifts after 1.3s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/layout-directory.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "TW-10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The trace recorded 8 long tasks, a 179ms longest task, and 399.76ms total blocking time; Lighthouse independently measured 540ms TBT.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "TW-11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "HAR recorded 252 requests and 2.92MB transferred, including 148 scripts totaling 2.02MB; numerous parser-inserted classic scripts were confirmed in the body without async/defer.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "TW-12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "HAR shows 148 scripts and 2.02MB of script transfer; DOM inspection confirms both nomodulePolyfills and a separate polyfills bundle on the page.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "TW-13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/image inspection",
+      "evidence": "Lighthouse accessibility scored 1.00. Search has an accessible name and meaningful stream/category imagery generally carries descriptive alt; no audit violation was reported.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse and forced-colors screenshot",
+      "evidence": "Lighthouse accessibility scored 1.00 and the forced-colors capture preserves readable text and control contrast across the first viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM focus probe and Lighthouse",
+      "evidence": "A focused first interactive element reports a visible auto outline, route landmarks/headings are present, and Lighthouse accessibility found no structural failure.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop representative screenshots",
+      "evidence": "At desktop width, headings, stream titles, channel metadata, and error copy are readable and not visibly clipped; the separate narrow reflow failure is recorded under zoom/reflow.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel",
+        "error"
+      ],
+      "artifacts": [
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png",
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The 360px capture is a 980px desktop canvas scaled to 0.367, making text and interactive targets materially too small even though no horizontal scrollbar is exposed.",
+      "pathIds": [
+        "home-mobile"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/layout-mobile.json"
+      ],
+      "findingIds": [
+        "TW-14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse audit review",
+      "evidence": "Lighthouse did not report its errors-in-console audit as failed during the captured run.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The images primitive found all 31 images missing both width and height, 15 missing srcset, 13 oversized, and 5 missing alt attributes; Lighthouse also flagged low-resolution images.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "TW-15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Lighthouse failed valid-source-maps, inspector-issues, and BFCache, reporting one back/forward cache failure reason.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "TW-16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM metadata probe",
+      "evidence": "The rendered page has title Twitch and a descriptive meta description explaining the livestreaming service.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Discoverability measured only 1% rendered-word coverage, isJsShell:true, and a crawler screenshot with no meaningful stream/category content; the viewport meta is also absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/layout-mobile.json"
+      ],
+      "findingIds": [
+        "TW-17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Metadata plus robots/sitemap fetch",
+      "evidence": "The homepage returns 200, declares canonical https://www.twitch.tv/, robots index, 28 hreflang links, and robots.txt advertises sitemapv2_index.xml.gz.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/robots-sitemap.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered metadata probe",
+      "evidence": "The homepage exposes JSON-LD and Open Graph site_name, title, URL, type, image, and description matching the visible Twitch service.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Headers show no CSP, Referrer-Policy, or Permissions-Policy. Cookie evidence includes a non-Secure country cookie and an api_token cookie without HttpOnly; all six use SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "TW-18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Network capture recorded 249 cross-origin requests and 2.85MB cross-origin transfer, including ad and telemetry endpoints; the consent panel names up to 109 partners.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "TW-19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Load walkthrough and platform probe",
+      "evidence": "No notification, geolocation, camera, or microphone permission prompt appeared on load. Authentication is optional for the core anonymous browse/watch flow.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/channel-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "HSTS, nosniff, and SAMEORIGIN are present, but CSP/frame-ancestors, Referrer-Policy, and Permissions-Policy are absent from the main response.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "TW-20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Raw HTML contains 1% of rendered content words and is classified as a JS shell; the crawler screenshot lacks streams, categories, and useful navigation content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "TW-21"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative route/error walkthrough",
+      "evidence": "Discovery, channel, and missing-channel routes reached stable, bounded states; the custom player and navigation remained within the viewport at desktop conditions.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel",
+        "error"
+      ],
+      "artifacts": [
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png",
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Site-purpose judgement plus manifest probe",
+      "evidence": "Twitch live playback is intrinsically online and no installability intent is declared; offline media playback is not a meaningful expectation for this audited public web surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "reason": "Twitch live playback is intrinsically online and no installability intent is declared; offline media playback is not a meaningful expectation for this audited public web surface."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Invalid resource route walkthrough",
+      "evidence": "A missing channel produces an intentional unavailable state with a Browse channels recovery action.",
+      "pathIds": [
+        "error"
+      ],
+      "artifacts": [
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM and CSS metadata probe",
+      "evidence": "The page declares lang=en-GB, exposes 28 hreflang variants, and accessible CSS inspection found logical inline/block properties.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered locale inspection",
+      "evidence": "The en-GB route renders compact locale-appropriate viewer counts and exposes localized language metadata rather than hard-coding an unlabeled locale.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/directory-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Representative-content judgement",
+      "evidence": "No calendar event, scheduled date/time entry, or user-editable time concept was present in the audited anonymous discovery/watch surfaces.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/directory-desktop.png",
+        "evidence/channel-desktop.png"
+      ],
+      "reason": "No calendar event, scheduled date/time entry, or user-editable time concept was present in the audited anonymous discovery/watch surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Consent and anonymous journey screenshot review",
+      "evidence": "Accept, Customize, and Reject are equally prominent; viewing does not require signup, and the unavailable state offers a direct recovery route.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel",
+        "error"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/channel-desktop.png",
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Error-state walkthrough",
+      "evidence": "The representative invalid channel error uses neutral language, explains unavailability, and offers a clear recovery action without blaming the user.",
+      "pathIds": [
+        "error"
+      ],
+      "artifacts": [
+        "evidence/error-state.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Form inventory",
+      "evidence": "The audited anonymous surfaces contain search and media controls but no address, payment, sign-in, or sign-up data-entry form requiring autofill tokens.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "reason": "The audited anonymous surfaces contain search and media controls but no address, payment, sign-in, or sign-up data-entry form requiring autofill tokens."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Scope and journey judgement",
+      "evidence": "Checkout, subscription purchase, cancellation, and authenticated account management require credentials/payment and were explicitly not exercised in this anonymous public-surface audit.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/channel-desktop.png"
+      ],
+      "reason": "Checkout, subscription purchase, cancellation, and authenticated account management require credentials/payment and were explicitly not exercised in this anonymous public-surface audit."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "Image evidence found 31 legacy PNG/JPEG images, no modern-format images, 13 oversized images, and 15 without responsive sources.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "TW-22"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The page makes 252 requests and loads 148 scripts before a user chooses a stream; trace evidence shows 399.76ms blocking time.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "TW-23"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "The initial route transfers 2.92MB and starts a featured live player while also loading ad, telemetry, casting, and extensive discovery code.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "TW-24"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Objective primitive and visual evidence review",
+      "evidence": "No structured agent capability was detected, and raw HTML exposes only 1% of rendered words despite public discovery and channel actions being useful to agents.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "TW-25"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Feature-purpose judgement",
+      "evidence": "No summarization or language-model task is exposed in the representative anonymous surfaces where on-device inference would clearly improve the current core journey.",
+      "pathIds": [
+        "home",
+        "directory",
+        "channel"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/channel-desktop.png"
+      ],
+      "reason": "No summarization or language-model task is exposed in the representative anonymous surfaces where on-device inference would clearly improve the current core journey."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline and post-interaction heap summaries",
+      "evidence": "After ten bottom/top feed traversals, heap self size rose from 55,406,433 to 56,122,869 bytes (1.29%) and nodes from 975,917 to 989,962 (1.44%), bounded growth rather than an obvious runaway leak.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline",
+        "evidence/heap-post-scroll-valid"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap-summary proportionality review",
+      "evidence": "Baseline V8 heap self size was 55.4MB for a complex React livestream discovery page with player, images, and extensive UI; no single application constructor dominated the snapshot.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Before/after constructor comparison",
+      "evidence": "Neither heap summary lists a Detached* constructor among the top retained constructors, and the repeated traversal produced only 1.29% total self-size growth.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline",
+        "evidence/heap-post-scroll-valid"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-01",
+        "TW-02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-06",
+        "TW-07",
+        "TW-08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-09",
+        "TW-10",
+        "TW-11",
+        "TW-12",
+        "TW-13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-15",
+        "TW-16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "TW-18",
+        "TW-19",
+        "TW-20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "TW-21"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "TW-22",
+        "TW-23",
+        "TW-24"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "TW-25"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage discovery archetype and consent-first load; covers first impression, navigation, metadata, performance, privacy, and preferences.",
+      "url": "https://www.twitch.tv",
+      "conditions": [
+        "desktop",
+        "prefers-color-scheme: light",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "home-mobile",
+      "description": "Homepage narrow form-factor condition; covers viewport/reflow/touch usability.",
+      "url": "https://www.twitch.tv",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "directory",
+      "description": "Browse directory listing archetype; represents category/listing and search discovery.",
+      "url": "https://www.twitch.tv/directory",
+      "conditions": [
+        "viewport: 1280x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "channel",
+      "description": "Live channel/player archetype; represents the primary anonymous watch journey.",
+      "url": "https://www.twitch.tv/stableronaldo",
+      "conditions": [
+        "viewport: 1280x800"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "error",
+      "description": "Nonexistent channel route; covers unavailable-content messaging and recovery.",
+      "url": "https://www.twitch.tv/this-channel-should-not-exist-web-uplift-2026",
+      "conditions": [
+        "viewport: 1280x800"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "login",
+      "description": "Login entry interaction was attempted only to inspect the public modal boundary; authenticated account, purchase, subscription, and cancellation flows were not covered because no credentials or payment context were provided.",
+      "url": "https://www.twitch.tv",
+      "conditions": [
+        "anonymous"
+      ],
+      "result": "skipped"
+    }
+  ],
+  "findings": [
+    {
+      "id": "TW-01",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "summary": "The interface stays in its dark theme when the user requests a light color scheme.",
+      "evidence": "The light-preference screenshot remains dark, and computed CSS reports body color-scheme: dark with no prefers-color-scheme rule.",
+      "suggestedFix": "Expose an automatic system theme using color-scheme and prefers-color-scheme, while retaining an explicit user override.",
+      "artifacts": [
+        "evidence/home-light-preference.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-02",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "summary": "Continuous animations remain active under reduced-motion.",
+      "evidence": "The reduced-motion probe found thirteen running animations, mostly 2 seconds long, and no prefers-reduced-motion rule in accessible stylesheets.",
+      "suggestedFix": "Under prefers-reduced-motion: reduce, stop auto-advance and non-essential looping motion and shorten necessary state transitions.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-03",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "summary": "Route and major state changes do not use View Transitions.",
+      "evidence": "CSS inspection found no view-transition rules or names across the rendered homepage.",
+      "suggestedFix": "Progressively enhance directory/channel route and modal state changes with the View Transitions API, preserving an instant fallback.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-04",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "summary": "Navigation chrome does not expose scroll-aware feedback.",
+      "evidence": "DOM/CSS inspection found no scroll-state container query, progress cue, or declarative scroll-position response on a long discovery feed.",
+      "suggestedFix": "Use scroll-state queries or a lightweight progress/affordance treatment where the long feed makes position ambiguous.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-05",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "summary": "Consent and transient surfaces are implemented without native dialog/popover primitives.",
+      "evidence": "The live DOM reported 0 dialog elements and 0 popover elements while the page displayed a large consent surface and custom transient controls.",
+      "suggestedFix": "Use dialog for modal flows and popover with declarative light-dismiss for transient menus, preserving focus and Escape behavior.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-06",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "summary": "The desktop page omits the viewport meta tag and is scaled down on a 360px screen.",
+      "evidence": "At a requested 360x800 viewport, layout reported hasViewportMeta:false and a 980 CSS-pixel layout viewport; the screenshot shows tiny desktop text and controls.",
+      "suggestedFix": "Add width=device-width, initial-scale=1 and deliver a genuinely narrow responsive layout rather than browser shrink-to-fit.",
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home-mobile",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-07",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "summary": "Reusable discovery components show no container-query adaptation.",
+      "evidence": "Accessible stylesheet inspection found no @container rules while the same cards/sidebar patterns appear across homepage and directory layouts.",
+      "suggestedFix": "Introduce size containers around reusable card and rail regions and adapt them with @container rules where their available width differs.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/directory-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-08",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "summary": "Many controls become undersized for touch and several controls have very small hit boxes.",
+      "evidence": "The interaction probe found many controls below 24px high, including 17px links and 20px tags; shrink-to-fit mobile rendering makes them smaller still.",
+      "suggestedFix": "Provide at least 24x24 CSS-pixel targets, preferably 44x44 for primary touch controls, and retain visible focus styles.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home-mobile",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-09",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "summary": "Cold-load performance is poor under Lighthouse mobile conditions.",
+      "evidence": "Lighthouse measured LCP 9.2s, FCP 6.4s, TBT 540ms, and time-to-interactive 12.3s, producing a 0.44 performance score.",
+      "suggestedFix": "Profile the LCP and interaction path, prioritize the LCP resource, and defer non-critical work until after the primary content is usable.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-10",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "summary": "Large layout shifts occur during representative page loads.",
+      "evidence": "The layout primitive measured CLS 0.373 on the homepage mobile condition and 1.122 on the directory, with multiple shifts after 1.3s.",
+      "suggestedFix": "Reserve space for late content, include intrinsic image dimensions/aspect ratios, and use stable font fallbacks.",
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/layout-directory.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-11",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "summary": "Heavy scripting blocks the main thread.",
+      "evidence": "The trace recorded 8 long tasks, a 179ms longest task, and 399.76ms total blocking time; Lighthouse independently measured 540ms TBT.",
+      "suggestedFix": "Break large tasks into prioritized chunks and defer discovery, ads, casting, and below-fold work until needed.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "summary": "The initial route ships an expensive script-heavy dependency graph.",
+      "evidence": "HAR recorded 252 requests and 2.92MB transferred, including 148 scripts totaling 2.02MB; numerous parser-inserted classic scripts were confirmed in the body without async/defer.",
+      "suggestedFix": "Reduce the initial route graph, load non-critical chunks conditionally, and apply intentional script priority/defer semantics.",
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-13",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "summary": "JavaScript dominates the initial transfer and includes legacy/polyfill bundles.",
+      "evidence": "HAR shows 148 scripts and 2.02MB of script transfer; DOM inspection confirms both nomodulePolyfills and a separate polyfills bundle on the page.",
+      "suggestedFix": "Use coverage and bundle analysis to remove unused/duplicate code and avoid shipping legacy polyfills to capable browsers.",
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-14",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "summary": "Mobile reflow and target sizing are not usable at the requested narrow viewport.",
+      "evidence": "The 360px capture is a 980px desktop canvas scaled to 0.367, making text and interactive targets materially too small even though no horizontal scrollbar is exposed.",
+      "suggestedFix": "Restore device-width reflow and audit text, player controls, captions, and targets at 320-400 CSS pixels and 200% zoom.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/layout-mobile.json"
+      ],
+      "effort": "medium",
+      "pathId": "home-mobile",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-15",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "summary": "Images omit intrinsic dimensions and responsive delivery metadata.",
+      "evidence": "The images primitive found all 31 images missing both width and height, 15 missing srcset, 13 oversized, and 5 missing alt attributes; Lighthouse also flagged low-resolution images.",
+      "suggestedFix": "Set intrinsic width/height or aspect-ratio, add responsive sources, and review each missing alt as decorative or meaningful.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-16",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "summary": "Browser hygiene issues include BFCache prevention and missing source maps.",
+      "evidence": "Lighthouse failed valid-source-maps, inspector-issues, and BFCache, reporting one back/forward cache failure reason.",
+      "suggestedFix": "Remove avoidable BFCache blockers, publish valid production source maps to the error tooling boundary, and clear DevTools Issues.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-17",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "summary": "Public content is effectively absent from raw HTML and the mobile viewport signal is missing.",
+      "evidence": "Discoverability measured only 1% rendered-word coverage, isJsShell:true, and a crawler screenshot with no meaningful stream/category content; the viewport meta is also absent.",
+      "suggestedFix": "Server-render or statically emit meaningful channel/category links and text, and add a correct viewport meta tag.",
+      "artifacts": [
+        "evidence/discoverability",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/layout-mobile.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-18",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "summary": "Security headers and cookie attributes leave material gaps.",
+      "evidence": "Headers show no CSP, Referrer-Policy, or Permissions-Policy. Cookie evidence includes a non-Secure country cookie and an api_token cookie without HttpOnly; all six use SameSite=None.",
+      "suggestedFix": "Deploy a restrictive CSP, explicit Referrer/Permissions policies, and minimize cookie scope; make sensitive cookies Secure, HttpOnly, and Lax/Strict unless cross-site use is essential.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-19",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "summary": "The pre-choice load has a broad data and third-party request surface.",
+      "evidence": "Network capture recorded 249 cross-origin requests and 2.85MB cross-origin transfer, including ad and telemetry endpoints; the consent panel names up to 109 partners.",
+      "suggestedFix": "Block non-essential advertising/analytics until consent, minimize partner access, batch telemetry, and document purpose/retention by endpoint.",
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-20",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "summary": "Defensive browser policy coverage is incomplete.",
+      "evidence": "HSTS, nosniff, and SAMEORIGIN are present, but CSP/frame-ancestors, Referrer-Policy, and Permissions-Policy are absent from the main response.",
+      "suggestedFix": "Add CSP with frame-ancestors, an explicit strict referrer policy, and a least-privilege Permissions-Policy; evaluate Trusted Types for this large SPA.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-21",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "stabilize-reactive-state",
+      "summary": "Core public content disappears without JavaScript.",
+      "evidence": "Raw HTML contains 1% of rendered content words and is classified as a JS shell; the crawler screenshot lacks streams, categories, and useful navigation content.",
+      "suggestedFix": "Server-render core discovery content and real links, then hydrate interactive player and personalization features as enhancements.",
+      "artifacts": [
+        "evidence/discoverability",
+        "evidence/discoverability-crawler.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-22",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "summary": "Image delivery is not resolution- or format-efficient.",
+      "evidence": "Image evidence found 31 legacy PNG/JPEG images, no modern-format images, 13 oversized images, and 15 without responsive sources.",
+      "suggestedFix": "Serve appropriately sized AVIF/WebP where suitable, retain JPEG/PNG fallbacks where needed, and provide srcset/sizes.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-23",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "summary": "Initial background and non-critical work is excessive.",
+      "evidence": "The page makes 252 requests and loads 148 scripts before a user chooses a stream; trace evidence shows 399.76ms blocking time.",
+      "suggestedFix": "Conditionally load player variants, casting, experimentation, ads, and below-fold discovery code, and deprioritize background fetches.",
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-24",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "summary": "The homepage media/script budget is heavy before explicit interaction.",
+      "evidence": "The initial route transfers 2.92MB and starts a featured live player while also loading ad, telemetry, casting, and extensive discovery code.",
+      "suggestedFix": "Use a poster-first player, defer autoplay/media and non-essential partners until intent or consent, and enforce route budgets.",
+      "artifacts": [
+        "evidence/home-network-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    },
+    {
+      "id": "TW-25",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "summary": "Agent access relies on scraping a JavaScript-rendered shell.",
+      "evidence": "No structured agent capability was detected, and raw HTML exposes only 1% of rendered words despite public discovery and channel actions being useful to agents.",
+      "suggestedFix": "Expose stable machine-readable discovery/action affordances and, when mature, narrowly scoped WebMCP tools with confirmation for side effects.",
+      "artifacts": [
+        "evidence/discoverability",
+        "evidence/discoverability-crawler.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.twitch.tv"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "TASK-1",
+      "title": "Restore real mobile reflow and accessible touch sizing",
+      "priority": 1,
+      "findingIds": [
+        "TW-06",
+        "TW-08",
+        "TW-14",
+        "TW-17"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "TASK-2",
+      "title": "Server-render meaningful discovery and channel content",
+      "priority": 2,
+      "findingIds": [
+        "TW-17",
+        "TW-21",
+        "TW-25"
+      ],
+      "guidanceId": "stabilize-reactive-state",
+      "status": "open"
+    },
+    {
+      "id": "TASK-3",
+      "title": "Cut initial JavaScript, request count, and main-thread blocking",
+      "priority": 3,
+      "findingIds": [
+        "TW-09",
+        "TW-11",
+        "TW-12",
+        "TW-13",
+        "TW-23",
+        "TW-24"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "TASK-4",
+      "title": "Reserve media space and stabilize late content",
+      "priority": 4,
+      "findingIds": [
+        "TW-10",
+        "TW-15"
+      ],
+      "guidanceId": "visually-stable-font-fallbacks",
+      "status": "open"
+    },
+    {
+      "id": "TASK-5",
+      "title": "Harden response policies and cookie attributes",
+      "priority": 5,
+      "findingIds": [
+        "TW-18",
+        "TW-19",
+        "TW-20"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "TASK-6",
+      "title": "Optimize responsive image formats and resolutions",
+      "priority": 6,
+      "findingIds": [
+        "TW-15",
+        "TW-22"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "TASK-7",
+      "title": "Respect system theme and reduced-motion preferences",
+      "priority": 7,
+      "findingIds": [
+        "TW-01",
+        "TW-02"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "TASK-8",
+      "title": "Adopt semantic overlays and progressive platform navigation patterns",
+      "priority": 8,
+      "findingIds": [
+        "TW-03",
+        "TW-04",
+        "TW-05",
+        "TW-07"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "TASK-9",
+      "title": "Resolve BFCache, source-map, and DevTools hygiene failures",
+      "priority": 9,
+      "findingIds": [
+        "TW-16"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-18T10-45-50-962Z"
+}

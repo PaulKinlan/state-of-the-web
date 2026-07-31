@@ -1,0 +1,2101 @@
+{
+  "url": "https://www.espn.com",
+  "auditedAt": "2026-07-18T09:25:05.933Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Completed atomic audit of 58 checks across home, article, scores, and error templates. Geographic routing resolved the entry URL to ESPN UK.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "React-like home and score surfaces with server-rendered editorial article HTML",
+    "notes": "Public sports media site. The requested .com entry redirected to https://www.espn.co.uk/ under the audit network location. Not covered: authenticated Disney account, paid playback, checkout, account cancellation, or other external-domain flows."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "discoverability",
+    "heap-summary",
+    "lighthouse (partial post-processing error, valid JSON retained)",
+    "robots.txt",
+    "sitemap.xml",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "light-dismiss-a-dialog",
+    "same-document-transitions",
+    "fluid-scaling",
+    "identify-heavy-scripts",
+    "optimize-image-priority",
+    "security",
+    "privacy",
+    "forms",
+    "improve-text-layout-and-legibility",
+    "webmcp"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for respects-color-scheme",
+      "evidence": "Under emulated prefers-color-scheme: dark, the probe reports html color-scheme \"normal\" and body background rgb(237, 238, 240); the screenshot remains the light theme.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for respects-reduced-motion",
+      "evidence": "With prefers-reduced-motion: reduce, document.getAnimations() still returned running 400ms animations and no preference media rules were found in accessible CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshot under forced-colors and prefers-contrast.",
+      "evidence": "Forced-colors screenshot keeps text, consent controls, and links visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-forced-colors.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for view-transitions",
+      "evidence": "The feature is available in the browser, but the CSS probe found no view-transition rules and representative navigation swaps immediately.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/preferences-probe.json",
+        "evidence/scoreboard-desktop.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement after representative-route recon",
+      "evidence": "No scroll-linked animation was present on the selected templates, so there was no scroll effect whose implementation technique applied.",
+      "reason": "No scroll-linked animation was present on the selected templates, so there was no scroll effect whose implementation technique applied."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS and screenshot inspection.",
+      "evidence": "Scores and page scrolling use native browser scrolling; no custom pointermove gesture layer was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/scoreboard-dom.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative page screenshots and DOM inspection.",
+      "evidence": "Persistent top navigation and score chrome retain context while long pages scroll.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/scoreboard-desktop.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement after representative-route recon",
+      "evidence": "No tooltip, transient popover, or manually positioned anchored overlay was exposed in the representative public journeys.",
+      "reason": "No tooltip, transient popover, or manually positioned anchored overlay was exposed in the representative public journeys."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual inspection of score navigation.",
+      "evidence": "The scores template uses a clear red active-tab underline and labelled score actions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/scoreboard-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for no-intrusive-interruptions",
+      "evidence": "Desktop, mobile, article, scores, and 404 screenshots all open with a modal covering the page. On 360px it fills nearly the entire viewport and pushes the action row below the fold.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/article-desktop.png",
+        "evidence/scoreboard-desktop.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM accessibility semantics.",
+      "evidence": "The consent surface exposes role=dialog, aria-modal=true, a label, and explicit Reject/Accept actions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon-links.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for reduced-chrome",
+      "evidence": "The desktop homepage uses three columns with subscribe, customisation, topics, quick links, video, headlines, and multiple repeated rails around the primary story feed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for responsive-no-horizontal-scroll",
+      "evidence": "The scores layout primitive reports innerWidth and scrollWidth 1000px with a 360px visual viewport, producing 640px horizontal overflow.",
+      "pathIds": [
+        "scores"
+      ],
+      "artifacts": [
+        "evidence/scoreboard-mobile-layout.json",
+        "evidence/scoreboard-desktop.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for component-level-responsiveness",
+      "evidence": "The score template remains 1000px wide at a 360px viewport and inspected computed styles report container-type normal rather than a component query context.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/scoreboard-mobile-layout.json",
+        "evidence/scoreboard-dom.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for input-modality-aware",
+      "evidence": "The viewport is initial-scale=1, maximum-scale=1, user-scalable=no; Lighthouse fails meta-viewport. The probe found multiple visible links only 14–19px high and focus was only a 1px outline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport screenshots across templates.",
+      "evidence": "Homepage headlines, article title, and Football Scores heading clearly communicate each template purpose.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/scoreboard-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Article and scores walkthrough.",
+      "evidence": "A representative headline opened a complete server-rendered article and scores opened a populated fixture listing without authentication.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/article-desktop.png",
+        "evidence/scoreboard-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "404 route probe and screenshot.",
+      "evidence": "An invalid route renders “Page not found” and a direct “Go to the homepage” recovery action rather than a blank shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json",
+        "evidence/404-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for good-core-web-vitals",
+      "evidence": "Lighthouse reports LCP 10.0s, TBT 820ms, performance 0.38, and TTI 27.5s. The desktop trace was much better at LCP 1.88s and TBT 32.64ms, showing a material mobile/device sensitivity.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout observers and Lighthouse.",
+      "evidence": "Observed CLS was 0.097 on mobile home, 0 on article, and Lighthouse CLS 0.042, all within the good threshold.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/article-mobile-layout.json",
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template evidence review.",
+      "evidence": "Representative DOM, visual, network, performance, resilience, or interaction evidence found no divergence for this check.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for efficient-resource-delivery",
+      "evidence": "HAR captured 182 requests and 3.64MB transferred, including 2.20MB script and 418KB CSS; Lighthouse reports 1.25s redirect savings and 179KB cache-lifetime savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for trim-unused-and-duplicate-code",
+      "evidence": "Lighthouse estimates 1,004KiB unused JavaScript and 199KiB unused CSS; HAR records 38 script requests with 8.36MB decoded script content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for names-roles-labels",
+      "evidence": "The images primitive reports 85 of 100 homepage images and 10 of 14 article images without alt; Lighthouse fails image-alt on 42 nodes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/article-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for sufficient-contrast",
+      "evidence": "Lighthouse reports 34 colour-contrast failing nodes and an overall accessibility score of 0.86.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-forced-colors.png"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template evidence review.",
+      "evidence": "Representative DOM, visual, network, performance, resilience, or interaction evidence found no divergence for this check.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Article screenshot and computed DOM styles.",
+      "evidence": "The article uses a 640px reading column, 36px headline, strong hierarchy, and unclipped paragraph text in desktop evidence.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/article-desktop.png",
+        "evidence/article-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for zoom-reflow-targets-and-media",
+      "evidence": "The authored viewport explicitly sets maximum-scale=1 and user-scalable=no, which Lighthouse flags and which prevents users from zooming the dense news layout.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for no-console-errors",
+      "evidence": "Lighthouse fails errors-in-console with four logged errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template evidence review.",
+      "evidence": "Representative DOM, visual, network, performance, resilience, or interaction evidence found no divergence for this check.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for browser-platform-hygiene",
+      "evidence": "Lighthouse reports one deprecation warning, inspector issues, legacy JavaScript, and a BFCache failure reason.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Metadata probes.",
+      "evidence": "Home and article have descriptive, template-specific titles and meta descriptions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/article-metadata.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for crawlable-and-mobile-friendly",
+      "evidence": "The homepage probe finds 87 href=\"#\" anchors and 9 anchors without href; Lighthouse fails crawlable-anchors and link-text.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Metadata, robots, and sitemap probes.",
+      "evidence": "Canonical, 22 hreflang editions, indexable robots policy for general crawlers, and a sitemap index were present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/robots.json",
+        "evidence/sitemap.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Parsed metadata probes.",
+      "evidence": "Home exposes WebSite/SearchAction plus Open Graph; article exposes NewsArticle, VideoObject, author, dates, image, and Open Graph.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/article-metadata.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for secure-transport-and-headers",
+      "evidence": "Headers evidence shows HTTPS and frame-ancestors CSP, but no HSTS or nosniff. Cookie evidence reports 10 of 11 cookies without Secure, all SameSite=None, and SWID lasting 400 days.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for data-minimisation-and-third-parties",
+      "evidence": "Tracker evidence records 27 third-party origins including DoubleClick; HAR attributes 179 of 182 requests and 3.59MB to origins classified third-party, while the consent UI names 1017 partners.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Repeated visual load and DOM interaction inspection.",
+      "evidence": "No notification, geolocation, camera, or microphone prompt appeared on load; account entry is an explicit user action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/recon-links.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for defensive-browser-policies",
+      "evidence": "The main response has no HSTS, Referrer-Policy, Permissions-Policy, or nosniff; CSP only defines frame-ancestors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for progressive-enhancement",
+      "evidence": "Discoverability comparison finds only 29% word overlap between rendered and raw content and no matching raw title, while the article template preserves 84%.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative screenshots and 404 probe.",
+      "evidence": "Scores, article, and 404 templates all rendered stable content and navigable recovery controls; no cut-off open menu was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/scoreboard-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/404-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for offline-and-installable",
+      "evidence": "The PWA probe finds a manifest and active service-worker.js registration but caches.keys() is empty, giving no evidence of an offline shell or fallback.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/pwa-probe.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "404 route probe.",
+      "evidence": "The invalid HTTP route shows a concise error and homepage recovery link instead of a broken shell or spinner.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json",
+        "evidence/404-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM metadata probe.",
+      "evidence": "The document declares lang=en and publishes 22 hreflang regional variants, including en-gb canonical targeting.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered UK page plus hreflang metadata.",
+      "evidence": "The UK edition renders UK-local content and relative sports times while exposing explicit regional variants.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Article JSON-LD metadata.",
+      "evidence": "Article structured data stores publication timestamps unambiguously in UTC (Z) and the UI renders a local/relative presentation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/article-metadata.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Consent and error screenshots.",
+      "evidence": "The consent dialog gives Reject All and Accept All equal visual prominence, and the 404 path offers honest recovery.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/404-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement after representative-route recon",
+      "evidence": "The selected public journeys contain only a simple search field and no required multi-field data-entry form to submit invalid data against.",
+      "reason": "The selected public journeys contain only a simple search field and no required multi-field data-entry form to submit invalid data against."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement after representative-route recon",
+      "evidence": "No address, payment, sign-in, or sign-up input form is hosted in the selected ESPN public templates.",
+      "reason": "No address, payment, sign-in, or sign-up input form is hosted in the selected ESPN public templates."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement after representative-route recon",
+      "evidence": "Subscription and account completion leave ESPN for Disney-owned account/commerce surfaces, which were outside this site audit.",
+      "reason": "Subscription and account completion leave ESPN for Disney-owned account/commerce surfaces, which were outside this site audit."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template evidence review.",
+      "evidence": "Representative DOM, visual, network, performance, resilience, or interaction evidence found no divergence for this check.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template evidence review.",
+      "evidence": "Representative DOM, visual, network, performance, resilience, or interaction evidence found no divergence for this check.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for third-party-and-media-budget",
+      "evidence": "HAR reports 3.59MB across 179 third-party-classified requests, including 2.20MB transferred script overall, before the user engages with video or account features.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for structured-agent-capabilities",
+      "evidence": "robots.txt disallows GPTBot, ChatGPT-User, anthropic-ai, Google-Extended, CCBot, and others; the probe finds no WebMCP surface. This is an emerging opportunity, not a conventional SEO failure.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/robots.json",
+        "evidence/home-quality-probe.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement after representative-route recon",
+      "evidence": "No user-authored or summarisation workflow on the selected public pages clearly requires on-device inference; absence is not itself harmful.",
+      "reason": "No user-authored or summarisation workflow on the selected public pages clearly requires on-device inference; absence is not itself harmful."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline/post heap summaries.",
+      "evidence": "After 10 repeated top-to-bottom scroll cycles, heap self size was 96.20MB and node count 1,703,490 versus baseline 96.28MB and 1,704,379, showing no retained growth in this exercise.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll-valid.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Targeted evidence review for bounded-footprint",
+      "evidence": "The baseline heap summary contains 1,704,379 nodes and 96.3MB self size, including 90,611 closures, for a single scoreboard view.",
+      "pathIds": [
+        "scores"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Before/after heap summary comparison.",
+      "evidence": "The repeated-scroll post snapshot did not grow overall and no Detached* constructor appears among the dominant constructor populations.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll-valid.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Entry/news-feed archetype and primary sports-discovery surface. Also tested consent, preferences, keyboard, network, performance, metadata, and no-JS rendering.",
+      "url": "https://www.espn.com",
+      "conditions": [
+        "desktop 1440x1000",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "keyboard focus",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Representative editorial article template, covering reading, article semantics, structured metadata, imagery, mobile reflow, and no-JS content.",
+      "url": "https://www.espn.co.uk/football/story/_/id/49387156/us-president-donald-trump-questions-harry-kane-england-mistake-argentina-2026-world-cup-tactics",
+      "conditions": [
+        "desktop 1440x1000",
+        "mobile 360x800",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "scores",
+      "description": "Representative live/listing and interactive scores template, covering navigation, dense data layout, mobile reflow, and repeated scrolling memory behaviour.",
+      "url": "https://www.espn.co.uk/football/scoreboard",
+      "conditions": [
+        "desktop 1440x1000",
+        "mobile 360x800",
+        "10 repeated top-to-bottom scroll cycles"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error",
+      "description": "Representative failed route to assess HTTP/error recovery and navigation continuity.",
+      "url": "https://www.espn.co.uk/not-a-real-page-web-uplift",
+      "conditions": [
+        "desktop 1440x1000"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "summary": "ESPN ignores the user’s dark colour-scheme preference",
+      "evidence": "Under emulated prefers-color-scheme: dark, the probe reports html color-scheme \"normal\" and body background rgb(237, 238, 240); the screenshot remains the light theme.",
+      "suggestedFix": "Declare color-scheme and define preference-driven light/dark tokens using the dark-mode guidance.",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dark-reduced.png",
+        "evidence/preferences-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "summary": "Reduced-motion preference does not suppress active animation",
+      "evidence": "With prefers-reduced-motion: reduce, document.getAnimations() still returned running 400ms animations and no preference media rules were found in accessible CSS.",
+      "suggestedFix": "Add prefers-reduced-motion overrides that remove non-essential transitions and auto-motion.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/preferences-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "summary": "Route and state changes do not use View Transitions",
+      "evidence": "The feature is available in the browser, but the CSS probe found no view-transition rules and representative navigation swaps immediately.",
+      "suggestedFix": "Use same-document and cross-document View Transitions for meaningful route or score-state changes, with reduced-motion fallbacks.",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/preferences-probe.json",
+        "evidence/scoreboard-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F04",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "summary": "The consent wall obscures every primary surface on first load",
+      "evidence": "Desktop, mobile, article, scores, and 404 screenshots all open with a modal covering the page. On 360px it fills nearly the entire viewport and pushes the action row below the fold.",
+      "suggestedFix": "Reduce the initial copy, keep Accept and Reject equally prominent, fit all primary actions in the mobile viewport, and preserve accessible declarative dismissal.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/article-desktop.png",
+        "evidence/scoreboard-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F05",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "summary": "Dense side rails and repeated modules compete with the core feed",
+      "evidence": "The desktop homepage uses three columns with subscribe, customisation, topics, quick links, video, headlines, and multiple repeated rails around the primary story feed.",
+      "suggestedFix": "Defer or collapse low-priority rails and give the primary news or score content a clearer dominant column.",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "css",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F06",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "summary": "Football scores force a 1000px desktop canvas into a 360px viewport",
+      "evidence": "The scores layout primitive reports innerWidth and scrollWidth 1000px with a 360px visual viewport, producing 640px horizontal overflow.",
+      "suggestedFix": "Remove desktop minimum widths, use intrinsic/fluid sizing, and recompose each fixture card into a narrow single-column layout.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "artifacts": [
+        "evidence/scoreboard-mobile-layout.json",
+        "evidence/scoreboard-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "scores",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "summary": "Reused scoreboard components do not adapt at component level",
+      "evidence": "The score template remains 1000px wide at a 360px viewport and inspected computed styles report container-type normal rather than a component query context.",
+      "suggestedFix": "Add container-type to score modules and use @container rules to switch fixture detail and action layouts at available-width thresholds.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "artifacts": [
+        "evidence/scoreboard-mobile-layout.json",
+        "evidence/scoreboard-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "summary": "Zoom is disabled and several visible controls are undersized",
+      "evidence": "The viewport is initial-scale=1, maximum-scale=1, user-scalable=no; Lighthouse fails meta-viewport. The probe found multiple visible links only 14–19px high and focus was only a 1px outline.",
+      "suggestedFix": "Allow pinch zoom, provide at least 24px minimum targets (prefer 44px for primary touch controls), and strengthen :focus-visible styling.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "summary": "Mobile lab loading is slow despite a fast desktop trace",
+      "evidence": "Lighthouse reports LCP 10.0s, TBT 820ms, performance 0.38, and TTI 27.5s. The desktop trace was much better at LCP 1.88s and TBT 32.64ms, showing a material mobile/device sensitivity.",
+      "suggestedFix": "Profile the mobile LCP chain, prioritise the hero, and delay non-critical scripts and modules until after content.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "summary": "The entry page ships a large, redirect-heavy critical load",
+      "evidence": "HAR captured 182 requests and 3.64MB transferred, including 2.20MB script and 418KB CSS; Lighthouse reports 1.25s redirect savings and 179KB cache-lifetime savings.",
+      "suggestedFix": "Eliminate the espn.com to espn.co.uk redirect for regional entry, trim critical CSS, set durable caching, and prioritise only LCP-critical assets.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "summary": "Large amounts of shipped CSS and JavaScript are unused",
+      "evidence": "Lighthouse estimates 1,004KiB unused JavaScript and 199KiB unused CSS; HAR records 38 script requests with 8.36MB decoded script content.",
+      "suggestedFix": "Split bundles by template, remove duplicate/legacy paths, and conditionally load advertising, account, and media code only when needed.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "summary": "Many images lack text alternatives",
+      "evidence": "The images primitive reports 85 of 100 homepage images and 10 of 14 article images without alt; Lighthouse fails image-alt on 42 nodes.",
+      "suggestedFix": "Give meaningful editorial images concise alt text and explicitly mark decorative icons with empty alt or CSS backgrounds.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/article-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "summary": "Text and controls fail colour contrast",
+      "evidence": "Lighthouse reports 34 colour-contrast failing nodes and an overall accessibility score of 0.86.",
+      "suggestedFix": "Adjust foreground/background design tokens to meet WCAG contrast in default, hover, disabled, and dimmed states.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-forced-colors.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "summary": "The page prevents user scaling",
+      "evidence": "The authored viewport explicitly sets maximum-scale=1 and user-scalable=no, which Lighthouse flags and which prevents users from zooming the dense news layout.",
+      "suggestedFix": "Remove maximum-scale and user-scalable=no, then test at 200% and 400% zoom.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "summary": "The homepage logs browser errors",
+      "evidence": "Lighthouse fails errors-in-console with four logged errors.",
+      "suggestedFix": "Resolve the four console errors and add regression monitoring so load-time exceptions fail CI.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "summary": "Deprecated APIs, inspector issues, and a BFCache blocker remain",
+      "evidence": "Lighthouse reports one deprecation warning, inspector issues, legacy JavaScript, and a BFCache failure reason.",
+      "suggestedFix": "Replace deprecated APIs, fix DevTools Issues findings, remove unload/BFCache blockers, and stop serving avoidable legacy code.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "summary": "Many navigation links are not crawlable or descriptive",
+      "evidence": "The homepage probe finds 87 href=\"#\" anchors and 9 anchors without href; Lighthouse fails crawlable-anchors and link-text.",
+      "suggestedFix": "Use real destination href values for navigation and descriptive visible or accessible link names.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-quality-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "summary": "Transport hardening and cookie defaults are incomplete",
+      "evidence": "Headers evidence shows HTTPS and frame-ancestors CSP, but no HSTS or nosniff. Cookie evidence reports 10 of 11 cookies without Secure, all SameSite=None, and SWID lasting 400 days.",
+      "suggestedFix": "Add HSTS and nosniff, scope CSP beyond frame-ancestors, and set Secure plus Lax/Strict on cookies unless cross-site use is essential.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "summary": "The default page has a very large third-party and tracking footprint",
+      "evidence": "Tracker evidence records 27 third-party origins including DoubleClick; HAR attributes 179 of 182 requests and 3.59MB to origins classified third-party, while the consent UI names 1017 partners.",
+      "suggestedFix": "Load only essential providers before consent, reduce vendor count, batch analytics, and defer advertising integrations until a contextual choice.",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "summary": "Several browser-enforced policies are absent",
+      "evidence": "The main response has no HSTS, Referrer-Policy, Permissions-Policy, or nosniff; CSP only defines frame-ancestors.",
+      "suggestedFix": "Set least-privilege Referrer-Policy and Permissions-Policy, HSTS, nosniff, and a full nonce/hash-based CSP appropriate to the application.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "summary": "The homepage’s current content is poorly represented without JavaScript",
+      "evidence": "Discoverability comparison finds only 29% word overlap between rendered and raw content and no matching raw title, while the article template preserves 84%.",
+      "suggestedFix": "Server-render the current homepage headlines and primary navigation just as the article template server-renders its content.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F22",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "summary": "An active service worker does not provide an observable offline cache",
+      "evidence": "The PWA probe finds a manifest and active service-worker.js registration but caches.keys() is empty, giving no evidence of an offline shell or fallback.",
+      "suggestedFix": "Precache a minimal offline shell and a useful offline response for saved/current content, with explicit stale and retry states.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/pwa-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F23",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "summary": "Third-party scripts dominate the resource budget",
+      "evidence": "HAR reports 3.59MB across 179 third-party-classified requests, including 2.20MB transferred script overall, before the user engages with video or account features.",
+      "suggestedFix": "Set a third-party byte/request budget, defer ad and account SDKs, and remove providers that do not demonstrate user value.",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F24",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "summary": "ESPN blocks major AI agents and offers no structured agent tools",
+      "evidence": "robots.txt disallows GPTBot, ChatGPT-User, anthropic-ai, Google-Extended, CCBot, and others; the probe finds no WebMCP surface. This is an emerging opportunity, not a conventional SEO failure.",
+      "suggestedFix": "If ESPN wants agent reach, define an explicit licensed crawler policy and expose safe read-only search, scores, and article tools with WebMCP.",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "web-ai",
+      "artifacts": [
+        "evidence/robots.json",
+        "evidence/home-quality-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.espn.com"
+    },
+    {
+      "id": "F25",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "summary": "The scores page has a heavy steady-state heap",
+      "evidence": "The baseline heap summary contains 1,704,379 nodes and 96.3MB self size, including 90,611 closures, for a single scoreboard view.",
+      "suggestedFix": "Use heap retainers and allocation profiling to remove unnecessary objects/listeners and lazy-create below-fold score modules.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/heap-baseline.json"
+      ],
+      "effort": "large",
+      "pathId": "scores",
+      "url": "https://www.espn.co.uk/football/scoreboard"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Repair the 360px football-scores layout",
+      "priority": 1,
+      "findingIds": [
+        "F06",
+        "F07"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Reduce and defer the script, CSS, redirect, and third-party load",
+      "priority": 2,
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11",
+        "F19",
+        "F23"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Restore zoom, target sizing, alt text, and colour contrast",
+      "priority": 3,
+      "findingIds": [
+        "F08",
+        "F12",
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Harden headers and cookie policy",
+      "priority": 4,
+      "findingIds": [
+        "F18",
+        "F20"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Make the consent experience fit mobile without obscuring the task",
+      "priority": 5,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Server-render current homepage content and real navigation hrefs",
+      "priority": 6,
+      "findingIds": [
+        "F17",
+        "F21"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Respect dark and reduced-motion preferences",
+      "priority": 7,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Fix console, deprecation, inspector, and BFCache issues",
+      "priority": 8,
+      "findingIds": [
+        "F15",
+        "F16"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Reduce steady-state scoreboard heap footprint",
+      "priority": 9,
+      "findingIds": [
+        "F25"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Add a useful offline fallback",
+      "priority": 10,
+      "findingIds": [
+        "F22"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Clarify an agent-access strategy and optional structured tools",
+      "priority": 11,
+      "findingIds": [
+        "F24"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Reduce secondary chrome and add transitions where useful",
+      "priority": 12,
+      "findingIds": [
+        "F03",
+        "F05"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/404-desktop.png",
+      "caption": "404 desktop",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/404-probe.json",
+      "caption": "404 probe",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-desktop.png",
+      "caption": "article desktop",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "article discoverability crawler",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "article discoverability rendered",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "article discoverability",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/article-dom.json",
+      "caption": "article dom",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-images.json",
+      "caption": "article images",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-metadata.json",
+      "caption": "article metadata",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/article-mobile-layout.json",
+      "caption": "article mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "heap baseline",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll-valid.json",
+      "caption": "heap post scroll valid",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll.json",
+      "caption": "heap post scroll",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "home cookies",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark-reduced.png",
+      "caption": "home dark reduced",
+      "condition": "prefers-color-scheme: dark and prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "home desktop",
+      "findingIds": [
+        "F04",
+        "F05",
+        "F19"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "home discoverability crawler",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "home discoverability rendered",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "home discoverability",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home dom",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-forced-colors.png",
+      "caption": "home forced colors",
+      "condition": "forced-colors: active and prefers-contrast: more",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "home headers",
+      "findingIds": [
+        "F18",
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "home images",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "home mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-quality-probe.json",
+      "caption": "home quality probe",
+      "findingIds": [
+        "F08",
+        "F14",
+        "F17",
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "home secrets",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F19",
+        "F23"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home trace",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "home trackers",
+      "findingIds": [
+        "F19",
+        "F23"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "lighthouse home",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/preferences-probe.json",
+      "caption": "preferences probe",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/pwa-probe.json",
+      "caption": "pwa probe",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon-content-links.json",
+      "caption": "recon content links",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon-links.json",
+      "caption": "recon links",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.json",
+      "caption": "robots",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/scoreboard-desktop.png",
+      "caption": "scoreboard desktop",
+      "findingIds": [
+        "F03",
+        "F04",
+        "F06"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/scoreboard-dom.json",
+      "caption": "scoreboard dom",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/scoreboard-mobile-layout.json",
+      "caption": "scoreboard mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.json",
+      "caption": "sitemap",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-18T09-13-46-343Z"
+}

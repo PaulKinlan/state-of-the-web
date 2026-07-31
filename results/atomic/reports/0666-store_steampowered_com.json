@@ -1,0 +1,2445 @@
+{
+  "url": "https://store.steampowered.com",
+  "auditedAt": "2026-07-22T06:34:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete across five representative public templates/states. Account-authenticated wishlist, checkout after account authentication, community pages, support, and localized variants were not covered because they require credentials or are distinct domains; one representative listing and product template stands for repeated catalog pages.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Legacy server-rendered MPA with React-powered modules",
+    "notes": "Public Steam storefront. Server HTML is substantial (79% rendered-word coverage), with legacy jQuery and bundled application modules."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "lighthouse",
+    "curl robots/sitemap",
+    "Modern Web Guidance 0.0.172"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "shrinking-header-on-scroll",
+    "declarative-dialog-popover-control",
+    "fluid-scaling",
+    "forms",
+    "performance",
+    "optimize-image-priority",
+    "security",
+    "privacy",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-desktop.png, evidence/home-dark.png",
+      "evidence": "Desktop and prefers-color-scheme:dark screenshots render the same dark palette, and the DOM probe found no preference-driven theming signal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Under prefers-reduced-motion:reduce the active probe found zero running animations; no auto-advance animation was exposed during the observation window.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "The forced-colors screenshot retains visible text, controls, search, and consent choices.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-forced-colors.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json",
+      "evidence": "The DOM probe found no view-transition usage on a multi-route storefront.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon.",
+      "evidence": "",
+      "reason": "No scroll-linked animation is present on the audited templates, so the declarative implementation choice is not exercised."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Mobile screenshots and layout evidence show native vertical scrolling with no horizontal trap; no custom pointer-drag surface blocked platform gestures.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-desktop.png, evidence/home-probe.json",
+      "evidence": "The long storefront screenshot shows static navigation, and the DOM/CSS probe found no modern scroll-state mechanism.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-dom.json, evidence/home-probe.json",
+      "evidence": "The DOM contains fixed custom responsive menu/search overlays and no popover or anchor-positioning primitives.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Screenshots show selected carousel content, breadcrumbs on product detail, prominent search, and clear section labels that maintain orientation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-mobile.png, evidence/product-desktop.png, evidence/search-desktop.png, evidence/login-desktop.png",
+      "evidence": "Homepage, product, search, and login screenshots show a large fixed consent panel covering featured content, product information, results, or the sign-in form.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/product-desktop.png",
+        "evidence/search-desktop.png",
+        "evidence/login-desktop.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/home-dom.json",
+      "evidence": "The probe found zero dialog and popover elements while screenshots and DOM show #cookiePrefPopup as a fixed custom container.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "After consent dismissal, the product screenshot devotes the main viewport to game media and information rather than a persistent app frame.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Home and product layout probes at 360x800 report 0 px horizontal overflow and a viewport meta tag.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/home-mobile.png",
+      "evidence": "The rendered DOM/CSS probe found no @container usage despite cards and navigation being reused in substantially different widths.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/focus-probe.json",
+      "evidence": "The active probe counted 32 visible links/controls under 24 px in at least one dimension; the focused sign-in link did receive a browser outline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/focus-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Home, search, product, and sign-in screenshots make discovery, product evaluation, search, and authentication purposes visually clear.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Search results loaded for the supplied query, product detail loaded, consent could be rejected, and sign-in presented its expected account flow without a dead end before credentials.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/404.png",
+      "evidence": "Navigating to /nonexistent-web-uplift-test produced the ordinary homepage with no not-found message or recovery context.",
+      "pathIds": [
+        "failure"
+      ],
+      "artifacts": [
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/lighthouse-home.json, evidence/home-trace-summary.json",
+      "evidence": "Lighthouse measured LCP 22.4 s, TBT 430 ms, and CLS 0.129 (performance 43); the independent trace measured LCP 2.16 s but still observed blocking tasks, indicating substantial condition sensitivity.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-mobile-layout.json, evidence/product-mobile-layout.json, evidence/home-images.json",
+      "evidence": "The 360x800 layout observer measured CLS 0.168 on home and 0.157 on the product page; 99 of 100 images lacked both dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/product-mobile-layout.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-trace-summary.json, evidence/lighthouse-home.json",
+      "evidence": "The trace recorded two long tasks, longest 107 ms, with 71 ms TBT; Lighthouse measured 430 ms TBT under throttling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-summary.json, evidence/home.har",
+      "evidence": "HAR captured 116 requests and 8.52 MB transferred, including 6.63 MB images, 14 parser-blocking stylesheets and synchronous legacy scripts; several fonts/assets lacked cache headers.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/lighthouse-home.json",
+      "evidence": "Lighthouse estimated 1,072 KiB unused JavaScript and 334 KiB unused CSS, including chunks with more than 99% waste.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/lighthouse-home.json, evidence/home-images.json, evidence/home-probe.json",
+      "evidence": "Lighthouse failed aria-required-children, image-alt, label-content-name-mismatch, and link-name; the image audit found 19 images without alt and the probe found five unlabeled controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-images.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/lighthouse-home.json, evidence/home-forced-colors.png",
+      "evidence": "Lighthouse failed the color-contrast audit; forced-colors remained usable but does not remedy default-palette contrast failures.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-forced-colors.png"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/lighthouse-home.json, evidence/focus-probe.json",
+      "evidence": "The homepage has no h1 and only footer h3 headings; Lighthouse also found malformed required ARIA children. Focus itself remained visibly outlined.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse-home.json",
+        "evidence/focus-probe.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Representative screenshots show readable typography, bounded line lengths in forms/consent, and no text clipping at desktop or mobile widths.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/home-mobile-layout.json",
+      "evidence": "The probe counted 32 visible targets below 24 px in one dimension. Mobile layouts reflow without horizontal overflow, but target sizing remains inadequate.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Lighthouse errors-in-console audit passed with no recorded console errors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-images.json, evidence/lighthouse-home.json",
+      "evidence": "The image primitive found 99 of 100 images without both dimensions, 29 oversized images, and Lighthouse failed image-aspect-ratio.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Lighthouse deprecations, BFCache and inspector-issues audits passed, and no permission prompt appeared on load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/search-dom.json, evidence/login-dom.json",
+      "evidence": "The live homepage probe returned no meta description; search and sign-in DOM snapshots also lack one, although product detail has a description.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/search-dom.json",
+        "evidence/login-dom.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Lighthouse document-title/robots/crawlable-anchor checks passed; all 280 detected links had href and mobile viewport metadata is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/sitemap-headers.txt, evidence/robots.txt",
+      "evidence": "GET /sitemap.xml returns 302 to the homepage HTML, and robots.txt declares no Sitemap line. Canonical and robots checks otherwise passed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/sitemap-headers.txt",
+        "evidence/robots.txt"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-probe.json, evidence/product-dom.json",
+      "evidence": "DOM snapshots found Open Graph tags but zero JSON-LD blocks on the homepage and Dota 2 product detail.",
+      "pathIds": [
+        "product"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-headers.json, evidence/home-cookies.json, evidence/sitemap-headers.txt",
+      "evidence": "Final response uses HSTS and frame-ancestors, but CSP permits unsafe-inline and unsafe-eval. The sessionid cookie is SameSite=None and JavaScript-readable, and timezoneOffset was not Secure.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json",
+        "evidence/sitemap-headers.txt"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Tracker capture found no known analytics trackers; observed third-party origins were Steam asset CDNs, and optional analytics consent was offered before acceptance.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/login-probe.json, evidence/login-desktop.png",
+      "evidence": "The login DOM probe found no WebAuthn/PublicKeyCredential signal or passkey copy.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-probe.json",
+        "evidence/login-desktop.png"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-headers.json, evidence/sitemap-headers.txt",
+      "evidence": "Header evidence indicates no X-Content-Type-Options, Referrer-Policy, or Permissions-Policy on the main response; CSP includes unsafe-inline and unsafe-eval. HSTS and clickjacking protection are present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/sitemap-headers.txt"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Discoverability capture found 79% raw-HTML content coverage, no empty app mount, and a usable crawler rendering rather than a JS shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Responsive menus and product/store layouts rendered without overflow, clipping, blank shells, or runtime console errors in the exercised states.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon.",
+      "evidence": "",
+      "reason": "The public web storefront is a commerce/catalog surface whose purchases and live account state intrinsically require a network; installability was not declared as an intent."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/404.png",
+      "evidence": "An unknown URL resolves to an ordinary storefront screen with no failure status or recovery explanation.",
+      "pathIds": [
+        "failure"
+      ],
+      "artifacts": [
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "All representative DOM snapshots declare html lang=en and maintain coherent reading order at desktop and mobile widths.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "The UK session renders prices in pounds and uses a steamCountry locale cookie, demonstrating locale-specific commerce formatting.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "The storefront sets a timezoneOffset value and no ambiguous scheduled event was present in the representative templates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Consent presents Accept All and Reject All side by side with privacy/settings links; product pricing and free-to-play status are visibly stated.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "The sign-in and search surfaces use persistent labelled fields and do not validate before interaction in the observed state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/login-probe.json",
+      "evidence": "The login probe found the account-name and password fields with empty autocomplete values, while the search field explicitly uses autocomplete=off.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-probe.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Product detail exposes title, free-to-play status/reviews, and Community Hub context; global navigation links refunds, privacy, and subscriber terms.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-summary.json, evidence/home-images.json",
+      "evidence": "HAR transferred 6.63 MB of images; the image audit found 87 legacy-format images, 29 oversized images, 34 without responsive sources, and 43 below-fold images not lazy-loaded.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-images.json, evidence/home-summary.json, evidence/lighthouse-home.json",
+      "evidence": "The initial page makes 116 requests; 43 below-fold images are not lazy-loaded and Lighthouse reports large unused JS/CSS payloads.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/home-summary.json",
+      "evidence": "Initial transfer is 8.52 MB, of which 8.15 MB comes from Steam CDN origins and 6.63 MB is images; individual decorative images exceed 1.1 MB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active review using evidence/lighthouse-home.json, evidence/product-dom.json",
+      "evidence": "Lighthouse agentic browsing scored 27; the DOM has no WebMCP tools and product actions are only encoded in presentation markup.",
+      "pathIds": [
+        "product"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/product-dom.json"
+      ],
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from representative route and interaction recon.",
+      "evidence": "",
+      "reason": "No summarization, generation, or other inference feature is part of the audited storefront tasks."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "After ten responsive-menu toggles, heap nodes fell from 520,001 to 518,959 and self size from 32,638,756 to 32,442,300 bytes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "The settled homepage heap was about 32.6 MB self size and did not grow after repeated interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-template visual, DOM, active-probe, and/or automated evidence review as stated.",
+      "evidence": "Neither heap summary listed a Detached constructor among top retained constructors, and repeated menu toggling did not increase node or edge counts.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F23",
+        "F24",
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F28",
+        "F29",
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Storefront homepage, representing discovery, recommendations, global navigation, consent, responsive layout, and initial load.",
+      "url": "https://store.steampowered.com/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "keyboard focus",
+        "JavaScript disabled crawler view"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "product",
+      "description": "Dota 2 detail page, representing a product entity, commercial information, media, and the primary acquire/play journey.",
+      "url": "https://store.steampowered.com/app/570/Dota_2/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "cookie prompt shown and dismissed"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search results for “cozy”, representing listing/filter discovery and query-result navigation.",
+      "url": "https://store.steampowered.com/search/?term=cozy",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Sign-in page, representing account authentication, labels, autofill, and credential assistance.",
+      "url": "https://store.steampowered.com/login/",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "failure",
+      "description": "Unknown route, representing HTTP/not-found recovery behavior.",
+      "url": "https://store.steampowered.com/nonexistent-web-uplift-test",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The storefront is hard-coded dark rather than adapting to the user’s color-scheme preference.",
+      "evidence": "Desktop and prefers-color-scheme:dark screenshots render the same dark palette, and the DOM probe found no preference-driven theming signal.",
+      "suggestedFix": "Declare color-scheme and provide preference-driven light and dark tokens, retaining the current palette as the dark branch.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F02",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Route and state changes do not use View Transitions.",
+      "evidence": "The DOM probe found no view-transition usage on a multi-route storefront.",
+      "suggestedFix": "Use same-document View Transitions for carousel/state changes and cross-document transitions for compatible store routes, with fallbacks.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Navigation chrome does not respond to scroll state.",
+      "evidence": "The long storefront screenshot shows static navigation, and the DOM/CSS probe found no modern scroll-state mechanism.",
+      "suggestedFix": "Use scroll-state container queries or a restrained shrinking-header treatment to preserve orientation while maximizing content.",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Menus and overlays use manually positioned legacy containers rather than anchored positioning.",
+      "evidence": "The DOM contains fixed custom responsive menu/search overlays and no popover or anchor-positioning primitives.",
+      "suggestedFix": "Use popover plus CSS anchor positioning and position-try fallbacks for menus and contextual surfaces.",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "anchored-positioning",
+      "guidanceId": "position-aware-tooltips",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The cookie prompt obscures primary content on every representative page.",
+      "evidence": "Homepage, product, search, and login screenshots show a large fixed consent panel covering featured content, product information, results, or the sign-in form.",
+      "suggestedFix": "Use a compact, non-obscuring consent surface with equal choices and preserve access to the primary task.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/product-desktop.png",
+        "evidence/search-desktop.png",
+        "evidence/login-desktop.png"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The consent overlay is an ad-hoc fixed div rather than a semantic dialog/popover.",
+      "evidence": "The probe found zero dialog and popover elements while screenshots and DOM show #cookiePrefPopup as a fixed custom container.",
+      "suggestedFix": "Implement the consent surface with an appropriate dialog/popover primitive, focus handling, and declarative dismissal where suitable.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-dom.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "small"
+    },
+    {
+      "id": "F07",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Reusable storefront components rely on viewport-era responsive CSS rather than container queries.",
+      "evidence": "The rendered DOM/CSS probe found no @container usage despite cards and navigation being reused in substantially different widths.",
+      "suggestedFix": "Adopt container-type and size/style queries for reusable cards, carousels, and navigation modules.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F08",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Many interactive targets are too small even though keyboard focus is visible.",
+      "evidence": "The active probe counted 32 visible links/controls under 24 px in at least one dimension; the focused sign-in link did receive a browser outline.",
+      "suggestedFix": "Increase compact targets to at least 24 by 24 CSS px, preferably 44 by 44 for primary touch controls, without removing focus styles.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/focus-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Unknown routes silently redirect to the storefront instead of explaining the failure.",
+      "evidence": "Navigating to /nonexistent-web-uplift-test produced the ordinary homepage with no not-found message or recovery context.",
+      "suggestedFix": "Return a real 404 state with a clear explanation, search, home link, and relevant recovery suggestions.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/404.png"
+      ],
+      "pathId": "failure",
+      "url": "https://store.steampowered.com/nonexistent-web-uplift-test",
+      "effort": "small"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Lab Core Web Vitals are poor on the storefront.",
+      "evidence": "Lighthouse measured LCP 22.4 s, TBT 430 ms, and CLS 0.129 (performance 43); the independent trace measured LCP 2.16 s but still observed blocking tasks, indicating substantial condition sensitivity.",
+      "suggestedFix": "Prioritize the LCP asset, reduce initial bytes and scripting, and reserve dynamic layout space; verify under mobile throttling and field data.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Homepage and product layouts shift beyond the good CLS threshold.",
+      "evidence": "The 360x800 layout observer measured CLS 0.168 on home and 0.157 on the product page; 99 of 100 images lacked both dimensions.",
+      "suggestedFix": "Reserve image/carousel/consent space with dimensions or aspect-ratio and use stable font fallbacks.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/product-mobile-layout.json",
+        "evidence/home-images.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Initial load performs avoidable long main-thread tasks.",
+      "evidence": "The trace recorded two long tasks, longest 107 ms, with 71 ms TBT; Lighthouse measured 430 ms TBT under throttling.",
+      "suggestedFix": "Break up long tasks, schedule non-critical work by priority, and defer below-fold carousel initialization.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The initial storefront payload is excessive and has a long render-blocking chain.",
+      "evidence": "HAR captured 116 requests and 8.52 MB transferred, including 6.63 MB images, 14 parser-blocking stylesheets and synchronous legacy scripts; several fonts/assets lacked cache headers.",
+      "suggestedFix": "Reduce critical CSS, defer non-critical scripts, modernize font delivery, preload only the LCP resource, and enforce durable immutable caching for versioned assets.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page ships over a megabyte of unused JavaScript plus substantial unused CSS.",
+      "evidence": "Lighthouse estimated 1,072 KiB unused JavaScript and 334 KiB unused CSS, including chunks with more than 99% waste.",
+      "suggestedFix": "Route-split bundles, conditionally import carousel/recommendation features, and remove legacy or duplicate dependencies.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Accessible names, roles, and alternatives are incomplete.",
+      "evidence": "Lighthouse failed aria-required-children, image-alt, label-content-name-mismatch, and link-name; the image audit found 19 images without alt and the probe found five unlabeled controls.",
+      "suggestedFix": "Fix ARIA ownership, provide matching accessible names and labels, and add meaningful or empty alt text as appropriate.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-images.json",
+        "evidence/home-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Some text and controls do not meet minimum contrast.",
+      "evidence": "Lighthouse failed the color-contrast audit; forced-colors remained usable but does not remedy default-palette contrast failures.",
+      "suggestedFix": "Adjust foreground and surface tokens to WCAG AA contrast and retest default and forced-color modes.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-forced-colors.png"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "small"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Heading and ARIA structure do not provide a robust page outline.",
+      "evidence": "The homepage has no h1 and only footer h3 headings; Lighthouse also found malformed required ARIA children. Focus itself remained visibly outlined.",
+      "suggestedFix": "Add a page-level h1, logical section headings and landmarks, and repair composite widget roles while preserving visible focus.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/lighthouse-home.json",
+        "evidence/focus-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Compact targets reduce touch and zoom usability.",
+      "evidence": "The probe counted 32 visible targets below 24 px in one dimension. Mobile layouts reflow without horizontal overflow, but target sizing remains inadequate.",
+      "suggestedFix": "Increase target hit areas and verify at 200% zoom and narrow reflow.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-mobile-layout.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image markup is unstable and sometimes distorted.",
+      "evidence": "The image primitive found 99 of 100 images without both dimensions, 29 oversized images, and Lighthouse failed image-aspect-ratio.",
+      "suggestedFix": "Emit intrinsic width/height or aspect-ratio, preserve natural ratios, and provide responsive sources.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Key templates lack meta descriptions.",
+      "evidence": "The live homepage probe returned no meta description; search and sign-in DOM snapshots also lack one, although product detail has a description.",
+      "suggestedFix": "Add unique, useful descriptions to the homepage and index templates where public discovery is intended.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/search-dom.json",
+        "evidence/login-dom.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "small"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The advertised sitemap endpoint is not a sitemap.",
+      "evidence": "GET /sitemap.xml returns 302 to the homepage HTML, and robots.txt declares no Sitemap line. Canonical and robots checks otherwise passed.",
+      "suggestedFix": "Publish a real sitemap index, reference it from robots.txt, and retain per-template canonical URLs.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/sitemap-headers.txt",
+        "evidence/robots.txt"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "small"
+    },
+    {
+      "id": "F22",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Product and storefront entities have social metadata but no structured data.",
+      "evidence": "DOM snapshots found Open Graph tags but zero JSON-LD blocks on the homepage and Dota 2 product detail.",
+      "suggestedFix": "Add accurate Organization/WebSite and Product/Offer JSON-LD matching visible names, prices, availability, and canonical URLs.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/product-dom.json"
+      ],
+      "pathId": "product",
+      "url": "https://store.steampowered.com/app/570/Dota_2/",
+      "effort": "medium"
+    },
+    {
+      "id": "F23",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Transport is HTTPS, but CSP and cookie posture remain weaker than expected.",
+      "evidence": "Final response uses HSTS and frame-ancestors, but CSP permits unsafe-inline and unsafe-eval. The sessionid cookie is SameSite=None and JavaScript-readable, and timezoneOffset was not Secure.",
+      "suggestedFix": "Move to nonce/hash-based CSP without unsafe-eval, document any intentionally script-readable CSRF token, use the narrowest SameSite policy, and mark all HTTPS cookies Secure.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json",
+        "evidence/sitemap-headers.txt"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F24",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The sign-in surface offers password/QR methods but no detectable passkey path.",
+      "evidence": "The login DOM probe found no WebAuthn/PublicKeyCredential signal or passkey copy.",
+      "suggestedFix": "Offer passkeys/WebAuthn as a first-class phishing-resistant sign-in and reauthentication option.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "authentication",
+      "artifacts": [
+        "evidence/login-probe.json",
+        "evidence/login-desktop.png"
+      ],
+      "pathId": "login",
+      "url": "https://store.steampowered.com/login/",
+      "effort": "large"
+    },
+    {
+      "id": "F25",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Several defensive headers are absent or too permissive.",
+      "evidence": "Header evidence indicates no X-Content-Type-Options, Referrer-Policy, or Permissions-Policy on the main response; CSP includes unsafe-inline and unsafe-eval. HSTS and clickjacking protection are present.",
+      "suggestedFix": "Add nosniff, a deliberate Referrer-Policy and Permissions-Policy, and harden CSP with nonces/hashes and Trusted Types where feasible.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/sitemap-headers.txt"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "medium"
+    },
+    {
+      "id": "F26",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "HTTP failure handling hides the error state.",
+      "evidence": "An unknown URL resolves to an ordinary storefront screen with no failure status or recovery explanation.",
+      "suggestedFix": "Serve intentional 404/5xx templates with meaningful status codes, search, retry/home actions, and retained context.",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/404.png"
+      ],
+      "pathId": "failure",
+      "url": "https://store.steampowered.com/nonexistent-web-uplift-test",
+      "effort": "small"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Sign-in inputs do not expose standard autocomplete tokens.",
+      "evidence": "The login probe found the account-name and password fields with empty autocomplete values, while the search field explicitly uses autocomplete=off.",
+      "suggestedFix": "Use autocomplete=username and current-password (plus webauthn when passkeys are available) and keep labels programmatically associated.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "forms",
+      "artifacts": [
+        "evidence/login-probe.json"
+      ],
+      "pathId": "login",
+      "url": "https://store.steampowered.com/login/",
+      "effort": "small"
+    },
+    {
+      "id": "F28",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Image delivery wastes several megabytes.",
+      "evidence": "HAR transferred 6.63 MB of images; the image audit found 87 legacy-format images, 29 oversized images, 34 without responsive sources, and 43 below-fold images not lazy-loaded.",
+      "suggestedFix": "Generate AVIF/WebP variants and srcset/sizes, lazy-load below-fold media, and right-size artwork to its rendered slot.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-images.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F29",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Below-fold work and resources are loaded eagerly.",
+      "evidence": "The initial page makes 116 requests; 43 below-fold images are not lazy-loaded and Lighthouse reports large unused JS/CSS payloads.",
+      "suggestedFix": "Defer below-fold feeds and media until near viewport, conditionally load feature code, and cancel work no longer relevant.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F30",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The storefront has no effective initial media budget.",
+      "evidence": "Initial transfer is 8.52 MB, of which 8.15 MB comes from Steam CDN origins and 6.63 MB is images; individual decorative images exceed 1.1 MB.",
+      "suggestedFix": "Set per-template byte/request budgets, cap carousel media, and enforce optimized formats and caching in the asset pipeline.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://store.steampowered.com/",
+      "effort": "large"
+    },
+    {
+      "id": "F31",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The public commerce surface exposes no structured agent capability contract.",
+      "evidence": "Lighthouse agentic browsing scored 27; the DOM has no WebMCP tools and product actions are only encoded in presentation markup.",
+      "suggestedFix": "Expose safe, user-mediated WebMCP capabilities for search, product inspection, cart intent, and account-safe actions, with clear confirmation boundaries.",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "web-apis",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/product-dom.json"
+      ],
+      "pathId": "product",
+      "url": "https://store.steampowered.com/app/570/Dota_2/",
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Reduce critical CSS, defer non-critical scripts, modernize font delivery, preload only the LCP resource, and enforce durable immutable caching for versioned assets.",
+      "priority": 1,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Use a compact, non-obscuring consent surface with equal choices and preserve access to the primary task.",
+      "priority": 2,
+      "findingIds": [
+        "F05"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Fix ARIA ownership, provide matching accessible names and labels, and add meaningful or empty alt text as appropriate.",
+      "priority": 3,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Move to nonce/hash-based CSP without unsafe-eval, document any intentionally script-readable CSRF token, use the narrowest SameSite policy, and mark all HTTPS cookies Secure.",
+      "priority": 4,
+      "findingIds": [
+        "F23"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Prioritize the LCP asset, reduce initial bytes and scripting, and reserve dynamic layout space; verify under mobile throttling and field data.",
+      "priority": 5,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Reserve image/carousel/consent space with dimensions or aspect-ratio and use stable font fallbacks.",
+      "priority": 6,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "visually-stable-font-fallbacks",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Generate AVIF/WebP variants and srcset/sizes, lazy-load below-fold media, and right-size artwork to its rendered slot.",
+      "priority": 7,
+      "findingIds": [
+        "F28"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Set per-template byte/request budgets, cap carousel media, and enforce optimized formats and caching in the asset pipeline.",
+      "priority": 8,
+      "findingIds": [
+        "F30"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Return a real 404 state with a clear explanation, search, home link, and relevant recovery suggestions.",
+      "priority": 9,
+      "findingIds": [
+        "F09"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Serve intentional 404/5xx templates with meaningful status codes, search, retry/home actions, and retained context.",
+      "priority": 10,
+      "findingIds": [
+        "F26"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Break up long tasks, schedule non-critical work by priority, and defer below-fold carousel initialization.",
+      "priority": 11,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "break-up-long-tasks",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Route-split bundles, conditionally import carousel/recommendation features, and remove legacy or duplicate dependencies.",
+      "priority": 12,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T13",
+      "title": "Adjust foreground and surface tokens to WCAG AA contrast and retest default and forced-color modes.",
+      "priority": 13,
+      "findingIds": [
+        "F16"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T14",
+      "title": "Add a page-level h1, logical section headings and landmarks, and repair composite widget roles while preserving visible focus.",
+      "priority": 14,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T15",
+      "title": "Increase target hit areas and verify at 200% zoom and narrow reflow.",
+      "priority": 15,
+      "findingIds": [
+        "F18"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T16",
+      "title": "Emit intrinsic width/height or aspect-ratio, preserve natural ratios, and provide responsive sources.",
+      "priority": 16,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T17",
+      "title": "Add unique, useful descriptions to the homepage and index templates where public discovery is intended.",
+      "priority": 17,
+      "findingIds": [
+        "F20"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T18",
+      "title": "Publish a real sitemap index, reference it from robots.txt, and retain per-template canonical URLs.",
+      "priority": 18,
+      "findingIds": [
+        "F21"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T19",
+      "title": "Add accurate Organization/WebSite and Product/Offer JSON-LD matching visible names, prices, availability, and canonical URLs.",
+      "priority": 19,
+      "findingIds": [
+        "F22"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T20",
+      "title": "Offer passkeys/WebAuthn as a first-class phishing-resistant sign-in and reauthentication option.",
+      "priority": 20,
+      "findingIds": [
+        "F24"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T21",
+      "title": "Add nosniff, a deliberate Referrer-Policy and Permissions-Policy, and harden CSP with nonces/hashes and Trusted Types where feasible.",
+      "priority": 21,
+      "findingIds": [
+        "F25"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T22",
+      "title": "Use autocomplete=username and current-password (plus webauthn when passkeys are available) and keep labels programmatically associated.",
+      "priority": 22,
+      "findingIds": [
+        "F27"
+      ],
+      "guidanceId": "autofill-sign-in-form",
+      "status": "open"
+    },
+    {
+      "id": "T23",
+      "title": "Defer below-fold feeds and media until near viewport, conditionally load feature code, and cancel work no longer relevant.",
+      "priority": 23,
+      "findingIds": [
+        "F29"
+      ],
+      "guidanceId": "deprioritize-background-fetches",
+      "status": "open"
+    },
+    {
+      "id": "T24",
+      "title": "Declare color-scheme and provide preference-driven light and dark tokens, retaining the current palette as the dark branch.",
+      "priority": 24,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T25",
+      "title": "Implement the consent surface with an appropriate dialog/popover primitive, focus handling, and declarative dismissal where suitable.",
+      "priority": 25,
+      "findingIds": [
+        "F06"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T26",
+      "title": "Increase compact targets to at least 24 by 24 CSS px, preferably 44 by 44 for primary touch controls, without removing focus styles.",
+      "priority": 26,
+      "findingIds": [
+        "F08"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T27",
+      "title": "Adopt container-type and size/style queries for reusable cards, carousels, and navigation modules.",
+      "priority": 27,
+      "findingIds": [
+        "F07"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T28",
+      "title": "Use same-document View Transitions for carousel/state changes and cross-document transitions for compatible store routes, with fallbacks.",
+      "priority": 28,
+      "findingIds": [
+        "F02"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T29",
+      "title": "Use scroll-state container queries or a restrained shrinking-header treatment to preserve orientation while maximizing content.",
+      "priority": 29,
+      "findingIds": [
+        "F03"
+      ],
+      "guidanceId": "shrinking-header-on-scroll",
+      "status": "open"
+    },
+    {
+      "id": "T30",
+      "title": "Use popover plus CSS anchor positioning and position-try fallbacks for menus and contextual surfaces.",
+      "priority": 30,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "position-aware-tooltips",
+      "status": "open"
+    },
+    {
+      "id": "T31",
+      "title": "Expose safe, user-mediated WebMCP capabilities for search, product inspection, cart intent, and account-safe actions, with clear confirmation boundaries.",
+      "priority": 31,
+      "findingIds": [
+        "F31"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/404.png",
+      "caption": "404 png",
+      "findingIds": [
+        "F09",
+        "F26"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability",
+      "caption": "discoverability",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "discoverability crawler png",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "discoverability rendered png",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/focus-probe.json",
+      "caption": "focus probe json",
+      "findingIds": [
+        "F08",
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "guidance list json",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "guidance retrieved md",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "heap baseline heapsnapshot",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "heap post heapsnapshot",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "home cookies json",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "home dark png",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "home desktop png",
+      "findingIds": [
+        "F01",
+        "F03"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home dom json",
+      "findingIds": [
+        "F04",
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-forced-colors.png",
+      "caption": "home forced colors png",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "home headers json",
+      "findingIds": [
+        "F23",
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "home images json",
+      "findingIds": [
+        "F11",
+        "F15",
+        "F19",
+        "F28",
+        "F29"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "home mobile layout json",
+      "findingIds": [
+        "F11",
+        "F18"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile png",
+      "findingIds": [
+        "F05",
+        "F07"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "home probe json",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04",
+        "F06",
+        "F07",
+        "F08",
+        "F15",
+        "F17",
+        "F18",
+        "F20",
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "home secrets json",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary json",
+      "findingIds": [
+        "F13",
+        "F28",
+        "F29",
+        "F30"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary json",
+      "findingIds": [
+        "F10",
+        "F12"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home trace json",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "home trackers json",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home har",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "lighthouse home json",
+      "findingIds": [
+        "F10",
+        "F12",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F19",
+        "F29",
+        "F31"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-desktop.png",
+      "caption": "login desktop png",
+      "findingIds": [
+        "F05",
+        "F24"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/login-dom.json",
+      "caption": "login dom json",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-probe.json",
+      "caption": "login probe json",
+      "findingIds": [
+        "F24",
+        "F27"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-desktop.png",
+      "caption": "product desktop png",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-dismissed.png",
+      "caption": "product dismissed png",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/product-dom.json",
+      "caption": "product dom json",
+      "findingIds": [
+        "F22",
+        "F31"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/product-mobile-layout.json",
+      "caption": "product mobile layout json",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-mobile.png",
+      "caption": "product mobile png",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "reduced motion probe json",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-headers.txt",
+      "caption": "robots headers txt",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots txt",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-desktop.png",
+      "caption": "search desktop png",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/search-dom.json",
+      "caption": "search dom json",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap-headers.txt",
+      "caption": "sitemap headers txt",
+      "findingIds": [
+        "F21",
+        "F23",
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "sitemap xml",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-22T06-28-39-595Z"
+}

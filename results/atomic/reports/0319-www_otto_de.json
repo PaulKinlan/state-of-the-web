@@ -1,0 +1,2118 @@
+{
+  "url": "https://www.otto.de",
+  "auditedAt": "2026-07-19T22:46:05.567Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "All 58 catalog checks were judged. Product-detail and unknown-route failures were recorded as observed site issues rather than hidden as untested work. Account, basket and payment submission were not attempted because product detail failed before those states and no purchase was authorized.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Mixed server-rendered micro-frontends (including Svelte/custom elements)",
+    "notes": "Large German commerce MPA/hybrid. Representative coverage includes homepage, category, search, two product-detail attempts and an error route. Not covered: authenticated account, basket/payment submission, post-purchase, or additional category templates; those require credentials/transaction authority or were downstream of the reproducible product-page failure."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-css",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse",
+    "axe-core",
+    "robots/sitemap fetch"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "forms",
+    "performance",
+    "security",
+    "privacy",
+    "optimize-image-priority",
+    "break-up-long-tasks",
+    "identify-heavy-scripts",
+    "visually-stable-font-fallbacks",
+    "improve-text-layout-and-legibility",
+    "persistent-toast-notifications",
+    "light-dismiss-a-dialog",
+    "html",
+    "fluid-scaling",
+    "webmcp",
+    "summarizer",
+    "manage-recurring-intervals",
+    "accessible-error-announcement",
+    "required-field-feedback",
+    "validate-input-after-interaction",
+    "agentic-forms"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage first viewport: consent dialog obscures the content.",
+      "condition": "desktop",
+      "findingIds": [
+        "F01",
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile homepage: consent dialog occupies most of the viewport.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark preference capture remains visually identical to light mode.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "High-contrast preference capture.",
+      "condition": "prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/category.png",
+      "caption": "Sofas category first viewport with consent interruption.",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-mobile.png",
+      "caption": "Mobile search results with consent interruption.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product.png",
+      "caption": "Representative product route rendered blank.",
+      "condition": "desktop",
+      "findingIds": [
+        "F05",
+        "F22",
+        "F24"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/product-alt.png",
+      "caption": "Second representative product route also rendered blank.",
+      "condition": "desktop",
+      "findingIds": [
+        "F05",
+        "F24"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and styles.",
+      "condition": "default",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-recon.json",
+      "caption": "Homepage metadata, headings, forms, links and content probe.",
+      "condition": "default",
+      "findingIds": [
+        "F18",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-ui-probe.json",
+      "caption": "Focus target, animation, semantic control and metadata probe.",
+      "condition": "default",
+      "findingIds": [
+        "F04",
+        "F14",
+        "F19",
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/product-recon.json",
+      "caption": "Representative product route DOM and metadata probe; returned empty.",
+      "condition": "default",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout, CLS, overflow and long-task observations.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered DOM discoverability comparison.",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered browser view.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler view.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Full network capture for the homepage.",
+      "condition": "5 second load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact network summary: 631 requests and 3.23 MB transferred.",
+      "condition": "5 second load",
+      "findingIds": [
+        "F05",
+        "F10",
+        "F11",
+        "F22",
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace.",
+      "condition": "5 second load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace timings and main-thread summary.",
+      "condition": "5 second load",
+      "findingIds": [
+        "F07",
+        "F09"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance, accessibility, best-practices, SEO and agentic-browsing audit.",
+      "condition": "mobile simulated load",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F13",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F26",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-a11y.json",
+      "caption": "axe-core 4.10.3 violations.",
+      "condition": "default",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14",
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Image dimensions, loading, responsive source and alt audit.",
+      "condition": "default",
+      "findingIds": [
+        "F08",
+        "F12",
+        "F16",
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Security response-header audit.",
+      "condition": "default",
+      "findingIds": [
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Cookie security and lifetime audit.",
+      "condition": "default",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Third-party origin and tracker inventory.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Client-side secret scan.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Doctype, charset and CSS feature inspection.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-reduced-motion.json",
+      "caption": "Animations under reduced-motion preference.",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary.",
+      "condition": "after load",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "Heap summary after ten category-menu toggles.",
+      "condition": "after repeated interaction",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "Same-session JS heap and DOM count before/after ten menu toggles.",
+      "condition": "repeated interaction",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-sitemap.json",
+      "caption": "robots.txt and default sitemap probe.",
+      "condition": "default",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/error-state.json",
+      "caption": "Unknown-route HTTP response probe.",
+      "condition": "404 route",
+      "findingIds": [
+        "F06",
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/consent-overlay-probe.json",
+      "caption": "Consent overlay semantics and controls.",
+      "condition": "first visit",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Light and dark screenshots are pixel-identical in the first viewport, while the platform probe found only limited color-scheme-related CSS in the readable sheets.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "The reduced-motion probe found fourteen running 800 ms animations and no readable prefers-reduced-motion rules; the active elements were rotating loading spinners.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-reduced-motion.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "High-contrast screenshot preserves readable text and visible consent controls; axe separately identifies ordinary contrast defects under sufficient-contrast.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Readable CSS contains 20 view-transition references and the browser exposes document.startViewTransition.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Readable CSS contains five animation-timeline/scroll-timeline references; no evidence of a scroll-event animation loop was found.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Mobile category/search surfaces use native scrolling; DOM/CSS inspection found modern scroll-related rules and no required custom pointer gesture for core navigation.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Desktop and mobile screenshots show persistent, responsive global navigation; readable CSS includes scroll-timeline rules used for position-aware behavior.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Readable CSS contains 17 anchor-name/position-anchor/position-try references, direct evidence that overlays can use anchored positioning.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Category/search screenshots provide breadcrumbs, a clear result heading and filter affordance; view-transition and scroll-timeline CSS is present.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Screenshots of home, category and mobile search show the dialog covering most of the content; on 360x800 it consumes nearly the entire viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-desktop.png",
+        "evidence/search-mobile.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Consent probe identifies role=dialog with an accessible label and explicit accept, reject and information controls.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Desktop category/home screenshots use a compact header and content-led card/grid treatment once the dialog layer is disregarded.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "At 360×800 the layout observer reported scrollWidth=clientWidth=360, zero overflow and a valid viewport meta tag.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Readable CSS contains five @container rules, and mobile/desktop captures show the global shell and listing controls adapt substantially.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "The focus/target probe measured category navigation buttons such as “Mode”, “Sport” and “Sale” at 24 px high, below comfortable touch-target guidance.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-ui-probe.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Homepage, category and search each have descriptive titles/headings, visible search, category navigation, filter controls and product links.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Two product links discovered from category/search were opened in fresh browser sessions; both screenshots are blank and the first product DOM has no title, H1, text or controls. HAR/Lighthouse also recorded an anti-bot 429.",
+      "pathIds": [
+        "product"
+      ],
+      "artifacts": [
+        "evidence/product.png",
+        "evidence/product-alt.png",
+        "evidence/product-recon.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "The same-origin unknown-route probe returned status 404 and only “404 Not Found”, with no home, search, retry or back affordance.",
+      "pathIds": [
+        "error"
+      ],
+      "artifacts": [
+        "evidence/error-state.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse + trace + HAR + layout/image evidence",
+      "evidence": "Lighthouse measured LCP 21.6 s, TBT 620 ms and CLS 0.126 (performance 38). The independent trace measured LCP 4.92 s and seven long tasks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse + trace + HAR + layout/image evidence",
+      "evidence": "Lighthouse measured CLS 0.126 and the mobile layout observer independently recorded a 0.063 shift near 5 seconds; 27 images lacked explicit dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse + trace + HAR + layout/image evidence",
+      "evidence": "The trace recorded seven long tasks, the longest 228 ms, with 212 ms TBT; Lighthouse measured 620 ms TBT.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse + trace + HAR + layout/image evidence",
+      "evidence": "HAR recorded 631 requests and 3.23 MB transferred, including 343 scripts, 28 stylesheets and numerous parser-inserted high-priority stylesheets; Lighthouse LCP was 21.6 s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse + trace + HAR + layout/image evidence",
+      "evidence": "Lighthouse estimated 164 KiB unused JavaScript and 82 KiB unused CSS, including 57% of the 130 KiB consent SDK and 85–90% of two global/component stylesheets.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core + Lighthouse + screenshots + DOM/focus probe",
+      "evidence": "axe reported 14 image-alt failures, three unnamed links, two unnamed ARIA commands and a title-only search label; the image primitive counted 28 images without alt.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-a11y.json",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core + Lighthouse + screenshots + DOM/focus probe",
+      "evidence": "axe found 18 serious color-contrast failures in recommendation prices and energy-label links; Lighthouse also failed color-contrast.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-a11y.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core + Lighthouse + screenshots + DOM/focus probe",
+      "evidence": "axe found duplicate/non-unique banner landmarks and 162 region violations; the probe also found programmatically focused global controls with no computed outline.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-a11y.json",
+        "evidence/home-ui-probe.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "axe-core + Lighthouse + screenshots + DOM/focus probe",
+      "evidence": "Desktop/mobile screenshots show comfortable body line-height and readable German text; no clipping or horizontal overflow was observed.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "axe-core + Lighthouse + screenshots + DOM/focus probe",
+      "evidence": "Viewport permits scaling and 360 px reflow has zero horizontal overflow; the audited paths contain no audio/video requiring captions. Target-size defects are recorded separately.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Lighthouse captured a 429 resource failure and an aborted Summarizer API request caused by unsupported language configuration.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "The image audit found 27 images without width/height and 19 oversized images; Lighthouse listed multiple product images displayed at 136×187 despite 350×500 source proportions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Lighthouse reported three deprecated API warnings, missing source maps for large first-party bundles and three BFCache failure reasons including cache-control:no-store.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "Homepage has descriptive title and meta description; category has the unique title “Sofas online kaufen » Couches | OTTO”.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "Lighthouse failed crawlable-anchors and link-text; homepage recon found “Mein Konto” uses javascript:void(0), while axe found unnamed links.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-recon.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "Homepage returned 200, declares canonical https://www.otto.de/, robots index/follow, and robots.txt points to three explicit sitemap indexes.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "The metadata probe found JSON-LD but no og:title value; title, description and canonical were present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-ui-probe.json",
+        "evidence/home-recon.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers + cookies + trackers + secrets + HAR",
+      "evidence": "Cookie audit found six cookies; OptanonConsent and KP_UIDz lacked Secure, and five used SameSite=None. HTTPS, HSTS, CSP frame-ancestors and nosniff were present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-cookies.json",
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "headers + cookies + trackers + secrets + HAR",
+      "evidence": "Before consent, tracker probe found no known tracker domains and only six operational/static OTTO or consent/reporting origins; secret scan found no exposed credentials.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "headers + cookies + trackers + secrets + HAR",
+      "evidence": "No geolocation/notification prompt appeared on load in any screenshot or probe; auth was not forced for browsing. No password-only claim is made.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers + cookies + trackers + secrets + HAR",
+      "evidence": "Header audit found HSTS, CSP frame-ancestors and nosniff, but no Referrer-Policy or Permissions-Policy.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "Discoverability probe fetched 317 KB raw HTML, found title/H1/description and 53% rendered-token coverage; it is not an empty JS shell.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "Consent dialog remains attached and usable at desktop/mobile edges; native dialog labeling and anchor-position CSS were observed.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement across representative paths",
+      "evidence": "The audited public commerce website is not presented as an installable app; the favicon manifest is not evidence of app intent. Flaky-network failure handling is judged separately.",
+      "reason": "The audited public commerce website is not presented as an installable app; the favicon manifest is not evidence of app intent. Flaky-network failure handling is judged separately.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM/metadata + raw-HTML discoverability + HTTP probes",
+      "evidence": "Product navigation produced blank documents alongside HTTP 429 evidence, while an unknown route returned only bare “404 Not Found” with no recovery controls.",
+      "pathIds": [
+        "product"
+      ],
+      "artifacts": [
+        "evidence/product.png",
+        "evidence/error-state.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Document lang is de, German reading direction is correct, and readable CSS contains 74 logical-property references.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Rendered prices use German comma decimals and euro placement, and dates use German weekday/day-month formatting (for example “Fr., 31.07.”).",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement across representative paths",
+      "evidence": "The representative public pages show offer dates but no scheduled cross-time-zone event or user-entered time requiring DST coordination.",
+      "reason": "The representative public pages show offer dates but no scheduled cross-time-zone event or user-entered time requiring DST coordination.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Consent offers explicit accept, reject and more-information controls in the first layer; pricing and sponsored labels are visibly stated in rendered content.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "The only directly exercisable homepage form is search and does not produce premature validation errors; failures of HTTP recovery are recorded under core-task/resilience.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "DOM probe found the only homepage text input has autocomplete=\"off\", no associated label and no aria-label; axe flagged it as title-only.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-ui-probe.json",
+        "evidence/home-a11y.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Two visible, descriptive product links from listing pages led to blank pages, preventing inspection of pricing commitment, basket, checkout, cancellation and reauthentication states.",
+      "pathIds": [
+        "product"
+      ],
+      "artifacts": [
+        "evidence/product.png",
+        "evidence/product-alt.png"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Image audit found 19 oversized images, 27 without responsive srcset and 66 below-fold images not lazy-loaded; the page transferred 994 KB of images.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "No autoplay audio/video exists and tracker probe found no known trackers before consent; observed waste is captured under the separate script/media budget finding.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "HAR recorded 343 script requests and 1.64 MB script transfer; 479 cross-origin requests moved 2.38 MB, mostly OTTO static/image subdomains, plus a 130 KB consent SDK.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Rendered DOM/source inspection found no WebMCP or agentic-tool registration even though robots.txt explicitly permits major AI user agents and the site exposes purchasable products.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/robots-sitemap.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots + rendered DOM/CSS + evaluate probes across representative paths",
+      "evidence": "Lighthouse console evidence says the Summarizer API request was aborted because unsupported languages were specified and lists the supported language codes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "baseline/post heap summaries + same-session memory/DOM probe",
+      "evidence": "After ten menu toggles in one session, DOM element count stayed exactly 4,250. JS heap rose from 53.7 to 66.0 MB, but one bounded run does not establish unbounded retained growth.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "baseline/post heap summaries + same-session memory/DOM probe",
+      "evidence": "Heap summaries measured 80.8–85.5 MB self size with 1.42–1.51 million V8 nodes; the post snapshot contained over 203k closures. This is high for a landing page even allowing for commerce complexity.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "baseline/post heap summaries + same-session memory/DOM probe",
+      "evidence": "DOM count stayed at 4,250 across ten toggles and heap summaries did not expose a top Detached* constructor; no direct evidence of accumulating detached DOM was found.",
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F29"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and global navigation, consent, promotions and recommendations; represents the shared shell and landing template.",
+      "url": "https://www.otto.de/",
+      "conditions": [
+        "desktop 780x493",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "keyboard/programmatic focus",
+        "JavaScript disabled crawler comparison"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "category",
+      "description": "Sofas category listing; represents taxonomy navigation, filters and product-grid discovery.",
+      "url": "https://www.otto.de/moebel/sofas/",
+      "conditions": [
+        "desktop",
+        "consent-first visit"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search results for “sofa”; represents search, filter and product discovery on mobile.",
+      "url": "https://www.otto.de/suche/sofa/",
+      "conditions": [
+        "mobile 360x800",
+        "consent-first visit"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "product",
+      "description": "Representative product-detail navigation from the category. Two products were attempted; both rendered an empty page under the audited browser after anti-bot HTTP 429 signals.",
+      "url": "https://www.otto.de/p/collection-ab-wohnlandschaft-josy-xl-u-form-b-313-cm-in-cord-cord-mix-bettfunktion-bettkasten-2-zierkissen-federkern-1815436403/",
+      "conditions": [
+        "desktop",
+        "fresh browser profile",
+        "10 second wait"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "error",
+      "description": "Synthetic unknown route; represents the HTTP 404 recovery state.",
+      "url": "https://www.otto.de/definitely-not-a-real-otto-page-404",
+      "conditions": [
+        "same-origin fetch"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "summary": "The site does not provide a usable preference-driven dark theme.",
+      "evidence": "Light and dark screenshots are pixel-identical in the first viewport, while the platform probe found only limited color-scheme-related CSS in the readable sheets.",
+      "suggestedFix": "Declare supported color schemes and retint surfaces, text, controls and imagery under prefers-color-scheme; verify contrast in both themes.",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "summary": "Loading animation continues when reduced motion is requested.",
+      "evidence": "The reduced-motion probe found fourteen running 800 ms animations and no readable prefers-reduced-motion rules; the active elements were rotating loading spinners.",
+      "suggestedFix": "Add a prefers-reduced-motion: reduce treatment that removes non-essential rotation and uses a static progress affordance where continuous motion is unnecessary.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-reduced-motion.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F03",
+      "severity": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "summary": "The first-visit consent dialog dominates and blocks the primary content on desktop and mobile.",
+      "evidence": "Screenshots of home, category and mobile search show the dialog covering most of the content; on 360x800 it consumes nearly the entire viewport.",
+      "suggestedFix": "Use the least intrusive consent presentation legally possible, keep equal accept/reject controls immediately visible, and avoid obscuring unrelated content.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-desktop.png",
+        "evidence/search-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "summary": "Several global navigation targets are only 24 px high.",
+      "evidence": "The focus/target probe measured category navigation buttons such as “Mode”, “Sport” and “Sale” at 24 px high, below comfortable touch-target guidance.",
+      "suggestedFix": "Increase the interactive hit area to at least 44 CSS px without necessarily increasing the visual glyph size, and verify visible :focus-visible styling.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-ui-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "summary": "The representative product journey dead-ends on a blank product page in the audited client.",
+      "evidence": "Two product links discovered from category/search were opened in fresh browser sessions; both screenshots are blank and the first product DOM has no title, H1, text or controls. HAR/Lighthouse also recorded an anti-bot 429.",
+      "suggestedFix": "Provide a recoverable challenge or server-rendered product fallback instead of a blank response, and ensure legitimate browsers/agents can reach product detail and continue shopping.",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/product.png",
+        "evidence/product-alt.png",
+        "evidence/product-recon.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "product",
+      "confidence": "high",
+      "url": "https://www.otto.de/p/collection-ab-wohnlandschaft-josy-xl-u-form-b-313-cm-in-cord-cord-mix-bettfunktion-bettkasten-2-zierkissen-federkern-1815436403/"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "summary": "Unknown routes return a bare 404 with no recovery path.",
+      "evidence": "The same-origin unknown-route probe returned status 404 and only “404 Not Found”, with no home, search, retry or back affordance.",
+      "suggestedFix": "Serve a branded 404 state that explains what happened and offers search, home, back and help actions while preserving the original context.",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/error-state.json"
+      ],
+      "effort": "small",
+      "pathId": "error",
+      "confidence": "high",
+      "url": "https://www.otto.de/definitely-not-a-real-otto-page-404"
+    },
+    {
+      "id": "F07",
+      "severity": "critical",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "summary": "Mobile load performance is far outside the good Core Web Vitals range.",
+      "evidence": "Lighthouse measured LCP 21.6 s, TBT 620 ms and CLS 0.126 (performance 38). The independent trace measured LCP 4.92 s and seven long tasks.",
+      "suggestedFix": "Profile the LCP dependency chain, prioritize the true LCP asset, reduce initial JavaScript and CSS, and split/defer non-critical work.",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F08",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "summary": "Late content causes measurable layout shift.",
+      "evidence": "Lighthouse measured CLS 0.126 and the mobile layout observer independently recorded a 0.063 shift near 5 seconds; 27 images lacked explicit dimensions.",
+      "suggestedFix": "Reserve dimensions/aspect-ratio for images and late modules, and make font fallbacks metrically compatible.",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "guidanceCategory": "web-platform",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "summary": "Heavy scripting blocks the main thread.",
+      "evidence": "The trace recorded seven long tasks, the longest 228 ms, with 212 ms TBT; Lighthouse measured 620 ms TBT.",
+      "suggestedFix": "Break work into yieldable tasks, prioritize interaction work, and defer recommendation, account and consent code until needed.",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "summary": "The entry page has an excessive request and render-blocking footprint.",
+      "evidence": "HAR recorded 631 requests and 3.23 MB transferred, including 343 scripts, 28 stylesheets and numerous parser-inserted high-priority stylesheets; Lighthouse LCP was 21.6 s.",
+      "suggestedFix": "Consolidate critical CSS, defer non-critical component bundles, preload only the confirmed LCP resource and preserve long-lived cacheability.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "summary": "Substantial unused JavaScript and CSS ship on initial load.",
+      "evidence": "Lighthouse estimated 164 KiB unused JavaScript and 82 KiB unused CSS, including 57% of the 130 KiB consent SDK and 85–90% of two global/component stylesheets.",
+      "suggestedFix": "Code-split by visible feature, remove legacy/global CSS from the initial route and load consent/account/recommendation modules conditionally.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "summary": "Important images, links, commands and the search field lack accessible names or visible labels.",
+      "evidence": "axe reported 14 image-alt failures, three unnamed links, two unnamed ARIA commands and a title-only search label; the image primitive counted 28 images without alt.",
+      "suggestedFix": "Add meaningful alt text, accessible names and visible labels; use empty alt only for genuinely decorative images and native semantics where possible.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-a11y.json",
+        "evidence/home-images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "summary": "Product and energy-label text fails minimum contrast.",
+      "evidence": "axe found 18 serious color-contrast failures in recommendation prices and energy-label links; Lighthouse also failed color-contrast.",
+      "suggestedFix": "Adjust foreground/background design tokens to meet WCAG AA in every state and theme, then retest rendered cards with axe.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-a11y.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F14",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "summary": "Landmark structure is repetitive and much content sits outside landmarks.",
+      "evidence": "axe found duplicate/non-unique banner landmarks and 162 region violations; the probe also found programmatically focused global controls with no computed outline.",
+      "suggestedFix": "Use one banner landmark, uniquely label repeated landmarks, place major content in main/section landmarks and implement an obvious :focus-visible indicator.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-a11y.json",
+        "evidence/home-ui-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "summary": "The page logs runtime and network errors.",
+      "evidence": "Lighthouse captured a 429 resource failure and an aborted Summarizer API request caused by unsupported language configuration.",
+      "suggestedFix": "Handle anti-bot/network responses without console errors and validate Summarizer language capabilities before creating a session.",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "summary": "Numerous images have missing dimensions or distorted aspect ratios.",
+      "evidence": "The image audit found 27 images without width/height and 19 oversized images; Lighthouse listed multiple product images displayed at 136×187 despite 350×500 source proportions.",
+      "suggestedFix": "Emit intrinsic width/height or aspect-ratio, preserve object-fit intentionally, and serve responsive sources matched to display size.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "summary": "Deprecated APIs, missing source maps and BFCache blockers reduce platform hygiene.",
+      "evidence": "Lighthouse reported three deprecated API warnings, missing source maps for large first-party bundles and three BFCache failure reasons including cache-control:no-store.",
+      "suggestedFix": "Remove deprecated storage/ad-tech API usage, publish valid source maps to controlled access, and scope no-store headers so eligible pages can use BFCache.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "summary": "Some controls presented as links are not crawlable or descriptively named.",
+      "evidence": "Lighthouse failed crawlable-anchors and link-text; homepage recon found “Mein Konto” uses javascript:void(0), while axe found unnamed links.",
+      "suggestedFix": "Use real href URLs for navigation, reserve buttons for actions, and give every link descriptive accessible text.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-recon.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F19",
+      "severity": "low",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "summary": "The homepage lacks complete social preview metadata.",
+      "evidence": "The metadata probe found JSON-LD but no og:title value; title, description and canonical were present.",
+      "suggestedFix": "Add accurate Open Graph and equivalent share metadata aligned with the visible page and retain valid Organization/WebSite JSON-LD.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/home-ui-probe.json",
+        "evidence/home-recon.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F20",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "summary": "Several first-party cookies are sent without Secure or with broad SameSite=None posture.",
+      "evidence": "Cookie audit found six cookies; OptanonConsent and KP_UIDz lacked Secure, and five used SameSite=None. HTTPS, HSTS, CSP frame-ancestors and nosniff were present.",
+      "suggestedFix": "Mark every HTTPS cookie Secure, use Lax/Strict unless cross-site delivery is required, and review identifiers for minimum lifetime and scope.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-cookies.json",
+        "evidence/home-headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "summary": "Referrer-Policy and Permissions-Policy are absent.",
+      "evidence": "Header audit found HSTS, CSP frame-ancestors and nosniff, but no Referrer-Policy or Permissions-Policy.",
+      "suggestedFix": "Set a restrictive Referrer-Policy and a feature-specific Permissions-Policy; keep frame-ancestors as the clickjacking control.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "summary": "HTTP failures degrade to blank or bare responses.",
+      "evidence": "Product navigation produced blank documents alongside HTTP 429 evidence, while an unknown route returned only bare “404 Not Found” with no recovery controls.",
+      "suggestedFix": "Render resilient, accessible error states for 404, 429, timeout and offline conditions with retry, search and safe navigation actions.",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/product.png",
+        "evidence/error-state.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "product",
+      "confidence": "high",
+      "url": "https://www.otto.de/p/collection-ab-wohnlandschaft-josy-xl-u-form-b-313-cm-in-cord-cord-mix-bettfunktion-bettkasten-2-zierkissen-federkern-1815436403/"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "summary": "The global search input is unlabeled and disables browser autocomplete.",
+      "evidence": "DOM probe found the only homepage text input has autocomplete=\"off\", no associated label and no aria-label; axe flagged it as title-only.",
+      "suggestedFix": "Provide a visible label or robust accessible name and avoid disabling autocomplete unless the custom suggestions demonstrably provide a better, accessible equivalent.",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "artifacts": [
+        "evidence/home-ui-probe.json",
+        "evidence/home-a11y.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F24",
+      "severity": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "summary": "The commercial flow cannot reach a product detail in the audited client.",
+      "evidence": "Two visible, descriptive product links from listing pages led to blank pages, preventing inspection of pricing commitment, basket, checkout, cancellation and reauthentication states.",
+      "suggestedFix": "Replace silent anti-bot failure with a proportionate recoverable verification state and preserve product/pricing context through the challenge.",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "artifacts": [
+        "evidence/product.png",
+        "evidence/product-alt.png"
+      ],
+      "effort": "large",
+      "pathId": "product",
+      "confidence": "high",
+      "url": "https://www.otto.de/p/collection-ab-wohnlandschaft-josy-xl-u-form-b-313-cm-in-cord-cord-mix-bettfunktion-bettkasten-2-zierkissen-federkern-1815436403/"
+    },
+    {
+      "id": "F25",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "summary": "Image delivery is not consistently resolution- and viewport-efficient.",
+      "evidence": "Image audit found 19 oversized images, 27 without responsive srcset and 66 below-fold images not lazy-loaded; the page transferred 994 KB of images.",
+      "suggestedFix": "Use responsive srcset/sizes or the image CDN’s equivalent, lazy-load genuinely below-fold media and preserve eager/fetchpriority only for the LCP image.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F26",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "summary": "The initial route ships a disproportionate script and subdomain footprint.",
+      "evidence": "HAR recorded 343 script requests and 1.64 MB script transfer; 479 cross-origin requests moved 2.38 MB, mostly OTTO static/image subdomains, plus a 130 KB consent SDK.",
+      "suggestedFix": "Set route-level request/byte budgets, collapse component fragmentation, defer non-essential scripts and audit every consent/recommendation dependency for user value.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F27",
+      "severity": "low",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "summary": "The commerce surface exposes no structured agent tools.",
+      "evidence": "Rendered DOM/source inspection found no WebMCP or agentic-tool registration even though robots.txt explicitly permits major AI user agents and the site exposes purchasable products.",
+      "suggestedFix": "Expose narrowly scoped, confirmable product search, detail, basket and order-status capabilities via WebMCP/agentic forms with explicit user control.",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "agentic",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/robots-sitemap.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "confidence": "medium",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F28",
+      "severity": "medium",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "on-device-inference",
+      "summary": "The page calls the Summarizer API with unsupported language configuration.",
+      "evidence": "Lighthouse console evidence says the Summarizer API request was aborted because unsupported languages were specified and lists the supported language codes.",
+      "suggestedFix": "Feature-detect the Summarizer API, query capability/language support and only create sessions with supported input/output languages; provide a graceful fallback.",
+      "guidanceId": "summarizer",
+      "guidanceCategory": "ai",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "confidence": "high",
+      "url": "https://www.otto.de/"
+    },
+    {
+      "id": "F29",
+      "severity": "medium",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "summary": "The homepage has a very large baseline memory footprint.",
+      "evidence": "Heap summaries measured 80.8–85.5 MB self size with 1.42–1.51 million V8 nodes; the post snapshot contained over 203k closures. This is high for a landing page even allowing for commerce complexity.",
+      "suggestedFix": "Reduce initial component/script population, unload closed surfaces and lazy-initialize recommendation/account/consent features.",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "confidence": "medium",
+      "url": "https://www.otto.de/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Cut the initial network/main-thread footprint and fix LCP",
+      "priority": 1,
+      "findingIds": [
+        "F07",
+        "F09",
+        "F10",
+        "F11",
+        "F26",
+        "F29"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore a recoverable product and HTTP-error journey",
+      "priority": 2,
+      "findingIds": [
+        "F05",
+        "F06",
+        "F22",
+        "F24"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Fix names, alternatives, labels, landmarks, focus and contrast",
+      "priority": 3,
+      "findingIds": [
+        "F04",
+        "F12",
+        "F13",
+        "F14",
+        "F23"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Make consent content-first without weakening choice",
+      "priority": 4,
+      "findingIds": [
+        "F03"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Harden cookies and defensive response policies",
+      "priority": 5,
+      "findingIds": [
+        "F20",
+        "F21"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Reserve and right-size responsive images",
+      "priority": 6,
+      "findingIds": [
+        "F08",
+        "F16",
+        "F25"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Respect dark and reduced-motion preferences",
+      "priority": 7,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Clean console, deprecated APIs, source maps and BFCache blockers",
+      "priority": 8,
+      "findingIds": [
+        "F15",
+        "F17"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Repair crawlable links and social metadata",
+      "priority": 9,
+      "findingIds": [
+        "F18",
+        "F19"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Validate built-in AI languages and expose safe agent tools",
+      "priority": 10,
+      "findingIds": [
+        "F27",
+        "F28"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T22-46-05-567Z"
+}

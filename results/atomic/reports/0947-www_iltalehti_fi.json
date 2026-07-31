@@ -1,0 +1,1951 @@
+{
+  "url": "https://www.iltalehti.fi",
+  "auditedAt": "2026-07-24T01:55:02.795Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete representative audit of homepage, section, article, weather utility and invalid-route recovery. Excluded: paywalled Plus article completion, login/account management, checkout/subscription purchase, video playback and the full settings subflow because they are distinct authenticated/commercial/media journeys beyond this public-path run.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "React/hybrid server-rendered MPA",
+    "notes": "Finnish national news site with client-updated feeds, ads, account UI and a cross-origin Sourcepoint consent iframe."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "lighthouse",
+    "raw robots/sitemap/manifest fetch"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "anchor-positioning-tab-underline",
+    "directional-navigation-transitions",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "complex-shapes",
+    "fluid-scaling",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "move-dom-element-without-losing-state",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "resilient-context-menus-and-nested-dropdowns",
+    "persistent-toast-notifications",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "search-hidden-content",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Fresh desktop load: consent dialog obscures the news feed.",
+      "condition": "desktop, fresh profile",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Fresh mobile load: consent dialog takes most of the viewport and lacks an equally direct reject action.",
+      "condition": "360x800, fresh profile",
+      "findingIds": [
+        "F01",
+        "F19"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark-preference capture is byte-identical to the light/default capture; consent surface remains light.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/section-mobile.png",
+      "caption": "News section on mobile with the same consent interruption.",
+      "condition": "360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-mobile.png",
+      "caption": "Article on mobile; consent overlay blocks the reading journey.",
+      "condition": "360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/weather-mobile.png",
+      "caption": "Weather utility on mobile; consent overlay blocks forecast use.",
+      "condition": "360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout metrics: no horizontal overflow and observed CLS 0.052.",
+      "condition": "360x800",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace for the homepage.",
+      "condition": "desktop",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP 3.87s, FCP 1.53s, no long tasks.",
+      "condition": "desktop",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR for homepage load, retained for network verification.",
+      "condition": "desktop",
+      "findingIds": [
+        "F11",
+        "F17"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network summary: 40 requests, 1.04MB, 68% third-party bytes, 648KB scripts.",
+      "condition": "desktop",
+      "findingIds": [
+        "F11",
+        "F17"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw-vs-rendered homepage comparison: 14% content-token coverage.",
+      "condition": "JavaScript on vs raw HTML",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered homepage view used in discoverability comparison.",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript homepage still exposes prominent news content.",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "Raw-vs-rendered article comparison: title/H1/description survive, 39% content coverage.",
+      "condition": "JavaScript on vs raw HTML",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "Rendered article discoverability view.",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "No-JavaScript article view retains headline and content.",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "DOM/platform/focus probe: no homepage H1, no View Transitions/container queries, several controls lack focus outlines.",
+      "condition": "desktop",
+      "findingIds": [
+        "F05",
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Reduced-motion probe reports a running 2750ms animation.",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-images.json",
+      "caption": "Article image audit: 18/18 missing explicit dimensions, 14 legacy formats, 7 missing alt, 2 oversized.",
+      "condition": "article",
+      "findingIds": [
+        "F12",
+        "F14",
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Security-header audit: narrowly scoped CSP, missing nosniff and Permissions-Policy.",
+      "condition": "homepage",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Cookie audit: five year-long first-party cookies, three SameSite=None.",
+      "condition": "homepage",
+      "findingIds": [
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Tracker/origin audit: 11 third-party origins on initial load.",
+      "condition": "before consent",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Secrets scan found one ad-workspace API-key-like identifier; context indicates a client ad-tech workspace key, not a sensitive credential.",
+      "condition": "homepage"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline readable heap summary: 404,034 nodes, 21.48MB self size.",
+      "condition": "homepage before repeated tab changes"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Post-interaction heap summary: 407,820 nodes, 21.71MB after ten tab changes.",
+      "condition": "homepage after repeated tab changes"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Full Lighthouse JSON. Scores: performance 60, accessibility 96, best practices 77, SEO 100.",
+      "condition": "mobile simulated",
+      "findingIds": [
+        "F04",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse summary including LCP 4.8s, CLS 0.512, contrast failures and 281KiB unused JS.",
+      "condition": "mobile simulated",
+      "findingIds": [
+        "F04",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-metadata.json",
+      "caption": "Article metadata probe: descriptive title, canonical and Open Graph metadata, but no JSON-LD.",
+      "condition": "article",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/site-files.json",
+      "caption": "robots, sitemap probe and manifest: explicit sitemap URLs; manifest has empty name and no service worker controlled the page.",
+      "condition": "homepage",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found-probe.json",
+      "caption": "Invalid route renders an explanatory Finnish not-found message and recovery links.",
+      "condition": "invalid URL"
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Paired screenshots under default and prefers-color-scheme: dark",
+      "evidence": "Captures are byte-identical; UI does not adapt.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "getAnimations() under emulated prefers-reduced-motion: reduce",
+      "evidence": "A 2750ms animation remained running.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion-probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse contrast audit plus visual inspection",
+      "evidence": "Four red-on-dark text states measured only 3.54:1.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "DOM/platform feature probe across homepage stateful feed",
+      "evidence": "No View Transition declarations or usage were present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Visual inspection plus animation/CSS feature probe",
+      "evidence": "No scroll-linked decorative motion was observed and no animation-timeline usage was detected, so no main-thread scroll-animation anti-pattern was evidenced.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Mobile screenshots and DOM interaction review",
+      "evidence": "Representative news, section, article and weather paths use native scrolling and taps; no custom drag/pointer gesture that fights platform behavior was observed.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "weather"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Mobile first-view screenshots and platform probe",
+      "evidence": "Persistent top/bottom chrome is static and no scroll-state query/progress behavior was detected.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No tooltip, anchored popover or edge-positioned menu requiring attachment was present on the exercised paths.",
+      "reason": "No tooltip, anchored popover or edge-positioned menu requiring attachment was present on the exercised paths."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative screenshots and DOM navigation labels",
+      "evidence": "Selected sections are visibly highlighted and article cards/404 links provide clear directional targets.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/section-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Fresh-profile screenshots on four templates",
+      "evidence": "Consent modal obscures all core paths before interaction.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "weather"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM semantics probe and visual consent inspection",
+      "evidence": "The consent surface exposes role=dialog and main navigation controls use native buttons; no unlabeled ad-hoc modal role failure was found.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Mobile viewport visual hierarchy review",
+      "evidence": "Two navigation rows, a persistent bottom bar and Plus promotion crowd the first view.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout primitive at 360x800 across responsive screenshot set",
+      "evidence": "scrollWidth and clientWidth are both 360, with zero horizontal overflow and a valid viewport meta.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "weather"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "CSS/platform feature probe",
+      "evidence": "No container-query usage was detected for heavily reused card/navigation components.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Programmatic focus and target-size probe",
+      "evidence": "Key buttons have outline none and menu target measured 30x22px.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport and heading/link inspection",
+      "evidence": "Brand, selected section, lead stories and weather route make the news-reading purpose and next story actions clear.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "weather"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Fresh-profile reading journey across homepage to article and weather",
+      "evidence": "The consent wall blocks the primary reading/forecast flow until a choice is made.",
+      "pathIds": [
+        "home",
+        "article",
+        "weather"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/weather-mobile.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Deliberately invalid-route walkthrough",
+      "evidence": "Invalid route shows a clear Finnish not-found message plus homepage and popular-story recovery links.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and independent DevTools trace",
+      "evidence": "Lighthouse LCP 4.8s and CLS 0.512 are outside good ranges; trace LCP was 3.87s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse shift attribution and layout observer",
+      "evidence": "Lighthouse found five shifts, including unsized media and font loading; CLS was 0.512.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DevTools trace and Lighthouse TBT",
+      "evidence": "Trace recorded no long tasks/0ms TBT; Lighthouse TBT was 110ms (score 0.98).",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary confirmed against Lighthouse insights",
+      "evidence": "40 requests transfer 1.04MB; third-party ad bundles dominate and LCP is slow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse code-coverage diagnostics and HAR weights",
+      "evidence": "Lighthouse estimates 281KiB unused JS, chiefly prebid/ATS/vendor bundles.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Article image audit and DOM naming probe",
+      "evidence": "7/18 article-page images lacked alt text and one image/link had no accessible text.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audit",
+      "evidence": "Four text/navigation states fail at 3.54:1.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Heading/landmark and focus-outline probe",
+      "evidence": "Homepage has no H1 and key controls suppress focus outlines.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F13",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Desktop/mobile screenshots and text-layout inspection",
+      "evidence": "Headlines and article text remain readable and unclipped at 360px; no text overlap was observed.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Mobile reflow and target-size probe",
+      "evidence": "Reflow succeeds, but important menu/sign-in targets are undersized and lack robust focus indication.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse errors-in-console audit",
+      "evidence": "Lighthouse errors-in-console audit scored 1 with no items.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM document probe, Lighthouse and image primitive",
+      "evidence": "Doctype/UTF-8 are valid, but all 18 audited article images omit intrinsic dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/article-images.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse BFCache, prompt, console and inspector audit review",
+      "evidence": "BFCache, notification-on-start and geolocation-on-start passed; the only inspector issue concerned third-party cookies, judged under privacy.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM metadata probes on home and article",
+      "evidence": "Both pages expose unique descriptive titles and meta descriptions.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-metadata.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse SEO plus DOM/robots probe",
+      "evidence": "SEO scored 100; links use href, viewport is valid and general robots policy allows indexing.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/site-files.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Canonical, robots and sitemap probes",
+      "evidence": "Pages return 200 with canonicals; robots lists dedicated working sitemap locations and does not noindex general crawlers.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-metadata.json",
+        "evidence/site-files.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Open Graph/JSON-LD and raw-vs-rendered probes",
+      "evidence": "Article has accurate Open Graph but no NewsArticle JSON-LD; raw coverage is only 14% homepage/39% article.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-metadata.json",
+        "evidence/home-discoverability.json",
+        "evidence/article-discoverability.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Header, cookie and HTTPS primitives",
+      "evidence": "HTTPS/HSTS exist, but CSP only constrains framing and nosniff/Permissions-Policy are absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trackers and HAR captured before consent",
+      "evidence": "11 third-party origins and 703KB third-party transfer occur while consent UI is shown.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse prompt audits and initial-load interaction review",
+      "evidence": "No geolocation or notification prompt fired on load; authentication is optional and was not imposed on the reading paths.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Structured security-header audit",
+      "evidence": "Permissions-Policy/nosniff are absent, referrer policy is permissive, and CSP lacks XSS-oriented directives.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Discoverability primitive with JavaScript disabled and raw HTML",
+      "evidence": "No-JS captures retain the site navigation and prominent article/headline content; article title/H1/description survive raw HTML.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability-crawler.png",
+        "evidence/article-discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative mobile screenshots and DOM state review",
+      "evidence": "Navigation and consent dialog remain within viewport boundaries across all templates; no cut-off menu or broken async shell was observed.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "weather"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/weather-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Manifest and service-worker probe",
+      "evidence": "Manifest name is empty and no controlling service worker/offline fallback was found.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/site-files.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Invalid-route exercise",
+      "evidence": "The invalid route renders a useful not-found state and actionable recovery links instead of a blank shell.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "Iltalehti is a deliberately Finnish-language national news product in the audited scope; no multilingual or bidirectional-language surface was present.",
+      "reason": "Iltalehti is a deliberately Finnish-language national news product in the audited scope; no multilingual or bidirectional-language surface was present."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The audited Finnish-only news/weather scope exposes no locale switch or cross-locale currency/calendar workflow to judge.",
+      "reason": "The audited Finnish-only news/weather scope exposes no locale switch or cross-locale currency/calendar workflow to judge."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No cross-time-zone scheduling or event-entry flow exists on the representative news-reading paths.",
+      "reason": "No cross-time-zone scheduling or event-entry flow exists on the representative news-reading paths."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Fresh-profile consent screenshot and control hierarchy review",
+      "evidence": "Bright Accept and muted Settings are presented without an equally direct Reject action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No user-input form or validation flow appears on the representative public news, article, section or weather paths.",
+      "reason": "No user-input form or validation flow appears on the representative public news, article, section or weather paths."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No address, payment, sign-in input form or other autofill-relevant fields were present on the exercised public paths.",
+      "reason": "No address, payment, sign-in input form or other autofill-relevant fields were present on the exercised public paths."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "First-view commercial/account control review",
+      "evidence": "Subscription and sign-in are clearly labeled optional actions and were not forced into the public reading flow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Article image primitive",
+      "evidence": "14 legacy-format images, 2 oversized assets, 2 missing responsive sources and 4 missed lazy-load opportunities were found.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/article-images.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse unused-code and HAR analysis",
+      "evidence": "281KiB unused JS and large prebid/ATS bundles are loaded before user intent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR third-party byte budget and tracker audit",
+      "evidence": "35/40 requests and 703KB are third-party, disproportionate for the pre-consent first view.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trackers.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The publisher explicitly blocks major AI agents in robots.txt and exposes no declared agent-facing task surface; emerging WebMCP capability is outside its evident intent.",
+      "reason": "The publisher explicitly blocks major AI agents in robots.txt and exposes no declared agent-facing task surface; emerging WebMCP capability is outside its evident intent."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No user-facing summarisation or language-model task is offered, and the publisher explicitly opts out of AI crawler access through robots policy.",
+      "reason": "No user-facing summarisation or language-model task is offered, and the publisher explicitly opts out of AI crawler access through robots policy."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline and post heap summaries around ten feed-tab interactions",
+      "evidence": "Heap self size grew only 228,253 bytes (~1.1%) and graph node count ~0.9%, with no unbounded-growth signal in this bounded run.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Single-state readable heap summary",
+      "evidence": "Baseline self size was 21.48MB for the media-rich homepage, proportionate to the rendered experience.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "low",
+      "method": "Before/after heap graph totals after repeated tab interaction",
+      "evidence": "Graph growth stayed below 1% after ten state changes; no accumulating detached/listener symptom was evident, though constructor-level leak tracing was not available.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F04",
+        "F13",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Iltalehti is a deliberately Finnish-language national news product in the audited scope; no multilingual or bidirectional-language surface was present. The audited Finnish-only news/weather scope exposes no locale switch or cross-locale currency/calendar workflow to judge. No cross-time-zone scheduling or event-entry flow exists on the representative news-reading paths."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F11",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "The publisher explicitly blocks major AI agents in robots.txt and exposes no declared agent-facing task surface; emerging WebMCP capability is outside its evident intent. No user-facing summarisation or language-model task is offered, and the publisher explicitly opts out of AI crawler access through robots policy."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and primary news-discovery feed; represents the main entry and listing template.",
+      "url": "https://www.iltalehti.fi/",
+      "conditions": [
+        "desktop 780x viewport",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus probe",
+        "fresh visitor consent state"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "section",
+      "description": "Uutiset section listing; represents category/index templates.",
+      "url": "https://www.iltalehti.fi/uutiset",
+      "conditions": [
+        "mobile 360x800",
+        "fresh visitor consent state"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Current domestic-news article; represents article/detail pages and the core reading journey.",
+      "url": "https://www.iltalehti.fi/kotimaa/a/589f5628-307a-4fa0-8403-2e23feb0ab8f",
+      "conditions": [
+        "mobile 360x800",
+        "raw HTML/no-JavaScript comparison",
+        "image audit"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "weather",
+      "description": "Weather route; represents the main data/interactive utility surface.",
+      "url": "https://www.iltalehti.fi/saa",
+      "conditions": [
+        "mobile 360x800",
+        "fresh visitor consent state"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Deliberately invalid URL; exercises recovery from a broken route.",
+      "url": "https://www.iltalehti.fi/this-route-should-not-exist-audit",
+      "conditions": [
+        "rendered DOM"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The consent dialog blocks every representative primary path on a fresh visit.",
+      "evidence": "Desktop and 360x800 screenshots show a large modal covering the homepage, section, article and weather content before interaction.",
+      "suggestedFix": "Replace the blocking first-load wall with a compact, content-first consent surface where legally possible; keep essential content usable and provide clear dismiss/reject controls using a semantic dialog.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The experience does not react to the user’s color-scheme preference.",
+      "evidence": "The default and prefers-color-scheme: dark homepage screenshots are byte-identical; the consent UI stays a fixed light surface while the underlying site stays fixed dark.",
+      "suggestedFix": "Declare color-scheme and use prefers-color-scheme or light-dark() tokens for the page and consent UI, preserving contrast in both schemes.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Motion continues when reduced motion is requested.",
+      "evidence": "The evaluate probe under prefers-reduced-motion: reduce reports a running animation with a 2750ms duration.",
+      "suggestedFix": "Wrap non-essential animation in no-preference and remove or shorten it under prefers-reduced-motion: reduce.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/reduced-motion-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Red-on-dark navigation and labels fail minimum text contrast.",
+      "evidence": "Lighthouse found four contrast failures at 3.54:1, including KIRJAUDU, selected navigation and category labels where 4.5:1 is required.",
+      "suggestedFix": "Adjust the red or dark surface tokens to reach at least 4.5:1 for normal text and verify forced-colors/high-contrast states.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F05",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Primary route and state changes do not use View Transitions.",
+      "evidence": "The platform probe found no view-transition declarations or API usage on a multi-route news site with stateful feed tabs.",
+      "suggestedFix": "Progressively enhance article navigation and feed-tab changes with same-document/cross-document View Transitions, with reduced-motion fallbacks.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Dense global chrome and promotional surfaces compete with the news content.",
+      "evidence": "Mobile screenshots devote two navigation rows, a persistent bottom bar and a large Plus promotion to chrome before the first story, even before counting the consent modal.",
+      "suggestedFix": "Collapse secondary navigation into a clear menu on narrow screens and reserve first-view space for the lead content and primary section choices.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "complex-shapes",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F07",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Responsive behavior is viewport-driven rather than component-aware.",
+      "evidence": "The DOM/platform probe found no container-query rules while the same card/navigation patterns are reused across columns and mobile layouts.",
+      "suggestedFix": "Add container-type to reusable card/list regions and use @container rules so components adapt to their allocated space rather than only global breakpoints.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Several important controls have no visible focus indicator and some targets are undersized.",
+      "evidence": "The focus probe measured KIRJAUDU and menu buttons with outline none; the menu control was 30x22px in one state, below a comfortable 44px touch target.",
+      "suggestedFix": "Use :focus-visible with a high-contrast outline and enlarge interactive hit areas to at least 44x44 CSS pixels without relying on hover.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Homepage loading is slow and visually unstable.",
+      "evidence": "Lighthouse measured LCP 4.8s and CLS 0.512; its shift diagnostics identify a late news container, web fonts and images without explicit size. The independent trace measured LCP 3.87s.",
+      "suggestedFix": "Reserve media/ad/feed space, set image dimensions/aspect-ratio, stabilise font fallbacks, and prioritise the actual LCP image while deferring non-critical ad work.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Advertising and account bundles dominate delivery and ship substantial unused JavaScript.",
+      "evidence": "HAR reports 648KB of scripts and 703KB of 1.04MB transferred from third-party origins; Lighthouse estimates 281KiB unused JavaScript, led by prebid and ATS bundles.",
+      "suggestedFix": "Load advertising/account features conditionally after consent and proximity/intent, split bundles, remove legacy/duplicate code, and lower non-critical priorities.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Article imagery is not consistently exposed to assistive technology.",
+      "evidence": "The image primitive found 7 of 18 images without alt text; several are article recommendation thumbnails rather than clearly decorative assets.",
+      "suggestedFix": "Provide meaningful alt text for informative images and explicit empty alt for decorative images; ensure image links retain an accessible name.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/article-images.json"
+      ],
+      "effort": "medium",
+      "pathId": "article",
+      "url": "https://www.iltalehti.fi/kotimaa/a/589f5628-307a-4fa0-8403-2e23feb0ab8f"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Homepage heading structure and keyboard focus treatment are incomplete.",
+      "evidence": "The rendered homepage had no H1, while the focus probe showed outline:none on key sign-in and menu buttons.",
+      "suggestedFix": "Add one descriptive H1 for the page/feed and restore a logical heading hierarchy and strong :focus-visible treatment in reading order.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Images omit intrinsic dimensions and contribute to layout shift.",
+      "evidence": "The article image audit found all 18 images lacked width/height attributes; Lighthouse directly attributed a large homepage shift to an image lacking explicit size.",
+      "suggestedFix": "Emit width and height (or a stable aspect-ratio wrapper) from image metadata and validate responsive sizing without distorting aspect ratios.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/article-images.json",
+        "evidence/lighthouse-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Article entities lack JSON-LD structured data and much feed content is absent from raw HTML.",
+      "evidence": "Metadata probe found accurate title/canonical/Open Graph but zero JSON-LD blocks; discoverability measured only 14% raw/rendered token coverage on the homepage and 39% on the article.",
+      "suggestedFix": "Server-render the primary feed/article text and add accurate NewsArticle JSON-LD matching visible headline, dates, author, image and publisher metadata.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/article-metadata.json",
+        "evidence/home-discoverability.json",
+        "evidence/article-discoverability.json"
+      ],
+      "effort": "medium",
+      "pathId": "article",
+      "url": "https://www.iltalehti.fi/kotimaa/a/589f5628-307a-4fa0-8403-2e23feb0ab8f"
+    },
+    {
+      "id": "F16",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Browser security policy headers leave avoidable gaps.",
+      "evidence": "Header audit found CSP limited to frame-ancestors (no script/object/base protections), missing X-Content-Type-Options and Permissions-Policy, and a permissive no-referrer-when-downgrade policy.",
+      "suggestedFix": "Deploy an enforcing CSP for scripts/objects/base-uri, add nosniff and a least-privilege Permissions-Policy, and use strict-origin-when-cross-origin or stricter referrer policy.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party ad and analytics activity begins while the consent wall is still displayed.",
+      "evidence": "Initial-load evidence records 11 third-party origins, 35/40 HAR requests and 703KB transferred to third parties, including ATS and visitor analytics, before the user accepts.",
+      "suggestedFix": "Gate non-essential analytics/ad requests on consent, minimise vendors and identifiers, batch necessary measurements, and document each third party in the settings UI.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The installable/offline surface is incomplete for a frequently used news utility.",
+      "evidence": "A manifest exists but has an empty name and no start_url; the probe found no controlling service worker, so no offline fallback was evident.",
+      "suggestedFix": "Complete the manifest identity/start URL and add a conservative service worker that provides an offline reading shell/fallback without caching personalised or consent-sensitive responses.",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/site-files.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Consent choices are visually asymmetric.",
+      "evidence": "The mobile dialog gives a large green Hyväksy button and a muted Asetukset button, with no equally direct reject action despite listing 87 partners and broad tracking purposes.",
+      "suggestedFix": "Present accept and reject at the same hierarchy on the first layer, use neutral styling, and make granular choices and withdrawal as easy as acceptance.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "search-hidden-content",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.iltalehti.fi/"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Article assets are not consistently resolution- or format-optimised.",
+      "evidence": "The image audit found 14 legacy PNG/JPEG assets, 2 oversized images, 2 missing responsive sources and 4 below-fold images without lazy loading.",
+      "suggestedFix": "Serve AVIF/WebP where useful, emit srcset/sizes from the image CDN, lazy-load below-fold media, and match requested dimensions to rendered size.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/article-images.json"
+      ],
+      "effort": "medium",
+      "pathId": "article",
+      "url": "https://www.iltalehti.fi/kotimaa/a/589f5628-307a-4fa0-8403-2e23feb0ab8f"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Gate third parties and redesign consent as a balanced, non-blocking choice",
+      "priority": 1,
+      "findingIds": [
+        "F01",
+        "F17",
+        "F19"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Stabilise media/feed layout and improve LCP",
+      "priority": 2,
+      "findingIds": [
+        "F10",
+        "F14"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Restore accessible contrast, focus, target sizes and image alternatives",
+      "priority": 3,
+      "findingIds": [
+        "F04",
+        "F08",
+        "F12",
+        "F13"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Trim and defer advertising/account JavaScript",
+      "priority": 4,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Harden CSP and browser policy headers",
+      "priority": 5,
+      "findingIds": [
+        "F16"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Optimise responsive article imagery",
+      "priority": 6,
+      "findingIds": [
+        "F20"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Server-render more primary content and add NewsArticle JSON-LD",
+      "priority": 7,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Support user color and motion preferences",
+      "priority": 8,
+      "findingIds": [
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Reduce mobile chrome and add component-aware responsiveness",
+      "priority": 9,
+      "findingIds": [
+        "F06",
+        "F07"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Complete manifest and add a safe offline fallback",
+      "priority": 10,
+      "findingIds": [
+        "F18"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Progressively enhance state changes with View Transitions",
+      "priority": 11,
+      "findingIds": [
+        "F05"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-24T01-45-03-704Z"
+}

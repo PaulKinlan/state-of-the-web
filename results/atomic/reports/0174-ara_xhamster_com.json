@@ -1,0 +1,2399 @@
+{
+  "url": "https://ara.xhamster.com",
+  "auditedAt": "2026-07-18T22:45:03.756Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete model-led audit across five representative archetypes and one recovery route.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Custom server-rendered application with client hydration",
+    "notes": "Arabic RTL adult media site. Initial loads show UK age-verification promotion and consent UI. No local source was provided."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "lighthouse",
+    "raw HTTP fetch"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "performance",
+    "forms",
+    "optimize-image-priority",
+    "improve-text-layout-and-legibility",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "position-aware-tooltips",
+    "navigation-drawer",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "css-layout",
+    "size-aware-styling",
+    "break-up-long-tasks",
+    "optimize-script-priority",
+    "identify-heavy-scripts",
+    "accessible-error-announcement",
+    "autofill-sign-up-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Light and dark emulation changed body text from rgb(48,48,48) to rgb(245,245,245), and CSS contains prefers-color-scheme support.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Emulated-media animation probe",
+      "evidence": "The reduced-motion probe found eight running 2-second animations while matchMedia(prefers-reduced-motion: reduce) was true.",
+      "findingIds": [
+        "F01"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "CSS inspection found no prefers-contrast or forced-colors rules, and Lighthouse found 13 color-contrast failures.",
+      "findingIds": [
+        "F02"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "CSS inspection found no view-transition usage across the MPA navigation surfaces.",
+      "findingIds": [
+        "F03"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "CSS inspection found no animation-timeline, scroll-timeline, or view-timeline usage on the long listing.",
+      "findingIds": [
+        "F04"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "CSS inspection found no scroll snap or overscroll affordance on dense horizontal and vertical media surfaces.",
+      "findingIds": [
+        "F05"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The long homepage exposes no scroll-state query, progress indicator, or shrinking-header behavior.",
+      "findingIds": [
+        "F06"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The load screenshot shows a custom centered overlay; DOM inspection found no dialog, popover, or anchor-positioning primitive.",
+      "findingIds": [
+        "F07"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Screenshots and DOM show a single H1, conventional navigation landmarks and clear section headings across listing pages.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Desktop, category, signup, and video screenshots all show a large consent panel obscuring the primary page before interaction.",
+      "findingIds": [
+        "F08"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/signup.png",
+        "evidence/video-detail.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "DOM probing found zero dialog or role=dialog elements and zero popovers while the blocking consent UI was visible.",
+      "findingIds": [
+        "F09"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The desktop first viewport is dominated by a consent panel, promotional strip, header and side chrome; the mobile capture leaves only a narrow content column.",
+      "findingIds": [
+        "F10"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The layout primitive measured scrollWidth 1024px and 664px horizontal overflow at a 360px visual viewport; the screenshot shows a wide sidebar consuming most of the screen.",
+      "findingIds": [
+        "F11"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "CSS inspection found no container queries, while the mobile screenshot shows desktop sidebar and cards compressed into a 360px viewport.",
+      "findingIds": [
+        "F12"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The first focused link computed to outline-style none and no box shadow; Lighthouse also found target-size failures.",
+      "findingIds": [
+        "F13"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The first viewport places consent, age verification and promotion ahead of the video browsing task, and the 360px view exposes only a sliver of content.",
+      "findingIds": [
+        "F14"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The signup path exposed Google, X and email choices and the email panel opened without navigation failure.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Invalid signup produced Arabic error messages, and a nonexistent route presented a localized explanation plus a home recovery link.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trace, HAR and Lighthouse",
+      "evidence": "Lighthouse measured LCP 3.9s and scored performance 0.85; FCP was 2.4s.",
+      "findingIds": [
+        "F15"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace, HAR and Lighthouse",
+      "evidence": "Layout and Lighthouse both measured CLS 0 during the observed load.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trace, HAR and Lighthouse",
+      "evidence": "The trace recorded two long tasks, longest 160.27ms, with 149.12ms total blocking time.",
+      "findingIds": [
+        "F16"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trace, HAR and Lighthouse",
+      "evidence": "HAR recorded 147 requests and 1.73MB transferred, including 61 scripts; Lighthouse estimated 1.05s savings from render-blocking resources.",
+      "findingIds": [
+        "F17"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trace, HAR and Lighthouse",
+      "evidence": "Lighthouse estimated 57KiB unused CSS (up to 94.6% in one file) and 26KiB unused JavaScript.",
+      "findingIds": [
+        "F18"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/accessibility probes",
+      "evidence": "Lighthouse found two unnamed buttons, two unnamed links and nine visible-label/accessibility-name mismatches; the DOM probe also found an unlabeled icon button and filter input.",
+      "findingIds": [
+        "F19"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/accessibility probes",
+      "evidence": "Lighthouse reported 13 color-contrast failures and links that rely on color alone.",
+      "findingIds": [
+        "F20"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/accessibility probes",
+      "evidence": "Focused content had no visible outline, and Lighthouse found malformed list structure.",
+      "findingIds": [
+        "F21"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/accessibility probes",
+      "evidence": "Desktop screenshots show readable Arabic body and heading typography with logical RTL layout.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/accessibility probes",
+      "evidence": "The 360px capture overflows by 664px; Lighthouse also failed meta-viewport zoom and target-size checks.",
+      "findingIds": [
+        "F22"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Lighthouse errors-in-console audit passed with no recorded items.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The image audit found 29 of 36 images without dimensions, 12 oversized images, eight below-fold images not lazy-loaded and one missing alt.",
+      "findingIds": [
+        "F23"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Lighthouse best-practices score was 1.0 and bfcache audit passed.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM, raw fetch and discoverability primitive",
+      "evidence": "Home DOM has a distinct Arabic title and non-empty meta description; detail and signup titles are route-specific.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM, raw fetch and discoverability primitive",
+      "evidence": "The layout primitive measured scrollWidth 1024px and 664px horizontal overflow at a 360px visual viewport; the screenshot shows a wide sidebar consuming most of the screen.",
+      "findingIds": [
+        "F11"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM, raw fetch and discoverability primitive",
+      "evidence": "Main and detail pages return 200 and expose self-referencing canonicals; robots.txt was reachable and discoverability fetch succeeded.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM, raw fetch and discoverability primitive",
+      "evidence": "The representative video page had Open Graph tags but no JSON-LD, so machine-readable VideoObject details are absent.",
+      "findingIds": [
+        "F24"
+      ],
+      "artifacts": [
+        "evidence/video-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers, cookies, trackers, HAR and secrets primitives",
+      "evidence": "Headers lacked X-Content-Type-Options and a response Referrer-Policy; two first-party cookies lacked Secure and settings used SameSite=None.",
+      "findingIds": [
+        "F25"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers, cookies, trackers, HAR and secrets primitives",
+      "evidence": "Tracker evidence observed 16 third-party origins and requests to collector.xhamster.com and tsyndicate.com on initial load.",
+      "findingIds": [
+        "F26"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers, cookies, trackers, HAR and secrets primitives",
+      "evidence": "The sign-up surface offers Google, X and email options; source and DOM probes found no WebAuthn or passkey affordance.",
+      "findingIds": [
+        "F27"
+      ],
+      "artifacts": [
+        "evidence/signup-probe.json",
+        "evidence/signup-email-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers, cookies, trackers, HAR and secrets primitives",
+      "evidence": "CSP only declared frame-ancestors, Referrer-Policy and nosniff were absent, and Permissions-Policy allowed only client hints rather than restricting sensitive features.",
+      "findingIds": [
+        "F28"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "No-JS comparison, service-worker/manifest probe and 404 exercise",
+      "evidence": "Raw HTML was 423KB, retained title/H1/description and 54% of rendered content words; the page was not a JS shell.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "No-JS comparison, service-worker/manifest probe and 404 exercise",
+      "evidence": "Navigation and the custom overlay remained rendered across sampled templates; no runtime error was observed.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "pass",
+      "confidence": "high",
+      "method": "No-JS comparison, service-worker/manifest probe and 404 exercise",
+      "evidence": "An active service worker registration and manifest with name, start_url, display and three icons were present.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "No-JS comparison, service-worker/manifest probe and 404 exercise",
+      "evidence": "A deliberately invalid URL rendered a localized not-found explanation and a return-home recovery action.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The document declares lang=ar and dir=rtl; CSS inspection found logical properties and the rendered layout is RTL.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The Arabic listing renders compact counts such as “1.9M مشاهدات” and “16.2M”, mixing English compact notation into Arabic copy.",
+      "findingIds": [
+        "F29"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Recon found no applicable authored surface.",
+      "reason": "No event times, appointments, calendars or time-zone-sensitive data appeared on the representative Arabic surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Consent presents Accept and Reject as equal-size adjacent controls and the signup page states data use before account creation.",
+      "pathIds": [
+        "home",
+        "categories",
+        "best",
+        "video",
+        "signup"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Empty signup produced Arabic messages, but inputs remained :valid with no aria-invalid and the assertive live region was empty.",
+      "findingIds": [
+        "F30"
+      ],
+      "artifacts": [
+        "evidence/signup-invalid-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The email field uses autocomplete=off and the password field is named new-password rather than using a complete, standards-based autocomplete token set.",
+      "findingIds": [
+        "F31"
+      ],
+      "artifacts": [
+        "evidence/signup-email-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The sign-up surface offers Google, X and email options; source and DOM probes found no WebAuthn or passkey affordance.",
+      "findingIds": [
+        "F27"
+      ],
+      "artifacts": [
+        "evidence/signup-probe.json",
+        "evidence/signup-email-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, image audit and trace",
+      "evidence": "The image audit found 12 oversized images, 16 legacy-format results, three without srcset and 29 without dimensions.",
+      "findingIds": [
+        "F32"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, image audit and trace",
+      "evidence": "The page loaded 61 scripts; Lighthouse identified unused CSS/JS and the trace recorded two long tasks.",
+      "findingIds": [
+        "F33"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, image audit and trace",
+      "evidence": "The initial load transferred 1.73MB across 147 requests, with 1.03MB of scripts and 16 third-party origins.",
+      "findingIds": [
+        "F34"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "The public site has search and signup flows, but probing found no WebMCP or registered agent-readable tools.",
+      "findingIds": [
+        "F35"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/signup-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Screenshots, DOM and evaluate probes across representative paths",
+      "evidence": "Recon found no applicable authored surface.",
+      "reason": "The audited site does not provide an authored AI inference feature for which on-device inference would be relevant."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "low",
+      "method": "Baseline/post heap-summary comparison",
+      "evidence": "A baseline-to-post heap comparison after ten synchronous menu-toggle attempts showed only modest growth (37.0MB to 39.1MB); no runaway order-of-magnitude growth was observed.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post2.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Baseline/post heap-summary comparison",
+      "evidence": "Heap summaries measured 37.0–39.1MB self size for a media-rich listing, proportionate to the page purpose.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post2.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "low",
+      "method": "Baseline/post heap-summary comparison",
+      "evidence": "Heap top-constructor summaries did not surface Detached* populations; ten toggle attempts produced bounded node growth (689k to 731k).",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post2.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F30",
+        "F31",
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F32",
+        "F33",
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F35"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and primary browsing entry; global navigation, consent, responsive, performance and privacy conditions.",
+      "url": "https://ara.xhamster.com/",
+      "conditions": [
+        "desktop",
+        "viewport 360x800",
+        "prefers-color-scheme light/dark",
+        "prefers-reduced-motion reduce"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "categories",
+      "description": "Category index archetype representing taxonomy navigation.",
+      "url": "https://ara.xhamster.com/categories",
+      "conditions": [
+        "desktop fresh profile"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "best",
+      "description": "Ranked media listing archetype representing dense result grids.",
+      "url": "https://ara.xhamster.com/best/weekly",
+      "conditions": [
+        "desktop fresh profile"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "video",
+      "description": "Representative media detail page; metadata and playback surface.",
+      "url": "https://ara.xhamster.com/videos/studying-with-hot-busty-classmate-she-lets-me-fuck-her-xh9uznd",
+      "conditions": [
+        "desktop fresh profile"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "signup",
+      "description": "Primary account-creation journey, email reveal and invalid submission state.",
+      "url": "https://ara.xhamster.com/signup?source=menuSignup",
+      "conditions": [
+        "desktop",
+        "empty email submission"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Deliberately invalid route to test runtime failure messaging and recovery.",
+      "url": "https://ara.xhamster.com/definitely-not-a-real-page-web-uplift",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Motion continues when reduced motion is requested",
+      "evidence": "The reduced-motion probe found eight running 2-second animations while matchMedia(prefers-reduced-motion: reduce) was true.",
+      "guidanceId": "accessibility",
+      "suggestedFix": "Add a reduced-motion media query that removes or shortens non-essential animation.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "id": "F02",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Contrast preferences are not handled",
+      "evidence": "CSS inspection found no prefers-contrast or forced-colors rules, and Lighthouse found 13 color-contrast failures.",
+      "guidanceId": "accessibility",
+      "suggestedFix": "Preserve system colors in forced-colors mode and provide a higher-contrast token set.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F03",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Route and state changes lack continuity cues",
+      "evidence": "CSS inspection found no view-transition usage across the MPA navigation surfaces.",
+      "guidanceId": "same-document-transitions",
+      "suggestedFix": "Use same-document or cross-document View Transitions for meaningful navigation changes, with reduced-motion handling.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "scroll-driven-animations",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Scrolling enhancements are not compositor-driven",
+      "evidence": "CSS inspection found no animation-timeline, scroll-timeline, or view-timeline usage on the long listing.",
+      "guidanceId": "scrollytelling",
+      "suggestedFix": "Where scroll-linked feedback is useful, use CSS scroll-driven animations rather than main-thread handlers.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F05",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "physical-gestures",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Long media listings provide no gesture-oriented affordances",
+      "evidence": "CSS inspection found no scroll snap or overscroll affordance on dense horizontal and vertical media surfaces.",
+      "guidanceId": "physics-based-easing",
+      "suggestedFix": "Add platform-native snap or overscroll behavior only where it clarifies a carousel or drawer interaction.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F06",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Navigation chrome does not reflect scroll state",
+      "evidence": "The long homepage exposes no scroll-state query, progress indicator, or shrinking-header behavior.",
+      "guidanceId": "shrinking-header-on-scroll",
+      "suggestedFix": "Use a sticky, scroll-state-aware header or progress cue without obscuring content.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F07",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "anchored-positioning",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The consent overlay is not anchored or edge-aware",
+      "evidence": "The load screenshot shows a custom centered overlay; DOM inspection found no dialog, popover, or anchor-positioning primitive.",
+      "guidanceId": "position-aware-tooltips",
+      "suggestedFix": "Use a semantic top-layer primitive and edge-aware positioning rather than an unanchored custom layer.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F08",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Consent blocks the primary content on every fresh load",
+      "evidence": "Desktop, category, signup, and video screenshots all show a large consent panel obscuring the primary page before interaction.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "suggestedFix": "Reduce the panel footprint, keep choices clear and equal, and preserve access to the page context.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/signup.png",
+        "evidence/video-detail.png"
+      ]
+    },
+    {
+      "id": "F09",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The blocking consent panel is not exposed as a dialog",
+      "evidence": "DOM probing found zero dialog or role=dialog elements and zero popovers while the blocking consent UI was visible.",
+      "guidanceId": "declarative-dialog-popover-control",
+      "suggestedFix": "Implement the blocking surface with dialog semantics, a programmatic name, focus management, Escape behavior, and explicit dismiss controls.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "id": "F10",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Promotions and navigation crowd out the media content",
+      "evidence": "The desktop first viewport is dominated by a consent panel, promotional strip, header and side chrome; the mobile capture leaves only a narrow content column.",
+      "guidanceId": "css",
+      "suggestedFix": "Reduce promotional chrome and prioritize the content grid and primary task in the initial viewport.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "id": "F11",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The 360px layout renders a 1024px-wide page",
+      "evidence": "The layout primitive measured scrollWidth 1024px and 664px horizontal overflow at a 360px visual viewport; the screenshot shows a wide sidebar consuming most of the screen.",
+      "guidanceId": "css-layout",
+      "suggestedFix": "Serve and lay out a true narrow-screen view using fluid sizing, responsive navigation and no fixed 1024px canvas.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "id": "F12",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Components do not adapt to their available space",
+      "evidence": "CSS inspection found no container queries, while the mobile screenshot shows desktop sidebar and cards compressed into a 360px viewport.",
+      "guidanceId": "size-aware-styling",
+      "suggestedFix": "Make sidebar, grid, cards and banners respond to their container sizes, with viewport fallbacks.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "id": "F13",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus and touch targets are inadequate",
+      "evidence": "The first focused link computed to outline-style none and no box shadow; Lighthouse also found target-size failures.",
+      "guidanceId": "accessibility",
+      "suggestedFix": "Provide a strong :focus-visible indicator and ensure interactive targets meet touch size and spacing guidance.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F14",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Primary content and actions are obscured at entry",
+      "evidence": "The first viewport places consent, age verification and promotion ahead of the video browsing task, and the 360px view exposes only a sliver of content.",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "suggestedFix": "Make the content purpose and next action immediately visible, with secondary legal and promotional surfaces taking less space.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "id": "F15",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile LCP misses the good threshold",
+      "evidence": "Lighthouse measured LCP 3.9s and scored performance 0.85; FCP was 2.4s.",
+      "guidanceId": "performance",
+      "suggestedFix": "Prioritize the LCP resource, reduce render-blocking CSS and defer non-critical scripts.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "id": "F16",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Load work includes blocking main-thread tasks",
+      "evidence": "The trace recorded two long tasks, longest 160.27ms, with 149.12ms total blocking time.",
+      "guidanceId": "break-up-long-tasks",
+      "suggestedFix": "Split long tasks and schedule non-critical work at lower priority.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "id": "F17",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The initial page ships a large, render-blocking dependency set",
+      "evidence": "HAR recorded 147 requests and 1.73MB transferred, including 61 scripts; Lighthouse estimated 1.05s savings from render-blocking resources.",
+      "guidanceId": "optimize-script-priority",
+      "suggestedFix": "Defer non-critical scripts and styles, reduce request chains, and prioritize only LCP-critical resources.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F18",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Substantial CSS and JavaScript are unused at load",
+      "evidence": "Lighthouse estimated 57KiB unused CSS (up to 94.6% in one file) and 26KiB unused JavaScript.",
+      "guidanceId": "identify-heavy-scripts",
+      "suggestedFix": "Split route-specific bundles and load optional dependencies only when needed.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F19",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Controls lack accessible names",
+      "evidence": "Lighthouse found two unnamed buttons, two unnamed links and nine visible-label/accessibility-name mismatches; the DOM probe also found an unlabeled icon button and filter input.",
+      "guidanceId": "accessibility",
+      "suggestedFix": "Give every control a stable accessible name matching its visible label.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "id": "F20",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Text and controls fail contrast requirements",
+      "evidence": "Lighthouse reported 13 color-contrast failures and links that rely on color alone.",
+      "guidanceId": "accessibility",
+      "suggestedFix": "Adjust foreground and background tokens to meet WCAG contrast and add non-color link cues.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F21",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Focus treatment and list semantics are unreliable",
+      "evidence": "Focused content had no visible outline, and Lighthouse found malformed list structure.",
+      "guidanceId": "accessibility",
+      "suggestedFix": "Restore visible keyboard focus and use valid list/landmark structure and logical focus order.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F22",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The mobile and zoom experience does not reflow",
+      "evidence": "The 360px capture overflows by 664px; Lighthouse also failed meta-viewport zoom and target-size checks.",
+      "guidanceId": "fluid-scaling",
+      "suggestedFix": "Allow user zoom, remove restrictive viewport settings on mobile output, and reflow content without horizontal scrolling.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "id": "F23",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image sizing and delivery metadata are incomplete",
+      "evidence": "The image audit found 29 of 36 images without dimensions, 12 oversized images, eight below-fold images not lazy-loaded and one missing alt.",
+      "guidanceId": "html",
+      "suggestedFix": "Provide intrinsic dimensions, responsive sources and appropriate lazy loading for media thumbnails.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "id": "F24",
+      "pathId": "video",
+      "url": "https://ara.xhamster.com/videos/studying-with-hot-busty-classmate-she-lets-me-fuck-her-xh9uznd",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Video pages omit structured data",
+      "evidence": "The representative video page had Open Graph tags but no JSON-LD, so machine-readable VideoObject details are absent.",
+      "guidanceId": "html",
+      "suggestedFix": "Add accurate schema.org VideoObject JSON-LD that matches visible content and canonical metadata.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/video-probe.json"
+      ]
+    },
+    {
+      "id": "F25",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Security headers and cookies are incomplete",
+      "evidence": "Headers lacked X-Content-Type-Options and a response Referrer-Policy; two first-party cookies lacked Secure and settings used SameSite=None.",
+      "guidanceId": "security",
+      "suggestedFix": "Add nosniff and a restrictive Referrer-Policy, mark HTTPS cookies Secure, and avoid SameSite=None unless required.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ]
+    },
+    {
+      "id": "F26",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The pre-consent load has a broad third-party footprint",
+      "evidence": "Tracker evidence observed 16 third-party origins and requests to collector.xhamster.com and tsyndicate.com on initial load.",
+      "guidanceId": "privacy",
+      "suggestedFix": "Minimize pre-consent third-party requests and document each necessary processor and data purpose.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "id": "F27",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Sign-up offers no passkey path",
+      "evidence": "The sign-up surface offers Google, X and email options; source and DOM probes found no WebAuthn or passkey affordance.",
+      "guidanceId": "security",
+      "suggestedFix": "Offer passkeys as a phishing-resistant sign-in and reauthentication option while retaining accessible fallbacks.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/signup-probe.json",
+        "evidence/signup-email-probe.json"
+      ]
+    },
+    {
+      "id": "F28",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The defensive policy set is narrow",
+      "evidence": "CSP only declared frame-ancestors, Referrer-Policy and nosniff were absent, and Permissions-Policy allowed only client hints rather than restricting sensitive features.",
+      "guidanceId": "security",
+      "suggestedFix": "Deploy an enforcing resource CSP, nosniff, restrictive referrer and permissions policies, preserving the existing HSTS and frame protections.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/headers.json"
+      ]
+    },
+    {
+      "id": "F29",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-internationalised",
+      "principleCheckId": "locale-aware-data",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Arabic UI mixes non-localized compact number notation",
+      "evidence": "The Arabic listing renders compact counts such as “1.9M مشاهدات” and “16.2M”, mixing English compact notation into Arabic copy.",
+      "guidanceId": "translator",
+      "suggestedFix": "Format numbers and compact units with Intl.NumberFormat using the active Arabic locale.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "id": "F30",
+      "pathId": "signup",
+      "url": "https://ara.xhamster.com/signup?source=menuSignup",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Signup errors are visible but not programmatically tied to fields",
+      "evidence": "Empty signup produced Arabic messages, but inputs remained :valid with no aria-invalid and the assertive live region was empty.",
+      "guidanceId": "accessible-error-announcement",
+      "suggestedFix": "Associate each message with its field, set aria-invalid, and announce the error summary after submission.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/signup-invalid-probe.json"
+      ]
+    },
+    {
+      "id": "F31",
+      "pathId": "signup",
+      "url": "https://ara.xhamster.com/signup?source=menuSignup",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Email signup disables expected autofill",
+      "evidence": "The email field uses autocomplete=off and the password field is named new-password rather than using a complete, standards-based autocomplete token set.",
+      "guidanceId": "autofill-sign-up-form",
+      "suggestedFix": "Use autocomplete=email and autocomplete=new-password with semantic input types and labels.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/signup-email-probe.json"
+      ]
+    },
+    {
+      "id": "F32",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Thumbnail assets are often oversized or missing delivery hints",
+      "evidence": "The image audit found 12 oversized images, 16 legacy-format results, three without srcset and 29 without dimensions.",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "suggestedFix": "Request thumbnails at rendered size, prefer modern formats, provide srcset/sizes and intrinsic dimensions.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/images.json"
+      ]
+    },
+    {
+      "id": "F33",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Initial rendering performs avoidable script and style work",
+      "evidence": "The page loaded 61 scripts; Lighthouse identified unused CSS/JS and the trace recorded two long tasks.",
+      "guidanceId": "deprioritize-background-fetches",
+      "suggestedFix": "Defer optional personalization, analytics and offscreen work until needed and prioritize foreground content.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "id": "F34",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party and script budgets are not constrained",
+      "evidence": "The initial load transferred 1.73MB across 147 requests, with 1.03MB of scripts and 16 third-party origins.",
+      "guidanceId": "optimize-script-priority",
+      "suggestedFix": "Set budgets for third-party origins, JavaScript and media, then gate optional integrations behind consent and interaction.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "id": "F35",
+      "pathId": "home",
+      "url": "https://ara.xhamster.com/",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Core search and signup capabilities are not machine-exposed",
+      "evidence": "The public site has search and signup flows, but probing found no WebMCP or registered agent-readable tools.",
+      "guidanceId": "webmcp",
+      "suggestedFix": "Expose carefully scoped, confirmable capabilities for search and account actions with clear safety boundaries.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/signup-probe.json"
+      ]
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Serve and lay out a true narrow-screen view using fluid sizing, responsive navigation and no fixed 1024px canvas.",
+      "priority": 1,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "css-layout",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Allow user zoom, remove restrictive viewport settings on mobile output, and reflow content without horizontal scrolling.",
+      "priority": 2,
+      "findingIds": [
+        "F22"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Reduce the panel footprint, keep choices clear and equal, and preserve access to the page context.",
+      "priority": 3,
+      "findingIds": [
+        "F08"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Implement the blocking surface with dialog semantics, a programmatic name, focus management, Escape behavior, and explicit dismiss controls.",
+      "priority": 4,
+      "findingIds": [
+        "F09"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Reduce promotional chrome and prioritize the content grid and primary task in the initial viewport.",
+      "priority": 5,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "css",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Make sidebar, grid, cards and banners respond to their container sizes, with viewport fallbacks.",
+      "priority": 6,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Provide a strong :focus-visible indicator and ensure interactive targets meet touch size and spacing guidance.",
+      "priority": 7,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Make the content purpose and next action immediately visible, with secondary legal and promotional surfaces taking less space.",
+      "priority": 8,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "improve-text-layout-and-legibility",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Prioritize the LCP resource, reduce render-blocking CSS and defer non-critical scripts.",
+      "priority": 9,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Defer non-critical scripts and styles, reduce request chains, and prioritize only LCP-critical resources.",
+      "priority": 10,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "optimize-script-priority",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Give every control a stable accessible name matching its visible label.",
+      "priority": 11,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Adjust foreground and background tokens to meet WCAG contrast and add non-color link cues.",
+      "priority": 12,
+      "findingIds": [
+        "F20"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T13",
+      "title": "Restore visible keyboard focus and use valid list/landmark structure and logical focus order.",
+      "priority": 13,
+      "findingIds": [
+        "F21"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T14",
+      "title": "Add nosniff and a restrictive Referrer-Policy, mark HTTPS cookies Secure, and avoid SameSite=None unless required.",
+      "priority": 14,
+      "findingIds": [
+        "F25"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T15",
+      "title": "Minimize pre-consent third-party requests and document each necessary processor and data purpose.",
+      "priority": 15,
+      "findingIds": [
+        "F26"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T16",
+      "title": "Deploy an enforcing resource CSP, nosniff, restrictive referrer and permissions policies, preserving the existing HSTS and frame protections.",
+      "priority": 16,
+      "findingIds": [
+        "F28"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T17",
+      "title": "Use autocomplete=email and autocomplete=new-password with semantic input types and labels.",
+      "priority": 17,
+      "findingIds": [
+        "F31"
+      ],
+      "guidanceId": "autofill-sign-up-form",
+      "status": "open"
+    },
+    {
+      "id": "T18",
+      "title": "Set budgets for third-party origins, JavaScript and media, then gate optional integrations behind consent and interaction.",
+      "priority": 18,
+      "findingIds": [
+        "F34"
+      ],
+      "guidanceId": "optimize-script-priority",
+      "status": "open"
+    },
+    {
+      "id": "T19",
+      "title": "Add a reduced-motion media query that removes or shortens non-essential animation.",
+      "priority": 19,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T20",
+      "title": "Preserve system colors in forced-colors mode and provide a higher-contrast token set.",
+      "priority": 20,
+      "findingIds": [
+        "F02"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T21",
+      "title": "Use a semantic top-layer primitive and edge-aware positioning rather than an unanchored custom layer.",
+      "priority": 21,
+      "findingIds": [
+        "F07"
+      ],
+      "guidanceId": "position-aware-tooltips",
+      "status": "open"
+    },
+    {
+      "id": "T22",
+      "title": "Split long tasks and schedule non-critical work at lower priority.",
+      "priority": 22,
+      "findingIds": [
+        "F16"
+      ],
+      "guidanceId": "break-up-long-tasks",
+      "status": "open"
+    },
+    {
+      "id": "T23",
+      "title": "Split route-specific bundles and load optional dependencies only when needed.",
+      "priority": 23,
+      "findingIds": [
+        "F18"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T24",
+      "title": "Provide intrinsic dimensions, responsive sources and appropriate lazy loading for media thumbnails.",
+      "priority": 24,
+      "findingIds": [
+        "F23"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T25",
+      "title": "Add accurate schema.org VideoObject JSON-LD that matches visible content and canonical metadata.",
+      "priority": 25,
+      "findingIds": [
+        "F24"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T26",
+      "title": "Offer passkeys as a phishing-resistant sign-in and reauthentication option while retaining accessible fallbacks.",
+      "priority": 26,
+      "findingIds": [
+        "F27"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T27",
+      "title": "Format numbers and compact units with Intl.NumberFormat using the active Arabic locale.",
+      "priority": 27,
+      "findingIds": [
+        "F29"
+      ],
+      "guidanceId": "translator",
+      "status": "open"
+    },
+    {
+      "id": "T28",
+      "title": "Associate each message with its field, set aria-invalid, and announce the error summary after submission.",
+      "priority": 28,
+      "findingIds": [
+        "F30"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T29",
+      "title": "Request thumbnails at rendered size, prefer modern formats, provide srcset/sizes and intrinsic dimensions.",
+      "priority": 29,
+      "findingIds": [
+        "F32"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T30",
+      "title": "Defer optional personalization, analytics and offscreen work until needed and prioritize foreground content.",
+      "priority": 30,
+      "findingIds": [
+        "F33"
+      ],
+      "guidanceId": "deprioritize-background-fetches",
+      "status": "open"
+    },
+    {
+      "id": "T31",
+      "title": "Expose carefully scoped, confirmable capabilities for search and account actions with clear safety boundaries.",
+      "priority": 31,
+      "findingIds": [
+        "F35"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "T32",
+      "title": "Use same-document or cross-document View Transitions for meaningful navigation changes, with reduced-motion handling.",
+      "priority": 32,
+      "findingIds": [
+        "F03"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T33",
+      "title": "Where scroll-linked feedback is useful, use CSS scroll-driven animations rather than main-thread handlers.",
+      "priority": 33,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "scrollytelling",
+      "status": "open"
+    },
+    {
+      "id": "T34",
+      "title": "Add platform-native snap or overscroll behavior only where it clarifies a carousel or drawer interaction.",
+      "priority": 34,
+      "findingIds": [
+        "F05"
+      ],
+      "guidanceId": "physics-based-easing",
+      "status": "open"
+    },
+    {
+      "id": "T35",
+      "title": "Use a sticky, scroll-state-aware header or progress cue without obscuring content.",
+      "priority": 35,
+      "findingIds": [
+        "F06"
+      ],
+      "guidanceId": "shrinking-header-on-scroll",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Initial desktop viewport with blocking consent panel",
+      "condition": "desktop",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "360x800 viewport showing fixed-width overflow",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F12",
+        "F14",
+        "F22"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Home under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/categories.png",
+      "caption": "Category archetype",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/best.png",
+      "caption": "Best-listing archetype",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/signup.png",
+      "caption": "Signup archetype with consent panel",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/video-detail.png",
+      "caption": "Video detail archetype with consent panel",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/not-found.png",
+      "caption": "Localized error and recovery state",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile overflow, CLS and long tasks",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F22"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact load timing and long-task summary",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F33"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Initial network capture",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact request and byte summary",
+      "findingIds": [
+        "F17",
+        "F26",
+        "F33",
+        "F34"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered coverage",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered view",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "No-JS crawler view",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Mobile Lighthouse report",
+      "findingIds": [
+        "F02",
+        "F13",
+        "F15",
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F21",
+        "F22",
+        "F33"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered home DOM and styles",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-probe.json",
+      "caption": "Semantic, CSS-feature and control probe",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F09",
+        "F19",
+        "F35"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Animations under reduced motion",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header audit",
+      "findingIds": [
+        "F25",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party origin audit",
+      "findingIds": [
+        "F26",
+        "F34"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit",
+      "findingIds": [
+        "F23",
+        "F32"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap summary",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post2.heapsnapshot",
+      "caption": "Post-interaction heap summary",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/signup-probe.json",
+      "caption": "Signup entry and account-method probe",
+      "findingIds": [
+        "F27",
+        "F35"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/signup-email-probe.json",
+      "caption": "Signup autofill probe",
+      "findingIds": [
+        "F27",
+        "F31"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/signup-invalid-probe.json",
+      "caption": "Signup error-state probe",
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Homepage text, link and localization recon",
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/video-probe.json",
+      "caption": "Video metadata probe",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Service worker, manifest and focus probe",
+      "findingIds": [
+        "F13",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Robots policy",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-18T22-45-03-756Z"
+}

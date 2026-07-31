@@ -1,0 +1,2159 @@
+{
+  "url": "https://rx.sp.mbga.jp",
+  "auditedAt": "2026-07-23T18:36:51.968Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete. Entry URL redirects by client/UA to Mobage portal variants; representative guest homepage, listing, login and missing-route states were inspected.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Server-rendered legacy MPA with jQuery/Modernizr on the listing",
+    "notes": "rx.sp.mbga.jp redirects to Mobage surfaces. Authenticated/community/gameplay internals were not covered because no credentials were provided."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "discoverability",
+    "trace",
+    "har",
+    "lighthouse",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "curl"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "fluid-scaling",
+    "forms",
+    "autofill-sign-in-form",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "visually-stable-font-fallbacks",
+    "deliver-optimized-decorative-images",
+    "security",
+    "privacy",
+    "batch-analytics-events",
+    "passkeys",
+    "same-document-transitions",
+    "scrollability-affordance-hints",
+    "validate-input-after-interaction",
+    "accessible-error-announcement",
+    "manage-recurring-intervals",
+    "html",
+    "css",
+    "reduce-style-repetition"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/desktop.png",
+      "caption": "Homepage at 1440x900 showing a mobile-derived layout stretched across desktop.",
+      "condition": "viewport: 1440x900",
+      "findingIds": [
+        "F06",
+        "F08"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "Homepage at 360x800.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01",
+        "F04",
+        "F08",
+        "F23",
+        "F25"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile-dark-reduced.png",
+      "caption": "Homepage under dark and reduced-motion preferences; appearance is pixel-identical to default.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Homepage mobile layout metrics: no overflow and CLS 0.0000375.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom.json",
+      "caption": "Rendered homepage DOM and CSS.",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-HTML versus rendered-DOM comparison: 86% coverage and no JS shell.",
+      "condition": "JavaScript enabled/disabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler view.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/trace.json",
+      "caption": "DevTools load trace.",
+      "condition": "default load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/trace-summary.json",
+      "caption": "Trace summary: LCP 3326ms, no long tasks.",
+      "condition": "default load",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/network.har",
+      "caption": "HAR containing 67 requests and 1.16MB transfer.",
+      "condition": "default load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/network-summary.json",
+      "caption": "HAR summary with resource, blocking, cache and weight signals.",
+      "condition": "default load",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F20",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security-header inspection.",
+      "condition": "main document",
+      "findingIds": [
+        "F19",
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security inspection.",
+      "condition": "guest load",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party-origin inspection.",
+      "condition": "guest load",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Rendered image audit.",
+      "condition": "homepage",
+      "findingIds": [
+        "F12",
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan; no findings.",
+      "condition": "homepage",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap summary: 91,409 nodes and 4,995,028 bytes self size.",
+      "condition": "before interaction",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Heap summary after ten scroll down/up cycles: 89,493 nodes and 5,041,275 bytes.",
+      "condition": "after repeated interaction",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "Same-page memory sample around ten scroll cycles: DOM nodes 812 to 810; used heap 1.31MB to 1.38MB.",
+      "condition": "repeated interaction",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report: performance 70, accessibility 78, SEO 92.",
+      "condition": "mobile default",
+      "findingIds": [
+        "F02",
+        "F09",
+        "F11",
+        "F13",
+        "F14",
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/probe.json",
+      "caption": "Metadata, links, headings, controls, animation and platform probe.",
+      "condition": "homepage",
+      "findingIds": [
+        "F01",
+        "F03",
+        "F06",
+        "F12",
+        "F14",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/focus-targets.json",
+      "caption": "Visible focus and target-size probe.",
+      "condition": "keyboard focus",
+      "findingIds": [
+        "F07",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Scripts, viewport, status, service worker and canonical probe.",
+      "condition": "homepage",
+      "findingIds": [
+        "F08",
+        "F10",
+        "F15",
+        "F18"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/listing-mobile.png",
+      "caption": "Listing delivered as a 980px desktop page scaled into a 360px viewport.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/listing-dom.json",
+      "caption": "Listing DOM showing no viewport meta and HTTP canonical/assets.",
+      "condition": "listing",
+      "findingIds": [
+        "F05",
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/listing-layout-mobile.json",
+      "caption": "Listing uses a 980 CSS-pixel layout viewport at 360px device width.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05",
+        "F15",
+        "F17"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-mobile.png",
+      "caption": "Login form and federated alternatives.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F21",
+        "F24"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/login-dom.json",
+      "caption": "Login form DOM.",
+      "condition": "login",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-probe.json",
+      "caption": "Login language, labels, autocomplete and WebAuthn-use probe.",
+      "condition": "login",
+      "findingIds": [
+        "F12",
+        "F15",
+        "F21",
+        "F24",
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-validation.json",
+      "caption": "Login fields are not required and expose no ARIA error relationship.",
+      "condition": "empty login form",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/404-mobile.png",
+      "caption": "Unknown route unexpectedly resolves to generic Mobage content rather than a not-found state.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/http-status.txt",
+      "caption": "HTTP redirect/status checks for entry, homepage, unknown route and sitemap.",
+      "condition": "curl follow redirects",
+      "findingIds": [
+        "F18",
+        "F23"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Guest game-portal homepage and primary browse entry; represents global chrome, discovery, news and game cards.",
+      "url": "https://rx.sp.mbga.jp",
+      "conditions": [
+        "desktop 1440x900",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "no JavaScript crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "New-games listing; represents catalogue/list templates and pagination.",
+      "url": "https://sp.mbga.jp/_game_newly_list?_from=game_top&p=2",
+      "conditions": [
+        "mobile 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Guest login journey reached from the primary header; represents authentication and form handling. Credentials were not submitted.",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest",
+      "conditions": [
+        "mobile 360x800",
+        "form semantics inspection"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "missing-route",
+      "description": "Deliberately unknown route used to inspect HTTP/not-found recovery behavior.",
+      "url": "https://sp.mbga.jp/definitely-not-a-route-web-uplift",
+      "conditions": [
+        "mobile 360x800"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "summary": "The public UI is hard-coded light and does not honor the user’s dark-theme preference.",
+      "evidence": "The default and dark-emulated 360px screenshots are pixel-identical; the computed root color-scheme is “normal”.",
+      "suggestedFix": "Declare color-scheme and retint surfaces, text, borders and imagery under prefers-color-scheme, following the dark-mode guidance.",
+      "guidanceId": "dark-mode",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/mobile-dark-reduced.png",
+        "evidence/probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F02",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "summary": "Essential footer links do not remain sufficiently distinct at normal contrast, so higher-contrast needs are not met.",
+      "evidence": "Lighthouse measured 2.86:1 for 11px blue footer links against #d0d0d0.",
+      "suggestedFix": "Use tokens that meet WCAG contrast in the default palette and add forced-colors/prefers-contrast treatment.",
+      "guidanceId": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "summary": "Route changes are abrupt rather than preserving spatial continuity.",
+      "evidence": "DOM/script inspection found no authored View Transition use; navigation is conventional full-document links and no animations were active.",
+      "suggestedFix": "Add cross-document View Transitions for same-origin catalogue navigation, with reduced-motion safeguards.",
+      "guidanceId": "same-document-transitions",
+      "artifacts": [
+        "evidence/probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "summary": "The long homepage provides no position-aware navigation or scroll progress.",
+      "evidence": "The page is 2,882px tall, while screenshots and DOM show static header/chrome and no active scroll-linked behavior.",
+      "suggestedFix": "Use a compact sticky header or progress/return affordance that responds to scroll state without obscuring content.",
+      "guidanceId": "scrollability-affordance-hints",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/layout-mobile.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "summary": "A representative listing is served as a desktop-only 980px canvas and scaled down on phones.",
+      "evidence": "At a 360px viewport the listing had no viewport meta, a 980px layout viewport and 0.367 scale; text and controls are tiny.",
+      "suggestedFix": "Serve one responsive HTTPS template with a viewport meta tag, intrinsic sizing and fluid/container-aware layout.",
+      "guidanceId": "fluid-scaling",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/listing-layout-mobile.json",
+        "evidence/listing-dom.json"
+      ],
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://sp.mbga.jp/_game_newly_list?_from=game_top&p=2"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "summary": "Reusable catalogue components do not adapt cleanly across available space.",
+      "evidence": "The homepage probe found zero container rules; desktop cards stretch to 780px rows, while the listing falls back to a fixed desktop canvas on mobile.",
+      "suggestedFix": "Give cards intrinsic limits and container-query variants rather than relying on separate fixed-width templates.",
+      "guidanceId": "fluid-scaling",
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/listing-mobile.png",
+        "evidence/probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "summary": "Several common links are below the recommended touch-target size.",
+      "evidence": "The focus/target probe measured login and registration at 45×31px, primary search links at 38px high, and category links at 32px high. Keyboard outlines were visible.",
+      "suggestedFix": "Increase interactive target boxes to at least 44×44 CSS pixels while preserving visible focus.",
+      "guidanceId": "accessibility",
+      "artifacts": [
+        "evidence/focus-targets.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "summary": "Guest users receive a generic, unactionable system error on the homepage.",
+      "evidence": "Both desktop and mobile screenshots show “システムエラーが発生しました。” with no cause, retry, dismissal or recovery action.",
+      "suggestedFix": "Replace the generic toast with a contextual message, a retry or alternative next step, and accessible status announcement.",
+      "guidanceId": "accessible-error-announcement",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/desktop.png",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "summary": "Cold-load rendering is slow despite a quiet main thread.",
+      "evidence": "Lighthouse measured LCP 4.8s and FCP 4.1s; the raw trace measured LCP/FCP 3.33s with no blocking tasks.",
+      "suggestedFix": "Reduce TTFB/render delay and prioritize the 20th-anniversary LCP image with fetchpriority=high after confirming it remains the LCP candidate.",
+      "guidanceId": "optimize-image-priority",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/trace-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "summary": "Parser-blocking resources and weak cache delivery delay the first view.",
+      "evidence": "HAR identified three VeryHigh parser-inserted stylesheets and two synchronous parser scripts; its hygiene section flags major sprites, JS, CSS and font responses without useful cache headers.",
+      "suggestedFix": "Consolidate critical CSS, defer noncritical scripts, and give versioned static assets long-lived immutable caching.",
+      "guidanceId": "identify-heavy-scripts",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "summary": "The page ships avoidable unused code and duplicate sprite cost.",
+      "evidence": "Lighthouse estimated 42KiB unused JS and 35KiB unused CSS; HAR shows near-duplicate 181KiB sprite transfers from sp.mbga.jp and ava-a.sp.mbga.jp.",
+      "suggestedFix": "Split page-specific code and serve each shared sprite once from one canonical asset origin.",
+      "guidanceId": "identify-heavy-scripts",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/network-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "summary": "Important controls and form fields lack robust accessible names and labels.",
+      "evidence": "The homepage has no landmarks and a visible menu button without text; the login email/password inputs rely on placeholders and have no associated labels; the image probe found 44 images without alt in the rendered DOM, many hidden drawer assets.",
+      "suggestedFix": "Add persistent labels, accessible button names, semantic landmarks, and empty or descriptive alt according to image purpose.",
+      "guidanceId": "accessibility",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/login-probe.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "login",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "summary": "Footer text contrast fails WCAG minimums.",
+      "evidence": "Lighthouse reported 2.86:1 contrast for multiple 11px footer links where 4.5:1 is required.",
+      "suggestedFix": "Darken link color or lighten its background and verify all states at 4.5:1 or better.",
+      "guidanceId": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "summary": "The homepage lacks navigation/main landmarks and includes many script-only pseudo-links.",
+      "evidence": "The DOM probe found no main/nav/header/footer landmarks; Lighthouse failed landmark-one-main; numerous anchors use javascript:void(0). Focus rings are visible, but structure is weak.",
+      "suggestedFix": "Introduce semantic page landmarks and real anchors/buttons while retaining the native focus outline.",
+      "guidanceId": "accessibility",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse.json",
+        "evidence/focus-targets.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "summary": "User zoom is disabled and one core template does not reflow.",
+      "evidence": "Two homepage viewport tags and the login viewport specify maximum-scale=1,user-scalable=no; the listing has no viewport meta and renders at 980 CSS pixels on a 360px device.",
+      "suggestedFix": "Remove scaling restrictions and rebuild the listing to reflow at narrow widths.",
+      "guidanceId": "fluid-scaling",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/login-probe.json",
+        "evidence/listing-layout-mobile.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "summary": "Legacy platform choices create fragile navigation and maintenance risk.",
+      "evidence": "The listing loads jQuery 1.7.2 and Modernizr 2.5.3, uses HTTP canonical/assets after redirect, and the homepage contains many javascript:void(0) anchors.",
+      "suggestedFix": "Retire legacy libraries, use native platform APIs and real href/button semantics, and keep all authored asset URLs HTTPS.",
+      "guidanceId": "html",
+      "artifacts": [
+        "evidence/listing-dom.json",
+        "evidence/probe.json"
+      ],
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://sp.mbga.jp/_game_newly_list?_from=game_top&p=2"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "summary": "A substantial set of navigation actions is not crawlable, and the listing is not mobile-friendly.",
+      "evidence": "Lighthouse failed crawlable-anchors for javascript:void(0) links; the listing has no viewport meta and is scaled from 980px.",
+      "suggestedFix": "Use real href URLs for navigation and a responsive viewport/template on every public listing.",
+      "guidanceId": "html",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/listing-layout-mobile.json"
+      ],
+      "effort": "medium",
+      "pathId": "listing",
+      "url": "https://sp.mbga.jp/_game_newly_list?_from=game_top&p=2"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "summary": "Canonical and sitemap signals are inconsistent across hosts and templates.",
+      "evidence": "The rendered homepage has no canonical; the listing canonical is HTTP www.mbga.jp; requests to sitemap.xml resolved to generic Mobage HTML rather than a sitemap.",
+      "suggestedFix": "Choose one HTTPS canonical host, emit self-consistent canonical URLs, and publish a valid sitemap that matches robots/indexing policy.",
+      "guidanceId": "html",
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/listing-dom.json",
+        "evidence/http-status.txt"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "summary": "Transport is HTTPS, but cookies and response headers are not safely hardened.",
+      "evidence": "All three guest cookies lack Secure and use SameSite=None; the document lacks CSP, HSTS and X-Content-Type-Options.",
+      "suggestedFix": "Set Secure and appropriate SameSite/HttpOnly attributes, then deploy HSTS, nosniff and a tested CSP.",
+      "guidanceId": "security",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "summary": "Guest loads include advertising/analytics collection without an evident minimisation explanation in the audited path.",
+      "evidence": "Network evidence includes ad-a.sp.mbga.jp and an analytics JSON-RPC call; the login DOM embeds an analytics endpoint/tracking cookie plus reCAPTCHA/Yahoo tags.",
+      "suggestedFix": "Inventory guest telemetry, remove unnecessary calls, batch essential analytics and disclose/control third-party processing.",
+      "guidanceId": "privacy",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/login-dom.json",
+        "evidence/trackers.json"
+      ],
+      "effort": "medium",
+      "pathId": "login",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "summary": "Authentication remains password-centric and does not expose a phishing-resistant passkey option.",
+      "evidence": "The login page offers password and social providers; the probe found no authored WebAuthn use, despite browser support. No permission prompt fired on load.",
+      "suggestedFix": "Add passkey registration/sign-in alongside existing recovery paths and request permissions only after a user action.",
+      "guidanceId": "passkeys",
+      "artifacts": [
+        "evidence/login-mobile.png",
+        "evidence/login-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "login",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "summary": "Browser-enforced defensive policies are absent.",
+      "evidence": "Header inspection found no frame protection, Referrer-Policy or Permissions-Policy in addition to missing CSP/HSTS/nosniff.",
+      "suggestedFix": "Deploy frame-ancestors, strict Referrer-Policy and a least-privilege Permissions-Policy, then verify compatibility.",
+      "guidanceId": "security",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "summary": "Failure routing does not produce a clear recoverable state.",
+      "evidence": "A deliberately unknown URL loaded generic Mobage content with no not-found explanation; the homepage also emitted an unactionable system error.",
+      "suggestedFix": "Return a proper 404 page with useful navigation, and make runtime/network failures explicit with retry and safe fallback actions.",
+      "guidanceId": "accessible-error-announcement",
+      "artifacts": [
+        "evidence/404-mobile.png",
+        "evidence/http-status.txt",
+        "evidence/mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "missing-route",
+      "url": "https://sp.mbga.jp/definitely-not-a-route-web-uplift"
+    },
+    {
+      "id": "F24",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "summary": "The authentication document does not identify its Japanese language.",
+      "evidence": "The login probe found an empty html lang value while the visible interface is Japanese; the homepage correctly uses lang=ja.",
+      "suggestedFix": "Set lang=\"ja\" (and dir where needed) on every document and use logical CSS properties for translation-safe layout.",
+      "guidanceId": "html",
+      "artifacts": [
+        "evidence/login-probe.json",
+        "evidence/login-mobile.png"
+      ],
+      "effort": "small",
+      "pathId": "login",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest"
+    },
+    {
+      "id": "F25",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "summary": "The login form lacks client-visible validation semantics before reCAPTCHA submission.",
+      "evidence": "Email and password fields are not required, have no aria-invalid/aria-describedby relationship, and expose no persistent labels; the homepage error is generic and unrecoverable.",
+      "suggestedFix": "Validate after interaction, connect concise field errors programmatically, preserve entered values, and announce the summary.",
+      "guidanceId": "validate-input-after-interaction",
+      "artifacts": [
+        "evidence/login-validation.json",
+        "evidence/login-probe.json",
+        "evidence/mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "login",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest"
+    },
+    {
+      "id": "F26",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "summary": "Login fields do not use purpose-specific autofill tokens.",
+      "evidence": "Email uses autocomplete=\"on\" and password has no autocomplete token; neither uses username/current-password.",
+      "suggestedFix": "Use autocomplete=\"username\" and autocomplete=\"current-password\" and keep labels visible.",
+      "guidanceId": "autofill-sign-in-form",
+      "artifacts": [
+        "evidence/login-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "login",
+      "url": "https://sp.mbga.jp/_lg?_from=globalHeaderNaviGuest"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "summary": "The page relies heavily on legacy PNG/GIF assets and eagerly loads below-fold images.",
+      "evidence": "Image inspection found 39 legacy-format images, no modern-format images and 16 below-fold images without lazy loading; images account for 1,001,309 transferred bytes.",
+      "suggestedFix": "Convert suitable imagery to AVIF/WebP, preserve dimensions, add responsive sources and lazy-load noncritical below-fold images.",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/network-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    },
+    {
+      "id": "F28",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "summary": "Image sprites and multi-origin delivery dominate a 1.16MB guest load.",
+      "evidence": "HAR recorded 67 requests and 1,160,179 transferred bytes; five large PNG sprites total roughly 767KB and 61 requests were classified off the requested origin.",
+      "suggestedFix": "Set a template-specific byte budget, remove duplicate sprites, defer nonessential assets and consolidate same-site delivery.",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "artifacts": [
+        "evidence/network-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://rx.sp.mbga.jp"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Harden cookies and browser security headers",
+      "priority": 1,
+      "findingIds": [
+        "F19",
+        "F22"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore zoom, responsive listing reflow and adequate targets",
+      "priority": 2,
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07",
+        "F15"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Repair labels, landmarks, contrast and semantic navigation",
+      "priority": 3,
+      "findingIds": [
+        "F02",
+        "F12",
+        "F13",
+        "F14",
+        "F17"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Make errors and missing routes explicit and recoverable",
+      "priority": 4,
+      "findingIds": [
+        "F08",
+        "F23",
+        "F25"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Cut LCP delay, parser blocking and duplicate unused payload",
+      "priority": 5,
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Modernise and budget image delivery",
+      "priority": 6,
+      "findingIds": [
+        "F27",
+        "F28"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Fix canonical host, sitemap and crawlable route signals",
+      "priority": 7,
+      "findingIds": [
+        "F17",
+        "F18"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add dark theme and preference-aware contrast",
+      "priority": 8,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Modernise authentication assistance and passkeys",
+      "priority": 9,
+      "findingIds": [
+        "F21",
+        "F24",
+        "F26"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Retire legacy libraries and abrupt route behavior",
+      "priority": 10,
+      "findingIds": [
+        "F03",
+        "F16"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Minimise and explain guest telemetry",
+      "priority": 11,
+      "findingIds": [
+        "F20"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Add lightweight position-aware navigation",
+      "priority": 12,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "scrollability-affordance-hints",
+      "status": "open"
+    }
+  ],
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The default and dark-emulated 360px screenshots are pixel-identical; the computed root color-scheme is “normal”.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/mobile-dark-reduced.png",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "No animations were active under reduced-motion emulation, so no non-essential motion persisted.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile-dark-reduced.png",
+        "evidence/probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Lighthouse measured 2.86:1 for 11px blue footer links against #d0d0d0.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "DOM/script inspection found no authored View Transition use; navigation is conventional full-document links and no animations were active.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No scroll-linked animation exists on the representative pages, so there is no implementation technique to evaluate.",
+      "reason": "No scroll-linked animation exists on the representative pages, so there is no implementation technique to evaluate.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No gesture-driven control was present in the guest browsing and login surfaces.",
+      "reason": "No gesture-driven control was present in the guest browsing and login surfaces.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The page is 2,882px tall, while screenshots and DOM show static header/chrome and no active scroll-linked behavior.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/layout-mobile.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No tooltip, popover or anchored menu was exposed on the audited guest paths.",
+      "reason": "No tooltip, popover or anchored menu was exposed on the audited guest paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Direct inspection found the expected outcome on all representative paths without a contradictory signal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/dom.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Screenshots show content immediately; the small error toast does not obscure the primary content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No user-triggered overlay or disclosure primitive appeared on the audited paths.",
+      "reason": "No user-triggered overlay or disclosure primitive appeared on the audited paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The mobile first viewport prioritises game/news content with compact global chrome.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "At a 360px viewport the listing had no viewport meta, a 980px layout viewport and 0.367 scale; text and controls are tiny.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/listing-layout-mobile.json",
+        "evidence/listing-dom.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The homepage probe found zero container rules; desktop cards stretch to 780px rows, while the listing falls back to a fixed desktop canvas on mobile.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/listing-mobile.png",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The focus/target probe measured login and registration at 45×31px, primary search links at 38px high, and category links at 32px high. Keyboard outlines were visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/focus-targets.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The H1 and first viewport clearly identify a games portal and expose new-game, ranking and genre routes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The guest browse journey reached a populated, paginated new-games listing; the separate login journey reached a cancellable form.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/login-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Both desktop and mobile screenshots show “システムエラーが発生しました。” with no cause, retry, dismissal or recovery action.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/desktop.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Lighthouse measured LCP 4.8s and FCP 4.1s; the raw trace measured LCP/FCP 3.33s with no blocking tasks.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/trace-summary.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Mobile layout observation measured CLS 0.0000375 and all inspected images declared dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/images.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Trace and layout observers recorded zero long tasks and 0ms total blocking time.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trace-summary.json",
+        "evidence/layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "HAR identified three VeryHigh parser-inserted stylesheets and two synchronous parser scripts; its hygiene section flags major sprites, JS, CSS and font responses without useful cache headers.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Lighthouse estimated 42KiB unused JS and 35KiB unused CSS; HAR shows near-duplicate 181KiB sprite transfers from sp.mbga.jp and ava-a.sp.mbga.jp.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The homepage has no landmarks and a visible menu button without text; the login email/password inputs rely on placeholders and have no associated labels; the image probe found 44 images without alt in the rendered DOM, many hidden drawer assets.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/login-probe.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Lighthouse reported 2.86:1 contrast for multiple 11px footer links where 4.5:1 is required.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The DOM probe found no main/nav/header/footer landmarks; Lighthouse failed landmark-one-main; numerous anchors use javascript:void(0). Focus rings are visible, but structure is weak.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse.json",
+        "evidence/focus-targets.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Homepage body text is readable at the mobile viewport with clear row separation; listing legibility failures are recorded under reflow/zoom.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Two homepage viewport tags and the login viewport specify maximum-scale=1,user-scalable=no; the listing has no viewport meta and renders at 980 CSS pixels on a 360px device.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/login-probe.json",
+        "evidence/listing-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Lighthouse reported no browser console errors and no deprecated API audit failures on the homepage load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Homepage DOM has an HTML doctype and UTF-8 metadata; image audit found dimensions on all 45 images and layout stayed stable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/dom.json",
+        "evidence/images.json",
+        "evidence/layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The listing loads jQuery 1.7.2 and Modernizr 2.5.3, uses HTTP canonical/assets after redirect, and the homepage contains many javascript:void(0) anchors.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-dom.json",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Homepage and listing DOMs contain descriptive, route-specific titles and meta descriptions.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/dom.json",
+        "evidence/listing-dom.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Lighthouse failed crawlable-anchors for javascript:void(0) links; the listing has no viewport meta and is scaled from 980px.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/listing-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The rendered homepage has no canonical; the listing canonical is HTTP www.mbga.jp; requests to sitemap.xml resolved to generic Mobage HTML rather than a sitemap.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json",
+        "evidence/listing-dom.json",
+        "evidence/http-status.txt"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The homepage exposes Open Graph metadata and WebSite semantics consistent with its visible portal content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/dom.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "All three guest cookies lack Secure and use SameSite=None; the document lacks CSP, HSTS and X-Content-Type-Options.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Network evidence includes ad-a.sp.mbga.jp and an analytics JSON-RPC call; the login DOM embeds an analytics endpoint/tracking cookie plus reCAPTCHA/Yahoo tags.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/login-dom.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The login page offers password and social providers; the probe found no authored WebAuthn use, despite browser support. No permission prompt fired on load.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-mobile.png",
+        "evidence/login-probe.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Header inspection found no frame protection, Referrer-Policy or Permissions-Policy in addition to missing CSP/HSTS/nosniff.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Discoverability comparison found 86% of rendered content in raw HTML, a raw H1/title/description and no JS shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The audited listing and login pages rendered usable server content without cut-off overlays; no fragile async overlay was exposed.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/login-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "This server-rendered games portal is intrinsically online and does not present itself as an installable application; offline installability is contextual.",
+      "reason": "This server-rendered games portal is intrinsically online and does not present itself as an installable application; offline installability is contextual.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "A deliberately unknown URL loaded generic Mobage content with no not-found explanation; the homepage also emitted an unactionable system error.",
+      "pathIds": [
+        "missing-route"
+      ],
+      "artifacts": [
+        "evidence/404-mobile.png",
+        "evidence/http-status.txt",
+        "evidence/mobile.png"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "The login probe found an empty html lang value while the visible interface is Japanese; the homepage correctly uses lang=ja.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-probe.json",
+        "evidence/login-mobile.png"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "The representative public paths displayed no dates, currencies or locale-sensitive numeric data.",
+      "reason": "The representative public paths displayed no dates, currencies or locale-sensitive numeric data.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No time-zone-sensitive events or times appeared on the representative paths.",
+      "reason": "No time-zone-sensitive events or times appeared on the representative paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The inspected guest homepage and login show direct labels, visible login cancellation and no consent wall, confirmshaming or forced continuity.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/login-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Email and password fields are not required, have no aria-invalid/aria-describedby relationship, and expose no persistent labels; the homepage error is generic and unrecoverable.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-validation.json",
+        "evidence/login-probe.json",
+        "evidence/mobile.png"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Email uses autocomplete=\"on\" and password has no autocomplete token; neither uses username/current-password.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-probe.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No purchase/subscription/account-management flow was entered; login cancellation and alternatives were visible, but commercial commitments were outside guest scope.",
+      "reason": "No purchase/subscription/account-management flow was entered; login cancellation and alternatives were visible, but commercial commitments were outside guest scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "Image inspection found 39 legacy-format images, no modern-format images and 16 below-fold images without lazy loading; images account for 1,001,309 transferred bytes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "The load produced no long tasks and only one XHR/fetch; no autoplay media or continuing animation was present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trace-summary.json",
+        "evidence/network-summary.json",
+        "evidence/probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Active visual, DOM and objective artifact review against the mapped guidance.",
+      "evidence": "HAR recorded 67 requests and 1,160,179 transferred bytes; five large PNG sprites total roughly 767KB and 61 requests were classified off the requested origin.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "This public catalogue exposes crawlable content but no declared agent-facing transactional capability; emerging WebMCP tooling is not required for this scope.",
+      "reason": "This public catalogue exposes crawlable content but no declared agent-facing transactional capability; emerging WebMCP tooling is not required for this scope.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative guest paths and feature inventory.",
+      "evidence": "No summarisation or language-model task is part of the audited guest browsing/login experience.",
+      "reason": "No summarisation or language-model task is part of the audited guest browsing/login experience.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "After ten representative scroll down/up cycles, DOM nodes fell 812→810; heap self size changed only 4,995,028→5,041,275 bytes (~0.9%).",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Baseline heap summary was proportionate for the page: 91,409 heap nodes and 4.995MB self size; in-page used heap was 1.31MB.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual, DOM, network, performance or active probe evidence as referenced.",
+      "evidence": "Repeated scrolling did not increase DOM count (812→810) or heap node count (91,409→89,493); no accumulation signal was observed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "The audited guest catalogue/login scope has no declared agent-facing or on-device inference capability; this emerging contextual principle was judged out of scope."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "budget": {
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-23T18-36-51-968Z"
+}

@@ -1,0 +1,2271 @@
+{
+  "url": "https://www.varzesh3.com",
+  "auditedAt": "2026-07-26T06:50:32.741Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic audit completed across six representative paths. Video/podcast playback, ad-vendor click-through, authenticated account state, and destructive/commercial transactions were not covered because they are separate third-party or unavailable journeys; the selected pages cover the homepage, article, live data, league detail, search, and failure-state templates.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Next.js widgets within a server-rendered multi-page site",
+    "notes": "Persian RTL sports/news portal. Core HTML is server-rendered (86% raw/rendered content coverage); different templates have materially different responsive behavior."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-styles",
+    "evaluate-probe",
+    "layout-metrics",
+    "DevTools trace",
+    "HAR",
+    "Lighthouse",
+    "discoverability/no-JS comparison",
+    "heap-summary before/after",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets scan",
+    "raw robots/sitemap fetch"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "navigation-drawer",
+    "light-dismiss-a-dialog",
+    "size-aware-styling",
+    "forms",
+    "performance",
+    "html",
+    "privacy",
+    "security",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "validate-input-after-interaction",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals",
+    "fluid-scaling",
+    "improve-text-layout-and-legibility",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "break-up-long-tasks",
+    "batch-analytics-events",
+    "reduce-style-repetition",
+    "accessible-error-announcement",
+    "required-field-feedback",
+    "declarative-dialog-popover-control"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage first viewport at desktop size.",
+      "condition": "viewport: 1440x1000",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F30"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at a narrow viewport renders the fixed-width desktop composition scaled down.",
+      "condition": "viewport: 390x844",
+      "findingIds": [
+        "F01",
+        "F07",
+        "F09"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-preferences.png",
+      "caption": "Homepage remains light and animated-preference styling is unchanged under dark/reduced-motion/high-contrast preferences.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce; prefers-contrast: more; viewport: 390x844",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-desktop.png",
+      "caption": "Representative news article at desktop size.",
+      "condition": "viewport: 1440x1000",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-mobile.png",
+      "caption": "Representative article adapts to a narrow viewport.",
+      "condition": "viewport: 390x844",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/livescore-mobile.png",
+      "caption": "Live score template adapts to a narrow viewport.",
+      "condition": "viewport: 390x844",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and selected computed styles.",
+      "condition": "default browser",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-site-probe.json",
+      "caption": "Ad-hoc metadata, semantics, focus, feature, resource, and memory probe.",
+      "condition": "default headless viewport",
+      "findingIds": [
+        "F01",
+        "F03",
+        "F04",
+        "F05",
+        "F08",
+        "F09",
+        "F16",
+        "F18",
+        "F19",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-site-probe.json",
+      "caption": "Article semantics, focus and resource probe.",
+      "condition": "default headless viewport",
+      "findingIds": [
+        "F05",
+        "F19",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/livescore-site-probe.json",
+      "caption": "Live-score semantics, focus and resource probe.",
+      "condition": "default headless viewport",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout.json",
+      "caption": "Layout shift, long task, content size, and overflow evidence.",
+      "condition": "780px layout viewport",
+      "findingIds": [
+        "F01",
+        "F06"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace.",
+      "condition": "load plus 3 second observation",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Compact trace timings and long-task summary.",
+      "condition": "load plus 3 second observation",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive for the homepage load.",
+      "condition": "load plus 3 second observation",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact network totals, third-party, weight, and caching signals.",
+      "condition": "load plus 3 second observation",
+      "findingIds": [
+        "F14",
+        "F15",
+        "F25",
+        "F30"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Lighthouse performance, accessibility, best-practices, SEO, and agentic browsing audit.",
+      "condition": "mobile Lighthouse run",
+      "findingIds": [
+        "F08",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F22",
+        "F25",
+        "F29",
+        "F31"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered-content discoverability comparison.",
+      "condition": "JavaScript on/off comparison",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Browser-rendered homepage for discoverability comparison.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler-view homepage retaining server-rendered content.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap.json",
+      "caption": "Baseline V8 heap summary.",
+      "condition": "homepage settled state",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/home-heap-after-scroll.json",
+      "caption": "Heap summary after ten bottom/top scroll cycles.",
+      "condition": "10 repeated scroll cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header audit.",
+      "condition": "main document",
+      "findingIds": [
+        "F24",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie flag and lifetime audit.",
+      "condition": "homepage load",
+      "findingIds": [
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party and known-tracker origin inventory.",
+      "condition": "homepage load",
+      "findingIds": [
+        "F25",
+        "F30",
+        "F31"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image dimensions, loading, format, responsive-source and alt inventory.",
+      "condition": "homepage load",
+      "findingIds": [
+        "F21",
+        "F29"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-delivered secret scan with zero findings.",
+      "condition": "homepage and external scripts",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-metadata.json",
+      "caption": "Article Open Graph, Twitter Card, JSON-LD, manifest and service-worker signals.",
+      "condition": "article page",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-flow.json",
+      "caption": "Search journey result for the common query “فوتبال”.",
+      "condition": "GET search submission",
+      "findingIds": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-form.json",
+      "caption": "Actual homepage search form action, method, input type and placeholder.",
+      "condition": "homepage form inspection",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/league-flow.json",
+      "caption": "League table route content probe.",
+      "condition": "default browser",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-flow.json",
+      "caption": "Useful 404 and recovery surface reached from the tested route.",
+      "condition": "unavailable route",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/pwa-cache-probe.json",
+      "caption": "Active service worker and manifest, but no Cache Storage entries after load.",
+      "condition": "homepage settled state",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Public robots rules and sitemap declaration.",
+      "condition": "raw fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Sitemap index returned by the public endpoint.",
+      "condition": "raw fetch",
+      "findingIds": [
+        "F23"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Preference-emulated screenshot plus computed styles",
+      "evidence": "Light surfaces remained unchanged under dark preference.",
+      "findingIds": [
+        "F02"
+      ],
+      "artifacts": [
+        "evidence/home-preferences.png",
+        "evidence/home-dom.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Animation inventory under reduced-motion capture",
+      "evidence": "A running 15s animation remains and no reduced-motion rule was found.",
+      "findingIds": [
+        "F03"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/home-preferences.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "High-contrast preference screenshot plus stylesheet feature probe",
+      "evidence": "No contrast/forced-colors treatment was observed.",
+      "findingIds": [
+        "F04"
+      ],
+      "artifacts": [
+        "evidence/home-preferences.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-template CSS/DOM feature inspection",
+      "evidence": "No view-transition rules/API treatment found for route/state changes.",
+      "findingIds": [
+        "F05"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "No scroll-linked parallax, scrollytelling, or reveal behavior was present on the representative templates.",
+      "reason": "No scroll-linked parallax, scrollytelling, or reveal behavior was present on the representative templates."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Visual carousel review and CSS feature inspection",
+      "evidence": "The homepage carousel uses small arrow/pagination controls and exposes no scroll-snap or native gesture surface.",
+      "findingIds": [
+        "F08"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-site-probe.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Long-page screenshot/layout and header positioning inspection",
+      "evidence": "The 7,838px homepage uses static chrome without scroll-state orientation.",
+      "findingIds": [
+        "F06"
+      ],
+      "artifacts": [
+        "evidence/home-layout.json",
+        "evidence/home-desktop.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "No tooltip, popover, or edge-sensitive anchored overlay appeared in the representative flows.",
+      "reason": "No tooltip, popover, or edge-sensitive anchored overlay appeared in the representative flows."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Route/state walkthrough and transition feature inspection",
+      "evidence": "Route changes and large carousel state changes provide no transition or focus-movement cue.",
+      "findingIds": [
+        "F05"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Load screenshots across homepage and article",
+      "evidence": "No modal interstitial or full-screen popup obscured core content on load.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "No dismissible modal/disclosure overlay was encountered; dialogs, popovers, and details counts were zero.",
+      "reason": "No dismissible modal/disclosure overlay was encountered; dialogs, popovers, and details counts were zero."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Desktop and narrow visual review",
+      "evidence": "Ad panels and dense widgets dominate the first viewport.",
+      "findingIds": [
+        "F07"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Layout metrics and narrow screenshots across templates",
+      "evidence": "Homepage content is 342px wider than the 780px viewport and fixes viewport width at 1122.",
+      "findingIds": [
+        "F01"
+      ],
+      "artifacts": [
+        "evidence/home-layout.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Stylesheet feature probe and cross-template narrow screenshots",
+      "evidence": "No container queries were found and homepage components retain the desktop canvas.",
+      "findingIds": [
+        "F09"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Programmatic focus walk, target geometry, and Lighthouse",
+      "evidence": "Focus outlines are none and many targets are undersized.",
+      "findingIds": [
+        "F08"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport and heading/content review across five templates",
+      "evidence": "Homepage, article, live score, and league page communicate their sports-content purpose and primary content clearly.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/article-mobile.png",
+        "evidence/livescore-mobile.png"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore",
+        "league"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Submitted the actual GET search form with a common query",
+      "evidence": "The search journey returned no content for فوتبال.",
+      "findingIds": [
+        "F10"
+      ],
+      "artifacts": [
+        "evidence/search-flow.json",
+        "evidence/search-form.json"
+      ],
+      "pathIds": [
+        "search"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Search empty-state walkthrough",
+      "evidence": "The empty state is visible but offers no query-specific recovery or suggested next action.",
+      "findingIds": [
+        "F11"
+      ],
+      "artifacts": [
+        "evidence/search-flow.json"
+      ],
+      "pathIds": [
+        "search"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse plus DevTools trace",
+      "evidence": "Lighthouse LCP was 6.9s, outside the good range.",
+      "findingIds": [
+        "F12"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout-shift observer plus Lighthouse",
+      "evidence": "Observed CLS was 0.0012 and Lighthouse CLS was 0.",
+      "artifacts": [
+        "evidence/home-layout.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse main-thread diagnostics plus trace long tasks",
+      "evidence": "6.4s main-thread work, 1.5s JS execution and an 81.96ms trace task were recorded.",
+      "findingIds": [
+        "F13"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary, DOM confirmation, and Lighthouse insights",
+      "evidence": "136 requests/4.22MB with render-blocking, cache and LCP-discovery opportunities.",
+      "findingIds": [
+        "F14"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse unused-code and source-map audits",
+      "evidence": "Estimated 593KiB unused JS and 88KiB unused CSS.",
+      "findingIds": [
+        "F15"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits plus DOM probe",
+      "evidence": "Unlabeled selects/search, unnamed links and invalid ARIA relationships were found.",
+      "findingIds": [
+        "F16"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-site-probe.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse contrast audit",
+      "evidence": "Multiple small-text color pairs failed 4.5:1.",
+      "findingIds": [
+        "F17"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Heading/landmark probe plus keyboard focus walk",
+      "evidence": "Homepage has no h1/main/nav and focused links have no visible outline.",
+      "findingIds": [
+        "F18"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Narrow and desktop screenshots",
+      "evidence": "The fixed-width homepage is scaled into tiny, dense text at 390px.",
+      "findingIds": [
+        "F01",
+        "F07"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Viewport meta inspection, narrow screenshots, and Lighthouse",
+      "evidence": "Fixed 1122 viewport, user-scalable=no on article/league, and target-size failures.",
+      "findingIds": [
+        "F19"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse console capture",
+      "evidence": "SignalR/WebSocket connection errors were logged.",
+      "findingIds": [
+        "F20"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Document probe, image primitive and Lighthouse",
+      "evidence": "Document basics pass, but image sizing/responsive delivery and alt inventory have material gaps.",
+      "findingIds": [
+        "F21"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-site-probe.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse deprecation, BFCache, source-map and inspector audits",
+      "evidence": "Deprecated API, unload/BFCache, source-map and inspector issues were reported.",
+      "findingIds": [
+        "F22"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM metadata across homepage/article/live-score/league/search",
+      "evidence": "Representative public pages have descriptive titles and descriptions.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore",
+        "league",
+        "search"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM links/viewport, robots and Lighthouse SEO/mobile evidence",
+      "evidence": "Links are crawlable and robots is sound, but the homepage fixed-width viewport is not mobile-friendly.",
+      "findingIds": [
+        "F01"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/robots.txt",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Canonical/meta inspection plus robots and sitemap fetch",
+      "evidence": "Homepage canonical and indexing are sound, but the representative article lacks a canonical link.",
+      "findingIds": [
+        "F23"
+      ],
+      "artifacts": [
+        "evidence/article-metadata.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.xml"
+      ],
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Article Open Graph, Twitter Card and JSON-LD inspection",
+      "evidence": "Article exposes matching NewsArticle JSON-LD, OG and Twitter metadata.",
+      "artifacts": [
+        "evidence/article-metadata.json"
+      ],
+      "pathIds": [
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers, cookies, HAR and secrets primitives",
+      "evidence": "HTTPS/HSTS/nosniff/frame controls pass, but CSP is limited and Referrer/Permissions policy are missing.",
+      "findingIds": [
+        "F24"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/secrets.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trackers, cookies, HAR and Lighthouse",
+      "evidence": "13 third-party origins and 17 third-party cookies indicate a heavy tracking footprint.",
+      "findingIds": [
+        "F25"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/cookies.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Public-flow walkthrough and form inventory",
+      "evidence": "No permission prompt fired on the tested public paths, and no authentication form was exposed in the representative core-content journeys.",
+      "reason": "No permission prompt fired on the tested public paths, and no authentication form was exposed in the representative core-content journeys."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security headers, cookie audit and Lighthouse inspector issues",
+      "evidence": "Referrer/Permissions policy gaps and SameSite=None analytics cookies remain.",
+      "findingIds": [
+        "F26"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Discoverability raw HTML/rendered comparison",
+      "evidence": "Raw HTML retained 86% rendered-content coverage and crawler view showed the core portal content.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Representative route and state walkthrough",
+      "evidence": "Homepage, article, live-score and league content settled without clipped modal/menu state; real links preserve navigation.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/article-mobile.png",
+        "evidence/livescore-mobile.png"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore",
+        "league"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Manifest, service-worker registration and Cache Storage probe",
+      "evidence": "Manifest and activated service worker exist, but no cached offline fallback was observable after load.",
+      "findingIds": [
+        "F27"
+      ],
+      "artifacts": [
+        "evidence/pwa-cache-probe.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Unavailable-route walkthrough",
+      "evidence": "The 404 surface clearly explains failure and offers homepage/report links.",
+      "artifacts": [
+        "evidence/login-flow.json"
+      ],
+      "pathIds": [
+        "error"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM lang/dir and stylesheet logical-property probe",
+      "evidence": "lang=fa and logical properties are present, but root dir is omitted.",
+      "findingIds": [
+        "F28"
+      ],
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Rendered date/number review across sports templates",
+      "evidence": "Persian-language dates and score/league data are rendered consistently for the target locale.",
+      "artifacts": [
+        "evidence/league-flow.json",
+        "evidence/livescore-mobile.png"
+      ],
+      "pathIds": [
+        "league",
+        "livescore"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "The representative pages display editorial and match values but expose no user-entered or cross-time-zone scheduling flow to test.",
+      "reason": "The representative pages display editorial and match values but expose no user-entered or cross-time-zone scheduling flow to test."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Visual and flow review of homepage/article/search",
+      "evidence": "No confirmshaming, forced continuity, consent wall, or hidden cancellation pattern appeared in the exercised flows.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "search"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "The only exercised input is search and it has no validity constraints or invalid-submission state.",
+      "reason": "The only exercised input is search and it has no validity constraints or invalid-submission state."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Search form markup inspection",
+      "evidence": "The public input is correctly typed as search, has a descriptive placeholder, preserves native entry behavior, and submits with GET.",
+      "artifacts": [
+        "evidence/search-form.json"
+      ],
+      "pathIds": [
+        "home",
+        "search"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "No checkout, subscription, payment, consent, or account-management flow was in the audited public content scope.",
+      "reason": "No checkout, subscription, payment, consent, or account-management flow was in the audited public content scope."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Image primitive and Lighthouse image-delivery insight",
+      "evidence": "Oversized/legacy/non-responsive images leave an estimated 1,589KiB saving.",
+      "findingIds": [
+        "F29"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR, tracker and Lighthouse main-thread evidence",
+      "evidence": "Multiple ad/analytics vendors execute on initial load alongside 6.4s main-thread work.",
+      "findingIds": [
+        "F31"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR byte budget, tracker inventory and visual review",
+      "evidence": "4.22MB/136 requests and 13 third-party origins are disproportionate for the initial news view.",
+      "findingIds": [
+        "F30"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-desktop.png"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "This public editorial site exposes rich crawlable metadata but no declared agent-facing transaction/tool surface; WebMCP absence is an opportunity, not a failure.",
+      "reason": "This public editorial site exposes rich crawlable metadata but no declared agent-facing transaction/tool surface; WebMCP absence is an opportunity, not a failure."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon plus DOM/interaction inventory",
+      "evidence": "No summarisation or language-model feature is part of the visible product intent, so on-device inference is not applicable.",
+      "reason": "No summarisation or language-model feature is part of the visible product intent, so on-device inference is not applicable."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/post heap summaries around ten representative full-feed scroll cycles",
+      "evidence": "Heap grew from 35.9MB to 49.9MB as lazy content was first visited, but top constructors show bounded content allocation rather than evidence of unbounded retention; no repeated-cycle series proved a leak.",
+      "artifacts": [
+        "evidence/home-heap.json",
+        "evidence/home-heap-after-scroll.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap totals plus Performance.memory on three templates",
+      "evidence": "Homepage heap summary was 35.9MB; probes measured about 18.7–31.2MB used JS heap across article/live-score/home, proportionate to these dense pages.",
+      "artifacts": [
+        "evidence/home-heap.json",
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json",
+        "evidence/livescore-site-probe.json"
+      ],
+      "pathIds": [
+        "home",
+        "article",
+        "livescore"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Before/after heap constructor summaries",
+      "evidence": "Top constructors in baseline and post-scroll summaries contain no Detached* population; the retained growth is dominated by native/content arrays after first full-feed traversal.",
+      "artifacts": [
+        "evidence/home-heap.json",
+        "evidence/home-heap-after-scroll.json"
+      ],
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F09",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F17",
+        "F18",
+        "F01",
+        "F07",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F24",
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F29",
+        "F31",
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "findingIds": [],
+      "reason": "Both emerging agent-facing checks were judged outside this editorial site’s current product intent."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and news portal template, including navigation, headline carousel, scores, ads, and news lists.",
+      "url": "https://www.varzesh3.com/",
+      "conditions": [
+        "desktop",
+        "narrow viewport",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Representative news article and reading journey from homepage headline to article body.",
+      "url": "https://www.varzesh3.com/news/2407576/%D9%BE%D8%B1%D8%B3%D9%BE%D9%88%D9%84%DB%8C%D8%B3-%D8%A8%D8%A7-%D9%BE%D9%86%D8%AC-%D8%A7%D9%85%D8%B6%D8%A7-%D8%B1%D9%88%DB%8C%D8%A7%DB%8C%DB%8C-%D9%85%DB%8C-%D8%B4%D9%88%D8%AF",
+      "conditions": [
+        "desktop",
+        "narrow viewport",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "livescore",
+      "description": "Live-results application template, a high-value frequently updated task surface.",
+      "url": "https://www.varzesh3.com/livescore",
+      "conditions": [
+        "narrow viewport",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "league",
+      "description": "League table/detail template, representing structured sports statistics and navigation tabs.",
+      "url": "https://www.varzesh3.com/football/league/6/",
+      "conditions": [
+        "default browser"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "search",
+      "description": "Primary search flow using the homepage GET form with a common Persian query.",
+      "url": "https://www.varzesh3.com/search?q=%D9%81%D9%88%D8%AA%D8%A8%D8%A7%D9%84",
+      "conditions": [
+        "submitted search query"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error",
+      "description": "Representative unavailable route used to assess failure messaging and recovery.",
+      "url": "https://www.varzesh3.com/login",
+      "conditions": [
+        "404 response surface"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "confidence": "high",
+      "summary": "The homepage forces a fixed 1122px desktop canvas instead of adapting to small screens.",
+      "evidence": "The layout primitive measured a 780px viewport against 1122px content (342px overflow); the viewport meta hard-codes width=1122, and the 390x844 screenshot shows the desktop page scaled to tiny text.",
+      "suggestedFix": "Use width=device-width and rebuild the homepage grid with intrinsic tracks, flexible sizing, and tested narrow breakpoints; do not shrink a desktop canvas to fit.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout.json",
+        "evidence/home-site-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "confidence": "high",
+      "summary": "The visual theme does not meaningfully adapt to a dark color-scheme preference.",
+      "evidence": "The dark-preference screenshot remains white/light gray and computed body background is rgb(255,255,255); no usable dark surface treatment is visible.",
+      "suggestedFix": "Declare color-scheme: light dark and define semantic surface/text tokens using prefers-color-scheme or light-dark(), preserving contrast in both schemes.",
+      "artifacts": [
+        "evidence/home-preferences.png",
+        "evidence/home-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Auto-advancing animation is not reduced for users who request less motion.",
+      "evidence": "The probe found a running 15,000ms homepage animation and no prefers-reduced-motion rules; the reduced-motion capture showed no alternate static state.",
+      "suggestedFix": "Wrap non-essential animation in prefers-reduced-motion: no-preference and stop auto-advance under reduce while retaining manual controls.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/home-preferences.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "High-contrast preferences receive no explicit adaptation.",
+      "evidence": "The combined high-contrast preference capture is visually unchanged and the stylesheet probe found no dedicated contrast/forced-colors handling.",
+      "suggestedFix": "Use system colors or forced-colors/prefers-contrast adjustments for essential controls and verify focus, carousel arrows, and score controls remain visible.",
+      "artifacts": [
+        "evidence/home-preferences.png",
+        "evidence/home-site-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F05",
+      "severity": "medium",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "confidence": "high",
+      "summary": "Page and content-state changes are abrupt and use no View Transition treatment.",
+      "evidence": "CSS/DOM probing across homepage, article, and live score found no view-transition usage; navigation reloads directly without a continuity cue.",
+      "suggestedFix": "Add progressive cross-document view transitions for page changes and same-document transitions for tabs/carousel states, with a no-motion path.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "navigation-drawer",
+      "confidence": "high",
+      "summary": "Long content pages provide static chrome rather than scroll-aware orientation.",
+      "evidence": "The homepage is about 7,838px tall, but its header is static and the feature probe found no scroll-state query or progress treatment.",
+      "suggestedFix": "Use a compact sticky header and optional article/page progress indicator that reacts declaratively to scroll state without obscuring content.",
+      "artifacts": [
+        "evidence/home-layout.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F07",
+      "severity": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "confidence": "high",
+      "summary": "Advertising and dense chrome dominate the homepage before core news and scores.",
+      "evidence": "The desktop screenshot shows multiple large ad panels occupying much of the first viewport, while the mobile-fixed layout makes content and controls extremely small.",
+      "suggestedFix": "Set a first-viewport ad budget, reserve fewer predictable ad slots, prioritize headlines/live scores, and defer below-fold ad/media modules.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Keyboard focus is invisible and many controls are undersized.",
+      "evidence": "The focus probe found outline-style none on all sampled focused links and 17 of 30 sampled homepage targets below 24px high; Lighthouse also failed target-size.",
+      "suggestedFix": "Add a high-contrast :focus-visible ring and enlarge interactive hit areas to at least 24px, preferably 44px for primary touch controls.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F09",
+      "severity": "medium",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "confidence": "high",
+      "summary": "The homepage component system relies on a fixed canvas and exposes no container-query adaptation.",
+      "evidence": "The stylesheet probe found no container queries; the same content cards remain in a desktop multi-column composition at 390px while article/live-score templates adapt separately.",
+      "suggestedFix": "Give reusable cards container contexts and use size-aware styling so each card adapts wherever it is placed, with media-query fallbacks only where needed.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-site-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "confidence": "high",
+      "summary": "The primary search journey can return an empty result for a very common query without useful results.",
+      "evidence": "Submitting the actual GET form to /search?q=فوتبال produced “در حال حاضر محتوایی وجود ندارد” despite the site containing extensive football content.",
+      "suggestedFix": "Fix search indexing/query handling, preserve the submitted query, and provide ranked news/team/video results for common terms.",
+      "artifacts": [
+        "evidence/search-flow.json",
+        "evidence/search-form.json"
+      ],
+      "effort": "large",
+      "pathId": "search",
+      "url": "https://www.varzesh3.com/search?q=%D9%81%D9%88%D8%AA%D8%A8%D8%A7%D9%84"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "forms",
+      "confidence": "high",
+      "summary": "The empty search state gives no query-specific recovery or next step.",
+      "evidence": "The tested search page only states that content is unavailable and then falls into the generic footer; it offers no spelling guidance, filters, popular searches, or retry action.",
+      "suggestedFix": "Show the query, explain that no matches were found, suggest alternative terms and popular destinations, and keep editable search controls in context.",
+      "artifacts": [
+        "evidence/search-flow.json"
+      ],
+      "effort": "small",
+      "pathId": "search",
+      "url": "https://www.varzesh3.com/search?q=%D9%81%D9%88%D8%AA%D8%A8%D8%A7%D9%84"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "confidence": "high",
+      "summary": "Mobile loading performance misses the LCP quality bar.",
+      "evidence": "Lighthouse performance scored 0.64 with LCP 6.9s, Speed Index 7.0s and TTI 19.9s; the controlled trace was faster but confirms load behavior varies materially by conditions.",
+      "suggestedFix": "Prioritize the actual LCP asset, shorten critical dependency chains, defer non-critical ads/scripts, and monitor field LCP/INP/CLS by template.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "confidence": "high",
+      "summary": "Heavy scripting delays interactivity.",
+      "evidence": "Lighthouse measured 6.4s main-thread work and 1.5s JavaScript execution with 250ms TBT; the trace also captured an 81.96ms long task.",
+      "suggestedFix": "Identify heavy first- and third-party scripts, remove unnecessary work, split remaining tasks, and use scheduler.yield() with the documented fallback.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "confidence": "high",
+      "summary": "The homepage ships a large, image- and script-heavy network payload.",
+      "evidence": "HAR captured 136 requests and 4,219,583 transferred bytes (2,775,741 image; 1,055,344 script); Lighthouse measured 5,345KiB and 250ms render-blocking savings.",
+      "suggestedFix": "Prioritize only the LCP image, defer/lazy-load non-critical modules, improve cache lifetimes, and remove avoidable render-blocking resources.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "confidence": "high",
+      "summary": "Substantial unused CSS and JavaScript are delivered.",
+      "evidence": "Lighthouse estimated 593KiB unused JavaScript and 88KiB unused CSS, plus missing source maps for large first-party JavaScript.",
+      "suggestedFix": "Route-split widget bundles, load ad/score modules on demand, remove unused styles, and publish valid production source maps where policy allows.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F16",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Important controls and links lack accessible names or valid role relationships.",
+      "evidence": "Lighthouse accessibility scored 0.77 and failed link-name, select-name, aria-required-parent, and main-landmark audits; the probe found 120 empty-named links and many unlabeled selects/search controls.",
+      "suggestedFix": "Use semantic landmarks, label every form control, give icon-only links discernible names, and remove invalid ARIA role/parent combinations.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-site-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Text and essential UI fail minimum contrast.",
+      "evidence": "Lighthouse found examples including teal #0097a7 on white at 3.5:1 and white on #47a0c2 at 2.96:1, below the required 4.5:1 for small text.",
+      "suggestedFix": "Adjust semantic color tokens to meet WCAG contrast in all themes and validate each state with automated and visual checks.",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "confidence": "high",
+      "summary": "Reading structure and keyboard focus do not provide a dependable navigation model.",
+      "evidence": "The homepage has 74 headings but no h1, main or nav landmarks; sampled focused links all computed outline-style none.",
+      "suggestedFix": "Add one descriptive h1, main/nav landmarks and logical heading levels; implement a visible :focus-visible style and test a full keyboard walk.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "confidence": "high",
+      "summary": "Viewport and reflow settings restrict comfortable mobile and zoom use.",
+      "evidence": "The homepage fixes viewport width at 1122; article and league templates include user-scalable=no; Lighthouse failed viewport optimization and target-size.",
+      "suggestedFix": "Use width=device-width, remove user-scalable=no, support 200–400% zoom/reflow, and maintain adequately spaced targets.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "The homepage logs live-data WebSocket errors.",
+      "evidence": "Lighthouse captured a SignalR exception and a wss://ksocket.varzesh3.com/live-v2 handshake failure with HTTP 503.",
+      "suggestedFix": "Handle live socket unavailability as an expected state, retry with bounded backoff, expose stale/offline status, and avoid uncaught console errors.",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "Image markup and delivery are inconsistent.",
+      "evidence": "The image primitive found 24 images without dimensions, 20 oversized images, 48 without srcset, 66 legacy-format images and 54 missing/empty meaningful alt candidates.",
+      "suggestedFix": "Reserve image dimensions, serve responsive modern formats with srcset/sizes, and provide meaningful alt text where images communicate content.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F22",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "Deprecated API use, BFCache blockers, missing source maps and DevTools issues reduce platform hygiene.",
+      "evidence": "Lighthouse reported one deprecation, six BFCache failure reasons including an unload handler, missing source maps, and inspector issues.",
+      "suggestedFix": "Replace deprecated APIs, remove unload handlers, review no-store usage, restore valid source maps, and resolve DevTools Issues findings.",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "confidence": "high",
+      "summary": "The representative article lacks a canonical link despite otherwise strong article metadata.",
+      "evidence": "The article metadata probe returned no link rel=canonical, while JSON-LD points to a shorter mainEntity URL and the visible URL includes a slug.",
+      "suggestedFix": "Emit one absolute self-referential canonical URL per article and keep canonical, JSON-LD url/mainEntityOfPage, sitemap and redirects consistent.",
+      "artifacts": [
+        "evidence/article-metadata.json",
+        "evidence/sitemap.xml"
+      ],
+      "effort": "small",
+      "pathId": "article",
+      "url": "https://www.varzesh3.com/news/2407576/%D9%BE%D8%B1%D8%B3%D9%BE%D9%88%D9%84%DB%8C%D8%B3-%D8%A8%D8%A7-%D9%BE%D9%86%D8%AC-%D8%A7%D9%85%D8%B6%D8%A7-%D8%B1%D9%88%DB%8C%D8%A7%DB%8C%DB%8C-%D9%85%DB%8C-%D8%B4%D9%88%D8%AF"
+    },
+    {
+      "id": "F24",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "confidence": "high",
+      "summary": "Security policy is incomplete despite HTTPS, HSTS and clickjacking protection.",
+      "evidence": "Headers show CSP limited to frame-ancestors only, with no script/style/default-src restrictions; Referrer-Policy and Permissions-Policy are absent.",
+      "suggestedFix": "Deploy a nonce/hash-based CSP beginning in report-only mode, add strict Referrer-Policy and least-privilege Permissions-Policy, retaining HSTS/nosniff/frame protections.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F25",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "confidence": "high",
+      "summary": "The page has a large advertising and tracking footprint.",
+      "evidence": "The tracker audit found 13 third-party origins including Google Tag Manager and Yandex; Lighthouse found 17 third-party cookies and the HAR recorded extensive ad/analytics traffic.",
+      "suggestedFix": "Audit each vendor for necessity, obtain consent where required, remove redundant trackers, shorten retention, partition/limit cookies, and batch minimal analytics.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/cookies.json",
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F26",
+      "severity": "medium",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "confidence": "high",
+      "summary": "Defensive browser policies and cookie posture are incomplete.",
+      "evidence": "Referrer-Policy and Permissions-Policy are missing; all three observed Yandex-derived first-party cookies use SameSite=None, including two with 365-day lifetimes.",
+      "suggestedFix": "Set least-privilege browser policies and review whether SameSite=None and year-long analytics identifiers are necessary; prefer Lax/shorter retention where cross-site use is not required.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "confidence": "high",
+      "summary": "The PWA surface is installable but provides no observable cached offline fallback after load.",
+      "evidence": "The page links a manifest and has an activated service worker, but Cache Storage contained no entries after a settled homepage visit.",
+      "suggestedFix": "Add and test a minimal offline fallback for navigation and resilient stale data handling for core news/score surfaces; keep live status explicit.",
+      "artifacts": [
+        "evidence/pwa-cache-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F28",
+      "severity": "medium",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "confidence": "high",
+      "summary": "The Persian document declares lang but omits explicit right-to-left direction.",
+      "evidence": "Homepage, article and live-score probes report html lang=fa and an empty dir attribute; logical CSS properties are present.",
+      "suggestedFix": "Set dir=rtl on the document root and preserve logical properties so reading order and layout remain robust for bidirectional content.",
+      "artifacts": [
+        "evidence/home-site-probe.json",
+        "evidence/article-site-probe.json"
+      ],
+      "effort": "trivial",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F29",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "confidence": "high",
+      "summary": "Asset delivery wastes substantial bytes.",
+      "evidence": "The image audit found 20 oversized images, 48 without responsive sources and 66 legacy-format images; Lighthouse estimated 1,589KiB image-delivery savings.",
+      "suggestedFix": "Generate responsive AVIF/WebP variants, use srcset/sizes, reserve dimensions, and deliver each editorial/ad image near its rendered size.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F30",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "batch-analytics-events",
+      "confidence": "high",
+      "summary": "Third-party ads, trackers and media consume a disproportionate first-load budget.",
+      "evidence": "HAR recorded 4.22MB over 136 requests; tracker evidence found 13 third-party origins and the first viewport is dominated by ads.",
+      "suggestedFix": "Define template budgets for third-party bytes/requests, defer below-fold ads, remove low-value vendors, and batch/deprioritize analytics.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    },
+    {
+      "id": "F31",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "batch-analytics-events",
+      "confidence": "high",
+      "summary": "Background analytics and advertising work is chatty and not visibly tied to the core task.",
+      "evidence": "Network evidence includes Yandex, GTM, Tapsell/MediaAd and 13 third-party origins during the initial load, while Lighthouse measured 6.4s main-thread work.",
+      "suggestedFix": "Consolidate analytics, batch events, defer background fetches until idle/consent, and stop work when the page is hidden.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.varzesh3.com/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Rebuild the homepage as a responsive, zoomable, container-aware layout",
+      "priority": 1,
+      "findingIds": [
+        "F01",
+        "F09",
+        "F19"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore semantic landmarks, accessible names, focus visibility, contrast and target sizing",
+      "priority": 2,
+      "findingIds": [
+        "F08",
+        "F16",
+        "F17",
+        "F18"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Cut LCP, JavaScript, image and third-party load cost",
+      "priority": 3,
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F29",
+        "F30",
+        "F31"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Reduce first-viewport advertising and prioritize core sports content",
+      "priority": 4,
+      "findingIds": [
+        "F07",
+        "F30"
+      ],
+      "guidanceId": "improve-text-layout-and-legibility",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Fix search results and add a useful recoverable empty state",
+      "priority": 5,
+      "findingIds": [
+        "F10",
+        "F11"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Complete CSP, Referrer/Permissions policy and privacy controls",
+      "priority": 6,
+      "findingIds": [
+        "F24",
+        "F25",
+        "F26"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Honor dark, reduced-motion and high-contrast preferences",
+      "priority": 7,
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Fix console/platform hygiene and live-socket failure handling",
+      "priority": 8,
+      "findingIds": [
+        "F20",
+        "F22"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Normalize image dimensions, responsive sources, formats and alt text",
+      "priority": 9,
+      "findingIds": [
+        "F21",
+        "F29"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Align article canonical metadata and Persian directionality",
+      "priority": 10,
+      "findingIds": [
+        "F23",
+        "F28"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Add and verify an offline fallback",
+      "priority": 11,
+      "findingIds": [
+        "F27"
+      ],
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Add progressive transitions and scroll-aware orientation",
+      "priority": 12,
+      "findingIds": [
+        "F05",
+        "F06"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-26T06-14-42-568Z"
+}

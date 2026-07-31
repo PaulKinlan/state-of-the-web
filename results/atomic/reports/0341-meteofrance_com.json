@@ -1,0 +1,2274 @@
+{
+  "url": "https://meteofrance.com",
+  "auditedAt": "2026-07-20T02:01:12.254Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete representative audit of homepage, city forecast, editorial listing, article, search journey, and 404 recovery. Excluded: account/commerce (not present), every city URL (Ajaccio represents the shared forecast template), specialist marine/mountain/beach templates, and destructive or authenticated flows.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Drupal-rendered MPA with client-side forecast/map widgets",
+    "notes": "Public French national weather and editorial service. Core HTML is server rendered; interactive maps, forecast states, advertising, and search hydrate client-side."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom+computed-css",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "lighthouse",
+    "axe-core",
+    "heap-summary",
+    "robots+sitemap"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "scrollability-affordance-hints",
+    "declarative-dialog-popover-control",
+    "size-aware-styling",
+    "forms",
+    "performance",
+    "optimize-image-priority",
+    "html",
+    "security",
+    "privacy",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots and computed animation probes under emulated media preferences",
+      "evidence": "Desktop screenshots under light and prefers-color-scheme: dark are pixel-identical, and the computed root colorScheme is “normal”.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots and computed animation probes under emulated media preferences",
+      "evidence": "The reduced-motion probe confirmed the media query matched while five animations remained running, including four 600ms animations and one 2000ms animation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots and computed animation probes under emulated media preferences",
+      "evidence": "The prefers-contrast: more screenshot is visually unchanged; axe found 23 color-contrast failures.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/high-contrast.png",
+        "evidence/axe-home.json"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "rendered CSS feature probe and interaction-state inspection",
+      "evidence": "The rendered stylesheet probe found no view-transition rules or names across forecast tabs/routes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "rendered CSS feature probe and interaction-state inspection",
+      "evidence": "Rendered CSS and trace inspection found no scroll-linked animation, parallax, or scrollytelling effect, so there is no main-thread scroll-animation anti-pattern on the representative paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "rendered CSS feature probe and interaction-state inspection",
+      "evidence": "The forecast map uses native panning/zoom controls and the remaining navigation is link/button based; no custom swipe/pull gesture fought platform scrolling in the inspected paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "rendered CSS feature probe, screenshots, and navigation walkthrough",
+      "evidence": "The homepage is 7,911 CSS pixels tall on mobile, while CSS inspection found no scroll-state or timeline feature and the captured header remains static.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "high",
+      "method": "rendered CSS feature probe, screenshots, and navigation walkthrough",
+      "evidence": "The DOM contains multiple custom modal/popup containers, while the feature probe found no anchor-name, position-anchor, or position-try usage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "rendered CSS feature probe, screenshots, and navigation walkthrough",
+      "evidence": "Screenshots show a strong pink active forecast tab, breadcrumbs on city detail, descriptive navigation labels, and direct search suggestions that preserve orientation.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "load screenshots and DOM overlay/primitive inventory",
+      "evidence": "Fresh-profile desktop and mobile screenshots show forecast content immediately with no consent wall or full-viewport interstitial obscuring it.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "load screenshots and DOM overlay/primitive inventory",
+      "evidence": "The DOM probe found repeated .mf_modal and .modal_overlay divs, zero dialog, popover, or details primitives, and axe found focusable content inside aria-hidden UI.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/axe-home.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "load screenshots and DOM overlay/primitive inventory",
+      "evidence": "The 360x800 screenshot shows a crowded, partially overlapping bottom carousel/navigation strip with clipped labels over editorial content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "360x800 screenshots/layout metrics and keyboard-focus probe",
+      "evidence": "Layout primitives at 360x800 report scrollWidth=clientWidth=360 on home, city, and listing templates; viewport meta is present.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "360x800 screenshots/layout metrics and keyboard-focus probe",
+      "evidence": "CSS inspection found no @container rules or container-type declarations across the rendered homepage styles.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/listing-mobile.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "360x800 screenshots/layout metrics and keyboard-focus probe",
+      "evidence": "The focus probe reported outline-style none and no box-shadow for the search input, submit button, menu button, and many navigation links; axe also found non-focusable scroll regions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/axe-home.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "search suggestion walkthrough, destination inspection, and 404 recovery state",
+      "evidence": "The first viewport clearly says METEO FRANCE, exposes location search, forecast tabs, a national map, and prominent vigilance status.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "search suggestion walkthrough, destination inspection, and 404 recovery state",
+      "evidence": "Typing Ajaccio exposes a real crawlable Ajaccio result and the destination forecast page loads with location, date tabs, and weather content.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "search suggestion walkthrough, destination inspection, and 404 recovery state",
+      "evidence": "A nonexistent route renders a branded, explanatory 404 with a return-home action and links to popular city forecasts.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace summary, layout observers, HAR summary, and image inventory",
+      "evidence": "Lighthouse measured LCP 24.0s, CLS 0.592, FCP 6.6s and TBT 400ms (performance score 24); the independent trace measured LCP 10.02s.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace summary, layout observers, HAR summary, and image inventory",
+      "evidence": "The layout primitive measured CLS 0.465 on the mobile homepage and 0.658 on the Ajaccio page; 60 of 64 images lack explicit dimensions.",
+      "pathIds": [
+        "city"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/city-mobile-layout.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse, trace summary, layout observers, HAR summary, and image inventory",
+      "evidence": "The independent trace recorded one 126ms long task and 76ms TBT, a bounded main-thread result despite broader Lighthouse load problems.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace summary, layout observers, HAR summary, and image inventory",
+      "evidence": "The HAR records 2.98 MB across 72 requests, four parser-inserted VeryHigh-priority stylesheets, an uncompressed 716 KB first-party script, and 234 KB uncompressed HTML.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace summary, layout observers, HAR summary, and image inventory",
+      "evidence": "Lighthouse estimated 735,048 bytes of unused JavaScript and 158,107 bytes of unused CSS; third parties transfer another 968,584 bytes.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core, Lighthouse, DOM/focus probe, and responsive screenshots",
+      "evidence": "axe found critical missing alt text and unnamed select failures, serious unnamed links and prohibited ARIA, plus aria-hidden focusable content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core, Lighthouse, DOM/focus probe, and responsive screenshots",
+      "evidence": "axe found 23 color-contrast failure nodes, including dates and article-card copy.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core, Lighthouse, DOM/focus probe, and responsive screenshots",
+      "evidence": "axe found nested banner/contentinfo/complementary landmarks, two keyboard-inaccessible scrollable regions, and focusable elements inside aria-hidden #sidebar_page; the direct focus probe found invisible focus on key controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "axe-core, Lighthouse, DOM/focus probe, and responsive screenshots",
+      "evidence": "Desktop article and mobile listing screenshots show readable line lengths, clear heading scale, unclipped body text, and comfortable card spacing.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "axe-core, Lighthouse, DOM/focus probe, and responsive screenshots",
+      "evidence": "axe’s critical meta-viewport rule failed because the viewport prevents text scaling/zooming.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/document/image probes",
+      "evidence": "Lighthouse’s errors-in-console audit failed on the homepage.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/document/image probes",
+      "evidence": "The image primitive found 60 of 64 images without dimensions, five oversized images, three legacy-format images, and three missing alt values.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DOM/document/image probes",
+      "evidence": "Lighthouse failed valid-source-maps and inspector-issues audits.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM metadata probe, robots.txt, sitemap.xml, Lighthouse, and discoverability captures",
+      "evidence": "DOM evidence shows a descriptive homepage title and meta description; the representative article also has a content-specific title and raw meta description.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata probe, robots.txt, sitemap.xml, Lighthouse, and discoverability captures",
+      "evidence": "Lighthouse failed crawlable-anchors; axe and Lighthouse also failed the meta-viewport zoom audit.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/axe-home.json"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM metadata probe, robots.txt, sitemap.xml, Lighthouse, and discoverability captures",
+      "evidence": "The homepage returns 200, has a self-canonical and fr hreflang, robots.txt permits public content, and sitemap.xml lists forecast URLs.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM metadata probe, robots.txt, sitemap.xml, Lighthouse, and discoverability captures",
+      "evidence": "The DOM probe found zero JSON-LD blocks and zero Open Graph tags even though the site contains organization, forecast/place, and article entities.",
+      "pathIds": [
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-desktop.png"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, secrets, and HAR primitives",
+      "evidence": "The headers primitive found no CSP, HSTS, nosniff, frame protection, Referrer-Policy, or Permissions-Policy; didomi_token lacks Secure and mfsession uses SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, secrets, and HAR primitives",
+      "evidence": "The tracker primitive found eight third-party origins including Google Tag Manager and DoubleClick; the HAR attributes 33 requests and 968,584 bytes to third parties.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "headers, cookies, trackers, secrets, and HAR primitives",
+      "evidence": "Fresh-load screenshots and runtime probes show no geolocation/notification prompt; no authentication surface exists on representative public paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, secrets, and HAR primitives",
+      "evidence": "No HSTS, frame-ancestors/X-Frame-Options, Referrer-Policy, Permissions-Policy, or CSP was returned for the main document.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "discoverability/no-JS capture, runtime screenshots, and 404 recovery inspection",
+      "evidence": "Discoverability captures show 85% homepage and 100% article content coverage without JavaScript, with title, H1 and description retained.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability/no-JS capture, runtime screenshots, and 404 recovery inspection",
+      "evidence": "The DOM reports multiple custom modal shells as geometrically visible while axe finds aria-hidden focusable content; the mobile screenshot shows overlapping carousel chrome.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/axe-home.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "discoverability/no-JS capture, runtime screenshots, and 404 recovery inspection",
+      "evidence": "Météo-France is a public, network-current content service rather than an installed web app; installability is not required for the audited forecast journey.",
+      "reason": "Météo-France is a public, network-current content service rather than an installed web app; installability is not required for the audited forecast journey."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "discoverability/no-JS capture, runtime screenshots, and 404 recovery inspection",
+      "evidence": "The tested nonexistent route presents a useful recovery message, home action, and popular destinations instead of a blank shell or infinite spinner.",
+      "pathIds": [
+        "home",
+        "article"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM language/CSS feature probe and rendered date/time inspection",
+      "evidence": "The DOM probe found html lang=fr and dir=ltr, but no logical-property usage and 450 physical left/right declarations in rendered CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM language/CSS feature probe and rendered date/time inspection",
+      "evidence": "Rendered forecast dates, French weekday/month wording, temperatures, and update text are consistently localized for html lang=fr.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM language/CSS feature probe and rendered date/time inspection",
+      "evidence": "The editorial/forecast content explicitly labels UTC where relevant and location-specific forecast dates remain unambiguous on the Ajaccio path.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "initial-state screenshots, search input walkthrough, and 404 recovery inspection",
+      "evidence": "Initial desktop/mobile screenshots expose content and vigilance directly, with no confirmshaming, forced continuity, hidden price, or blocking consent choice.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "initial-state screenshots, search input walkthrough, and 404 recovery inspection",
+      "evidence": "The audited site exposes search/navigation but no data-entry form with required or invalid submission states to validate.",
+      "reason": "The audited site exposes search/navigation but no data-entry form with required or invalid submission states to validate."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "initial-state screenshots, search input walkthrough, and 404 recovery inspection",
+      "evidence": "The search field provides immediate, descriptive Ajaccio place, beach, and marine suggestions that link directly to the corresponding surfaces.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "initial-state screenshots, search input walkthrough, and 404 recovery inspection",
+      "evidence": "No checkout, subscription, authentication, or account-management flow exists in the representative public surfaces.",
+      "reason": "No checkout, subscription, authentication, or account-management flow exists in the representative public surfaces."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary, image inventory, trace, and tracker inventory",
+      "evidence": "Of 64 images, 60 lack dimensions, 39 below-fold images are not lazy-loaded, five are oversized, 12 lack srcset, and three use legacy formats.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F29"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary, image inventory, trace, and tracker inventory",
+      "evidence": "Eight third-party origins load on entry; ads, consent, analytics, and wrappers account for 33 requests and 968,584 transferred bytes before user interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F30"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary, image inventory, trace, and tracker inventory",
+      "evidence": "Third parties account for roughly one third of the 2.98 MB load, while the homepage also fetches editorial/video-related resources before they enter the viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability and DOM capability/metadata inspection",
+      "evidence": "Raw HTML coverage is 85% on the homepage and 100% on the article, but the capability probe found no WebMCP/agentic tool registration or structured action surface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/article-discoverability.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "discoverability and DOM capability/metadata inspection",
+      "evidence": "No summarisation or generation task on the audited forecast/content surfaces clearly benefits from on-device inference.",
+      "reason": "No summarisation or generation task on the audited forecast/content surfaces clearly benefits from on-device inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "issues",
+      "confidence": "low",
+      "method": "baseline and post-interaction heap summaries after 10 forecast-tab cycles",
+      "evidence": "After ten today/tomorrow cycles, the summary grew from 44.7 MB/1,211,243 nodes to 48.0 MB/1,275,325 nodes (about +3.25 MB and +64k nodes). Separate fresh-browser baselines reduce confidence, so this requires retained-path confirmation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ],
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "baseline and post-interaction heap summaries after 10 forecast-tab cycles",
+      "evidence": "The baseline heap summary reports 1,211,243 nodes, 4,955,903 edges, 154,521 closures, and 44.7 MB self-size before extended interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F34"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "baseline and post-interaction heap summaries after 10 forecast-tab cycles",
+      "evidence": "Neither readable heap summary lists Detached* constructors among dominant populations after repeated interaction; no direct detached-DOM growth signal was observed.",
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F24",
+        "F25",
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F29",
+        "F30",
+        "F31"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F33",
+        "F34"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and primary forecast/search entry; tested desktop, 360x800, dark, reduced-motion, increased-contrast, keyboard focus, performance, security, privacy, network, no-JS and memory conditions.",
+      "url": "https://meteofrance.com/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "keyboard-only",
+        "JavaScript disabled",
+        "10 repeated forecast-tab cycles"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "city",
+      "description": "Ajaccio city forecast detail, representing the shared local-forecast template and destination of the core search journey.",
+      "url": "https://meteofrance.com/previsions-meteo-france/ajaccio/20000",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "Actualités et dossiers listing, representing editorial index/card templates.",
+      "url": "https://meteofrance.com/actualites-et-dossiers",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "article",
+      "description": "Representative municipal-services article, covering long-form editorial and crawler-visible content.",
+      "url": "https://meteofrance.com/actualites-et-dossiers/nouvelles-equipes-municipales-meteo-france-vos-cotes",
+      "conditions": [
+        "desktop",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Primary location-search flow: type Ajaccio, inspect suggestions, follow the forecast result.",
+      "url": "https://meteofrance.com/",
+      "conditions": [
+        "keyboard focus",
+        "client-side suggestions"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "not-found",
+      "description": "Unknown-route recovery state, representing HTTP/navigation failure handling.",
+      "url": "https://meteofrance.com/this-route-does-not-exist-audit",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage at desktop viewport",
+      "condition": "desktop",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05",
+        "F08",
+        "F27"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under dark preference; appearance is unchanged",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "Homepage under increased-contrast preference; appearance is unchanged",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and CSS capture",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Metadata, links, forms, focus styles, modern CSS feature and content probe",
+      "findingIds": [
+        "F01",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F09",
+        "F10",
+        "F17",
+        "F20",
+        "F23",
+        "F27",
+        "F28",
+        "F32"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout.json",
+      "caption": "Homepage desktop CLS, long tasks, and overflow",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Homepage mobile CLS 0.465 and no horizontal overflow",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F05",
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Homepage network archive",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "72 requests, 2.98 MB transferred, 0.97 MB third-party",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F25",
+        "F29",
+        "F30",
+        "F31",
+        "F34"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "Homepage DevTools performance trace",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "FCP 2.64s, LCP 10.02s, TBT 76ms trace summary",
+      "findingIds": [
+        "F11",
+        "F13"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Homepage raw HTML versus rendered content comparison",
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Homepage with JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Homepage crawler view with JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header audit",
+      "findingIds": [
+        "F24",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security and lifetime audit",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker inventory",
+      "findingIds": [
+        "F25",
+        "F30",
+        "F31"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-side secret scan; zero findings",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image sizing, loading, format, and alternative-text inventory",
+      "findingIds": [
+        "F12",
+        "F15",
+        "F20",
+        "F29"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Lighthouse performance, accessibility, best-practices, SEO and agentic-browsing run",
+      "findingIds": [
+        "F11",
+        "F14",
+        "F18",
+        "F19",
+        "F21",
+        "F22"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/axe-home.json",
+      "caption": "axe-core accessibility violations on homepage",
+      "findingIds": [
+        "F03",
+        "F07",
+        "F10",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F22",
+        "F27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Animations remaining under reduced-motion preference",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/city-desktop.png",
+      "caption": "Ajaccio forecast detail page",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/city-mobile-layout.json",
+      "caption": "Ajaccio detail mobile CLS 0.658 and overflow metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/listing-mobile.png",
+      "caption": "News and dossiers listing at mobile viewport",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/listing-mobile-layout.json",
+      "caption": "Listing mobile CLS and overflow metrics",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-desktop.png",
+      "caption": "Representative article page",
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "Article raw/rendered comparison with 100% content coverage",
+      "findingIds": [
+        "F32"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "Article with JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "Article with JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/not-found.png",
+      "caption": "Helpful 404 recovery page",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found-probe.json",
+      "caption": "404 recovery copy and links",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-flow.json",
+      "caption": "Ajaccio search suggestions and direct forecast destination",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline readable heap summary: 44.7 MB self-size, 1.21M nodes",
+      "findingIds": [
+        "F33",
+        "F34"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Post-10-cycle heap summary: 48.0 MB self-size, 1.28M nodes",
+      "findingIds": [
+        "F33"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Public robots policy",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "Public sitemap with forecast URLs",
+      "findingIds": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "summary": "The site does not honor the user’s dark color-scheme preference.",
+      "evidence": "Desktop screenshots under light and prefers-color-scheme: dark are pixel-identical, and the computed root colorScheme is “normal”.",
+      "suggestedFix": "Declare color-scheme and provide preference-driven surface, text, icon, and browser-chrome colors using prefers-color-scheme or light-dark().",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png",
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Animations continue when reduced motion is requested.",
+      "evidence": "The reduced-motion probe confirmed the media query matched while five animations remained running, including four 600ms animations and one 2000ms animation.",
+      "suggestedFix": "Under prefers-reduced-motion: reduce, remove non-essential transitions and auto-motion or reduce them to near-instant state changes.",
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The interface does not adapt to increased contrast, and existing text contrast failures remain.",
+      "evidence": "The prefers-contrast: more screenshot is visually unchanged; axe found 23 color-contrast failures.",
+      "suggestedFix": "Add forced-colors and prefers-contrast treatments and fix the underlying WCAG contrast failures without suppressing system colors.",
+      "artifacts": [
+        "evidence/high-contrast.png",
+        "evidence/axe-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "summary": "Forecast state and document changes use abrupt swaps rather than View Transitions.",
+      "evidence": "The rendered stylesheet probe found no view-transition rules or names across forecast tabs/routes.",
+      "suggestedFix": "Progressively enhance forecast-tab and cross-document changes with View Transitions while preserving instant fallback behavior.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F05",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scrollability-affordance-hints",
+      "guidanceCategory": "user-experience",
+      "summary": "Long pages do not expose scroll progress or scroll-state-aware chrome.",
+      "evidence": "The homepage is 7,911 CSS pixels tall on mobile, while CSS inspection found no scroll-state or timeline feature and the captured header remains static.",
+      "suggestedFix": "Use lightweight scroll-state affordances such as a shrinking sticky header or progress marker, with reduced-motion support.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-mobile-layout.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F06",
+      "severity": "low",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "anchored-positioning",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "summary": "Menus and overlay surfaces are manually positioned rather than anchored declaratively.",
+      "evidence": "The DOM contains multiple custom modal/popup containers, while the feature probe found no anchor-name, position-anchor, or position-try usage.",
+      "suggestedFix": "Use popover plus CSS anchor positioning and position-try fallbacks for transient menus and attached overlays.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "summary": "Overlay UI is implemented as custom div structures rather than semantic dialog/popover primitives.",
+      "evidence": "The DOM probe found repeated .mf_modal and .modal_overlay divs, zero dialog, popover, or details primitives, and axe found focusable content inside aria-hidden UI.",
+      "suggestedFix": "Replace custom modal shells with dialog for modal tasks and popover for transient UI, relying on platform focus, top-layer, Escape, and light-dismiss behavior.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/axe-home.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F08",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "scrollability-affordance-hints",
+      "guidanceCategory": "user-experience",
+      "summary": "Mobile homepage chrome overlaps and competes with content near the bottom of the first viewport.",
+      "evidence": "The 360x800 screenshot shows a crowded, partially overlapping bottom carousel/navigation strip with clipped labels over editorial content.",
+      "suggestedFix": "Remove or defer non-essential sticky/carousel chrome, reserve its space, and keep one clear content hierarchy at narrow widths.",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F09",
+      "severity": "low",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "user-experience",
+      "summary": "Reusable components rely on viewport styling rather than container-level adaptation.",
+      "evidence": "CSS inspection found no @container rules or container-type declarations across the rendered homepage styles.",
+      "suggestedFix": "Adopt container queries for reused cards, forecast panels, and navigation modules so they respond to their actual available width.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/listing-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Keyboard focus is not visibly indicated on important controls.",
+      "evidence": "The focus probe reported outline-style none and no box-shadow for the search input, submit button, menu button, and many navigation links; axe also found non-focusable scroll regions.",
+      "suggestedFix": "Add strong :focus-visible styling, make scrollable regions keyboard focusable, and preserve at least 44x44 CSS-pixel targets.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/axe-home.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F11",
+      "severity": "critical",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The primary forecast page loads far outside good Core Web Vitals ranges.",
+      "evidence": "Lighthouse measured LCP 24.0s, CLS 0.592, FCP 6.6s and TBT 400ms (performance score 24); the independent trace measured LCP 10.02s.",
+      "suggestedFix": "Profile the LCP dependency chain, prioritize the LCP asset, reduce server/document latency and render-blocking work, and verify LCP below 2.5s and CLS below 0.1.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-mobile-layout.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "user-experience",
+      "summary": "Late content causes severe layout movement on the forecast templates.",
+      "evidence": "The layout primitive measured CLS 0.465 on the mobile homepage and 0.658 on the Ajaccio page; 60 of 64 images lack explicit dimensions.",
+      "suggestedFix": "Reserve image, map, advertising, and async-module space with width/height or aspect-ratio and avoid injecting unreserved content above existing content.",
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/city-mobile-layout.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "city",
+      "url": "https://meteofrance.com/previsions-meteo-france/ajaccio/20000",
+      "confidence": "high"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "user-experience",
+      "summary": "Critical delivery is heavy and render-blocked.",
+      "evidence": "The HAR records 2.98 MB across 72 requests, four parser-inserted VeryHigh-priority stylesheets, an uncompressed 716 KB first-party script, and 234 KB uncompressed HTML.",
+      "suggestedFix": "Compress text responses, reduce and inline only truly critical CSS, defer non-critical resources, split the monolithic script, and set useful cache headers.",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "Large amounts of shipped JavaScript and CSS are unused on the initial forecast view.",
+      "evidence": "Lighthouse estimated 735,048 bytes of unused JavaScript and 158,107 bytes of unused CSS; third parties transfer another 968,584 bytes.",
+      "suggestedFix": "Split code by route/component, remove duplicate and legacy code, conditionally load maps/ads/editorial features, and enforce JavaScript/CSS budgets.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Controls and visual content have missing or invalid accessible names and roles.",
+      "evidence": "axe found critical missing alt text and unnamed select failures, serious unnamed links and prohibited ARIA, plus aria-hidden focusable content.",
+      "suggestedFix": "Give every control and meaningful image an accessible name, correct invalid roles/ARIA, and remove hidden descendants from the focus order.",
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F16",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Text contrast fails WCAG AA in repeated editorial content.",
+      "evidence": "axe found 23 color-contrast failure nodes, including dates and article-card copy.",
+      "suggestedFix": "Update text and surface tokens to achieve at least 4.5:1 for normal text and 3:1 for large text and essential UI.",
+      "artifacts": [
+        "evidence/axe-home.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "Landmarks, focus handling, and keyboard access are inconsistent.",
+      "evidence": "axe found nested banner/contentinfo/complementary landmarks, two keyboard-inaccessible scrollable regions, and focusable elements inside aria-hidden #sidebar_page; the direct focus probe found invisible focus on key controls.",
+      "suggestedFix": "Use top-level landmarks, remove hidden UI from the focus order, make carousels/scroll regions keyboard operable, and provide a logical visible focus sequence.",
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F18",
+      "severity": "critical",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "summary": "The viewport configuration disables user zoom.",
+      "evidence": "axe’s critical meta-viewport rule failed because the viewport prevents text scaling/zooming.",
+      "suggestedFix": "Remove maximum-scale and user-scalable=no restrictions; retain width=device-width and initial-scale=1 so users can zoom and reflow.",
+      "artifacts": [
+        "evidence/axe-home.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "trivial",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The production page emits console errors.",
+      "evidence": "Lighthouse’s errors-in-console audit failed on the homepage.",
+      "suggestedFix": "Resolve runtime/network exceptions and add production monitoring that treats uncaught errors as release regressions.",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Image asset sizing is unsound despite a valid doctype and UTF-8 charset.",
+      "evidence": "The image primitive found 60 of 64 images without dimensions, five oversized images, three legacy-format images, and three missing alt values.",
+      "suggestedFix": "Emit intrinsic dimensions, responsive srcset/sizes, and appropriately sized modern assets while retaining valid document metadata.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F21",
+      "severity": "low",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "The page ships broken inspection metadata and browser issues.",
+      "evidence": "Lighthouse failed valid-source-maps and inspector-issues audits.",
+      "suggestedFix": "Publish matching production source maps to authorized tooling or omit broken references, and clear reported inspector/deprecation issues.",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F22",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Some links are not crawlable and mobile friendliness is weakened by disabled zoom.",
+      "evidence": "Lighthouse failed crawlable-anchors; axe and Lighthouse also failed the meta-viewport zoom audit.",
+      "suggestedFix": "Use real descriptive href values for every navigational link and allow user scaling in the viewport metadata.",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/axe-home.json"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "summary": "Rich pages do not expose structured data or social-preview metadata.",
+      "evidence": "The DOM probe found zero JSON-LD blocks and zero Open Graph tags even though the site contains organization, forecast/place, and article entities.",
+      "suggestedFix": "Add accurate JSON-LD and Open Graph/Twitter metadata that matches visible Organization, Article, Place, and weather content.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/article-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "article",
+      "url": "https://meteofrance.com/actualites-et-dossiers/nouvelles-equipes-municipales-meteo-france-vos-cotes",
+      "confidence": "high"
+    },
+    {
+      "id": "F24",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "HTTPS is used, but baseline security headers and cookie protections are missing.",
+      "evidence": "The headers primitive found no CSP, HSTS, nosniff, frame protection, Referrer-Policy, or Permissions-Policy; didomi_token lacks Secure and mfsession uses SameSite=None.",
+      "suggestedFix": "Deploy a restrictive CSP, HSTS, nosniff, clickjacking defense, Referrer-Policy and Permissions-Policy; mark all HTTPS cookies Secure and use the strictest workable SameSite.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F25",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "summary": "The default page load has a large tracking and advertising footprint.",
+      "evidence": "The tracker primitive found eight third-party origins including Google Tag Manager and DoubleClick; the HAR attributes 33 requests and 968,584 bytes to third parties.",
+      "suggestedFix": "Load non-essential analytics/advertising only after valid consent, minimize vendors and event volume, batch telemetry, and document retention and purposes.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F26",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "summary": "Browser-enforced defensive policies are absent.",
+      "evidence": "No HSTS, frame-ancestors/X-Frame-Options, Referrer-Policy, Permissions-Policy, or CSP was returned for the main document.",
+      "suggestedFix": "Set HSTS, CSP with frame-ancestors and Trusted Types where feasible, strict referrer handling, and a least-privilege Permissions-Policy.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "user-experience",
+      "summary": "Custom hidden/runtime UI has inconsistent visibility and focus state.",
+      "evidence": "The DOM reports multiple custom modal shells as geometrically visible while axe finds aria-hidden focusable content; the mobile screenshot shows overlapping carousel chrome.",
+      "suggestedFix": "Move transient UI to dialog/popover top-layer primitives, synchronize hidden/inert/focus state, and test narrow-edge positioning and async open/close cycles.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/axe-home.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F28",
+      "severity": "medium",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "internationalization",
+      "summary": "The French language is declared correctly, but layout CSS is not writing-mode resilient.",
+      "evidence": "The DOM probe found html lang=fr and dir=ltr, but no logical-property usage and 450 physical left/right declarations in rendered CSS.",
+      "suggestedFix": "Migrate layout spacing, sizing, and positioning to logical properties and test translated and RTL expansion even if French remains the primary locale.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F29",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "summary": "Image delivery wastes bytes and creates layout risk.",
+      "evidence": "Of 64 images, 60 lack dimensions, 39 below-fold images are not lazy-loaded, five are oversized, 12 lack srcset, and three use legacy formats.",
+      "suggestedFix": "Generate right-sized AVIF/WebP variants with srcset/sizes, lazy-load below-fold images, and include intrinsic dimensions.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F30",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "summary": "Non-essential third-party work consumes substantial resources during initial load.",
+      "evidence": "Eight third-party origins load on entry; ads, consent, analytics, and wrappers account for 33 requests and 968,584 transferred bytes before user interaction.",
+      "suggestedFix": "Defer non-essential vendors until consent and intent, remove low-value wrappers, and budget third-party CPU/network cost.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F31",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "summary": "Third-party scripts and media are disproportionate to the immediate forecast task.",
+      "evidence": "Third parties account for roughly one third of the 2.98 MB load, while the homepage also fetches editorial/video-related resources before they enter the viewport.",
+      "suggestedFix": "Conditionally load ads, video embeds, and editorial media near interaction/viewport; set per-template third-party and media budgets.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F32",
+      "severity": "low",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "guidanceCategory": "ai",
+      "summary": "Forecast capability is crawler-visible but not exposed as a safe structured agent action.",
+      "evidence": "Raw HTML coverage is 85% on the homepage and 100% on the article, but the capability probe found no WebMCP/agentic tool registration or structured action surface.",
+      "suggestedFix": "Treat this as an emerging opportunity: expose read-only location lookup and forecast retrieval as schema-described, permission-bounded agent tools.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/article-discoverability.json",
+        "evidence/home-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "high"
+    },
+    {
+      "id": "F33",
+      "severity": "medium",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "no-leak-under-repeated-interaction",
+      "guidanceId": "manage-recurring-intervals",
+      "guidanceCategory": "user-experience",
+      "summary": "Repeated forecast-tab interaction increases retained heap and node count.",
+      "evidence": "After ten today/tomorrow cycles, the summary grew from 44.7 MB/1,211,243 nodes to 48.0 MB/1,275,325 nodes (about +3.25 MB and +64k nodes). Separate fresh-browser baselines reduce confidence, so this requires retained-path confirmation.",
+      "suggestedFix": "Capture baseline/target/final snapshots in one session, identify retained paths, and clean up listeners, timers, nodes, and caches on forecast-state teardown.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "low"
+    },
+    {
+      "id": "F34",
+      "severity": "medium",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "summary": "The initial page has a large memory footprint for a forecast/content page.",
+      "evidence": "The baseline heap summary reports 1,211,243 nodes, 4,955,903 edges, 154,521 closures, and 44.7 MB self-size before extended interaction.",
+      "suggestedFix": "Reduce initial modules and DOM, virtualize or defer below-fold content, and conditionally initialize maps, ads, and editorial features.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://meteofrance.com/",
+      "confidence": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Fix LCP, CLS, compression, and critical resource delivery",
+      "priority": 1,
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore zoom, visible focus, semantic names, roles, and contrast",
+      "priority": 2,
+      "findingIds": [
+        "F10",
+        "F15",
+        "F16",
+        "F17",
+        "F18"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Deploy security headers and consent-gate third-party trackers",
+      "priority": 3,
+      "findingIds": [
+        "F24",
+        "F25",
+        "F26"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Split unused code and conditionally initialize heavy modules",
+      "priority": 4,
+      "findingIds": [
+        "F14",
+        "F34"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Replace custom modal shells with dialog/popover and resilient focus handling",
+      "priority": 5,
+      "findingIds": [
+        "F06",
+        "F07",
+        "F27"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Optimize responsive images and defer below-fold media",
+      "priority": 6,
+      "findingIds": [
+        "F20",
+        "F29",
+        "F31"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Honor dark, reduced-motion, and increased-contrast preferences",
+      "priority": 7,
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Repair crawlable links and add JSON-LD/social metadata",
+      "priority": 8,
+      "findingIds": [
+        "F22",
+        "F23"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Modernize responsive and mobile content chrome",
+      "priority": 9,
+      "findingIds": [
+        "F05",
+        "F08",
+        "F09"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Confirm and eliminate retained growth in a single-session heap study",
+      "priority": 10,
+      "findingIds": [
+        "F33"
+      ],
+      "guidanceId": "manage-recurring-intervals",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Migrate layout CSS to logical properties",
+      "priority": 11,
+      "findingIds": [
+        "F28"
+      ],
+      "guidanceId": "translator",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Evaluate a read-only structured forecast agent surface",
+      "priority": 12,
+      "findingIds": [
+        "F32"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 2400,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-20T02-01-12-254Z"
+}

@@ -1,0 +1,1252 @@
+{
+  "url": "https://zozo.jp",
+  "auditedAt": "2026-07-27T19:36:19.841Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Akamai returned HTTP 403 to the audit environment for the entry page, robots.txt, and sitemap.xml. Browser evidence primitives could not complete navigation, so the site could not be audited.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "Page profile and archetypes could not be identified because the origin blocked this audit environment before content loaded."
+  },
+  "evidenceUsed": [
+    "raw-CDP screenshot attempt",
+    "raw-CDP DOM attempt",
+    "raw-CDP headers attempt",
+    "HTTP response probe",
+    "robots.txt probe",
+    "sitemap.xml probe",
+    "Modern Web Guidance semantic search"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "component-specific-light-dark-theme",
+    "css",
+    "adapt-scrollbar-to-contrast-preferences",
+    "accessibility",
+    "carousel-slide-effects",
+    "directional-navigation-transitions",
+    "scroll-entry-exit-effects",
+    "scroll-snap-realtime-feedback",
+    "position-aware-tooltips",
+    "pull-to-reveal",
+    "navigation-drawer",
+    "scroll-target-on-load",
+    "declarative-dialog-popover-control",
+    "html",
+    "persistent-app-tours",
+    "light-dismiss-a-dialog",
+    "scroll-position-aware-elements",
+    "scrollability-affordance-hints",
+    "stabilize-reactive-state",
+    "capture-location-agnostic-data",
+    "schedule-tasks-by-priority",
+    "model-partial-time-concepts",
+    "language-model",
+    "identify-heavy-scripts",
+    "break-up-long-tasks",
+    "performance",
+    "optimize-script-priority",
+    "efficient-background-processing",
+    "accessible-error-announcement",
+    "forms",
+    "defer-rendering-heavy-content",
+    "highlight-text-ranges",
+    "security",
+    "search-hidden-content",
+    "passkeys",
+    "privacy",
+    "passkey-reauthentication",
+    "passkey-authentication",
+    "passkey-management",
+    "coordinate-global-events",
+    "translator",
+    "support-global-calendar-systems",
+    "calculate-event-differentials",
+    "autofill-payment-form",
+    "autofill-sign-up-form",
+    "autofill-sign-in-form",
+    "autofill-address-form",
+    "deliver-optimized-decorative-images",
+    "optimize-preload-priority",
+    "agentic-forms",
+    "agentic-javascript-tools",
+    "webmcp",
+    "persistent-top-layer-ui",
+    "defer-work-until-scroll-ends",
+    "move-dom-element-without-losing-state",
+    "stack-drill-down"
+  ],
+  "artifacts": [
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic manifest of all 58 expected principle/check pairs and their intended evidence methods."
+    },
+    {
+      "type": "other",
+      "path": "guidance-searches.txt",
+      "caption": "Pinned Modern Web Guidance 0.0.172 semantic search results consulted before judgement."
+    },
+    {
+      "type": "other",
+      "path": "evidence/entry-response-headers.txt",
+      "caption": "HTTP response headers showing Akamai 403 Forbidden for the entry URL.",
+      "condition": "direct HTTP GET from audit environment"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/entry-response-body.html",
+      "caption": "Akamai access-denied HTML returned instead of the ZOZOTOWN page.",
+      "condition": "direct HTTP GET from audit environment"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers-command.log",
+      "caption": "Raw CDP headers primitive attempt ending in an external timeout after navigation could not complete."
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-txt-headers.txt",
+      "caption": "HTTP 403 response headers for robots.txt."
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap-xml-headers.txt",
+      "caption": "HTTP 403 response headers for sitemap.xml."
+    },
+    {
+      "type": "other",
+      "path": "validator.log",
+      "caption": "Atomic coverage validator output. The publication gate correctly fails because all 58 checks are blocked."
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned CDP screenshots and computed-style/animation probes under dark, reduced-motion, and high-contrast emulation; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned CDP screenshots and computed-style/animation probes under dark, reduced-motion, and high-contrast emulation; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned CDP screenshots and computed-style/animation probes under dark, reduced-motion, and high-contrast emulation; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned CDP interaction video plus DOM/CSS listener and animation inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned CDP interaction video plus DOM/CSS listener and animation inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned CDP interaction video plus DOM/CSS listener and animation inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned scroll interaction video plus overlay and navigation DOM/CSS inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned scroll interaction video plus overlay and navigation DOM/CSS inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned scroll interaction video plus overlay and navigation DOM/CSS inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned load screenshot plus overlay/chrome DOM and layout inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned load screenshot plus overlay/chrome DOM and layout inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned load screenshot plus overlay/chrome DOM and layout inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned mobile layout/screenshot and keyboard focus/target-size probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned mobile layout/screenshot and keyboard focus/target-size probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned mobile layout/screenshot and keyboard focus/target-size probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned representative task walkthrough with screenshots and state/error probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned representative task walkthrough with screenshots and state/error probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned representative task walkthrough with screenshots and state/error probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, images, and Lighthouse-style performance probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, images, and Lighthouse-style performance probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, images, and Lighthouse-style performance probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, images, and Lighthouse-style performance probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned layout, trace, HAR, images, and Lighthouse-style performance probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned axe-style DOM/accessibility probes, keyboard focus walk, and mobile/zoom screenshots; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned axe-style DOM/accessibility probes, keyboard focus walk, and mobile/zoom screenshots; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned axe-style DOM/accessibility probes, keyboard focus walk, and mobile/zoom screenshots; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned axe-style DOM/accessibility probes, keyboard focus walk, and mobile/zoom screenshots; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned axe-style DOM/accessibility probes, keyboard focus walk, and mobile/zoom screenshots; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned console/log capture and document/assets/platform DOM probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned console/log capture and document/assets/platform DOM probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned console/log capture and document/assets/platform DOM probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned raw HTML discoverability, metadata, robots, sitemap, and indexing probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned raw HTML discoverability, metadata, robots, sitemap, and indexing probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned raw HTML discoverability, metadata, robots, sitemap, and indexing probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned raw HTML discoverability, metadata, robots, sitemap, and indexing probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned headers, cookies, trackers, secrets, and HAR inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned headers, cookies, trackers, secrets, and HAR inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned headers, cookies, trackers, secrets, and HAR inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned headers, cookies, trackers, secrets, and HAR inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS/raw HTML comparison and network/error/offline state probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS/raw HTML comparison and network/error/offline state probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS/raw HTML comparison and network/error/offline state probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned no-JS/raw HTML comparison and network/error/offline state probes; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, logical CSS, locale, and time rendering inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, logical CSS, locale, and time rendering inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned lang/dir, logical CSS, locale, and time rendering inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, form, checkout, account, cancellation, and validation walkthroughs; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, form, checkout, account, cancellation, and validation walkthroughs; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, form, checkout, account, cancellation, and validation walkthroughs; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned consent, form, checkout, account, cancellation, and validation walkthroughs; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned HAR/image/media weight and background-work inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned HAR/image/media weight and background-work inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned HAR/image/media weight and background-work inspection; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/source inspection for WebMCP and on-device inference surfaces; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned DOM/source inspection for WebMCP and on-device inference surfaces; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline and repeated-interaction heap/metrics comparison; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline and repeated-interaction heap/metrics comparison; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Planned baseline and repeated-interaction heap/metrics comparison; attempted raw CDP entry navigation and corroborating HTTP retrieval before executing this check.",
+      "evidence": "The entry URL returned HTTP 403 Forbidden from Akamai. The screenshot and DOM primitives each timed out after Chrome reached session-ready; the headers primitive also timed out. robots.txt and sitemap.xml returned 403.",
+      "reason": "Akamai denied the audit host with HTTP 403 before page content was available; raw CDP screenshot, DOM, and headers primitives were attempted but could not finish navigation.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/entry-response-headers.txt",
+        "evidence/entry-response-body.html",
+        "evidence/headers-command.log"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 atomic checks are blocked by the Akamai HTTP 403 access gate; no site-quality verdict was inferred."
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry",
+      "description": "Homepage entry and route-discovery recon. Homepage, robots.txt, and sitemap.xml were attempted. No representative secondary templates could be selected because all discovery endpoints were denied by the same access gate.",
+      "url": "https://zozo.jp",
+      "conditions": [
+        "desktop 1440x900",
+        "raw HTTP retrieval"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T19-32-27-937Z"
+}

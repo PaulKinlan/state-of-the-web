@@ -1,0 +1,1864 @@
+{
+  "url": "https://www.youtube.com",
+  "auditedAt": "2026-07-24T05:10:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of anonymous public home, search, watch, mobile and error states; signed-in, upload, purchase and creator-studio flows excluded.",
+  "page": {
+    "appType": "spa",
+    "framework": "YouTube Polymer/Web Components SPA",
+    "notes": "Anonymous en-GB experience; fresh browser profiles trigger the consent interstitial."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "emulated-media",
+    "layout-metrics",
+    "trace",
+    "har",
+    "lighthouse",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "light-dismiss-a-dialog",
+    "forms",
+    "identify-inp-causes",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "security",
+    "privacy",
+    "html",
+    "flicker-free-client-side-ab-testing",
+    "efficient-background-processing",
+    "webmcp"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "emulated-media screenshot/evaluate comparison",
+      "evidence": "Desktop screenshots under default and prefers-color-scheme: dark are pixel-identical in treatment: the consent surface remains white and computed color-scheme is normal.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F1"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "emulated-media screenshot/evaluate comparison",
+      "evidence": "The reduced-motion probe found 26 prefers-reduced-motion media rules and zero running animations in the observed consent/home state.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "emulated-media screenshot/evaluate comparison",
+      "evidence": "The prefers-contrast screenshot did not alter the surface, and Lighthouse reported color-contrast and link-in-text-block failures.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F2"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "computed CSS and rendered interaction-state inspection",
+      "evidence": "The search-page CSS probe found active view-transition names root, metadata, and secondary-column, direct evidence of declarative route/state transition participation.",
+      "pathIds": [
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "computed CSS and rendered interaction-state inspection",
+      "evidence": "No scroll-linked animation was present on the representative home, search, or watch states, so there was no scroll-driven implementation to evaluate.",
+      "pathIds": [
+        "search",
+        "watch"
+      ],
+      "reason": "No scroll-linked animation was present on the representative home, search, or watch states, so there was no scroll-driven implementation to evaluate."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "computed CSS and rendered interaction-state inspection",
+      "evidence": "The watch page uses native video controls and the responsive page retained platform scrolling without horizontal overflow; no custom pointer-drag layer displaced platform behavior.",
+      "pathIds": [
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "representative search/watch screenshot and DOM walkthrough",
+      "evidence": "Search and watch screenshots show persistent masthead/sidebar orientation plus filter and chapter states that remain visually anchored to the current context.",
+      "pathIds": [
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "high",
+      "method": "representative search/watch screenshot and DOM walkthrough",
+      "evidence": "The consent modal and visible menus remained centered/in-bounds at desktop and mobile sizes; no clipped overlay was observed.",
+      "pathIds": [
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "representative search/watch screenshot and DOM walkthrough",
+      "evidence": "Search results expose selected filter state, “Now playing”, chapters, and clear video titles; the watch page preserves current title and playback state.",
+      "pathIds": [
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "desktop/mobile screenshot plus dialog DOM inspection",
+      "evidence": "Every fresh home, search, and watch capture was covered by a large consent dialog; on mobile it filled the viewport and pushed all actions below the fold.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ],
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "pass",
+      "confidence": "high",
+      "method": "desktop/mobile screenshot plus dialog DOM inspection",
+      "evidence": "DOM inspection found dialog roles and explicit Reject all, Accept all, More options, privacy, and terms controls; the overlay is keyboard-addressable and dismissible.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "desktop/mobile screenshot plus dialog DOM inspection",
+      "evidence": "Behind the consent overlay, home/search/watch layouts devote the main region to recommendations, results, or video content with a compact masthead and collapsible navigation.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "mobile layout metrics and target/container-query probe",
+      "evidence": "At 360x800, layout reported scrollWidth=clientWidth=360 and horizontalOverflowPx=0 with a valid viewport meta tag.",
+      "pathIds": [
+        "home-mobile"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "mobile layout metrics and target/container-query probe",
+      "evidence": "The live stylesheet probe found a container-query rule, and desktop/mobile captures show the consent and app chrome reflowing to the available width.",
+      "pathIds": [
+        "home-mobile"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "mobile layout metrics and target/container-query probe",
+      "evidence": "The control probe found visible primary controls only 24x24 CSS px (Guide and Settings), while Lighthouse also failed the restrictive viewport scaling audit.",
+      "pathIds": [
+        "home-mobile"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "anonymous search→watch walkthrough and invalid-state probe",
+      "evidence": "Search and watch probes expose descriptive titles, video result links, Play, Search, and Go to home; page purpose and next action are explicit.",
+      "pathIds": [
+        "search",
+        "watch",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "anonymous search→watch walkthrough and invalid-state probe",
+      "evidence": "The search-to-watch content exists, but an anonymous fresh session is interrupted by the full consent decision on every tested archetype before the primary content can be used.",
+      "pathIds": [
+        "search",
+        "watch",
+        "error-state"
+      ],
+      "findingIds": [
+        "F4"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "anonymous search→watch walkthrough and invalid-state probe",
+      "evidence": "An invalid watch URL rendered “This video isn’t available any more” with a GO TO HOME recovery action; home also explains history-off state and offers Update setting.",
+      "pathIds": [
+        "search",
+        "watch",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, layout observer, HAR summary",
+      "evidence": "Lighthouse measured FCP 6.5s, LCP 8.5s, Speed Index 13.4s, TBT 240ms, and performance score 0.51; trace LCP was 4.18s.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F5"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, layout observer, HAR summary",
+      "evidence": "The mobile layout observer measured CLS 0.000089 and Lighthouse CLS was 0.001, both comfortably stable.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, layout observer, HAR summary",
+      "evidence": "Trace recorded four long tasks, longest 268.78ms and TBT 275.52ms; Lighthouse reported 2.1s main-thread work.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F6"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, layout observer, HAR summary",
+      "evidence": "HAR recorded 144 requests and 4,057,297 transferred bytes, including 3,042,094 bytes of script and parser-inserted high-priority scripts/styles; Lighthouse flagged redirects, document latency, dependency chains, and render blocking.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F7"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, layout observer, HAR summary",
+      "evidence": "Lighthouse estimated 643KiB unused JavaScript and 156KiB unused CSS; the largest JS response was 2.11MB transferred.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F8"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits plus screenshot/DOM inspection",
+      "evidence": "Lighthouse accessibility score was 0.85 and failed visible-label/accessibility-name matching plus unlabeled select controls.",
+      "pathIds": [
+        "home",
+        "watch"
+      ],
+      "findingIds": [
+        "F9"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits plus screenshot/DOM inspection",
+      "evidence": "Lighthouse directly failed color-contrast and links-distinguishable-by-color audits on the loaded experience.",
+      "pathIds": [
+        "home",
+        "watch"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits plus screenshot/DOM inspection",
+      "evidence": "The DOM exposes Skip navigation, named Search/Settings/Sign in controls, dialog actions, video controls, and ordered result headings; keyboard-oriented labels are present.",
+      "pathIds": [
+        "home",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits plus screenshot/DOM inspection",
+      "evidence": "Desktop and mobile screenshots show readable 14–16px body copy, clear hierarchy, and no clipped lines; the mobile consent copy wraps within the viewport.",
+      "pathIds": [
+        "home",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility audits plus screenshot/DOM inspection",
+      "evidence": "Lighthouse failed meta-viewport because scaling is constrained below its accessible threshold; the watch player reported captions unavailable in the tested state.",
+      "pathIds": [
+        "home",
+        "watch"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse best-practices audits and runtime document probe",
+      "evidence": "Lighthouse directly reported browser console errors during load.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse best-practices audits and runtime document probe",
+      "evidence": "Runtime probe found HTML doctype, UTF-8 charset, valid viewport, and negligible CLS; rendered video thumbnails preserve their 16:9 framing.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse best-practices audits and runtime document probe",
+      "evidence": "Lighthouse reported missing source maps, DevTools inspector issues, and one BFCache restoration failure.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "metadata probes and raw-HTML discoverability comparison",
+      "evidence": "Home has title YouTube and a descriptive meta description; search has a query-specific title; watch has a content-specific title and description.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "metadata probes and raw-HTML discoverability comparison",
+      "evidence": "Rendered search links use real watch hrefs and viewport metadata is present, but discoverability found only 5–6% rendered-word coverage without JavaScript and classified home/watch as JS shells.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "metadata probes and raw-HTML discoverability comparison",
+      "evidence": "The watch page returned 200 and exposed canonical https://www.youtube.com/watch?v=uT7MVcCQ4rw without a noindex signal.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "metadata probes and raw-HTML discoverability comparison",
+      "evidence": "The watch page exposed two JSON-LD blocks and complete Open Graph video title, description, image dimensions, URL, and embed metadata matching visible content.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, HAR, trackers, secrets and consent inspection",
+      "evidence": "Headers showed HTTPS, HSTS, nosniff, X-Frame-Options, CSP and Trusted Types, but the CSP permits unsafe-inline/unsafe-eval and Referrer-Policy is absent.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, HAR, trackers, secrets and consent inspection",
+      "evidence": "HAR attributed 108 of 144 requests to third-party origins; tracker scan found 9 third-party origins (87 font requests alone), while the consent copy states audience measurement occurs before optional personalization.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "headers, cookies, HAR, trackers, secrets and consent inspection",
+      "evidence": "No geolocation, notification, camera, or microphone prompt appeared on load; authentication is delegated to accounts.google.com rather than an inline password form.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, HAR, trackers, secrets and consent inspection",
+      "evidence": "HSTS, SAMEORIGIN, nosniff, Permissions-Policy and Trusted Types are present, but Referrer-Policy is missing and CSP retains unsafe-inline/unsafe-eval allowances.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability, service-worker/manifest and invalid-route probes",
+      "evidence": "Discoverability measured only 6% raw/rendered word overlap on home and 5% on watch, classifying both as JavaScript shells; crawler screenshots omit the useful browse/watch content.",
+      "pathIds": [
+        "home",
+        "watch",
+        "error-state"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "discoverability, service-worker/manifest and invalid-route probes",
+      "evidence": "Consent, search filters, result cards, watch player and recovery state rendered without clipping at tested desktop/mobile sizes; invalid content produced a stable recovery UI.",
+      "pathIds": [
+        "home",
+        "watch",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "discoverability, service-worker/manifest and invalid-route probes",
+      "evidence": "Runtime inspection found a linked manifest and an active service-worker controller, direct installability/offline infrastructure evidence (offline media playback was not claimed).",
+      "pathIds": [
+        "home",
+        "watch",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "discoverability, service-worker/manifest and invalid-route probes",
+      "evidence": "The invalid-video route displayed a specific unavailable state and GO TO HOME recovery rather than a blank shell or infinite spinner.",
+      "pathIds": [
+        "home",
+        "watch",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "lang/locale DOM and rendered-content inspection",
+      "evidence": "The document declares lang=en-GB and exposes a visible en-GB language control; mobile reflow preserved reading order.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "lang/locale DOM and rendered-content inspection",
+      "evidence": "Rendered counts and relative dates use localized compact forms such as 159k views, 2 months ago, and en-GB language selection.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "lang/locale DOM and rendered-content inspection",
+      "evidence": "The anonymous representative paths expose relative ages rather than user-scheduled or cross-zone events; no time-zone-sensitive editing flow applied.",
+      "pathIds": [
+        "home",
+        "search",
+        "watch"
+      ],
+      "reason": "The anonymous representative paths expose relative ages rather than user-scheduled or cross-zone events; no time-zone-sensitive editing flow applied."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "consent choice comparison and invalid-state walkthrough",
+      "evidence": "Reject all and Accept all are adjacent, similarly sized dark buttons, More options is available, and the copy distinguishes necessary measurement from optional personalization.",
+      "pathIds": [
+        "home",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "consent choice comparison and invalid-state walkthrough",
+      "evidence": "The invalid-video state explains the problem in plain language and offers GO TO HOME; consent offers reject, accept, and more-options paths without a dead end.",
+      "pathIds": [
+        "home",
+        "error-state"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "consent choice comparison and invalid-state walkthrough",
+      "evidence": "The anonymous representative paths contained search and consent controls but no address, payment, sign-in, or sign-up form owned by youtube.com.",
+      "pathIds": [
+        "home",
+        "error-state"
+      ],
+      "reason": "The anonymous representative paths contained search and consent controls but no address, payment, sign-in, or sign-up form owned by youtube.com."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "consent choice comparison and invalid-state walkthrough",
+      "evidence": "Premium purchase and authenticated account-management flows were explicitly outside this anonymous, no-purchase audit scope.",
+      "pathIds": [
+        "home",
+        "error-state"
+      ],
+      "reason": "Premium purchase and authenticated account-management flows were explicitly outside this anonymous, no-purchase audit scope."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR resource/third-party budget and Lighthouse waste diagnostics",
+      "evidence": "The initial consent/home load transferred 4.06MB, including 3.04MB JavaScript, despite showing little primary media content.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR resource/third-party budget and Lighthouse waste diagnostics",
+      "evidence": "The consent/home HAR recorded 144 requests and 4.06MB before the user chose a consent option, including 98 fetch/XHR requests.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR resource/third-party budget and Lighthouse waste diagnostics",
+      "evidence": "The HAR recorded 108 third-party requests and tracker inventory found 9 third-party origins; fonts.gstatic.com alone received 87 requests.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F18",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "discoverability and Lighthouse agentic-browsing audits",
+      "evidence": "Lighthouse agentic-browsing score was 0.33, failed accessibility-tree and llms.txt checks, while no WebMCP/agent tool declaration was observed.",
+      "pathIds": [
+        "home",
+        "watch"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "discoverability and Lighthouse agentic-browsing audits",
+      "evidence": "On-device language-model inference is not necessary to the core anonymous browse, search, and watch journeys.",
+      "pathIds": [
+        "home",
+        "watch"
+      ],
+      "reason": "On-device language-model inference is not necessary to the core anonymous browse, search, and watch journeys."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "baseline/post heap summaries and runtime DOM/heap probe",
+      "evidence": "After ten programmatic guide toggles, heap node count fell 1,406,303→1,405,700 and self size rose only 70,902,183→71,024,288 bytes (~0.17%), with HTMLElement count 1046→1045.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "baseline/post heap summaries and runtime DOM/heap probe",
+      "evidence": "A loaded anonymous home/consent state used ~65.5MB JS heap and a 71.0MB heap snapshot; substantial but proportionate to a complex media SPA and stable across the repeated interaction.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "baseline/post heap summaries and runtime DOM/heap probe",
+      "evidence": "The live DOM probe found zero disconnected queried elements, and post-interaction HTMLElement/closure/object counts did not grow.",
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F4"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F9",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Anonymous homepage and consent entry state; represents global shell, navigation, privacy prompt, network and performance.",
+      "url": "https://www.youtube.com/",
+      "conditions": [
+        "1440x900",
+        "default",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "home-mobile",
+      "description": "Anonymous homepage at narrow mobile viewport; represents responsive reflow and touch constraints.",
+      "url": "https://www.youtube.com/",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search results for “web development”; represents listing/filter template and the first half of the primary browse journey.",
+      "url": "https://www.youtube.com/results?search_query=web+development",
+      "conditions": [
+        "1440x900",
+        "anonymous"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "watch",
+      "description": "Public watch page for a known video; represents media, metadata, chapters, recommendations and the primary destination.",
+      "url": "https://www.youtube.com/watch?v=uT7MVcCQ4rw",
+      "conditions": [
+        "1440x900",
+        "anonymous",
+        "JavaScript disabled crawler comparison"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error-state",
+      "description": "Invalid video URL; represents content-not-found and recovery behavior.",
+      "url": "https://www.youtube.com/watch?v=invalid00000",
+      "conditions": [
+        "anonymous"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "summary": "The consent and anonymous entry experience ignore the system dark-mode preference.",
+      "evidence": "Default and dark-emulated screenshots retain the same white dialog and light app; computed color-scheme is normal.",
+      "suggestedFix": "Declare color-scheme and map consent/app surface tokens through prefers-color-scheme or light-dark(), preserving contrast.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dark.png"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F2",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "adapt-scrollbar-to-contrast-preferences",
+      "summary": "High-contrast preference is not reflected and baseline contrast defects remain.",
+      "evidence": "The prefers-contrast screenshot is visually unchanged; Lighthouse fails color contrast and links distinguished only by color.",
+      "suggestedFix": "Add forced-colors/prefers-contrast treatments and system-color fallbacks, then rerun contrast audits.",
+      "artifacts": [
+        "evidence/home-contrast.png",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F3",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "summary": "A full consent interstitial obscures every audited archetype on a fresh anonymous visit.",
+      "evidence": "Home, search, and watch screenshots are dominated by the same modal; on 360x800 its decision buttons are below the initial viewport.",
+      "suggestedFix": "Use a compact, content-first consent treatment where legally possible; keep essential reject/accept controls visible without scrolling and avoid repeating after a recorded choice.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/search-desktop.png",
+        "evidence/watch-desktop.png"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F4",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "search",
+      "url": "https://www.youtube.com/results?search_query=web+development",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "summary": "The anonymous search-to-watch journey is gated by an oversized consent decision before content can be used.",
+      "evidence": "Direct search and watch URLs render useful content behind a blocking modal in every fresh browser profile.",
+      "suggestedFix": "Preserve a minimal anonymous browse/watch path while consent is undecided and persist the decision reliably.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/watch-desktop.png"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F5",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "summary": "Cold-load performance is well outside the good LCP range.",
+      "evidence": "Lighthouse reports LCP 8.5s, FCP 6.5s, Speed Index 13.4s and score 0.51; trace LCP is 4.18s.",
+      "suggestedFix": "Profile the LCP critical path, remove redirects, prioritize only the LCP resource, and defer non-critical app/player work.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F6",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "summary": "Large main-thread tasks delay responsiveness.",
+      "evidence": "Trace records four long tasks, longest 268.78ms and TBT 275.52ms; Lighthouse attributes 2.1s to main-thread work.",
+      "suggestedFix": "Break long tasks into yieldable work, schedule by priority, and avoid initializing player/cast/offline modules before needed.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F7",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-image-priority",
+      "summary": "The entry state ships a 4MB, script-heavy dependency graph before consent.",
+      "evidence": "HAR records 144 requests/4.06MB, 3.04MB script, parser-blocking legacy polyfills/scripts and multiple redirects; largest JS is 2.11MB.",
+      "suggestedFix": "Gate non-essential modules until consent/interaction, collapse redirects, modernize delivery, and shorten parser-blocking chains.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F8",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "summary": "Large amounts of downloaded JS and CSS are unused on the audited state.",
+      "evidence": "Lighthouse estimates 643KiB unused JavaScript and 156KiB unused CSS.",
+      "suggestedFix": "Split bundles by surface and capability; load player, cast, offline, and route-specific CSS only where exercised.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F9",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "summary": "Some controls expose mismatched or missing accessible names.",
+      "evidence": "Lighthouse fails label-content-name-mismatch and select-name, contributing to accessibility score 0.85.",
+      "suggestedFix": "Align accessible names with visible labels and associate every select/input with a programmatic label.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "summary": "Text/link contrast does not consistently meet accessible minimums.",
+      "evidence": "Lighthouse directly fails color-contrast and link-in-text-block audits.",
+      "suggestedFix": "Raise foreground/background contrast and add non-color link affordances such as underlines.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "accessibility",
+      "summary": "The viewport policy restricts user scaling.",
+      "evidence": "Lighthouse fails meta-viewport because user-scalable=no or a maximum scale below 5 is applied in the audited load.",
+      "suggestedFix": "Remove user-scalable=no and restrictive maximum-scale values; verify 200–400% zoom and reflow.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "summary": "Several prominent controls expose only 24×24 CSS-pixel hit areas.",
+      "evidence": "Computed target probe measures Guide and Settings at 24×24, below the commonly usable 44×44 target area.",
+      "suggestedFix": "Keep the icon 24px if desired but enlarge the interactive box and spacing to at least 44×44 CSS px.",
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "summary": "The page logs browser errors during a normal load.",
+      "evidence": "Lighthouse errors-in-console audit fails.",
+      "suggestedFix": "Fix or intentionally handle the recorded runtime/network errors and keep production console output clean.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F13",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "summary": "Production platform hygiene has BFCache, source-map, and DevTools Issues failures.",
+      "evidence": "Lighthouse reports invalid/missing source maps, inspector issues, and one BFCache blocker.",
+      "suggestedFix": "Restore valid source maps, resolve DevTools Issues, and remove the BFCache blocking lifecycle behavior.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "watch",
+      "url": "https://www.youtube.com/watch?v=uT7MVcCQ4rw",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "summary": "Useful browse and watch content is largely absent for non-JavaScript crawlers.",
+      "evidence": "Discoverability measures 6% raw/rendered word overlap on home and 5% on watch and classifies both as JS shells.",
+      "suggestedFix": "Server-render meaningful titles, descriptions, channel/video links, transcript/chapters and recovery content into crawlable HTML.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/watch-discoverability.json",
+        "evidence/watch-discoverability-rendered.png",
+        "evidence/watch-discoverability-crawler.png"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "summary": "Strong baseline headers are weakened by CSP allowances and a missing Referrer-Policy.",
+      "evidence": "Header audit finds CSP unsafe-inline/unsafe-eval and no Referrer-Policy, despite HSTS, Trusted Types, nosniff and frame protection.",
+      "suggestedFix": "Remove unsafe-eval/legacy allowlist policy paths where possible and set an explicit privacy-preserving Referrer-Policy.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "summary": "The pre-decision page makes a very large third-party request footprint.",
+      "evidence": "HAR counts 108/144 third-party requests; trackers inventory finds 9 origins and 87 requests to fonts.gstatic.com before consent choice.",
+      "suggestedFix": "Self-host/cache stable assets, batch essential telemetry, and delay non-essential third-party traffic until purpose and consent justify it.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F17",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "watch",
+      "url": "https://www.youtube.com/watch?v=uT7MVcCQ4rw",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "summary": "Core content depends on JavaScript despite large server responses.",
+      "evidence": "Raw HTML is 875KB–1.34MB yet shares only 5–6% of rendered content words; crawler screenshots omit useful route content.",
+      "suggestedFix": "Render a meaningful resilient baseline for home/search/watch and hydrate enhancements on top.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/watch-discoverability.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "home",
+      "url": "https://www.youtube.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "efficient-background-processing",
+      "summary": "The anonymous consent state consumes an excessive network and third-party budget.",
+      "evidence": "Before primary interaction, HAR transfers 4.06MB over 144 requests, including 3.04MB JS, 98 fetch/XHR requests and 108 third-party requests.",
+      "suggestedFix": "Define route budgets; defer player/cast/offline modules and background fetches, reduce fonts, and enforce budget regressions in CI.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "pathId": "watch",
+      "url": "https://www.youtube.com/watch?v=uT7MVcCQ4rw",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "summary": "The experience offers weak machine/agent access to its useful content and actions.",
+      "evidence": "Lighthouse agentic-browsing score is 0.33 with accessibility-tree and llms.txt failures; non-JS content coverage is 5–6%.",
+      "suggestedFix": "Expose structured, permission-conscious agent capabilities and server-rendered machine-readable content/actions; fix the accessibility tree first.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/discoverability.json",
+        "evidence/watch-discoverability.json"
+      ],
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T7",
+      "title": "Gate non-essential modules until consent/interaction, collapse redirects, modernize delivery, and shorten parser-blocking chains.",
+      "priority": 1,
+      "findingIds": [
+        "F7"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Use a compact, content-first consent treatment where legally possible; keep essential reject/accept controls visible without scrolling and avoid repeating after a recorded choice.",
+      "priority": 2,
+      "findingIds": [
+        "F3"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T15",
+      "title": "Server-render meaningful titles, descriptions, channel/video links, transcript/chapters and recovery content into crawlable HTML.",
+      "priority": 3,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Profile the LCP critical path, remove redirects, prioritize only the LCP resource, and defer non-critical app/player work.",
+      "priority": 4,
+      "findingIds": [
+        "F5"
+      ],
+      "guidanceId": "identify-inp-causes",
+      "status": "open"
+    },
+    {
+      "id": "T18",
+      "title": "Render a meaningful resilient baseline for home/search/watch and hydrate enhancements on top.",
+      "priority": 5,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "status": "open"
+    },
+    {
+      "id": "T19",
+      "title": "Define route budgets; defer player/cast/offline modules and background fetches, reduce fonts, and enforce budget regressions in CI.",
+      "priority": 6,
+      "findingIds": [
+        "F18"
+      ],
+      "guidanceId": "efficient-background-processing",
+      "status": "open"
+    },
+    {
+      "id": "T20",
+      "title": "Expose structured, permission-conscious agent capabilities and server-rendered machine-readable content/actions; fix the accessibility tree first.",
+      "priority": 7,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "webmcp",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Preserve a minimal anonymous browse/watch path while consent is undecided and persist the decision reliably.",
+      "priority": 8,
+      "findingIds": [
+        "F4"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Break long tasks into yieldable work, schedule by priority, and avoid initializing player/cast/offline modules before needed.",
+      "priority": 9,
+      "findingIds": [
+        "F6"
+      ],
+      "guidanceId": "break-up-long-tasks",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Remove user-scalable=no and restrictive maximum-scale values; verify 200–400% zoom and reflow.",
+      "priority": 10,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Split bundles by surface and capability; load player, cast, offline, and route-specific CSS only where exercised.",
+      "priority": 11,
+      "findingIds": [
+        "F8"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T17",
+      "title": "Self-host/cache stable assets, batch essential telemetry, and delay non-essential third-party traffic until purpose and consent justify it.",
+      "priority": 12,
+      "findingIds": [
+        "F16"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T16",
+      "title": "Remove unsafe-eval/legacy allowlist policy paths where possible and set an explicit privacy-preserving Referrer-Policy.",
+      "priority": 13,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T14",
+      "title": "Restore valid source maps, resolve DevTools Issues, and remove the BFCache blocking lifecycle behavior.",
+      "priority": 14,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T13",
+      "title": "Fix or intentionally handle the recorded runtime/network errors and keep production console output clean.",
+      "priority": 15,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Keep the icon 24px if desired but enlarge the interactive box and spacing to at least 44×44 CSS px.",
+      "priority": 16,
+      "findingIds": [
+        "F20"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Align accessible names with visible labels and associate every select/input with a programmatic label.",
+      "priority": 17,
+      "findingIds": [
+        "F9"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Raise foreground/background contrast and add non-color link affordances such as underlines.",
+      "priority": 18,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T1",
+      "title": "Declare color-scheme and map consent/app surface tokens through prefers-color-scheme or light-dark(), preserving contrast.",
+      "priority": 19,
+      "findingIds": [
+        "F1"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Add forced-colors/prefers-contrast treatments and system-color fallbacks, then rerun contrast audits.",
+      "priority": 20,
+      "findingIds": [
+        "F2"
+      ],
+      "guidanceId": "adapt-scrollbar-to-contrast-preferences",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "other",
+      "path": "evidence/cbrd-probe.json",
+      "caption": "cbrd probe",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "cookies",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "discoverability crawler",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "discoverability rendered",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "discoverability",
+      "findingIds": [
+        "F14",
+        "F17",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/error-state.json",
+      "caption": "error state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "headers",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "heap baseline",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "heap post",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast.png",
+      "caption": "home contrast",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F2"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "home dark",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F1"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "home desktop",
+      "findingIds": [
+        "F1",
+        "F3",
+        "F10"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home dom",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary",
+      "findingIds": [
+        "F7",
+        "F8",
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary",
+      "findingIds": [
+        "F5",
+        "F6"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home trace",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home",
+      "findingIds": [
+        "F7",
+        "F18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "images",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/interaction-css-probe.json",
+      "caption": "interaction css probe",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "lighthouse",
+      "findingIds": [
+        "F2",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F19"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/mobile-layout.json",
+      "caption": "mobile layout",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "platform probe",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "recon",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "reduced motion",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/runtime-probe.json",
+      "caption": "runtime probe",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-desktop.png",
+      "caption": "search desktop",
+      "findingIds": [
+        "F3",
+        "F4"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-probe.json",
+      "caption": "search probe",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "secrets",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "trackers",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/watch-desktop.png",
+      "caption": "watch desktop",
+      "findingIds": [
+        "F3",
+        "F4"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/watch-discoverability-crawler.png",
+      "caption": "watch discoverability crawler",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/watch-discoverability-rendered.png",
+      "caption": "watch discoverability rendered",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/watch-discoverability.json",
+      "caption": "watch discoverability",
+      "findingIds": [
+        "F14",
+        "F17",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/watch-probe.json",
+      "caption": "watch probe",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-24T04-59-54-077Z"
+}

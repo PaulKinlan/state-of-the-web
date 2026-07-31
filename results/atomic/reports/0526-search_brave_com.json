@@ -1,0 +1,1728 @@
+{
+  "url": "https://search.brave.com",
+  "auditedAt": "2026-07-28T02:05:00.000Z",
+  "mode": "report",
+  "status": "partial",
+  "statusDetail": "57 of 58 checks were judged; primary-flow-completion was blocked by Brave bot verification. No score is published.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "SvelteKit",
+    "notes": "Public search homepage and settings are reachable; the representative results archetype is protected by an interactive bot challenge."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "lighthouse",
+    "heap-summary",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "Modern Web Guidance"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "fluid-scaling",
+    "identify-heavy-scripts",
+    "privacy",
+    "light-dismiss-a-dialog",
+    "same-document-transitions",
+    "size-aware-styling",
+    "performance",
+    "optimize-script-priority"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Homepage at the default desktop condition; private-metrics notice is visible on load.",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-light.png",
+      "caption": "Homepage under prefers-color-scheme: light.",
+      "condition": "prefers-color-scheme: light",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under prefers-color-scheme: dark.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Homepage under prefers-contrast: more.",
+      "condition": "prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at a 360x800 device viewport; content is scaled from a 980 CSS-pixel layout.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01",
+        "F13"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/results-desktop.png",
+      "caption": "Search results path intercepted by a bot-verification challenge.",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/results-mobile.png",
+      "caption": "Bot-verification challenge at 360x800, also scaled from 980 CSS pixels.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01",
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/settings-desktop.png",
+      "caption": "Settings archetype with language, region, theme, and privacy controls.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/error-404.png",
+      "caption": "Intentional 404 state with an explanation and route back to search.",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout.json",
+      "caption": "Desktop layout metrics: CLS 0.0065 and no long tasks.",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile metrics: no viewport meta; layout viewport is 980 CSS px at scale 0.367.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01",
+        "F13"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/results-layout-mobile.json",
+      "caption": "Results/challenge mobile metrics: no viewport meta; 980 CSS px at scale 0.367.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered homepage DOM and computed styles.",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/results-dom.json",
+      "caption": "Rendered bot-challenge DOM and styles.",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/settings-dom.json",
+      "caption": "Rendered settings DOM and control styles.",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "Desktop DevTools performance trace.",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP 1.68s, FCP 1.60s, TBT 0ms.",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR 1.2 network capture for the homepage.",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "HAR summary: 72 requests, 516,673 transferred bytes, 55 scripts.",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Mobile Lighthouse report: performance 80, accessibility 92, LCP 4.1s, contrast failure.",
+      "findingIds": [
+        "F02",
+        "F05"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary: 208,219 nodes and 12.71 MB self size.",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-escape.json",
+      "caption": "Post-interaction heap summary after repeated quick-settings attempts: one-time panel allocation, no per-iteration DOM growth.",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-vs-rendered discoverability capture; raw fetch was rate-limited with HTTP 429.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view captured by discoverability primitive.",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "No-JS crawler view returned under rate limiting.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header audit: strong CSP/HSTS/frame controls; Permissions-Policy absent.",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit: no cookies set.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Tracker audit: no known trackers or third-party origins.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan: no findings.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit: two SVGs, alt text present; one lacks complete dimensions.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Document, metadata, headings, controls, target, focus, and CSS feature probe.",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/motion-modern-css.json",
+      "caption": "Reduced-motion and modern CSS probe: only a zero-duration reveal animation; no transition/scroll CSS found.",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/settings-probe.json",
+      "caption": "Settings controls, locale choices, forms, manifest, and service-worker probe.",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.json",
+      "caption": "robots.txt permits selected conversation URLs and intentionally disallows normal search-result crawling.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/site-files.json",
+      "caption": "robots, sitemap (404), and manifest fetch results.",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/repeat-interaction-probe.json",
+      "caption": "Ten quick-settings attempts plateaued at 458 DOM elements after first panel allocation.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "In-page before/after memory metrics; interaction ended in a different open-panel state.",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-consulted.txt",
+      "caption": "Pinned Modern Web Guidance searches for all 17 principles.",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 57,
+    "blocked": 1,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Light and dark screenshots show complete surface/logo retinting, and computed html color-scheme follows the selected/system theme.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Under prefers-reduced-motion: reduce, getAnimations returned only a finished zero-duration reveal; no auto-advance or essential motion remained.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "High-contrast screenshot preserves controls and content; the separate normal-theme notice contrast defect is recorded under be-inclusive/sufficient-contrast.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "confidence": "medium",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "The CSS/animation probe found no view-transition rules or API evidence; the only animation under reduced motion was a finished zero-duration reveal.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/motion-modern-css.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No scrollytelling, parallax, carousel, or scroll-linked motion exists on the reachable home/settings archetypes.",
+      "reason": "No scrollytelling, parallax, carousel, or scroll-linked motion exists on the reachable home/settings archetypes.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No gesture-driven component or scroll carousel exists on the reachable archetypes.",
+      "reason": "No gesture-driven component or scroll carousel exists on the reachable archetypes.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "The reachable homepage is a single viewport and settings uses ordinary document scrolling without affixed chrome needing state adaptation.",
+      "reason": "The reachable homepage is a single viewport and settings uses ordinary document scrolling without affixed chrome needing state adaptation.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No tooltip, anchored menu, or edge-positioned popover was present in the exercised states.",
+      "reason": "No tooltip, anchored menu, or edge-positioned popover was present in the exercised states.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Settings uses a stable page title, grouped labeled sections, and a clear close route; the 404 gives a direct return action.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "Desktop, light, dark, mobile, results, and settings screenshots all show the persistent notice before interaction. It is dismissible, but it repeatedly consumes prominent viewport space.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/settings-desktop.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "confidence": "medium",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "DOM probes report zero <dialog> and zero [popover] elements on home/settings despite the Quick settings overlay surface; controls are assembled from generic page structures.",
+      "pathIds": [
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/settings-dom.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Homepage devotes the main surface to the search control with minimal header/footer chrome.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "Both 360x800 layout captures report hasViewportMeta=false, clientWidth=980 and visualViewport scale=0.367; the mobile screenshots show a miniature desktop interface.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/results-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "confidence": "medium",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "The authored CSS exposed by the DOM and the dedicated probe contained no @container or container-type rules.",
+      "pathIds": [
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/settings-dom.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Lighthouse target-size passed; primary controls expose names and keyboard focusability, and settings uses native selects/radios/checkboxes.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "First viewport clearly presents Brave branding and a single prominent “Ask anything, find anything” search control.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "confidence": "high",
+      "method": "Attempted direct query navigation and form-submission flow; Brave bot verification intercepted the results route.",
+      "status": "blocked",
+      "evidence": "The results route presented a drag-the-slider bot challenge, so result selection and end-to-end completion could not be exercised.",
+      "reason": "External anti-bot enforcement prevented completion in the audit browser.",
+      "pathIds": [
+        "search-flow"
+      ],
+      "artifacts": [
+        "evidence/results-desktop.png",
+        "evidence/results-mobile.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "The bot state names the verification requirement and the 404 explicitly states failure with “Get back to searching privately”.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "confidence": "medium",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "Mobile Lighthouse reports LCP 4.1s and FCP 3.2s (performance 80), while the desktop trace records LCP 1.68s and TBT 0ms. The slower common mobile condition is the divergence.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Layout observer measured CLS 0.0065 desktop and 0 mobile; images are SVG and no meaningful jump was observed.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Trace and layout observers recorded zero long tasks and 0ms total blocking time.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "HAR found no redirects, HTTP errors, missing cache headers, uncompressed text, or render-blocking candidates.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "confidence": "medium",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "HAR summary records 72 requests and 516,673 transferred bytes, including 55 scripts (286,474 bytes) and a 128,942-byte stylesheet for a sparse search shell.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Lighthouse button-name, link-name and label audits passed; both images have meaningful alt text.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "Lighthouse measures #909093 on #39393b at 3.61:1 for 13px text, below the WCAG 4.5:1 minimum.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "The document probe found no h1-h6 elements; main and footer landmarks exist, but the page purpose is represented only by logo/controls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Desktop/light/dark screenshots show comfortable main text sizing and unclipped labels; the specific notice contrast issue is separately recorded.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Lighthouse reports no user-scaling restriction and target-size passes; no media requiring captions exists. Mobile reflow defect is recorded under responsive layout.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Lighthouse reports no browser errors logged to the console.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "DOM and Lighthouse confirm HTML doctype and UTF-8; two SVG images have alt text and observed CLS is minimal.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Lighthouse best-practices scored 100; no permission prompt appeared on load and no paste-blocking input behavior was observed.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Homepage and settings expose unique descriptive titles and a detailed meta description.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "DOM and both mobile layout captures report no meta viewport and a 980 CSS-pixel layout viewport at scale 0.367.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Homepage returns successfully in browser, exposes a language-qualified canonical, and robots.txt intentionally excludes query-result indexing.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Homepage Open Graph site, URL, title, description, locale, and 1200x630 image metadata accurately describe the visible service.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "HTTPS, HSTS, CSP, nosniff, SAMEORIGIN and secure referrer policy are present; zero cookies and zero exposed secrets were found.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Tracker primitive found no known trackers/third-party origins and cookies primitive found zero cookies; the metrics notice provides a settings opt-out.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No authentication surface was exposed, and the location permission action is user-initiated in settings.",
+      "reason": "No authentication surface was exposed, and the location permission action is user-initiated in settings.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "The headers primitive confirms CSP, HSTS, nosniff, SAMEORIGIN, and strict-origin-when-cross-origin, but reports Permissions-Policy missing.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Raw response included substantial HTML and metadata rather than an empty mount; settings controls are server-backed POST forms. The crawler-specific fetch was externally rate-limited.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Reachable settings controls and notification remained bounded in screenshots; no cut-off menu or runtime error was observed.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "issues",
+      "evidence": "The fetched manifest has blank name and short_name and no start_url; the settings probe reports no controlling service worker.",
+      "pathIds": [
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/site-files.json",
+        "evidence/settings-probe.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "A real 404 returns HTTP 404 with plain explanation and a recovery link rather than a blank shell.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "html lang is en-gb; settings offers a broad language and region selector, and the CSS probe found no physical left/right property use in exposed top-level rules.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "Reachable home/settings states contain no user-facing dates, currency, or locale-sensitive numbers to format.",
+      "reason": "Reachable home/settings states contain no user-facing dates, currency, or locale-sensitive numbers to format.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "Reachable home/settings states contain no event or time-zone data.",
+      "reason": "Reachable home/settings states contain no event or time-zone data.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Settings exposes usage-metrics control and the notice links directly to settings; no forced continuity, disguised ad, confirmshaming, or hidden pricing appeared.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "The primary search field has no required/invalid form state; no validation workflow exists on reachable settings controls.",
+      "reason": "The primary search field has no required/invalid form state; no validation workflow exists on reachable settings controls.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No address, payment, sign-in, or sign-up fields exist on the reachable archetypes.",
+      "reason": "No address, payment, sign-in, or sign-up fields exist on the reachable archetypes.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No checkout, subscription purchase, authentication, or account-management flow was entered; the premium link is only a navigation CTA.",
+      "reason": "No checkout, subscription purchase, authentication, or account-management flow was entered; the premium link is only a navigation CTA.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Image audit found two lightweight modern SVGs with alt text and no legacy raster formats; total image transfer was 8KB.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Trace recorded no long tasks and trackers found no chatty external analytics; network activity settled after load.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "No autoplay/media or known tracker origin loaded; CDN-hosted first-party assets total about 490KB and are cached.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "Agent-facing capabilities are emerging and no declared WebMCP/agent surface was observable; absence is treated as an opportunity, not a failure.",
+      "reason": "Agent-facing capabilities are emerging and no declared WebMCP/agent surface was observable; absence is treated as an opportunity, not a failure.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "not-applicable",
+      "evidence": "No page feature calls for optional built-in summarisation/language-model inference on the reachable search shell.",
+      "reason": "No page feature calls for optional built-in summarisation/language-model inference on the reachable search shell.",
+      "pathIds": [
+        "home",
+        "settings"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Ten quick-settings attempts produced a one-time DOM increase to 458 elements, then counts remained exactly 458 for every remaining iteration; no unbounded per-iteration growth was observed.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Baseline heap was 12.71MB self size for 208,219 heap nodes, proportionate to this app shell.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "confidence": "high",
+      "method": "Direct multimodal inspection across the representative home, search-flow, settings, and 404 paths using the planned evidence manifest.",
+      "status": "pass",
+      "evidence": "Heap summaries showed no Detached* constructor among dominant populations, and repeated-interaction DOM counts plateaued rather than accumulating.",
+      "pathIds": [
+        "home",
+        "settings"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "One or more required checks were blocked by Brave anti-bot enforcement.",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged contextually not applicable to the reachable site surfaces."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Search landing page and primary input; tested desktop, 360x800, light/dark/high-contrast, reduced motion, keyboard/control semantics, performance, network, privacy and memory.",
+      "url": "https://search.brave.com/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: light",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "keyboard/control probe"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search-flow",
+      "description": "Primary journey from query input to results; selected because results are the core product archetype. Bot verification prevented reaching actual result cards.",
+      "url": "https://search.brave.com/search?q=modern+web",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "settings",
+      "description": "Settings/control-heavy archetype covering language, region, theme, privacy toggles, native controls, and app metadata.",
+      "url": "https://search.brave.com/settings",
+      "conditions": [
+        "desktop",
+        "DOM/control probe"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error-404",
+      "description": "Representative HTTP failure and recovery state.",
+      "url": "https://search.brave.com/this-path-does-not-exist",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page omits a viewport meta tag, so mobile Chrome lays it out at 980 CSS pixels and scales the entire interface down.",
+      "evidence": "Both 360x800 layout captures report hasViewportMeta=false, clientWidth=980 and visualViewport scale=0.367; the mobile screenshots show a miniature desktop interface.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/results-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ],
+      "suggestedFix": "Add <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> and verify fluid layout and readable target sizing at narrow widths.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F02",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The private-usage-metrics notice uses low-contrast body text.",
+      "evidence": "Lighthouse measures #909093 on #39393b at 3.61:1 for 13px text, below the WCAG 4.5:1 minimum.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Raise the notice text color contrast to at least 4.5:1 in every theme and recheck the link and close-button states.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F03",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "A metrics notice occupies the full bottom edge on every fresh load and competes with the primary search task.",
+      "evidence": "Desktop, light, dark, mobile, results, and settings screenshots all show the persistent notice before interaction. It is dismissible, but it repeatedly consumes prominent viewport space.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/settings-desktop.png"
+      ],
+      "suggestedFix": "Persist dismissal/choice, reduce the notice to non-blocking inline disclosure, and avoid showing it again after the user has made a choice.",
+      "effort": "small"
+    },
+    {
+      "id": "F04",
+      "pathId": "search-flow",
+      "url": "https://search.brave.com/search?q=modern+web",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The representative search flow is blocked by a drag-the-slider bot challenge in the audit environment.",
+      "evidence": "Direct navigation and form submission both reached navigation/bot enforcement; desktop and mobile result captures show “Verifying you’re not a bot” instead of search results.",
+      "artifacts": [
+        "evidence/results-desktop.png",
+        "evidence/results-mobile.png",
+        "evidence/results-dom.json"
+      ],
+      "suggestedFix": "Review bot-risk thresholds and provide an accessible, privacy-preserving alternative challenge and clear recovery route for false positives.",
+      "effort": "large"
+    },
+    {
+      "id": "F05",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "Mobile lab loading misses the good LCP threshold despite a fast desktop trace.",
+      "evidence": "Mobile Lighthouse reports LCP 4.1s and FCP 3.2s (performance 80), while the desktop trace records LCP 1.68s and TBT 0ms. The slower common mobile condition is the divergence.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Profile the mobile critical path, prioritize the logo/search shell, and reduce startup requests so LCP stays at or below 2.5s under mobile throttling.",
+      "effort": "medium"
+    },
+    {
+      "id": "F06",
+      "pathId": "settings",
+      "url": "https://search.brave.com/settings",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Transient settings UI is implemented without dialog or popover semantics.",
+      "evidence": "DOM probes report zero <dialog> and zero [popover] elements on home/settings despite the Quick settings overlay surface; controls are assembled from generic page structures.",
+      "artifacts": [
+        "evidence/settings-dom.json",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Use popover for transient quick settings or dialog for a modal flow, with declarative light-dismiss, focus management, and Escape behavior.",
+      "effort": "medium"
+    },
+    {
+      "id": "F07",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The homepage has no heading structure.",
+      "evidence": "The document probe found no h1-h6 elements; main and footer landmarks exist, but the page purpose is represented only by logo/controls.",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Add a concise visually hidden or visible h1 such as “Brave Search” and keep subsequent page headings hierarchical.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F08",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "privacy",
+      "guidanceCategory": "security",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Permissions-Policy is absent despite otherwise strong defensive headers.",
+      "evidence": "The headers primitive confirms CSP, HSTS, nosniff, SAMEORIGIN, and strict-origin-when-cross-origin, but reports Permissions-Policy missing.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Send an explicit Permissions-Policy that disables unused powerful features and grants required features only to intended origins.",
+      "effort": "small"
+    },
+    {
+      "id": "F09",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "css",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "State and route changes expose no View Transitions integration.",
+      "evidence": "The CSS/animation probe found no view-transition rules or API evidence; the only animation under reduced motion was a finished zero-duration reveal.",
+      "artifacts": [
+        "evidence/motion-modern-css.json",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Use same-document View Transitions for quick-settings and search state changes, retaining an instant fallback and honoring reduced motion.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "pathId": "settings",
+      "url": "https://search.brave.com/settings",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "No container-query evidence was found for reusable search/settings components.",
+      "evidence": "The authored CSS exposed by the DOM and the dedicated probe contained no @container or container-type rules.",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/settings-dom.json"
+      ],
+      "suggestedFix": "Give reusable panels/search controls containment and adapt their internal layout with size container queries where they appear in different widths.",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "The minimal homepage loads a fragmented script-heavy startup payload.",
+      "evidence": "HAR summary records 72 requests and 516,673 transferred bytes, including 55 scripts (286,474 bytes) and a 128,942-byte stylesheet for a sparse search shell.",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Use coverage/bundle analysis to remove unused homepage modules and CSS, combine only where it reduces overhead, and defer settings/results code until requested.",
+      "effort": "medium"
+    },
+    {
+      "id": "F12",
+      "pathId": "settings",
+      "url": "https://search.brave.com/settings",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The app-like search experience advertises a standalone manifest but is not meaningfully installable or offline-capable.",
+      "evidence": "The fetched manifest has blank name and short_name and no start_url; the settings probe reports no controlling service worker.",
+      "artifacts": [
+        "evidence/site-files.json",
+        "evidence/settings-probe.json"
+      ],
+      "suggestedFix": "Complete the manifest metadata/start URL and add a service worker with an offline search-shell/failure page, or remove standalone installability signaling if intentionally unsupported.",
+      "effort": "medium"
+    },
+    {
+      "id": "F13",
+      "pathId": "home",
+      "url": "https://search.brave.com/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The public homepage lacks the viewport signal required for mobile-friendly indexing and presentation.",
+      "evidence": "DOM and both mobile layout captures report no meta viewport and a 980 CSS-pixel layout viewport at scale 0.367.",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Add a standard width=device-width viewport declaration, then verify that crawler/mobile rendering presents readable content without whole-page shrink-to-fit.",
+      "effort": "trivial"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Restore a true mobile viewport and verify responsive sizing",
+      "priority": 1,
+      "findingIds": [
+        "F01",
+        "F13"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Reduce false-positive bot blocking and add an accessible alternative challenge",
+      "priority": 2,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Fix usage-notice contrast and make its choice persistent/non-intrusive",
+      "priority": 3,
+      "findingIds": [
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Improve mobile LCP and trim homepage startup modules",
+      "priority": 4,
+      "findingIds": [
+        "F05",
+        "F11"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Complete or remove partial PWA installability signals",
+      "priority": 5,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Use semantic transient-overlay and modern transition primitives",
+      "priority": 6,
+      "findingIds": [
+        "F06",
+        "F09"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Add homepage heading structure and explicit Permissions-Policy",
+      "priority": 7,
+      "findingIds": [
+        "F07",
+        "F08"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Adopt container queries for reused panels where sizes vary",
+      "priority": 8,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T01-59-39-253Z"
+}

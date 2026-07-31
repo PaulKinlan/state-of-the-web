@@ -1,0 +1,2099 @@
+{
+  "url": "https://go.search-start.org",
+  "auditedAt": "2026-07-21T05:21:25.940Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete across the single search landing template, primary redirect flow, and representative 404 recovery path.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Hand-authored HTML/CSS/JavaScript with Bootstrap and Taboola",
+    "notes": "Public single-view search gateway. No additional first-party content routes exist: four footer labels are # links and sitemap.xml is absent. Search redirects to an external Yahoo results page."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "lighthouse",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "raw-source-fetch",
+    "Modern Web Guidance search"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "directional-navigation-transitions",
+    "navigation-drawer",
+    "defer-rendering-heavy-content",
+    "css-layout",
+    "accessibility",
+    "persistent-toast-notifications",
+    "performance",
+    "optimize-script-priority",
+    "identify-heavy-scripts",
+    "fluid-scaling",
+    "html",
+    "security",
+    "privacy",
+    "resilient-context-menus-and-nested-dropdowns",
+    "deliver-optimized-decorative-images",
+    "efficient-background-processing",
+    "deprioritize-background-fetches",
+    "css",
+    "forms",
+    "webmcp",
+    "language-model",
+    "coordinate-global-events",
+    "size-aware-styling",
+    "declarative-dialog-popover-control"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop first viewport",
+      "condition": "desktop",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile portrait first viewport",
+      "condition": "360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile-landscape.png",
+      "caption": "Narrow short viewport showing clipped 500px layout",
+      "condition": "360x500",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark-preference viewport remains light",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast.png",
+      "caption": "Forced-colors/high-contrast rendering",
+      "condition": "forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/not-found-mobile.png",
+      "caption": "Generic Cloudflare R2 404 with no product recovery",
+      "condition": "360x800",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JS view",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and styles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Route/link/form/metadata recon",
+      "findingIds": [
+        "F03",
+        "F17",
+        "F18",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/page-probe.json",
+      "caption": "Semantic, responsive-feature and control probe",
+      "findingIds": [
+        "F02",
+        "F06",
+        "F11",
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/interaction-probe.json",
+      "caption": "Focused input and rendered recommendation-text probe",
+      "findingIds": [
+        "F04",
+        "F06",
+        "F13",
+        "F25"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Reduced-motion active animation probe",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/search-redirect-probe.json",
+      "caption": "Primary q=modern web redirect result",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found-probe.json",
+      "caption": "Unknown-route recovery probe",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/site-files.json",
+      "caption": "robots.txt and sitemap.xml responses",
+      "findingIds": [
+        "F18",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/resource-markup.json",
+      "caption": "Script and stylesheet loading attributes",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-details.txt",
+      "caption": "Selected failing Lighthouse audit details",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-desktop.json",
+      "caption": "Desktop layout shift and overflow metrics",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile portrait layout metrics",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile-landscape.json",
+      "caption": "Short mobile overflow metrics",
+      "findingIds": [
+        "F05",
+        "F14",
+        "F24"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/load-trace.json",
+      "caption": "DevTools load trace",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/load-trace-summary.json",
+      "caption": "Load timing and main-thread summary",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/network.har",
+      "caption": "Network archive",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/network-summary.json",
+      "caption": "Network weight, third-party and blocking summary",
+      "findingIds": [
+        "F09",
+        "F22",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw-versus-rendered discoverability analysis",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance/accessibility/best-practices/SEO report",
+      "findingIds": [
+        "F04",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F25",
+        "F26",
+        "F27"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "Heap after ten search-field interaction cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response headers",
+      "findingIds": [
+        "F21",
+        "F23"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie audit",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker audit",
+      "findingIds": [
+        "F22",
+        "F25",
+        "F28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image delivery/accessibility audit",
+      "findingIds": [
+        "F15",
+        "F26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw-home.html",
+      "caption": "Raw server HTML",
+      "findingIds": [
+        "F03",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/script.js",
+      "caption": "First-party script source",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/style.css",
+      "caption": "First-party stylesheet source",
+      "findingIds": [
+        "F05",
+        "F16",
+        "F24"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic check manifest and evidence plan",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-searches.ndjson",
+      "caption": "Pinned Modern Web Guidance searches",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Dark-emulated screenshot remains the same white surface as light mode; CSS feature probe found theme declarations but the rendered page did not retint.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Under prefers-reduced-motion: reduce, getAnimations() returned no active animations; the simple landing state has no auto-advance.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Forced-colors screenshot preserves visible text, search outline, icons and footer links with system high-contrast colors.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The primary search changes from this page to an external results document with no transition treatment; CSS/source probe found no view-transition usage.",
+      "pathIds": [
+        "search-flow"
+      ],
+      "artifacts": [
+        "evidence/search-redirect-probe.json",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "No parallax, scrollytelling, reveal, carousel, or other scroll-linked motion exists on this single-view search landing page.",
+      "reason": "There is no scroll-linked interaction to implement."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The core interaction is a native text input and Enter-key submission; source inspection found no custom pointermove or gesture implementation fighting platform behavior.",
+      "pathIds": [
+        "search-flow"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html",
+        "evidence/script.js"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The core landing viewport does not scroll at 360x800 or desktop, and there is no progress-dependent chrome.",
+      "reason": "No meaningful scroll state exists on the core page."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "DOM and source inspection found no tooltip, menu, popover, or transient overlay requiring anchored positioning.",
+      "reason": "No anchored overlay exists."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Four prominent footer destinations (How Search works, Terms, FAQs, About) all use href=\"#\" and do not move users to the promised destination.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/raw-home.html"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Initial desktop and mobile screenshots show the search task unobscured, with no load-time modal, banner, or interstitial.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "DOM probe found zero dialog, popover, or details surfaces and the page presents no overlay control.",
+      "reason": "No overlay or disclosure interaction exists."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The simple search landing loads a large recommendation/advertising feed: the rendered DOM text contains dozens of Taboola-style headlines and Lighthouse measured a 2,852px mobile body.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/interaction-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "At a 360x500 viewport, layout reported 500px content width and 140px horizontal overflow; the short-height media query hard-codes the search UI to 500px.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile-landscape.json",
+        "evidence/home-mobile-landscape.png",
+        "evidence/style.css"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The page has no reused component rendered in materially different containers; its one search shell is page-level.",
+      "reason": "No reusable multi-container component was identified."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Focused search input computes outline:none, border:0 and box-shadow:none; several footer links are only about 35.5px high, below a comfortable touch target.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/interaction-probe.json",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "First-viewport screenshots show a conventional search logo and a single visually dominant search field with no competing primary CTA.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Loading the supported q=modern web flow redirected end-to-end to a Yahoo results URL carrying the query and rendered a retry-capable search-results state.",
+      "pathIds": [
+        "search-flow"
+      ],
+      "artifacts": [
+        "evidence/search-redirect-probe.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "A representative unknown URL returns a generic Cloudflare R2 bucket-owner 404 with only an external Public Access documentation link and no route back to search.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found-mobile.png",
+        "evidence/not-found-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Lighthouse measured LCP 8.3s and TTI 8.4s (performance 0.69), despite low CLS; trace corroborated a 2.07s LCP in a separate warm/desktop-style run, so load speed is variable and poor under Lighthouse mobile conditions.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/load-trace-summary.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Layout observers measured CLS 0.0002 desktop, 0.017 at 360x800 and 0.032 at 360x500; Lighthouse CLS was 0.046, all within the good range.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/layout-desktop.json",
+        "evidence/layout-mobile.json",
+        "evidence/layout-mobile-landscape.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Trace recorded zero long tasks and 0ms TBT; layout observers also recorded no long tasks, while Lighthouse TBT was 80ms.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/layout-desktop.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "HAR recorded 41 requests/727KB with parser-blocking Bootstrap and local CSS plus a non-deferred head script; Lighthouse estimated 1,040ms render-blocking savings and 93KiB cache savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/resource-markup.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Lighthouse estimated 172KiB unused Taboola JavaScript and 38KiB unused CSS, including 97% of Bootstrap.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Lighthouse found the search input has no label/name and the logo image has no alt attribute; DOM also found no main landmark.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Lighthouse found repeated ad-branding text at 2.84:1 contrast (#999 on white), below the 4.5:1 minimum for 11px text.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The page has no headings or main landmark, and the focused search input has no visible outline, border or shadow.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/interaction-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Desktop, mobile and forced-color screenshots show core search and footer text without clipping at standard portrait sizes; text remains readable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/home-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The 360x500 reflow condition overflows horizontally by 140px and footer targets are about 35.5px high; the viewport itself permits scaling.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile-landscape.json",
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Lighthouse errors-in-console audit scored 1 with no error rows.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Doctype/UTF-8/viewport are valid, but the 1692px-wide PNG logo renders at 65px without width/height attributes; image audit reports seven unsized image elements.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Source contains duplicate id=\"lucky_button\" controls and a malformed unitless max-width media query; Lighthouse also reported inspector issues and legacy JavaScript savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/raw-home.html",
+        "evidence/style.css",
+        "evidence/lighthouse-details.txt"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The title is only “Search” and no meta description exists in rendered or raw HTML; Lighthouse meta-description audit failed.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/discoverability.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Viewport and robots are valid, but four descriptive footer labels resolve only to the same-page # fragment rather than crawlable destination content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/site-files.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The public page returns 200 and robots allows search, but it has no canonical URL and /sitemap.xml returns 404.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/site-files.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "DOM probe found zero JSON-LD blocks and no Open Graph metadata, leaving this public search product without a reliable share preview or organization/site entity description.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "HTTPS is used and no first-party cookies were found, but CSP, HSTS and X-Content-Type-Options are all absent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Tracker audit found 10 third-party origins and eight known tracker hosts; HAR recorded 35 third-party requests and 411KB, including Taboola/Criteo event and sync traffic.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/network-summary.json",
+        "evidence/lighthouse-details.txt"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "No authentication flow or permission request is part of this public search landing page; Notification remained default and no prompt appeared.",
+      "reason": "No auth or permission-requiring feature exists."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Header inspection found no clickjacking defense, Referrer-Policy or Permissions-Policy in addition to missing HSTS/CSP.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Discoverability comparison found 100% rendered-word coverage in raw HTML, no JS shell, and equivalent core landing content without JavaScript.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The suggestion box is manually absolutely positioned with invalid unitless offsets, while the 360x500 condition expands layout to 500px; this is fragile near viewport edges.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/style.css",
+        "evidence/layout-mobile-landscape.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "This search gateway is intrinsically online and exposes neither a manifest nor an active service-worker controller.",
+      "reason": "Offline search results cannot fulfill the product’s core purpose; installability was judged out of scope."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Unknown routes show storage-provider diagnostics and no recovery to the product; the tested external results state did at least offer a search-again control.",
+      "pathIds": [
+        "not-found",
+        "search-flow"
+      ],
+      "artifacts": [
+        "evidence/not-found-mobile.png",
+        "evidence/not-found-probe.json",
+        "evidence/search-redirect-probe.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The document declares html lang=\"en\" and the CSS feature probe found logical-property usage; no conflicting direction was present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The page renders no dates, numbers, currencies, durations, or calendar data.",
+      "reason": "No locale-sensitive data exists."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The page has no event or time data.",
+      "reason": "No time-zone-sensitive feature exists."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The core search page initializes Taboola/Criteo tracking and can inject a long feed of sensational recommendation headlines beneath the task, while no consent or preference surface appeared.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/interaction-probe.json",
+        "evidence/trackers.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The only input is a free-text search field with no constrained validity or required-field error state.",
+      "reason": "No validation flow exists."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The site collects no address, payment, account, or other autofill-appropriate personal information.",
+      "reason": "No personal-data form exists."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "No checkout, subscription, consent choice, authentication, or account-management flow exists.",
+      "reason": "No commercial or account flow exists."
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "The 1692×2358 PNG logo is displayed at 65×90 and transfers about 106KB; Lighthouse estimated about 106KB savings for it and 148KiB total image-delivery savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F26"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "A minimal search shell makes 41 requests; 35 are third-party and Lighthouse found 172KiB unused Taboola JavaScript plus 38KiB unused CSS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F27"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Third parties account for 411KB across 35 requests, over half the 727KB transfer, dominated by advertising/tracking scripts rather than the search task.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "The emerging WebMCP surface was absent and this externally redirected search gateway exposes no safe site-owned action beyond a simple crawlable input.",
+      "reason": "No declared agent-facing intent; absence is an opportunity, not a failing."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon, rendered DOM, source and applicability judgement",
+      "evidence": "No summarisation, generation, or other inference task is presented where on-device AI would clearly improve this minimal gateway.",
+      "reason": "No relevant inference use case was identified."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "After ten focus/type/input/blur/clear cycles, heap self-size decreased from 9,719,098 to 9,710,411 bytes and node count decreased from 167,590 to 167,488.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Heap summary measured about 9.7MB self-size for the loaded state; despite third-party code, the captured footprint remained bounded and did not grow in the exercised session.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct inspection using the referenced screenshot/DOM/evaluate/layout/trace/HAR/Lighthouse/security/heap evidence",
+      "evidence": "Before/after heap summaries contained no Detached* constructor among reported constructors, and aggregate node/closure counts did not grow after repeated interaction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F17",
+        "F18",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F21",
+        "F22",
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F24",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F25"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F26",
+        "F27",
+        "F28"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "No declared agent-facing intent; absence is an opportunity, not a failing. No relevant inference use case was identified."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage/search landing: the only first-party page template; audited at desktop, mobile portrait, 360x500 short-mobile, dark, forced-colors, reduced-motion, no-JS, performance, network, security and memory conditions.",
+      "url": "https://go.search-start.org/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "viewport: 360x500",
+        "prefers-color-scheme: dark",
+        "forced-colors: active",
+        "prefers-reduced-motion: reduce",
+        "JavaScript disabled",
+        "keyboard focus",
+        "repeated input interaction"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search-flow",
+      "description": "Primary search journey using q=modern web, representing end-to-end redirect to the configured external provider.",
+      "url": "https://go.search-start.org/?q=modern%20web",
+      "conditions": [
+        "live network"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "not-found",
+      "description": "Representative invalid first-party route, selected to test HTTP error and recovery behavior.",
+      "url": "https://go.search-start.org/not-a-real-page",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "Dark preference does not produce a dark theme",
+      "evidence": "Dark screenshot remains white and visually matches the light screenshot.",
+      "suggestedFix": "Declare color-scheme: light dark and use prefers-color-scheme or light-dark() for every surface and control.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-desktop.png"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F02",
+      "severity": "low",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "directional-navigation-transitions",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "Search navigation swaps documents abruptly",
+      "evidence": "The tested query jumps directly from the landing page to an external Yahoo results document; no view-transition CSS exists.",
+      "suggestedFix": "Where same-origin navigation is available, add cross-document View Transitions with a reduced-motion fallback; preserve a stable search-shell cue across the redirect.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/search-redirect-probe.json",
+        "evidence/page-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "guidanceId": "navigation-drawer",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "Footer navigation promises destinations but goes nowhere",
+      "evidence": "How Search works, Terms, FAQs and About all resolve to #.",
+      "suggestedFix": "Link each label to a real, unique URL and provide current-location/state cues.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/raw-home.html"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "defer-rendering-heavy-content",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Advertising recommendations overwhelm a minimal search task",
+      "evidence": "Rendered DOM evidence contains dozens of recommendation headlines and Lighthouse measured a 2,852px mobile body.",
+      "suggestedFix": "Remove the recommendation feed from the task page, or defer it behind a clearly labelled, user-requested disclosure below results.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/interaction-probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F05",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "css-layout",
+      "guidanceCategory": "css-layout",
+      "confidence": "high",
+      "summary": "Short mobile viewports force a 500px desktop layout",
+      "evidence": "Layout at 360x500 reports 140px horizontal overflow due to fixed 500px widths in the max-height media query.",
+      "suggestedFix": "Replace fixed 500px widths with min(500px, 90vw) or intrinsic sizing and test narrow landscape/reflow conditions.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/layout-mobile-landscape.json",
+        "evidence/home-mobile-landscape.png",
+        "evidence/style.css"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F06",
+      "severity": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Keyboard focus is invisible and targets are undersized",
+      "evidence": "Focused input computes no outline, border, or shadow; footer links are around 35.5px high.",
+      "suggestedFix": "Use :focus-visible with a high-contrast outline and make interactive targets at least 44×44 CSS px or provide equivalent spacing.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/interaction-probe.json",
+        "evidence/page-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The 404 state strands users in storage-provider diagnostics",
+      "evidence": "Unknown route shows “Is this your bucket?” and only links to Cloudflare R2 documentation.",
+      "suggestedFix": "Serve a branded 404 with a search field, Home link, concise explanation and retry/back recovery.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/not-found-mobile.png",
+        "evidence/not-found-probe.json"
+      ],
+      "pathId": "not-found",
+      "url": "https://go.search-start.org/not-a-real-page"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Mobile load is too slow and variable",
+      "evidence": "Lighthouse measured 8.3s LCP, 8.4s TTI and performance 69.",
+      "suggestedFix": "Remove/defer advertising code, prioritize the actual LCP asset, and retest LCP/INP/CLS under mobile throttling.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/load-trace-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Render-blocking and cache policy delay the small page",
+      "evidence": "Bootstrap/local CSS and a non-deferred head script block parsing; Lighthouse estimated 1,040ms render-blocking savings and 93KiB cache savings.",
+      "suggestedFix": "Inline critical CSS, remove Bootstrap, defer the local script, and give versioned static assets long immutable cache lifetimes.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/resource-markup.json",
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Most shipped framework and ad code is unused",
+      "evidence": "Lighthouse estimated 172KiB unused Taboola JS and 38KiB unused CSS, including 97% of Bootstrap.",
+      "suggestedFix": "Remove Bootstrap for the small bespoke layout and load recommendation code only after explicit user demand.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F11",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Core search UI lacks accessible names and semantics",
+      "evidence": "Search input has no label, logo has no alt, and the document has no main landmark.",
+      "suggestedFix": "Wrap core content in main, add a visible or visually hidden Search label, and give the logo meaningful alt text or mark it decorative.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/page-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Advertising attribution text fails contrast",
+      "evidence": "Lighthouse measured repeated 11px #999-on-white branding at 2.84:1.",
+      "suggestedFix": "Use text/background colors meeting at least 4.5:1 and avoid relying on tiny, faint attribution.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "confidence": "high",
+      "summary": "Page structure and focus indication are missing",
+      "evidence": "There are no headings or main landmark, and the focused input has no visible focus styling.",
+      "suggestedFix": "Add a logical h1/main structure and a persistent :focus-visible indicator that follows DOM reading order.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/interaction-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "Reflow and target sizing fail on a common narrow condition",
+      "evidence": "360x500 produces 140px overflow and several links are under 44px high.",
+      "suggestedFix": "Use fluid/intrinsic widths and enlarge or space targets so 320px/reflow layouts work without two-dimensional scrolling.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/layout-mobile-landscape.json",
+        "evidence/page-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F15",
+      "severity": "low",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Logo asset is unsized and grossly oversized",
+      "evidence": "1692px logo renders at 65px with no width/height attributes; image audit found seven unsized elements.",
+      "suggestedFix": "Export an appropriately sized AVIF/WebP/PNG and include explicit width and height attributes.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/page-probe.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F16",
+      "severity": "low",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Markup and CSS contain avoidable structural defects",
+      "evidence": "Duplicate lucky_button IDs and an invalid unitless max-width query are present; Lighthouse reports inspector issues.",
+      "suggestedFix": "Use unique IDs, fix the media query to include px, validate HTML/CSS, and remove legacy payload.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/raw-home.html",
+        "evidence/style.css",
+        "evidence/lighthouse-details.txt"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Search result snippet metadata is weak",
+      "evidence": "Title is generic “Search” and meta description is absent in raw and rendered HTML.",
+      "suggestedFix": "Write a unique product/site title and concise meta description explaining what this search page provides.",
+      "effort": "trivial",
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/discoverability.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Prominent informational links are not crawlable destinations",
+      "evidence": "Four footer links point only to #.",
+      "suggestedFix": "Publish real Terms, About, FAQ and How Search Works URLs with descriptive anchor text.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/site-files.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Canonical and sitemap signals are absent",
+      "evidence": "No canonical link exists and sitemap.xml returns 404 although robots allows indexing.",
+      "suggestedFix": "Add a self-referencing canonical and a valid sitemap referenced from robots.txt.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/site-files.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F20",
+      "severity": "low",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "confidence": "high",
+      "summary": "Share and entity metadata is absent",
+      "evidence": "No Open Graph tags or JSON-LD blocks are present.",
+      "suggestedFix": "Add accurate Open Graph/Twitter preview data and WebSite/Organization JSON-LD matching visible content.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F21",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "confidence": "high",
+      "summary": "Foundational security headers are missing",
+      "evidence": "CSP, HSTS and X-Content-Type-Options are absent despite HTTPS delivery.",
+      "suggestedFix": "Deploy a restrictive CSP, HSTS and nosniff after report-only testing; secure all future cookies.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F22",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "confidence": "high",
+      "summary": "Tracking footprint is disproportionate to the search task",
+      "evidence": "Ten third-party origins, eight known tracker hosts, 35 third-party requests and 411KB load by default.",
+      "suggestedFix": "Remove nonessential trackers, gate recommendations behind consent/demand, minimize event fields, batch necessary analytics, and document retention/purpose.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/network-summary.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F23",
+      "severity": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "confidence": "high",
+      "summary": "Browser-enforced defenses are absent",
+      "evidence": "No frame protection, Referrer-Policy or Permissions-Policy was returned.",
+      "suggestedFix": "Add frame-ancestors (or X-Frame-Options fallback), strict-origin-when-cross-origin or stricter Referrer-Policy, and a least-privilege Permissions-Policy.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F24",
+      "severity": "medium",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "resilient-context-menus-and-nested-dropdowns",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "Suggestion overlay positioning is brittle",
+      "evidence": "Suggestion box uses absolute positioning with unitless top/bottom values and the same short viewport overflows by 140px.",
+      "suggestedFix": "Use normal flow or anchored/top-layer positioning with explicit fallback positions and intrinsic inline sizing.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/style.css",
+        "evidence/layout-mobile-landscape.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F25",
+      "severity": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "confidence": "high",
+      "summary": "Recommendation and tracking behavior is not transparent or user-controlled",
+      "evidence": "Taboola/Criteo initialize on load and inject sensational recommendation content without a visible consent/preferences surface in tested states.",
+      "suggestedFix": "Default to no recommendation tracking, clearly label paid content, expose understandable privacy choices, and make refusal as easy as acceptance.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/interaction-probe.json",
+        "evidence/trackers.json",
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F26",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "user-experience",
+      "confidence": "high",
+      "summary": "The logo wastes image bytes",
+      "evidence": "A 1692×2358 PNG transfers ~106KB for a 65×90 rendering; Lighthouse estimates ~106KB savings.",
+      "suggestedFix": "Export a correctly sized modern-format image and supply intrinsic dimensions/density variants.",
+      "effort": "small",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F27",
+      "severity": "medium",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Background advertising work dominates a tiny page",
+      "evidence": "A minimal shell triggers 41 requests and Lighthouse finds large unused JS/CSS.",
+      "suggestedFix": "Do not initialize recommendations until requested or visible; remove unused dependencies and pause nonessential background work.",
+      "effort": "medium",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    },
+    {
+      "id": "F28",
+      "severity": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "confidence": "high",
+      "summary": "Third-party bytes are disproportionate",
+      "evidence": "Third parties account for 411KB across 35 requests, over half the transfer.",
+      "suggestedFix": "Set a strict third-party budget, remove Criteo/Taboola from initial load, and defer any retained integration behind user value.",
+      "effort": "large",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/trackers.json"
+      ],
+      "pathId": "home",
+      "url": "https://go.search-start.org/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Remove or explicitly gate the advertising/tracking stack",
+      "priority": 1,
+      "findingIds": [
+        "F04",
+        "F08",
+        "F10",
+        "F22",
+        "F25",
+        "F27",
+        "F28"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Restore semantic, labelled and visibly focusable search UI",
+      "priority": 2,
+      "findingIds": [
+        "F06",
+        "F11",
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Fix narrow/short viewport reflow with intrinsic sizing",
+      "priority": 3,
+      "findingIds": [
+        "F05",
+        "F14",
+        "F24"
+      ],
+      "guidanceId": "css-layout",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Deploy a tested security-header baseline",
+      "priority": 4,
+      "findingIds": [
+        "F21",
+        "F23"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Cut render-blocking resources and optimize/cache the logo",
+      "priority": 5,
+      "findingIds": [
+        "F09",
+        "F15",
+        "F26"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Publish real navigation, metadata, canonical and sitemap signals",
+      "priority": 6,
+      "findingIds": [
+        "F03",
+        "F17",
+        "F18",
+        "F19",
+        "F20"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Replace the storage-provider 404 with product recovery",
+      "priority": 7,
+      "findingIds": [
+        "F07"
+      ],
+      "guidanceId": "persistent-toast-notifications",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add preference-aware dark theming",
+      "priority": 8,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T05-21-25-940Z"
+}

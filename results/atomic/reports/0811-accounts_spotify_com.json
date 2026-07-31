@@ -1,0 +1,1711 @@
+{
+  "url": "https://accounts.spotify.com",
+  "auditedAt": "2026-07-27T01:48:42.260Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of the public account entry, invalid/empty recovery state, and signup handoff. Authenticated account pages and real credential completion were not covered because they require a user account.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Next.js",
+    "notes": "Server-rendered localized login hydrated by Next.js; signup hands off to www.spotify.com."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "DOM",
+    "evaluate probes",
+    "emulated media",
+    "layout metrics",
+    "DevTools trace",
+    "HAR",
+    "discoverability/no-JS comparison",
+    "Lighthouse",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets scan",
+    "images audit",
+    "heap baseline/post comparison"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "same-document-transitions",
+    "size-aware-styling",
+    "forms",
+    "optimize-script-priority",
+    "identify-heavy-scripts",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "efficient-background-processing"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/desktop.png",
+      "caption": "Desktop login entry",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "Mobile login entry",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/light-scheme.png",
+      "caption": "Login under light colour preference",
+      "condition": "prefers-color-scheme: light",
+      "findingIds": [
+        "F1"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/forced-colors.png",
+      "caption": "Login in forced colours/high contrast",
+      "condition": "forced-colors: active; prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/empty-submit.png",
+      "caption": "State after empty primary form submission",
+      "condition": "empty form submit",
+      "findingIds": [
+        "F3",
+        "F13"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered login",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JS login",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom-desktop.json",
+      "caption": "Rendered Next.js DOM",
+      "condition": "desktop",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom-signup.json",
+      "caption": "Signup handoff DOM",
+      "condition": "signup handoff",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile overflow, CLS and long-task metrics",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/load-trace",
+      "caption": "DevTools load trace",
+      "condition": "desktop load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/load-trace-summary.json",
+      "caption": "Trace timing summary",
+      "condition": "desktop load",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/load.har",
+      "caption": "Network archive",
+      "condition": "desktop load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/load-summary.json",
+      "caption": "Network summary",
+      "condition": "desktop load",
+      "findingIds": [
+        "F4",
+        "F14"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML vs rendered discoverability",
+      "condition": "crawler comparison",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse JSON",
+      "condition": "desktop load",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse results",
+      "condition": "desktop load",
+      "findingIds": [
+        "F5",
+        "F6"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary",
+      "condition": "loaded state",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.json",
+      "caption": "Heap after ten input cycles",
+      "condition": "10 focus/edit/blur cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security headers",
+      "condition": "main document",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie posture",
+      "condition": "loaded state",
+      "findingIds": [
+        "F9"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party origin inventory",
+      "condition": "loaded state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan",
+      "condition": "loaded state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit",
+      "condition": "loaded state",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/page-probe.json",
+      "caption": "DOM, focus, targets and metadata probe",
+      "condition": "loaded state",
+      "findingIds": [
+        "F7",
+        "F8",
+        "F10"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Platform/CSS feature and script delivery probe",
+      "condition": "loaded state",
+      "findingIds": [
+        "F2"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion-probe.json",
+      "caption": "Reduced-motion animation probe",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.json",
+      "caption": "robots.txt probe",
+      "condition": "public crawler",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.json",
+      "caption": "sitemap.xml probe",
+      "condition": "public crawler",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic check manifest and evidence plan",
+      "condition": "catalog 0.0.172",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Emulated `prefers-color-scheme: light` screenshot compared with default screenshot.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/light-scheme.png"
+      ],
+      "findingIds": [
+        "F1"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Reduced-motion emulation matched and the page reported zero active animations; there is no non-essential motion to suppress.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/light-scheme.png",
+        "evidence/forced-colors.png",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Forced-colors/high-contrast screenshot keeps text, field borders, button labels, and keyboard focus clearly visible.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/light-scheme.png",
+        "evidence/forced-colors.png",
+        "evidence/reduced-motion-probe.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Static rendered stylesheet probe reported `viewTransition: false`.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F2"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "The audited authentication screens contain no scroll-linked storytelling, parallax, carousel, or reveal motion.",
+      "reason": "The audited authentication screens contain no scroll-linked storytelling, parallax, carousel, or reveal motion."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "The audited authentication screens expose no gesture-driven interaction.",
+      "reason": "The audited authentication screens expose no gesture-driven interaction."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "This short single-task form has no persistent scroll chrome that needs scroll-state adaptation.",
+      "reason": "This short single-task form has no persistent scroll chrome that needs scroll-state adaptation."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "No tooltip, popover, or menu overlay is present on the audited states.",
+      "reason": "No tooltip, popover, or menu overlay is present on the audited states."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "The first viewport has one H1, one labelled email field, and one visually dominant Continue action; Next.js also includes an assertive route announcer.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Desktop and mobile load screenshots show no content-obscuring popup or interstitial.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "No transient overlay, modal flow, or disclosure control appears on the audited states.",
+      "reason": "No transient overlay, modal flow, or disclosure control appears on the audited states."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "The viewport is almost entirely the authentication task, with minimal logo/header chrome and no decorative sidebars.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "At 360x800 the layout primitive measured scrollWidth=clientWidth=360 and zero horizontal overflow; viewport meta is present.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "The public login is a single fixed-purpose form, with no evidence that this component is reused in differently sized containers.",
+      "reason": "The public login is a single fixed-purpose form, with no evidence that this component is reused in differently sized containers."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Primary controls are 48px high and the focused email input has a visible 2px white outline.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "“Welcome back”, the Email label, and full-width Continue button make purpose and next action immediate on desktop and mobile.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "The public entry step exposes working real-href routes for email continuation, three federated providers, and sign-up; no decorative detour precedes the primary action.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Interaction screenshot after `form.requestSubmit()` is unchanged; the email input is `type=text`, has no `required`, and remains `aria-invalid=false`.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/empty-submit.png"
+      ],
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Lighthouse measured LCP 2.44s, CLS 0.0099 and TBT 46ms; trace measured LCP 1.53s and TBT 0ms.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Mobile layout observer measured CLS 0.00898, well within the good range, with no unreserved images.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Trace captured zero long tasks and 0ms total blocking time; the layout observer also saw no long tasks.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/load-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "HAR recorded two 307 redirects; Lighthouse estimated 790 ms redirect savings and 1,040 ms render-blocking savings.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "findingIds": [
+        "F4"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Lighthouse estimated 273 KiB unused JavaScript and 13 KiB legacy JavaScript; HAR transferred 704,779 bytes of script.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F5"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Lighthouse accessibility scored 1.0; DOM shows a labelled email input, semantic button/anchors, named Spotify SVG, and no content images.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Lighthouse accessibility scored 1.0 and both normal and forced-colors screenshots retain strong contrast.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "DOM has one H1, main/header landmarks, semantic controls and an assertive route announcer; focus probe measured a visible 2px outline.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Desktop/mobile screenshots show unclipped, readable text with a clear hierarchy and fluid heading wrap.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Viewport allows scaling, mobile reflow has no overflow, primary controls are 48px high, and there is no media requiring captions.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/page-probe.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Lighthouse did not report console-error or uncaught-exception failures during load.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "DOM has HTML doctype, UTF-8 charset and viewport metadata; the images primitive found no raster images or image defects.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Lighthouse `bf-cache` and `inspector-issues` audits both scored 0.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F6"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "DOM and Lighthouse both found no meta description; rendered title is only “Spotify”.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F7"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "All six visible links have real descriptive hrefs, viewport meta is present, and robots.txt explicitly allows `/*/login`.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/page-probe.json",
+        "evidence/robots.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "The successful `/en-GB/login` page has no canonical or hreflang signal, and `/sitemap.xml` returned 404, although robots explicitly allows login routes.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F8"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "A private account login form is not an article, product, event, or other rich public entity requiring schema.org/share metadata.",
+      "reason": "A private account login form is not an article, product, event, or other rich public entity requiring schema.org/share metadata."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Cookie audit found `sp_sso_csrf_token` without Secure and `sp_t` with SameSite=None; CSP permits unsafe-inline styles.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F9"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "No sensitive secrets or known tracker origins were found; observed Google requests serve disclosed reCAPTCHA fraud protection.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/secrets.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "DOM exposes email, Google, Facebook and Apple paths; no passkey control is present on this relevant authentication surface.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Headers primitive found both policies absent; HSTS, nosniff and clickjacking protection were present.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Crawler screenshot shows the full form plus “Please enable JavaScript to continue”; discoverability coverage was only 20%.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "The simple form has no cut-off overlays; narrow layout remains contained and route state is announced.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/page-probe.json",
+        "evidence/robots.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "Authentication intrinsically requires a live identity service; offline/installability is not a meaningful requirement for this login origin.",
+      "reason": "Authentication intrinsically requires a live identity service; offline/installability is not a meaningful requirement for this login origin."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Server HTML includes an actionable no-script alert, and shipped translations include connection, server, retry and support recovery messages.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/page-probe.json",
+        "evidence/robots.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Rendered HTML declares lang=en-GB and dir=ltr; authored layout CSS uses logical inline/block sizing and padding, with locale-prefixed routes and translations.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "The audited screens display no dates, numbers, currencies, durations, or calendar data.",
+      "reason": "The audited screens display no dates, numbers, currencies, durations, or calendar data."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "The audited screens display or edit no time-zone-sensitive data.",
+      "reason": "The audited screens display or edit no time-zone-sensitive data."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "The login page presents equivalent provider choices, sign-up and legal links without consent walls, forced continuity, pricing, or confirmshaming.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "Empty-submit interaction remained unchanged; DOM shows no `required` attribute and `aria-invalid=false`.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/empty-submit.png"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "The email/username field is labelled and uses autocomplete=username with autocapitalize, spellcheck and autocorrect disabled appropriately.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Authentication choices and sign-up are explicit, legal links are visible, and no commercial commitment or preselected consent is introduced.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Images primitive found zero raster images; brand/provider artwork is lightweight inline SVG, avoiding resolution waste.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Trace and layout observers captured no long tasks or ongoing animation; network completed with 26 bounded requests.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/page-probe.json",
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct browser artifact and objective probe comparison",
+      "evidence": "HAR transferred 871,015 bytes total; reCAPTCHA alone was 382,965 bytes, and the tracker probe observed seven third-party origins (none matched known trackers).",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "This security-sensitive account login surface has no appropriate agent-facing transaction to expose.",
+      "reason": "This security-sensitive account login surface has no appropriate agent-facing transaction to expose."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of rendered routes and interaction inventory",
+      "evidence": "The login task has no summarisation or language-model use case that would improve the experience.",
+      "reason": "The login task has no summarisation or language-model use case that would improve the experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "After ten representative input focus/edit/blur cycles, heap self-size rose only 191,390 bytes (1.38%) and closure count stayed 15,948.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Baseline heap self-size was 13.84MB for the hydrated Next.js/recaptcha login, proportionate to the page and stable after interaction.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Direct visual, DOM, interaction, performance, network, accessibility, or memory evidence as stated",
+      "evidence": "Before/after summaries show unchanged closure count and no growing Detached* constructor among reported populations.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F1"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F2"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F3"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F4",
+        "F5"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F6"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F7",
+        "F8"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F9",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "This security-sensitive account login surface has no appropriate agent-facing transaction to expose. The login task has no summarisation or language-model use case that would improve the experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "login-entry",
+      "description": "Public localized login entry, representing the account authentication form and provider choices.",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "conditions": [
+        "desktop",
+        "viewport 360x800",
+        "prefers-color-scheme: light",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "keyboard focus",
+        "JavaScript disabled"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "invalid-account-recovery",
+      "description": "Empty submission/recovery state, representing validation and error handling without sending credentials.",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "conditions": [
+        "empty primary form submission"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "signup-handoff",
+      "description": "Sign-up link handoff, representing the alternative account-creation journey and distinct signup template.",
+      "url": "https://www.spotify.com/uk/signup",
+      "conditions": [
+        "desktop DOM"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Respect the OS colour preference instead of forcing dark",
+      "evidence": "Emulated `prefers-color-scheme: light` screenshot compared with default screenshot.",
+      "artifacts": [
+        "evidence/light-scheme.png"
+      ],
+      "suggestedFix": "Add `color-scheme: light dark` and preference-driven light/dark tokens, retaining the current dark palette for dark preference.",
+      "effort": "medium"
+    },
+    {
+      "id": "F2",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Add continuity to multi-step authentication state changes",
+      "evidence": "Static rendered stylesheet probe reported `viewTransition: false`.",
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "suggestedFix": "Use same-document View Transitions around email/password/OTP state changes, with a reduced-motion fallback.",
+      "effort": "medium"
+    },
+    {
+      "id": "F3",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Empty primary submission has no visible recovery state",
+      "evidence": "Interaction screenshot after `form.requestSubmit()` is unchanged; the email input is `type=text`, has no `required`, and remains `aria-invalid=false`.",
+      "artifacts": [
+        "evidence/empty-submit.png"
+      ],
+      "suggestedFix": "Make the field required, validate after interaction, focus it, set `aria-invalid`, and announce a concise error in a live region.",
+      "effort": "small"
+    },
+    {
+      "id": "F4",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Remove redirect and critical delivery delay",
+      "evidence": "HAR recorded two 307 redirects; Lighthouse estimated 790 ms redirect savings and 1,040 ms render-blocking savings.",
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Link and canonicalize the localized login URL directly, inline or minimize critical CSS, and fix font-display/cache/HTTP delivery diagnostics.",
+      "effort": "medium"
+    },
+    {
+      "id": "F5",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Trim unused and legacy JavaScript",
+      "evidence": "Lighthouse estimated 273 KiB unused JavaScript and 13 KiB legacy JavaScript; HAR transferred 704,779 bytes of script.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Code-split provider/reCAPTCHA logic until needed, remove legacy payload for modern browsers, and reduce unused framework chunks.",
+      "effort": "large"
+    },
+    {
+      "id": "F6",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Restore platform navigation hygiene",
+      "evidence": "Lighthouse `bf-cache` and `inspector-issues` audits both scored 0.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Resolve the DevTools Inspector issue and remove the reported BFCache blocker so back navigation can restore instantly.",
+      "effort": "medium"
+    },
+    {
+      "id": "F7",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Use descriptive search/share metadata",
+      "evidence": "DOM and Lighthouse both found no meta description; rendered title is only “Spotify”.",
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Set a localized title such as “Log in to Spotify” and a concise meta description.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F8",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Complete canonical indexing signals",
+      "evidence": "The successful `/en-GB/login` page has no canonical or hreflang signal, and `/sitemap.xml` returned 404, although robots explicitly allows login routes.",
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add a canonical for the localized login route and coherent hreflang/sitemap signals, or explicitly noindex the account surface if indexing is not intended.",
+      "effort": "small"
+    },
+    {
+      "id": "F9",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Harden cookies and CSP on the auth origin",
+      "evidence": "Cookie audit found `sp_sso_csrf_token` without Secure and `sp_t` with SameSite=None; CSP permits unsafe-inline styles.",
+      "artifacts": [
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Mark the CSRF cookie Secure, review the year-long SameSite=None cookie, and remove unsafe-inline style allowance with nonces/hashes where practical.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "security",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Offer phishing-resistant authentication",
+      "evidence": "DOM exposes email, Google, Facebook and Apple paths; no passkey control is present on this relevant authentication surface.",
+      "artifacts": [
+        "evidence/page-probe.json"
+      ],
+      "suggestedFix": "Add passkey/WebAuthn sign-in and registration alongside existing email and federated methods.",
+      "effort": "large"
+    },
+    {
+      "id": "F11",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Add missing browser defense policies",
+      "evidence": "Headers primitive found both policies absent; HSTS, nosniff and clickjacking protection were present.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Send a restrictive Referrer-Policy and Permissions-Policy tailored to the authentication page.",
+      "effort": "small"
+    },
+    {
+      "id": "F12",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Make the first auth step progressively functional",
+      "evidence": "Crawler screenshot shows the full form plus “Please enable JavaScript to continue”; discoverability coverage was only 20%.",
+      "artifacts": [
+        "evidence/discoverability-crawler.png"
+      ],
+      "suggestedFix": "Post the basic email form to a server-capable continuation path without JavaScript, then enhance it client-side.",
+      "effort": "large"
+    },
+    {
+      "id": "F13",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Provide humane required-field feedback",
+      "evidence": "Empty-submit interaction remained unchanged; DOM shows no `required` attribute and `aria-invalid=false`.",
+      "artifacts": [
+        "evidence/empty-submit.png"
+      ],
+      "suggestedFix": "Use native required semantics plus post-interaction `:user-invalid` styling and an accessible error announcement.",
+      "effort": "small"
+    },
+    {
+      "id": "F14",
+      "pathId": "login-entry",
+      "url": "https://accounts.spotify.com/en-GB/login",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Defer and budget third-party authentication code",
+      "evidence": "HAR transferred 871,015 bytes total; reCAPTCHA alone was 382,965 bytes, and the tracker probe observed seven third-party origins (none matched known trackers).",
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Delay reCAPTCHA/provider code until the relevant interaction where risk controls permit, and enforce a third-party transfer budget.",
+      "effort": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T3",
+      "title": "Empty primary submission has no visible recovery state",
+      "priority": 1,
+      "findingIds": [
+        "F3"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Harden cookies and CSP on the auth origin",
+      "priority": 2,
+      "findingIds": [
+        "F9"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T13",
+      "title": "Provide humane required-field feedback",
+      "priority": 3,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T1",
+      "title": "Respect the OS colour preference instead of forcing dark",
+      "priority": 4,
+      "findingIds": [
+        "F1"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Remove redirect and critical delivery delay",
+      "priority": 5,
+      "findingIds": [
+        "F4"
+      ],
+      "guidanceId": "optimize-script-priority",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Trim unused and legacy JavaScript",
+      "priority": 6,
+      "findingIds": [
+        "F5"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Restore platform navigation hygiene",
+      "priority": 7,
+      "findingIds": [
+        "F6"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Use descriptive search/share metadata",
+      "priority": 8,
+      "findingIds": [
+        "F7"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Offer phishing-resistant authentication",
+      "priority": 9,
+      "findingIds": [
+        "F10"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Add missing browser defense policies",
+      "priority": 10,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T12",
+      "title": "Make the first auth step progressively functional",
+      "priority": 11,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T14",
+      "title": "Defer and budget third-party authentication code",
+      "priority": 12,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "efficient-background-processing",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Add continuity to multi-step authentication state changes",
+      "priority": 13,
+      "findingIds": [
+        "F2"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Complete canonical indexing signals",
+      "priority": 14,
+      "findingIds": [
+        "F8"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T01-48-42-260Z"
+}

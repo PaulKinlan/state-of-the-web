@@ -1,0 +1,1783 @@
+{
+  "url": "https://login.yahoo.com",
+  "auditedAt": "2026-07-27T20:23:00.000Z",
+  "mode": "report",
+  "status": "partial",
+  "statusDetail": "55 of 58 checks were conclusively judged. End-to-end sign-in, passkey availability, and authenticated account-management safety were blocked because no Yahoo test credentials were available.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Next.js",
+    "notes": "Public Yahoo authentication utility. Representative public archetypes: sign-in, account recovery, and account creation. Authenticated/password/passkey/account-management states were not covered."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse/axe-core"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "forms",
+    "autofill-sign-in-form",
+    "performance",
+    "security",
+    "privacy",
+    "passkeys",
+    "html",
+    "css-layout",
+    "fluid-scaling",
+    "size-aware-styling",
+    "required-field-feedback",
+    "accessible-error-announcement",
+    "declarative-dialog-popover-control",
+    "search-hidden-content",
+    "efficient-background-processing",
+    "deprioritize-background-fetches",
+    "agentic-forms",
+    "language-model",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/desktop.png",
+      "caption": "Desktop sign-in first viewport",
+      "condition": "viewport: 780x600",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "Mobile sign-in at 360x800",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/dark.png",
+      "caption": "Sign-in under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "Sign-in under forced colors/high contrast",
+      "condition": "prefers-contrast: more; forced-colors: active"
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Mobile overflow, CLS and long-task metrics",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "trace",
+      "path": "evidence/load-trace.json",
+      "caption": "Raw DevTools load trace",
+      "condition": "default headless load"
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/load-trace-summary.json",
+      "caption": "Load timing and main-thread summary",
+      "condition": "default headless load",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/load.har",
+      "caption": "Raw HAR 1.2 network capture",
+      "condition": "5 second load"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/load-summary.json",
+      "caption": "Network weight, third-party, dependency and hygiene summary",
+      "condition": "5 second load",
+      "findingIds": [
+        "F06",
+        "F07",
+        "F10",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered-content comparison",
+      "condition": "JavaScript on/off"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered browser view",
+      "condition": "JavaScript enabled"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript view and recovery state",
+      "condition": "JavaScript disabled"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response headers",
+      "condition": "main document",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie flags and lifetime audit",
+      "condition": "main page"
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party and known tracker origins",
+      "condition": "main page",
+      "findingIds": [
+        "F10",
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-visible secret scan",
+      "condition": "main page"
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image dimensions, formats and alt audit",
+      "condition": "main page",
+      "findingIds": [
+        "F08",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/probe.json",
+      "caption": "Semantics, focus, forms, scripts, platform features and metadata probe",
+      "condition": "main page",
+      "findingIds": [
+        "F02",
+        "F06",
+        "F08",
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/empty-flow.json",
+      "caption": "Empty submission validation and focus state",
+      "condition": "empty submit"
+    },
+    {
+      "type": "other",
+      "path": "evidence/invalid-flow.json",
+      "caption": "Synthetic unknown-account error state",
+      "condition": "non-existent identifier",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/forgot-mobile.png",
+      "caption": "Account recovery mobile entry view",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/forgot-dom.json",
+      "caption": "Account recovery DOM/computed styles",
+      "condition": "recovery route"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/create-mobile.png",
+      "caption": "Account creation mobile entry view",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Full Lighthouse 13.4.1 report",
+      "condition": "mobile emulation"
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse categories, metrics and failed audits",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F05",
+        "F09"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline retained heap summary",
+      "condition": "after load"
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-repeated.json",
+      "caption": "Heap after ten repeated invalid/empty submissions",
+      "condition": "repeated interaction"
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "Same-session JS heap and live DOM samples",
+      "condition": "ten repeated submissions"
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Animation probe under reduced motion",
+      "condition": "prefers-reduced-motion: reduce"
+    },
+    {
+      "type": "other",
+      "path": "evidence/metadata.json",
+      "caption": "robots, sitemap, links and metadata probe",
+      "condition": "main page"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom.json",
+      "caption": "Rendered sign-in DOM and computed styles",
+      "condition": "main page",
+      "findingIds": [
+        "F01"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 55,
+    "blocked": 3,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Dark-mode screenshot plus computed-style DOM probe",
+      "evidence": "Under emulated prefers-color-scheme: dark, the page remains a white/light-only surface; computed html color-scheme is light.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/dom.json"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "getAnimations() under prefers-reduced-motion: reduce",
+      "evidence": "The reduced-motion probe confirmed the preference matched and found zero active animations on the login surface.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Screenshot under prefers-contrast: more and forced-colors: active",
+      "evidence": "Forced-colors/high-contrast capture retains visible text, borders, controls, checkbox state, and links.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Feature/CSS probe and route screenshots",
+      "evidence": "The login, recovery, and account-creation journey changes views without any authored View Transition CSS; probe found no view-transition rules.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/forgot-mobile.png",
+        "evidence/create-mobile.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No parallax, scrollytelling, carousel, or scroll-linked motion exists on the compact authentication surfaces.",
+      "reason": "No parallax, scrollytelling, carousel, or scroll-linked motion exists on the compact authentication surfaces.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No gesture-driven control, swipe action, carousel, or scroll-snap interaction exists on the audited authentication surfaces.",
+      "reason": "No gesture-driven control, swipe action, carousel, or scroll-snap interaction exists on the audited authentication surfaces.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The compact sign-in and recovery forms have no meaningful scroll-reactive chrome; account creation is a conventional linear form.",
+      "reason": "The compact sign-in and recovery forms have no meaningful scroll-reactive chrome; account creation is a conventional linear form.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No tooltip, popover, anchored menu, or transient overlay is present on the audited surfaces.",
+      "reason": "No tooltip, popover, anchored menu, or transient overlay is present on the audited surfaces.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual review and activeElement/focus probe",
+      "evidence": "Strong heading hierarchy, auto-focused first field, prominent Next button, and inline focus return after validation make the next step and moved attention clear.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/empty-flow.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Load screenshots and DOM review",
+      "evidence": "No popup, consent wall, or interstitial obscured the authentication forms on load across three routes.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/forgot-mobile.png",
+        "evidence/create-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "No overlay, disclosure, picker, or other dismissible transient control is present to require dialog/popover/details semantics.",
+      "reason": "No overlay, disclosure, picker, or other dismissible transient control is present to require dialog/popover/details semantics.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Desktop first-viewport screenshot",
+      "evidence": "At desktop width, a large animated-looking Yahoo Finance promotion consumes about half the first viewport and competes with the primary sign-in task.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/desktop.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile screenshot and layout metrics",
+      "evidence": "At 360x800 the form reflows to one column; layout reports 360px scrollWidth, 360px clientWidth, and 0px horizontal overflow with viewport meta present.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Cross-viewport screenshot comparison",
+      "evidence": "The same authentication card changes from a desktop side panel to a full-width mobile card while preserving field and action hierarchy; no reuse context showed a failed component state.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Focus/target geometry probe plus Lighthouse",
+      "evidence": "Primary controls are 52px tall, keyboard focus is visible, and Lighthouse target-size passed; the 18px checkbox has a larger associated text label.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "First-viewport visual hierarchy review",
+      "evidence": "“Sign in to Yahoo”, the username label, and a single prominent Next action make the page purpose and next step immediately clear.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted sign-in with empty and synthetic non-existent identifiers, plus recovery-route inspection",
+      "evidence": "The unauthenticated username and recovery steps were exercised, but end-to-end sign-in requires a valid Yahoo account and secret; no credentials were available.",
+      "reason": "The unauthenticated username and recovery steps were exercised, but end-to-end sign-in requires a valid Yahoo account and secret; no credentials were available.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/invalid-flow.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Invalid-flow DOM/evaluate probe",
+      "evidence": "A synthetic non-existent username produces only “Whoops, something went wrong.” It gives no cause, retry advice, or account-recovery link in the error itself.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/invalid-flow.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse and DevTools trace summaries",
+      "evidence": "Lighthouse measured 5.1s LCP (performance 69) and the raw trace measured 7.1s LCP; both are outside the good threshold.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/load-trace-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout observer and Lighthouse",
+      "evidence": "Mobile layout observation measured CLS 0.00287 and Lighthouse measured 0.00014, both comfortably in the good range.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Trace and Lighthouse main-thread metrics",
+      "evidence": "Trace total blocking time was 85.59ms with two long tasks; Lighthouse TBT was 233.5ms, elevated but not the dominant load failure.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR dependency summary confirmed against live script attributes",
+      "evidence": "The main document took 4.94s; four parser-inserted, non-async/non-defer analytics/consent scripts are in head, and one analytics script lacks compression and cache headers.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR weight and third-party summary",
+      "evidence": "The simple sign-in form transfers 705KB across 24 scripts; Google Tag Manager alone is 169KB and third-party requests account for 841KB of 862KB total.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse axe audits and DOM semantics probe",
+      "evidence": "Lighthouse accessibility scored 100; the form probe found explicit labels for username and persistence controls, accessible action text, and alt text for both logos.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/probe.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse contrast audit and high-contrast screenshot",
+      "evidence": "Lighthouse color-contrast passed with no failing nodes, and forced-colors preserved essential content.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Landmark/focus walk and invalid-flow probe",
+      "evidence": "A main landmark and headings are present; all interactive controls accepted visible keyboard focus, and invalid submission returned focus to #username.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/empty-flow.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Visual review across representative paths",
+      "evidence": "Text remains clear and unclipped at desktop and 360px, with readable labels and instructions on sign-in, recovery, and account-creation views.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/forgot-mobile.png",
+        "evidence/create-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile layout, viewport and Lighthouse audits",
+      "evidence": "The mobile layout reflows without horizontal overflow, user scaling is not disabled, Lighthouse target-size passed, and there is no time-based media requiring captions.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse errors-in-console audit",
+      "evidence": "Lighthouse found no errors logged to the browser console.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM, image audit, and Lighthouse best-practices evidence",
+      "evidence": "The document has valid HTML/UTF-8, but both Yahoo logo images omit width and height; one lacks srcset and both are legacy PNG.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Lighthouse BFCache audit",
+      "evidence": "Lighthouse reports the page is ineligible for back/forward cache for two reasons, reducing clean browser-history restoration.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/evaluate and Lighthouse SEO probes",
+      "evidence": "The page exposes a descriptive title and meta description in the rendered DOM; Lighthouse title and description audits passed.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Link/robots probe, DOM, and Lighthouse",
+      "evidence": "All visible links have real href values and descriptive text, viewport meta is present, robots.txt permits the root login page, and Lighthouse crawlable-links passed.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/metadata.json",
+        "evidence/probe.json",
+        "evidence/lighthouse-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Auth-surface applicability judgement plus robots/sitemap probe",
+      "evidence": "This is a deliberately gated authentication utility, not a public content page intended for indexing; a sitemap is not required for the login endpoint.",
+      "reason": "This is a deliberately gated authentication utility, not a public content page intended for indexing; a sitemap is not required for the login endpoint.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The page is an authentication utility, not an article, product, event, place, or other rich entity that needs JSON-LD or social-preview metadata.",
+      "reason": "The page is an authentication utility, not an article, product, event, place, or other rich entity that needs JSON-LD or social-preview metadata.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Headers, cookies, and secrets primitives",
+      "evidence": "The page uses HTTPS, HSTS, CSP, nosniff, X-Frame-Options DENY, strict-origin referrer policy, and all observed cookies are Secure; no sensitive client-side secrets were found.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/secrets.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Trackers and HAR summaries",
+      "evidence": "The login load contacts 9 third-party origins, including Google Tag Manager and Google Analytics; 46 of 48 requests and 840,830 transferred bytes are classified third-party.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/load-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Load observation and attempted unauthenticated auth-flow inspection",
+      "evidence": "No permission prompt fired on load and Google federation is visible, but passkey/WebAuthn availability can only be established after identifying a real account; no account credentials were available.",
+      "reason": "No permission prompt fired on load and Google federation is visible, but passkey/WebAuthn availability can only be established after identifying a real account; no account credentials were available.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/probe.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Security headers primitive",
+      "evidence": "Permissions-Policy is absent and CSP allows all style origins plus unsafe-inline, weakening browser-enforced least privilege despite strong HSTS and frame denial.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Discoverability raw-HTML comparison and crawler screenshot",
+      "evidence": "Raw HTML contains 82% of rendered content and is not a JS shell; with JavaScript disabled the page shows a clear sign-in limitation and a Try again recovery action rather than a blank shell.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Route screenshots and validation focus probe",
+      "evidence": "The audited forms contain no overlays or fragile menus, retain focus through validation, and render consistently across desktop/mobile route changes.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/desktop.png",
+        "evidence/mobile.png",
+        "evidence/empty-flow.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "Authentication intrinsically requires an online identity service; no offline completion is meaningful, so a service worker/manifest is not expected for this standalone login endpoint.",
+      "reason": "Authentication intrinsically requires an online identity service; no offline completion is meaningful, so a service worker/manifest is not expected for this standalone login endpoint.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Crawler adverse-state screenshot and validation probe",
+      "evidence": "The no-JavaScript/adverse state is an explicit “We couldn’t sign you in” page with troubleshooting and Try again; validation errors remain in context with focus returned to the field.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/discoverability-crawler.png",
+        "evidence/empty-flow.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "DOM language/direction and mobile screenshots",
+      "evidence": "The served locale declares html lang=en-GB and dir=ltr; audited copy is coherent for that locale and mobile layout survives narrow reflow.",
+      "pathIds": [
+        "sign-in",
+        "recovery",
+        "create-account"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The unauthenticated sign-in and recovery views display no dates, numbers, currency, durations, or locale-sensitive data.",
+      "reason": "The unauthenticated sign-in and recovery views display no dates, numbers, currency, durations, or locale-sensitive data.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The audited authentication surfaces contain no times, events, recurrence, or time-zone-sensitive concepts.",
+      "reason": "The audited authentication surfaces contain no times, events, recurrence, or time-zone-sensitive concepts.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Initial desktop/mobile screenshots and form-state probe",
+      "evidence": "“Stay signed in” is selected by default, opting users into persistent authentication even on a shared device unless they notice and reverse the choice.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Empty and invalid submission probes",
+      "evidence": "Errors appear only after submission, set aria-invalid=true, use role=alert, return focus to the username field, and the empty case clearly says “This is required.”",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/empty-flow.json",
+        "evidence/invalid-flow.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Live form control probe",
+      "evidence": "The username/email/phone field has an empty autocomplete attribute instead of autocomplete=\"username\", preventing reliable password-manager and sign-in autofill assistance.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted public account-flow walkthrough",
+      "evidence": "The public sign-in, recovery, and create-account entry views were inspected, but cancellation, sensitive-action reauthentication, passkey management, and authenticated account controls require a real account.",
+      "reason": "The public sign-in, recovery, and create-account entry views were inspected, but cancellation, sensitive-action reauthentication, passkey management, and authenticated account controls require a real account.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/create-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Images primitive",
+      "evidence": "Both logos are PNG without intrinsic dimensions; one lacks responsive sources. The assets are small, but modern format/dimension metadata is not fully used.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR and tracker summaries",
+      "evidence": "A simple login form initiates 48 requests and 705KB of scripts, including analytics, consent, and tag-manager work before authentication.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR third-party budget summary",
+      "evidence": "Third parties account for 46 of 48 requests and 840,830 of 861,889 transferred bytes, disproportionate to the value of the unauthenticated login form.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "Authentication is a security-sensitive flow with no declared agent-facing surface; exposing sign-in credentials as WebMCP tools is not an expected requirement.",
+      "reason": "Authentication is a security-sensitive flow with no declared agent-facing surface; exposing sign-in credentials as WebMCP tools is not an expected requirement.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and applicability judgement",
+      "evidence": "The login/recovery flow has no summarisation, generation, or language-inference task for which on-device AI would improve the experience.",
+      "reason": "The login/recovery flow has no summarisation, generation, or language-inference task for which on-device AI would improve the experience.",
+      "pathIds": [
+        "sign-in"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/repeated heap summaries plus same-session performance.memory/DOM sampling",
+      "evidence": "After ten alternating invalid/empty submissions, a retained heap summary was 17.1MB versus 15.75MB baseline while DOM nodes remained exactly 138 in the same-page probe. The modest one-time growth is consistent with loading validation code and does not show unbounded accumulation.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-repeated.json",
+        "evidence/memory-metrics.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap summary totals and constructor distribution",
+      "evidence": "Baseline retained self-size was 15.75MB for the hydrated sign-in application; this is not unusually large for the observed Next.js/auth/analytics surface.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap constructor summary and same-session DOM sampling",
+      "evidence": "No Detached-named constructor appeared among retained top constructors, and ten repeated submissions left live DOM count stable at 138; no accumulating visual animations were present.",
+      "pathIds": [
+        "sign-in"
+      ],
+      "artifacts": [
+        "evidence/heap-repeated.json",
+        "evidence/memory-metrics.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F14",
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Authentication is a security-sensitive flow with no declared agent-facing surface; exposing sign-in credentials as WebMCP tools is not an expected requirement. The login/recovery flow has no summarisation, generation, or language-inference task for which on-device AI would improve the experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "sign-in",
+      "description": "Primary public sign-in form, including preference, mobile, keyboard, empty-submit and synthetic unknown-account states.",
+      "url": "https://login.yahoo.com/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "forced-colors: active",
+        "keyboard focus",
+        "empty submit",
+        "synthetic unknown account"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "recovery",
+      "description": "Forgotten-username/account-recovery entry archetype; represents public recovery before identity verification.",
+      "url": "https://login.yahoo.com/forgot",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "create-account",
+      "description": "Account-creation entry archetype; reviewed for mobile layout and public form structure.",
+      "url": "https://login.yahoo.com/account/create?specId=yidregsimplified",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Light-only styling ignores the user’s dark preference",
+      "evidence": "The dark-mode capture remains white and computed html color-scheme is light.",
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/dom.json"
+      ],
+      "suggestedFix": "Declare light and dark schemes early, set color-scheme: light dark, and theme surfaces/text with prefers-color-scheme or light-dark().",
+      "effort": "medium"
+    },
+    {
+      "id": "F02",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Multi-step authentication changes are abrupt",
+      "evidence": "No authored View Transition rules are present across sign-in, recovery, and creation route changes.",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/forgot-mobile.png",
+        "evidence/create-mobile.png"
+      ],
+      "suggestedFix": "Use same-document or cross-document View Transitions for directional continuity, while respecting reduced motion.",
+      "effort": "medium"
+    },
+    {
+      "id": "F03",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "user-experience",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Desktop promotion competes with the sign-in task",
+      "evidence": "The Yahoo Finance promotion occupies roughly half the desktop first viewport beside the authentication card.",
+      "artifacts": [
+        "evidence/desktop.png"
+      ],
+      "suggestedFix": "Reduce or defer promotional creative on the security-sensitive login surface so authentication remains the uncontested focus.",
+      "effort": "small"
+    },
+    {
+      "id": "F04",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Unknown-account errors are not actionable",
+      "evidence": "A synthetic unknown username returns only “Whoops, something went wrong.” with no reason or recovery action in the message.",
+      "artifacts": [
+        "evidence/invalid-flow.json"
+      ],
+      "suggestedFix": "Provide a privacy-safe, actionable message with retry and account-recovery options, announced through the existing alert region.",
+      "effort": "small"
+    },
+    {
+      "id": "F05",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Largest Contentful Paint is slow",
+      "evidence": "Lighthouse measured LCP 5.1s and the DevTools trace measured 7.1s.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json",
+        "evidence/load-trace-summary.json"
+      ],
+      "suggestedFix": "Use the performance guidance to shorten document latency, prioritize the LCP content, and defer non-critical work.",
+      "effort": "large"
+    },
+    {
+      "id": "F06",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Parser-blocking analytics and consent work delays delivery",
+      "evidence": "Four classic scripts in head have neither async nor defer; the main document took 4.94s and opus.js is uncached/uncompressed.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/probe.json"
+      ],
+      "suggestedFix": "Defer non-critical analytics/consent scripts, compress and cache static code, and keep the critical dependency chain focused on the form.",
+      "effort": "medium"
+    },
+    {
+      "id": "F07",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "performance",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The login form ships a heavy JavaScript payload",
+      "evidence": "The page transfers 705KB in 24 scripts; GTM alone is 169KB and most bytes are third-party.",
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Remove unused and duplicate code, conditionally load analytics, and split authentication-critical code from optional integrations.",
+      "effort": "large"
+    },
+    {
+      "id": "F08",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Logo assets omit intrinsic dimensions and responsive metadata",
+      "evidence": "Both logos omit width/height, one lacks srcset, and both are PNG.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/probe.json"
+      ],
+      "suggestedFix": "Add intrinsic width/height, responsive sources where useful, and consider AVIF/WebP or an appropriate vector while preserving alt text.",
+      "effort": "small"
+    },
+    {
+      "id": "F09",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page cannot use the back/forward cache",
+      "evidence": "Lighthouse reports two BFCache failure reasons.",
+      "artifacts": [
+        "evidence/lighthouse-summary.json"
+      ],
+      "suggestedFix": "Inspect the Lighthouse BFCache reasons and remove avoidable unload handlers, cache-control blockers, or incompatible APIs.",
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Tracking footprint is excessive on the login page",
+      "evidence": "Nine third-party origins are contacted; 46 of 48 requests and 840,830 bytes are third-party, including GTM and Google Analytics.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Minimise authentication-page telemetry, remove unnecessary third parties, and batch or defer analytics until justified by user action/consent.",
+      "effort": "large"
+    },
+    {
+      "id": "F11",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser policy hardening is incomplete",
+      "evidence": "Permissions-Policy is absent and CSP style-src allows all origins plus unsafe-inline.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Deploy a least-privilege Permissions-Policy and tighten style-src with nonces/hashes or bounded origins after report-only testing.",
+      "effort": "medium"
+    },
+    {
+      "id": "F12",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Persistent sign-in is enabled by default",
+      "evidence": "The Stay signed in checkbox is checked on first load, including on a potentially shared device.",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/probe.json"
+      ],
+      "suggestedFix": "Default persistence off or make device trust explicit and contextual, preserving a clear reversible choice.",
+      "effort": "small"
+    },
+    {
+      "id": "F13",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "forms",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The username field does not advertise autofill semantics",
+      "evidence": "The field accepts username/email/phone but its autocomplete value is empty.",
+      "artifacts": [
+        "evidence/probe.json"
+      ],
+      "suggestedFix": "Set autocomplete=\"username\" and retain the clear label so password managers and browser autofill can assist reliably.",
+      "effort": "trivial"
+    },
+    {
+      "id": "F14",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Image delivery misses lightweight asset techniques",
+      "evidence": "Two logos use PNG and omit intrinsic dimensions; one has no srcset.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Add dimensions and responsive/modern image delivery appropriate to these small logos.",
+      "effort": "small"
+    },
+    {
+      "id": "F15",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Background analytics work is disproportionate to the form",
+      "evidence": "The unauthenticated form initiates 48 requests and 705KB of scripts before the user acts.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Deprioritize and conditionally load background analytics so sign-in-critical work wins.",
+      "effort": "medium"
+    },
+    {
+      "id": "F16",
+      "pathId": "sign-in",
+      "url": "https://login.yahoo.com/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "performance",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party budget dominates total transfer",
+      "evidence": "Third parties contribute 840,830 of 861,889 transferred bytes and 46 of 48 requests.",
+      "artifacts": [
+        "evidence/load-summary.json"
+      ],
+      "suggestedFix": "Set a strict third-party budget for authentication, remove low-value vendors, and defer remaining integrations.",
+      "effort": "large"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Cut login latency and third-party JavaScript",
+      "priority": 1,
+      "findingIds": [
+        "F05",
+        "F06",
+        "F07",
+        "F10",
+        "F15",
+        "F16"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Add correct username autofill semantics",
+      "priority": 2,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "autofill-sign-in-form",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Add preference-driven dark mode",
+      "priority": 3,
+      "findingIds": [
+        "F01"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Make unknown-account errors actionable",
+      "priority": 4,
+      "findingIds": [
+        "F04"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Harden CSP and browser policies",
+      "priority": 5,
+      "findingIds": [
+        "F11"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Reconsider default persistent sign-in",
+      "priority": 6,
+      "findingIds": [
+        "F12"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Restore BFCache eligibility",
+      "priority": 7,
+      "findingIds": [
+        "F09"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add intrinsic, modern logo delivery",
+      "priority": 8,
+      "findingIds": [
+        "F08",
+        "F14"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Reduce promotional competition on desktop login",
+      "priority": 9,
+      "findingIds": [
+        "F03"
+      ],
+      "guidanceId": "improve-text-layout-and-legibility",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Add subtle route/state transitions",
+      "priority": 10,
+      "findingIds": [
+        "F02"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 3,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T20-21-32-729Z"
+}

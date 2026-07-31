@@ -1,0 +1,1856 @@
+{
+  "url": "https://sso.acesso.gov.br",
+  "auditedAt": "2026-07-20T13:26:36.809Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage complete for the public, unauthenticated login entry. Authenticated/account routes were excluded because no credentials or test account were supplied.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Server-rendered SSO reached through a JavaScript portal shell",
+    "notes": "The requested host redirects through servicos.acesso.gov.br to a transient sso.acesso.gov.br authorization URL. Bot-management intermittently returned an empty challenge; evidence uses successful delayed loads."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "trace",
+    "har",
+    "heap-summary",
+    "lighthouse",
+    "curl"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "forms",
+    "validate-input-after-interaction",
+    "required-field-feedback",
+    "accessible-error-announcement",
+    "autofill-sign-in-form",
+    "passkeys",
+    "passkey-authentication",
+    "security",
+    "privacy",
+    "performance",
+    "optimize-script-priority",
+    "improve-text-layout-and-legibility",
+    "fluid-scaling",
+    "html",
+    "light-dismiss-a-dialog"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Rendered login page after JavaScript and redirects complete",
+      "condition": "JavaScript enabled",
+      "findingIds": [
+        "F-DISCOVERABILITY"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler/no-JavaScript view exposes only an enable-JavaScript message",
+      "condition": "JavaScript disabled",
+      "findingIds": [
+        "F-DISCOVERABILITY",
+        "F-PROGRESSIVE"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered-content discoverability analysis",
+      "condition": "JavaScript enabled vs disabled",
+      "findingIds": [
+        "F-DISCOVERABILITY",
+        "F-PROGRESSIVE"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile-wait.png",
+      "caption": "Complete login entry page at narrow viewport",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-INPUT-MODALITY",
+        "F-ZOOM"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/dark-wait.png",
+      "caption": "Login UI remains light under dark preference",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "Login UI under increased contrast preference",
+      "condition": "prefers-contrast: more"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/dom-wait.json",
+      "caption": "Rendered login DOM and computed styles after the bot-management delay",
+      "condition": "default",
+      "findingIds": [
+        "F-LABELS",
+        "F-SEMANTIC-OVERLAY",
+        "F-ASSETS",
+        "F-AUTOFILL"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/layout-mobile.json",
+      "caption": "Narrow layout metrics: zero horizontal overflow and CLS",
+      "condition": "viewport: 360x800"
+    },
+    {
+      "type": "other",
+      "path": "evidence/probe.json",
+      "caption": "Metadata, landmarks, links, inputs, focus styles, images and capability probe",
+      "condition": "default",
+      "findingIds": [
+        "F-LABELS",
+        "F-STRUCTURE",
+        "F-INPUT-MODALITY",
+        "F-AUTOFILL"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Reduced-motion animation probe reported no running animations",
+      "condition": "prefers-reduced-motion: reduce"
+    },
+    {
+      "type": "trace",
+      "path": "evidence/trace",
+      "caption": "DevTools load trace",
+      "condition": "cold load",
+      "findingIds": [
+        "F-PERFORMANCE"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/trace-summary.json",
+      "caption": "Trace summary: LCP 13.0s, FCP 11.8s, three long tasks",
+      "condition": "cold load",
+      "findingIds": [
+        "F-PERFORMANCE"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/network.har",
+      "caption": "Network archive for the redirect and login load",
+      "condition": "cold load",
+      "findingIds": [
+        "F-RESOURCES",
+        "F-SUSTAINABILITY"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/network-summary.json",
+      "caption": "72 requests and 1.73 MB transferred; 1.18 MB scripts",
+      "condition": "cold load",
+      "findingIds": [
+        "F-RESOURCES",
+        "F-SUSTAINABILITY"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap.json",
+      "caption": "Single-state V8 heap summary: 6.5 MB self size and 107,795 nodes",
+      "condition": "post-load"
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance, accessibility, best-practices and SEO evidence",
+      "condition": "mobile cold load",
+      "findingIds": [
+        "F-PERFORMANCE",
+        "F-CONTRAST",
+        "F-CONSOLE",
+        "F-PLATFORM",
+        "F-STRUCTURE",
+        "F-ZOOM"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Main navigation security-header probe",
+      "condition": "default",
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security attributes observed during navigation",
+      "condition": "default",
+      "findingIds": [
+        "F-HEADERS",
+        "F-DEFENSIVE"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party origin and tracker inventory",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client resource secret scan returned no findings",
+      "condition": "default"
+    },
+    {
+      "type": "other",
+      "path": "evidence/invalid-cpf.json",
+      "caption": "Invalid CPF interaction returned no visible error and aria-invalid remained false",
+      "condition": "invalid CPF: 123",
+      "findingIds": [
+        "F-ERRORS"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/invalid-cpf.png",
+      "caption": "Login page after an invalid CPF interaction, with no error feedback",
+      "condition": "invalid CPF: 123",
+      "findingIds": [
+        "F-ERRORS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots.txt request returned the branded 404 page",
+      "condition": "robots.txt",
+      "findingIds": [
+        "F-INDEXING",
+        "F-FAILURE"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-headers.txt",
+      "caption": "robots.txt response headers: HTTP 404 and CSP/HSTS details",
+      "condition": "robots.txt",
+      "findingIds": [
+        "F-INDEXING",
+        "F-FAILURE",
+        "F-DEFENSIVE"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dark-wait.png",
+      "evidence": "The dark-preference screenshot remains a white surface, and computed color-scheme is normal.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dark-wait.png"
+      ],
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The reduced-motion probe matched reduce and found no running animations.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The increased-contrast screenshot kept controls and text visible, and the page exposes an explicit high-contrast control.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dom-wait.json, evidence/reduced-motion.json",
+      "evidence": "The rendered DOM contains accordion/modal state changes, while the animation probe found no animations and source inspection found no transition setup.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/reduced-motion.json"
+      ],
+      "findingIds": [
+        "F-VIEW-TRANSITIONS"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "The page has no scroll-linked animation, parallax or scrollytelling surface.",
+      "reason": "The page has no scroll-linked animation, parallax or scrollytelling surface.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "The authentication entry exposes no swipe, pull, drag or snap gesture interaction.",
+      "reason": "The authentication entry exposes no swipe, pull, drag or snap gesture interaction.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The narrow screenshot shows a compact header and complete task card without obstructive sticky chrome.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "No tooltip or edge-positioned transient surface was present in the audited entry state.",
+      "reason": "No tooltip or edge-positioned transient surface was present in the audited entry state.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The mobile screenshot presents one prominent Continue action followed by clearly separated alternative methods.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The load screenshots show no interstitial, consent wall or content-obscuring popup.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dom-wait.json",
+      "evidence": "Rendered source loads modal.js and invokes showModal(...) from a button; no dialog or popover element is present.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dom-wait.json"
+      ],
+      "findingIds": [
+        "F-SEMANTIC-OVERLAY"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The mobile screenshot devotes almost all space below the compact header to authentication content.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "Layout metrics at 360px report scrollWidth 360, horizontalOverflowPx 0 and a viewport meta tag.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/layout-mobile.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "The audited single-card component is not demonstrated in multiple container contexts, so container-specific adaptation is not applicable.",
+      "reason": "The audited single-card component is not demonstrated in multiple container contexts, so container-specific adaptation is not applicable.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/probe.json, evidence/mobile-wait.png",
+      "evidence": "The focus probe measured bank buttons around 27px high with outline none, while the primary mobile controls are 40px high.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ],
+      "findingIds": [
+        "F-INPUT-MODALITY"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The first viewport states “Identifique-se” and gives a visually dominant Continue button.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The unauthenticated step exposes CPF, bank, QR and certificate routes with direct controls and no pre-task upsell.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/invalid-cpf.json, evidence/invalid-cpf.png",
+      "evidence": "After entering 123 and invoking Continue, aria-invalid remained false and no alert/error text appeared.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/invalid-cpf.json",
+        "evidence/invalid-cpf.png"
+      ],
+      "findingIds": [
+        "F-ERRORS"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/trace-summary.json, evidence/lighthouse.json",
+      "evidence": "Trace measured FCP 11.8s and LCP 13.0s; Lighthouse measured FCP 20.0s and LCP 20.5s on a cold mobile run.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F-PERFORMANCE"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The narrow layout observer measured CLS 0 with no recorded shifts.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "Trace total blocking time was 188.86ms with three bounded long tasks; Lighthouse TBT was 2.5ms.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/network-summary.json, evidence/network.har",
+      "evidence": "HAR recorded 72 requests and 1.73 MB transferred, including 1.18 MB of scripts and multiple render-blocking stylesheets.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/network.har"
+      ],
+      "findingIds": [
+        "F-RESOURCES"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/network-summary.json",
+      "evidence": "The HAR identifies a 783,542-byte portal bundle plus challenge, hCaptcha, government-bar, jQuery and other scripts before login.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F-DUPLICATE-CODE"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dom-wait.json, evidence/probe.json",
+      "evidence": "DOM shows label for=\"cpf\" but the input id is accountId; the probe reports no associated label.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F-LABELS"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/lighthouse.json",
+      "evidence": "Lighthouse reports 4.37:1 for green #008c32 text and the inverse badge, below the 4.5:1 requirement.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F-CONTRAST"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/probe.json, evidence/lighthouse.json",
+      "evidence": "The probe found only h3 headings and several bank buttons with outline none; Lighthouse accessibility was 0.73.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F-STRUCTURE"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "Desktop and mobile screenshots show readable body text and a coherent single-column narrow layout.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dom-wait.json, evidence/mobile-wait.png",
+      "evidence": "The rendered meta viewport contains maximum-scale=1.0 and user-scalable=0.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/mobile-wait.png"
+      ],
+      "findingIds": [
+        "F-ZOOM"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/lighthouse.json",
+      "evidence": "Lighthouse records CSP-blocked hCaptcha requests and missing rawline-900 font files.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F-CONSOLE"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dom-wait.json, evidence/probe.json",
+      "evidence": "DOM source shows the main logo and hero image without width/height attributes even though natural dimensions are known.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F-ASSETS"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/lighthouse.json, evidence/network-summary.json",
+      "evidence": "Lighthouse flags an unload listener and deprecated Protected Audience API use; the HAR also loads jQuery 2.2.4.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/network-summary.json"
+      ],
+      "findingIds": [
+        "F-PLATFORM"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/probe.json, evidence/lighthouse.json",
+      "evidence": "The metadata probe and Lighthouse both report a descriptive title but no meta[name=description].",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F-META"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "This is a deliberately gated identity-provider login, so public crawling is not an intended journey.",
+      "reason": "This is a deliberately gated identity-provider login, so public crawling is not an intended journey.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "This is a transient authorization login URL and should not be indexed.",
+      "reason": "This is a transient authorization login URL and should not be indexed.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "A transient authentication page is not a rich public entity intended for sharing.",
+      "reason": "A transient authentication page is not a rich public entity intended for sharing.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/cookies.json, evidence/robots-headers.txt",
+      "evidence": "Cookie evidence shows two TS cookies without Secure/HttpOnly and SameSite=None; the observed CSP allows unsafe-inline and unsafe-eval.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/cookies.json",
+        "evidence/robots-headers.txt"
+      ],
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "Tracker inventory found no known analytics trackers, and the secret scan found no exposed credentials.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "No permission prompt appeared on load; the page offers QR, bank and digital-certificate authentication alternatives.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/headers.json, evidence/robots-headers.txt",
+      "evidence": "Header probe did not observe nosniff, Referrer-Policy or Permissions-Policy; CSP uses frame-ancestors but also broad unsafe script allowances.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/robots-headers.txt"
+      ],
+      "findingIds": [
+        "F-DEFENSIVE"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/discoverability.json, evidence/discoverability-crawler.png",
+      "evidence": "Discoverability measured 0% content coverage with an empty #root; the crawler view says only “You need to enable JavaScript”.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F-PROGRESSIVE"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The mobile screenshot shows the authentication controls contained within the viewport without clipping or broken state.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "Authentication is intrinsically online and no installable app behavior is expected for this entry page.",
+      "reason": "Authentication is intrinsically online and no installable app behavior is expected for this entry page.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/robots.txt, evidence/robots-headers.txt",
+      "evidence": "The robots.txt request returned HTTP 404 and a page containing only “Erro: 404 Not Found” beneath the site header.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/robots.txt",
+        "evidence/robots-headers.txt"
+      ],
+      "findingIds": [
+        "F-FAILURE"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The DOM declares lang=\"pt-BR\" and the Portuguese reading order renders correctly left-to-right.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "The audited login step displays no dates, numbers, currency, durations or calendar data.",
+      "reason": "The audited login step displays no dates, numbers, currency, durations or calendar data.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "The audited login step contains no time or event data.",
+      "reason": "The audited login step contains no time or event data.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The login entry shows neutral alternatives, help, terms and privacy links without confirmshaming or forced commercial continuity.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Invalid CPF interaction and DOM state probe",
+      "evidence": "After entering 123 and invoking Continue, aria-invalid remained false and no alert/error text appeared.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/invalid-cpf.json",
+        "evidence/invalid-cpf.png"
+      ],
+      "findingIds": [
+        "F-ERRORS"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/dom-wait.json, evidence/probe.json",
+      "evidence": "The CPF input uses autocomplete=\"new-password\" despite being an account identifier.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/probe.json"
+      ],
+      "findingIds": [
+        "F-AUTOFILL"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The entry page clearly identifies government sign-in, links terms/privacy/help, and presents proportionate authentication alternatives.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The probe found the principal hero image displayed below its natural resolution and compact icon assets at native size.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The trace recorded bounded main-thread work after load and no running animations under the reduced-motion probe.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct inspection using evidence/network-summary.json, evidence/network.har",
+      "evidence": "HAR measured 1.73 MB, 72 requests, 35 images and 827 KB attributed to cross-origin requests before authentication.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/network.har"
+      ],
+      "findingIds": [
+        "F-SUSTAINABILITY"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "Exposing autonomous agent tools on a sensitive government sign-in surface is not an evident or safe requirement.",
+      "reason": "Exposing autonomous agent tools on a sensitive government sign-in surface is not an evident or safe requirement.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "The deterministic authentication entry has no appropriate summarization or generative inference use case.",
+      "reason": "The deterministic authentication entry has no appropriate summarization or generative inference use case.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Applicability judgement from entry-page recon and rendered DOM",
+      "evidence": "No safe, representative repeated interaction can be completed before authentication without submitting identity data; a synthetic loop was not fabricated.",
+      "reason": "No safe, representative repeated interaction can be completed before authentication without submitting identity data; a synthetic loop was not fabricated.",
+      "pathIds": [
+        "login-entry"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The post-load heap summary reports 6.5 MB self size for the feature-rich login, a proportionate single-state footprint.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/heap.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered DOM, visual screenshot and/or objective browser probe for this check",
+      "evidence": "The heap summary contains no Detached* constructor population in its reported constructor set; no accumulation is asserted from a single state.",
+      "pathIds": [
+        "login-entry"
+      ],
+      "artifacts": [
+        "evidence/heap.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-VIEW-TRANSITIONS"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-SEMANTIC-OVERLAY"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-INPUT-MODALITY"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-ERRORS"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-PERFORMANCE",
+        "F-RESOURCES",
+        "F-DUPLICATE-CODE"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-LABELS",
+        "F-CONTRAST",
+        "F-STRUCTURE",
+        "F-ZOOM"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-CONSOLE",
+        "F-ASSETS",
+        "F-PLATFORM"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-META"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-HEADERS",
+        "F-DEFENSIVE"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-PROGRESSIVE",
+        "F-FAILURE"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-ERRORS",
+        "F-AUTOFILL"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-SUSTAINABILITY"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged out of scope for this sensitive, gated authentication entry."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "login-entry",
+      "description": "Public authentication entry after the servicos.acesso.gov.br redirect; covers CPF and alternative-method selection, invalid CPF recovery, desktop/mobile/preferences, no-JS, security, performance and memory single-state evidence. Authenticated routes, real credential submission, bank/certificate handoffs and account management were not covered because no safe test identity was supplied.",
+      "url": "https://sso.acesso.gov.br",
+      "conditions": [
+        "desktop 780x510",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "JavaScript disabled",
+        "invalid CPF 123",
+        "cold load"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-DARK",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The login page does not follow the system dark theme.",
+      "evidence": "The dark-preference screenshot remains a white surface, and computed color-scheme is normal.",
+      "suggestedFix": "Declare color-scheme and provide preference-driven dark tokens with accessible contrast.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dark-wait.png"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-META",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The login page has no meta description.",
+      "evidence": "The metadata probe and Lighthouse both report a descriptive title but no meta[name=description].",
+      "suggestedFix": "Add a concise description of the gov.br sign-in purpose while retaining noindex if indexing is intentionally disallowed.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "title-and-description",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "trivial"
+    },
+    {
+      "id": "F-VIEW-TRANSITIONS",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "State changes are not enhanced with View Transitions.",
+      "evidence": "The rendered DOM contains accordion/modal state changes, while the animation probe found no animations and source inspection found no transition setup.",
+      "suggestedFix": "Use same-document View Transitions for meaningful accordion or authentication-state changes, while respecting reduced motion.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/reduced-motion.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F-SEMANTIC-OVERLAY",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Bank and QR overlays use custom modal scripting rather than native dialog/popover primitives.",
+      "evidence": "Rendered source loads modal.js and invokes showModal(...) from a button; no dialog or popover element is present.",
+      "suggestedFix": "Use dialog for modal flows or popover for transient UI, with native focus management and light dismiss.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dom-wait.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F-INPUT-MODALITY",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Several bank controls are too small and lose visible keyboard focus.",
+      "evidence": "The focus probe measured bank buttons around 27px high with outline none, while the primary mobile controls are 40px high.",
+      "suggestedFix": "Provide at least 44x44 CSS-pixel targets where practical and a strong :focus-visible style for every bank option.",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/mobile-wait.png"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-ERRORS",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Invalid CPF input gives no visible or programmatic recovery feedback.",
+      "evidence": "After entering 123 and invoking Continue, aria-invalid remained false and no alert/error text appeared.",
+      "suggestedFix": "Validate after interaction, set aria-invalid, associate specific guidance with aria-describedby, and announce it in a live region.",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "forms",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/invalid-cpf.json",
+        "evidence/invalid-cpf.png"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-PERFORMANCE",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The authentication entry is very slow to become visible.",
+      "evidence": "Trace measured FCP 11.8s and LCP 13.0s; Lighthouse measured FCP 20.0s and LCP 20.5s on a cold mobile run.",
+      "suggestedFix": "Profile the redirect/challenge chain and prioritize the login HTML/CSS; remove avoidable pre-content delay.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F-RESOURCES",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The simple login journey has a heavy, redirect-rich resource load.",
+      "evidence": "HAR recorded 72 requests and 1.73 MB transferred, including 1.18 MB of scripts and multiple render-blocking stylesheets.",
+      "suggestedFix": "Split and defer non-critical scripts, cache hashed assets, self-host/trim fonts, and shorten the redirect dependency chain.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/network.har"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F-DUPLICATE-CODE",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Large JavaScript dominates the login load.",
+      "evidence": "The HAR identifies a 783,542-byte portal bundle plus challenge, hCaptcha, government-bar, jQuery and other scripts before login.",
+      "suggestedFix": "Audit coverage, remove unused legacy code, and conditionally load secondary authentication dependencies only when selected.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "performance",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/network-summary.json"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F-LABELS",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The visible CPF label is not associated with the CPF input.",
+      "evidence": "DOM shows label for=\"cpf\" but the input id is accountId; the probe reports no associated label.",
+      "suggestedFix": "Make label[for] exactly match the input id and verify the accessible name in the accessibility tree.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/probe.json"
+      ],
+      "effort": "trivial"
+    },
+    {
+      "id": "F-CONTRAST",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The bank-login option fails minimum text contrast.",
+      "evidence": "Lighthouse reports 4.37:1 for green #008c32 text and the inverse badge, below the 4.5:1 requirement.",
+      "suggestedFix": "Darken the green or adjust the background so normal text and badge text meet WCAG AA.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "trivial"
+    },
+    {
+      "id": "F-STRUCTURE",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page starts its heading hierarchy at h3 and some focusable bank controls have no visible outline.",
+      "evidence": "The probe found only h3 headings and several bank buttons with outline none; Lighthouse accessibility was 0.73.",
+      "suggestedFix": "Use an h1 for the page purpose, a logical hierarchy, and consistent :focus-visible styling.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/probe.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-ZOOM",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The viewport explicitly prevents pinch zoom.",
+      "evidence": "The rendered meta viewport contains maximum-scale=1.0 and user-scalable=0.",
+      "suggestedFix": "Remove maximum-scale and user-scalable restrictions so users can zoom.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "accessibility",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/mobile-wait.png"
+      ],
+      "effort": "trivial"
+    },
+    {
+      "id": "F-CONSOLE",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The login load emits console and network errors.",
+      "evidence": "Lighthouse records CSP-blocked hCaptcha requests and missing rawline-900 font files.",
+      "suggestedFix": "Correct the hCaptcha CSP allowlist and font URLs, then verify a clean console.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-ASSETS",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Rendered images omit intrinsic width and height attributes.",
+      "evidence": "DOM source shows the main logo and hero image without width/height attributes even though natural dimensions are known.",
+      "suggestedFix": "Add intrinsic width and height attributes and retain responsive CSS sizing.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-PLATFORM",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Deprecated browser behavior and a legacy library remain in the authentication page.",
+      "evidence": "Lighthouse flags an unload listener and deprecated Protected Audience API use; the HAR also loads jQuery 2.2.4.",
+      "suggestedFix": "Remove unload handlers, update third-party dependencies, and replace or isolate legacy jQuery usage.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/network-summary.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F-HEADERS",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Cookie and CSP policy are weaker than expected for an identity provider.",
+      "evidence": "Cookie evidence shows two TS cookies without Secure/HttpOnly and SameSite=None; the observed CSP allows unsafe-inline and unsafe-eval.",
+      "suggestedFix": "Mark every sensitive cookie Secure, HttpOnly and appropriately SameSite; move inline code to nonce/hash CSP and remove unsafe-eval.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/cookies.json",
+        "evidence/robots-headers.txt"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F-DEFENSIVE",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Several browser defense headers are absent or weak.",
+      "evidence": "Header probe did not observe nosniff, Referrer-Policy or Permissions-Policy; CSP uses frame-ancestors but also broad unsafe script allowances.",
+      "suggestedFix": "Add nosniff, a strict Referrer-Policy and minimal Permissions-Policy, then tighten CSP without breaking required authentication providers.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/robots-headers.txt"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-PROGRESSIVE",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The login UI is an empty JavaScript shell for non-JavaScript clients.",
+      "evidence": "Discoverability measured 0% content coverage with an empty #root; the crawler view says only “You need to enable JavaScript”.",
+      "suggestedFix": "Server-render the login entry and keep a functional HTML form as the baseline, then enhance it with JavaScript.",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-crawler.png"
+      ],
+      "effort": "large"
+    },
+    {
+      "id": "F-FAILURE",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The representative 404 response offers no recovery path.",
+      "evidence": "The robots.txt request returned HTTP 404 and a page containing only “Erro: 404 Not Found” beneath the site header.",
+      "suggestedFix": "Provide an explanatory error state with safe links back to login/help and retry guidance where relevant.",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "user-experience",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/robots.txt",
+        "evidence/robots-headers.txt"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F-AUTOFILL",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The CPF sign-in field disables useful identity autofill semantics.",
+      "evidence": "The CPF input uses autocomplete=\"new-password\" despite being an account identifier.",
+      "suggestedFix": "Use the appropriate username autocomplete token while retaining numeric inputmode and privacy safeguards.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "forms",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/dom-wait.json",
+        "evidence/probe.json"
+      ],
+      "effort": "trivial"
+    },
+    {
+      "id": "F-SUSTAINABILITY",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Resource cost is disproportionate to the first login step.",
+      "evidence": "HAR measured 1.73 MB, 72 requests, 35 images and 827 KB attributed to cross-origin requests before authentication.",
+      "suggestedFix": "Lazy/conditional-load provider assets and hCaptcha, trim icon/font sets, and keep only resources needed for the selected method.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "performance",
+      "pathId": "login-entry",
+      "url": "https://sso.acesso.gov.br",
+      "artifacts": [
+        "evidence/network-summary.json",
+        "evidence/network.har"
+      ],
+      "effort": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Restore fast first content and trim the login dependency chain",
+      "priority": 1,
+      "guidanceId": "performance",
+      "findingIds": [
+        "F-PERFORMANCE",
+        "F-RESOURCES",
+        "F-DUPLICATE-CODE",
+        "F-SUSTAINABILITY"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Repair labels, focus, zoom and contrast",
+      "priority": 2,
+      "guidanceId": "accessibility",
+      "findingIds": [
+        "F-LABELS",
+        "F-INPUT-MODALITY",
+        "F-ZOOM",
+        "F-CONTRAST",
+        "F-STRUCTURE"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Make invalid-input recovery visible and announced",
+      "priority": 3,
+      "guidanceId": "accessible-error-announcement",
+      "findingIds": [
+        "F-ERRORS"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Harden cookies, CSP and browser policy headers",
+      "priority": 4,
+      "guidanceId": "security",
+      "findingIds": [
+        "F-HEADERS",
+        "F-DEFENSIVE"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Server-render a resilient baseline login form",
+      "priority": 5,
+      "guidanceId": "html",
+      "findingIds": [
+        "F-PROGRESSIVE"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Clean metadata, console errors and deprecated dependencies",
+      "priority": 6,
+      "guidanceId": "html",
+      "findingIds": [
+        "F-META",
+        "F-CONSOLE",
+        "F-PLATFORM",
+        "F-ASSETS"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Adopt system theme and semantic interaction primitives",
+      "priority": 7,
+      "guidanceId": "dark-mode",
+      "findingIds": [
+        "F-DARK",
+        "F-SEMANTIC-OVERLAY",
+        "F-VIEW-TRANSITIONS"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Correct sign-in autofill semantics",
+      "priority": 8,
+      "guidanceId": "autofill-sign-in-form",
+      "findingIds": [
+        "F-AUTOFILL"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Provide useful 404 recovery",
+      "priority": 9,
+      "guidanceId": "persistent-toast-notifications",
+      "findingIds": [
+        "F-FAILURE"
+      ],
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-20T13-26-36-809Z"
+}

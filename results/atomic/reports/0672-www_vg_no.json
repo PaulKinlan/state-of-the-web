@@ -1,0 +1,2164 @@
+{
+  "url": "https://www.vg.no",
+  "auditedAt": "2026-07-22T07:27:35.983Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete atomic audit of six representative public paths. Authenticated account management, paid checkout completion and destructive form submission were intentionally not performed; their public entry states and applicable template checks were inspected.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Astro islands with React/web components",
+    "notes": "Server-rendered Norwegian news publication with an initial cross-origin Sourcepoint/Schibsted consent layer, long feed, article templates, forms, account links, video and ad integrations."
+  },
+  "evidenceUsed": [
+    "Modern Web Guidance 0.0.172 search/retrieve",
+    "raw CDP screenshots",
+    "DOM and computed-style probes",
+    "layout metrics and layout-shift observers",
+    "DevTools trace",
+    "HAR",
+    "Lighthouse",
+    "discoverability/raw HTML comparison",
+    "security headers",
+    "cookies",
+    "trackers",
+    "secrets with context review",
+    "image inspection",
+    "heap summaries",
+    "form and 404 interaction probes",
+    "robots/sitemap/manifest fetches"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "scrollytelling",
+    "physics-based-easing",
+    "shrinking-header-on-scroll",
+    "anchor-positioning-tab-underline",
+    "directional-navigation-transitions",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "complex-shapes",
+    "fluid-scaling",
+    "size-aware-styling",
+    "improve-text-layout-and-legibility",
+    "forms",
+    "accessible-error-announcement",
+    "identify-inp-causes",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "optimize-image-priority",
+    "identify-heavy-scripts",
+    "move-dom-element-without-losing-state",
+    "css",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "flicker-free-client-side-ab-testing",
+    "resilient-context-menus-and-nested-dropdowns",
+    "persistent-toast-notifications",
+    "translator",
+    "support-global-calendar-systems",
+    "coordinate-global-events",
+    "search-hidden-content",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "deliver-optimized-decorative-images",
+    "deprioritize-background-fetches",
+    "webmcp",
+    "language-model",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-consent-before.png",
+      "caption": "Initial desktop load is fully obscured by the cookie-consent dialog",
+      "condition": "initial load",
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Initial 360x800 load is almost entirely occupied by cookie consent",
+      "condition": "viewport 360x800",
+      "findingIds": [
+        "F01",
+        "F03"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-clean-desktop.png",
+      "caption": "Homepage after an ephemeral consent choice",
+      "condition": "viewport 1440x1000",
+      "findingIds": [
+        "F07",
+        "F11"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-clean-mobile.png",
+      "caption": "Responsive homepage after consent",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-menu-mobile.png",
+      "caption": "Expanded mobile navigation",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Homepage under prefers-color-scheme: dark remains light",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Homepage under prefers-contrast: more",
+      "condition": "prefers-contrast: more",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/section-desktop.png",
+      "caption": "News section representative template",
+      "condition": "viewport 1440x1000",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-desktop.png",
+      "caption": "Article representative template",
+      "condition": "viewport 1440x1000",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/tips-desktop.png",
+      "caption": "Tips form representative flow",
+      "condition": "viewport 1440x1000",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/session-probe.json",
+      "caption": "Cross-template metadata, structure, forms, focus, responsive CSS and preference probe",
+      "condition": "desktop, mobile, dark, reduced motion, high contrast",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/session-summary.json",
+      "caption": "Compact summary of the cross-template session probe",
+      "condition": "multiple conditions",
+      "findingIds": [
+        "F04",
+        "F05",
+        "F11",
+        "F14",
+        "F18"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Homepage mobile overflow, viewport and layout-shift metrics",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/article-mobile-layout.json",
+      "caption": "Article mobile overflow and CLS metrics",
+      "condition": "viewport 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace for initial homepage load",
+      "condition": "initial load",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary with FCP, LCP and long tasks",
+      "condition": "initial load",
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Initial homepage network capture",
+      "condition": "initial load",
+      "findingIds": [
+        "F15",
+        "F21"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network totals, third parties, render-blocking candidates and hygiene",
+      "condition": "initial load",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F12",
+        "F15",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Lighthouse performance, accessibility, best-practices and SEO audit",
+      "condition": "mobile lab load",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10",
+        "F12",
+        "F13",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered homepage coverage",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered homepage crawler comparison",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler-view homepage comparison",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "Raw HTML versus rendered article coverage",
+      "condition": "JavaScript on/off",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "Rendered article crawler comparison",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "Crawler-view article comparison",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security response-header inspection",
+      "condition": "initial load",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie attribute inspection",
+      "condition": "initial load before consent",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party and tracker-origin inspection",
+      "condition": "initial load",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client-exposed token scan",
+      "condition": "initial load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/jwt-context.json",
+      "caption": "Context and decoded scope of the push-event JWT signal",
+      "condition": "initial load",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Homepage image audit",
+      "condition": "initial load",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-images.json",
+      "caption": "Article image audit",
+      "condition": "article load",
+      "findingIds": [
+        "F13",
+        "F19"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-clean-baseline.json",
+      "caption": "Heap summary after removing the visual consent container",
+      "condition": "baseline",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-after-scroll.json",
+      "caption": "Heap summary after ten bottom-to-top scroll cycles",
+      "condition": "10 repeated scroll cycles",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-features.json",
+      "caption": "Manifest and modern platform feature probe",
+      "condition": "initial load",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/service-workers.json",
+      "caption": "Service-worker registration probe",
+      "condition": "initial load",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots policy including sitemaps and explicit AI crawler policy",
+      "condition": "raw fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/manifest.json",
+      "caption": "Web app manifest",
+      "condition": "raw fetch",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap-headers.txt",
+      "caption": "Sitemap HTTP response headers",
+      "condition": "raw HEAD",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found.json",
+      "caption": "404 recovery-content probe",
+      "condition": "invalid route",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/not-found-headers.txt",
+      "caption": "404 status response headers",
+      "condition": "invalid route",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/tips-validation.json",
+      "caption": "Required-field validation probe on tips form",
+      "condition": "invalid submission",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/resource-dom.json",
+      "caption": "Live script and stylesheet placement/attributes",
+      "condition": "initial load",
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/offer-probe.json",
+      "caption": "Commercial-content labelling probe",
+      "condition": "public offers path",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "Pinned Modern Web Guidance catalog consulted up front",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "Retrieved guidance used to set the audit bar",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-searches.json",
+      "caption": "Check-specific guidance searches",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "CDP emulated-media computed-style probe and screenshot",
+      "evidence": "Dark emulation leaves color-scheme normal and light body colors unchanged.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/session-summary.json"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "getAnimations() comparison under emulated reduced motion",
+      "evidence": "409 animations remain running under reduce, close to the default 420.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "prefers-contrast screenshot plus Lighthouse accessibility",
+      "evidence": "High-contrast screenshot preserves visible text, controls and focus; Lighthouse contrast checks pass.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png",
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Platform/CSS probe and route screenshot comparison",
+      "evidence": "No view-transition signal is present across linked MPA templates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-features.json",
+        "evidence/article-desktop.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Live CSS rule inspection",
+      "evidence": "Stylesheet probe found animation-timeline/scroll-timeline use, avoiding a solely scroll-event-driven implementation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-features.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile interaction and screenshot",
+      "evidence": "Mobile drawer opens from a labelled button, fits the viewport, and uses native scrolling/expand controls without observed custom pointer friction.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-menu-mobile.png",
+        "evidence/session-probe.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Long-page visual inspection and CSS probe",
+      "evidence": "Long homepage/article surfaces retain static fixed chrome without progress or changed scroll state.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "pass",
+      "confidence": "high",
+      "method": "CSS feature probe plus opened overlay screenshot",
+      "evidence": "Live CSS inspection finds anchor positioning and the inspected mobile menu remains attached and fully visible.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-features.json",
+        "evidence/home-menu-mobile.png"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Menu interaction screenshot",
+      "evidence": "Expanded mobile navigation clearly groups content, shows disclosure state, and keeps the underlying selected content spatially understandable.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-menu-mobile.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Initial-load screenshots",
+      "evidence": "Cookie consent obscures nearly all initial desktop and mobile content.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-consent-before.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "DOM dialog inventory and screenshot",
+      "evidence": "The consent surface is a role=dialog div around a cross-origin iframe rather than native dialog, unlike account dialogs on the page.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-probe.json",
+        "evidence/home-consent-before.png"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Desktop/mobile visual inspection",
+      "evidence": "After consent, the main viewport is dominated by news cards and headlines; chrome is compact and the mobile menu is only shown on request.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Mobile layout metrics",
+      "evidence": "360x800 layout reports scrollWidth 360, horizontal overflow 0 and a viewport meta tag on homepage and article.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/article-mobile-layout.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "CSS rule probe and paired screenshots",
+      "evidence": "Homepage CSS exposes nine container rules and cards/menu visibly recompose at mobile width.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/home-clean-mobile.png",
+        "evidence/home-clean-desktop.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Programmatic focus probe, Lighthouse and mobile interaction",
+      "evidence": "Focus probes show a visible browser outline on controls; Lighthouse accessibility is 1.0 and mobile controls are usable in the opened menu.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/lighthouse-home.json",
+        "evidence/home-menu-mobile.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Representative first-viewport screenshots and heading probe",
+      "evidence": "Homepage, section, article and tips templates expose clear headlines/purpose and labelled next actions.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/section-desktop.png",
+        "evidence/article-desktop.png",
+        "evidence/tips-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Tips-flow DOM and form walkthrough",
+      "evidence": "The public tips journey reaches a labelled POST form with required content and optional contact/file fields without an account wall.",
+      "pathIds": [
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/tips-validation.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Invalid-form probe and 404 response/content probe",
+      "evidence": "Invalid required content triggers native validation and a real HTTP 404 presents explanation, feedback and homepage recovery links.",
+      "pathIds": [
+        "tips",
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/tips-validation.json",
+        "evidence/not-found.json",
+        "evidence/not-found-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse plus DevTools trace",
+      "evidence": "Lighthouse mobile LCP is 8.0 s and CLS 0.054; unthrottled trace LCP is 1.89 s, showing slow-condition risk.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout-shift observers and Lighthouse",
+      "evidence": "Observed CLS is 0 on the homepage consent state and 0.052 on article mobile, both within the good threshold.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile-layout.json",
+        "evidence/article-mobile-layout.json",
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Trace summary and Lighthouse",
+      "evidence": "Trace reports zero >50 ms long tasks and 0 ms TBT; Lighthouse TBT is 70 ms.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR candidates confirmed against live DOM plus Lighthouse",
+      "evidence": "Five confirmed head stylesheets are render-blocking with about 170 ms potential savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/resource-dom.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse code coverage/insights",
+      "evidence": "Lighthouse estimates 464 KiB unused JS, 32 KiB unused CSS, 17 KiB duplicated JS and 40 KiB legacy JS.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse plus cross-template DOM/image probes",
+      "evidence": "Lighthouse accessibility scores 1.0; form fields are labelled or aria-labelled and meaningful article imagery has descriptive alt text.",
+      "pathIds": [
+        "home",
+        "article",
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/session-summary.json",
+        "evidence/article-images.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse and prefers-contrast screenshot",
+      "evidence": "Lighthouse accessibility and visual checks found no contrast failure, including high-contrast emulation.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Heading/landmark/focus probe",
+      "evidence": "Homepage has no h1 and begins with repeated h2 teaser headings, although landmarks and focus outlines exist.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/home-clean-desktop.png"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Article/desktop and homepage/mobile screenshots",
+      "evidence": "Article body has a comfortable narrow measure and clear typographic hierarchy; mobile headlines reflow without clipping.",
+      "pathIds": [
+        "article",
+        "home"
+      ],
+      "artifacts": [
+        "evidence/article-desktop.png",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Layout, viewport DOM and Lighthouse",
+      "evidence": "Mobile layouts reflow with zero horizontal overflow, scaling is not prevented, Lighthouse accessibility is 1.0, and article audio has a labelled control.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/article-mobile-layout.json",
+        "evidence/home-mobile-layout.json",
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse console audit and HAR hygiene",
+      "evidence": "Lighthouse and HAR record repeated 400/403/404 failures plus an Account SDK console.error.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse document checks and image primitives",
+      "evidence": "Doctype/charset pass, but image probes find incomplete dimensions/oversizing and Lighthouse estimates 326 KiB savings.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/images.json",
+        "evidence/article-images.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse best-practices audits and initial-load observation",
+      "evidence": "Lighthouse reports BFCache, deprecations and inspector issues passing; no permission prompt appears on load.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-consent-before.png"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Cross-template metadata probe",
+      "evidence": "All four templates have descriptive titles and meta descriptions.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM, robots and Lighthouse SEO",
+      "evidence": "Real hrefs, viewport metadata, crawlable robots policy and Lighthouse SEO 1.0 are present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/robots.txt",
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-template canonical probe plus robots/sitemap headers",
+      "evidence": "Homepage, section and article have canonicals and sitemap is 200, but the public tips page has no canonical.",
+      "pathIds": [
+        "home",
+        "section",
+        "article",
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/robots.txt",
+        "evidence/sitemap-headers.txt"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Metadata probe on representative rich entities",
+      "evidence": "Homepage/section/article expose JSON-LD and Open Graph; article OG title/image match its visible story.",
+      "pathIds": [
+        "home",
+        "section",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers and cookies primitives",
+      "evidence": "HTTPS, CSP and HSTS are strong, but __mbl is a 365-day cookie without Secure and _sp_su uses SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR and trackers primitives",
+      "evidence": "82 requests and 2.04 MB transfer are third-party across 26 origins, including a known tracker.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Initial-load observation and form/account-link inventory",
+      "evidence": "No browser permission prompt fires on load; authentication is delegated to Schibsted and no password/auth data is collected by the audited VG templates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-probe.json",
+        "evidence/home-consent-before.png"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Security headers primitive",
+      "evidence": "CSP frame-ancestors, HSTS, nosniff, DENY framing, strict-origin referrer policy and restrictive permissions policy are all present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Discoverability no-JS comparison",
+      "evidence": "Raw HTML retains 96% homepage and 97% article rendered vocabulary; neither page is a JS shell.",
+      "pathIds": [
+        "home",
+        "article"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/article-discoverability.json",
+        "evidence/home-discoverability-crawler.png",
+        "evidence/article-discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Menu interaction and error-state probe",
+      "evidence": "Opened mobile menu fits the viewport and remains usable; 404 and template navigation stabilize without blank shells.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-menu-mobile.png",
+        "evidence/not-found.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Manifest fetch and service-worker probe",
+      "evidence": "A standalone manifest and shortcuts are present but no service-worker registrations exist.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/service-workers.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "HTTP HEAD and rendered 404 probe",
+      "evidence": "A real 404 status renders an explanatory state with feedback and homepage recovery actions rather than a blank shell.",
+      "pathIds": [
+        "not-found"
+      ],
+      "artifacts": [
+        "evidence/not-found-headers.txt",
+        "evidence/not-found.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM language and responsive visual probe",
+      "evidence": "All templates declare lang=no and preserve natural Norwegian reading order across desktop/mobile; no bidi-sensitive flow is present.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/home-clean-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Rendered content and DOM text inspection",
+      "evidence": "News timestamps are rendered in Norwegian relative forms such as “I dag”, “i går”, minutes and hours, consistently across templates.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-clean-mobile.png",
+        "evidence/offer-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Surface inventory for temporal interactions",
+      "evidence": "No user-entered, scheduled, recurring or cross-zone time flow exists in the representative public news, article, tips or offers templates.",
+      "reason": "Covered templates only display publisher-local relative timestamps; there is no cross-zone event-management task to exercise.",
+      "pathIds": [
+        "home",
+        "article",
+        "tips"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Initial consent screenshots",
+      "evidence": "Consent UI makes acceptance prominent while personalized-ad rejection is labelled as a paid service and no equal reject-all action appears.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-consent-before.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Invalid submission probe",
+      "evidence": "Required tips content uses native post-interaction validity with a specific “Please fill in this field” message; fields are labelled.",
+      "pathIds": [
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/tips-validation.json",
+        "evidence/session-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Form DOM inspection",
+      "evidence": "Tips contact fields for name, email and telephone have no autocomplete tokens.",
+      "pathIds": [
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/session-summary.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Offer text/link probe and navigation inventory",
+      "evidence": "Commercial offers are explicitly labelled ANNONSE and show merchant/discount; account and subscription actions are clearly named and leave VG for their dedicated provider.",
+      "pathIds": [
+        "offers",
+        "home"
+      ],
+      "artifacts": [
+        "evidence/offer-probe.json",
+        "evidence/session-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse image insight plus image primitives",
+      "evidence": "Lighthouse estimates 326 KiB image savings and probes identify oversized/missing-dimension assets.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/images.json",
+        "evidence/article-images.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary and Lighthouse",
+      "evidence": "Initial view initiates 152 requests, 94 scripts and 23 fetches, including repeated failed anonymous account calls.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "HAR summary",
+      "evidence": "Initial transfer is 2.80 MB, with an 829 KB preview MP4 and 2.04 MB third-party bytes before playback intent.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Platform probe and declared robots policy",
+      "evidence": "No WebMCP capability is exposed and robots explicitly disallows AI training crawlers while allowing OAI SearchBot.",
+      "reason": "VG expresses a deliberate crawler/licensing policy and no agent-facing transactional capability intent; absence of WebMCP is not penalised.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/platform-features.json",
+        "evidence/robots.txt"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Representative surface inventory",
+      "evidence": "The covered news, article and tips surfaces do not present a user task that requires site-authored on-device inference.",
+      "reason": "No declared agent/on-device inference intent or applicable user flow was found; browser globals alone do not prove site use.",
+      "pathIds": [
+        "home",
+        "article",
+        "tips"
+      ],
+      "artifacts": [
+        "evidence/platform-features.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Baseline/post heap-summary comparison",
+      "evidence": "After ten bottom-to-top scroll cycles, total self size rose only 6,736 bytes (0.03%) and nodes 0.4%, with no Detached constructor in the top summaries.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-clean-baseline.json",
+        "evidence/heap-after-scroll.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap summary and page-purpose comparison",
+      "evidence": "Baseline heap is 25.29 MB self size and 398,725 nodes for a very long, media-rich homepage; footprint remained stable after exercise.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-clean-baseline.json",
+        "evidence/session-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Before/after constructor summaries",
+      "evidence": "Neither heap summary lists Detached constructors among top retained constructors and repeated scroll did not produce material total growth.",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-clean-baseline.json",
+        "evidence/heap-after-scroll.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass",
+      "findingIds": []
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F20",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "findingIds": [],
+      "reason": "VG expresses a deliberate crawler/licensing policy and no agent-facing transactional capability intent; absence of WebMCP is not penalised. No declared agent/on-device inference intent or applicable user flow was found; browser globals alone do not prove site use."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass",
+      "findingIds": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage/news feed: primary entry template, consent, navigation, preferences, responsive layout, performance and network.",
+      "url": "https://www.vg.no/",
+      "conditions": [
+        "initial load",
+        "1440x1000",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "section",
+      "description": "Nyheter section: representative listing/index template.",
+      "url": "https://www.vg.no/nyheter",
+      "conditions": [
+        "1440x1000"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "article",
+      "description": "Current news article: representative editorial detail, rich metadata, text, imagery and mobile stability.",
+      "url": "https://www.vg.no/nyheter/i/wr9EJA/15-aar-siden-terroren-slik-minnes-norge-22-juli",
+      "conditions": [
+        "1440x1000",
+        "360x800",
+        "JavaScript disabled/raw HTML"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "tips",
+      "description": "Tips submission: primary public form flow, labels, validation and input assistance.",
+      "url": "https://www.vg.no/tips-oss",
+      "conditions": [
+        "invalid required submission",
+        "1440x1000"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "offers",
+      "description": "Commercial offers: representative advertising/commercial labelling surface.",
+      "url": "https://www.vg.no/tilbud",
+      "conditions": [
+        "public anonymous"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "not-found",
+      "description": "Invalid route: HTTP failure and recovery state.",
+      "url": "https://www.vg.no/this-route-does-not-exist-atomic-audit",
+      "conditions": [
+        "HTTP 404"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Cookie consent blocks the entire initial experience",
+      "evidence": "Desktop and 360x800 screenshots show a full-page modal before any interaction; on mobile almost no news content remains visible.",
+      "suggestedFix": "Use the least intrusive consent layer permitted, keep core context visible, and provide an immediate, equally legible decline path.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-consent-before.png",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F02",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The consent overlay is an ad-hoc iframe dialog rather than a native dialog",
+      "evidence": "DOM inspection shows a div with role=dialog wrapping a cross-origin iframe, while the site uses native dialog elsewhere.",
+      "suggestedFix": "Use a correctly managed native dialog where integration permits, including focus containment, Escape handling and return focus.",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-consent-before.png",
+        "evidence/session-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F03",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Consent choices are visually asymmetric and decline is framed as paid",
+      "evidence": "The mobile consent screenshot makes “Godta alle” the prominent first action; “Avvis personlig tilpassede annonser” is marked “Betalt tjeneste”, and there is no equally prominent reject-all option.",
+      "suggestedFix": "Present accept and reject choices with comparable prominence and explain paid/ad-funded alternatives without steering language.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "custom-button-actions",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-consent-before.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F04",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The site does not honor the system dark-color preference",
+      "evidence": "Under prefers-color-scheme: dark, color-scheme remains normal and the body remains rgb(250,246,246) with dark text; the dark screenshot is visually unchanged.",
+      "suggestedFix": "Declare color-scheme and provide preference-driven light/dark surface, text, control and media treatments.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/session-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F05",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Reduced-motion preference leaves hundreds of animations running",
+      "evidence": "The probe found 409 running animations under prefers-reduced-motion: reduce, with 200 ms and 1900 ms durations, versus 420 in the default state.",
+      "suggestedFix": "Use prefers-reduced-motion to remove or substantially reduce non-essential teaser, loading and chrome motion.",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/session-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F06",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Cross-page navigation has no View Transition treatment",
+      "evidence": "The platform probe found no view-transition declaration or API usage across the homepage and article templates.",
+      "suggestedFix": "Add progressive cross-document View Transitions for stable shared chrome and directional route changes, with reduced-motion handling.",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "cross-document-transitions",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/platform-features.json",
+        "evidence/article-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F07",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Sticky site chrome does not communicate scroll state",
+      "evidence": "Visual inspection and the multi-state probe show a fixed red header but no progress cue, compacted state or other position feedback on long pages.",
+      "suggestedFix": "Add a lightweight scroll-state treatment or article progress affordance without increasing chrome.",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scroll-progress-indicator",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-clean-desktop.png",
+        "evidence/article-desktop.png"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile lab LCP is slow despite a fast unthrottled trace",
+      "evidence": "Lighthouse measured LCP 8.0 s, performance 0.72 and interactive 16.4 s; the unthrottled trace measured LCP 1.89 s, showing a material slow-device/network gap.",
+      "suggestedFix": "Reduce critical-path work and media, preserve the correctly prioritised LCP image, and validate against mobile throttling and field CWV.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F09",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Critical delivery includes avoidable render-blocking CSS",
+      "evidence": "Lighthouse identified five blocking CSS files with about 170 ms potential savings; the DOM confirms they are head stylesheets, while parser-discovered module scripts are correctly deferred by type=module.",
+      "suggestedFix": "Inline truly critical CSS, consolidate template CSS, and defer non-critical component styles.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-preload-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json",
+        "evidence/resource-dom.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The homepage ships substantial unused and duplicated code",
+      "evidence": "Lighthouse estimates 464 KiB unused JavaScript, 32 KiB unused CSS, 17 KiB duplicated JavaScript and 40 KiB legacy JavaScript.",
+      "suggestedFix": "Conditionally load the video player, ads and CMP branches; deduplicate shared libraries and stop serving legacy transforms to modern clients.",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The homepage has no level-one heading",
+      "evidence": "The homepage probe found zero h1 elements and begins its content outline with many h2 teaser headings; section and article templates do provide h1.",
+      "suggestedFix": "Add one concise, visually appropriate h1 for the homepage content/feed and retain the existing teaser hierarchy beneath it.",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/home-clean-desktop.png"
+      ],
+      "effort": "small",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Routine account and media checks log browser errors",
+      "evidence": "Lighthouse reports failed 400/403/404 resources and an Account SDK “HasSession failed” console.error; the HAR independently records the same failures.",
+      "suggestedFix": "Handle expected anonymous/geoblocking responses without console errors, and remove or repair the missing bottombar/tracker requests.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F13",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Several article and homepage images lack complete intrinsic sizing or are oversized",
+      "evidence": "The image probes report one homepage image without dimensions, three article images without complete dimensions, and four article assets over 2x display size; Lighthouse estimates 326 KiB image savings.",
+      "suggestedFix": "Emit width and height for every rendered image and tune sizes/srcset plus compression to actual card and avatar slots.",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/article-images.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "medium",
+      "pathId": "article",
+      "url": "https://www.vg.no/nyheter/i/wr9EJA/15-aar-siden-terroren-slik-minnes-norge-22-juli"
+    },
+    {
+      "id": "F14",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The public tips page omits a canonical URL",
+      "evidence": "The tips template has a descriptive title but the probe found no link rel=canonical, unlike the homepage, section and article templates.",
+      "suggestedFix": "Add a self-referencing canonical URL to the tips page template.",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/session-summary.json"
+      ],
+      "effort": "trivial",
+      "pathId": "tips",
+      "url": "https://www.vg.no/tips-oss"
+    },
+    {
+      "id": "F15",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The initial page has a large third-party and tracking footprint",
+      "evidence": "The HAR records 82 third-party requests and 2.04 MB third-party transfer across 26 external origins; the tracker probe identifies adnxs and the network includes analytics/ad SDKs.",
+      "suggestedFix": "Gate non-essential third parties until the relevant consent, consolidate measurement, and load video/ad stacks only when their surface is used.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F16",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "A long-lived first-party cookie is set without Secure",
+      "evidence": "Cookie inspection found __mbl with a 365-day expiry and Secure=false; _sp_su also uses SameSite=None, although no auth-like cookie lacked HttpOnly.",
+      "suggestedFix": "Set Secure on every cookie delivered by HTTPS and review whether SameSite=None is required for _sp_su.",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/cookies.json",
+        "evidence/headers.json"
+      ],
+      "effort": "trivial",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F17",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The app-like manifest is not backed by an offline service worker",
+      "evidence": "A complete standalone manifest with shortcuts is linked, but the service-worker registration probe returned an empty list.",
+      "suggestedFix": "If installability is intentional, register a small service worker with a safe offline news shell/fallback; otherwise avoid implying full PWA capability.",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "detect-initial-visibility-state",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/manifest.json",
+        "evidence/service-workers.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F18",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The tips form omits autocomplete assistance for contact fields",
+      "evidence": "The publicly accessible form labels its name, email and telephone inputs correctly but all three have empty autocomplete tokens.",
+      "suggestedFix": "Add name, email and tel autocomplete tokens so browsers and assistive input tools can help users submit tips.",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-address-form",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/session-summary.json",
+        "evidence/tips-validation.json"
+      ],
+      "effort": "trivial",
+      "pathId": "tips",
+      "url": "https://www.vg.no/tips-oss"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Responsive image delivery leaves avoidable bytes on the table",
+      "evidence": "Lighthouse estimates 326 KiB image savings, including 1080 px assets displayed around 665 px and a 552 px PNG displayed around 74 px.",
+      "suggestedFix": "Correct sizes/srcset candidates, use AVIF/WebP where the image service permits, and compress campaign graphics for their rendered slot.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/article-images.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Initial background work is disproportionate to the news view",
+      "evidence": "The homepage initiates 152 requests, including 94 scripts and 23 fetch/XHR requests; several anonymous account checks fail repeatedly.",
+      "suggestedFix": "Delay account, ad, analytics and player work until needed, batch telemetry, and remove repeated failed fetches.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "effort": "large",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Autoloaded media and third-party code dominate the initial budget",
+      "evidence": "The HAR transfers 2.80 MB total, including an 829 KB preview MP4 and 2.04 MB from third parties before the user requests playback.",
+      "suggestedFix": "Replace autoplay preview transfer with a poster, fetch media on intent, and set explicit third-party/media budgets.",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "modern-web-guidance",
+      "artifacts": [
+        "evidence/home.har",
+        "evidence/home-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "home",
+      "url": "https://www.vg.no/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Replace the blocking, asymmetric consent experience with balanced choices",
+      "priority": 1,
+      "findingIds": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Cut initial third-party, video and unused-code work",
+      "priority": 2,
+      "findingIds": [
+        "F08",
+        "F10",
+        "F15",
+        "F20",
+        "F21"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Meet mobile LCP and critical-delivery budgets",
+      "priority": 3,
+      "findingIds": [
+        "F08",
+        "F09",
+        "F19"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Add preference-driven dark and reduced-motion modes",
+      "priority": 4,
+      "findingIds": [
+        "F04",
+        "F05"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Repair semantic structure, autocomplete and canonical details",
+      "priority": 5,
+      "findingIds": [
+        "F11",
+        "F14",
+        "F18"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Eliminate routine console/network errors and harden cookies",
+      "priority": 6,
+      "findingIds": [
+        "F12",
+        "F16"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Complete image sizing and responsive delivery",
+      "priority": 7,
+      "findingIds": [
+        "F13",
+        "F19"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add progressive route transitions and scroll-state guidance",
+      "priority": 8,
+      "findingIds": [
+        "F06",
+        "F07"
+      ],
+      "guidanceId": "cross-document-transitions",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Back the app manifest with a safe offline fallback",
+      "priority": 9,
+      "findingIds": [
+        "F17"
+      ],
+      "guidanceId": "detect-initial-visibility-state",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-22T07-27-35-983Z"
+}

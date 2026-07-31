@@ -1,0 +1,2400 @@
+{
+  "url": "https://bakusai.com",
+  "auditedAt": "2026-07-21T11:46:29.693Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Atomic coverage complete across 58 checks and six representative paths. No local source was supplied; report mode only.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Legacy server-rendered MPA with a frameset area hub, jQuery-style widgets, and a delegated zauth.net login.",
+    "notes": "Audited home, Tokyo area hub, entertainment listing, representative thread, login, and unknown-route recovery. Other regions/categories were not repeated because they share the same templates; authenticated account settings, destructive posting, and commercial flows were not exercised without credentials."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "evaluate-probe",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "Lighthouse",
+    "robots.txt fetch"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "same-document-transitions",
+    "scroll-position-aware-elements",
+    "position-aware-tooltips",
+    "light-dismiss-a-dialog",
+    "defer-rendering-heavy-content",
+    "css-layout",
+    "size-aware-styling",
+    "scrollability-affordance-hints",
+    "accessible-error-announcement",
+    "performance",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "identify-heavy-scripts",
+    "improve-text-layout-and-legibility",
+    "fluid-scaling",
+    "deliver-optimized-decorative-images",
+    "html",
+    "security",
+    "privacy",
+    "passkey-authentication",
+    "stabilize-reactive-state",
+    "deprioritize-background-fetches",
+    "efficient-background-processing",
+    "agentic-forms",
+    "conditional-async-dependencies",
+    "move-dom-element-without-losing-state",
+    "optimize-image-priority",
+    "forms",
+    "validate-input-after-interaction"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Homepage at 360x800 shows a scaled desktop canvas.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/listing-mobile.png",
+      "caption": "Listing at 360x800 shows tiny dense desktop layout.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-05",
+        "F-08",
+        "F-09",
+        "F-10",
+        "F-12",
+        "F-22",
+        "F-23"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/thread-mobile.png",
+      "caption": "Thread at 360x800 shows tiny desktop layout and ad load.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-05",
+        "F-07",
+        "F-08",
+        "F-09",
+        "F-22"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-mobile.png",
+      "caption": "Responsive delegated login form.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/thread-dark.png",
+      "caption": "Thread remains light under dark preference.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/thread-high-contrast.png",
+      "caption": "Thread under increased contrast preference.",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F-03",
+        "F-20"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/thread-mobile-layout.json",
+      "caption": "Thread mobile layout/CLS/long-task observations.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F-09",
+        "F-15",
+        "F-22"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/thread-trace-summary.json",
+      "caption": "Thread trace timing and main-thread summary.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-14",
+        "F-16",
+        "F-34"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/thread-trace.json",
+      "caption": "DevTools-loadable performance trace.",
+      "condition": "desktop load",
+      "findingIds": []
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/thread-summary.json",
+      "caption": "Compact thread network summary.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-17",
+        "F-18",
+        "F-29",
+        "F-34",
+        "F-35",
+        "F-38"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/thread.har",
+      "caption": "Thread HAR 1.2 network capture.",
+      "condition": "desktop load",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-thread-summary.json",
+      "caption": "Thread Lighthouse category, metric, and audit summary.",
+      "condition": "mobile emulation",
+      "findingIds": [
+        "F-11",
+        "F-14",
+        "F-15",
+        "F-16",
+        "F-17",
+        "F-18",
+        "F-19",
+        "F-20",
+        "F-21",
+        "F-23",
+        "F-24",
+        "F-25",
+        "F-26"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-login-summary.json",
+      "caption": "Login Lighthouse summary.",
+      "condition": "mobile emulation",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/listing-images.json",
+      "caption": "Listing image audit.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-15",
+        "F-19",
+        "F-24",
+        "F-33"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Main-document security headers.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-28",
+        "F-31"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie flags and lifetime audit.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-28"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers-thread.json",
+      "caption": "Thread tracker/origin enumeration.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-29",
+        "F-34",
+        "F-35"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/thread-discoverability.json",
+      "caption": "Thread raw HTML versus rendered coverage.",
+      "condition": "JavaScript/no-JavaScript",
+      "findingIds": [
+        "F-36"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/thread-discoverability-rendered.png",
+      "caption": "Rendered browser thread view.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/thread-discoverability-crawler.png",
+      "caption": "Crawler thread view.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline thread heap summary.",
+      "condition": "after load",
+      "findingIds": [
+        "F-37",
+        "F-38",
+        "F-39"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-stamp.json",
+      "caption": "Heap after 10 stamp modal cycles.",
+      "condition": "10x open/close",
+      "findingIds": [
+        "F-37",
+        "F-39"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "Same-session DOM and JS heap samples.",
+      "condition": "10x open/close",
+      "findingIds": [
+        "F-37",
+        "F-39"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/thread-static-probe.json",
+      "caption": "Preference, metadata, CSS, animation, and focus probe.",
+      "condition": "dark + reduced motion",
+      "findingIds": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-06",
+        "F-07",
+        "F-10",
+        "F-11",
+        "F-21",
+        "F-27"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/thread-runtime-probe.json",
+      "caption": "Runtime links, workers, permissions, iframe, and resource probe.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-19",
+        "F-26"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-static-probe.json",
+      "caption": "Login autocomplete, auth and focus probe.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F-30"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/login-validation.json",
+      "caption": "Invalid login validation state.",
+      "condition": "empty submit",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/404-probe.json",
+      "caption": "Unknown-route recovery text and links.",
+      "condition": "404 path",
+      "findingIds": [
+        "F-13",
+        "F-32",
+        "F-36"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/area-dom.json",
+      "caption": "Tokyo area frameset DOM.",
+      "condition": "desktop load",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The dark-mode screenshot remains a white surface, and the CSS probe found no prefers-color-scheme, light-dark(), or color-scheme implementation.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-dark.png",
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Under prefers-reduced-motion: reduce, the probe still found a running 6.5-second animation and no reduced-motion media rule.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The CSS probe found no prefers-contrast or forced-colors rule; the high-contrast capture retains the same dense, low-emphasis styling.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-high-contrast.png",
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The CSS probe found no view-transition usage across MPA navigation or the stamp modal state change.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-04"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon-based applicability judgement against the check and site purpose.",
+      "evidence": "No scroll-linked animation, parallax, carousel, or scrollytelling interaction is present to implement.",
+      "reason": "No scroll-linked animation, parallax, carousel, or scrollytelling interaction is present to implement."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "The inspected surfaces rely on native scrolling and links; no custom pointermove or gesture layer was observed fighting platform behavior.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The listing and thread are several screens long, but screenshots and CSS inspection show no progress indicator or scroll-reactive chrome.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png"
+      ],
+      "findingIds": [
+        "F-05"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The stamp overlay is custom DOM, while the CSS probe found no anchor positioning, popover, or dialog primitives.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-06"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Breadcrumbs, selected area styling, descriptive thread links, and back-to-list controls give direct location cues across the exercised read journey.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Load screenshots show banners and inline ads but no full-screen interstitial or content-blocking consent wall.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The thread exposes custom .js-stampmodal-open/.close controls, while the probe found zero dialog, popover, or details elements.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-static-probe.json",
+        "evidence/thread-mobile.png"
+      ],
+      "findingIds": [
+        "F-07"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "At 360px the desktop page is scaled to fit; the listing is dominated by banners, a dense image grid and side rail, while the thread places multiple ads before and beside the core discussion.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png"
+      ],
+      "findingIds": [
+        "F-08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "At a requested 360x800 viewport, listing/thread layout metrics report innerWidth 1100 and a scale of about 0.327; screenshots show tiny desktop text and controls.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png",
+        "evidence/thread-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F-09"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The CSS probe found no container queries; the listing grid and side rail are merely scaled down at 360px.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-10"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Focused forum links report outline: none; many navigation targets are only 25px high, and Lighthouse fails target-size.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-static-probe.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "findingIds": [
+        "F-11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The mobile listing first viewport contains dense navigation, banners, tabs, a search strip, a large image grid and a side rail before a clear thread-reading action.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png"
+      ],
+      "findingIds": [
+        "F-12"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "The public read journey completed from region selection to listing to a thread, with thread/list/home return controls available.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The unknown-route page says “ika error! click” and instructs users to use the browser Back button rather than offering a clear home/search/retry action.",
+      "pathIds": [
+        "error404"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ],
+      "findingIds": [
+        "F-13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Mobile Lighthouse reports LCP 4.2s, TBT 990ms, CLS 0.12, and performance 0.45.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-trace-summary.json"
+      ],
+      "findingIds": [
+        "F-14"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse reports CLS 0.12 and the image audit finds 90 of 100 images without both dimensions.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/listing-images.json",
+        "evidence/thread-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F-15"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The trace records a 541.82ms long task and 503.94ms TBT; Lighthouse records 990ms TBT and a 22.5s time to interactive.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-trace-summary.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "findingIds": [
+        "F-16"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "HAR records 249 requests and 2,357,529 transferred bytes, including 55 scripts and 153 images; Lighthouse flags cache, font, HTTP, dependency-tree and render-blocking insights.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-summary.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "findingIds": [
+        "F-17"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse flags unused CSS, unused JavaScript, unminified CSS/JS, legacy JavaScript and heavy main-thread work.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-summary.json"
+      ],
+      "findingIds": [
+        "F-18"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse accessibility is 0.56 and fails image-alt, label, link-name, select-name, list/listitem, definition-list and frame-title; the runtime probe finds several untitled third-party iframes and 21 empty-name links.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-runtime-probe.json",
+        "evidence/listing-images.json"
+      ],
+      "findingIds": [
+        "F-19"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse fails the color-contrast audit on the thread, and the site has no contrast-preference adaptation.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-high-contrast.png"
+      ],
+      "findingIds": [
+        "F-20"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse fails heading-order and tabindex; direct focus probes show outline: none on forum links.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-21"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The 1100px desktop layout is scaled to roughly 32.7% at 360px, producing tiny body and control text in the listing and thread captures.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png",
+        "evidence/thread-mobile-layout.json"
+      ],
+      "findingIds": [
+        "F-22"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse fails meta-viewport and target-size, while the 360px captures preserve a desktop canvas rather than reflowing.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/listing-mobile.png"
+      ],
+      "findingIds": [
+        "F-23"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Lighthouse did not report a console-error audit failure and the resource probe observed no HTTP >=400 resource entries on the representative thread.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The image audit finds 90 missing dimensions, 43 oversized assets and 82 legacy-format images; Lighthouse fails unsized-images.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-images.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "findingIds": [
+        "F-24"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse flags deprecations, inspector issues, BFCache blockers, third-party cookies, and missing source-map quality.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "findingIds": [
+        "F-25"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Home and thread have descriptive, content-specific titles and meta descriptions; the raw HTML preserves both.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Lighthouse fails meta-viewport and crawlable-anchors; the runtime probe reports 7 anchors without href and 21 linked elements with no discernible text.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-runtime-probe.json"
+      ],
+      "findingIds": [
+        "F-26"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "The thread returned 200, exposed a canonical without the tracking/back parameter, robots.txt did not broadly block indexing, and no accidental noindex was observed.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The thread exposes zero JSON-LD blocks; og:description contains HTML-like “<div><imgsrc=...>” text rather than a clean summary.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "findingIds": [
+        "F-27"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "HTTPS is used, but CSP and HSTS are absent; all 13 observed first-party cookies lack Secure, including bakusai_session.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F-28"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The tracker probe sees 30 third-party origins and known Google Analytics, DoubleClick and Rubicon trackers; HAR records 249 requests.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/trackers-thread.json",
+        "evidence/thread-summary.json"
+      ],
+      "findingIds": [
+        "F-29"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "No permission prompt fired on load, but the delegated login probe finds password/OAuth options and no WebAuthn/passkey implementation.",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-static-probe.json"
+      ],
+      "findingIds": [
+        "F-30"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Headers are missing clickjacking protection, Referrer-Policy, Permissions-Policy, CSP and HSTS.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F-31"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Discoverability reports 100% home and 89% thread raw/rendered content overlap with non-empty server HTML, so core reading survives without JavaScript.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Core menus, links, search and thread content loaded and remained operable in the exercised states; no blank shell or cut-off required overlay was observed.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon-based applicability judgement against the check and site purpose.",
+      "evidence": "The audited public forum is a content MPA rather than an install-oriented app; no offline promise or app intent was found.",
+      "reason": "The audited public forum is a content MPA rather than an install-oriented app; no offline promise or app intent was found."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The exercised 404 route renders “ika error! click” and relies on the browser back button instead of direct recovery choices.",
+      "pathIds": [
+        "error404"
+      ],
+      "artifacts": [
+        "evidence/404-probe.json"
+      ],
+      "findingIds": [
+        "F-32"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon-based applicability judgement against the check and site purpose.",
+      "evidence": "Bakusai is deliberately a Japanese-language local forum; the audited pages declare lang=ja and no multilingual or bidi product surface was identified.",
+      "reason": "Bakusai is deliberately a Japanese-language local forum; the audited pages declare lang=ja and no multilingual or bidi product surface was identified."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon-based applicability judgement against the check and site purpose.",
+      "evidence": "The scoped public read/login journey is single-locale Japanese and no user-selectable locale, currency, or cross-locale data flow was identified.",
+      "reason": "The scoped public read/login journey is single-locale Japanese and no user-selectable locale, currency, or cross-locale data flow was identified."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon-based applicability judgement against the check and site purpose.",
+      "evidence": "No scheduling, recurring-event, or cross-time-zone workflow appears in the exercised forum and authentication surfaces.",
+      "reason": "No scheduling, recurring-event, or cross-time-zone workflow appears in the exercised forum and authentication surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "The exercised browsing and login states showed no confirmshaming, forced continuity, preselected paid option, or consent wall; promotional recommendations were labelled PR where inspected.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "Empty login submission uses required native validation, moves focus to email, and prevents submission without clearing context.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "The login email and password controls expose autocomplete=email and autocomplete=current-password, with visible recovery links.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Direct walkthrough plus DOM/runtime and visual corroboration.",
+      "evidence": "The login surface clearly separates OAuth and email methods, offers password/email recovery, account creation, privacy policy and terms, and makes no paid commitment.",
+      "pathIds": [
+        "home",
+        "thread",
+        "login"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Of 100 listing images, 82 use legacy formats, 43 are oversized, 40 lack srcset and 70 below-fold images are not lazy-loaded.",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-images.json"
+      ],
+      "findingIds": [
+        "F-33"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The thread loads 249 requests from 33 origins and later executes a 541.82ms long task, despite a simple text/article-and-comments core task.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-summary.json",
+        "evidence/thread-trace-summary.json",
+        "evidence/trackers-thread.json"
+      ],
+      "findingIds": [
+        "F-34"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "HAR transfers 2.36MB, with 1.17MB of images and 882KB of scripts; 30 third-party origins participate.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/thread-summary.json",
+        "evidence/trackers-thread.json"
+      ],
+      "findingIds": [
+        "F-35"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "The public content is crawler-visible (89% raw/rendered overlap), but no WebMCP/agentic tool surface was found despite a visible “生成AI企業パートナー募集” link on the error template.",
+      "pathIds": [
+        "error404"
+      ],
+      "artifacts": [
+        "evidence/thread-discoverability.json",
+        "evidence/404-probe.json"
+      ],
+      "findingIds": [
+        "F-36"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon-based applicability judgement against the check and site purpose.",
+      "evidence": "No summarisation or language-model feature is offered, and on-device inference is not required for the core browse/read/post journey.",
+      "reason": "No summarisation or language-model feature is offered, and on-device inference is not required for the core browse/read/post journey."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "After 10 open/close cycles, heap nodes rise from 508,125 to 733,629 and self size from 29.22MB to 36.05MB; m.fn.init objects rise from 134 to 20,954 and closures from 24,540 to 64,725. Same-session used heap rises about 4.18MB while DOM elements stay at 3,076.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-stamp.json",
+        "evidence/memory-metrics.json"
+      ],
+      "findingIds": [
+        "F-37"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "A fresh loaded thread heap contains 508,125 snapshot nodes and 29.22MB self size alongside 249 network requests and 55 scripts.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/thread-summary.json"
+      ],
+      "findingIds": [
+        "F-38"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "Direct visual/objective evidence from the referenced artifacts across representative paths.",
+      "evidence": "Across 10 open/close cycles the live DOM count stays 3,076, yet closures add 40,185 and m.fn.init wrappers add 20,820, consistent with retained listeners/wrappers rather than visible DOM growth.",
+      "pathIds": [
+        "thread"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-stamp.json",
+        "evidence/memory-metrics.json"
+      ],
+      "findingIds": [
+        "F-39"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-01",
+        "F-02",
+        "F-03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-05",
+        "F-06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-07",
+        "F-08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-09",
+        "F-10",
+        "F-11"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-12",
+        "F-13"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-14",
+        "F-15",
+        "F-16",
+        "F-17",
+        "F-18"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-19",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-24",
+        "F-25"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-26",
+        "F-27"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-28",
+        "F-29",
+        "F-30",
+        "F-31"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-32"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "Bakusai is deliberately a Japanese-language local forum; the audited pages declare lang=ja and no multilingual or bidi product surface was identified. The scoped public read/login journey is single-locale Japanese and no user-selectable locale, currency, or cross-locale data flow was identified. No scheduling, recurring-event, or cross-time-zone workflow appears in the exercised forum and authentication surfaces."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-33",
+        "F-34",
+        "F-35"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-36"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-37",
+        "F-38",
+        "F-39"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Public entry page and region-selection journey; represents the global landing template.",
+      "url": "https://bakusai.com/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "no JavaScript crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "area",
+      "description": "Tokyo area hub; represents the legacy frameset and regional content index.",
+      "url": "https://bakusai.com/areatop/acode=3/",
+      "conditions": [
+        "desktop"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "Entertainment thread listing; represents dense category/listing templates.",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "thread",
+      "description": "Representative public thread/detail and posting surface; used for performance, privacy, accessibility, metadata, and memory interaction tests.",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "no JavaScript crawler",
+        "10x stamp modal open/close"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Authentication form and recovery journey on the delegated zauth.net surface.",
+      "url": "https://bakusai.com/auth/login/",
+      "conditions": [
+        "desktop",
+        "viewport: 360x800",
+        "empty invalid submission",
+        "keyboard focus probe"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error404",
+      "description": "Unknown-route recovery state.",
+      "url": "https://bakusai.com/definitely-not-a-real-page-web-uplift",
+      "conditions": [
+        "viewport: 360x800"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The public forum is light-only.",
+      "evidence": "The dark-mode screenshot remains a white surface, and the CSS probe found no prefers-color-scheme, light-dark(), or color-scheme implementation.",
+      "artifacts": [
+        "evidence/thread-dark.png",
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Declare color-scheme and provide preference-driven dark tokens using the dark-mode guidance.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-02",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Motion continues when reduced motion is requested.",
+      "evidence": "Under prefers-reduced-motion: reduce, the probe still found a running 6.5-second animation and no reduced-motion media rule.",
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Disable non-essential repeating motion within prefers-reduced-motion: reduce.",
+      "effort": "small",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-03",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The interface has no high-contrast adaptation.",
+      "evidence": "The CSS probe found no prefers-contrast or forced-colors rule; the high-contrast capture retains the same dense, low-emphasis styling.",
+      "artifacts": [
+        "evidence/thread-high-contrast.png",
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Add forced-colors and prefers-contrast treatments that preserve control boundaries and focus.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-04",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Route and state changes are abrupt.",
+      "evidence": "The CSS probe found no view-transition usage across MPA navigation or the stamp modal state change.",
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Progressively enhance same- and cross-document changes with View Transitions and reduced-motion fallbacks.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-05",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Long pages provide no scroll-state guidance.",
+      "evidence": "The listing and thread are several screens long, but screenshots and CSS inspection show no progress indicator or scroll-reactive chrome.",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png"
+      ],
+      "suggestedFix": "Add a lightweight declarative scroll-progress/position affordance for long lists and threads.",
+      "effort": "medium",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "scroll-position-aware-elements",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-06",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Transient UI is manually positioned rather than anchored.",
+      "evidence": "The stamp overlay is custom DOM, while the CSS probe found no anchor positioning, popover, or dialog primitives.",
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Use popover/dialog and CSS anchor positioning where a transient control must stay attached to its trigger.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "anchored-positioning",
+      "guidanceId": "position-aware-tooltips",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-07",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The stamp overlay is an ad-hoc control.",
+      "evidence": "The thread exposes custom .js-stampmodal-open/.close controls, while the probe found zero dialog, popover, or details elements.",
+      "artifacts": [
+        "evidence/thread-static-probe.json",
+        "evidence/thread-mobile.png"
+      ],
+      "suggestedFix": "Replace the custom overlay with dialog or popover and declarative light-dismiss.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-08",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Advertising and chrome overwhelm the content.",
+      "evidence": "At 360px the desktop page is scaled to fit; the listing is dominated by banners, a dense image grid and side rail, while the thread places multiple ads before and beside the core discussion.",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png"
+      ],
+      "suggestedFix": "Reduce above-the-fold promotional units, defer secondary rails, and preserve a clear content column.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "defer-rendering-heavy-content",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-09",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Core forum templates render as shrunken desktop pages on mobile.",
+      "evidence": "At a requested 360x800 viewport, listing/thread layout metrics report innerWidth 1100 and a scale of about 0.327; screenshots show tiny desktop text and controls.",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png",
+        "evidence/thread-mobile-layout.json"
+      ],
+      "suggestedFix": "Use width=device-width,initial-scale=1 and fluid intrinsic layouts rather than a fixed 1100px canvas.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "responsive-no-horizontal-scroll",
+      "guidanceId": "css-layout",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-10",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Dense components do not adapt to their available width.",
+      "evidence": "The CSS probe found no container queries; the listing grid and side rail are merely scaled down at 360px.",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Refactor cards, rails, and post controls with container queries and intrinsic grid sizing.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-11",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Forum controls are too small and keyboard focus is not visible.",
+      "evidence": "Focused forum links report outline: none; many navigation targets are only 25px high, and Lighthouse fails target-size.",
+      "artifacts": [
+        "evidence/thread-static-probe.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "suggestedFix": "Provide :focus-visible styles, at least 44px touch targets, and non-hover equivalents.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-12",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The next useful action is buried in competing content.",
+      "evidence": "The mobile listing first viewport contains dense navigation, banners, tabs, a search strip, a large image grid and a side rail before a clear thread-reading action.",
+      "artifacts": [
+        "evidence/listing-mobile.png"
+      ],
+      "suggestedFix": "Prioritise the listing title, search/filter, and primary thread links; defer secondary modules.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "guidanceId": "scrollability-affordance-hints",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-13",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The error state is cryptic and lacks a direct recovery action.",
+      "evidence": "The unknown-route page says “ika error! click” and instructs users to use the browser Back button rather than offering a clear home/search/retry action.",
+      "artifacts": [
+        "evidence/404-probe.json"
+      ],
+      "suggestedFix": "Use a plain-language Japanese error heading and direct Home, Search, and Back links.",
+      "effort": "small",
+      "pathId": "error404",
+      "url": "https://bakusai.com/definitely-not-a-real-page-web-uplift",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-14",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The representative thread is slow and unstable.",
+      "evidence": "Mobile Lighthouse reports LCP 4.2s, TBT 990ms, CLS 0.12, and performance 0.45.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritise the LCP content, cut blocking third-party work, and reserve late content space.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F-15",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Late assets shift the page.",
+      "evidence": "Lighthouse reports CLS 0.12 and the image audit finds 90 of 100 images without both dimensions.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/listing-images.json",
+        "evidence/thread-mobile-layout.json"
+      ],
+      "suggestedFix": "Set intrinsic width/height or aspect-ratio for images and reserve ad/widget slots.",
+      "effort": "medium",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-16",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party scripting blocks the main thread.",
+      "evidence": "The trace records a 541.82ms long task and 503.94ms TBT; Lighthouse records 990ms TBT and a 22.5s time to interactive.",
+      "artifacts": [
+        "evidence/thread-trace-summary.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "suggestedFix": "Remove or defer non-essential scripts and split remaining work into sub-50ms tasks.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F-17",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The thread has an excessive dependency and transfer footprint.",
+      "evidence": "HAR records 249 requests and 2,357,529 transferred bytes, including 55 scripts and 153 images; Lighthouse flags cache, font, HTTP, dependency-tree and render-blocking insights.",
+      "artifacts": [
+        "evidence/thread-summary.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "suggestedFix": "Shorten critical chains, cache immutable assets, preload only true critical resources, and defer ads/widgets.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F-18",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page ships avoidable unused and legacy code.",
+      "evidence": "Lighthouse flags unused CSS, unused JavaScript, unminified CSS/JS, legacy JavaScript and heavy main-thread work.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-summary.json"
+      ],
+      "suggestedFix": "Use coverage to remove unused bundles and load optional features only on interaction.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-19",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Accessible names and semantics are incomplete.",
+      "evidence": "Lighthouse accessibility is 0.56 and fails image-alt, label, link-name, select-name, list/listitem, definition-list and frame-title; the runtime probe finds several untitled third-party iframes and 21 empty-name links.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-runtime-probe.json",
+        "evidence/listing-images.json"
+      ],
+      "suggestedFix": "Fix native semantics, labels, alternative text, frame titles and accessible names before adding ARIA.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-20",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Text contrast fails WCAG checks.",
+      "evidence": "Lighthouse fails the color-contrast audit on the thread, and the site has no contrast-preference adaptation.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-high-contrast.png"
+      ],
+      "suggestedFix": "Adjust foreground/background tokens to meet WCAG AA in all states.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-21",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Heading structure and focus treatment are unreliable.",
+      "evidence": "Lighthouse fails heading-order and tabindex; direct focus probes show outline: none on forum links.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Use a logical heading/landmark hierarchy and consistent :focus-visible rings in reading order.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-22",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "The core forum is unreadably small on mobile.",
+      "evidence": "The 1100px desktop layout is scaled to roughly 32.7% at 360px, producing tiny body and control text in the listing and thread captures.",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/thread-mobile.png",
+        "evidence/thread-mobile-layout.json"
+      ],
+      "suggestedFix": "Reflow to a true mobile content column with fluid type and comfortable line length.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "legible-text",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-23",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Reflow and target sizing fail on the core templates.",
+      "evidence": "Lighthouse fails meta-viewport and target-size, while the 360px captures preserve a desktop canvas rather than reflowing.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/listing-mobile.png"
+      ],
+      "suggestedFix": "Allow normal user scaling and reflow; enlarge interactive targets and avoid fixed-width layout assumptions.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-24",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Asset markup is unsized and inefficient.",
+      "evidence": "The image audit finds 90 missing dimensions, 43 oversized assets and 82 legacy-format images; Lighthouse fails unsized-images.",
+      "artifacts": [
+        "evidence/listing-images.json",
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "suggestedFix": "Add intrinsic dimensions, correct aspect ratios and modern responsive image sources.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F-25",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The page triggers platform hygiene diagnostics.",
+      "evidence": "Lighthouse flags deprecations, inspector issues, BFCache blockers, third-party cookies, and missing source-map quality.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json"
+      ],
+      "suggestedFix": "Resolve DevTools deprecations/inspector issues, remove BFCache blockers, and publish valid source maps for owned production bundles.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-26",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Mobile and link crawlability signals are incomplete.",
+      "evidence": "Lighthouse fails meta-viewport and crawlable-anchors; the runtime probe reports 7 anchors without href and 21 linked elements with no discernible text.",
+      "artifacts": [
+        "evidence/lighthouse-thread-summary.json",
+        "evidence/thread-runtime-probe.json"
+      ],
+      "suggestedFix": "Use a responsive viewport and real descriptive anchors for navigational actions.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility"
+    },
+    {
+      "id": "F-27",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The article template lacks structured data and has malformed social description content.",
+      "evidence": "The thread exposes zero JSON-LD blocks; og:description contains HTML-like “<div><imgsrc=...>” text rather than a clean summary.",
+      "artifacts": [
+        "evidence/thread-static-probe.json"
+      ],
+      "suggestedFix": "Add accurate DiscussionForumPosting/Article JSON-LD and plain-text Open Graph/Twitter descriptions.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-28",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Secure transport is undermined by missing defenses and insecure cookies.",
+      "evidence": "HTTPS is used, but CSP and HSTS are absent; all 13 observed first-party cookies lack Secure, including bakusai_session.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Set Secure on all HTTPS cookies, deploy HSTS and a nonce/hash-based CSP, and add nosniff.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "security"
+    },
+    {
+      "id": "F-29",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The thread has an extensive tracking footprint.",
+      "evidence": "The tracker probe sees 30 third-party origins and known Google Analytics, DoubleClick and Rubicon trackers; HAR records 249 requests.",
+      "artifacts": [
+        "evidence/trackers-thread.json",
+        "evidence/thread-summary.json"
+      ],
+      "suggestedFix": "Audit necessity, obtain meaningful consent where required, remove redundant trackers, and batch/defer analytics.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "security"
+    },
+    {
+      "id": "F-30",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Authentication does not offer a phishing-resistant passkey path.",
+      "evidence": "No permission prompt fired on load, but the delegated login probe finds password/OAuth options and no WebAuthn/passkey implementation.",
+      "artifacts": [
+        "evidence/login-static-probe.json"
+      ],
+      "suggestedFix": "Offer passkey registration and authentication alongside recovery-safe existing methods.",
+      "effort": "large",
+      "pathId": "login",
+      "url": "https://bakusai.com/auth/login/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkey-authentication",
+      "guidanceCategory": "security"
+    },
+    {
+      "id": "F-31",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Browser-enforced defensive policies are absent.",
+      "evidence": "Headers are missing clickjacking protection, Referrer-Policy, Permissions-Policy, CSP and HSTS.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Set frame-ancestors/X-Frame-Options, strict Referrer-Policy, scoped Permissions-Policy and HSTS.",
+      "effort": "medium",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "security"
+    },
+    {
+      "id": "F-32",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Unknown-route recovery is not actionable.",
+      "evidence": "The exercised 404 route renders “ika error! click” and relies on the browser back button instead of direct recovery choices.",
+      "artifacts": [
+        "evidence/404-probe.json"
+      ],
+      "suggestedFix": "Return an intentional 404 with plain language and direct Home, Search and retry paths.",
+      "effort": "small",
+      "pathId": "error404",
+      "url": "https://bakusai.com/definitely-not-a-real-page-web-uplift",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "guidanceId": "stabilize-reactive-state",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-33",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Image delivery wastes bytes and decoding work.",
+      "evidence": "Of 100 listing images, 82 use legacy formats, 43 are oversized, 40 lack srcset and 70 below-fold images are not lazy-loaded.",
+      "artifacts": [
+        "evidence/listing-images.json"
+      ],
+      "suggestedFix": "Generate AVIF/WebP responsive sources, size to display, and lazy-load below-fold media.",
+      "effort": "large",
+      "pathId": "listing",
+      "url": "https://bakusai.com/thr_tl/acode=3/ctgid=137/bid=1177/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance"
+    },
+    {
+      "id": "F-34",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Background and third-party work is disproportionate.",
+      "evidence": "The thread loads 249 requests from 33 origins and later executes a 541.82ms long task, despite a simple text/article-and-comments core task.",
+      "artifacts": [
+        "evidence/thread-summary.json",
+        "evidence/thread-trace-summary.json",
+        "evidence/trackers-thread.json"
+      ],
+      "suggestedFix": "Defer background fetches and ad/analytics processing until idle, visible, or explicitly needed.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "deprioritize-background-fetches",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-35",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party and media weight exceeds the value of the text thread.",
+      "evidence": "HAR transfers 2.36MB, with 1.17MB of images and 882KB of scripts; 30 third-party origins participate.",
+      "artifacts": [
+        "evidence/thread-summary.json",
+        "evidence/trackers-thread.json"
+      ],
+      "suggestedFix": "Set budgets for third-party requests/bytes and remove or delay units that do not support the current task.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-36",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Forum capabilities are not exposed as structured agent tools.",
+      "evidence": "The public content is crawler-visible (89% raw/rendered overlap), but no WebMCP/agentic tool surface was found despite a visible “生成AI企業パートナー募集” link on the error template.",
+      "artifacts": [
+        "evidence/thread-discoverability.json",
+        "evidence/404-probe.json"
+      ],
+      "suggestedFix": "Consider safe read/search/report tools with explicit schemas and confirmation for posting actions.",
+      "effort": "large",
+      "pathId": "error404",
+      "url": "https://bakusai.com/definitely-not-a-real-page-web-uplift",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "agentic-forms",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-37",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Repeated stamp-modal use retains a large amount of JavaScript state.",
+      "evidence": "After 10 open/close cycles, heap nodes rise from 508,125 to 733,629 and self size from 29.22MB to 36.05MB; m.fn.init objects rise from 134 to 20,954 and closures from 24,540 to 64,725. Same-session used heap rises about 4.18MB while DOM elements stay at 3,076.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-stamp.json",
+        "evidence/memory-metrics.json"
+      ],
+      "suggestedFix": "Profile the stamp-modal event path, bind handlers once, remove listeners on close, and release jQuery/object references.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "no-leak-under-repeated-interaction",
+      "guidanceId": "html",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-38",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "The baseline client footprint is heavy for a text thread.",
+      "evidence": "A fresh loaded thread heap contains 508,125 snapshot nodes and 29.22MB self size alongside 249 network requests and 55 scripts.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/thread-summary.json"
+      ],
+      "suggestedFix": "Reduce third-party scripts and lazy-initialise optional widgets to lower baseline heap and code populations.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "conditional-async-dependencies",
+      "guidanceCategory": "user-experience"
+    },
+    {
+      "id": "F-39",
+      "severity": "high",
+      "confidence": "medium",
+      "summary": "The modal interaction appears to accumulate handlers or retained wrappers.",
+      "evidence": "Across 10 open/close cycles the live DOM count stays 3,076, yet closures add 40,185 and m.fn.init wrappers add 20,820, consistent with retained listeners/wrappers rather than visible DOM growth.",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-stamp.json",
+        "evidence/memory-metrics.json"
+      ],
+      "suggestedFix": "Audit addEventListener/jQuery .on calls, use stable handler references, and unregister or abort listeners when the modal closes.",
+      "effort": "large",
+      "pathId": "thread",
+      "url": "https://bakusai.com/thr_res/acode=3/ctgid=137/bid=1177/tid=13390403/bk=1/",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "no-detached-dom-or-unbounded-listeners",
+      "guidanceId": "move-dom-element-without-losing-state",
+      "guidanceCategory": "user-experience"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-1",
+      "title": "Rebuild core forum templates as genuine responsive layouts",
+      "priority": 1,
+      "findingIds": [
+        "F-09",
+        "F-10",
+        "F-11",
+        "F-22",
+        "F-23"
+      ],
+      "guidanceId": "css-layout",
+      "status": "open"
+    },
+    {
+      "id": "T-2",
+      "title": "Reduce and defer advertising, third-party scripts, and unused code",
+      "priority": 2,
+      "findingIds": [
+        "F-08",
+        "F-14",
+        "F-16",
+        "F-17",
+        "F-18",
+        "F-29",
+        "F-34",
+        "F-35"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T-3",
+      "title": "Deploy secure cookie and browser header policies",
+      "priority": 3,
+      "findingIds": [
+        "F-28",
+        "F-29",
+        "F-31"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T-4",
+      "title": "Fix semantic structure, names, contrast, labels, focus, and target size",
+      "priority": 4,
+      "findingIds": [
+        "F-03",
+        "F-11",
+        "F-19",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-5",
+      "title": "Stop stamp-modal handler/wrapper accumulation",
+      "priority": 5,
+      "findingIds": [
+        "F-37",
+        "F-38",
+        "F-39"
+      ],
+      "guidanceId": "move-dom-element-without-losing-state",
+      "status": "open"
+    },
+    {
+      "id": "T-6",
+      "title": "Optimise and intrinsically size image delivery",
+      "priority": 6,
+      "findingIds": [
+        "F-15",
+        "F-24",
+        "F-33"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T-7",
+      "title": "Add preference-driven dark, reduced-motion, and contrast treatments",
+      "priority": 7,
+      "findingIds": [
+        "F-01",
+        "F-02",
+        "F-03"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T-8",
+      "title": "Simplify content hierarchy and error recovery",
+      "priority": 8,
+      "findingIds": [
+        "F-08",
+        "F-12",
+        "F-13",
+        "F-32"
+      ],
+      "guidanceId": "scrollability-affordance-hints",
+      "status": "open"
+    },
+    {
+      "id": "T-9",
+      "title": "Improve metadata and crawlable links",
+      "priority": 9,
+      "findingIds": [
+        "F-26",
+        "F-27"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T-10",
+      "title": "Offer passkey authentication",
+      "priority": 10,
+      "findingIds": [
+        "F-30"
+      ],
+      "guidanceId": "passkey-authentication",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T11-33-55-751Z"
+}

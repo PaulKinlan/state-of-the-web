@@ -1,0 +1,1305 @@
+{
+  "url": "https://m.happymh.com",
+  "auditedAt": "2026-07-28T04:04:22.295Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Entry-page recon was blocked by an HTTP 403 Cloudflare response that displays an upstream server-stopped message. No intended site page or journey was reachable, so this is retained as an incomplete blocked run.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The response is a Cloudflare-served Chinese error page, not enough evidence to identify the intended application."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "curl",
+    "DNS lookup",
+    "headers",
+    "har",
+    "discoverability",
+    "Modern Web Guidance catalog"
+  ],
+  "guidanceConsulted": [],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile entry capture showing only the upstream error response.",
+      "condition": "viewport: 390x844"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM contains only the Chinese server-stopped error and Cloudflare scripts.",
+      "condition": "default browser load"
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Link/form/heading recon: zero links, forms, and headings; error title only.",
+      "condition": "default browser load"
+    },
+    {
+      "type": "other",
+      "path": "evidence/curl-headers.txt",
+      "caption": "curl response headers show HTTP 403 served by Cloudflare.",
+      "condition": "direct HTTP request"
+    },
+    {
+      "type": "other",
+      "path": "evidence/dns.txt",
+      "caption": "DNS resolution confirms the host resolves to Cloudflare addresses.",
+      "condition": "DNS lookup"
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security-header capture of the 403 response; not treated as the intended app response.",
+      "condition": "default browser load"
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Network archive for the blocked entry load, including two 403 responses.",
+      "condition": "default browser load"
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Compact HAR summary: seven requests and two HTTP 403 responses.",
+      "condition": "default browser load"
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw and rendered discovery both received the unavailable response; raw fetch status 403.",
+      "condition": "JS and no-JS crawler comparison"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered unavailable response.",
+      "condition": "JavaScript enabled"
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler-view unavailable response.",
+      "condition": "JavaScript disabled"
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "Pinned Modern Web Guidance 0.0.172 catalog consulted before judgement stopped at the access blocker.",
+      "condition": "modern-web-guidance@0.0.172"
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Exact 58-pair atomic coverage manifest derived from principles.json.",
+      "condition": "catalog checksum recorded"
+    },
+    {
+      "type": "other",
+      "path": "evidence-plan.json",
+      "caption": "Per-check evidence plan, preserved even though execution stopped at entry-page recon.",
+      "condition": "planned before judgement"
+    },
+    {
+      "type": "other",
+      "path": "validation.log",
+      "caption": "Atomic coverage validator output records 58 blocked checks and the expected publication-gate failure.",
+      "condition": "post-report validation"
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to emulated preference screenshots and computed-style probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to interaction video, scroll, and animation probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to emulated preference screenshots and computed-style probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to interaction video, scroll, and animation probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to interaction video, scroll, and animation probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to interaction video, scroll, and animation probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to interaction video, scroll, and animation probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to interaction video, scroll, and animation probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile screenshot and DOM/layout recon as prerequisite to viewport, reflow, and focus probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile screenshot and DOM/layout recon as prerequisite to viewport, reflow, and focus probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile screenshot and DOM/layout recon as prerequisite to viewport, reflow, and focus probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile screenshot and DOM/layout recon as prerequisite to viewport, reflow, and focus probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to accessibility, document, console, and platform-hygiene probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted visual/DOM recon as prerequisite to emulated preference screenshots and computed-style probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to accessibility, document, console, and platform-hygiene probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile screenshot and DOM/layout recon as prerequisite to viewport, reflow, and focus probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted mobile screenshot and DOM/layout recon as prerequisite to viewport, reflow, and focus probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to accessibility, document, console, and platform-hygiene probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to accessibility, document, console, and platform-hygiene probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw fetch, rendered DOM, and discoverability capture as prerequisite to crawler/indexing checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw fetch, rendered DOM, and discoverability capture as prerequisite to crawler/indexing checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw fetch, rendered DOM, and discoverability capture as prerequisite to crawler/indexing checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw fetch, rendered DOM, and discoverability capture as prerequisite to crawler/indexing checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted document load, response-header inspection, and HAR capture as prerequisite to security/privacy checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted document load, response-header inspection, and HAR capture as prerequisite to security/privacy checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted document load, response-header inspection, and HAR capture as prerequisite to security/privacy checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted document load, response-header inspection, and HAR capture as prerequisite to security/privacy checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted raw fetch, rendered DOM, and discoverability capture as prerequisite to crawler/indexing checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to language, direction, formatting, and locale behavior inspection.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to language, direction, formatting, and locale behavior inspection.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to language, direction, formatting, and locale behavior inspection.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted page load and HAR capture as prerequisite to layout, trace, Lighthouse, image, and performance checks.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted rendered DOM recon as prerequisite to accessibility, document, console, and platform-hygiene probes.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted entry-page screenshot, rendered DOM, links/forms recon, and raw fetch as prerequisite to exercising this check on representative paths.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM recon as prerequisite to selecting a representative repeatable interaction for baseline/post heap comparison.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM recon as prerequisite to selecting a representative repeatable interaction for baseline/post heap comparison.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted DOM recon as prerequisite to selecting a representative repeatable interaction for baseline/post heap comparison.",
+      "evidence": "The target returned HTTP 403 from Cloudflare and rendered only “无法显示此网页，因为服务器停止响应。” (“This webpage cannot be displayed because the server stopped responding”), so the intended application, routes, controls, and authored behavior were unavailable.",
+      "reason": "The shared prerequisite entry-page recon was attempted, but the external HTTP 403/upstream-unavailable response prevented access to the actual site state required for this check.",
+      "pathIds": [
+        "entry"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-dom.json",
+        "evidence/curl-headers.txt",
+        "evidence/home-summary.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 registered checks are blocked because the intended application could not be reached behind the HTTP 403/upstream-unavailable response."
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry",
+      "description": "Entry-page recon intended to discover page archetypes and journeys; it returned only an HTTP 403/upstream-unavailable error. No further representative routes could be selected. Not covered: all intended content, listing/detail pages, forms, account/commercial flows, and interactive states because the entry response exposed no links or application UI.",
+      "url": "https://m.happymh.com/",
+      "conditions": [
+        "desktop browser load",
+        "viewport: 390x844",
+        "raw no-JS fetch",
+        "crawler comparison"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "wallClockSeconds": 65,
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-28T04-03-18-978Z"
+}

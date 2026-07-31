@@ -1,0 +1,2264 @@
+{
+  "url": "https://www.paramountplus.com",
+  "auditedAt": "2026-07-22T04:02:27.621Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete remote audit. Account flows returned reproducible 403 failures and are recorded as site issues rather than untested blockers.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Server-rendered landing plus Vue/Vuetify catalog/account assets",
+    "notes": "Geo-redirected to the en-GB site. Representative public acquisition, catalog, search and account destinations were exercised. Playback, authenticated library, billing cancellation after login, and title-detail/player templates were not covered because they require an account; the highest-risk unauthenticated account entry paths were covered and failed at the edge."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "lighthouse",
+    "heap-summary",
+    "plain-http-fetch",
+    "Modern Web Guidance search/retrieve"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "accessibility",
+    "performance",
+    "security",
+    "privacy",
+    "forms",
+    "html",
+    "css",
+    "css-layout",
+    "light-dismiss-a-dialog",
+    "declarative-dialog-popover-control",
+    "optimize-image-priority",
+    "break-up-long-tasks",
+    "webmcp",
+    "passkeys",
+    "efficient-background-processing"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Landing page at desktop size; consent dialog obscures the primary content.",
+      "condition": "desktop",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Landing page at 360x800; consent dialog occupies nearly the full viewport.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark preference capture, pixel-identical in size/content to the default capture.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-contrast.png",
+      "caption": "Higher-contrast preference capture; styling does not adapt.",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F02",
+        "F09"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile layout metrics: no overflow, but CLS 0.220 and one 193 ms long task.",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools performance trace for landing-page load.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP 2.79 s, five long tasks, 626 ms TBT.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR for landing-page load (64 requests, 4.80 MB transferred).",
+      "condition": "desktop load",
+      "findingIds": [
+        "F08",
+        "F14",
+        "F19"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network summary including 1.04 MB third-party transfer and heavy CSS/JS.",
+      "condition": "desktop load",
+      "findingIds": [
+        "F08",
+        "F14",
+        "F19"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered DOM comparison: 61% word coverage; not a JS shell.",
+      "condition": "JavaScript on/off",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Browser-rendered landing page.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler view retains title, H1, offer and CTA.",
+      "condition": "JavaScript disabled",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-headers.json",
+      "caption": "Security header probe.",
+      "condition": "main response",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-cookies.json",
+      "caption": "Cookie security probe.",
+      "condition": "fresh session",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-trackers.json",
+      "caption": "Third-party/tracker origin probe.",
+      "condition": "fresh session",
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Image dimensions, lazy loading, srcset and alt probe.",
+      "condition": "landing DOM",
+      "findingIds": [
+        "F09",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-secrets.json",
+      "caption": "Client secret-pattern scan; matches were reviewed as public client configuration.",
+      "condition": "landing DOM and scripts",
+      "findingIds": []
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse report: performance 39, accessibility 83, SEO 85.",
+      "condition": "mobile simulated load",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-summary.json",
+      "caption": "Compact Lighthouse category and failing-audit summary.",
+      "condition": "mobile simulated load",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/lighthouse-detail-summary.json",
+      "caption": "Focused accessibility, SEO, console, and unused-code evidence.",
+      "condition": "mobile simulated load",
+      "findingIds": [
+        "F09",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Navigation, headings, forms, dialogs and route recon.",
+      "condition": "landing DOM",
+      "findingIds": [
+        "F01",
+        "F06",
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-probe.json",
+      "caption": "Doctype, script loading, metadata, focus, service worker and WebMCP probe.",
+      "condition": "landing DOM",
+      "findingIds": [
+        "F08",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/css-feature-probe.json",
+      "caption": "2.71 MB CSS corpus searched for preference, transition, container and logical-property features.",
+      "condition": "landing stylesheets",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F17"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/pwa-probe.json",
+      "caption": "Manifest, service worker registration/controller and cache probe.",
+      "condition": "landing runtime",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline readable heap summary: 43.12 MB self size, 712,397 nodes.",
+      "condition": "landing after load",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-scroll.json",
+      "caption": "Post-scroll heap summary after 10 repeated top/bottom scroll cycles: +85,838 bytes (+0.2%).",
+      "condition": "10 repeated scroll cycles",
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/browse.png",
+      "caption": "Browse listing with consent interruption.",
+      "condition": "desktop fresh session",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/movies.png",
+      "caption": "Movies listing representative capture.",
+      "condition": "desktop fresh session",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search.png",
+      "caption": "Search surface obscured by consent interruption.",
+      "condition": "desktop fresh session",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/signup.png",
+      "caption": "Primary signup destination returns raw 403 Forbidden.",
+      "condition": "direct navigation",
+      "findingIds": [
+        "F06",
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-linked.png",
+      "caption": "Linked login destination returns raw 403 Forbidden.",
+      "condition": "direct navigation",
+      "findingIds": [
+        "F06",
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "Fetched robots policy.",
+      "condition": "plain HTTP fetch",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "/sitemap.xml returned an HTML page instead of XML.",
+      "condition": "plain HTTP fetch",
+      "findingIds": [
+        "F12"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The 2.71 MB stylesheet probe found zero prefers-color-scheme, prefers-reduced-motion, prefers-contrast, or forced-colors rules; dark and contrast captures are visually unchanged. Lighthouse also measured consent-link contrast at 3.58:1.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/home-dark.png",
+        "evidence/home-contrast.png",
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The 2.71 MB stylesheet probe found zero prefers-color-scheme, prefers-reduced-motion, prefers-contrast, or forced-colors rules; dark and contrast captures are visually unchanged. Lighthouse also measured consent-link contrast at 3.58:1.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/home-dark.png",
+        "evidence/home-contrast.png",
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The 2.71 MB stylesheet probe found zero prefers-color-scheme, prefers-reduced-motion, prefers-contrast, or forced-colors rules; dark and contrast captures are visually unchanged. Lighthouse also measured consent-link contrast at 3.58:1. Lighthouse scored accessibility 83: three content images lacked alt attributes, two consent links were 3.58:1 rather than 4.5:1, and heading order skipped from H1 to H3.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/home-dark.png",
+        "evidence/home-contrast.png",
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/home-images.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F02",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The fetched stylesheet corpus contained zero view-transition, animation-timeline/scroll-timeline, scroll-snap, or overscroll rules across landing and listing styles.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The fetched stylesheet corpus contained zero view-transition, animation-timeline/scroll-timeline, scroll-snap, or overscroll rules across landing and listing styles.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The fetched stylesheet corpus contained zero view-transition, animation-timeline/scroll-timeline, scroll-snap, or overscroll rules across landing and listing styles.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Browse/search captures show fixed header/category rails, while stylesheet inspection found no scroll-state container query, anchor positioning, or scroll timeline usage.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png",
+        "evidence/search.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative routes and visible/runtime capabilities.",
+      "evidence": "No tooltip, popover, or edge-positioned menu requiring an anchor was present in the representative unauthenticated surfaces.",
+      "pathIds": [
+        "landing"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "reason": "No tooltip, popover, or edge-positioned menu requiring an anchor was present in the representative unauthenticated surfaces."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Browse/search captures show fixed header/category rails, while stylesheet inspection found no scroll-state container query, anchor positioning, or scroll timeline usage.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png",
+        "evidence/search.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Desktop and 360x800 screenshots show a custom consent dialog covering roughly half to almost all of the viewport before interaction; it repeats on landing, browse, movies and search fresh sessions.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/browse.png",
+        "evidence/search.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Desktop and 360x800 screenshots show a custom consent dialog covering roughly half to almost all of the viewport before interaction; it repeats on landing, browse, movies and search fresh sessions.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/browse.png",
+        "evidence/search.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "After separating the consent interruption, screenshots show content-led hero and poster-grid layouts with restrained site chrome.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Mobile layout measured scrollWidth=clientWidth=360, horizontalOverflowPx=0, with viewport meta present.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Across 2.71 MB of fetched CSS the probe found zero @container rules and zero logical-property matches, despite reusable catalog cards and rails.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The focus probe found the visible logo and SIGN IN anchors computed with outline-style none, while primary CTA controls did expose solid outlines.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Crawler and browser captures clearly state “A MOUNTAIN OF ENTERTAINMENT”, price, trial and a prominent signup CTA.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Direct navigation to the landing-page signup and login links produced Varnish “Error 403 Forbidden / Error 54113” pages with no recovery action.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Direct navigation to the landing-page signup and login links produced Varnish “Error 403 Forbidden / Error 54113” pages with no recovery action. Signup and login requests showed raw Varnish 403/54113 pages with no retry, support link, preserved context or alternate path.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "findingIds": [
+        "F06",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse scored performance 39 with LCP 20.0 s, CLS 0.2 and TBT 320 ms; the independent mobile layout observer measured CLS 0.220 and the trace found 626 ms TBT across five long tasks.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-layout-mobile.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse scored performance 39 with LCP 20.0 s, CLS 0.2 and TBT 320 ms; the independent mobile layout observer measured CLS 0.220 and the trace found 626 ms TBT across five long tasks.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-layout-mobile.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse scored performance 39 with LCP 20.0 s, CLS 0.2 and TBT 320 ms; the independent mobile layout observer measured CLS 0.220 and the trace found 626 ms TBT across five long tasks. HAR measured 4.80 MB over 64 requests; Lighthouse estimated 850 KiB unused JS and 1,645 KiB unused CSS, including a 1.36 MB stylesheet that was 98.7% unused. Three parser-inserted classic scripts lacked async/defer.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-layout-mobile.json",
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "HAR measured 4.80 MB over 64 requests; Lighthouse estimated 850 KiB unused JS and 1,645 KiB unused CSS, including a 1.36 MB stylesheet that was 98.7% unused. Three parser-inserted classic scripts lacked async/defer.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "HAR measured 4.80 MB over 64 requests; Lighthouse estimated 850 KiB unused JS and 1,645 KiB unused CSS, including a 1.36 MB stylesheet that was 98.7% unused. Three parser-inserted classic scripts lacked async/defer.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse scored accessibility 83: three content images lacked alt attributes, two consent links were 3.58:1 rather than 4.5:1, and heading order skipped from H1 to H3.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/home-images.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse scored accessibility 83: three content images lacked alt attributes, two consent links were 3.58:1 rather than 4.5:1, and heading order skipped from H1 to H3.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/home-images.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse scored accessibility 83: three content images lacked alt attributes, two consent links were 3.58:1 rather than 4.5:1, and heading order skipped from H1 to H3. The focus probe found the visible logo and SIGN IN anchors computed with outline-style none, while primary CTA controls did expose solid outlines.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/home-images.json",
+        "evidence/home-mobile.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F09",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Desktop/mobile screenshots show readable body/hero text without clipping; the only measured contrast failures are separately recorded.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "The 360px reflow has no horizontal overflow, viewport scaling is allowed, and Lighthouse target-size/meta-viewport audits passed.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse captured a Redfast CORS failure, net::ERR_FAILED, and “om is not loaded yet!” console error from supertop JavaScript.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "All 22 inspected images lacked width/height, 17 below-fold images lacked loading=lazy and srcset, and HAR transferred 4.80 MB including 1.04 MB from third parties.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Lighthouse deprecation and BFCache audits passed; Notification permission remained default and no prompt fired on load.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "DOM recon found a descriptive unique title and meta description on the public landing page.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Lighthouse SEO found four non-crawlable anchors, including Manage Cookies and Legal & Support using javascript:void(0).",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The page has title, description, canonical and server-rendered H1, but /sitemap.xml returned a 257 KB HTML document rather than XML, robots.txt declares no Sitemap line, and no JSON-LD was present.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/sitemap.xml",
+        "evidence/robots.txt",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The page has title, description, canonical and server-rendered H1, but /sitemap.xml returned a 257 KB HTML document rather than XML, robots.txt declares no Sitemap line, and no JSON-LD was present.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/sitemap.xml",
+        "evidence/robots.txt",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The HTTPS response lacked CSP, HSTS, X-Content-Type-Options, Referrer-Policy and Permissions-Policy. Six of seven observed cookies were not Secure; several also used SameSite=None.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The consent dialog names 313 partners. A fresh load contacted 10 third-party origins and transferred 1.04 MB third-party data across 30 requests, with New Relic detected as a known tracker.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The linked login route returned a raw 403 page, while the landing runtime exposed no WebAuthn/passkey affordance; no permission prompt fired on load.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/login-linked.png",
+        "evidence/platform-probe.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The HTTPS response lacked CSP, HSTS, X-Content-Type-Options, Referrer-Policy and Permissions-Policy. Six of seven observed cookies were not Secure; several also used SameSite=None.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Discoverability capture found a 200 raw document with title, H1, offer and CTA and 61% rendered-word coverage; it is not a JS shell.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Representative listing/search captures rendered stable underlying content and the landing page used a controlled consent dialog; route failures are recorded separately.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Runtime probe found a standalone manifest with maskable icons plus an active controlling service worker and Workbox precache.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Signup and login requests showed raw Varnish 403/54113 pages with no retry, support link, preserved context or alternate path.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The document correctly uses lang=en-gb, but the stylesheet probe found zero sampled logical properties and 2,039 physical left/right declarations; dir is not explicitly set.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/recon.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "The en-GB landing page renders GBP pricing as £4.99 and carries en-gb language metadata; no other locale-sensitive data was present.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative routes and visible/runtime capabilities.",
+      "evidence": "No user-visible event times, schedules, or time-zone-sensitive dates occur in the audited unauthenticated templates.",
+      "pathIds": [
+        "landing"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "reason": "No user-visible event times, schedules, or time-zone-sensitive dates occur in the audited unauthenticated templates."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "The visible consent surface gives Accept and Reject equal size/prominence, and the acquisition copy states price, auto-renewal, cancellation and trial terms.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Signup and login requests showed raw Varnish 403/54113 pages with no retry, support link, preserved context or alternate path.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Pricing and cancellation wording are visible on the landing page, but both signup and login CTAs terminate in raw 403 pages, preventing review, completion, cancellation/account entry, or recovery.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability-crawler.png",
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "Pricing and cancellation wording are visible on the landing page, but both signup and login CTAs terminate in raw 403 pages, preventing review, completion, cancellation/account entry, or recovery.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability-crawler.png",
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "All 22 inspected images lacked width/height, 17 below-fold images lacked loading=lazy and srcset, and HAR transferred 4.80 MB including 1.04 MB from third parties.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "HAR measured 4.80 MB over 64 requests; Lighthouse estimated 850 KiB unused JS and 1,645 KiB unused CSS, including a 1.36 MB stylesheet that was 98.7% unused. Three parser-inserted classic scripts lacked async/defer. The consent dialog names 313 partners. A fresh load contacted 10 third-party origins and transferred 1.04 MB third-party data across 30 requests, with New Relic detected as a known tracker.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/platform-probe.json",
+        "evidence/home-trackers.json",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F08",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The consent dialog names 313 partners. A fresh load contacted 10 third-party origins and transferred 1.04 MB third-party data across 30 requests, with New Relic detected as a known tracker. All 22 inspected images lacked width/height, 17 below-fold images lacked loading=lazy and srcset, and HAR transferred 4.80 MB including 1.04 MB from third parties.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png",
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F14",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative routes and visible/runtime capabilities.",
+      "evidence": "No declared agent-facing intent or transactional tool surface was found; this emerging contextual capability is not currently applicable.",
+      "pathIds": [
+        "landing"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "reason": "No declared agent-facing intent or transactional tool surface was found; this emerging contextual capability is not currently applicable."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon of representative routes and visible/runtime capabilities.",
+      "evidence": "The audited streaming acquisition/catalog experience has no summarisation or language-model task that clearly warrants on-device inference.",
+      "pathIds": [
+        "landing"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "reason": "The audited streaming acquisition/catalog experience has no summarisation or language-model task that clearly warrants on-device inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "After ten representative top/bottom scroll cycles, heap self size grew only 85,838 bytes (+0.2%); closure and native counts did not grow.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Cross-checked objective primitive/tool output against representative screenshots and DOM/runtime probes.",
+      "evidence": "The readable baseline heap summary reported 43.12 MB self size and 712,397 heap nodes. Repeating scroll ten times added only 85,838 bytes (+0.2%), so no repeated-scroll leak was observed, but the initial footprint remains disproportionate.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Active DOM/runtime probe plus representative visual/tool evidence.",
+      "evidence": "Baseline/post heap summaries showed native count decreased by 98 and closure count decreased by 5 after repeated scrolling; no accumulating detached/listener signature appeared.",
+      "pathIds": [
+        "landing",
+        "browse",
+        "search"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F02",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F09",
+        "F21"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14",
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F08",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged not applicable for this unauthenticated public streaming surface."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "landing",
+      "description": "Public acquisition landing page and primary subscription CTA; represents the marketing entry template.",
+      "url": "https://www.paramountplus.com/gb/",
+      "conditions": [
+        "desktop 780x493",
+        "viewport 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "no JavaScript crawler"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "browse",
+      "description": "Series browse/listing template; represents content discovery and carousel navigation.",
+      "url": "https://www.paramountplus.com/gb/browse/",
+      "conditions": [
+        "desktop",
+        "fresh consent state"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "movies",
+      "description": "Movies listing template; represents the second major catalog archetype.",
+      "url": "https://www.paramountplus.com/gb/movies/",
+      "conditions": [
+        "desktop",
+        "fresh consent state"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search surface; represents a primary interactive discovery journey.",
+      "url": "https://www.paramountplus.com/gb/search/",
+      "conditions": [
+        "desktop",
+        "fresh consent state"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "signup",
+      "description": "Primary subscription/signup journey reached from the landing-page CTA.",
+      "url": "https://www.paramountplus.com/gb/account/user-flow/f-upsell/",
+      "conditions": [
+        "direct navigation in Chrome"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "login",
+      "description": "Returning-subscriber authentication journey linked from the landing page.",
+      "url": "https://www.paramountplus.com/account/flow/f-upsell/action/login/",
+      "conditions": [
+        "direct navigation in Chrome"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "summary": "The consent experience obscures the content on every fresh page load.",
+      "evidence": "Desktop and 360x800 screenshots show a custom consent dialog covering roughly half to almost all of the viewport before interaction; it repeats on landing, browse, movies and search fresh sessions.",
+      "suggestedFix": "Replace the wall-like presentation with a compact, accessible consent surface that preserves meaningful page context, remains easy to reject, and uses native dialog semantics and light-dismiss where legally appropriate.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/browse.png",
+        "evidence/search.png"
+      ],
+      "effort": "medium",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "summary": "The stylesheet does not respond to color, motion, or contrast preferences.",
+      "evidence": "The 2.71 MB stylesheet probe found zero prefers-color-scheme, prefers-reduced-motion, prefers-contrast, or forced-colors rules; dark and contrast captures are visually unchanged. Lighthouse also measured consent-link contrast at 3.58:1.",
+      "suggestedFix": "Declare color-scheme, use preference media queries/light-dark() for surfaces, add reduced-motion overrides, and preserve visible controls in contrast/forced-colors modes.",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/home-dark.png",
+        "evidence/home-contrast.png",
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "effort": "medium",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F03",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "summary": "Navigation and carousel interactions do not use declarative transition or scroll primitives.",
+      "evidence": "The fetched stylesheet corpus contained zero view-transition, animation-timeline/scroll-timeline, scroll-snap, or overscroll rules across landing and listing styles.",
+      "suggestedFix": "Use View Transitions for route/state changes and CSS scroll snap/scroll-driven animations for catalog rails, with reduced-motion fallbacks.",
+      "guidanceId": "css",
+      "guidanceCategory": "css",
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png"
+      ],
+      "effort": "large",
+      "pathId": "browse",
+      "url": "https://www.paramountplus.com/gb/browse/"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "summary": "Navigation chrome lacks modern scroll-state and attention cues.",
+      "evidence": "Browse/search captures show fixed header/category rails, while stylesheet inspection found no scroll-state container query, anchor positioning, or scroll timeline usage.",
+      "suggestedFix": "Add scroll-state-aware header/rail affordances and clear active/overflow markers using CSS container scroll-state queries where supported.",
+      "guidanceId": "css-layout",
+      "guidanceCategory": "css-layout",
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png",
+        "evidence/search.png"
+      ],
+      "effort": "medium",
+      "pathId": "browse",
+      "url": "https://www.paramountplus.com/gb/browse/"
+    },
+    {
+      "id": "F05",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "summary": "The layout relies on global/physical CSS rather than component-level adaptation.",
+      "evidence": "Across 2.71 MB of fetched CSS the probe found zero @container rules and zero logical-property matches, despite reusable catalog cards and rails.",
+      "suggestedFix": "Define container contexts for cards/rails and adapt them with size/style queries, retaining viewport fallbacks.",
+      "guidanceId": "css-layout",
+      "guidanceCategory": "css-layout",
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/browse.png"
+      ],
+      "effort": "large",
+      "pathId": "browse",
+      "url": "https://www.paramountplus.com/gb/browse/"
+    },
+    {
+      "id": "F06",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "summary": "The primary signup and returning-user login destinations fail with raw 403 pages.",
+      "evidence": "Direct navigation to the landing-page signup and login links produced Varnish “Error 403 Forbidden / Error 54113” pages with no recovery action.",
+      "suggestedFix": "Fix edge/CDN routing and bot policy for linked account paths; provide a branded recoverable error page and continuously test CTA-to-account flow from supported regions.",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "effort": "large",
+      "pathId": "signup",
+      "url": "https://www.paramountplus.com/gb/account/user-flow/f-upsell/"
+    },
+    {
+      "id": "F07",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "summary": "Load performance and visual stability are poor under measured conditions.",
+      "evidence": "Lighthouse scored performance 39 with LCP 20.0 s, CLS 0.2 and TBT 320 ms; the independent mobile layout observer measured CLS 0.220 and the trace found 626 ms TBT across five long tasks.",
+      "suggestedFix": "Reserve space for late content, prioritise the LCP asset, split/defer long tasks, and remeasure on mobile until LCP and CLS are in the good range.",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/lighthouse-summary.json",
+        "evidence/home-layout-mobile.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F08",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "summary": "The landing page ships a disproportionately heavy CSS/JS payload.",
+      "evidence": "HAR measured 4.80 MB over 64 requests; Lighthouse estimated 850 KiB unused JS and 1,645 KiB unused CSS, including a 1.36 MB stylesheet that was 98.7% unused. Three parser-inserted classic scripts lacked async/defer.",
+      "suggestedFix": "Route-split account/upsell bundles, purge unused framework CSS, defer noncritical scripts and load reCAPTCHA only at the form step.",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "summary": "The consent and content markup has concrete accessibility failures.",
+      "evidence": "Lighthouse scored accessibility 83: three content images lacked alt attributes, two consent links were 3.58:1 rather than 4.5:1, and heading order skipped from H1 to H3.",
+      "suggestedFix": "Give informative images alt text (or alt=\"\" when decorative), fix consent-link colors to 4.5:1, and restore a logical heading hierarchy.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json",
+        "evidence/home-images.json",
+        "evidence/home-mobile.png"
+      ],
+      "effort": "medium",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F10",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "summary": "The page logs runtime/network errors during a normal load.",
+      "evidence": "Lighthouse captured a Redfast CORS failure, net::ERR_FAILED, and “om is not loaded yet!” console error from supertop JavaScript.",
+      "suggestedFix": "Remove or correctly configure the failing Redfast request and sequence consent/analytics initialization so unavailable dependencies do not log errors.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "effort": "small",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F11",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "summary": "Several visible footer controls are non-crawlable javascript: links.",
+      "evidence": "Lighthouse SEO found four non-crawlable anchors, including Manage Cookies and Legal & Support using javascript:void(0).",
+      "suggestedFix": "Use buttons for actions and real href links for navigation/disclosures; preserve descriptive link text.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/lighthouse-detail-summary.json"
+      ],
+      "effort": "small",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F12",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "summary": "Indexing metadata is partly sound, but sitemap and entity signals are incomplete.",
+      "evidence": "The page has title, description, canonical and server-rendered H1, but /sitemap.xml returned a 257 KB HTML document rather than XML, robots.txt declares no Sitemap line, and no JSON-LD was present.",
+      "suggestedFix": "Publish a valid XML sitemap and reference it from robots.txt; add accurate Organization/WebSite and offer/product structured data that matches visible content.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/sitemap.xml",
+        "evidence/robots.txt",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "medium",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F13",
+      "severity": "critical",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "summary": "Essential browser security headers are absent and most cookies lack Secure.",
+      "evidence": "The HTTPS response lacked CSP, HSTS, X-Content-Type-Options, Referrer-Policy and Permissions-Policy. Six of seven observed cookies were not Secure; several also used SameSite=None.",
+      "suggestedFix": "Deploy CSP in report-only then enforcement, add HSTS/nosniff/referrer/permissions policies, and mark all HTTPS cookies Secure with the narrowest viable SameSite and HttpOnly settings.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "artifacts": [
+        "evidence/home-headers.json",
+        "evidence/home-cookies.json"
+      ],
+      "effort": "medium",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "summary": "The pre-choice privacy and third-party footprint is excessive.",
+      "evidence": "The consent dialog names 313 partners. A fresh load contacted 10 third-party origins and transferred 1.04 MB third-party data across 30 requests, with New Relic detected as a known tracker.",
+      "suggestedFix": "Block nonessential vendors until consent, reduce the vendor list and SDK surface, batch necessary analytics, and enforce a third-party byte/request budget.",
+      "guidanceId": "privacy",
+      "guidanceCategory": "privacy",
+      "artifacts": [
+        "evidence/home-trackers.json",
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ],
+      "effort": "large",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "summary": "No usable modern authentication path could be verified.",
+      "evidence": "The linked login route returned a raw 403 page, while the landing runtime exposed no WebAuthn/passkey affordance; no permission prompt fired on load.",
+      "suggestedFix": "Restore the login route and offer passkey authentication/reauthentication alongside properly autofilled fallback credentials.",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "passkeys",
+      "artifacts": [
+        "evidence/login-linked.png",
+        "evidence/platform-probe.json"
+      ],
+      "effort": "large",
+      "pathId": "login",
+      "url": "https://www.paramountplus.com/account/flow/f-upsell/action/login/"
+    },
+    {
+      "id": "F16",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "network-and-http-failure-states",
+      "summary": "Account route failures fall through to an unbranded infrastructure error.",
+      "evidence": "Signup and login requests showed raw Varnish 403/54113 pages with no retry, support link, preserved context or alternate path.",
+      "suggestedFix": "Map edge failures to a branded error state with retry, support and return-home actions; preserve the intended account action after recovery.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "artifacts": [
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "effort": "medium",
+      "pathId": "signup",
+      "url": "https://www.paramountplus.com/gb/account/user-flow/f-upsell/"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "summary": "Locale metadata is present, but the CSS is not writing-mode resilient.",
+      "evidence": "The document correctly uses lang=en-gb, but the stylesheet probe found zero sampled logical properties and 2,039 physical left/right declarations; dir is not explicitly set.",
+      "suggestedFix": "Set dir=ltr for this locale and migrate reusable layout spacing/positioning to inline/block logical properties with RTL regression tests.",
+      "guidanceId": "css",
+      "guidanceCategory": "css",
+      "artifacts": [
+        "evidence/css-feature-probe.json",
+        "evidence/recon.json"
+      ],
+      "effort": "large",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "summary": "Commercial/account continuity is not reliable or recoverable.",
+      "evidence": "Pricing and cancellation wording are visible on the landing page, but both signup and login CTAs terminate in raw 403 pages, preventing review, completion, cancellation/account entry, or recovery.",
+      "suggestedFix": "Fix the linked account routes and validate signup, sign-in, plan disclosure, confirmation and cancellation end-to-end with clear commitments and reversible choices.",
+      "guidanceId": "forms",
+      "guidanceCategory": "forms",
+      "artifacts": [
+        "evidence/home-discoverability-crawler.png",
+        "evidence/signup.png",
+        "evidence/login-linked.png"
+      ],
+      "effort": "large",
+      "pathId": "signup",
+      "url": "https://www.paramountplus.com/gb/account/user-flow/f-upsell/"
+    },
+    {
+      "id": "F19",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "summary": "Asset delivery wastes bandwidth and risks shifts.",
+      "evidence": "All 22 inspected images lacked width/height, 17 below-fold images lacked loading=lazy and srcset, and HAR transferred 4.80 MB including 1.04 MB from third parties.",
+      "suggestedFix": "Add intrinsic dimensions, responsive srcset/sizes and modern formats; lazy-load below-fold catalog art and enforce per-template media/third-party budgets.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-summary.json"
+      ],
+      "effort": "large",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "summary": "The initial memory footprint is high for a mostly static acquisition page.",
+      "evidence": "The readable baseline heap summary reported 43.12 MB self size and 712,397 heap nodes. Repeating scroll ten times added only 85,838 bytes (+0.2%), so no repeated-scroll leak was observed, but the initial footprint remains disproportionate.",
+      "suggestedFix": "Reduce shipped framework/consent code and DOM duplication, then profile retained constructors and detached nodes after consent and route interactions.",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-scroll.json"
+      ],
+      "effort": "large",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    },
+    {
+      "id": "F21",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "summary": "Keyboard focus is not consistently visible.",
+      "evidence": "The focus probe found the visible logo and SIGN IN anchors computed with outline-style none, while primary CTA controls did expose solid outlines.",
+      "suggestedFix": "Apply a consistent high-contrast :focus-visible indicator to every interactive element and retain adequate target sizes.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "artifacts": [
+        "evidence/platform-probe.json"
+      ],
+      "effort": "small",
+      "pathId": "landing",
+      "url": "https://www.paramountplus.com/gb/"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Restore signup/login and branded recovery",
+      "priority": 1,
+      "findingIds": [
+        "F06",
+        "F16",
+        "F18"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Deploy security headers and secure cookie defaults",
+      "priority": 2,
+      "findingIds": [
+        "F13"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Cut critical CSS/JS and improve Core Web Vitals",
+      "priority": 3,
+      "findingIds": [
+        "F07",
+        "F08",
+        "F20"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Reduce pre-consent third-party processing",
+      "priority": 4,
+      "findingIds": [
+        "F14"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Make consent compact, semantic and accessible",
+      "priority": 5,
+      "findingIds": [
+        "F01",
+        "F02",
+        "F09"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Fix responsive image delivery",
+      "priority": 6,
+      "findingIds": [
+        "F19"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Repair keyboard focus and document semantics",
+      "priority": 7,
+      "findingIds": [
+        "F09",
+        "F21"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Publish sitemap and structured metadata",
+      "priority": 8,
+      "findingIds": [
+        "F11",
+        "F12"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Adopt preference and component-responsive CSS",
+      "priority": 9,
+      "findingIds": [
+        "F02",
+        "F05",
+        "F17"
+      ],
+      "guidanceId": "css-layout",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Remove console errors and add modern interaction cues",
+      "priority": 10,
+      "findingIds": [
+        "F03",
+        "F04",
+        "F10"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Restore and modernise authentication",
+      "priority": 11,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1800,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-22T04-02-27-621Z"
+}

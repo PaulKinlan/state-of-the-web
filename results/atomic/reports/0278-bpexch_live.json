@@ -1,0 +1,2028 @@
+{
+  "url": "https://bpexch.live",
+  "auditedAt": "2026-07-26T03:05:53.367Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Complete atomic audit of the sole unauthenticated archetype. Authenticated exchange routes were not covered because no credentials were supplied.",
+  "page": {
+    "appType": "mpa",
+    "framework": "ASP.NET-style server-rendered form with jQuery/Bootstrap-era frontend",
+    "notes": "Root redirects to /Users/Login. Public navigation exposes only the login page; authenticated betting/exchange surfaces are outside this run."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "DOM/CSS inspection",
+    "evaluate probes",
+    "layout metrics",
+    "trace",
+    "HAR",
+    "Lighthouse",
+    "discoverability raw-HTML comparison",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap summaries"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "same-document-transitions",
+    "shrinking-header-on-scroll",
+    "light-dismiss-a-dialog",
+    "fluid-scaling",
+    "improve-text-layout-and-legibility",
+    "identify-inp-causes",
+    "accessibility",
+    "css",
+    "security",
+    "flicker-free-client-side-ab-testing",
+    "translator",
+    "search-hidden-content",
+    "deliver-optimized-decorative-images",
+    "webmcp",
+    "manage-recurring-intervals"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home.png",
+      "caption": "Default desktop login",
+      "condition": "default",
+      "findingIds": [
+        "F05",
+        "F17"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/mobile.png",
+      "caption": "Login at 360x800",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03",
+        "F12"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/mobile-layout.json",
+      "caption": "Mobile overflow, CLS and long-task observation",
+      "condition": "viewport: 360x800",
+      "findingIds": [
+        "F03",
+        "F12"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/dark.png",
+      "caption": "prefers-color-scheme dark",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/high-contrast.png",
+      "caption": "prefers-contrast more",
+      "condition": "prefers-contrast: more",
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "Reduced-motion animation and transition probe",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and CSS",
+      "condition": "default",
+      "findingIds": [
+        "F09",
+        "F11",
+        "F14",
+        "F17",
+        "F18",
+        "F19",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/page-probe.json",
+      "caption": "Metadata, control, script and feature probe",
+      "condition": "default",
+      "findingIds": [
+        "F09",
+        "F11",
+        "F14",
+        "F17",
+        "F18",
+        "F19",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/interaction-probe.json",
+      "caption": "Focus, feature and form attribute probe",
+      "condition": "default",
+      "findingIds": [
+        "F01",
+        "F04",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/load-trace.json",
+      "caption": "DevTools load trace",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/load-trace-summary.json",
+      "caption": "Load timing and main-thread summary",
+      "condition": "default",
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/load.har",
+      "caption": "Network archive",
+      "condition": "default",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F16",
+        "F20"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/load-summary.json",
+      "caption": "Network weight, third-party and blocking summary",
+      "condition": "default",
+      "findingIds": [
+        "F08",
+        "F09",
+        "F16",
+        "F20"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse performance, accessibility, best practices and SEO",
+      "condition": "default",
+      "findingIds": [
+        "F04",
+        "F07",
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Raw HTML versus rendered analysis",
+      "condition": "default",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Public links, robots.txt, sitemap and route recon",
+      "condition": "default",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-rendered view",
+      "condition": "default",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "No-JS crawler view",
+      "condition": "default",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header inspection",
+      "condition": "default",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie inspection",
+      "condition": "default",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker inspection",
+      "condition": "default",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Client secret scan",
+      "condition": "default",
+      "findingIds": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit",
+      "condition": "default",
+      "findingIds": [
+        "F10",
+        "F12",
+        "F20"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/form-validation.json",
+      "caption": "Required-field and recovery-link probe",
+      "condition": "default",
+      "findingIds": [
+        "F05",
+        "F06",
+        "F19",
+        "F21"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/error-route.json",
+      "caption": "Unknown-route response",
+      "condition": "default",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline heap summary",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "Heap summary after ten input cycles",
+      "condition": "default",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/memory-metrics.json",
+      "caption": "DOM and JS heap metrics",
+      "condition": "default",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "confidence": "high",
+      "method": "HINT (not mandatory): a screenshot or computed background under an emulated prefers-color-scheme: dark condition will reveal whether surfaces re-tint; the page CSS / a color-scheme declaration is corroborating evidence",
+      "evidence": "Dark and prefers-contrast screenshots are pixel-identical to the default; the CSS probe found no color-scheme, prefers-color-scheme, forced-colors, or prefers-contrast rules.",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ],
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/high-contrast.png",
+        "evidence/reduced-motion.json",
+        "evidence/interaction-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "confidence": "high",
+      "method": "HINT: a transition video, or an in-page probe of getAnimations()/computed animation under an emulated prefers-reduced-motion: reduce condition, can show whether motion stops",
+      "evidence": "Under prefers-reduced-motion: reduce, links and the Login button still report 0.4s transitions; no reduced-motion rule exists.",
+      "status": "issues",
+      "findingIds": [
+        "F02"
+      ],
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "confidence": "high",
+      "method": "HINT: a screenshot under emulated prefers-contrast: more / forced-colors, or an axe/contrast probe, can show whether controls and text survive",
+      "evidence": "Dark and prefers-contrast screenshots are pixel-identical to the default; the CSS probe found no color-scheme, prefers-color-scheme, forced-colors, or prefers-contrast rules.",
+      "status": "issues",
+      "findingIds": [
+        "F01"
+      ],
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/high-contrast.png",
+        "evidence/reduced-motion.json",
+        "evidence/interaction-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "confidence": "high",
+      "method": "HINT: a transition video of a route/state change shows whether it animates; the page source / ::view-transition usage corroborates",
+      "evidence": "CSS inspection found no view-transition declarations or API use; form state is swapped through conventional DOM/CSS behavior.",
+      "status": "issues",
+      "findingIds": [
+        "F21"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/form-validation.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "confidence": "high",
+      "method": "HINT: source/CSS inspection for animation-timeline: scroll()/view(); a long-task / scroll-handler probe can flag the main-thread anti-pattern",
+      "evidence": "The login page has no scroll-linked animation or scrollytelling surface.",
+      "status": "not-applicable",
+      "reason": "The login page has no scroll-linked animation or scrollytelling surface.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "confidence": "high",
+      "method": "HINT: CSS inspection for scroll-snap / overscroll-behavior / physics-based easing vs custom pointermove listeners",
+      "evidence": "The login form exposes no gesture-driven or carousel interaction.",
+      "status": "not-applicable",
+      "reason": "The login form exposes no gesture-driven or carousel interaction.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "confidence": "high",
+      "method": "HINT: a transition video of scrolling, or CSS inspection for scroll-state container queries",
+      "evidence": "This single fixed login viewport has no scrolling navigation chrome.",
+      "status": "not-applicable",
+      "reason": "This single fixed login viewport has no scrolling navigation chrome.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "confidence": "high",
+      "method": "HINT: CSS inspection for anchor-name / position-anchor / position-try on overlays; a screenshot of an open overlay near a viewport edge can show drift",
+      "evidence": "No tooltip, menu, popover, or positioned overlay is present.",
+      "status": "not-applicable",
+      "reason": "No tooltip, menu, popover, or positioned overlay is present.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "confidence": "high",
+      "method": "HINT: CSS inspection for ::highlight / scroll-marker; a transition video can show whether attention is cued after navigation",
+      "evidence": "Default and mobile screenshots present one centered form and a single prominent Login action with no competing navigation.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "confidence": "high",
+      "method": "HINT: a screenshot on load, or a DOM probe for full-viewport overlays present before interaction",
+      "evidence": "Load screenshots and DOM show no popup, banner, consent wall, or full-viewport overlay obscuring the form.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "confidence": "high",
+      "method": "HINT: DOM/source inspection for popover / <dialog> / <details> vs custom overlay divs with manual dismiss handling",
+      "evidence": "No overlay, dialog, disclosure, or rich custom control is present.",
+      "status": "not-applicable",
+      "reason": "No overlay, dialog, disclosure, or rich custom control is present.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "confidence": "high",
+      "method": "HINT: a screenshot plus layout metrics can show the proportion of the viewport given to chrome vs content",
+      "evidence": "The first viewport is dominated by the compact login form; only a minimal decorative background and footer line remain.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "confidence": "high",
+      "method": "HINT: layout metrics (scrollWidth vs innerWidth) and a screenshot at an emulated narrow mobile viewport reveal overflow",
+      "evidence": "At 360x800, layout reported scrollWidth=clientWidth=360, zero overflow, viewport meta present, and the full form remained visible.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "confidence": "high",
+      "method": "HINT: CSS inspection for @container / container-type; a computed-style probe of the same component in a wide vs narrow container shows whether it adapts",
+      "evidence": "CSS inspection found no container-type or @container rules, although the card currently fits at 360px.",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ],
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "confidence": "high",
+      "method": "HINT: a focus probe (focus an element, read the computed outline) or an axe target-size check; a screenshot of a focused control corroborates",
+      "evidence": "Programmatically focusing both inputs and both links produced outline-style none and no box-shadow; the button shadow is always present and is not a distinct focus indicator.",
+      "status": "issues",
+      "findingIds": [
+        "F04"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "confidence": "high",
+      "method": "HINT: screenshot the first viewport and key scrolled states; inspect heading structure, nav labels, button text, and visual hierarchy; a task walkthrough can show whether the next action is obvious",
+      "evidence": "The title and first viewport clearly present username/password entry and one Login button.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/form-validation.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "confidence": "high",
+      "method": "HINT: run the flow manually with screenshots/DOM snapshots at each step; compare expected vs actual path length; inspect form requirements, navigation continuity, and blockers",
+      "evidence": "The DOM and screenshot show only Username, Password, and Login. Both anchors have empty text; one points to #. No forgot-password or account-help action is visible.",
+      "status": "issues",
+      "findingIds": [
+        "F05"
+      ],
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/form-validation.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "confidence": "high",
+      "method": "HINT: exercise network delay/failure, invalid input, empty data and success states; screenshot the state messaging and recovery controls; inspect whether browser history and focus remain sensible",
+      "evidence": "Required fields rely only on browser validation with no live status region, while an unknown route returns Chrome’s generic HTTP 404 page with no site navigation or recovery action.",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ],
+      "artifacts": [
+        "evidence/form-validation.json",
+        "evidence/error-route.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "confidence": "high",
+      "method": "HINT: Lighthouse reports LCP/CLS/TBT directly and the model may run it; layout metrics + a layout-shift observer + a long-task observer (the evidence primitives) give the same signal first-party",
+      "evidence": "Lighthouse measured LCP 5.2s and TTI 5.2s (performance 0.81). A separate trace measured LCP 1.12s, so the regression is variable but reproducible in the throttled Lighthouse condition.",
+      "status": "issues",
+      "findingIds": [
+        "F07"
+      ],
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "confidence": "high",
+      "method": "HINT: the layout primitive's CLS observer captures shifts; a transition video of the first seconds shows content jumping",
+      "evidence": "Mobile layout observation measured CLS 0.0015625 with one negligible shift.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "confidence": "high",
+      "method": "HINT: the layout primitive records long tasks; a heap summary shows the object population; Lighthouse reports TBT",
+      "evidence": "Trace and layout evidence recorded zero long tasks and 0ms total blocking time.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/lighthouse.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "confidence": "high",
+      "method": "HINT: a HAR summary can reveal cache headers, redirects, render-blocking candidates, weight offenders and dependency shape; a trace/Lighthouse insight report can corroborate LCP discovery, render-blocking, font-display and document latency",
+      "evidence": "HAR recorded 808,043 transferred bytes, 38 requests, 11 stylesheets, 15 scripts, ten parser-inserted VeryHigh-priority stylesheets, and 328,015 font bytes.",
+      "status": "issues",
+      "findingIds": [
+        "F08"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "confidence": "high",
+      "method": "HINT: Lighthouse/trace/code-coverage style evidence can flag unused JS/CSS, duplicated JavaScript and legacy code; a HAR summary shows third-party byte cost and request count",
+      "evidence": "The DOM/HAR show two jQuery files, two Moment files, plus Select2, daterangepicker, countdowntime, Bootstrap, Popper, WURFL, and UA parser for a two-field form.",
+      "status": "issues",
+      "findingIds": [
+        "F09"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "confidence": "high",
+      "method": "HINT: axe-core (injectable via the evaluate primitive) or Lighthouse's a11y audits enumerate these; a DOM probe of the accessibility-relevant attributes is a first-party alternative",
+      "evidence": "Lighthouse accessibility scored 0.80: the BP image has no alt and its 120px link plus a second href=# link have no discernible name. The form has no explicit visible labels beyond placeholders.",
+      "status": "issues",
+      "findingIds": [
+        "F10"
+      ],
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json",
+        "evidence/images.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "confidence": "high",
+      "method": "HINT: axe contrast rules, a Lighthouse contrast audit, or an in-page probe computing contrast ratios from computed colours",
+      "evidence": "Lighthouse color-contrast audit passed and default/high-contrast screenshots keep text and controls legible.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "confidence": "high",
+      "method": "HINT: axe/Lighthouse structural audits; a focus-walk probe (tab through, read activeElement + computed outline) is a first-party alternative",
+      "evidence": "Programmatically focusing both inputs and both links produced outline-style none and no box-shadow; the button shadow is always present and is not a distinct focus indicator. DOM inspection found zero headings and no main/nav/header landmark; focus probes found outline none on all focusable controls.",
+      "status": "issues",
+      "findingIds": [
+        "F11",
+        "F04"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "confidence": "high",
+      "method": "HINT: a screenshot of body and heading text, plus CSS inspection for text-wrap / text alignment / font fallback handling",
+      "evidence": "Desktop and mobile screenshots show unclipped 16px field text with ample spacing and no cramped wrapping.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "confidence": "high",
+      "method": "HINT: Lighthouse/axe target-size, meta-viewport and media-caption audits are useful signals; screenshots at narrow and zoomed conditions plus DOM/media inspection can corroborate",
+      "evidence": "Viewport permits scaling, the 360px layout has no overflow, fields are 45px high, and Login is 50px high; no media requires captions.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json",
+        "evidence/home.png",
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "confidence": "high",
+      "method": "HINT: capture Runtime/Log CDP events, or a probe that reads collected errors; Lighthouse reports this too",
+      "evidence": "Lighthouse errors-in-console audit passed with no logged browser errors.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "confidence": "high",
+      "method": "HINT: a DOM/source probe for doctype/charset/img dimensions; CSS inspection for repetition; Lighthouse best-practices audits cover the rest",
+      "evidence": "The images primitive reports one image with no width/height, no alt, no srcset, and JPG format; the small observed CLS was 0.0016.",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ],
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "confidence": "high",
+      "method": "HINT: Lighthouse best-practices audits and DevTools inspector/deprecation signals can surface these; DOM/source probes can verify paste handlers and prompt timing",
+      "evidence": "Lighthouse passed BFCache, deprecations, inspector issues, and third-party-cookie audits; no permission prompt appeared.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "confidence": "high",
+      "method": "HINT: a DOM probe reads <title> and meta[name=description]; Lighthouse SEO audits cover the same ground",
+      "evidence": "DOM and raw HTML contain title “BpExch Login” and meta description “BpExch - Web Exchange”.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/recon.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "confidence": "high",
+      "method": "HINT: a DOM probe for anchor hrefs, viewport meta, and robots; Lighthouse SEO audits corroborate",
+      "evidence": "The fetched robots.txt contains a later `User-agent: *` and `Disallow: /`, overriding the earlier allow intent for general crawlers. The page itself has no robots meta block.",
+      "status": "issues",
+      "findingIds": [
+        "F13"
+      ],
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/recon.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "confidence": "high",
+      "method": "HINT: inspect response status and headers, <link rel=canonical>, hreflang links, robots meta, robots.txt and sitemap.xml; Lighthouse SEO audits cover several of these",
+      "evidence": "DOM inspection found no rel=canonical. The root redirects to /Users/Login, making the preferred URL ambiguous to crawlers.",
+      "status": "issues",
+      "findingIds": [
+        "F14"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "confidence": "high",
+      "method": "HINT: inspect JSON-LD/microdata and social preview tags against visible content; Lighthouse has a manual structured-data audit, and ad-hoc probes can parse schema.org blocks",
+      "evidence": "A private account login is not an article, product, event, or other rich entity needing structured/share metadata.",
+      "status": "not-applicable",
+      "reason": "A private account login is not an article, product, event, or other rich entity needing structured/share metadata.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "confidence": "high",
+      "method": "HINT: inspect response headers / page protocol via an evaluate probe or the network layer; Lighthouse best-practices flags HTTPS and CSP issues",
+      "evidence": "Headers evidence found no CSP, HSTS, X-Content-Type-Options, Referrer-Policy, or Permissions-Policy. The AntiForgery.WebExchange cookie is HttpOnly and SameSite=Strict but not Secure.",
+      "status": "issues",
+      "findingIds": [
+        "F15"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "confidence": "high",
+      "method": "HINT: inspect network requests and third-party origins; a probe of analytics/beacon calls",
+      "evidence": "Tracker evidence recorded WURFL and Cloudflare Insights; HAR shows four third-party requests and 15,374 transferred bytes, while no known advertising tracker or exposed secret was found.",
+      "status": "issues",
+      "findingIds": [
+        "F16"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "confidence": "high",
+      "method": "HINT: a probe for permission requests fired on load; source inspection for passkey / WebAuthn / navigator.credentials usage in auth flows",
+      "evidence": "The only sign-in controls are username and password; source inspection found no WebAuthn/passkey affordance. No permission prompt occurred on load.",
+      "status": "issues",
+      "findingIds": [
+        "F17"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/home.png"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "confidence": "high",
+      "method": "HINT: inspect response headers and browser security state; Lighthouse/DevTools security audits can corroborate HSTS, clickjacking, Trusted Types, origin isolation and third-party cookie findings",
+      "evidence": "Headers evidence found no CSP, HSTS, X-Content-Type-Options, Referrer-Policy, or Permissions-Policy. The AntiForgery.WebExchange cookie is HttpOnly and SameSite=Strict but not Secure.",
+      "status": "issues",
+      "findingIds": [
+        "F15"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "confidence": "high",
+      "method": "HINT: load with scripting disabled or compare a no-JS fetch of the HTML against the rendered page; check for Baseline-aware fallbacks in source",
+      "evidence": "Discoverability evidence shows the complete login form in raw server HTML and the crawler screenshot matches the browser view; it is not a JS shell.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/recon.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "confidence": "high",
+      "method": "HINT: exercise menus near viewport edges with a screenshot; a probe of async/visibility behaviour",
+      "evidence": "The only form state uses native required validation; no overlay, asynchronous shell, or fragile positioned menu is present.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "confidence": "high",
+      "method": "HINT: a probe for a service worker registration and a web app manifest; test behaviour offline",
+      "evidence": "An authenticated live exchange is intrinsically online; offline transaction capability is not appropriate and no install intent is declared.",
+      "status": "not-applicable",
+      "reason": "An authenticated live exchange is intrinsically online; offline transaction capability is not appropriate and no install intent is declared.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "confidence": "high",
+      "method": "HINT: simulate failed fetches/offline mode or inspect representative 404/500 routes; screenshots and DOM snapshots of error/loading/empty states show whether recovery is possible",
+      "evidence": "Required fields rely only on browser validation with no live status region, while an unknown route returns Chrome’s generic HTTP 404 page with no site navigation or recovery action.",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ],
+      "artifacts": [
+        "evidence/form-validation.json",
+        "evidence/error-route.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "confidence": "high",
+      "method": "HINT: a DOM probe for <html lang>/dir and CSS inspection for logical vs physical properties",
+      "evidence": "The page has html lang=en, but CSS inspection found no logical inline/block properties and no dir declaration.",
+      "status": "issues",
+      "findingIds": [
+        "F18"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "confidence": "high",
+      "method": "HINT: source inspection for Intl.* usage vs hand-rolled formatting; a probe of rendered dates/numbers under a different locale",
+      "evidence": "The public login displays no dates, numbers, currencies, or durations.",
+      "status": "not-applicable",
+      "reason": "The public login displays no dates, numbers, currencies, or durations.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "confidence": "high",
+      "method": "HINT: source inspection for time-zone-aware date handling vs naive local Date math",
+      "evidence": "The public login displays no time or event data; its hidden UTC offset does not establish a user-visible time flow.",
+      "status": "not-applicable",
+      "reason": "The public login displays no time or event data; its hidden UTC offset does not establish a user-visible time flow.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "confidence": "high",
+      "method": "HINT: a screenshot of consent/upsell/cancel flows; source inspection for declarative button actions vs misleading controls",
+      "evidence": "The public screenshot shows no consent wall, upsell, forced continuity wording, disguised advertisement, or preselected option.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/form-validation.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "confidence": "high",
+      "method": "HINT: exercise a form, submit invalid input, and observe timing and clarity of errors via a screenshot or a :user-invalid / aria-invalid probe",
+      "evidence": "Both fields validate after submit/reportValidity and expose clear native messages “Please fill in this field.” rather than premature errors.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/form-validation.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "confidence": "high",
+      "method": "HINT: source/DOM inspection for autocomplete attributes on form fields; a probe of autofill affordances",
+      "evidence": "The username and password inputs both expose an empty autocomplete value.",
+      "status": "issues",
+      "findingIds": [
+        "F19"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/form-validation.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "confidence": "high",
+      "method": "HINT: walkthrough checkout/subscription/auth/account flows when present; screenshot pricing, confirmation, cancellation and reauthentication states; inspect passkey/autocomplete support for sign-in and payment",
+      "evidence": "The DOM and screenshot show only Username, Password, and Login. Both anchors have empty text; one points to #. No forgot-password or account-help action is visible. The only sign-in controls are username and password; source inspection found no WebAuthn/passkey affordance. No permission prompt occurred on load.",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F17"
+      ],
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/form-validation.json",
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "confidence": "high",
+      "method": "HINT: inspect transferred image bytes vs displayed size; source inspection for modern formats and resolution handling",
+      "evidence": "HAR transferred 808KB, including 328KB of fonts and 50KB of images; the sole content image is JPEG without responsive sources, while numerous decorative/vendor assets load eagerly.",
+      "status": "issues",
+      "findingIds": [
+        "F20"
+      ],
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/load.har",
+        "evidence/images.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "confidence": "high",
+      "method": "HINT: a long-task / network probe for background fetches and processing while idle or backgrounded",
+      "evidence": "The DOM/HAR show two jQuery files, two Moment files, plus Select2, daterangepicker, countdowntime, Bootstrap, Popper, WURFL, and UA parser for a two-field form.",
+      "status": "issues",
+      "findingIds": [
+        "F09"
+      ],
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "confidence": "high",
+      "method": "HINT: a HAR summary shows third-party bytes, font/media weight and caching; screenshots/video reveal autoplay and decorative media; trace/layout evidence shows whether media/animation keeps work running",
+      "evidence": "Tracker evidence recorded WURFL and Cloudflare Insights; HAR shows four third-party requests and 15,374 transferred bytes, while no known advertising tracker or exposed secret was found. HAR transferred 808KB, including 328KB of fonts and 50KB of images; the sole content image is JPEG without responsive sources, while numerous decorative/vendor assets load eagerly.",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F20"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json",
+        "evidence/load-summary.json",
+        "evidence/load.har",
+        "evidence/images.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "confidence": "high",
+      "method": "HINT: source inspection for WebMCP / agentic-tool registration and agent-readable affordances",
+      "evidence": "No agent-facing intent is declared for this private authenticated exchange; the emerging capability is an opportunity, not a baseline failure.",
+      "status": "not-applicable",
+      "reason": "No agent-facing intent is declared for this private authenticated exchange; the emerging capability is an opportunity, not a baseline failure.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "confidence": "high",
+      "method": "HINT: source inspection for built-in AI (language model / summariser) usage",
+      "evidence": "The two-field login has no summarisation or language-model task that would benefit from on-device inference.",
+      "status": "not-applicable",
+      "reason": "The two-field login has no summarisation or language-model task that would benefit from on-device inference.",
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "confidence": "medium",
+      "method": "HINT (not mandatory): compare heap snapshots for retained growth - a baseline, then one taken after repeating the interaction with `--interact` about 10x (the memory-tracer methodology: baseline -> repeat -> post -> compare)",
+      "evidence": "After ten representative focus/input/clear cycles, heap self size rose only 155,812 bytes (1.7%) and closures by 12, consistent with bounded runtime variation rather than unbounded retention.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "confidence": "medium",
+      "method": "HINT: a single `heap` summary's totals (nodeCount, totalSelfSizeBytes, constructor population) plus Performance.getMetrics (Nodes, JSHeapUsedSize) give the current footprint to judge against the page's purpose",
+      "evidence": "The page has 75 DOM elements, about 4.1MB used JS heap via performance.memory, and an 8.94MB snapshot self-size baseline, proportionate to a small page.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "confidence": "medium",
+      "method": "HINT: the `heap` summary by constructor (Detached* nodes) compared across a before/after pair shows a growing detached-DOM population; an `evaluate` probe can sample listener/timer counts (e.g",
+      "evidence": "Neither heap summary lists a Detached* constructor among retained populations; after ten cycles closure count changed only 5,077 to 5,089 and object count 2,555 to 2,580.",
+      "status": "pass",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot",
+        "evidence/memory-metrics.json"
+      ],
+      "pathIds": [
+        "public-login"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11",
+        "F04"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15",
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F19",
+        "F05",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F20",
+        "F09",
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "No agent-facing intent is declared for this private authenticated exchange; the emerging capability is an opportunity, not a baseline failure. The two-field login has no summarisation or language-model task that would benefit from on-device inference."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "public-login",
+      "description": "Root redirect and sole public login archetype; covers authentication entry, invalid required-field state, mobile/reflow, preferences, crawler/no-JS rendering, load/network/security, unknown-route recovery, and repeated input interaction. Authenticated exchange, account, betting, and transaction routes were not covered because credentials were not provided.",
+      "url": "https://bpexch.live/Users/Login",
+      "conditions": [
+        "default desktop",
+        "viewport 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-contrast: more",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus",
+        "empty required-field validation",
+        "no-JS crawler",
+        "unknown URL",
+        "ten repeated input cycles"
+      ],
+      "result": "issues"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The login surface ignores dark and high-contrast preferences.",
+      "evidence": "Dark and prefers-contrast screenshots are pixel-identical to the default; the CSS probe found no color-scheme, prefers-color-scheme, forced-colors, or prefers-contrast rules.",
+      "suggestedFix": "Declare color-scheme and define preference-aware surface, text, border, and control colors with tested forced-colors fallbacks.",
+      "artifacts": [
+        "evidence/dark.png",
+        "evidence/high-contrast.png",
+        "evidence/reduced-motion.json",
+        "evidence/interaction-probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F02",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Transitions remain enabled when reduced motion is requested.",
+      "evidence": "Under prefers-reduced-motion: reduce, links and the Login button still report 0.4s transitions; no reduced-motion rule exists.",
+      "suggestedFix": "Disable or substantially shorten non-essential transitions inside @media (prefers-reduced-motion: reduce).",
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F03",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The component only adapts through viewport rules, not its container.",
+      "evidence": "CSS inspection found no container-type or @container rules, although the card currently fits at 360px.",
+      "suggestedFix": "Give the reusable login card a containment context and use container queries for internal spacing/type changes.",
+      "artifacts": [
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F04",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "web-quality",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus is not visibly indicated.",
+      "evidence": "Programmatically focusing both inputs and both links produced outline-style none and no box-shadow; the button shadow is always present and is not a distinct focus indicator.",
+      "suggestedFix": "Add a high-contrast :focus-visible indicator with sufficient area and do not remove the browser outline without a replacement.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F05",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "guidanceCategory": "web-quality",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The only public flow is a password login with no visible recovery, registration, help, or cancellation path.",
+      "evidence": "The DOM and screenshot show only Username, Password, and Login. Both anchors have empty text; one points to #. No forgot-password or account-help action is visible.",
+      "suggestedFix": "Provide clearly labelled recovery/help and account onboarding routes, preserve context, and offer passkey sign-in where accounts support it.",
+      "artifacts": [
+        "evidence/home.png",
+        "evidence/form-validation.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F06",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-system-state-and-recovery",
+      "guidanceId": "persistent-toast-notifications",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Failure and recovery coverage is incomplete.",
+      "evidence": "Required fields rely only on browser validation with no live status region, while an unknown route returns Chrome’s generic HTTP 404 page with no site navigation or recovery action.",
+      "suggestedFix": "Add an accessible inline error summary/status region and a branded 404 state with retry, home, and support actions.",
+      "artifacts": [
+        "evidence/form-validation.json",
+        "evidence/error-route.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F07",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "guidanceCategory": "web-quality",
+      "severity": "high",
+      "confidence": "medium",
+      "summary": "Cold-load LCP is slow in Lighthouse.",
+      "evidence": "Lighthouse measured LCP 5.2s and TTI 5.2s (performance 0.81). A separate trace measured LCP 1.12s, so the regression is variable but reproducible in the throttled Lighthouse condition.",
+      "suggestedFix": "Reduce the critical dependency chain and test under mobile throttling until LCP is consistently within 2.5s.",
+      "artifacts": [
+        "evidence/load-trace-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-preload-priority",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "A tiny login page has an excessive render-blocking and font payload.",
+      "evidence": "HAR recorded 808,043 transferred bytes, 38 requests, 11 stylesheets, 15 scripts, ten parser-inserted VeryHigh-priority stylesheets, and 328,015 font bytes.",
+      "suggestedFix": "Inline or bundle only critical login CSS, subset/self-host WOFF2 fonts, and defer/remove non-critical libraries.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Duplicate and unrelated libraries are shipped on the login route.",
+      "evidence": "The DOM/HAR show two jQuery files, two Moment files, plus Select2, daterangepicker, countdowntime, Bootstrap, Popper, WURFL, and UA parser for a two-field form.",
+      "suggestedFix": "Build a route-specific bundle, remove duplicate jQuery/Moment and libraries unused by the login form, and prefer platform APIs.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F10",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "web-quality",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Key controls and imagery lack accessible names.",
+      "evidence": "Lighthouse accessibility scored 0.80: the BP image has no alt and its 120px link plus a second href=# link have no discernible name. The form has no explicit visible labels beyond placeholders.",
+      "suggestedFix": "Add an appropriate logo alt/name, remove or name empty links, and provide persistent programmatic labels for username and password.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json",
+        "evidence/images.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F11",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "web-quality",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page has no heading or main landmark and no visible focus treatment.",
+      "evidence": "DOM inspection found zero headings and no main/nav/header landmark; focus probes found outline none on all focusable controls.",
+      "suggestedFix": "Add a descriptive h1 within main, retain a logical landmark structure, and implement visible :focus-visible styles.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/lighthouse.json",
+        "evidence/interaction-probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F12",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The logo omits intrinsic dimensions and uses a legacy JPEG.",
+      "evidence": "The images primitive reports one image with no width/height, no alt, no srcset, and JPG format; the small observed CLS was 0.0016.",
+      "suggestedFix": "Add width and height, alt semantics, and serve an SVG or appropriately compressed AVIF/WebP where raster output is required.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/mobile.png",
+        "evidence/mobile-layout.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F13",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "robots.txt ultimately blocks all crawling.",
+      "evidence": "The fetched robots.txt contains a later `User-agent: *` and `Disallow: /`, overriding the earlier allow intent for general crawlers. The page itself has no robots meta block.",
+      "suggestedFix": "Remove the blanket wildcard disallow if this public login/brand surface is intended to appear in search, and verify with a robots tester.",
+      "artifacts": [
+        "evidence/discoverability.json",
+        "evidence/discoverability-rendered.png",
+        "evidence/discoverability-crawler.png",
+        "evidence/recon.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F14",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "guidanceId": "html",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The public login has no canonical indexing signal.",
+      "evidence": "DOM inspection found no rel=canonical. The root redirects to /Users/Login, making the preferred URL ambiguous to crawlers.",
+      "suggestedFix": "Choose the intended public URL and add a self-referencing canonical, keeping redirects and robots policy consistent.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F15",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "web-quality",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The authentication page lacks baseline browser security controls.",
+      "evidence": "Headers evidence found no CSP, HSTS, X-Content-Type-Options, Referrer-Policy, or Permissions-Policy. The AntiForgery.WebExchange cookie is HttpOnly and SameSite=Strict but not Secure.",
+      "suggestedFix": "Set a nonce/hash-based CSP, HSTS, nosniff, Referrer-Policy and Permissions-Policy; mark all HTTPS cookies Secure.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F16",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The bare login route contacts unnecessary third parties.",
+      "evidence": "Tracker evidence recorded WURFL and Cloudflare Insights; HAR shows four third-party requests and 15,374 transferred bytes, while no known advertising tracker or exposed secret was found.",
+      "suggestedFix": "Remove device-detection/analytics calls from authentication until needed, or document and minimize their data collection.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json",
+        "evidence/trackers.json",
+        "evidence/secrets.json",
+        "evidence/load-summary.json",
+        "evidence/load.har"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F17",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Authentication is password-only with no phishing-resistant option.",
+      "evidence": "The only sign-in controls are username and password; source inspection found no WebAuthn/passkey affordance. No permission prompt occurred on load.",
+      "suggestedFix": "Offer WebAuthn/passkey authentication and account recovery alongside password fallback.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/home.png"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F18",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-internationalised",
+      "principleCheckId": "lang-dir-and-logical-properties",
+      "guidanceId": "translator",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The document language is set, but the CSS is not writing-mode resilient.",
+      "evidence": "The page has html lang=en, but CSS inspection found no logical inline/block properties and no dir declaration.",
+      "suggestedFix": "Use logical properties for spacing/positioning and set/derive direction so translated RTL layouts remain usable.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F19",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Sign-in fields omit autocomplete tokens.",
+      "evidence": "The username and password inputs both expose an empty autocomplete value.",
+      "suggestedFix": "Use autocomplete=username and autocomplete=current-password, and add the corresponding WebAuthn token when passkeys are available.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/form-validation.json"
+      ],
+      "effort": "small"
+    },
+    {
+      "id": "F20",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "web-quality",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The asset budget is disproportionate to the two-field page.",
+      "evidence": "HAR transferred 808KB, including 328KB of fonts and 50KB of images; the sole content image is JPEG without responsive sources, while numerous decorative/vendor assets load eagerly.",
+      "suggestedFix": "Set a small route budget, subset fonts, optimize the background/logo, and avoid loading unrelated component assets.",
+      "artifacts": [
+        "evidence/load-summary.json",
+        "evidence/load.har",
+        "evidence/images.json"
+      ],
+      "effort": "medium"
+    },
+    {
+      "id": "F21",
+      "pathId": "public-login",
+      "url": "https://bpexch.live/Users/Login",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "web-quality",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "The interactive form has no transition treatment for state changes.",
+      "evidence": "CSS inspection found no view-transition declarations or API use; form state is swapped through conventional DOM/CSS behavior.",
+      "suggestedFix": "Use a same-document View Transition for meaningful login state changes such as pending, error, and recovery panels, while honoring reduced motion.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/page-probe.json",
+        "evidence/form-validation.json"
+      ],
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Harden the authentication response and cookie policies",
+      "priority": 1,
+      "findingIds": [
+        "F15"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Make login accessible with names, landmarks, and visible focus",
+      "priority": 2,
+      "findingIds": [
+        "F04",
+        "F10",
+        "F11"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Add recovery routes, passkeys, and correct sign-in autocomplete",
+      "priority": 3,
+      "findingIds": [
+        "F05",
+        "F06",
+        "F17",
+        "F19"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Strip the login route to a small critical bundle",
+      "priority": 4,
+      "findingIds": [
+        "F07",
+        "F08",
+        "F09",
+        "F20"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Respect theme, contrast, and reduced-motion preferences",
+      "priority": 5,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Fix crawler/indexing signals",
+      "priority": 6,
+      "findingIds": [
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Modernize and dimension the logo asset",
+      "priority": 7,
+      "findingIds": [
+        "F12",
+        "F20"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Use logical and component-responsive CSS",
+      "priority": 8,
+      "findingIds": [
+        "F03",
+        "F18"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Minimize third-party calls on authentication",
+      "priority": 9,
+      "findingIds": [
+        "F16"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Add progressive state transitions to the login flow",
+      "priority": 10,
+      "findingIds": [
+        "F21"
+      ],
+      "guidanceId": "same-document-transitions",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 900,
+    "pathCount": 1,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-26T03-05-53-367Z"
+}

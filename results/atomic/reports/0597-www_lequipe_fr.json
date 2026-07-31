@@ -1,0 +1,2009 @@
+{
+  "url": "https://www.lequipe.fr",
+  "auditedAt": "2026-07-21T20:16:44.173Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit of six representative routes/flows. Source code was not provided; authored internals were judged from rendered DOM/CSS and active browser evidence.",
+  "page": {
+    "appType": "hybrid",
+    "framework": "Vue-style scoped rendered markup",
+    "notes": "Large SSR public sports-news MPA/hybrid with consent/subscription gateway, article schema metadata, account forms and a service worker."
+  },
+  "evidenceUsed": [
+    "screenshots",
+    "DOM+computed CSS",
+    "evaluate probes",
+    "layout metrics",
+    "DevTools trace",
+    "HAR network capture",
+    "discoverability raw HTML comparison",
+    "Lighthouse",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets scan",
+    "heap snapshots"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "component-specific-light-dark-theme",
+    "adapt-scrollbar-to-contrast-preferences",
+    "css",
+    "scroll-entry-exit-effects",
+    "carousel-slide-effects",
+    "accessibility",
+    "position-aware-tooltips",
+    "pull-to-reveal",
+    "declarative-dialog-popover-control",
+    "html",
+    "persistent-app-tours",
+    "scroll-position-aware-elements",
+    "required-field-feedback",
+    "language-model",
+    "performance",
+    "break-up-long-tasks",
+    "defer-rendering-heavy-content",
+    "accessible-error-announcement",
+    "deliver-optimized-decorative-images",
+    "calculate-with-intrinsic-sizes",
+    "search-hidden-content",
+    "passkey-reauthentication",
+    "passkeys",
+    "passkey-authentication",
+    "summarizer",
+    "efficient-background-processing",
+    "coordinate-global-events",
+    "capture-location-agnostic-data",
+    "calculate-event-differentials",
+    "autofill-sign-up-form",
+    "autofill-sign-in-form",
+    "validate-input-after-interaction",
+    "agentic-forms",
+    "agentic-javascript-tools",
+    "webmcp",
+    "defer-work-until-scroll-ends",
+    "sequence-distributed-events",
+    "persistent-top-layer-ui"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The dark-mode screenshot is pixel-identical in treatment to the light capture: a white full-screen surface remains under prefers-color-scheme: dark.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The reduced-motion probe reports 18 running pulse-19bfe654 animations, each 3000ms and infinite, while the media query matches.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-MOTION"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Lighthouse color-contrast audit fails and the overall accessibility score is 0.84.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-CONTRAST"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The rendered CSS/DOM probe found no active View Transition declarations or API usage on a highly navigational news site.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-MODERN-UI"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "No scroll-linked decorative/scrollytelling effect was observed, so there is no scroll-handler implementation to judge.",
+      "reason": "No scroll-linked decorative/scrollytelling effect was observed, so there is no scroll-handler implementation to judge."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "DOM/CSS contains native scroll-snap and overscroll-behavior declarations rather than evidence of a required custom pointer gesture.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Visible mobile tab bar and conventional page chrome remain available across long content; no broken scroll state was observed.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "No tooltip or edge-positioned popover was present in the sampled primary surfaces.",
+      "reason": "No tooltip or edge-positioned popover was present in the sampled primary surfaces."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Descriptive sport, Chrono and Directs links plus clear active navigation provide orientation in the rendered DOM.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Desktop/mobile captures of home, section, article and Directs show subscription choices plus “accept cookies … free”; refusal warns that navigation/features are limited. Core news is not visible in the first viewport.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-CONSENT"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "DOM recon found a DIV modal surface and no <dialog>; the full-screen interaction requires custom handling.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-SEMANTIC"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Outside the consent defect, DOM structure is content-led news cards and navigation rather than decorative application framing.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "At 360×800, layout reports scrollWidth=clientWidth=360 and horizontalOverflowPx=0 with a viewport meta tag.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "CSS inspection found logical properties but no active @container rule across a card-heavy, reused-component layout.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-CONTAINER"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus/image probes",
+      "evidence": "After programmatically focusing a link, computed outline was none and box-shadow none; sampled 32px controls are below a comfortable 44px target.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-FOCUS"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Raw/rendered content and metadata clearly identify a continuous sports-news service and expose article/Directs links, although first access is harmed by the separate consent finding.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Direct article, section and live URLs return successful rendered/SSR content and real href navigation; the blocking consent defect is recorded under interruptions/dark patterns.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The invalid route clearly says the page no longer exists/URL is wrong and offers search/topic recovery links.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "Lighthouse LCP is 2.3s; trace LCP is 796ms; observed CLS is 0.00054. No poor-range load vital was measured.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "Layout observer measured CLS 0.00054 with one tiny shift and no horizontal overflow.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "Lighthouse reports 3.5s main-thread work, 1.6s JS execution and 339ms TBT; HAR records 132 script requests.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-MAINTHREAD"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "HAR recorded 236 requests and 2.16MB transferred, including 132 scripts and 54 stylesheets; Lighthouse flags font display and the dependency tree.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-DELIVERY"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "Scripts transfer 1.42MB; top offenders include GTM, Permutive, Didomi, Google sign-in and the 195KB vendor bundle before content access.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-UNUSED"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus/image probes",
+      "evidence": "Lighthouse fails button-name, link-name and image-alt; image probe reports 35 images without alt text.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-A11Y-NAMES"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Lighthouse accessibility plus DOM/focus/image probes",
+      "evidence": "Representative screenshots, DOM and active probes showed the expected outcome with no contrary signal in the sampled paths.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus/image probes",
+      "evidence": "The focused-link probe shows no visible focus style; Lighthouse reports a malformed accessibility tree.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-A11Y-FOCUS"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus/image probes",
+      "evidence": "Mobile screenshots show readable French body copy, comfortable line length and no clipping at 360px.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus/image probes",
+      "evidence": "The viewport allows up to 5× zoom and mobile has no overflow, but sampled controls are 32px high, below a comfortable touch target.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-REFLOW"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Lighthouse errors-in-console audit scores 0.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-CONSOLE"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Image probe reports 91/100 missing width or height attributes, 45 missing srcset, 51 legacy-format images and 3 oversized images.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-ASSETS"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Lighthouse reports missing source maps for large first-party JavaScript and Inspector Issues.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-PLATFORM"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "raw HTML/browser discoverability comparison and metadata probes",
+      "evidence": "Homepage and article have descriptive titles and meta descriptions; article title matches its H1.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "raw HTML/browser discoverability comparison and metadata probes",
+      "evidence": "robots.txt starts with User-agent: * / Disallow: / and only grants broad access to named search engines; generic and AI crawlers cannot crawl the 95–97% SSR content.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-ROBOTS"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "raw HTML/browser discoverability comparison and metadata probes",
+      "evidence": "Both sampled pages return 200 and expose canonical/index-follow signals; sitemap.xml exists and lists public sections.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "pass",
+      "confidence": "high",
+      "method": "raw HTML/browser discoverability comparison and metadata probes",
+      "evidence": "Article exposes NewsArticle JSON-LD and complete Open Graph title, description, URL and image matching visible content.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, HAR, secrets and account probes",
+      "evidence": "CSP is only “block-all-mixed-content”; Permissions-Policy is absent; two first-party cookies are not Secure and several use SameSite=None.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, HAR, secrets and account probes",
+      "evidence": "Tracker probe finds 15 third-party origins including GTM and Google Ads; HAR attributes 24 requests and 694,639 bytes to third parties.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-THIRDPARTY"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, HAR, secrets and account probes",
+      "evidence": "Account DOM contains username/password fields and Apple/Google actions; no WebAuthn/passkey affordance was present.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-AUTH"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "headers, cookies, trackers, HAR, secrets and account probes",
+      "evidence": "Permissions-Policy is absent, Referrer-Policy is legacy no-referrer-when-downgrade, and CSP has no source allowlist/frame-ancestors.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-POLICIES"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "high",
+      "method": "raw HTML/browser discoverability comparison and metadata probes",
+      "evidence": "Discoverability comparison finds 97% homepage and 95% article content coverage in raw server HTML; neither page is a JS shell.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Sampled routes render stable responsive DOM, real links, and a clear error route; no cut-off menu/runtime blank state was observed.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "A service worker is active and /manifest.json exists, but no manifest link was found in the page and Cache Storage was empty after load; no offline fallback was evidenced.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-OFFLINE"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The invalid route provides an explicit French not-found state and useful recovery links rather than a blank shell.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS and structured metadata inspection",
+      "evidence": "The root lang is fr, content reads in the expected direction, and CSS inspection finds logical inline/block properties.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS and structured metadata inspection",
+      "evidence": "French content and metadata render accents and French date/time conventions; structured dates are machine-readable ISO.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "pass",
+      "confidence": "high",
+      "method": "DOM/CSS and structured metadata inspection",
+      "evidence": "Article structured data uses an unambiguous ISO timestamp with +02:00 offset.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The gateway says users must accept personalized-ad trackers from L’Équipe and 278 partners for free access and that refusal limits navigation/features.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-DARKPATTERN"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "After submitting the empty sign-in form, the probe found no :invalid fields, role=alert content, or error message.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-FORM-ERROR"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "DOM inspection found pseudo and password inputs with no associated label and empty autocomplete attributes.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-AUTH-FORM"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "The gateway leads with “je m’abonne” and Google subscription, while pricing/commitment details are not visible and free access requires tracking consent.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-COMMERCIAL"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "Of 100 images, 51 use legacy formats, 45 lack srcset and 3 are oversized; many have no intrinsic dimensions.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-ASSET-SUSTAIN"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "The consent screen load still makes 236 requests with 132 scripts and known tracking vendors.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-WASTE"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR and layout evidence",
+      "evidence": "Third parties transfer 694KB; GTM alone transfers 241KB and several vendors take around one second.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-SUSTAIN"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "Emerging agent tools are optional here; public articles are already machine-readable through SSR and NewsArticle JSON-LD.",
+      "reason": "Emerging agent tools are optional here; public articles are already machine-readable through SSR and NewsArticle JSON-LD."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "medium",
+      "method": "screenshots, rendered DOM/CSS and interaction probes across representative paths",
+      "evidence": "No user-facing summarisation or language-model task was offered, so on-device inference is not currently applicable.",
+      "reason": "No user-facing summarisation or language-model task was offered, so on-device inference is not currently applicable."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "low",
+      "method": "heap summaries before/after repeated menu interaction",
+      "evidence": "Across fresh baseline/post captures after ten menu toggles, self size rose only 0.43MB (<1%); no unbounded growth was demonstrated.",
+      "pathIds": [
+        "home"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "issues",
+      "confidence": "high",
+      "method": "heap summaries before/after repeated menu interaction",
+      "evidence": "Heap summary reports 810,415 nodes and 47.76MB self size before interaction; after ten menu toggles it reaches 816,629 nodes and 48.19MB.",
+      "pathIds": [
+        "home"
+      ],
+      "findingIds": [
+        "F-MEMORY"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "low",
+      "method": "heap summaries before/after repeated menu interaction",
+      "evidence": "The repeated-interaction snapshots show <1% total growth; no direct evidence of unbounded listeners/timers was observed. Confidence is low because constructor-level retention was not analyzed.",
+      "pathIds": [
+        "home"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-DARK",
+        "F-MOTION",
+        "F-CONTRAST"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-MODERN-UI"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-CONSENT",
+        "F-SEMANTIC"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-CONTAINER",
+        "F-FOCUS"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-MAINTHREAD",
+        "F-DELIVERY",
+        "F-UNUSED"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-A11Y-NAMES",
+        "F-A11Y-FOCUS",
+        "F-REFLOW"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-CONSOLE",
+        "F-ASSETS",
+        "F-PLATFORM"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-ROBOTS"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-HEADERS",
+        "F-THIRDPARTY",
+        "F-AUTH",
+        "F-POLICIES"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-OFFLINE"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-DARKPATTERN",
+        "F-FORM-ERROR",
+        "F-AUTH-FORM",
+        "F-COMMERCIAL"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-ASSET-SUSTAIN",
+        "F-WASTE",
+        "F-SUSTAIN"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged contextually not applicable for this public news experience."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-MEMORY"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage and first-visit consent/subscription gateway; represents the primary news entry and consent journey.",
+      "url": "https://www.lequipe.fr/",
+      "conditions": [
+        "desktop",
+        "360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "keyboard focus"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "section",
+      "description": "Football section listing; represents sport-category/index templates.",
+      "url": "https://www.lequipe.fr/Football/",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Current Tour de France story; represents article/detail and crawler rendering.",
+      "url": "https://www.lequipe.fr/Cyclisme-sur-route/Actualites/Remco-evenepoel-enchaine-en-remportant-le-chrono-individuel-de-la-16e-etape-du-tour-de-france-paul-seixas-grignote-pour-le-podium/1706182",
+      "conditions": [
+        "360x800",
+        "JavaScript disabled crawler comparison"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "directs",
+      "description": "Live sports hub; represents the prominent live-results journey.",
+      "url": "https://www.lequipe.fr/Directs",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "account",
+      "description": "Account sign-in route; represents a primary form and authentication flow.",
+      "url": "https://www.lequipe.fr/mon-compte/mon-abonnement/connexion",
+      "conditions": [
+        "empty submission",
+        "DOM form inspection"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "error",
+      "description": "Deliberately invalid route; represents HTTP/navigation recovery.",
+      "url": "https://www.lequipe.fr/this-route-does-not-exist-web-uplift",
+      "conditions": [
+        "360x800"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-DARK",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The first-visit experience ignores the user’s dark color preference.",
+      "evidence": "The dark-mode screenshot is pixel-identical in treatment to the light capture: a white full-screen surface remains under prefers-color-scheme: dark.",
+      "artifacts": [
+        "evidence/home-dark.png"
+      ],
+      "suggestedFix": "Declare color-scheme and provide preference-driven dark surface/text tokens, including the consent layer.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-MOTION",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Infinite pulse animations continue when reduced motion is requested.",
+      "evidence": "The reduced-motion probe reports 18 running pulse-19bfe654 animations, each 3000ms and infinite, while the media query matches.",
+      "artifacts": [
+        "evidence/reduced-motion.json"
+      ],
+      "suggestedFix": "Disable non-essential pulse animations inside prefers-reduced-motion: reduce.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-CONTRAST",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-contrast",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Text/UI contrast is insufficient in the default experience.",
+      "evidence": "Lighthouse color-contrast audit fails and the overall accessibility score is 0.84.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Use contrast-safe color tokens and test default, prefers-contrast and forced-colors states.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-MODERN-UI",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "directional-navigation-transitions",
+      "guidanceCategory": "modern-web",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Route/state changes do not use View Transitions.",
+      "evidence": "The rendered CSS/DOM probe found no active View Transition declarations or API usage on a highly navigational news site.",
+      "artifacts": [
+        "evidence/home-dom.json",
+        "evidence/interaction-probe.json"
+      ],
+      "suggestedFix": "Progressively enhance same- and cross-document navigation with View Transitions while preserving no-motion behavior.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-CONSENT",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "modern-web",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "A full-screen pay-or-track gateway obscures every sampled public-content path.",
+      "evidence": "Desktop/mobile captures of home, section, article and Directs show subscription choices plus “accept cookies … free”; refusal warns that navigation/features are limited. Core news is not visible in the first viewport.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/section-mobile.png",
+        "evidence/directs-mobile.png"
+      ],
+      "suggestedFix": "Replace the blocking wall with non-obscuring, equal-choice consent controls and keep public core content usable without personalized tracking.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-SEMANTIC",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The modal gateway is implemented as custom div-based UI rather than a semantic dialog.",
+      "evidence": "DOM recon found a DIV modal surface and no <dialog>; the full-screen interaction requires custom handling.",
+      "artifacts": [
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Use <dialog> with correct modal semantics, initial focus, Escape behavior and an equally prominent non-consent action.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-CONTAINER",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "modern-web",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "No component-level container queries were found.",
+      "evidence": "CSS inspection found logical properties but no active @container rule across a card-heavy, reused-component layout.",
+      "artifacts": [
+        "evidence/platform-css.json"
+      ],
+      "suggestedFix": "Use container queries where cards/widgets are reused across rails and viewport regions; keep media-query fallback where needed.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-FOCUS",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Keyboard focus is not visibly indicated and some controls are undersized.",
+      "evidence": "After programmatically focusing a link, computed outline was none and box-shadow none; sampled 32px controls are below a comfortable 44px target.",
+      "artifacts": [
+        "evidence/platform-focus.json",
+        "evidence/interaction-probe.json"
+      ],
+      "suggestedFix": "Add a high-contrast :focus-visible treatment and increase interactive target hit areas.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-MAINTHREAD",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "JavaScript work remains heavy despite acceptable paint timing.",
+      "evidence": "Lighthouse reports 3.5s main-thread work, 1.6s JS execution and 339ms TBT; HAR records 132 script requests.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Remove/conditional-load heavy scripts, chunk long work, and defer non-essential tags until consent and interaction.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-DELIVERY",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The initial dependency graph is script-heavy.",
+      "evidence": "HAR recorded 236 requests and 2.16MB transferred, including 132 scripts and 54 stylesheets; Lighthouse flags font display and the dependency tree.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Consolidate critical CSS, preload only true LCP dependencies, use font-display, and delay non-critical scripts.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-UNUSED",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Third-party and first-party JavaScript dominates initial delivery.",
+      "evidence": "Scripts transfer 1.42MB; top offenders include GTM, Permutive, Didomi, Google sign-in and the 195KB vendor bundle before content access.",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Use coverage to remove unused vendor code and load analytics, ads and identity providers only when required and permitted.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-A11Y-NAMES",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Accessible names and alternatives are missing.",
+      "evidence": "Lighthouse fails button-name, link-name and image-alt; image probe reports 35 images without alt text.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Give every actionable control a discernible name and meaningful images appropriate alt; use empty alt only for decoration.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-A11Y-FOCUS",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Focus visibility and accessibility-tree structure fail.",
+      "evidence": "The focused-link probe shows no visible focus style; Lighthouse reports a malformed accessibility tree.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/platform-focus.json"
+      ],
+      "suggestedFix": "Repair landmark/heading relationships and implement consistent visible focus in logical DOM order.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-REFLOW",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Some targets do not meet inclusive target-size expectations.",
+      "evidence": "The viewport allows up to 5× zoom and mobile has no overflow, but sampled controls are 32px high, below a comfortable touch target.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/interaction-probe.json"
+      ],
+      "suggestedFix": "Expand hit areas to at least 44×44 CSS px without changing visual icon size.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-CONSOLE",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "no-console-errors",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser errors occur during load.",
+      "evidence": "Lighthouse errors-in-console audit scores 0.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Resolve the recorded console/network errors and add production monitoring for uncaught exceptions.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-ASSETS",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Image markup and responsive delivery are weak.",
+      "evidence": "Image probe reports 91/100 missing width or height attributes, 45 missing srcset, 51 legacy-format images and 3 oversized images.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Emit intrinsic dimensions, responsive srcset/sizes and modern encodings from the image pipeline.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-PLATFORM",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "browser-platform-hygiene",
+      "guidanceId": "html",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "DevTools platform hygiene checks fail.",
+      "evidence": "Lighthouse reports missing source maps for large first-party JavaScript and Inspector Issues.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Publish correct production source maps to authorized tooling and clear all DevTools Issues/deprecations.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-ROBOTS",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "search-hidden-content",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "robots.txt blocks all generic crawlers despite public indexable metadata.",
+      "evidence": "robots.txt starts with User-agent: * / Disallow: / and only grants broad access to named search engines; generic and AI crawlers cannot crawl the 95–97% SSR content.",
+      "artifacts": [
+        "evidence/site-files.json",
+        "evidence/article-discoverability.json"
+      ],
+      "suggestedFix": "Replace default-deny with explicit policy aligned to intended public discovery, while retaining targeted exclusions.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-HEADERS",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Transport is HTTPS, but CSP and cookie defenses are incomplete.",
+      "evidence": "CSP is only “block-all-mixed-content”; Permissions-Policy is absent; two first-party cookies are not Secure and several use SameSite=None.",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Deploy a nonce/hash-based allowlist CSP, Secure cookies with least-permissive SameSite, and a minimal Permissions-Policy.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-THIRDPARTY",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "A large tracking/third-party surface loads on the consent wall.",
+      "evidence": "Tracker probe finds 15 third-party origins including GTM and Google Ads; HAR attributes 24 requests and 694,639 bytes to third parties.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Block non-essential third parties until affirmative granular consent and reduce vendors, event volume and retention.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-POLICIES",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Browser-enforced policy headers are incomplete or weak.",
+      "evidence": "Permissions-Policy is absent, Referrer-Policy is legacy no-referrer-when-downgrade, and CSP has no source allowlist/frame-ancestors.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Add restrictive Permissions-Policy, strict-origin-when-cross-origin or stricter referrer policy, and frame-ancestors in CSP.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-OFFLINE",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-resilient",
+      "principleCheckId": "offline-and-installable",
+      "guidanceId": "performance",
+      "guidanceCategory": "modern-web",
+      "severity": "low",
+      "confidence": "high",
+      "summary": "Install/offline plumbing is incomplete.",
+      "evidence": "A service worker is active and /manifest.json exists, but no manifest link was found in the page and Cache Storage was empty after load; no offline fallback was evidenced.",
+      "artifacts": [
+        "evidence/platform-focus.json",
+        "evidence/site-files.json"
+      ],
+      "suggestedFix": "Link the manifest and have the service worker cache a small offline fallback plus core shell assets.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-DARKPATTERN",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "no-dark-patterns",
+      "guidanceId": "privacy",
+      "guidanceCategory": "modern-web",
+      "severity": "critical",
+      "confidence": "high",
+      "summary": "Free access is conditioned on accepting personalized advertising trackers.",
+      "evidence": "The gateway says users must accept personalized-ad trackers from L’Équipe and 278 partners for free access and that refusal limits navigation/features.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Offer a genuinely equivalent reject path, avoid conditioning core content on personalized tracking, and present choices with equal prominence.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-FORM-ERROR",
+      "pathId": "account",
+      "url": "https://www.lequipe.fr/mon-compte/mon-abonnement/connexion",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Empty login submission gives no visible or programmatic recovery feedback.",
+      "evidence": "After submitting the empty sign-in form, the probe found no :invalid fields, role=alert content, or error message.",
+      "artifacts": [
+        "evidence/account-invalid.json"
+      ],
+      "suggestedFix": "Use required constraints, validate after interaction, focus the first invalid field and announce a concise error through a live region.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-AUTH-FORM",
+      "pathId": "account",
+      "url": "https://www.lequipe.fr/mon-compte/mon-abonnement/connexion",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Sign-in fields omit labels and autocomplete tokens.",
+      "evidence": "DOM inspection found pseudo and password inputs with no associated label and empty autocomplete attributes.",
+      "artifacts": [
+        "evidence/account-form.json"
+      ],
+      "suggestedFix": "Add persistent labels and autocomplete=username/current-password; preserve paste and password-manager support.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-AUTH",
+      "pathId": "account",
+      "url": "https://www.lequipe.fr/mon-compte/mon-abonnement/connexion",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The sampled sign-in flow exposes only password/social sign-in, not phishing-resistant passkeys.",
+      "evidence": "Account DOM contains username/password fields and Apple/Google actions; no WebAuthn/passkey affordance was present.",
+      "artifacts": [
+        "evidence/account-form.json"
+      ],
+      "suggestedFix": "Offer passkey sign-in/registration alongside recovery-safe existing methods; request permissions only after user intent.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-COMMERCIAL",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "guidanceId": "autofill-payment-form",
+      "guidanceCategory": "modern-web",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The first screen prioritizes subscription before clear terms or an equivalent free path.",
+      "evidence": "The gateway leads with “je m’abonne” and Google subscription, while pricing/commitment details are not visible and free access requires tracking consent.",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Show price, renewal and cancellation terms before commitment and provide a clear account/cancellation route.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-ASSET-SUSTAIN",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The image estate is not resource-efficient.",
+      "evidence": "Of 100 images, 51 use legacy formats, 45 lack srcset and 3 are oversized; many have no intrinsic dimensions.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Generate AVIF/WebP variants with width-based srcset/sizes and intrinsic dimensions.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-WASTE",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Substantial analytics/ad work occurs before core content is available.",
+      "evidence": "The consent screen load still makes 236 requests with 132 scripts and known tracking vendors.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Gate and batch background analytics, eliminate duplicate tag loads and defer low-value work to idle/user intent.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-SUSTAIN",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "efficient-background-processing",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Third-party script cost is disproportionate on the initial wall.",
+      "evidence": "Third parties transfer 694KB; GTM alone transfers 241KB and several vendors take around one second.",
+      "artifacts": [
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Set a third-party byte/request budget, remove low-value vendors and lazy-load approved integrations.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-MEMORY",
+      "pathId": "home",
+      "url": "https://www.lequipe.fr/",
+      "principleId": "be-memory-efficient",
+      "principleCheckId": "bounded-footprint",
+      "guidanceId": "defer-rendering-heavy-content",
+      "guidanceCategory": "modern-web",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "The initial page has a large DOM/heap footprint for a consent-gated first view.",
+      "evidence": "Heap summary reports 810,415 nodes and 47.76MB self size before interaction; after ten menu toggles it reaches 816,629 nodes and 48.19MB.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ],
+      "suggestedFix": "Reduce hidden/pre-rendered DOM and vendor allocations; profile retained objects and detached nodes on representative navigation.",
+      "effort": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T1",
+      "title": "Remove the pay-or-track content wall and provide equal consent choices",
+      "priority": 1,
+      "findingIds": [
+        "F-CONSENT",
+        "F-DARKPATTERN",
+        "F-COMMERCIAL"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T2",
+      "title": "Repair accessible names, contrast, focus, targets and form errors",
+      "priority": 2,
+      "findingIds": [
+        "F-CONTRAST",
+        "F-FOCUS",
+        "F-A11Y-NAMES",
+        "F-A11Y-FOCUS",
+        "F-REFLOW",
+        "F-FORM-ERROR",
+        "F-AUTH-FORM"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T3",
+      "title": "Gate and reduce third-party scripts and analytics",
+      "priority": 3,
+      "findingIds": [
+        "F-THIRDPARTY",
+        "F-WASTE",
+        "F-SUSTAIN",
+        "F-UNUSED"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T4",
+      "title": "Deploy a real CSP and harden cookies/policy headers",
+      "priority": 4,
+      "findingIds": [
+        "F-HEADERS",
+        "F-POLICIES"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T5",
+      "title": "Reduce script/main-thread and dependency cost",
+      "priority": 5,
+      "findingIds": [
+        "F-MAINTHREAD",
+        "F-DELIVERY",
+        "F-CONSOLE",
+        "F-PLATFORM"
+      ],
+      "guidanceId": "break-up-long-tasks",
+      "status": "open"
+    },
+    {
+      "id": "T6",
+      "title": "Modernize image delivery and markup",
+      "priority": 6,
+      "findingIds": [
+        "F-ASSETS",
+        "F-ASSET-SUSTAIN"
+      ],
+      "guidanceId": "deliver-optimized-decorative-images",
+      "status": "open"
+    },
+    {
+      "id": "T7",
+      "title": "Align robots.txt with intended public and AI discoverability",
+      "priority": 7,
+      "findingIds": [
+        "F-ROBOTS"
+      ],
+      "guidanceId": "search-hidden-content",
+      "status": "open"
+    },
+    {
+      "id": "T8",
+      "title": "Add preference-aware theming and reduced motion",
+      "priority": 8,
+      "findingIds": [
+        "F-DARK",
+        "F-MOTION"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T9",
+      "title": "Improve semantic/modal and modern responsive navigation primitives",
+      "priority": 9,
+      "findingIds": [
+        "F-SEMANTIC",
+        "F-CONTAINER",
+        "F-MODERN-UI"
+      ],
+      "guidanceId": "declarative-dialog-popover-control",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Add passkeys and complete install/offline support",
+      "priority": 10,
+      "findingIds": [
+        "F-AUTH",
+        "F-OFFLINE"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T11",
+      "title": "Profile and reduce initial retained DOM/heap",
+      "priority": 11,
+      "findingIds": [
+        "F-MEMORY"
+      ],
+      "guidanceId": "defer-rendering-heavy-content",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "First-visit desktop consent/subscription wall.",
+      "condition": "desktop",
+      "findingIds": [
+        "F-CONSENT"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "First-visit mobile consent/subscription wall.",
+      "condition": "360x800",
+      "findingIds": [
+        "F-CONSENT",
+        "F-REFLOW"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Consent wall remains light under dark preference.",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-DARK"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/section-mobile.png",
+      "caption": "Football listing at mobile width is covered by the same gateway.",
+      "condition": "360x800",
+      "findingIds": [
+        "F-CONSENT"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-mobile.png",
+      "caption": "Article at mobile width is covered by the same gateway.",
+      "condition": "360x800",
+      "findingIds": [
+        "F-CONSENT"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/directs-mobile.png",
+      "caption": "Live hub at mobile width is covered by the same gateway.",
+      "condition": "360x800",
+      "findingIds": [
+        "F-CONSENT"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Mobile layout: 360px content width, 0 overflow, CLS 0.00054.",
+      "condition": "360x800"
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and CSS for homepage."
+    },
+    {
+      "type": "other",
+      "path": "evidence/reduced-motion.json",
+      "caption": "18 infinite pulse animations remain running under reduced motion.",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": [
+        "F-MOTION"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/interaction-probe.json",
+      "caption": "Controls, animation population and modern CSS feature probe.",
+      "condition": "desktop",
+      "findingIds": [
+        "F-FOCUS",
+        "F-MODERN-UI"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace."
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary: LCP 796ms and TBT 12.6ms in this capture."
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "HAR with 236 requests and 2.16MB transferred."
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network summary: 132 scripts, 694KB third-party bytes.",
+      "condition": "load",
+      "findingIds": [
+        "F-MAINTHREAD",
+        "F-DELIVERY",
+        "F-THIRDPARTY",
+        "F-SUSTAIN"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Homepage raw-HTML coverage 97%."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "Rendered homepage crawler comparison."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "No-JS homepage crawler comparison."
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/article-discoverability.json",
+      "caption": "Article raw-HTML coverage 95%."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-rendered.png",
+      "caption": "Rendered article crawler comparison."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-discoverability-crawler.png",
+      "caption": "No-JS article crawler comparison."
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "Lighthouse: performance 89, accessibility 84, best practices 88, SEO 92.",
+      "condition": "desktop",
+      "findingIds": [
+        "F-MAINTHREAD",
+        "F-A11Y-NAMES",
+        "F-CONTRAST",
+        "F-CONSOLE",
+        "F-PLATFORM"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header audit.",
+      "condition": "load",
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security audit.",
+      "condition": "load",
+      "findingIds": [
+        "F-HEADERS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "15 third-party origins and known trackers.",
+      "condition": "load",
+      "findingIds": [
+        "F-THIRDPARTY"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "Image audit: 91 missing dimensions, 45 missing srcset, 35 missing alt.",
+      "condition": "load",
+      "findingIds": [
+        "F-A11Y-NAMES",
+        "F-ASSETS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "Secrets scan: one generic public-style API-key signal; no sensitive credential confirmed."
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "Baseline summary: 810,415 nodes, 47.76MB self size.",
+      "condition": "baseline",
+      "findingIds": [
+        "F-MEMORY"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "After ten menu toggles: 816,629 nodes, 48.19MB self size.",
+      "condition": "10 repeated menu toggles",
+      "findingIds": [
+        "F-MEMORY"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/article-meta.json",
+      "caption": "Article canonical, JSON-LD NewsArticle and Open Graph metadata."
+    },
+    {
+      "type": "other",
+      "path": "evidence/account-form.json",
+      "caption": "Login fields lack labels/autocomplete tokens.",
+      "condition": "account",
+      "findingIds": [
+        "F-AUTH-FORM"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/account-invalid.json",
+      "caption": "Empty login submission produced no invalid state or alert.",
+      "condition": "account empty submit",
+      "findingIds": [
+        "F-FORM-ERROR"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/site-files.json",
+      "caption": "robots.txt default-denies all generic crawlers; sitemap and manifest content captured.",
+      "condition": "load",
+      "findingIds": [
+        "F-ROBOTS"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-focus.json",
+      "caption": "Focused link has no outline/box shadow; service worker has no Cache Storage.",
+      "condition": "keyboard focus",
+      "findingIds": [
+        "F-FOCUS",
+        "F-OFFLINE"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/platform-css.json",
+      "caption": "Doctype/charset, script attributes and CSS feature probe."
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/404-mobile.png",
+      "caption": "Clear French not-found recovery page.",
+      "condition": "360x800"
+    },
+    {
+      "type": "other",
+      "path": "evidence/404-probe.json",
+      "caption": "404 recovery text and links."
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 1500,
+    "pathCount": 6,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-21T20-16-44-173Z"
+}

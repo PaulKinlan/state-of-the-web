@@ -1,0 +1,1863 @@
+{
+  "url": "https://www.xnxx.com",
+  "auditedAt": "2026-07-18T01:27:00.000Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "Coverage-complete audit across the public homepage, search listing, account sign-in, and not-found state.",
+  "page": {
+    "appType": "mpa",
+    "framework": "Server-rendered multi-page site with client enhancement",
+    "notes": "Public adult-video catalogue. A mandatory age acknowledgement overlays catalogue pages; explicit thumbnails are blurred before acknowledgement."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "images",
+    "secrets",
+    "heap-summary",
+    "lighthouse"
+  ],
+  "guidanceConsulted": [
+    "accessibility",
+    "dark-mode",
+    "forms",
+    "performance",
+    "security",
+    "privacy",
+    "fluid-scaling",
+    "improve-text-layout-and-legibility",
+    "optimize-image-priority",
+    "conditional-async-dependencies",
+    "translator",
+    "passkeys",
+    "webmcp",
+    "manage-recurring-intervals",
+    "light-dismiss-a-dialog",
+    "same-document-transitions",
+    "size-aware-styling",
+    "accessible-error-announcement",
+    "autofill-sign-in-form",
+    "defer-rendering-heavy-content",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "identify-heavy-scripts",
+    "flicker-free-client-side-ab-testing",
+    "deliver-optimized-decorative-images"
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The default and emulated prefers-color-scheme: dark screenshots are byte-identical, while DOM/CSS inspection found no preference-driven theme switch.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-preferences.png"
+      ],
+      "findingIds": [
+        "F01"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The preference-conditioned capture remained identical and the account probe reported five running animations; the inspected CSS includes animated pulse/toggle transitions without a reduced-motion override.",
+      "artifacts": [
+        "evidence/home-preferences.png",
+        "evidence/account-probe.json"
+      ],
+      "findingIds": [
+        "F02"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "Lighthouse contrast audit passed and the high-contrast-conditioned screenshot retained legible controls and text.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-preferences.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The CSS/API probe found no view-transition rules, and navigation among home, search, account, and error templates uses full-document swaps without a visual continuity cue.",
+      "artifacts": [
+        "evidence/account-probe.json",
+        "evidence/search-desktop.png"
+      ],
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "No scroll-linked parallax, scrollytelling, or reveal interaction was present on the representative templates.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "No scroll-linked parallax, scrollytelling, or reveal interaction was present on the representative templates."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "No swipe, pull, drag, or carousel gesture surface was present in the exercised paths.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "No swipe, pull, drag, or carousel gesture surface was present in the exercised paths."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "Desktop and mobile captures show fixed, dense chrome, while the CSS probe found no scroll timeline/container-state implementation.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/search-desktop.png"
+      ],
+      "findingIds": [
+        "F04"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "No tooltip, anchored popover, or edge-positioned menu was exposed in the representative states.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "No tooltip, anchored popover, or edge-positioned menu was exposed in the representative states."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "Search, account, and 404 captures switch templates abruptly; there is no transition, highlighted destination, breadcrumb, or focus cue tying the prior action to the new state.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/account.png",
+        "evidence/404.png"
+      ],
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The age gate is immediate and blocking, but it serves the necessary age acknowledgement before explicit content, keeps thumbnails blurred, and presents clear continuation choices.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "DOM/CSS evidence identifies #disclaimer_background and #disclaimer_message divs; the probe found zero dialog, popover, or details elements.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The search first viewport contains two navigation rows, controls, filters, badges, and the blocking gate before the results; the mobile viewport also devotes substantial space to persistent chrome.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "At 360x800 the layout primitive measured scrollWidth 360, clientWidth 360, horizontal overflow 0, and a viewport meta element.",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The component/CSS probe found no @container rules, although reused search, account, header, and card components appear in different available widths.",
+      "artifacts": [
+        "evidence/account-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F08"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "The account focus probe found outline:none and no box shadow on visible form controls and buttons; only the first logo links retained a UA outline.",
+      "artifacts": [
+        "evidence/account-probe.json",
+        "evidence/account.png"
+      ],
+      "findingIds": [
+        "F09"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The first viewport clearly identifies an adult video catalogue and presents explicit age/category continuation actions.",
+      "artifacts": [
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "A direct search route rendered labelled results, and the account route exposed sign-in, password recovery, account creation, and federated alternatives.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/account.png"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The deliberately invalid route rendered a clear not-found message while retaining global navigation.",
+      "artifacts": [
+        "evidence/404.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "Lighthouse measured LCP 6.8 s, FCP 3.7 s, and performance 0.68; the separate warm trace measured LCP 1.22 s, showing material condition sensitivity.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "The mobile layout observer measured CLS 0 with no recorded shifts, corroborated by Lighthouse CLS 0.",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "The trace recorded zero long tasks and 0 ms total blocking time; Lighthouse TBT was 102 ms.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "HAR found a VeryHigh parser stylesheet, a synchronous head script, several synchronous scripts, and ten large thumbnails without useful cache headers.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "The HAR recorded six scripts totalling 536 KB, but no code-coverage evidence established substantial unused or duplicated execution; the measured main thread remained light.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-trace-summary.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "Lighthouse accessibility scored 0.71 and identified an unnamed close button plus unnamed menu and thumbnail links; the image audit found 98 of 100 images without alt text.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F12"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "Lighthouse color-contrast passed and the captured blue/yellow/white interfaces remained visually distinguishable.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/account.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "The home recon found no h1; the account probe found repeated h2 headings, no main/nav landmarks, and outline:none on visible controls.",
+      "artifacts": [
+        "evidence/home-recon.json",
+        "evidence/account-probe.json"
+      ],
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "Desktop and mobile captures show readable labels, consistent left alignment, and no text clipping in the principal gate, search, and account states.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/search-desktop.png",
+        "evidence/account.png"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "Lighthouse failed meta-viewport because the homepage declares maximum-scale=1.0 and user-scalable=no.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "findingIds": [
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "Lighthouse errors-in-console audit passed and no uncaught error was observed during exercised loads.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The image audit found all 100 images without width/height attributes or srcset, 12 oversized images, and 100 legacy-format images.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "Lighthouse reported passing BFCache, inspector-issues, and third-party-cookie audits; no permission prompt appeared on load.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Raw-HTML discoverability, metadata, robots, sitemap and Lighthouse SEO inspection",
+      "evidence": "The homepage has a descriptive title and meta description, both present in raw server HTML.",
+      "artifacts": [
+        "evidence/home-recon.json",
+        "evidence/home-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Raw-HTML discoverability, metadata, robots, sitemap and Lighthouse SEO inspection",
+      "evidence": "Lighthouse SEO scored 1.0; anchors and robots audits passed, viewport metadata is present, and robots.txt permits the public homepage.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/robots.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Raw-HTML discoverability, metadata, robots, sitemap and Lighthouse SEO inspection",
+      "evidence": "The metadata probe returned no canonical link, although robots.txt permits the homepage and a sitemap index exists.",
+      "artifacts": [
+        "evidence/home-metadata.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.xml"
+      ],
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Raw-HTML discoverability, metadata, robots, sitemap and Lighthouse SEO inspection",
+      "evidence": "The homepage metadata probe found no Open Graph tags and no JSON-LD blocks despite the page representing a public media catalogue.",
+      "artifacts": [
+        "evidence/home-metadata.json"
+      ],
+      "findingIds": [
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers/cookies/network inspection",
+      "evidence": "Header evidence found no HSTS or nosniff and a CSP that allows unsafe-inline and unsafe-eval.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F18"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Headers/cookies/network inspection",
+      "evidence": "The pre-consent load contacted three CDN origins, found no known trackers, and exposed no client-side secrets.",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/secrets.json"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers/cookies/network inspection",
+      "evidence": "The account screenshot shows password, Google, and X sign-in; the DOM/API probe found no WebAuthn/passkey affordance. No permission prompt fired on load.",
+      "artifacts": [
+        "evidence/account.png",
+        "evidence/account-probe.json"
+      ],
+      "findingIds": [
+        "F19"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Headers/cookies/network inspection",
+      "evidence": "Headers evidence found no Permissions-Policy, no HSTS, no nosniff, and only legacy X-Frame-Options; Referrer-Policy remains no-referrer-when-downgrade.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Raw-HTML discoverability, metadata, robots, sitemap and Lighthouse SEO inspection",
+      "evidence": "Discoverability evidence fetched 130 KB of raw HTML but found only 29% rendered-word coverage; the rendered page is not an empty shell, yet most catalogue content is client-dependent.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "Representative gate, search controls, account form, and 404 state remained inside the viewport without clipped overlays in captured states.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/search-desktop.png",
+        "evidence/account.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "The primary product is network-dependent streaming; offline playback/installability was judged outside the expected core journey.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "The primary product is network-dependent streaming; offline playback/installability was judged outside the expected core journey."
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The invalid route rendered a clear not-found state and retained navigation rather than a blank shell or infinite spinner.",
+      "artifacts": [
+        "evidence/404.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The document declares lang=en and exposes visible language/content selectors; the sampled layouts retained correct reading order.",
+      "artifacts": [
+        "evidence/home-recon.json",
+        "evidence/search-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "No dates, prices, currencies, durations requiring locale formatting, or user-entered locale-sensitive values appeared in the representative paths.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "No dates, prices, currencies, durations requiring locale formatting, or user-entered locale-sensitive values appeared in the representative paths."
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "No event time, scheduling, timezone, or DST-sensitive concept appeared in the representative paths.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "No event time, scheduling, timezone, or DST-sensitive concept appeared in the representative paths."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The observed age gate states its purpose and terms link, keeps explicit content blurred, and account creation exposes terms/privacy links without a preselected continuity purchase.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/account.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "After activating Sign in with both fields empty, the captured page remained visually unchanged with no inline error summary or recovery instruction.",
+      "artifacts": [
+        "evidence/account-error.png"
+      ],
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse accessibility plus DOM/focus and screenshot probes",
+      "evidence": "The account probe reports empty autocomplete values for email and password fields.",
+      "artifacts": [
+        "evidence/account-probe.json"
+      ],
+      "findingIds": [
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Responsive screenshots, DOM/CSS/API probes, and representative flow walkthroughs",
+      "evidence": "The account route exposes password recovery, account creation, terms/privacy links, and federated sign-in; no paid commitment was introduced in the exercised flow.",
+      "artifacts": [
+        "evidence/account.png"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "Image evidence found 100/100 images without srcset, 100 legacy PNG/JPEG resources, 12 oversized images, and 89 below-fold images without lazy loading.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "The trace found no long tasks, and the initial network settled at 31 requests without known analytics trackers or observed idle polling.",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "pass",
+      "confidence": "high",
+      "method": "Lighthouse, trace, HAR, layout, and image evidence",
+      "evidence": "Before age acknowledgement, the rich-media catalogue transferred 1.23 MB across 31 requests, with no autoplay media and no known trackers; this is proportionate but still leaves image optimisation work.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home-desktop.png"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "This public video catalogue exposes no transactional or productivity capability for which an agent tool is currently justified; absence is an emerging opportunity, not a failure.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "This public video catalogue exposes no transactional or productivity capability for which an agent tool is currently justified; absence is an emerging opportunity, not a failure."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "Recon and representative-template applicability judgement",
+      "evidence": "No summarisation or language-model task was part of the observed core experience; on-device inference is not applicable.",
+      "pathIds": [
+        "home"
+      ],
+      "reason": "No summarisation or language-model task was part of the observed core experience; on-device inference is not applicable."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap snapshot comparison using the memory-tracer baseline/post method",
+      "evidence": "After ten repeated menu-toggle attempts, retained heap changed from 19,723,569 to 19,915,232 bytes (+0.97%) and node count from 284,522 to 286,611 (+0.73%), with no runaway growth signal.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap snapshot comparison using the memory-tracer baseline/post method",
+      "evidence": "The homepage heap snapshot measured 19.7 MB self size and 284,522 nodes, proportionate to a thumbnail-rich catalogue.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "Heap snapshot comparison using the memory-tracer baseline/post method",
+      "evidence": "The repeated-interaction snapshot increased by less than 1% in heap and node count; no accumulating detached/listener symptom was observed at this sampling confidence.",
+      "artifacts": [
+        "evidence/heap-baseline.heapsnapshot",
+        "evidence/heap-post.heapsnapshot"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F03"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F04",
+        "F05"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F06",
+        "F07"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F12",
+        "F13",
+        "F14"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F15"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F18",
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F22",
+        "F23"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F24"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "not-applicable",
+      "reason": "All checks were judged outside the observed site intent and representative journeys."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Homepage catalogue, age acknowledgement, preferences, mobile layout, performance, security, discoverability, sustainability, and memory. Represents the primary landing/listing template.",
+      "url": "https://www.xnxx.com",
+      "conditions": [
+        "desktop 780x493",
+        "mobile 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "prefers-contrast: more",
+        "cold Lighthouse load"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "search",
+      "description": "Search results for nature. Represents search/listing/filter navigation and result-card presentation.",
+      "url": "https://www.xnxx.com/search/nature",
+      "conditions": [
+        "desktop 1280x800"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "account",
+      "description": "Account sign-in and empty submission. Represents authentication, forms, focus, labels, autofill, validation, and recovery.",
+      "url": "https://www.xnxx.com/account/",
+      "conditions": [
+        "desktop 1280x800",
+        "keyboard focus probe",
+        "empty submission"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "not-found",
+      "description": "Deliberately invalid URL. Represents HTTP/navigation failure recovery.",
+      "url": "https://www.xnxx.com/this-route-should-not-exist-audit",
+      "conditions": [
+        "desktop 1280x800"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "not-covered",
+      "description": "Authenticated account management, upload, payment/GOLD checkout, post-age-gate video playback, comments, and destructive/cancellation flows were not covered because they require credentials, payment, user data, or entering explicit playback; representative public and auth-entry templates were prioritised.",
+      "result": "skipped"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Theme is fixed rather than preference-driven.",
+      "evidence": "The default and emulated prefers-color-scheme: dark screenshots are byte-identical, while DOM/CSS inspection found no preference-driven theme switch.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-preferences.png"
+      ],
+      "suggestedFix": "Declare color-scheme and use prefers-color-scheme or light-dark() so browser chrome and surfaces follow the user preference.",
+      "guidanceId": "dark-mode",
+      "guidanceCategory": "user-experience",
+      "effort": "small"
+    },
+    {
+      "id": "F02",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-reduced-motion",
+      "pathId": "account",
+      "url": "https://www.xnxx.com/account/",
+      "summary": "Motion is not reduced when requested.",
+      "evidence": "The preference-conditioned capture remained identical and the account probe reported five running animations; the inspected CSS includes animated pulse/toggle transitions without a reduced-motion override.",
+      "artifacts": [
+        "evidence/home-preferences.png",
+        "evidence/account-probe.json"
+      ],
+      "suggestedFix": "Wrap non-essential animation and transition declarations in no-preference and disable them under prefers-reduced-motion: reduce.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "effort": "small"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Route and state changes use abrupt swaps.",
+      "evidence": "The CSS/API probe found no view-transition rules, and navigation among home, search, account, and error templates uses full-document swaps without a visual continuity cue.",
+      "artifacts": [
+        "evidence/account-probe.json",
+        "evidence/search-desktop.png"
+      ],
+      "suggestedFix": "Progressively enhance same-origin navigation with cross-document View Transitions and a no-animation fallback.",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "effort": "medium"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Persistent navigation does not react to scroll state.",
+      "evidence": "Desktop and mobile captures show fixed, dense chrome, while the CSS probe found no scroll timeline/container-state implementation.",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/search-desktop.png"
+      ],
+      "suggestedFix": "Use a sticky header that reduces or clarifies itself after scrolling, with CSS scroll-state/container-query enhancement.",
+      "guidanceId": "defer-rendering-heavy-content",
+      "guidanceCategory": "performance",
+      "effort": "medium"
+    },
+    {
+      "id": "F05",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Navigation changes do not visibly guide attention.",
+      "evidence": "Search, account, and 404 captures switch templates abruptly; there is no transition, highlighted destination, breadcrumb, or focus cue tying the prior action to the new state.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/account.png",
+        "evidence/404.png"
+      ],
+      "suggestedFix": "Add destination focus management and a restrained directional transition or current-location cue.",
+      "guidanceId": "same-document-transitions",
+      "guidanceCategory": "user-experience",
+      "effort": "medium"
+    },
+    {
+      "id": "F06",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "The blocking age gate is an ad-hoc overlay rather than a semantic modal.",
+      "evidence": "DOM/CSS evidence identifies #disclaimer_background and #disclaimer_message divs; the probe found zero dialog, popover, or details elements.",
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Implement the mandatory age gate as a dialog with a labelled title, contained focus, Escape policy, and explicit leave/continue actions.",
+      "guidanceId": "light-dismiss-a-dialog",
+      "guidanceCategory": "user-experience",
+      "effort": "medium"
+    },
+    {
+      "id": "F07",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "pathId": "search",
+      "url": "https://www.xnxx.com/search/nature",
+      "summary": "Dense navigation and category chrome compete with content.",
+      "evidence": "The search first viewport contains two navigation rows, controls, filters, badges, and the blocking gate before the results; the mobile viewport also devotes substantial space to persistent chrome.",
+      "artifacts": [
+        "evidence/search-desktop.png",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Collapse secondary controls progressively, keep one clear primary navigation row, and reveal advanced filters on demand.",
+      "guidanceId": "improve-text-layout-and-legibility",
+      "guidanceCategory": "css",
+      "effort": "medium"
+    },
+    {
+      "id": "F08",
+      "severity": "low",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Responsive behavior is viewport-only.",
+      "evidence": "The component/CSS probe found no @container rules, although reused search, account, header, and card components appear in different available widths.",
+      "artifacts": [
+        "evidence/account-probe.json",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Use container-type and size-aware component queries where cards, forms, and navigation are reused.",
+      "guidanceId": "size-aware-styling",
+      "guidanceCategory": "css",
+      "effort": "medium"
+    },
+    {
+      "id": "F09",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "pathId": "account",
+      "url": "https://www.xnxx.com/account/",
+      "summary": "Keyboard focus is missing on many controls.",
+      "evidence": "The account focus probe found outline:none and no box shadow on visible form controls and buttons; only the first logo links retained a UA outline.",
+      "artifacts": [
+        "evidence/account-probe.json",
+        "evidence/account.png"
+      ],
+      "suggestedFix": "Add a high-contrast :focus-visible treatment and verify every interactive control through a keyboard focus walk.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "effort": "small"
+    },
+    {
+      "id": "F10",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Cold-load LCP is slow.",
+      "evidence": "Lighthouse measured LCP 6.8 s, FCP 3.7 s, and performance 0.68; the separate warm trace measured LCP 1.22 s, showing material condition sensitivity.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Prioritize the LCP resource, reduce blocking discovery chains, and validate cold-load field-like conditions.",
+      "guidanceId": "performance",
+      "guidanceCategory": "performance",
+      "effort": "medium"
+    },
+    {
+      "id": "F11",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Parser-blocking assets and weak image caching delay delivery.",
+      "evidence": "HAR found a VeryHigh parser stylesheet, a synchronous head script, several synchronous scripts, and ten large thumbnails without useful cache headers.",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/home.har"
+      ],
+      "suggestedFix": "Defer non-critical scripts, inline only critical CSS, and serve immutable thumbnail URLs with useful cache headers.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "effort": "medium"
+    },
+    {
+      "id": "F12",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Important controls and thumbnail links lack accessible names.",
+      "evidence": "Lighthouse accessibility scored 0.71 and identified an unnamed close button plus unnamed menu and thumbnail links; the image audit found 98 of 100 images without alt text.",
+      "artifacts": [
+        "evidence/lighthouse.json",
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Give icon controls explicit accessible names and ensure each linked thumbnail has meaningful link text or an accessible name; use empty alt only for decorative images.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "effort": "medium"
+    },
+    {
+      "id": "F13",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "pathId": "account",
+      "url": "https://www.xnxx.com/account/",
+      "summary": "Heading structure and keyboard focus are incomplete.",
+      "evidence": "The home recon found no h1; the account probe found repeated h2 headings, no main/nav landmarks, and outline:none on visible controls.",
+      "artifacts": [
+        "evidence/home-recon.json",
+        "evidence/account-probe.json"
+      ],
+      "suggestedFix": "Provide one descriptive h1, semantic main/nav landmarks, a logical heading hierarchy, and visible :focus-visible states.",
+      "guidanceId": "accessibility",
+      "guidanceCategory": "accessibility",
+      "effort": "medium"
+    },
+    {
+      "id": "F14",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Mobile zoom is disabled.",
+      "evidence": "Lighthouse failed meta-viewport because the homepage declares maximum-scale=1.0 and user-scalable=no.",
+      "artifacts": [
+        "evidence/lighthouse.json"
+      ],
+      "suggestedFix": "Remove maximum-scale and user-scalable=no, then verify reflow at 200% and 400% zoom.",
+      "guidanceId": "fluid-scaling",
+      "guidanceCategory": "css",
+      "effort": "trivial"
+    },
+    {
+      "id": "F15",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Image assets lack dimensions and responsive delivery.",
+      "evidence": "The image audit found all 100 images without width/height attributes or srcset, 12 oversized images, and 100 legacy-format images.",
+      "artifacts": [
+        "evidence/images.json"
+      ],
+      "suggestedFix": "Reserve aspect-ratio/width/height and provide size-appropriate srcset/sizes with modern formats where supported.",
+      "guidanceId": "optimize-image-priority",
+      "guidanceCategory": "performance",
+      "effort": "medium"
+    },
+    {
+      "id": "F16",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "canonical-and-indexing-signals",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "The homepage has no canonical URL.",
+      "evidence": "The metadata probe returned no canonical link, although robots.txt permits the homepage and a sitemap index exists.",
+      "artifacts": [
+        "evidence/home-metadata.json",
+        "evidence/robots.txt",
+        "evidence/sitemap.xml"
+      ],
+      "suggestedFix": "Add a self-referencing canonical URL and keep it consistent with sitemap and redirect behavior.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "effort": "trivial"
+    },
+    {
+      "id": "F17",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Share and entity metadata are absent.",
+      "evidence": "The homepage metadata probe found no Open Graph tags and no JSON-LD blocks despite the page representing a public media catalogue.",
+      "artifacts": [
+        "evidence/home-metadata.json"
+      ],
+      "suggestedFix": "Add accurate Open Graph/Twitter preview metadata and appropriate schema.org JSON-LD matching visible catalogue content.",
+      "guidanceId": "html",
+      "guidanceCategory": "html",
+      "effort": "small"
+    },
+    {
+      "id": "F18",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Transport is HTTPS but key hardening headers are absent or weak.",
+      "evidence": "Header evidence found no HSTS or nosniff and a CSP that allows unsafe-inline and unsafe-eval.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Deploy HSTS and nosniff; migrate inline/eval execution to nonce/hash-based CSP directives and narrow allowed origins.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "effort": "medium"
+    },
+    {
+      "id": "F19",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "pathId": "account",
+      "url": "https://www.xnxx.com/account/",
+      "summary": "The observed sign-in route offers passwords and federated login but no phishing-resistant passkey option.",
+      "evidence": "The account screenshot shows password, Google, and X sign-in; the DOM/API probe found no WebAuthn/passkey affordance. No permission prompt fired on load.",
+      "artifacts": [
+        "evidence/account.png",
+        "evidence/account-probe.json"
+      ],
+      "suggestedFix": "Offer passkey registration and authentication alongside existing recovery paths.",
+      "guidanceId": "passkeys",
+      "guidanceCategory": "security",
+      "effort": "large"
+    },
+    {
+      "id": "F20",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Defensive browser policy coverage is incomplete.",
+      "evidence": "Headers evidence found no Permissions-Policy, no HSTS, no nosniff, and only legacy X-Frame-Options; Referrer-Policy remains no-referrer-when-downgrade.",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Add a restrictive Permissions-Policy, modern Referrer-Policy, HSTS and nosniff, and express clickjacking defense with CSP frame-ancestors.",
+      "guidanceId": "security",
+      "guidanceCategory": "security",
+      "effort": "small"
+    },
+    {
+      "id": "F21",
+      "severity": "high",
+      "confidence": "high",
+      "principleId": "be-resilient",
+      "principleCheckId": "progressive-enhancement",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "Most catalogue content is missing without JavaScript.",
+      "evidence": "Discoverability evidence fetched 130 KB of raw HTML but found only 29% rendered-word coverage; the rendered page is not an empty shell, yet most catalogue content is client-dependent.",
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-rendered.png",
+        "evidence/home-discoverability-crawler.png"
+      ],
+      "suggestedFix": "Server-render core catalogue labels and crawlable links, then progressively enhance interactions with JavaScript.",
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "guidanceCategory": "performance",
+      "effort": "large"
+    },
+    {
+      "id": "F22",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "humane-error-handling",
+      "pathId": "account",
+      "url": "https://www.xnxx.com/account/",
+      "summary": "Empty sign-in submission provides no persistent, actionable error state.",
+      "evidence": "After activating Sign in with both fields empty, the captured page remained visually unchanged with no inline error summary or recovery instruction.",
+      "artifacts": [
+        "evidence/account-error.png"
+      ],
+      "suggestedFix": "Validate after submission, mark fields with aria-invalid, associate clear messages, focus an error summary, and preserve entered values.",
+      "guidanceId": "accessible-error-announcement",
+      "guidanceCategory": "accessibility",
+      "effort": "small"
+    },
+    {
+      "id": "F23",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "pathId": "account",
+      "url": "https://www.xnxx.com/account/",
+      "summary": "Sign-in fields omit autocomplete tokens.",
+      "evidence": "The account probe reports empty autocomplete values for email and password fields.",
+      "artifacts": [
+        "evidence/account-probe.json"
+      ],
+      "suggestedFix": "Use autocomplete=username and autocomplete=current-password, with appropriate tokens on registration fields.",
+      "guidanceId": "autofill-sign-in-form",
+      "guidanceCategory": "forms",
+      "effort": "trivial"
+    },
+    {
+      "id": "F24",
+      "severity": "medium",
+      "confidence": "high",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "pathId": "home",
+      "url": "https://www.xnxx.com",
+      "summary": "The catalogue ships non-responsive legacy imagery.",
+      "evidence": "Image evidence found 100/100 images without srcset, 100 legacy PNG/JPEG resources, 12 oversized images, and 89 below-fold images without lazy loading.",
+      "artifacts": [
+        "evidence/images.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Generate AVIF/WebP variants, add srcset/sizes and dimensions, and lazy-load below-fold thumbnails.",
+      "guidanceId": "deliver-optimized-decorative-images",
+      "guidanceCategory": "performance",
+      "effort": "medium"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T01",
+      "title": "Restore keyboard, zoom, names, structure, and image alternatives",
+      "priority": 1,
+      "findingIds": [
+        "F09",
+        "F12",
+        "F13",
+        "F14"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T02",
+      "title": "Improve cold-load LCP and resource discovery",
+      "priority": 2,
+      "findingIds": [
+        "F10",
+        "F11"
+      ],
+      "guidanceId": "performance",
+      "status": "open"
+    },
+    {
+      "id": "T03",
+      "title": "Harden response headers and authentication",
+      "priority": 3,
+      "findingIds": [
+        "F18",
+        "F19",
+        "F20"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T04",
+      "title": "Server-render core catalogue content",
+      "priority": 4,
+      "findingIds": [
+        "F21"
+      ],
+      "guidanceId": "flicker-free-client-side-ab-testing",
+      "status": "open"
+    },
+    {
+      "id": "T05",
+      "title": "Modernise responsive image delivery",
+      "priority": 5,
+      "findingIds": [
+        "F15",
+        "F24"
+      ],
+      "guidanceId": "optimize-image-priority",
+      "status": "open"
+    },
+    {
+      "id": "T06",
+      "title": "Make the age gate semantic and reduce chrome",
+      "priority": 6,
+      "findingIds": [
+        "F06",
+        "F07"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T07",
+      "title": "Add humane sign-in errors and autofill",
+      "priority": 7,
+      "findingIds": [
+        "F22",
+        "F23"
+      ],
+      "guidanceId": "accessible-error-announcement",
+      "status": "open"
+    },
+    {
+      "id": "T08",
+      "title": "Add canonical and share/entity metadata",
+      "priority": 8,
+      "findingIds": [
+        "F16",
+        "F17"
+      ],
+      "guidanceId": "html",
+      "status": "open"
+    },
+    {
+      "id": "T09",
+      "title": "Add preference-aware theme and motion",
+      "priority": 9,
+      "findingIds": [
+        "F01",
+        "F02"
+      ],
+      "guidanceId": "dark-mode",
+      "status": "open"
+    },
+    {
+      "id": "T10",
+      "title": "Adopt component and navigation enhancements",
+      "priority": 10,
+      "findingIds": [
+        "F03",
+        "F04",
+        "F05",
+        "F08"
+      ],
+      "guidanceId": "size-aware-styling",
+      "status": "open"
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/404.png",
+      "caption": "404",
+      "findingIds": [
+        "F05"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/account-error.png",
+      "caption": "account error",
+      "findingIds": [
+        "F22"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/account-probe.json",
+      "caption": "account probe",
+      "findingIds": [
+        "F02",
+        "F03",
+        "F08",
+        "F09",
+        "F13",
+        "F19",
+        "F23"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/account.png",
+      "caption": "account",
+      "findingIds": [
+        "F05",
+        "F09",
+        "F19"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "cookies",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-retrieved.md",
+      "caption": "guidance retrieved",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-search.json",
+      "caption": "guidance search",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "headers",
+      "findingIds": [
+        "F18",
+        "F20"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.heapsnapshot",
+      "caption": "heap baseline",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post.heapsnapshot",
+      "caption": "heap post",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "home desktop",
+      "findingIds": [
+        "F01",
+        "F06"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "home discoverability crawler",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-rendered.png",
+      "caption": "home discoverability rendered",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "home discoverability",
+      "findingIds": [
+        "F21"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "home dom",
+      "findingIds": [
+        "F06"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "home layout mobile",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-metadata.json",
+      "caption": "home metadata",
+      "findingIds": [
+        "F16",
+        "F17"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "home mobile",
+      "findingIds": [
+        "F04",
+        "F07",
+        "F08"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-preferences.png",
+      "caption": "home preferences",
+      "findingIds": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-recon.json",
+      "caption": "home recon",
+      "findingIds": [
+        "F13"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "home summary",
+      "findingIds": [
+        "F11",
+        "F24"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "home trace summary",
+      "findingIds": [
+        "F10"
+      ]
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "home trace",
+      "findingIds": []
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "home",
+      "findingIds": [
+        "F11"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/images.json",
+      "caption": "images",
+      "findingIds": [
+        "F12",
+        "F15",
+        "F24"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse.json",
+      "caption": "lighthouse",
+      "findingIds": [
+        "F10",
+        "F12",
+        "F14"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/other-links.json",
+      "caption": "other links",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "robots",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/search-desktop.png",
+      "caption": "search desktop",
+      "findingIds": [
+        "F03",
+        "F04",
+        "F05",
+        "F07"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/secrets.json",
+      "caption": "secrets",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "sitemap",
+      "findingIds": [
+        "F16"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "trackers",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/video-links.json",
+      "caption": "video links",
+      "findingIds": []
+    }
+  ],
+  "budget": {
+    "wallClockSeconds": 600,
+    "pathCount": 4,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-18T01-20-48-168Z"
+}

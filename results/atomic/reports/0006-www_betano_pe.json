@@ -1,0 +1,1291 @@
+{
+  "url": "https://www.betano.pe",
+  "auditedAt": "2026-07-27T11:38:24.075Z",
+  "mode": "report",
+  "status": "blocked",
+  "statusDetail": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403. Per the audit method, work stopped at recon rather than treating the restriction splash as the site.",
+  "page": {
+    "appType": "unknown",
+    "framework": "unknown",
+    "notes": "The accessible top-level document is a thin iframe wrapper for a Betano restriction splash. The actual product architecture could not be determined."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "layout-metrics",
+    "discoverability",
+    "security-headers",
+    "direct-http-fetch",
+    "modern-web-guidance catalog"
+  ],
+  "guidanceConsulted": [],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Desktop browser view shows the security/compliance restriction splash.",
+      "condition": "viewport: 1440x900",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Mobile browser view of the same restriction splash.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-mobile-layout.json",
+      "caption": "Layout metrics for the wrapper/restriction page, not the inaccessible product.",
+      "condition": "viewport: 360x800",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Target DOM is only an iframe wrapper titled Betano Splash Screen.",
+      "condition": "default browser condition",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/restriction-dom.json",
+      "caption": "DOM of the cross-origin restriction splash confirms its security/compliance message.",
+      "condition": "direct iframe inspection",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/restriction-preferences.png",
+      "caption": "Restriction splash under dark mode and reduced-motion preferences; not representative of the product.",
+      "condition": "prefers-color-scheme: dark; prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/discoverability.json",
+      "caption": "Discoverability probe received HTTP 403 and an empty rendered top-level wrapper.",
+      "condition": "crawler and browser comparison",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-rendered.png",
+      "caption": "Browser-side discoverability capture of blocked target.",
+      "condition": "JavaScript enabled",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/discoverability-crawler.png",
+      "caption": "Crawler-side discoverability capture after HTTP 403.",
+      "condition": "JavaScript disabled crawler",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Descriptive security-header capture of the restriction response, not the product.",
+      "condition": "browser navigation",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/http-headers.txt",
+      "caption": "HTTP response headers showing 403 for the homepage.",
+      "condition": "direct HTTP fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots-headers.txt",
+      "caption": "HTTP response headers showing 403 for robots.txt.",
+      "condition": "direct HTTP fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap-headers.txt",
+      "caption": "HTTP response headers showing 403 for sitemap.xml.",
+      "condition": "direct HTTP fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/raw-home.html",
+      "caption": "Raw HTTP 403 response body for the homepage.",
+      "condition": "direct HTTP fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/robots.txt",
+      "caption": "HTTP 403 response body for robots.txt.",
+      "condition": "direct HTTP fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/sitemap.xml",
+      "caption": "HTTP 403 response body for sitemap.xml.",
+      "condition": "direct HTTP fetch",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/guidance-list.json",
+      "caption": "Pinned Modern Web Guidance 0.0.172 catalog listed before judgement; no check was judged because access was blocked.",
+      "condition": "modern-web-guidance@0.0.172",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "coverage-manifest.json",
+      "caption": "Atomic manifest of all 58 expected principle/check pairs and planned methods.",
+      "condition": "principles catalog 0.0.172",
+      "findingIds": []
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 0,
+    "blocked": 58,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": false
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a screenshot or computed background under an emulated prefers-color-scheme: dark condition will reveal whether surfaces re-tint; the page CSS / a color-scheme declaration is corroborating evidence. The model chooses the method.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for respect-user-preferences/respects-color-scheme.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a transition video, or an in-page probe of getAnimations()/computed animation under an emulated prefers-reduced-motion: reduce condition, can show whether motion stops. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for respect-user-preferences/respects-reduced-motion.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a screenshot under emulated prefers-contrast: more / forced-colors, or an axe/contrast probe, can show whether controls and text survive. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for respect-user-preferences/respects-contrast.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a transition video of a route/state change shows whether it animates; the page source / ::view-transition usage corroborates. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for implement-natural-interactions/view-transitions.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: source/CSS inspection for animation-timeline: scroll()/view(); a long-task / scroll-handler probe can flag the main-thread anti-pattern. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for implement-natural-interactions/scroll-driven-animations.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: CSS inspection for scroll-snap / overscroll-behavior / physics-based easing vs custom pointermove listeners. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for implement-natural-interactions/physical-gestures.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a transition video of scrolling, or CSS inspection for scroll-state container queries. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for provide-guided-navigation/scroll-state-aware-chrome.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: CSS inspection for anchor-name / position-anchor / position-try on overlays; a screenshot of an open overlay near a viewport edge can show drift. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for provide-guided-navigation/anchored-positioning.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: CSS inspection for ::highlight / scroll-marker; a transition video can show whether attention is cued after navigation. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for provide-guided-navigation/directs-attention.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a screenshot on load, or a DOM probe for full-viewport overlays present before interaction. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for maximize-content-reduce-noise/no-intrusive-interruptions.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: DOM/source inspection for popover / <dialog> / <details> vs custom overlay divs with manual dismiss handling. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for maximize-content-reduce-noise/semantic-dismissible-primitives.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a screenshot plus layout metrics can show the proportion of the viewport given to chrome vs content. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for maximize-content-reduce-noise/reduced-chrome.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: layout metrics (scrollWidth vs innerWidth) and a screenshot at an emulated narrow mobile viewport reveal overflow. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for adapt-to-the-form-factor/responsive-no-horizontal-scroll.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: CSS inspection for @container / container-type; a computed-style probe of the same component in a wide vs narrow container shows whether it adapts. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for adapt-to-the-form-factor/component-level-responsiveness.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a focus probe (focus an element, read the computed outline) or an axe target-size check; a screenshot of a focused control corroborates. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for adapt-to-the-form-factor/input-modality-aware.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: screenshot the first viewport and key scrolled states; inspect heading structure, nav labels, button text, and visual hierarchy; a task walkthrough can show whether the next action is obvious. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for support-core-task-success/clear-purpose-and-primary-action.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: run the flow manually with screenshots/DOM snapshots at each step; compare expected vs actual path length; inspect form requirements, navigation continuity, and blockers. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for support-core-task-success/primary-flow-completion.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: exercise network delay/failure, invalid input, empty data and success states; screenshot the state messaging and recovery controls; inspect whether browser history and focus remain sensible. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for support-core-task-success/clear-system-state-and-recovery.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: Lighthouse reports LCP/CLS/TBT directly and the model may run it; layout metrics + a layout-shift observer + a long-task observer (the evidence primitives) give the same signal first-party. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-fast-and-stable/good-core-web-vitals.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: the layout primitive's CLS observer captures shifts; a transition video of the first seconds shows content jumping. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-fast-and-stable/visual-stability.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: the layout primitive records long tasks; a heap summary shows the object population; Lighthouse reports TBT. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-fast-and-stable/efficient-main-thread.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a HAR summary can reveal cache headers, redirects, render-blocking candidates, weight offenders and dependency shape; a trace/Lighthouse insight report can corroborate LCP discovery, render-blocking, font-display and document latency. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-fast-and-stable/efficient-resource-delivery.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: Lighthouse/trace/code-coverage style evidence can flag unused JS/CSS, duplicated JavaScript and legacy code; a HAR summary shows third-party byte cost and request count. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-fast-and-stable/trim-unused-and-duplicate-code.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: axe-core (injectable via the evaluate primitive) or Lighthouse's a11y audits enumerate these; a DOM probe of the accessibility-relevant attributes is a first-party alternative. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-inclusive/names-roles-labels.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: axe contrast rules, a Lighthouse contrast audit, or an in-page probe computing contrast ratios from computed colours. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-inclusive/sufficient-contrast.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: axe/Lighthouse structural audits; a focus-walk probe (tab through, read activeElement + computed outline) is a first-party alternative. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-inclusive/structure-and-focus.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a screenshot of body and heading text, plus CSS inspection for text-wrap / text alignment / font fallback handling. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-inclusive/legible-text.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: Lighthouse/axe target-size, meta-viewport and media-caption audits are useful signals; screenshots at narrow and zoomed conditions plus DOM/media inspection can corroborate. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-inclusive/zoom-reflow-targets-and-media.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: capture Runtime/Log CDP events, or a probe that reads collected errors; Lighthouse reports this too. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for follow-best-practices/no-console-errors.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a DOM/source probe for doctype/charset/img dimensions; CSS inspection for repetition; Lighthouse best-practices audits cover the rest. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for follow-best-practices/sound-document-and-assets.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: Lighthouse best-practices audits and DevTools inspector/deprecation signals can surface these; DOM/source probes can verify paste handlers and prompt timing. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for follow-best-practices/browser-platform-hygiene.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a DOM probe reads <title> and meta[name=description]; Lighthouse SEO audits cover the same ground. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-discoverable/title-and-description.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a DOM probe for anchor hrefs, viewport meta, and robots; Lighthouse SEO audits corroborate. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-discoverable/crawlable-and-mobile-friendly.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: inspect response status and headers, <link rel=canonical>, hreflang links, robots meta, robots.txt and sitemap.xml; Lighthouse SEO audits cover several of these. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-discoverable/canonical-and-indexing-signals.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: inspect JSON-LD/microdata and social preview tags against visible content; Lighthouse has a manual structured-data audit, and ad-hoc probes can parse schema.org blocks. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-discoverable/structured-and-shareable-metadata.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: inspect response headers / page protocol via an evaluate probe or the network layer; Lighthouse best-practices flags HTTPS and CSP issues. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-private-and-secure/secure-transport-and-headers.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: inspect network requests and third-party origins; a probe of analytics/beacon calls. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-private-and-secure/data-minimisation-and-third-parties.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a probe for permission requests fired on load; source inspection for passkey / WebAuthn / navigator.credentials usage in auth flows. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-private-and-secure/in-context-permissions-and-modern-auth.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: inspect response headers and browser security state; Lighthouse/DevTools security audits can corroborate HSTS, clickjacking, Trusted Types, origin isolation and third-party cookie findings. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-private-and-secure/defensive-browser-policies.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: load with scripting disabled or compare a no-JS fetch of the HTML against the rendered page; check for Baseline-aware fallbacks in source. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-resilient/progressive-enhancement.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: exercise menus near viewport edges with a screenshot; a probe of async/visibility behaviour. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-resilient/resilient-runtime-behaviour.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a probe for a service worker registration and a web app manifest; test behaviour offline. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-resilient/offline-and-installable.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: simulate failed fetches/offline mode or inspect representative 404/500 routes; screenshots and DOM snapshots of error/loading/empty states show whether recovery is possible. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-resilient/network-and-http-failure-states.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a DOM probe for <html lang>/dir and CSS inspection for logical vs physical properties. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-internationalised/lang-dir-and-logical-properties.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: source inspection for Intl.* usage vs hand-rolled formatting; a probe of rendered dates/numbers under a different locale. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-internationalised/locale-aware-data.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: source inspection for time-zone-aware date handling vs naive local Date math. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-internationalised/time-zone-correctness.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a screenshot of consent/upsell/cancel flows; source inspection for declarative button actions vs misleading controls. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-trustworthy/no-dark-patterns.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: exercise a form, submit invalid input, and observe timing and clarity of errors via a screenshot or a :user-invalid / aria-invalid probe. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-trustworthy/humane-error-handling.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: source/DOM inspection for autocomplete attributes on form fields; a probe of autofill affordances. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-trustworthy/trustworthy-input-assistance.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: walkthrough checkout/subscription/auth/account flows when present; screenshot pricing, confirmation, cancellation and reauthentication states; inspect passkey/autocomplete support for sign-in and payment. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-trustworthy/safe-commercial-and-account-flows.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: inspect transferred image bytes vs displayed size; source inspection for modern formats and resolution handling. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-sustainable/optimised-assets.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a long-task / network probe for background fetches and processing while idle or backgrounded. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-sustainable/no-wasteful-work.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a HAR summary shows third-party bytes, font/media weight and caching; screenshots/video reveal autoplay and decorative media; trace/layout evidence shows whether media/animation keeps work running. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-sustainable/third-party-and-media-budget.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: source inspection for WebMCP / agentic-tool registration and agent-readable affordances. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-agent-ready/structured-agent-capabilities.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: source inspection for built-in AI (language model / summariser) usage. The model chooses.",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-agent-ready/on-device-inference.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: compare heap snapshots for retained growth - a baseline, then one taken after repeating the interaction with `--interact` about 10x (the memory-tracer methodology: baseline -> repeat -> post -> compare). Performance.getMetrics (JSHeapUsedSize, Nodes) across the same before/after window is corroborat",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-memory-efficient/no-leak-under-repeated-interaction.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: a single `heap` summary's totals (nodeCount, totalSelfSizeBytes, constructor population) plus Performance.getMetrics (Nodes, JSHeapUsedSize) give the current footprint to judge against the page's purpose. Chrome DevTools MCP heap snapshots and memlab snapshot analysis can provide the same memory dis",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-memory-efficient/bounded-footprint.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "blocked",
+      "confidence": "high",
+      "method": "Attempted target navigation before planned check-specific evidence: the `heap` summary by constructor (Detached* nodes) compared across a before/after pair shows a growing detached-DOM population; an `evaluate` probe can sample listener/timer counts (e.g. getEventListeners-style counting, or instrumenting addEventListener/setInterval) before and after the repeated i",
+      "evidence": "Chrome and direct HTTP navigation reached only a security/compliance restriction splash; the target document, routes, controls, content, and user journeys were unavailable. Direct fetches of /, /robots.txt, and /sitemap.xml all returned HTTP 403.",
+      "reason": "External access control prevented inspection of the actual Betano experience required for be-memory-efficient/no-detached-dom-or-unbounded-listeners.",
+      "pathIds": [
+        "entry-restriction"
+      ],
+      "artifacts": [
+        "evidence/home-desktop.png",
+        "evidence/home-dom.json",
+        "evidence/http-headers.txt"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 5 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 4 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 4 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "incomplete",
+      "reason": "All 2 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "incomplete",
+      "reason": "All 3 checks were blocked by the security/compliance restriction page; no verdict on the actual site is possible."
+    }
+  ],
+  "paths": [
+    {
+      "id": "entry-restriction",
+      "description": "Homepage recon and access attempt. Selected as the required entry path; browser rendered only a security/compliance restriction splash and direct HTTP returned 403.",
+      "url": "https://www.betano.pe",
+      "conditions": [
+        "viewport: 1440x900",
+        "viewport: 360x800",
+        "prefers-color-scheme: dark",
+        "prefers-reduced-motion: reduce",
+        "crawler without JavaScript",
+        "direct HTTP"
+      ],
+      "result": "failed"
+    },
+    {
+      "id": "representative-archetypes",
+      "description": "Planned sportsbook listing/detail, casino listing/game detail, search/navigation, registration/sign-in, account and betting-flow archetypes. Not covered because no links, routes, or product UI were reachable past the external restriction.",
+      "url": "https://www.betano.pe",
+      "conditions": [
+        "representative-route discovery"
+      ],
+      "result": "skipped"
+    }
+  ],
+  "findings": [],
+  "taskList": [],
+  "budget": {
+    "pathCount": 2,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-27T11-35-02-733Z"
+}

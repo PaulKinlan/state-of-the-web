@@ -4,7 +4,7 @@ This file instructs AI agents (Claude Code, Codex, Gemini, etc.) on how to run t
 
 ## Overview
 
-Run web-uplift audits across the top 1,000 Tranco sites. Each site gets a structured JSON report covering every authoritative `(principleId, checkId)` pair from `principles.json`, plus derived principle outcomes, evidence metrics, and findings. The catalog currently contains 17 principles and 58 checks; always derive those counts from the file.
+Run web-uplift audits across an immutable 1,000-origin manifest. Each site gets a structured JSON report covering every authoritative `(principleId, checkId)` pair from `principles.json`, plus derived principle outcomes, evidence metrics, and findings. The published bounded run uses all 1,000 unique origins in the CrUX global `rank=1000` bucket, preserving source-file order (not an exact within-bucket popularity rank). The catalog currently contains 17 principles and 58 checks; always derive those counts from the file.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Run web-uplift audits across the top 1,000 Tranco sites. Each site gets a struct
 2. **Evidence CLI**: `node ~/.web-uplift/evidence/cli.mjs <primitive> <url> [options]`
 3. **Python 3.12+** with `tldextract` (`pip install tldextract`)
 4. **System Chrome** at `/usr/bin/google-chrome-stable` (headless, driven via CDP)
-5. **Tranco top 1000** at `/tmp/tranco-top1000.txt`
+5. **Immutable source manifest** for the run (the final published copy is `results/atomic/manifest.csv`)
 
 ## Two audit modes
 
@@ -134,6 +134,18 @@ Do not maintain a prose approximation here. Read `principles.json` at runtime an
 - **missing execution is explicit**: use `blocked` or `not-run` when execution was impossible; never turn missing evidence into a pass or a vague “pending testing method”. The denominator remains every applicable defined check for every site.
 - **principle status is derived from tests**: any test with `issues` makes the principle `issues`; all applicable measured tests passing makes it `pass`; `not-applicable` is only valid when the principle or test genuinely does not apply. A mix containing `blocked`/`not-run` derives `incomplete`, never pass.
 - **validation is a publication gate**: run `node scripts/validate_atomic_report.mjs principles.json <report.json>` before import, scoring, aggregation, or publication. Missing, unknown, duplicate, blocked, or not-run checks keep the report partial and unscored.
+
+## Final publication
+
+The finished bounded run is reconciled into `results/atomic/`, 1,000 static pages in `sites/`, and 17 principle pages. Raw browser evidence remains in the local run tree and is not committed. Rebuild and validate with:
+
+```bash
+python3 scripts/reconcile_atomic_run.py <run-dir> --catalog <exact-run-catalog.json>
+python3 scripts/build_atomic_db.py
+python3 scripts/validate_atomic_publication.py
+```
+
+The final inventory is unscored and must preserve complete, exhausted-blocked, and exhausted-partial dispositions exactly.
 
 ## Important
 

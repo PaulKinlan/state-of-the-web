@@ -1,0 +1,2358 @@
+{
+  "url": "https://m.autoplius.lt",
+  "auditedAt": "2026-07-19T23:18:54.119Z",
+  "mode": "report",
+  "status": "completed",
+  "statusDetail": "58/58 atomic checks judged. Representative secondary routes exposed bot verification and a broken login render; these are recorded as observed issues rather than unexecuted checks.",
+  "page": {
+    "appType": "mpa",
+    "framework": "server-rendered legacy/mobile MPA",
+    "notes": "Public Lithuanian vehicle marketplace. Home page rendered, while listing/detail/article routes later hit rate-limit verification during the representative traversal."
+  },
+  "evidenceUsed": [
+    "screenshot",
+    "dom",
+    "evaluate-probe",
+    "layout-metrics",
+    "trace",
+    "har",
+    "discoverability",
+    "headers",
+    "cookies",
+    "trackers",
+    "secrets",
+    "images",
+    "heap-summary",
+    "lighthouse",
+    "curl robots/sitemap"
+  ],
+  "guidanceConsulted": [
+    "dark-mode",
+    "component-specific-light-dark-theme",
+    "adapt-scrollbar-to-contrast-preferences",
+    "same-document-transitions",
+    "cross-document-transitions",
+    "group-element-transitions",
+    "faster-spa-view-transitions",
+    "parallax-scroll-effects",
+    "scroll-entry-exit-effects",
+    "carousel-slide-effects",
+    "physics-based-easing",
+    "individual-transform-properties",
+    "animate-element-entry-exit",
+    "animate-to-from-top-layer",
+    "animate-to-intrinsic-sizes",
+    "dynamic-sibling-animations",
+    "interactive-content-reveal",
+    "pull-to-reveal",
+    "swipe-to-remove",
+    "shrinking-header-on-scroll",
+    "scroll-progress-indicator",
+    "scroll-position-aware-elements",
+    "scroll-snap-realtime-feedback",
+    "scroll-snap-state-sync",
+    "scroll-target-on-load",
+    "soft-edge-content-fade",
+    "scrollability-affordance-hints",
+    "anchor-positioning-tab-underline",
+    "position-aware-tooltips",
+    "interest-triggered-tooltips",
+    "interest-triggered-action-previews",
+    "directional-navigation-transitions",
+    "carousel-snap-highlights",
+    "navigation-drawer",
+    "stack-drill-down",
+    "persistent-app-tours",
+    "persistent-toast-notifications",
+    "light-dismiss-a-dialog",
+    "platform-controls-dismiss-dialog",
+    "declarative-dialog-popover-control",
+    "animated-select-picker",
+    "branded-select-styling",
+    "brand-consistent-forms",
+    "custom-select-picker-layouts",
+    "rich-media-picker",
+    "complex-shapes",
+    "shaped-cutouts",
+    "overflow-clipping-control",
+    "visually-texture-content",
+    "apply-webgl-shaders",
+    "interactive-content-in-3d-scenes",
+    "highlight-text-ranges",
+    "prevent-text-wrapping",
+    "customize-scrollbar-color-and-thickness",
+    "export-html-media-from-canvas",
+    "fluid-scaling",
+    "calculate-with-intrinsic-sizes",
+    "css-layout",
+    "size-aware-styling",
+    "content-based-styling",
+    "child-state-based-styling",
+    "design-token-reactivity",
+    "dynamic-sibling-styling",
+    "form-fields-automatically-fit-contents",
+    "improve-text-layout-and-legibility",
+    "accessible-error-announcement",
+    "required-field-feedback",
+    "validate-input-after-interaction",
+    "identify-inp-causes",
+    "schedule-tasks-by-priority",
+    "optimize-preload-priority",
+    "improve-next-page-load-performance",
+    "interactions-in-complex-layouts",
+    "visually-stable-font-fallbacks",
+    "break-up-long-tasks",
+    "identify-heavy-scripts",
+    "optimize-script-priority",
+    "defer-rendering-heavy-content",
+    "defer-work-until-scroll-ends",
+    "optimize-image-priority",
+    "conditional-async-dependencies",
+    "expose-canvas-content-to-browser-features",
+    "move-dom-element-without-losing-state",
+    "precise-text-alignment",
+    "visually-stable-mixed-fonts",
+    "reduce-style-repetition",
+    "batch-analytics-events",
+    "full-session-analytics",
+    "calculate-total-foreground-time",
+    "passkey-registration",
+    "passkey-authentication",
+    "passkey-reauthentication",
+    "passkey-conditional-create",
+    "passkey-management",
+    "flicker-free-client-side-ab-testing",
+    "consistent-cross-document-transitions",
+    "stabilize-reactive-state",
+    "resilient-context-menus-and-nested-dropdowns",
+    "persistent-top-layer-ui",
+    "detect-initial-visibility-state",
+    "sequence-distributed-events",
+    "language-detection",
+    "support-global-calendar-systems",
+    "capture-location-agnostic-data",
+    "format-human-readable-durations",
+    "manage-recurring-intervals",
+    "calculate-event-differentials",
+    "coordinate-global-events",
+    "model-partial-time-concepts",
+    "search-hidden-content",
+    "select-menu-interaction",
+    "style-parent-with-has",
+    "autofill-address-form",
+    "autofill-payment-form",
+    "autofill-sign-in-form",
+    "autofill-sign-up-form",
+    "autofill-highlight-inputs",
+    "deliver-optimized-decorative-images",
+    "resolution-optimized-pseudo-elements",
+    "deprioritize-background-fetches",
+    "efficient-background-processing",
+    "agentic-forms",
+    "agentic-javascript-tools",
+    "language-model",
+    "accessibility",
+    "forms",
+    "html",
+    "security",
+    "privacy",
+    "passkeys",
+    "webmcp"
+  ],
+  "artifacts": [
+    {
+      "type": "screenshot",
+      "path": "evidence/home-mobile.png",
+      "caption": "Initial mobile viewport with blocking consent wall",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-008",
+        "F-010"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-dark.png",
+      "caption": "Dark preference capture, visually identical to light",
+      "condition": "prefers-color-scheme: dark",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-high-contrast.png",
+      "caption": "Forced-colors/high-contrast capture",
+      "condition": "forced-colors: active",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-desktop.png",
+      "caption": "Initial desktop viewport",
+      "condition": "viewport 1440x1000",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/home-discoverability-crawler.png",
+      "caption": "Crawler view with JavaScript disabled",
+      "condition": "crawler without JavaScript",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/motion-modern-css.json",
+      "caption": "Reduced-motion and modern motion CSS probe",
+      "condition": "prefers-reduced-motion: reduce",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/recon.json",
+      "caption": "Route, heading and form reconnaissance",
+      "condition": "home",
+      "findingIds": []
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/listing-mobile.png",
+      "caption": "Listing navigation returned Cloudflare verification",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-014",
+        "F-033"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/detail-mobile.png",
+      "caption": "Detail navigation returned Cloudflare verification",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-014"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/article-mobile.png",
+      "caption": "Article navigation returned Cloudflare verification",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-014"
+      ]
+    },
+    {
+      "type": "screenshot",
+      "path": "evidence/login-mobile.png",
+      "caption": "Login endpoint rendered escaped markup",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-014",
+        "F-031",
+        "F-038"
+      ]
+    },
+    {
+      "type": "layout",
+      "path": "evidence/home-layout-mobile.json",
+      "caption": "Mobile overflow, CLS, and long-task observation",
+      "condition": "viewport 390x844",
+      "findingIds": []
+    },
+    {
+      "type": "trace",
+      "path": "evidence/home-trace.json",
+      "caption": "DevTools load trace",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-015",
+        "F-017"
+      ]
+    },
+    {
+      "type": "trace-summary",
+      "path": "evidence/home-trace-summary.json",
+      "caption": "Trace summary with LCP and blocking time",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-015",
+        "F-017",
+        "F-040"
+      ]
+    },
+    {
+      "type": "har",
+      "path": "evidence/home.har",
+      "caption": "Load network archive",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-018",
+        "F-019",
+        "F-030",
+        "F-041"
+      ]
+    },
+    {
+      "type": "har-summary",
+      "path": "evidence/home-summary.json",
+      "caption": "Network summary, resource/third-party weight",
+      "condition": "viewport 390x844",
+      "findingIds": [
+        "F-018",
+        "F-019",
+        "F-030",
+        "F-041"
+      ]
+    },
+    {
+      "type": "lighthouse",
+      "path": "evidence/lighthouse-home.json",
+      "caption": "Lighthouse performance/accessibility/best-practices/SEO",
+      "condition": "mobile",
+      "findingIds": [
+        "F-015",
+        "F-016",
+        "F-020",
+        "F-021",
+        "F-025"
+      ]
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-baseline.json",
+      "caption": "Baseline heap summary",
+      "condition": "home",
+      "findingIds": []
+    },
+    {
+      "type": "heap",
+      "path": "evidence/heap-post-repeat.json",
+      "caption": "Heap after 10 repeated scroll cycles",
+      "condition": "home repeated scroll",
+      "findingIds": []
+    },
+    {
+      "type": "discoverability",
+      "path": "evidence/home-discoverability.json",
+      "caption": "Raw HTML versus rendered content comparison",
+      "condition": "crawler without JS",
+      "findingIds": []
+    },
+    {
+      "type": "dom",
+      "path": "evidence/home-dom.json",
+      "caption": "Rendered DOM and styles",
+      "condition": "home",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-probe.json",
+      "caption": "Semantics, metadata, focus, targets and CSS probe",
+      "condition": "home",
+      "findingIds": []
+    },
+    {
+      "type": "other",
+      "path": "evidence/headers.json",
+      "caption": "Security header audit",
+      "condition": "home",
+      "findingIds": [
+        "F-029",
+        "F-032"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/cookies.json",
+      "caption": "Cookie security audit",
+      "condition": "home",
+      "findingIds": [
+        "F-029"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/trackers.json",
+      "caption": "Third-party tracker inventory",
+      "condition": "home",
+      "findingIds": [
+        "F-030",
+        "F-041"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/home-images.json",
+      "caption": "Image sizing/loading/alt inventory",
+      "condition": "home",
+      "findingIds": [
+        "F-020",
+        "F-024",
+        "F-039"
+      ]
+    },
+    {
+      "type": "other",
+      "path": "evidence/render-blocking-confirmation.json",
+      "caption": "DOM confirmation of script and stylesheet loading attributes",
+      "condition": "home",
+      "findingIds": [
+        "F-018"
+      ]
+    }
+  ],
+  "config": {
+    "loaded": false
+  },
+  "coverage": {
+    "catalogVersion": "modern-web-guidance@0.0.172",
+    "catalogChecksum": "sha256:78ccfdb2d483f4c57d9dafed80fd86c6265585a56457c8dcfddc254b80fb44d7",
+    "expected": 58,
+    "recorded": 58,
+    "judged": 58,
+    "blocked": 0,
+    "notRun": 0,
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "complete": true
+  },
+  "checkOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-color-scheme",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "screenshot under emulated dark mode is pixel-identical to light mode; no color-scheme CSS was found",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-reduced-motion",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "reduced-motion probe matched the preference and found no running animations or motion CSS",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/motion-modern-css.json"
+      ]
+    },
+    {
+      "principleId": "respect-user-preferences",
+      "checkId": "respects-contrast",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "forced-colors/prefers-contrast screenshot retained readable consent controls and text",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-high-contrast.png"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "view-transitions",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "CSS/animation probe found no View Transition rules or animations for state/route changes",
+      "pathIds": [
+        "home",
+        "listing",
+        "detail",
+        "article",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/motion-modern-css.json"
+      ],
+      "findingIds": [
+        "F-002"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "scroll-driven-animations",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "No parallax, scrollytelling, or scroll-linked animation was present on the inspected surfaces",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "reason": "No parallax, scrollytelling, or scroll-linked animation was present on the inspected surfaces"
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "checkId": "physical-gestures",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "content carousels and long mobile surfaces expose no scroll-snap/overscroll declarative gesture CSS",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "scroll-state-aware-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "long 6,122px page uses static header chrome; no scroll-state/progress CSS was found",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-004"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "anchored-positioning",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "No tooltip or edge-positioned popover was present in the inspected entry experience",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "reason": "No tooltip or edge-positioned popover was present in the inspected entry experience"
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "checkId": "directs-attention",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "navigation/state changes expose no directional transition, marker, highlight, or focus cue",
+      "pathIds": [
+        "home",
+        "listing",
+        "detail",
+        "article",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-005"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "no-intrusive-interruptions",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "first viewport is fully obscured by a consent interstitial before any interaction",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F-006"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "semantic-dismissible-primitives",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "probe found 3 custom modal-role elements but zero native dialog, popover, or details elements",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-007"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "checkId": "reduced-chrome",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "consent chrome consumes the whole first viewport and persistent header/chat controls compete with marketplace content",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-desktop.png"
+      ],
+      "findingIds": [
+        "F-008"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "responsive-no-horizontal-scroll",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "390x844 layout measured scrollWidth=clientWidth=390 with zero overflow and viewport meta present",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "component-level-responsiveness",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "CSS probe found no container queries or container-type; adaptation relies on a separate mobile surface",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-009"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "checkId": "input-modality-aware",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "focused first link computed outline is none; many links are only 13-18px high",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-010"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-purpose-and-primary-action",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "search/listing purpose exists behind the page, but the blocking consent wall hides it on first load",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "findingIds": [
+        "F-011"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "primary-flow-completion",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "listing, detail, and article navigations returned a Cloudflare human-verification wall; the login endpoint rendered escaped HTML text",
+      "pathIds": [
+        "listing",
+        "detail",
+        "article",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/detail-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/login-mobile.png"
+      ],
+      "findingIds": [
+        "F-012"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "checkId": "clear-system-state-and-recovery",
+      "status": "pass",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "rate-limit challenge clearly explains the state, offers Lithuanian/English, and provides a visible verification recovery action",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "good-core-web-vitals",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse measured LCP 12.2s, CLS 0.131 and TBT 230ms; trace measured LCP 6.78s and TBT 2.17s",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F-013"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "visual-stability",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse measured CLS 0.131 despite the shorter layout observation measuring 0.012",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-layout-mobile.json"
+      ],
+      "findingIds": [
+        "F-014"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-main-thread",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "trace found a 2,199ms main-thread task and 2,174ms total blocking time",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ],
+      "findingIds": [
+        "F-015"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "efficient-resource-delivery",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "HAR recorded five VeryHigh render-blocking stylesheets and several synchronous classic scripts; probe confirmed key scripts lack async/defer",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/render-blocking-confirmation.json"
+      ],
+      "findingIds": [
+        "F-016"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "checkId": "trim-unused-and-duplicate-code",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "976KB of script was transferred; ad, analytics, Facebook and chat bundles dominate the 1.58MB load",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F-017"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "names-roles-labels",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse found unnamed links; image audit found 42 images without alt; search text input has no label",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-images.json",
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-018"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "sufficient-contrast",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse found white VIN badge text at 3.24:1, below the required 4.5:1",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F-019"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "structure-and-focus",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "visible headings begin at H3 and no visible page H1 exists; focused first link has outline:none",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-020"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "legible-text",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "mobile screenshot shows readable body typography and the 390px layout has no clipping or horizontal overflow",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-layout-mobile.json"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "checkId": "zoom-reflow-targets-and-media",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "viewport disables zoom with maximum-scale=1 and user-scalable=0; many targets are 13-18px high",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-021"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "no-console-errors",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse console-errors audit passed",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "sound-document-and-assets",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "doctype/charset are valid, but image audit found 43 images without width/height and 46 without srcset",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-dom.json"
+      ],
+      "findingIds": [
+        "F-022"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "checkId": "browser-platform-hygiene",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse best-practices score was 100 with no deprecated API or console-error failure",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "title-and-description",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "descriptive title and meta description are present in rendered and raw HTML",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "crawlable-and-mobile-friendly",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Lighthouse found a feedback anchor with no href; robots and viewport otherwise exist",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "findingIds": [
+        "F-023"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "canonical-and-indexing-signals",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "home returns 200, canonical/hreflang are present, robots permits normal crawlers and names a sitemap",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "checkId": "structured-and-shareable-metadata",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "Open Graph title/description/url exist, but no JSON-LD was present for marketplace/product entities",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-024"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "secure-transport-and-headers",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "HTTPS/HSTS/nosniff are present, but CSP is missing and 6 of 8 cookies lack Secure",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "findingIds": [
+        "F-025"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "data-minimisation-and-third-parties",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "18 third-party origins and 7 known trackers loaded; 80/82 requests and 1.56MB were classified third-party",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F-026"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "in-context-permissions-and-modern-auth",
+      "status": "issues",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "no permission prompt fired on home, but the sign-in endpoint rendered escaped markup and no usable modern-auth surface could be reached",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-mobile.png"
+      ],
+      "findingIds": [
+        "F-027"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "checkId": "defensive-browser-policies",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "CSP and Permissions-Policy are absent; Referrer-Policy is the weak no-referrer-when-downgrade default",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "findingIds": [
+        "F-028"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "progressive-enhancement",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "raw HTML is substantial (141KB), not a JS shell, and retains 65% of rendered content words",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-discoverability.json",
+        "evidence/home-discoverability-crawler.png"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "resilient-runtime-behaviour",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "representative internal navigations degrade to a bot wall, and login renders escaped markup instead of an interactive form",
+      "pathIds": [
+        "listing",
+        "login"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/login-mobile.png"
+      ],
+      "findingIds": [
+        "F-029"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "offline-and-installable",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "a service worker API is active and the page remains server-rendered; installability is not central to this marketplace",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-discoverability.json"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "checkId": "network-and-http-failure-states",
+      "status": "pass",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "the HTTP/rate-limit challenge is explicit, localized and offers a verification action instead of a blank shell",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "lang-dir-and-logical-properties",
+      "status": "pass",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "html lang=lt is correct and hreflang links expose Lithuanian, Russian, English and Latvian variants",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "locale-aware-data",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "rendered prices use Lithuanian spacing and euro notation and localized variants are explicitly linked",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json",
+        "evidence/home-probe.json"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "checkId": "time-zone-correctness",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "no scheduled event or user-facing time-zone-sensitive workflow was present in the audited marketplace entry experience",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/recon.json"
+      ],
+      "reason": "no scheduled event or user-facing time-zone-sensitive workflow was present in the audited marketplace entry experience"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "no-dark-patterns",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "consent accept and reject actions are both clearly labeled and similarly prominent; no confirmshaming was observed",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "humane-error-handling",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "the observed verification error state explains why it appeared and offers a clear recovery action without blame",
+      "pathIds": [
+        "listing"
+      ],
+      "artifacts": [
+        "evidence/listing-mobile.png"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "trustworthy-input-assistance",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "primary text search has autocomplete=off, no name and no accessible label",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "findingIds": [
+        "F-030"
+      ]
+    },
+    {
+      "principleId": "be-trustworthy",
+      "checkId": "safe-commercial-and-account-flows",
+      "status": "issues",
+      "confidence": "high",
+      "method": "visual screenshot review plus corroborating probe",
+      "evidence": "sign-in endpoint displays escaped HTML rather than a usable account form, preventing a clear account flow",
+      "pathIds": [
+        "login"
+      ],
+      "artifacts": [
+        "evidence/login-mobile.png"
+      ],
+      "findingIds": [
+        "F-031"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "optimised-assets",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "46/49 images lack responsive srcset, 11 use legacy formats and 46 below-fold images are not lazy-loaded",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-images.json"
+      ],
+      "findingIds": [
+        "F-032"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "no-wasteful-work",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "trace found 2.17s blocking time and HAR shows ad/analytics work loading before user intent",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json"
+      ],
+      "findingIds": [
+        "F-033"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "checkId": "third-party-and-media-budget",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "third parties account for 1.56MB and 80 of 82 requests, including ad, analytics, Facebook and chat code",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "findingIds": [
+        "F-034"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "structured-agent-capabilities",
+      "status": "issues",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "robots.txt explicitly blocks anthropic-ai, Claude-Web and Applebot-Extended; no JSON-LD or agent tool registration was found",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-discoverability.json"
+      ],
+      "findingIds": [
+        "F-035"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "checkId": "on-device-inference",
+      "status": "not-applicable",
+      "confidence": "high",
+      "method": "objective artifact/probe review",
+      "evidence": "no clear user task in this marketplace entry experience requires on-device language-model inference",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "reason": "no clear user task in this marketplace entry experience requires on-device language-model inference"
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-leak-under-repeated-interaction",
+      "status": "pass",
+      "confidence": "low",
+      "method": "objective artifact/probe review",
+      "evidence": "after 10 repeated full-page scroll cycles, snapshot size rose only ~0.50MB (1.6%); no unbounded trend was demonstrated",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-repeat.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "bounded-footprint",
+      "status": "pass",
+      "confidence": "medium",
+      "method": "objective artifact/probe review",
+      "evidence": "heap summary was ~30.9MB for a content- and third-party-heavy marketplace page; proportionate though optimizable",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "checkId": "no-detached-dom-or-unbounded-listeners",
+      "status": "pass",
+      "confidence": "low",
+      "method": "objective artifact/probe review",
+      "evidence": "heap summaries exposed no Detached* constructor among reported populations and repeated scrolling did not show runaway size growth",
+      "pathIds": [
+        "home"
+      ],
+      "artifacts": [
+        "evidence/heap-baseline.json",
+        "evidence/heap-post-repeat.json"
+      ]
+    }
+  ],
+  "principleOutcomes": [
+    {
+      "principleId": "respect-user-preferences",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-001"
+      ]
+    },
+    {
+      "principleId": "implement-natural-interactions",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-002",
+        "F-003"
+      ]
+    },
+    {
+      "principleId": "provide-guided-navigation",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-004",
+        "F-005"
+      ]
+    },
+    {
+      "principleId": "maximize-content-reduce-noise",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-006",
+        "F-007",
+        "F-008"
+      ]
+    },
+    {
+      "principleId": "adapt-to-the-form-factor",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-009",
+        "F-010"
+      ]
+    },
+    {
+      "principleId": "support-core-task-success",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-011",
+        "F-012"
+      ]
+    },
+    {
+      "principleId": "be-fast-and-stable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-013",
+        "F-014",
+        "F-015",
+        "F-016",
+        "F-017"
+      ]
+    },
+    {
+      "principleId": "be-inclusive",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-018",
+        "F-019",
+        "F-020",
+        "F-021"
+      ]
+    },
+    {
+      "principleId": "follow-best-practices",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-022"
+      ]
+    },
+    {
+      "principleId": "be-discoverable",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-023",
+        "F-024"
+      ]
+    },
+    {
+      "principleId": "be-private-and-secure",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-025",
+        "F-026",
+        "F-027",
+        "F-028"
+      ]
+    },
+    {
+      "principleId": "be-resilient",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-029"
+      ]
+    },
+    {
+      "principleId": "be-internationalised",
+      "expectation": "contextual",
+      "status": "pass"
+    },
+    {
+      "principleId": "be-trustworthy",
+      "expectation": "default",
+      "status": "issues",
+      "findingIds": [
+        "F-030",
+        "F-031"
+      ]
+    },
+    {
+      "principleId": "be-sustainable",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-032",
+        "F-033",
+        "F-034"
+      ]
+    },
+    {
+      "principleId": "be-agent-ready",
+      "expectation": "contextual",
+      "status": "issues",
+      "findingIds": [
+        "F-035"
+      ]
+    },
+    {
+      "principleId": "be-memory-efficient",
+      "expectation": "default",
+      "status": "pass"
+    }
+  ],
+  "paths": [
+    {
+      "id": "home",
+      "description": "Entry/search and mixed listing archetype; tested first load, mobile/desktop, preferences, performance, accessibility, security and memory.",
+      "url": "https://m.autoplius.lt",
+      "conditions": [
+        "390x844",
+        "1440x1000",
+        "dark",
+        "reduced-motion",
+        "forced-colors",
+        "crawler without JavaScript"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "listing",
+      "description": "Primary used-car results/listing journey; navigation reached a human-verification state.",
+      "url": "https://m.autoplius.lt/skelbimai/naudoti-automobiliai",
+      "conditions": [
+        "390x844"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "detail",
+      "description": "Representative vehicle detail; navigation reached a human-verification state.",
+      "url": "https://m.autoplius.lt/skelbimai/audi-a6-3-0-l-sedanas-2011-dyzelinas-31420360.html",
+      "conditions": [
+        "390x844"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "article",
+      "description": "Editorial/content archetype; navigation reached a human-verification state.",
+      "url": "https://m.autoplius.lt/tyrimai/barometras/2026-metu-ii-ketv-lietuvos-automobiliu-rinkos-apzvalga?page_nr=1",
+      "conditions": [
+        "390x844"
+      ],
+      "result": "issues"
+    },
+    {
+      "id": "login",
+      "description": "Account/authentication flow; endpoint rendered escaped markup rather than a usable form.",
+      "url": "https://m.autoplius.lt/login/dialog",
+      "conditions": [
+        "390x844"
+      ],
+      "result": "failed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-006",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "no-intrusive-interruptions",
+      "guidanceId": "light-dismiss-a-dialog",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "No intrusive pop-ups, interstitials or banners that obscure content on load; overlays are dismissible and content-first.",
+      "evidence": "first viewport is fully obscured by a consent interstitial before any interaction",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Replace the blocking first-load wall with a compact, content-preserving consent surface where legally possible.",
+      "effort": "large"
+    },
+    {
+      "id": "F-010",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "input-modality-aware",
+      "guidanceId": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Touch targets are adequately sized and hover-only affordances have a non-hover fallback, and keyboard focus is visible, so the UI works for touch, pointer and keyboard alike.",
+      "evidence": "focused first link computed outline is none; many links are only 13-18px high",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Add visible :focus-visible styles and enlarge touch targets to at least 24px, preferably 44px.",
+      "effort": "large"
+    },
+    {
+      "id": "F-011",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "clear-purpose-and-primary-action",
+      "guidanceId": "scrollability-affordance-hints",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page communicates what it is for and exposes the primary next action without requiring users to hunt through decorative content, generic copy, or competing calls to action.",
+      "evidence": "search/listing purpose exists behind the page, but the blocking consent wall hides it on first load",
+      "artifacts": [
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Expose the vehicle search and primary next action in the initial usable viewport.",
+      "effort": "large"
+    },
+    {
+      "id": "F-012",
+      "pathId": "listing",
+      "principleId": "support-core-task-success",
+      "principleCheckId": "primary-flow-completion",
+      "guidanceId": "forms",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The representative primary flow can be completed end-to-end with predictable steps, no avoidable dead ends, no hidden required information, and no needless detours through modals, account walls, or upsells.",
+      "evidence": "listing, detail, and article navigations returned a Cloudflare human-verification wall; the login endpoint rendered escaped HTML text",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/detail-mobile.png",
+        "evidence/article-mobile.png",
+        "evidence/login-mobile.png"
+      ],
+      "suggestedFix": "Tune bot protection and endpoint rendering so normal navigation and sign-in remain completable.",
+      "effort": "large"
+    },
+    {
+      "id": "F-013",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "good-core-web-vitals",
+      "guidanceId": "identify-inp-causes",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Core Web Vitals are in the good range: LCP is fast, interaction latency (INP) is low, and CLS is minimal; work is prioritised and deferred sensibly.",
+      "evidence": "Lighthouse measured LCP 12.2s, CLS 0.131 and TBT 230ms; trace measured LCP 6.78s and TBT 2.17s",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Profile the LCP chain, defer non-critical scripts, and break up long tasks.",
+      "effort": "large"
+    },
+    {
+      "id": "F-015",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-main-thread",
+      "guidanceId": "break-up-long-tasks",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The main thread is not blocked by long tasks or heavy scripting; work is deferred, chunked, prioritised, or moved off-thread.",
+      "evidence": "trace found a 2,199ms main-thread task and 2,174ms total blocking time",
+      "artifacts": [
+        "evidence/home-trace-summary.json"
+      ],
+      "suggestedFix": "Split synchronous page initialization and defer ad/analytics work until idle or consent.",
+      "effort": "large"
+    },
+    {
+      "id": "F-016",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "efficient-resource-delivery",
+      "guidanceId": "optimize-script-priority",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Critical resources are delivered efficiently: cache headers are useful, render-blocking chains are short, fonts do not block or shift text, HTTP delivery is modern, and network dependency trees do not delay the main content.",
+      "evidence": "HAR recorded five VeryHigh render-blocking stylesheets and several synchronous classic scripts; probe confirmed key scripts lack async/defer",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/render-blocking-confirmation.json"
+      ],
+      "suggestedFix": "Inline only critical CSS, reduce font stylesheets, and defer non-critical classic scripts.",
+      "effort": "large"
+    },
+    {
+      "id": "F-017",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "trim-unused-and-duplicate-code",
+      "guidanceId": "identify-heavy-scripts",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page does not ship large unused or duplicated JavaScript/CSS, avoidable legacy bundles, or third-party code that dominates the load without user value.",
+      "evidence": "976KB of script was transferred; ad, analytics, Facebook and chat bundles dominate the 1.58MB load",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/lighthouse-home.json"
+      ],
+      "suggestedFix": "Remove or conditionally load third-party bundles after consent/intent.",
+      "effort": "large"
+    },
+    {
+      "id": "F-018",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-inclusive",
+      "principleCheckId": "names-roles-labels",
+      "guidanceId": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Interactive elements have accessible names, correct roles, and form fields have labels; images have alt text where meaningful; canvas/expressive content is exposed to assistive technology.",
+      "evidence": "Lighthouse found unnamed links; image audit found 42 images without alt; search text input has no label",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-images.json",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Give every control an accessible name, label search, and add meaningful alt or empty alt for decoration.",
+      "effort": "large"
+    },
+    {
+      "id": "F-020",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-inclusive",
+      "principleCheckId": "structure-and-focus",
+      "guidanceId": "accessibility",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Heading and landmark structure is logical, focus order follows reading order, keyboard focus is always visible, and interactive state survives DOM moves.",
+      "evidence": "visible headings begin at H3 and no visible page H1 exists; focused first link has outline:none",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Restore one visible H1, logical heading order, landmarks, and strong :focus-visible styling.",
+      "effort": "large"
+    },
+    {
+      "id": "F-021",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-inclusive",
+      "principleCheckId": "zoom-reflow-targets-and-media",
+      "guidanceId": "fluid-scaling",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The experience remains usable when zoomed or reflowed, touch targets are large enough, media has captions or equivalents where needed, and the viewport does not prevent user scaling.",
+      "evidence": "viewport disables zoom with maximum-scale=1 and user-scalable=0; many targets are 13-18px high",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Allow user zoom and increase compact links/touch targets.",
+      "effort": "large"
+    },
+    {
+      "id": "F-025",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "secure-transport-and-headers",
+      "guidanceId": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Served over HTTPS with a sensible Content-Security-Policy and secure, SameSite cookies; no mixed content or obvious transport/header smells.",
+      "evidence": "HTTPS/HSTS/nosniff are present, but CSP is missing and 6 of 8 cookies lack Secure",
+      "artifacts": [
+        "evidence/headers.json",
+        "evidence/cookies.json"
+      ],
+      "suggestedFix": "Deploy a restrictive CSP and set Secure/SameSite attributes consistently.",
+      "effort": "large"
+    },
+    {
+      "id": "F-026",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "data-minimisation-and-third-parties",
+      "guidanceId": "privacy",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "No over-collection of user data, no leaky third parties, and analytics/background data collection is minimised and batched rather than chatty or session-wide by default.",
+      "evidence": "18 third-party origins and 7 known trackers loaded; 80/82 requests and 1.56MB were classified third-party",
+      "artifacts": [
+        "evidence/trackers.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Minimize trackers and gate all non-essential third parties behind consent and user intent.",
+      "effort": "large"
+    },
+    {
+      "id": "F-027",
+      "pathId": "login",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "in-context-permissions-and-modern-auth",
+      "guidanceId": "passkeys",
+      "severity": "high",
+      "confidence": "medium",
+      "summary": "Permission prompts are requested in context (not on load), and authentication uses modern, phishing-resistant methods (passkeys / WebAuthn) where relevant rather than passwords alone.",
+      "evidence": "no permission prompt fired on home, but the sign-in endpoint rendered escaped markup and no usable modern-auth surface could be reached",
+      "artifacts": [
+        "evidence/login-mobile.png"
+      ],
+      "suggestedFix": "Repair sign-in and offer a WebAuthn/passkey path alongside appropriate fallback.",
+      "effort": "large"
+    },
+    {
+      "id": "F-028",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-private-and-secure",
+      "principleCheckId": "defensive-browser-policies",
+      "guidanceId": "security",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Browser-enforced defenses are configured where appropriate: HSTS, clickjacking protection (frame-ancestors / X-Frame-Options), Trusted Types for XSS-sensitive apps, origin isolation, privacy-preserving third-party cookie posture, and sensible Referrer-Policy / Permissions-Policy.",
+      "evidence": "CSP and Permissions-Policy are absent; Referrer-Policy is the weak no-referrer-when-downgrade default",
+      "artifacts": [
+        "evidence/headers.json"
+      ],
+      "suggestedFix": "Add CSP/frame-ancestors, Permissions-Policy and strict-origin-when-cross-origin or stricter referrer policy.",
+      "effort": "large"
+    },
+    {
+      "id": "F-029",
+      "pathId": "listing",
+      "principleId": "be-resilient",
+      "principleCheckId": "resilient-runtime-behaviour",
+      "guidanceId": "conditional-async-dependencies",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "The page behaves robustly at runtime: overlays and menus never get cut off, DOM state survives moves, background work and async dependencies are sequenced and conditional rather than fragile, and initial visibility state is detected correctly.",
+      "evidence": "representative internal navigations degrade to a bot wall, and login renders escaped markup instead of an interactive form",
+      "artifacts": [
+        "evidence/listing-mobile.png",
+        "evidence/login-mobile.png"
+      ],
+      "suggestedFix": "Make route/runtime handling robust and ensure challenge/login responses render valid interactive states.",
+      "effort": "large"
+    },
+    {
+      "id": "F-031",
+      "pathId": "login",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "safe-commercial-and-account-flows",
+      "guidanceId": "passkey-authentication",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Checkout, subscription, consent, authentication and account-management flows are clear, reversible, and proportionate: pricing and commitments are visible, cancellation is findable, sensitive actions re-authenticate when appropriate, and users are not tricked into continuity.",
+      "evidence": "sign-in endpoint displays escaped HTML rather than a usable account form, preventing a clear account flow",
+      "artifacts": [
+        "evidence/login-mobile.png"
+      ],
+      "suggestedFix": "Repair the sign-in response, then provide clear recovery and passkey-capable authentication.",
+      "effort": "large"
+    },
+    {
+      "id": "F-032",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-sustainable",
+      "principleCheckId": "optimised-assets",
+      "guidanceId": "optimize-image-priority",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Images and decorative assets are optimised and served at appropriate resolutions; decorative pseudo-element imagery and heavy decorative images are resolution-optimised rather than oversized.",
+      "evidence": "46/49 images lack responsive srcset, 11 use legacy formats and 46 below-fold images are not lazy-loaded",
+      "artifacts": [
+        "evidence/home-images.json"
+      ],
+      "suggestedFix": "Use AVIF/WebP, responsive srcset/sizes, intrinsic dimensions and below-fold lazy loading.",
+      "effort": "large"
+    },
+    {
+      "id": "F-033",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-sustainable",
+      "principleCheckId": "no-wasteful-work",
+      "guidanceId": "efficient-background-processing",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Background work and fetching are not wasteful: background processing is efficient and de-prioritised, and the lightest technique that achieves the result is preferred over heavy or redundant work.",
+      "evidence": "trace found 2.17s blocking time and HAR shows ad/analytics work loading before user intent",
+      "artifacts": [
+        "evidence/home-trace-summary.json",
+        "evidence/home-summary.json"
+      ],
+      "suggestedFix": "Deprioritize or remove background ad/analytics work and load conditionally.",
+      "effort": "large"
+    },
+    {
+      "id": "F-034",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-sustainable",
+      "principleCheckId": "third-party-and-media-budget",
+      "guidanceId": "deprioritize-background-fetches",
+      "severity": "high",
+      "confidence": "high",
+      "summary": "Third-party scripts, fonts, video, audio, animation and heavy media are proportionate to the user value they provide; autoplay or background media is avoided unless essential and resource use is cached or deferred where possible.",
+      "evidence": "third parties account for 1.56MB and 80 of 82 requests, including ad, analytics, Facebook and chat code",
+      "artifacts": [
+        "evidence/home-summary.json",
+        "evidence/trackers.json"
+      ],
+      "suggestedFix": "Set a third-party budget and defer non-essential media/scripts until consent or interaction.",
+      "effort": "large"
+    },
+    {
+      "id": "F-001",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "respect-user-preferences",
+      "principleCheckId": "respects-color-scheme",
+      "guidanceId": "dark-mode",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Honours prefers-color-scheme: a usable dark mode exists and is driven by the user's preference (color-scheme / prefers-color-scheme / light-dark()), not hard-coded light only.",
+      "evidence": "screenshot under emulated dark mode is pixel-identical to light mode; no color-scheme CSS was found",
+      "artifacts": [
+        "evidence/home-dark.png",
+        "evidence/home-mobile.png"
+      ],
+      "suggestedFix": "Add color-scheme and theme tokens driven by prefers-color-scheme/light-dark().",
+      "effort": "medium"
+    },
+    {
+      "id": "F-007",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "semantic-dismissible-primitives",
+      "guidanceId": "declarative-dialog-popover-control",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Overlays and rich controls use the right primitive: popover (with declarative light-dismiss) for transient UI, dialog for modal flows, details for disclosure, native-but-branded selects and pickers, rather than ad-hoc divs.",
+      "evidence": "probe found 3 custom modal-role elements but zero native dialog, popover, or details elements",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Use dialog/popover/details with declarative dismissal and correct focus management.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-008",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "maximize-content-reduce-noise",
+      "principleCheckId": "reduced-chrome",
+      "guidanceId": "light-dismiss-a-dialog",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "Minimise non-content chrome and borders so the content is the focus, not the application frame; expressive/decorative visuals serve the content rather than crowd it.",
+      "evidence": "consent chrome consumes the whole first viewport and persistent header/chat controls compete with marketplace content",
+      "artifacts": [
+        "evidence/home-mobile.png",
+        "evidence/home-desktop.png"
+      ],
+      "suggestedFix": "Reduce persistent chrome and keep the first viewport focused on search and listings.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-014",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-fast-and-stable",
+      "principleCheckId": "visual-stability",
+      "guidanceId": "visually-stable-font-fallbacks",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "No cumulative layout shift from late content (images, banners, fonts) that arrives without reserved space.",
+      "evidence": "Lighthouse measured CLS 0.131 despite the shorter layout observation measuring 0.012",
+      "artifacts": [
+        "evidence/lighthouse-home.json",
+        "evidence/home-layout-mobile.json"
+      ],
+      "suggestedFix": "Reserve space for late content and use stable font/image sizing.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-019",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-inclusive",
+      "principleCheckId": "sufficient-contrast",
+      "guidanceId": "accessibility",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Text and essential UI meet WCAG colour-contrast minimums against their background.",
+      "evidence": "Lighthouse found white VIN badge text at 3.24:1, below the required 4.5:1",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "suggestedFix": "Darken badge backgrounds or adjust text color to meet WCAG contrast.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-022",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "follow-best-practices",
+      "principleCheckId": "sound-document-and-assets",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "medium",
+      "summary": "Valid doctype and charset, images sized with correct aspect ratio, no deprecated APIs misused, and CSS/HTML are well structured and not needlessly repetitive. (HTTPS, CSP and permission hygiene are judged under be-private-and-secure, not here.)",
+      "evidence": "doctype/charset are valid, but image audit found 43 images without width/height and 46 without srcset",
+      "artifacts": [
+        "evidence/home-images.json",
+        "evidence/home-dom.json"
+      ],
+      "suggestedFix": "Provide intrinsic image dimensions and responsive srcset/sizes.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-023",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-discoverable",
+      "principleCheckId": "crawlable-and-mobile-friendly",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Links are crawlable (real href), there is a viewport meta tag, robots does not block indexing, and link text is descriptive.",
+      "evidence": "Lighthouse found a feedback anchor with no href; robots and viewport otherwise exist",
+      "artifacts": [
+        "evidence/lighthouse-home.json"
+      ],
+      "suggestedFix": "Use real href URLs for all navigational links and retain descriptive link text.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-024",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-discoverable",
+      "principleCheckId": "structured-and-shareable-metadata",
+      "guidanceId": "html",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Where the page represents an article, product, organization, event, place or other rich entity, structured data and share-preview metadata accurately describe the visible content.",
+      "evidence": "Open Graph title/description/url exist, but no JSON-LD was present for marketplace/product entities",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Add accurate schema.org JSON-LD for Organization, WebSite/SearchAction and listing/product entities.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-030",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-trustworthy",
+      "principleCheckId": "trustworthy-input-assistance",
+      "guidanceId": "autofill-highlight-inputs",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Input is assisted, not obstructed: correct autocomplete tokens so address, payment, sign-in and sign-up fields autofill, and inputs are highlighted/sized to help the user rather than trip them up.",
+      "evidence": "primary text search has autocomplete=off, no name and no accessible label",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Name and label search inputs and avoid disabling browser input assistance without a specific need.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-035",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "be-agent-ready",
+      "principleCheckId": "structured-agent-capabilities",
+      "guidanceId": "webmcp",
+      "severity": "medium",
+      "confidence": "high",
+      "summary": "Where it makes sense, the site exposes structured, safe capabilities to agents via WebMCP tools, agentic forms, and agentic JavaScript tools rather than leaving agents to scrape and guess.",
+      "evidence": "robots.txt explicitly blocks anthropic-ai, Claude-Web and Applebot-Extended; no JSON-LD or agent tool registration was found",
+      "artifacts": [
+        "evidence/home-probe.json",
+        "evidence/home-discoverability.json"
+      ],
+      "suggestedFix": "Choose and document an AI-crawler policy; expose safe structured listing/search capabilities and metadata where desired.",
+      "effort": "medium"
+    },
+    {
+      "id": "F-002",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "view-transitions",
+      "guidanceId": "same-document-transitions",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "State and route changes use View Transitions (including same-document, cross-document and scroll-driven/staggered) rather than instant, jarring swaps.",
+      "evidence": "CSS/animation probe found no View Transition rules or animations for state/route changes",
+      "artifacts": [
+        "evidence/motion-modern-css.json"
+      ],
+      "suggestedFix": "Use progressive View Transitions for route and major state changes.",
+      "effort": "small"
+    },
+    {
+      "id": "F-003",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "implement-natural-interactions",
+      "principleCheckId": "physical-gestures",
+      "guidanceId": "carousel-slide-effects",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Gesture-driven interactions and entry/exit motion feel native (declarative overscroll/scroll-snap, physics-based easing, animating to intrinsic sizes, pull/swipe gestures) rather than fighting the platform with custom pointer handlers.",
+      "evidence": "content carousels and long mobile surfaces expose no scroll-snap/overscroll declarative gesture CSS",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Use scroll-snap and declarative overscroll behavior for carousels and gesture surfaces.",
+      "effort": "small"
+    },
+    {
+      "id": "F-004",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "scroll-state-aware-chrome",
+      "guidanceId": "shrinking-header-on-scroll",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Sticky/affixed UI reacts to scroll state and position (e.g. the new scroll-state(scrolled) query, shrinking headers, progress indicators) so chrome responds to position instead of static or JS-driven toggling.",
+      "evidence": "long 6,122px page uses static header chrome; no scroll-state/progress CSS was found",
+      "artifacts": [
+        "evidence/home-layout-mobile.json",
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Make sticky chrome respond to scroll state and provide progress/affordance cues.",
+      "effort": "small"
+    },
+    {
+      "id": "F-005",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "provide-guided-navigation",
+      "principleCheckId": "directs-attention",
+      "guidanceId": "directional-navigation-transitions",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Navigation and in-page jumps guide attention (highlight effects, scroll/carousel markers, directional transitions, drill-down and drawer navigation) so the user can follow where focus moved.",
+      "evidence": "navigation/state changes expose no directional transition, marker, highlight, or focus cue",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Add clear focus/selection cues and directional transitions around navigation changes.",
+      "effort": "small"
+    },
+    {
+      "id": "F-009",
+      "pathId": "home",
+      "url": "https://m.autoplius.lt",
+      "principleId": "adapt-to-the-form-factor",
+      "principleCheckId": "component-level-responsiveness",
+      "guidanceId": "size-aware-styling",
+      "severity": "low",
+      "confidence": "medium",
+      "summary": "Components adapt to their container with container queries (incl. anchored container queries) and content/state-based styling where reused at different sizes, not only global viewport breakpoints.",
+      "evidence": "CSS probe found no container queries or container-type; adaptation relies on a separate mobile surface",
+      "artifacts": [
+        "evidence/home-probe.json"
+      ],
+      "suggestedFix": "Adopt container queries for reusable search, card, and navigation components.",
+      "effort": "small"
+    }
+  ],
+  "taskList": [
+    {
+      "id": "T-01",
+      "title": "Replace the blocking first-load wall with a compact, content-preserving consent surface where legally possible.",
+      "priority": 1,
+      "findingIds": [
+        "F-006"
+      ],
+      "guidanceId": "light-dismiss-a-dialog",
+      "status": "open"
+    },
+    {
+      "id": "T-02",
+      "title": "Add visible :focus-visible styles and enlarge touch targets to at least 24px, preferably 44px.",
+      "priority": 2,
+      "findingIds": [
+        "F-010"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-03",
+      "title": "Expose the vehicle search and primary next action in the initial usable viewport.",
+      "priority": 3,
+      "findingIds": [
+        "F-011"
+      ],
+      "guidanceId": "scrollability-affordance-hints",
+      "status": "open"
+    },
+    {
+      "id": "T-04",
+      "title": "Tune bot protection and endpoint rendering so normal navigation and sign-in remain completable.",
+      "priority": 4,
+      "findingIds": [
+        "F-012"
+      ],
+      "guidanceId": "forms",
+      "status": "open"
+    },
+    {
+      "id": "T-05",
+      "title": "Profile the LCP chain, defer non-critical scripts, and break up long tasks.",
+      "priority": 5,
+      "findingIds": [
+        "F-013"
+      ],
+      "guidanceId": "identify-inp-causes",
+      "status": "open"
+    },
+    {
+      "id": "T-06",
+      "title": "Split synchronous page initialization and defer ad/analytics work until idle or consent.",
+      "priority": 6,
+      "findingIds": [
+        "F-015"
+      ],
+      "guidanceId": "break-up-long-tasks",
+      "status": "open"
+    },
+    {
+      "id": "T-07",
+      "title": "Inline only critical CSS, reduce font stylesheets, and defer non-critical classic scripts.",
+      "priority": 7,
+      "findingIds": [
+        "F-016"
+      ],
+      "guidanceId": "optimize-script-priority",
+      "status": "open"
+    },
+    {
+      "id": "T-08",
+      "title": "Remove or conditionally load third-party bundles after consent/intent.",
+      "priority": 8,
+      "findingIds": [
+        "F-017"
+      ],
+      "guidanceId": "identify-heavy-scripts",
+      "status": "open"
+    },
+    {
+      "id": "T-09",
+      "title": "Give every control an accessible name, label search, and add meaningful alt or empty alt for decoration.",
+      "priority": 9,
+      "findingIds": [
+        "F-018"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-10",
+      "title": "Restore one visible H1, logical heading order, landmarks, and strong :focus-visible styling.",
+      "priority": 10,
+      "findingIds": [
+        "F-020"
+      ],
+      "guidanceId": "accessibility",
+      "status": "open"
+    },
+    {
+      "id": "T-11",
+      "title": "Allow user zoom and increase compact links/touch targets.",
+      "priority": 11,
+      "findingIds": [
+        "F-021"
+      ],
+      "guidanceId": "fluid-scaling",
+      "status": "open"
+    },
+    {
+      "id": "T-12",
+      "title": "Deploy a restrictive CSP and set Secure/SameSite attributes consistently.",
+      "priority": 12,
+      "findingIds": [
+        "F-025"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    },
+    {
+      "id": "T-13",
+      "title": "Minimize trackers and gate all non-essential third parties behind consent and user intent.",
+      "priority": 13,
+      "findingIds": [
+        "F-026"
+      ],
+      "guidanceId": "privacy",
+      "status": "open"
+    },
+    {
+      "id": "T-14",
+      "title": "Repair sign-in and offer a WebAuthn/passkey path alongside appropriate fallback.",
+      "priority": 14,
+      "findingIds": [
+        "F-027"
+      ],
+      "guidanceId": "passkeys",
+      "status": "open"
+    },
+    {
+      "id": "T-15",
+      "title": "Add CSP/frame-ancestors, Permissions-Policy and strict-origin-when-cross-origin or stricter referrer policy.",
+      "priority": 15,
+      "findingIds": [
+        "F-028"
+      ],
+      "guidanceId": "security",
+      "status": "open"
+    }
+  ],
+  "budget": {
+    "pathCount": 5,
+    "auditPasses": 1
+  },
+  "agent": "pi",
+  "runId": "2026-07-19T23-18-54-119Z"
+}
