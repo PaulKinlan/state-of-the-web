@@ -417,16 +417,17 @@ def render_html(dataset: dict, media_manifest: dict) -> str:
     for row in dataset["rows"]:
         c = row["coverage"]
         label = row["disposition"]
+        reason_text = row["reasonCode"] or "not-applicable"
         table_rows.append(
             f"<tr><th scope=row>{row['ordinal']}. <code>{html.escape(row['origin'])}</code></th>"
-            f"<td>{html.escape(row['archetype'])}</td><td><strong class=\"status {label}\">{html.escape(label)}</strong><br><code>{html.escape(str(row['reasonCode']))}</code></td>"
+            f"<td>{html.escape(row['archetype'])}</td><td><strong class=\"status {label}\">{html.escape(label)}</strong><br><code>{html.escape(reason_text)}</code></td>"
             f"<td>{c['judged']} judged; {c['blocked']} blocked; {c['notRun']} not run; {c['missing']} missing</td>"
             f"<td>{html.escape(row['journey']['status'])}</td></tr>"
         )
         cards.append(
             f"<article class=\"row-card deferred status-{label}\"><h3>{row['ordinal']}. <code>{html.escape(row['origin'])}</code></h3>"
             f"<p><strong class=\"status {label}\">Ledger: {html.escape(label)}</strong> · {html.escape(row['archetype'])}</p>"
-            f"<p><strong>Reason:</strong> <code>{html.escape(str(row['reasonCode']))}</code>. {html.escape(row['reasonSummary'])}</p>"
+            f"<p><strong>Reason:</strong> <code>{html.escape(reason_text)}</code>. {html.escape(row['reasonSummary'])}</p>"
             f"<p><strong>Recomputed coverage:</strong> expected {c['expected']}; recorded {c['recorded']}; judged {c['judged']}; blocked {c['blocked']}; not run {c['notRun']}; missing {c['missing']}; unknown {c['unknown']}; duplicates {c['duplicates']}.</p>"
             f"<h4>Journey actions</h4>{render_actions(row['journey']['actions'])}<h4>Safe aggregates</h4>{render_aggregate(row['aggregates'])}"
             f"<div class=media>{render_media(row['ordinal'], media_by_row[row['ordinal']])}</div></article>"
