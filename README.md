@@ -18,6 +18,8 @@ Across all targets, the publication retains exactly **58,000 check rows**: 42,75
 
 Browse the [exact 1,000-target inventory](index.html), download the [machine-readable inventory](results/atomic/inventory.json), or read the [final run summary](checkpoint.html).
 
+A separate [fixed-10 Web Uplift journey pilot](journey-pilot/) documents a sanitized operational convenience run. It is not a ranking or replacement for this main report, and it publishes no scores or pass rates.
+
 ## Source and ordering
 
 The source is the [Chrome UX Report global top list](https://github.com/zakird/crux-top-lists), repository commit `650c9d833e0de62ef004b827b02be3aaef1eedd3`. The manifest contains all 1,000 unique origins in the CrUX `rank=1000` bucket, preserving source-file order. CrUX does not publish exact ordering within that bucket, so the published `position` is provenance, not an exact popularity rank.
