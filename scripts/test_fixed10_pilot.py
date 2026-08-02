@@ -107,6 +107,8 @@ class Fixed10ValidationTests(unittest.TestCase):
             with self.subTest(value=value):
                 sanitized=safe_private_text(value,'adversarial fixture')
                 self.assertTrue(private_narrative_safe(sanitized),sanitized)
+    def test_standalone_email_is_fully_redacted_before_host_sanitization(self):
+        self.assertEqual(safe_private_text('privateperson@example.org','email fixture'),'[email omitted]')
     def test_adversarial_private_narratives_rejected_after_manifest_rehash(self):
         for value in ADVERSARIAL_PRIVATE_VALUES:
             with self.subTest(value=value):
