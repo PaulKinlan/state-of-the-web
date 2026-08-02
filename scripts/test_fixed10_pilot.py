@@ -1,8 +1,26 @@
 #!/usr/bin/env python3
-import json, sys, tempfile, unittest
+import hashlib, json, sys, tempfile, unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from validate_fixed10_pilot import ROOT, canonical, validate
+from generate_fixed10_pilot import safe_private_text
+from validate_fixed10_pilot import ROOT, canonical, private_narrative_safe, validate
+
+ADVERSARIAL_PRIVATE_VALUES=[
+    '/var/lib/web-uplift/private/site/report-full.json',
+    r'C:\\Users\\paul\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1',
+    'Set-Cookie: sid=private; HttpOnly',
+    'Authorization: Basic dXNlcjpwYXNz',
+    'request body: user@example.org',
+    'www.example.org/private/account?debug',
+    'access_token=generic-value',
+    'browser profile id: Profile-42',
+    'artifact report-full.json retained',
+    '/gb/',
+    'cookie name: nfvdid',
+    'cookie identifier OptanonConsent',
+    'X-Frame-Options: DENY',
+    'response body=private payload',
+]
 
 class Fixed10ValidationTests(unittest.TestCase):
     def setUp(self):
@@ -14,12 +32,20 @@ class Fixed10ValidationTests(unittest.TestCase):
         pilot=json.loads((root/'data/pilot.json').read_text()); change(pilot)
         (root/'data/pilot.json').write_bytes(canonical(pilot))
         return root
+    def refresh_manifest(self, root, relative):
+        path=root/relative
+        manifest_path=root/'data/public-manifest.json'
+        manifest=json.loads(manifest_path.read_text())
+        item=next(item for item in manifest['files'] if item['path']==relative)
+        item['bytes']=path.stat().st_size
+        item['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+        manifest_path.write_bytes(canonical(manifest))
     def mutated_checks(self, change):
         temp=tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
         root=Path(temp.name)/'journey-pilot'
         import shutil; shutil.copytree(self.source,root)
         path=root/'data/check-outcomes.json'; data=json.loads(path.read_text()); change(data)
-        path.write_bytes(canonical(data))
+        path.write_bytes(canonical(data)); self.refresh_manifest(root,'data/check-outcomes.json')
         return root
     def assertRejected(self, change):
         with self.assertRaises(ValueError): validate(self.mutated(change))
@@ -57,6 +83,22 @@ class Fixed10ValidationTests(unittest.TestCase):
         self.assertChecksRejected(change)
     def test_private_path_in_atomic_text_rejected(self):
         def change(d): d['sites'][2]['outcomes'][0]['evidence']['summary']='/home/private/report.json'
+        self.assertChecksRejected(change)
+    def test_generator_sanitizes_adversarial_private_narratives(self):
+        for value in ADVERSARIAL_PRIVATE_VALUES:
+            with self.subTest(value=value):
+                sanitized=safe_private_text(value,'adversarial fixture')
+                self.assertTrue(private_narrative_safe(sanitized),sanitized)
+    def test_adversarial_private_narratives_rejected_after_manifest_rehash(self):
+        for value in ADVERSARIAL_PRIVATE_VALUES:
+            with self.subTest(value=value):
+                def change(d, value=value): d['sites'][2]['outcomes'][0]['evidence']['summary']=value
+                self.assertChecksRejected(change)
+    def test_invented_catalog_pair_on_all_sites_rejected_after_manifest_rehash(self):
+        def change(d):
+            for site in d['sites']:
+                site['outcomes'][0]['principleId']='invented-principle'
+                site['outcomes'][0]['checkId']='invented-check'
         self.assertChecksRejected(change)
 
 if __name__=='__main__': unittest.main()

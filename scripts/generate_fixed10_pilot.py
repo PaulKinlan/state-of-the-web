@@ -28,9 +28,22 @@ DISPLAY_STATUSES = KNOWN_STATUSES | {"unavailable"}
 CONFIDENCE = {"high", "medium", "low"}
 SEVERITIES = {"critical", "high", "medium", "low"}
 TEXT_FORBIDDEN = re.compile(
-    r"(?i)(/home/|/tmp/|file://|https?://|(?:evidence|reports?|scratch)/|"
-    r"chrome[^\s\"']*profile|(?:access|refresh|session)[_-]?token|api[_-]?key|"
-    r"bearer\s+[a-z0-9._-]+|[?&][a-z0-9._-]+=)"
+    r"(?ix)("
+    r"(?:file|https?)://|"
+    r"(?<![A-Za-z0-9])/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\)|"
+    r"(?<![A-Za-z0-9])/[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~!$&'()*+,;=:@%-]*)+(?:[?#][^\s]*)?|"
+    r"(?:[A-Za-z]:\\|\\\\)[^\s\"']+|"
+    r"\b(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?:/[^\s]*)|"
+    r"\b(?:set-cookie|cookie|authorization|proxy-authorization|content-security-policy|strict-transport-security|x-content-type-options|x-frame-options|referrer-policy|permissions-policy|headers?|request[ _-]?body|response[ _-]?body)\s*[:=]|"
+    r"\b(?:basic|bearer)\s+[A-Za-z0-9+/._~=-]+|"
+    r"\b(?:access|refresh|session|auth|id)?[_-]?token\s*[:=]\s*[^\s,;]+|"
+    r"\b(?:api[_ -]?key|secret|password|passwd|credential)\s*[:=]\s*[^\s,;]+|"
+    r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b|"
+    r"\b(?:chrome|browser|user)[ _-]?profile(?:[ _-]?(?:id|name))?\s*[:=]?\s*[A-Za-z0-9._\\/-]+|"
+    r"\b(?:report|artifact|flow-result|execution-permit|site-run)[A-Za-z0-9._-]*\.(?:json|har|log|html?|txt|zip)\b|"
+    r"[?&][A-Za-z0-9._~-]+(?:=|\b)|"
+    r"\b(?:nfvdid|optanonconsent)\b"
+    r")"
 )
 SECRET_SHAPES = re.compile(
     r"(?i)(?:gh[pousr]_[a-z0-9]{20,}|sk-[a-z0-9_-]{20,}|eyJ[a-z0-9_-]{20,}\.[a-z0-9_-]+)"
@@ -213,19 +226,60 @@ def safe_text(value: object, label: str, maximum: int = 1200) -> str:
     text = unicodedata.normalize("NFKC", value)
     text = " ".join(text.split())
     text = re.sub(r"https?://[^\s<>()\[\]{}\"']+", "[origin omitted]", text, flags=re.I)
-    text = re.sub(r"(?:/home/|/tmp/|file://)[^\s<>()\[\]{}\"']+", "[private path omitted]", text, flags=re.I)
+    text = re.sub(
+        r"(?<![A-Za-z0-9])(?:[A-Za-z]:\\|\\\\|/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\))[^\s<>()\[\]{}\"']*",
+        "[private path omitted]",
+        text,
+        flags=re.I,
+    )
     text = re.sub(r"\b(?:evidence|reports?|scratch)/[^\s<>()\[\]{}\"']+", "[private evidence retained]", text, flags=re.I)
+    text = SECRET_SHAPES.sub("[secret-shaped value omitted]", text)
+    if len(text) > maximum:
+        text = text[: maximum - 1].rstrip() + "…"
+    if TEXT_FORBIDDEN.search(text):
+        raise SystemExit(f"{label}: unsafe text remained after sanitization")
+    return text
+
+
+def safe_private_text(value: object, label: str, maximum: int = 1200) -> str:
+    """Project private narrative to categories, never raw routes, headers, bodies, or identifiers."""
+    if not isinstance(value, str) or not value.strip():
+        raise SystemExit(f"{label}: expected non-empty text")
+    text = unicodedata.normalize("NFKC", value)
+    text = " ".join(text.split())
+    replacements = [
+        (r"https?://[^\s<>()\[\]{}\"']+", "[origin omitted]"),
+        (r"file://[^\s<>()\[\]{}\"']+", "[private path omitted]"),
+        (r"(?<![A-Za-z0-9])(?:[A-Za-z]:\\|\\\\)[^;,\n]+", "[private path omitted]"),
+        (r"(?<![A-Za-z0-9])/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\)[^\s<>()\[\]{}\"']*", "[private path omitted]"),
+        (r"\b(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?:/[^\s<>()\[\]{}\"']*)", "[host/path omitted]"),
+        (r"(?<![A-Za-z0-9])/[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~!$&'()*+,;=:@%-]*)+(?:[?#][^\s]*)?", "[route omitted]"),
+        (r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", "[email omitted]"),
+        (r"\b(?:set-cookie|cookie|authorization|proxy-authorization)\s*:[^.;]*", "[private header detail omitted]"),
+        (r"\b(?:content-security-policy|strict-transport-security|x-content-type-options|x-frame-options|referrer-policy|permissions-policy)\s*:[^.;]*", "[security header value omitted]"),
+        (r"\b(?:headers?|request[ _-]?body|response[ _-]?body)\s*[:=]\s*[^.;]+", "[private message detail omitted]"),
+        (r"\b(?:basic|bearer)\s+[A-Za-z0-9+/._~=-]+", "[authorization value omitted]"),
+        (r"\b(?:access|refresh|session|auth|id)?[_-]?token\s*[:=]\s*[^\s,;]+", "[credential omitted]"),
+        (r"\b(?:api[_ -]?key|secret|password|passwd|credential)\s*[:=]\s*[^\s,;]+", "[credential omitted]"),
+        (r"\b(?:chrome|browser|user)[ _-]?profile(?:[ _-]?(?:id|name))?\s*[:=]?\s*[A-Za-z0-9._\\/-]+", "[profile omitted]"),
+        (r"\bcookie(?:[ _-](?:name|identifier))\s*[:=]?\s*[A-Za-z0-9_-]+", "[identifier omitted]"),
+        (r"\b(?:report|artifact|flow-result|execution-permit|site-run)[A-Za-z0-9._-]*\.(?:json|har|log|html?|txt|zip)\b", "[private artifact omitted]"),
+        (r"\b(?:nfvdid|optanonconsent)\b", "[identifier omitted]"),
+        (r"[?&][A-Za-z0-9._~-]+(?:=[^\s,;]*)?", "[query omitted]"),
+    ]
+    for pattern, replacement in replacements:
+        text = re.sub(pattern, replacement, text, flags=re.I)
     text = SECRET_SHAPES.sub("[secret-shaped value omitted]", text)
     text = re.sub(
         r"\b(?=[A-Za-z0-9_-]{6,}\b)(?=[A-Za-z0-9_-]*(?:sessionid|cookieid|authid|tokenid))[A-Za-z0-9_-]+\b",
-        "[cookie identifier omitted]",
+        "[identifier omitted]",
         text,
         flags=re.I,
     )
     if len(text) > maximum:
         text = text[: maximum - 1].rstrip() + "…"
     if TEXT_FORBIDDEN.search(text):
-        raise SystemExit(f"{label}: unsafe text remained after sanitization")
+        raise SystemExit(f"{label}: unsafe private narrative remained after sanitization")
     return text
 
 
@@ -321,12 +375,48 @@ def sanitized_findings(report: dict, ordinal: int) -> dict[str, dict]:
         result[finding["id"]] = {
             "findingId": f"site-{ordinal:02d}-finding-{index:02d}",
             "severity": severity,
-            "summary": safe_text(finding.get("summary"), "finding summary", 1200),
+            "summary": safe_private_text(finding.get("summary"), "finding summary", 1200),
         }
     return result
 
 
-def sanitize_outcome(outcome: dict, catalog: dict, findings: dict[str, dict], ordinal: int) -> dict:
+def categorical_security_projection(outcome: dict, row: dict) -> tuple[str, str] | None:
+    if outcome.get("principleId") != "be-private-and-secure":
+        return None
+    aggregates = row.get("aggregates")
+    if not isinstance(aggregates, dict):
+        return None
+    check_id = outcome.get("checkId")
+    headers = aggregates.get("securityHeaderPresence")
+    cookies = aggregates.get("cookieAttributeCounts")
+    if not isinstance(headers, dict) or not isinstance(cookies, dict):
+        return None
+    present = sum(value is True for value in headers.values())
+    header_total = len(headers)
+    if check_id == "secure-transport-and-headers":
+        method = "Reviewed transport state, baseline security-header presence, and cookie-attribute counts from retained private evidence."
+        evidence = (
+            f"Retained evidence records {present} of {header_total} baseline security-header categories present. "
+            f"Cookie-attribute review records {cookies.get('secure', 0)} of {cookies.get('total', 0)} records with Secure "
+            f"and {cookies.get('httpOnly', 0)} with HttpOnly. Names, values, routes, and raw headers remain private."
+        )
+        return method, evidence
+    if check_id == "defensive-browser-policies":
+        return (
+            "Reviewed baseline browser-policy header presence from retained private evidence.",
+            f"Retained evidence records {present} of {header_total} baseline browser-policy header categories present. Values and raw headers remain private.",
+        )
+    if check_id == "data-minimisation-and-third-parties":
+        return (
+            "Reviewed categorical request-origin and cookie-attribute counts from retained private evidence.",
+            f"Retained evidence records {aggregates.get('firstPartyOriginCount', 0)} first-party origin categories and "
+            f"{aggregates.get('thirdPartyOriginCount', 0)} third-party origin categories across {aggregates.get('requestCount', 0)} requests. "
+            "Destinations, identifiers, routes, headers, and bodies remain private.",
+        )
+    return None
+
+
+def sanitize_outcome(outcome: dict, catalog: dict, findings: dict[str, dict], ordinal: int, row: dict) -> dict:
     status = outcome.get("status")
     confidence = outcome.get("confidence")
     if status not in KNOWN_STATUSES or confidence not in CONFIDENCE:
@@ -348,19 +438,22 @@ def sanitize_outcome(outcome: dict, catalog: dict, findings: dict[str, dict], or
     if status in {"blocked", "not-run", "not-applicable", "opted-out"} and not isinstance(reason, str):
         raise SystemExit("incomplete/applicability outcome lacks reason")
     types = sorted({evidence_type(item) for item in artifacts})
+    categorical = categorical_security_projection(outcome, row)
+    method_source = categorical[0] if categorical else outcome.get("method")
+    evidence_source = categorical[1] if categorical else outcome.get("evidence")
     return {
         **catalog,
         "confidence": confidence,
         "displayStatus": status,
         "evidence": {
             "availability": "retained-private" if types else "described-only",
-            "summary": safe_text(outcome.get("evidence"), "outcome evidence", 1600),
+            "summary": safe_private_text(evidence_source, "outcome evidence", 1600),
             "types": types,
         },
         "findings": finding_refs,
-        "method": safe_text(outcome.get("method"), "outcome method", 1200),
+        "method": safe_private_text(method_source, "outcome method", 1200),
         "methodInvalid": ordinal in {3, 6} and outcome.get("checkId") == "no-console-errors",
-        "reason": safe_text(reason, "outcome reason", 1200) if isinstance(reason, str) else None,
+        "reason": safe_private_text(reason, "outcome reason", 1200) if isinstance(reason, str) else None,
         "sourceStatus": status,
     }
 
@@ -409,7 +502,7 @@ def check_dataset(rows: list[dict], reports: dict[int, dict | None], catalog_row
             if set(indexed) != set(catalog_lookup):
                 raise SystemExit("report atomic denominator drifted")
             findings = sanitized_findings(report, ordinal)
-            outcomes = [sanitize_outcome(indexed[key], catalog_lookup[key], findings, ordinal) for key in catalog_order]
+            outcomes = [sanitize_outcome(indexed[key], catalog_lookup[key], findings, ordinal, row) for key in catalog_order]
         if len(outcomes) != EXPECTED:
             raise SystemExit("site check denominator drifted")
         totals.update(item["displayStatus"] for item in outcomes)
