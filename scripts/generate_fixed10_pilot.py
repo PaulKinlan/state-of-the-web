@@ -251,7 +251,7 @@ def safe_private_text(value: object, label: str, maximum: int = 1200) -> str:
     text = " ".join(text.split())
     replacements = [
         (
-            r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^\s,;]+",
+            r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^,;]+",
             "[private detail omitted]",
         ),
         (
@@ -262,10 +262,10 @@ def safe_private_text(value: object, label: str, maximum: int = 1200) -> str:
         (r"file://[^\s<>()\[\]{}\"']+", "[private path omitted]"),
         (r"(?<![A-Za-z0-9])(?:[A-Za-z]:\\|\\\\)[^;,\n]+", "[private path omitted]"),
         (r"(?<![A-Za-z0-9])/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\)[^\s<>()\[\]{}\"']*", "[private path omitted]"),
-        (r"\b(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?:/[^\s<>()\[\]{}\"']*)", "[host/path omitted]"),
+        (r"\b(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?:/[^\s<>()\[\]{}\"']*)?", "[host/path omitted]"),
         (r"(?<![A-Za-z0-9])/[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~!$&'()*+,;=:@%-]*)+(?:[?#][^\s]*)?", "[route omitted]"),
         (r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", "[email omitted]"),
-        (r"\b(?:set-cookie|cookie|authorization|proxy-authorization)\s*:[^.;]*", "[private header detail omitted]"),
+        (r"\b(?:set-cookie|cookie|authorization|proxy-authorization)\s*:[^,;]+", "[private header detail omitted]"),
         (r"\b(?:content-security-policy|strict-transport-security|x-content-type-options|x-frame-options|referrer-policy|permissions-policy)\s*:[^.;]*", "[security header value omitted]"),
         (r"\b(?:headers?|request[ _-]?body|response[ _-]?body)\s*[:=]\s*[^.;]+", "[private message detail omitted]"),
         (r"\b(?:basic|bearer)\s+[A-Za-z0-9+/._~=-]+", "[authorization value omitted]"),

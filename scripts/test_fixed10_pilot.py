@@ -12,6 +12,8 @@ ADVERSARIAL_PRIVATE_VALUES=[
     'Authorization: Basic dXNlcjpwYXNz',
     'request body: user@example.org',
     'www.example.org/private/account?debug',
+    'example.org',
+    'Authorization: Bearer abc.private.signature',
     'access_token=generic-value',
     'browser profile id: Profile-42',
     'artifact report-full.json retained',
@@ -120,6 +122,10 @@ class Fixed10ValidationTests(unittest.TestCase):
             'profile id: Profile-42',
             'artifact name: audit-output.json',
             'user@example.org',
+            '/gb/',
+            'www.example.org/private/account?debug',
+            'example.org',
+            '?debug',
         ]
         for value in values:
             with self.subTest(surface='pilot.json',value=value):

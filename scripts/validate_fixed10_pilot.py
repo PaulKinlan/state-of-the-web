@@ -13,7 +13,10 @@ FORBIDDEN=re.compile(
  r"\bset-cookie\s*[:=]|\b(?:authorization|proxy-authorization)\s*[:=]\s*(?:basic|bearer)\b|"
  r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^\s,;]+|"
  r"\b[A-Za-z0-9_.-]*(?:report|artifact|audit|output|flow|permit|site-run)[A-Za-z0-9_.-]*\.(?:json|har|log|html?|txt|zip)\b|"
- r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b)"
+ r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b|"
+ r"(?<![A-Za-z0-9:/])/[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~!$&'()*+,;=:@%-]*)+(?:[?#][^\s]*)?|"
+ r"(?<!//)(?<![A-Za-z0-9_.])(?!schema\.org\b)(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.(?:com|org|net|io|dev|app|co\.uk|uk)(?![A-Za-z0-9_.-])(?:/[^\s<>()\[\]{}\"']*)?(?:\?[^\s<>()\[\]{}\"']*)?|"
+ r"\?[A-Za-z0-9._~-]+(?:=[^\s,;]*)?)"
 )
 PRIVATE_NARRATIVE_FORBIDDEN=re.compile(
  r"(?ix)("
@@ -21,7 +24,7 @@ PRIVATE_NARRATIVE_FORBIDDEN=re.compile(
  r"(?<![A-Za-z0-9])/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\)[^\s\"']*|"
  r"(?<![A-Za-z0-9])/[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~!$&'()*+,;=:@%-]*)+(?:[?#][^\s]*)?|"
  r"(?:[A-Za-z]:\\|\\\\)[^\s\"']+|"
- r"\b(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?:/[^\s]*)|"
+ r"\b(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?:/[^\s]*)?|"
  r"\b(?:set-cookie|cookie|authorization|proxy-authorization|content-security-policy|strict-transport-security|x-content-type-options|x-frame-options|referrer-policy|permissions-policy|headers?|request[ _-]?body|response[ _-]?body)\s*[:=]|"
  r"\b(?:basic|bearer)\s+[A-Za-z0-9+/._~=-]+|"
  r"\b(?:access|refresh|session|auth|id)?[_-]?token\s*[:=]\s*[^\s,;]+|"
