@@ -11,6 +11,7 @@ ADVERSARIAL_PRIVATE_VALUES=[
     'Set-Cookie: sid=private; HttpOnly',
     'Authorization: Basic dXNlcjpwYXNz',
     'request body: user@example.org',
+    'privateperson@example.org',
     'www.example.org/private/account?debug',
     'example.org',
     'Authorization: Bearer abc.private.signature',
