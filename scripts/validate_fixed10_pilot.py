@@ -8,7 +8,13 @@ from pathlib import Path
 from urllib.parse import urlsplit
 import jsonschema
 ROOT=Path(__file__).resolve().parents[1]
-FORBIDDEN=re.compile(r"(?ix)(file://|(?<![A-Za-z0-9])/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\)|(?:[A-Za-z]:\\|\\\\)[^\s\"']+|chrome[^\s\"']*profile|authorizationmessageid|relay[^\s\"']*id|(?:access|refresh|session)[_-]?token|api[_-]?key|bearer\s+[a-z0-9._~+/=-]+|[?&][a-z0-9._~-]+=)")
+FORBIDDEN=re.compile(
+ r"(?ix)(file://|(?<![A-Za-z0-9])/(?:home|tmp|var|etc|usr|opt|srv|private|root|mnt|run|proc|dev|sys|data|Users|Volumes)(?:/|\\)|(?:[A-Za-z]:\\|\\\\)[^\s\"']+|chrome[^\s\"']*profile|authorizationmessageid|relay[^\s\"']*id|(?:access|refresh|session)[_-]?token|api[_-]?key|bearer\s+[a-z0-9._~+/=-]+|[?&][a-z0-9._~-]+=|"
+ r"\bset-cookie\s*[:=]|\b(?:authorization|proxy-authorization)\s*[:=]\s*(?:basic|bearer)\b|"
+ r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^\s,;]+|"
+ r"\b[A-Za-z0-9_.-]*(?:report|artifact|audit|output|flow|permit|site-run)[A-Za-z0-9_.-]*\.(?:json|har|log|html?|txt|zip)\b|"
+ r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b)"
+)
 PRIVATE_NARRATIVE_FORBIDDEN=re.compile(
  r"(?ix)("
  r"(?:file|https?)://|"
@@ -25,6 +31,8 @@ PRIVATE_NARRATIVE_FORBIDDEN=re.compile(
  r"\b(?:report|artifact|flow-result|execution-permit|site-run)[A-Za-z0-9._-]*\.(?:json|har|log|html?|txt|zip)\b|"
  r"\bcookie(?:[ _-](?:name|identifier))\s*[:=]?\s*[A-Za-z0-9_-]+|"
  r"\b(?:nfvdid|optanonconsent)\b|"
+ r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^\s,;]+|"
+ r"\b[A-Za-z0-9_.-]*(?:report|artifact|audit|output|flow|permit|site-run)[A-Za-z0-9_.-]*\.(?:json|har|log|html?|txt|zip)\b|"
  r"[?&][A-Za-z0-9._~-]+(?:=|\b)"
  r")"
 )
@@ -144,6 +152,9 @@ def validate(root:Path)->dict:
   except Exception as e: errors.append(f'{path.name}: invalid JSON: {e}')
   text=path.read_text(errors='replace')
   if FORBIDDEN.search(text): errors.append(f'{path.name}: forbidden secret/path/query pattern')
+ for path in sorted(root.rglob('*')):
+  if path.is_file() and path.suffix.lower() in {'.html','.js','.css','.md','.txt'}:
+   if FORBIDDEN.search(path.read_text(errors='replace')): errors.append(f'{path.name}: forbidden private text pattern')
  media_path=data/'media-manifest.json'
  try:
   media=json.loads(media_path.read_text()); exact(media,['omissions','receipts','reviewMethod','reviewScope','schemaVersion','transforms'],'media manifest')

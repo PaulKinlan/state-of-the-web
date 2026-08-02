@@ -42,7 +42,9 @@ TEXT_FORBIDDEN = re.compile(
     r"\b(?:chrome|browser|user)[ _-]?profile(?:[ _-]?(?:id|name))?\s*[:=]?\s*[A-Za-z0-9._\\/-]+|"
     r"\b(?:report|artifact|flow-result|execution-permit|site-run)[A-Za-z0-9._-]*\.(?:json|har|log|html?|txt|zip)\b|"
     r"[?&][A-Za-z0-9._~-]+(?:=|\b)|"
-    r"\b(?:nfvdid|optanonconsent)\b"
+    r"\b(?:nfvdid|optanonconsent)\b|"
+    r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^\s,;]+|"
+    r"\b[A-Za-z0-9_.-]*(?:report|artifact|audit|output|flow|permit|site-run)[A-Za-z0-9_.-]*\.(?:json|har|log|html?|txt|zip)\b"
     r")"
 )
 SECRET_SHAPES = re.compile(
@@ -248,6 +250,14 @@ def safe_private_text(value: object, label: str, maximum: int = 1200) -> str:
     text = unicodedata.normalize("NFKC", value)
     text = " ".join(text.split())
     replacements = [
+        (
+            r"\b(?:cookie|headers?|body|token|profile|artifact)(?:[ _-]+(?:name|identifier|id|value))?\s*[:=]\s*[^\s,;]+",
+            "[private detail omitted]",
+        ),
+        (
+            r"\b[A-Za-z0-9_.-]*(?:report|artifact|audit|output|flow|permit|site-run)[A-Za-z0-9_.-]*\.(?:json|har|log|html?|txt|zip)\b",
+            "[private artifact omitted]",
+        ),
         (r"https?://[^\s<>()\[\]{}\"']+", "[origin omitted]"),
         (r"file://[^\s<>()\[\]{}\"']+", "[private path omitted]"),
         (r"(?<![A-Za-z0-9])(?:[A-Za-z]:\\|\\\\)[^;,\n]+", "[private path omitted]"),

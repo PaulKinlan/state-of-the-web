@@ -20,6 +20,12 @@ ADVERSARIAL_PRIVATE_VALUES=[
     'cookie identifier OptanonConsent',
     'X-Frame-Options: DENY',
     'response body=private payload',
+    'cookie value: private-cookie-value',
+    'header value: private-header-value',
+    'body: private payload',
+    'token value: private-token-value',
+    'profile id: Profile-42',
+    'artifact name: audit-output.json',
 ]
 
 class Fixed10ValidationTests(unittest.TestCase):
@@ -31,6 +37,7 @@ class Fixed10ValidationTests(unittest.TestCase):
         import shutil; shutil.copytree(self.source,root)
         pilot=json.loads((root/'data/pilot.json').read_text()); change(pilot)
         (root/'data/pilot.json').write_bytes(canonical(pilot))
+        self.refresh_manifest(root,'data/pilot.json')
         return root
     def refresh_manifest(self, root, relative):
         path=root/relative
@@ -46,6 +53,14 @@ class Fixed10ValidationTests(unittest.TestCase):
         import shutil; shutil.copytree(self.source,root)
         path=root/'data/check-outcomes.json'; data=json.loads(path.read_text()); change(data)
         path.write_bytes(canonical(data)); self.refresh_manifest(root,'data/check-outcomes.json')
+        return root
+    def mutated_public_text(self, relative, value):
+        temp=tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
+        root=Path(temp.name)/'journey-pilot'
+        import shutil; shutil.copytree(self.source,root)
+        path=root/relative
+        path.write_text(path.read_text()+f'\n<!-- {value} -->\n')
+        self.refresh_manifest(root,relative)
         return root
     def assertRejected(self, change):
         with self.assertRaises(ValueError): validate(self.mutated(change))
@@ -94,6 +109,23 @@ class Fixed10ValidationTests(unittest.TestCase):
             with self.subTest(value=value):
                 def change(d, value=value): d['sites'][2]['outcomes'][0]['evidence']['summary']=value
                 self.assertChecksRejected(change)
+    def test_sensitive_labels_rejected_in_all_public_json_and_html(self):
+        values=[
+            'Set-Cookie: sid=private',
+            'Authorization: Basic dXNlcjpwYXNz',
+            'cookie value: private-cookie-value',
+            'header value: private-header-value',
+            'body: private payload',
+            'token value: private-token-value',
+            'profile id: Profile-42',
+            'artifact name: audit-output.json',
+            'user@example.org',
+        ]
+        for value in values:
+            with self.subTest(surface='pilot.json',value=value):
+                self.assertRejected(lambda p,value=value:p['rows'][0].__setitem__('reasonSummary',value))
+            with self.subTest(surface='index.html',value=value):
+                with self.assertRaises(ValueError): validate(self.mutated_public_text('index.html',value))
     def test_invented_catalog_pair_on_all_sites_rejected_after_manifest_rehash(self):
         def change(d):
             for site in d['sites']:
