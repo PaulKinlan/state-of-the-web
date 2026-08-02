@@ -56,6 +56,44 @@ def validate(root:Path)->dict:
     exact(a['securityHeaderPresence'],['content-security-policy','permissions-policy','referrer-policy','strict-transport-security','x-content-type-options','x-frame-options'],'header presence')
     for x in a['resourceTypes'].values(): exact(x,['count','transferBytes'],'resource type')
  except Exception as e: errors.append(f'schema/data validation: {e}')
+ try:
+  checks_path=data/'check-outcomes.json'; checks=json.loads(checks_path.read_text()); checks_schema=json.loads((data/'check-outcomes.schema.json').read_text())
+  jsonschema.Draft202012Validator(checks_schema).validate(checks)
+  if checks_path.read_bytes()!=canonical(checks): errors.append('check outcomes JSON is not canonical')
+  exact(checks,['catalog','datasetId','schemaVersion','sites','totals'],'check outcomes')
+  exact(checks['catalog'],['checkCountPerSite','principleCountPerSite','principles','siteCount','totalSlots'],'check catalog')
+  exact(checks['totals'],['blocked','issues','not-applicable','not-run','pass','unavailable'],'check totals')
+  required_totals={'pass':174,'issues':147,'not-applicable':68,'blocked':73,'not-run':2,'unavailable':116}
+  if checks['totals']!=required_totals: errors.append('atomic display totals drift')
+  if checks['catalog']['totalSlots']!=580 or sum(p['checkCount'] for p in checks['catalog']['principles'])!=58: errors.append('atomic catalog denominator drift')
+  sites=checks['sites']
+  if [site['ordinal'] for site in sites]!=list(range(1,11)): errors.append('atomic site ordinal drift')
+  display_counts=Counter(); reference_pairs=None; method_invalid=[]
+  for site in sites:
+   exact(site,['disposition','methodInvalid','ordinal','origin','outcomes','reportState'],f"check site {site.get('ordinal')}")
+   if not origin_only(site['origin']): errors.append(f"check site {site['ordinal']}: non-origin URL")
+   expected_state='available' if site['ordinal']>=3 else ('missing-report' if site['ordinal']==1 else 'runner-error')
+   if site['reportState']!=expected_state: errors.append(f"check site {site['ordinal']}: report-state drift")
+   pairs=[]
+   for outcome in site['outcomes']:
+    exact(outcome,['checkId','checkSummary','confidence','detectableVia','displayStatus','evidence','findings','guides','method','methodInvalid','principleId','principleTitle','reason','sourceStatus'],'check outcome')
+    exact(outcome['evidence'],['availability','summary','types'],'check evidence')
+    pair=(outcome['principleId'],outcome['checkId']); pairs.append(pair); display_counts[outcome['displayStatus']]+=1
+    if outcome['displayStatus']=='issues' and not outcome['findings']: errors.append(f"site {site['ordinal']} {pair}: issue lacks sanitized finding")
+    if outcome['displayStatus']!='issues' and outcome['findings']: errors.append(f"site {site['ordinal']} {pair}: non-issue has finding")
+    if outcome['displayStatus'] in {'blocked','not-run','not-applicable','unavailable'} and not outcome['reason']: errors.append(f"site {site['ordinal']} {pair}: incomplete status lacks reason")
+    if outcome['displayStatus']=='unavailable':
+     if outcome['sourceStatus']!=expected_state or outcome['confidence'] is not None or outcome['evidence']['availability']!='unavailable': errors.append(f"site {site['ordinal']} {pair}: unavailable provenance drift")
+    elif outcome['sourceStatus']!=outcome['displayStatus']: errors.append(f"site {site['ordinal']} {pair}: source/display status drift")
+    if outcome['methodInvalid']: method_invalid.append((site['ordinal'],outcome['principleId'],outcome['checkId']))
+    for finding in outcome['findings']: exact(finding,['findingId','severity','summary'],'sanitized finding')
+   if len(set(pairs))!=58: errors.append(f"check site {site['ordinal']}: duplicate/missing catalog pairs")
+   if reference_pairs is None: reference_pairs=pairs
+   elif pairs!=reference_pairs: errors.append(f"check site {site['ordinal']}: catalog order/identity drift")
+  if dict(display_counts)!=required_totals: errors.append(f'atomic recomputed totals drift: {display_counts}')
+  expected_invalid=[(3,'follow-best-practices','no-console-errors'),(6,'follow-best-practices','no-console-errors')]
+  if method_invalid!=expected_invalid: errors.append(f'method-invalid outcome drift: {method_invalid}')
+ except Exception as e: errors.append(f'atomic check validation: {e}')
  for path in sorted(root.rglob('*.json')):
   try:
    obj=json.loads(path.read_text())
@@ -94,24 +132,33 @@ def validate(root:Path)->dict:
  except Exception as e: errors.append(f'public manifest validation: {e}')
  try:
   text=(root/'index.html').read_text(); parser=StaticHTML(); parser.feed(text)
-  for tag in ['header','nav','main','footer','h1','table','caption','figure','figcaption']:
+  for tag in ['header','nav','main','footer','h1','table','caption','figure','figcaption','form','label','select','details','summary','script']:
    if not parser.tags[tag]: errors.append(f'HTML missing {tag}')
   if parser.tags['h1']!=1 or any(b>a+1 for a,b in zip(parser.headings,parser.headings[1:])): errors.append('invalid heading hierarchy')
   if not any(t=='a' and a.get('class')=='skip-link' and a.get('href')=='#content' for t,a in parser.attrs): errors.append('missing skip link')
+  check_rows=[a for t,a in parser.attrs if t=='tr' and 'check-row' in a.get('class','').split()]
+  if len(check_rows)!=580: errors.append(f'HTML atomic row count drift: {len(check_rows)}')
+  if not all(all(key in a for key in ['data-site','data-principle','data-status']) for a in check_rows): errors.append('HTML check row filter identity missing')
+  select_ids={a.get('id') for t,a in parser.attrs if t=='select'}
+  if select_ids!={'site-filter','principle-filter','status-filter'}: errors.append('HTML evidence filters missing')
+  if not any(t=='p' and a.get('id')=='filter-count' and a.get('role')=='status' and a.get('aria-live')=='polite' for t,a in parser.attrs): errors.append('HTML filter live status missing')
   for t,a in parser.attrs:
    if t=='th' and a.get('scope') not in {'row','col'}: errors.append('table header missing scope')
    if t=='img' and not all(k in a for k in ['alt','width','height','loading']): errors.append('image missing accessible/lazy dimensions')
    if t=='video' and not all(k in a for k in ['controls','width','height']): errors.append('video missing controls/dimensions')
   css=(root/'styles.css').read_text()
-  if 'prefers-reduced-motion' not in css or 'content-visibility:auto' not in css or 'contain-intrinsic-size' not in css: errors.append('CSS preference/defer guidance missing')
+  if 'prefers-reduced-motion' not in css or 'content-visibility:auto' not in css or 'contain-intrinsic-size' not in css or 'forced-colors' not in css: errors.append('CSS preference/defer guidance missing')
+  script=(root/'explorer.js').read_text()
+  if any(token in script for token in ['fetch(', 'XMLHttpRequest', 'WebSocket', 'localStorage', 'sessionStorage', 'document.cookie']): errors.append('explorer script has network/storage surface')
+  if 'rows.length !== 580' not in script: errors.append('explorer script lacks denominator gate')
  except Exception as e: errors.append(f'HTML validation: {e}')
  forbidden_suffix={'.har','.log','.heapsnapshot'}
  if any(p.suffix in forbidden_suffix or p.name in {'flow-result.json','report.json','execution-permit.json','site-run.json'} for p in root.rglob('*') if p.is_file()): errors.append('raw private artifact published')
  if errors: raise ValueError('\n'.join(errors))
- return {'files':sum(p.is_file() for p in root.rglob('*')),'mediaReceipts':13,'rows':10}
+ return {'atomicSlots':580,'files':sum(p.is_file() for p in root.rglob('*')),'mediaReceipts':13,'rows':10}
 def main():
  ap=argparse.ArgumentParser(); ap.add_argument('--root',type=Path,default=ROOT/'journey-pilot'); args=ap.parse_args()
  try: result=validate(args.root.resolve())
  except Exception as e: print(f'fixed10 validation failed:\n{e}'); return 1
- print(f"fixed10 validation passed: {result['rows']} rows, {result['mediaReceipts']} media receipts, {result['files']} public files"); return 0
+ print(f"fixed10 validation passed: {result['rows']} rows, {result['atomicSlots']} site-check slots, {result['mediaReceipts']} media receipts, {result['files']} public files"); return 0
 if __name__=='__main__': raise SystemExit(main())

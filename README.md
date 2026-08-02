@@ -18,7 +18,7 @@ Across all targets, the publication retains exactly **58,000 check rows**: 42,75
 
 Browse the [exact 1,000-target inventory](index.html), download the [machine-readable inventory](results/atomic/inventory.json), or read the [final run summary](checkpoint.html).
 
-A separate [fixed-10 Web Uplift journey pilot](journey-pilot/) documents a sanitized operational convenience run. It is not a ranking or replacement for this main report, and it publishes no scores or pass rates.
+A separate [fixed-10 Web Uplift journey pilot](journey-pilot/) documents a sanitized operational convenience run and exposes all 580 site-check slots with their verdict, method, evidence summary, and failure or collection reason. It is not a ranking or replacement for this main report, and it publishes no scores or pass rates.
 
 ## Source and ordering
 

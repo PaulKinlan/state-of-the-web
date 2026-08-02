@@ -12,6 +12,8 @@ import hashlib
 import html
 import json
 import math
+import re
+import unicodedata
 from collections import Counter
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -22,6 +24,17 @@ DATASET_ID = "web-uplift-fixed10-operational-pilot-2026-08-01"
 EXPECTED = 58
 JUDGED = {"pass", "issues", "not-applicable", "opted-out"}
 KNOWN_STATUSES = JUDGED | {"blocked", "not-run"}
+DISPLAY_STATUSES = KNOWN_STATUSES | {"unavailable"}
+CONFIDENCE = {"high", "medium", "low"}
+SEVERITIES = {"critical", "high", "medium", "low"}
+TEXT_FORBIDDEN = re.compile(
+    r"(?i)(/home/|/tmp/|file://|https?://|(?:evidence|reports?|scratch)/|"
+    r"chrome[^\s\"']*profile|(?:access|refresh|session)[_-]?token|api[_-]?key|"
+    r"bearer\s+[a-z0-9._-]+|[?&][a-z0-9._-]+=)"
+)
+SECRET_SHAPES = re.compile(
+    r"(?i)(?:gh[pousr]_[a-z0-9]{20,}|sk-[a-z0-9_-]{20,}|eyJ[a-z0-9_-]{20,}\.[a-z0-9_-]+)"
+)
 DISPOSITION_MAP = {
     "audit-completed": "runner-completed",
     "audit-partial": "partial",
@@ -191,6 +204,238 @@ def coverage_from_report(report: dict | None) -> dict:
         "notRun": counts["not-run"],
         "recorded": recorded,
         "unknown": unknown,
+    }
+
+
+def safe_text(value: object, label: str, maximum: int = 1200) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise SystemExit(f"{label}: expected non-empty text")
+    text = unicodedata.normalize("NFKC", value)
+    text = " ".join(text.split())
+    text = re.sub(r"https?://[^\s<>()\[\]{}\"']+", "[origin omitted]", text, flags=re.I)
+    text = re.sub(r"(?:/home/|/tmp/|file://)[^\s<>()\[\]{}\"']+", "[private path omitted]", text, flags=re.I)
+    text = re.sub(r"\b(?:evidence|reports?|scratch)/[^\s<>()\[\]{}\"']+", "[private evidence retained]", text, flags=re.I)
+    text = SECRET_SHAPES.sub("[secret-shaped value omitted]", text)
+    text = re.sub(
+        r"\b(?=[A-Za-z0-9_-]{6,}\b)(?=[A-Za-z0-9_-]*(?:sessionid|cookieid|authid|tokenid))[A-Za-z0-9_-]+\b",
+        "[cookie identifier omitted]",
+        text,
+        flags=re.I,
+    )
+    if len(text) > maximum:
+        text = text[: maximum - 1].rstrip() + "…"
+    if TEXT_FORBIDDEN.search(text):
+        raise SystemExit(f"{label}: unsafe text remained after sanitization")
+    return text
+
+
+def catalog_manifest(catalog: dict) -> tuple[list[dict], dict[tuple[str, str], dict]]:
+    principles = catalog.get("principles")
+    if not isinstance(principles, list):
+        raise SystemExit("principle catalog missing")
+    rows = []
+    lookup = {}
+    for principle in principles:
+        principle_id = principle.get("id")
+        principle_title = principle.get("title")
+        checks = principle.get("checks")
+        if not isinstance(principle_id, str) or not isinstance(principle_title, str) or not isinstance(checks, list):
+            raise SystemExit("principle catalog shape drifted")
+        check_rows = []
+        for check in checks:
+            check_id = check.get("id")
+            if not isinstance(check_id, str):
+                raise SystemExit("check catalog shape drifted")
+            guides = check.get("guides", [])
+            if not isinstance(guides, list) or not all(isinstance(item, str) for item in guides):
+                raise SystemExit("check guides shape drifted")
+            record = {
+                "checkId": check_id,
+                "checkSummary": safe_text(check.get("summary"), "catalog check summary", 1800),
+                "detectableVia": safe_text(check.get("detectableVia"), "catalog detectableVia", 1800),
+                "guides": [safe_text(item, "catalog guide", 240) for item in guides],
+                "principleId": principle_id,
+                "principleTitle": safe_text(principle_title, "catalog principle title", 200),
+            }
+            check_rows.append(record)
+            key = (principle_id, check_id)
+            if key in lookup:
+                raise SystemExit("duplicate catalog check")
+            lookup[key] = record
+        rows.append({
+            "checkCount": len(check_rows),
+            "principleId": principle_id,
+            "principleTitle": safe_text(principle_title, "catalog principle title", 200),
+        })
+    if len(rows) != 17 or len(lookup) != EXPECTED:
+        raise SystemExit("catalog denominator drift")
+    return rows, lookup
+
+
+def evidence_type(value: object) -> str:
+    if not isinstance(value, str):
+        return "other-private-evidence"
+    lowered = value.lower()
+    if any(token in lowered for token in ("screenshot", "desktop.png", "mobile.png", "dark.png", "light.png", "step-")):
+        return "screenshot"
+    if lowered.endswith((".mp4", ".webm")) or "video" in lowered:
+        return "video"
+    if "layout" in lowered:
+        return "layout-summary"
+    if "discover" in lowered or "crawler" in lowered:
+        return "discoverability-summary"
+    if "header" in lowered:
+        return "security-header-summary"
+    if "cookie" in lowered:
+        return "cookie-attribute-summary"
+    if "image" in lowered:
+        return "image-summary"
+    if "secret" in lowered:
+        return "secret-scan-summary"
+    if "tracker" in lowered:
+        return "tracker-summary"
+    if "har" in lowered or "network" in lowered:
+        return "network-summary"
+    if "trace" in lowered or "perf" in lowered:
+        return "performance-summary"
+    if "heap" in lowered or "memory" in lowered:
+        return "memory-summary"
+    if "dom" in lowered or "probe" in lowered or "evaluate" in lowered:
+        return "page-probe-summary"
+    if "flow" in lowered or "journey" in lowered:
+        return "journey-summary"
+    return "other-private-evidence"
+
+
+def sanitized_findings(report: dict, ordinal: int) -> dict[str, dict]:
+    result = {}
+    findings = report.get("findings", [])
+    if not isinstance(findings, list):
+        raise SystemExit("findings shape drifted")
+    for index, finding in enumerate(findings, start=1):
+        if not isinstance(finding, dict) or not isinstance(finding.get("id"), str):
+            raise SystemExit("finding shape drifted")
+        severity = finding.get("severity")
+        if severity not in SEVERITIES:
+            raise SystemExit("finding severity drifted")
+        result[finding["id"]] = {
+            "findingId": f"site-{ordinal:02d}-finding-{index:02d}",
+            "severity": severity,
+            "summary": safe_text(finding.get("summary"), "finding summary", 1200),
+        }
+    return result
+
+
+def sanitize_outcome(outcome: dict, catalog: dict, findings: dict[str, dict], ordinal: int) -> dict:
+    status = outcome.get("status")
+    confidence = outcome.get("confidence")
+    if status not in KNOWN_STATUSES or confidence not in CONFIDENCE:
+        raise SystemExit("check outcome status or confidence drifted")
+    finding_ids = outcome.get("findingIds", [])
+    artifacts = outcome.get("artifacts", [])
+    if not isinstance(finding_ids, list) or not isinstance(artifacts, list):
+        raise SystemExit("check outcome references drifted")
+    finding_refs = []
+    for finding_id in finding_ids:
+        if finding_id not in findings:
+            raise SystemExit("check outcome finding reference drifted")
+        finding_refs.append(findings[finding_id])
+    if status == "issues" and not finding_refs:
+        raise SystemExit("issue outcome lacks finding reference")
+    if status != "issues" and finding_refs:
+        raise SystemExit("non-issue outcome has finding reference")
+    reason = outcome.get("reason")
+    if status in {"blocked", "not-run", "not-applicable", "opted-out"} and not isinstance(reason, str):
+        raise SystemExit("incomplete/applicability outcome lacks reason")
+    types = sorted({evidence_type(item) for item in artifacts})
+    return {
+        **catalog,
+        "confidence": confidence,
+        "displayStatus": status,
+        "evidence": {
+            "availability": "retained-private" if types else "described-only",
+            "summary": safe_text(outcome.get("evidence"), "outcome evidence", 1600),
+            "types": types,
+        },
+        "findings": finding_refs,
+        "method": safe_text(outcome.get("method"), "outcome method", 1200),
+        "methodInvalid": ordinal in {3, 6} and outcome.get("checkId") == "no-console-errors",
+        "reason": safe_text(reason, "outcome reason", 1200) if isinstance(reason, str) else None,
+        "sourceStatus": status,
+    }
+
+
+def unavailable_outcome(catalog: dict, ordinal: int, reason_code: str) -> dict:
+    if reason_code not in {"missing-report", "runner-error"}:
+        raise SystemExit("missing report reason drifted")
+    summary = REASON_SUMMARIES[ordinal]
+    return {
+        **catalog,
+        "confidence": None,
+        "displayStatus": "unavailable",
+        "evidence": {
+            "availability": "unavailable",
+            "summary": "No atomic report or check-specific evidence was produced for this site-check slot.",
+            "types": [],
+        },
+        "findings": [],
+        "method": "No check-specific method was executed because the site report is unavailable.",
+        "methodInvalid": False,
+        "reason": safe_text(summary, "unavailable outcome reason", 1200),
+        "sourceStatus": reason_code,
+    }
+
+
+def check_dataset(rows: list[dict], reports: dict[int, dict | None], catalog_rows: list[dict], catalog_lookup: dict[tuple[str, str], dict]) -> dict:
+    sites = []
+    totals = Counter()
+    catalog_order = list(catalog_lookup)
+    for row in rows:
+        ordinal = row["ordinal"]
+        report = reports[ordinal]
+        if report is None:
+            reason_code = "missing-report" if ordinal == 1 else "runner-error"
+            outcomes = [unavailable_outcome(catalog_lookup[key], ordinal, reason_code) for key in catalog_order]
+        else:
+            source = report.get("checkOutcomes")
+            if not isinstance(source, list):
+                raise SystemExit("report check outcomes missing")
+            indexed = {}
+            for outcome in source:
+                key = (outcome.get("principleId"), outcome.get("checkId"))
+                if key not in catalog_lookup or key in indexed:
+                    raise SystemExit("report check identity drifted")
+                indexed[key] = outcome
+            if set(indexed) != set(catalog_lookup):
+                raise SystemExit("report atomic denominator drifted")
+            findings = sanitized_findings(report, ordinal)
+            outcomes = [sanitize_outcome(indexed[key], catalog_lookup[key], findings, ordinal) for key in catalog_order]
+        if len(outcomes) != EXPECTED:
+            raise SystemExit("site check denominator drifted")
+        totals.update(item["displayStatus"] for item in outcomes)
+        sites.append({
+            "disposition": row["disposition"],
+            "methodInvalid": row["methodInvalid"],
+            "ordinal": ordinal,
+            "origin": row["origin"],
+            "outcomes": outcomes,
+            "reportState": "available" if report else ("missing-report" if ordinal == 1 else "runner-error"),
+        })
+    expected = Counter({"pass": 174, "issues": 147, "not-applicable": 68, "blocked": 73, "not-run": 2, "unavailable": 116})
+    if totals != expected:
+        raise SystemExit(f"atomic public totals drifted: {totals}")
+    return {
+        "catalog": {
+            "checkCountPerSite": EXPECTED,
+            "principleCountPerSite": len(catalog_rows),
+            "principles": catalog_rows,
+            "siteCount": len(sites),
+            "totalSlots": len(sites) * EXPECTED,
+        },
+        "datasetId": DATASET_ID,
+        "sites": sites,
+        "schemaVersion": 1,
+        "totals": {status: totals[status] for status in ("pass", "issues", "not-applicable", "blocked", "not-run", "unavailable")},
     }
 
 
@@ -408,7 +653,101 @@ def render_media(ordinal: int, receipts: list[dict]) -> str:
     return image + video_markup
 
 
-def render_html(dataset: dict, media_manifest: dict) -> str:
+def status_label(status: str) -> str:
+    return {
+        "pass": "Pass",
+        "issues": "Failed / issue",
+        "not-applicable": "Not applicable",
+        "blocked": "Blocked",
+        "not-run": "Not run",
+        "opted-out": "Opted out",
+        "unavailable": "Unavailable",
+    }[status]
+
+
+def render_check_explorer(checks: dict) -> str:
+    site_options = "".join(
+        f'<option value="{site["ordinal"]}">{site["ordinal"]}. {html.escape(site["origin"])}</option>'
+        for site in checks["sites"]
+    )
+    principle_options = "".join(
+        f'<option value="{html.escape(principle["principleId"])}">{html.escape(principle["principleTitle"])}</option>'
+        for principle in checks["catalog"]["principles"]
+    )
+    status_options = "".join(
+        f'<option value="{status}">{status_label(status)} ({checks["totals"].get(status, 0)})</option>'
+        for status in ("pass", "issues", "not-applicable", "blocked", "not-run", "unavailable")
+    )
+    site_groups = []
+    for site in checks["sites"]:
+        by_principle: dict[str, list[dict]] = {}
+        for outcome in site["outcomes"]:
+            by_principle.setdefault(outcome["principleId"], []).append(outcome)
+        principle_groups = []
+        for principle in checks["catalog"]["principles"]:
+            outcomes = by_principle[principle["principleId"]]
+            rows = []
+            for outcome in outcomes:
+                status = outcome["displayStatus"]
+                types = ", ".join(outcome["evidence"]["types"]) or "No artifact reference"
+                finding_markup = ""
+                if outcome["findings"]:
+                    items = "".join(
+                        f'<li><code>{html.escape(finding["findingId"])}</code> · {html.escape(finding["severity"])} · {html.escape(finding["summary"])}</li>'
+                        for finding in outcome["findings"]
+                    )
+                    finding_markup = f'<ul class="finding-refs">{items}</ul>'
+                if status == "issues":
+                    why = " ".join(finding["summary"] for finding in outcome["findings"])
+                elif status == "pass":
+                    why = "The retained evidence directly supported this check under the captured conditions."
+                else:
+                    why = outcome["reason"] or "The source did not provide a check-specific reason."
+                warning = (
+                    '<p class="method-warning"><strong>Method invalid:</strong> this console pass used absence of a surfaced error even though the authoritative console collector was unavailable. Treat it as unreliable evidence, not a valid pass.</p>'
+                    if outcome["methodInvalid"] else ""
+                )
+                rows.append(
+                    f'<tr class="check-row" data-site="{site["ordinal"]}" data-principle="{html.escape(outcome["principleId"])}" data-status="{status}">'
+                    f'<th scope="row"><code>{html.escape(outcome["checkId"])}</code><p>{html.escape(outcome["checkSummary"])}</p></th>'
+                    f'<td><span class="check-status status-{status}">{status_label(status)}</span><br><small>Source: <code>{html.escape(outcome["sourceStatus"])}</code>; confidence: {html.escape(outcome["confidence"] or "none")}</small>{warning}</td>'
+                    f'<td><details><summary>Implementation and method</summary><p><strong>Catalog test design:</strong> {html.escape(outcome["detectableVia"])}</p><p><strong>Method used or attempted:</strong> {html.escape(outcome["method"])}</p></details></td>'
+                    f'<td><p>{html.escape(outcome["evidence"]["summary"])}</p><p><strong>Reference:</strong> {html.escape(types)}; {html.escape(outcome["evidence"]["availability"])}</p></td>'
+                    f'<td><p>{html.escape(why)}</p>{finding_markup}</td></tr>'
+                )
+            principle_groups.append(
+                f'<details class="principle-checks filter-group" data-site="{site["ordinal"]}" data-principle="{html.escape(principle["principleId"])}">'
+                f'<summary>{html.escape(principle["principleTitle"])} · {len(outcomes)} tests</summary>'
+                f'<div class="check-table-wrap"><table class="check-table"><caption>{html.escape(principle["principleTitle"])} checks for {html.escape(site["origin"])}</caption>'
+                '<thead><tr><th scope="col">Test</th><th scope="col">Verdict</th><th scope="col">How it was implemented</th><th scope="col">Evidence</th><th scope="col">Why it passed, failed, or was incomplete</th></tr></thead>'
+                f'<tbody>{"".join(rows)}</tbody></table></div></details>'
+            )
+        unavailable_note = (
+            '<p class="collection-note"><strong>Collection failure:</strong> these 58 slots were materialized from the catalog so the denominator remains visible. They were not tested and have no check-specific evidence.</p>'
+            if site["reportState"] != "available" else ""
+        )
+        method_note = (
+            '<p class="method-warning"><strong>Method warning:</strong> this site has a report, but its <code>no-console-errors</code> pass is method-invalid and is labelled in the table.</p>'
+            if site["methodInvalid"] else ""
+        )
+        site_groups.append(
+            f'<details class="site-checks filter-group" data-site="{site["ordinal"]}"><summary>{site["ordinal"]}. <code>{html.escape(site["origin"])}</code> · 58 slots · {html.escape(site["reportState"])}</summary>'
+            f'{unavailable_note}{method_note}{"".join(principle_groups)}</details>'
+        )
+    totals = checks["totals"]
+    return (
+        '<section id="all-tests" class="deferred"><h2>All 580 tests and evidence</h2>'
+        '<p>This explorer retains every catalog slot. An <strong>issue</strong> is a tested product failure. <strong>Blocked</strong> and <strong>not run</strong> mean incomplete collection. <strong>Unavailable</strong> means the site produced no atomic report, so no test result is claimed.</p>'
+        f'<p><strong>Exact totals:</strong> {totals["pass"]} pass; {totals["issues"]} issues; {totals["not-applicable"]} not applicable; {totals["blocked"]} blocked; {totals["not-run"]} not run; {totals["unavailable"]} unavailable.</p>'
+        '<form class="filters" id="evidence-filters"><label>Site<select id="site-filter"><option value="">All 10 sites</option>'
+        f'{site_options}</select></label><label>Principle<select id="principle-filter"><option value="">All 17 principles</option>{principle_options}</select></label>'
+        f'<label>Status<select id="status-filter"><option value="">All statuses</option>{status_options}</select></label><button type="reset">Reset</button></form>'
+        '<p id="filter-count" role="status" aria-live="polite">Showing all 580 site-check slots.</p>'
+        f'<div id="evidence-results">{"".join(site_groups)}</div><noscript><p>Filtering requires JavaScript; all 580 rows remain available in the expandable groups.</p></noscript></section>'
+    )
+
+
+def render_html(dataset: dict, media_manifest: dict, check_data: dict) -> str:
     media_by_row: dict[int, list[dict]] = {ordinal: [] for ordinal in range(1, 11)}
     for receipt in media_manifest["receipts"]:
         media_by_row[receipt["ordinal"]].append(receipt)
@@ -434,15 +773,16 @@ def render_html(dataset: dict, media_manifest: dict) -> str:
         )
     source = dataset["source"]
     return f"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="color-scheme" content="light dark"><meta name="description" content="Sanitized operational fixed-10 Web Uplift journey pilot for State of the Web."><title>Fixed-10 journey pilot | State of the Web</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"></head>
-<body><a class="skip-link" href="#content">Skip to report</a><header><nav aria-label="Breadcrumb"><a href="../index.html">State of the Web inventory</a></nav><p class="eyebrow">Operational convenience pilot · fixed denominator 10</p><h1>Fixed-10 Web Uplift journey pilot</h1><p class="lede">A sanitized, point-in-time operational sub-report about runner behavior across ten fixed, reviewed origins. This is not a site ranking, not a quality league table, and not a replacement for the main State of the Web report.</p></header>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="color-scheme" content="light dark"><meta name="description" content="All 580 sanitized test outcomes and evidence from the fixed-10 Web Uplift journey pilot."><title>Fixed-10 Web Uplift evidence report | State of the Web</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"></head>
+<body><a class="skip-link" href="#content">Skip to report</a><header><nav aria-label="Breadcrumb"><a href="../index.html">State of the Web inventory</a></nav><p class="eyebrow">Evidence report · fixed denominator 10 sites × 58 tests</p><h1>Fixed-10 Web Uplift evidence report</h1><p class="lede">Inspect every test, verdict, method, sanitized evidence summary, and failure or collection reason from the retained pilot. This is not a site ranking, quality league table, or replacement for the main State of the Web report.</p></header>
 <main id="content" tabindex="-1"><section class="warning"><h2>Read this before interpreting the ledger</h2><p><strong>The authoritative hash-chained ledger classified 2 rows runner-completed, 6 partial, and 2 errors.</strong> Both runner-completed rows contain method-invalid console passes: the collector was unsupported and absence of surfaced errors was treated as evidence. Therefore this report publishes <strong>no scores, pass rates, rankings, or completed-quality claims</strong>. “Runner-completed” means only that the ledger classified the row completed.</p></section>
 <section><h2>Ledger disposition</h2><div class="summary-cards"><article><strong>10</strong><span>fixed origins</span></article><article><strong>2</strong><span>ledger runner-completed</span></article><article><strong>6</strong><span>partial</span></article><article><strong>2</strong><span>errors</span></article></div><p>No target was replaced or retried. GitHub is correctly reported as <code>missing-report</code>; permit expiry is not claimed because the retained timestamps disprove it. Facebook is an error because the runner invalidated completed cross-origin journey states.</p></section>
 <section class="deferred"><h2>Ten-row inventory</h2><div class="table-wrap"><table><caption>Authoritative ledger disposition, recomputed atomic coverage, and journey status for the fixed ten origins</caption><thead><tr><th scope=col>Origin</th><th scope=col>Archetype</th><th scope=col>Disposition / reason</th><th scope=col>Coverage</th><th scope=col>Journey</th></tr></thead><tbody>{''.join(table_rows)}</tbody></table></div><div class="mobile-cards">{''.join(cards)}</div></section>
 <section class="desktop-details deferred"><h2>Row evidence details</h2>{''.join(cards)}</section>
+{render_check_explorer(check_data)}
 <section class="deferred"><h2>Methodology</h2><ol><li>Keep the reviewed convenience cohort fixed at ten origins, with no substitutions or automatic retries.</li><li>Verify the hash-chained event ledger and use it as the sole disposition authority. Stale <code>site-run</code> pending states and conflicting report states are ignored.</li><li>Recompute coverage from the 58 atomic check outcomes. A missing report produces 58 missing rows.</li><li>Allowlist only origins, categorical outcomes, counts, bytes, timing aggregates, header presence, and cookie-attribute counts. URLs are reduced to origins before counting.</li><li>Deterministically re-encode selected media, strip metadata, verify hashes and dimensions, and admit it only after OCR and visual privacy review.</li></ol><p>Network and trace facts describe one retained collection under its recorded conditions. They are not lab scores and are not comparable performance rankings.</p></section>
 <section class="deferred"><h2>Limitations</h2><ul><li>This is a fixed, reviewed convenience pilot, not a representative sample. No population inference is supported.</li><li>Observations are limited to public landing surfaces, reachable states, strict mutation containment, and the captured window.</li><li>Authentication walls, humanity challenges, exact-origin scope, and unavailable Stage 2 collectors limited journey and check coverage.</li><li>The ledger is authoritative for disposition, but its two completed classifications do not establish valid completion quality because both console methods were unsupported.</li><li>Cleanup evidence is an operational assertion rather than authenticated per-session teardown receipts; additional audit profiles observed in private logs were outside the ten-profile cleanup list.</li></ul></section>
-<section class="deferred"><h2>Public evidence and provenance</h2><ul><li><a href="data/pilot.json">Sanitized aggregate JSON</a></li><li><a href="data/public-manifest.json">Public evidence manifest</a></li><li><a href="data/media-manifest.json">Media transform and review receipts</a></li><li><a href="data/provenance.json">Source and provenance hashes</a></li><li><a href="data/cleanup-summary.json">Sanitized cleanup summary</a></li><li><a href="data/schema.json">Strict aggregate schema</a></li></ul><p>Runner commit: <code>{source['runnerCommit']}</code><br>Pilot manifest SHA-256: <code>{source['pilotManifestSha256']}</code><br>Source manifest SHA-256: <code>{source['sourceManifestSha256']}</code><br>Policy SHA-256: <code>{source['policySha256']}</code><br>Ledger SHA-256: <code>{source['ledgerSha256']}</code></p><p><strong>Publication authorization:</strong> explicit authorization for this sanitized derivative was granted after the run. The private start receipt recorded the status at collection start; it does not negate later authorization. No relay identifiers are published.</p></section></main><footer><p>State of the Web · sanitized operational pilot derivative</p></footer></body></html>
+<section class="deferred"><h2>Public evidence and provenance</h2><ul><li><a href="data/pilot.json">Sanitized aggregate JSON</a></li><li><a href="data/check-outcomes.json">All 580 sanitized test outcomes</a></li><li><a href="data/check-outcomes.schema.json">Strict test-outcome schema</a></li><li><a href="data/public-manifest.json">Public evidence manifest</a></li><li><a href="data/media-manifest.json">Media transform and review receipts</a></li><li><a href="data/provenance.json">Source and provenance hashes</a></li><li><a href="data/cleanup-summary.json">Sanitized cleanup summary</a></li><li><a href="data/schema.json">Strict aggregate schema</a></li></ul><p>Runner commit: <code>{source['runnerCommit']}</code><br>Pilot manifest SHA-256: <code>{source['pilotManifestSha256']}</code><br>Source manifest SHA-256: <code>{source['sourceManifestSha256']}</code><br>Policy SHA-256: <code>{source['policySha256']}</code><br>Ledger SHA-256: <code>{source['ledgerSha256']}</code></p><p><strong>Publication authorization:</strong> explicit authorization for this sanitized derivative was granted after the run. The private start receipt recorded the status at collection start; it does not negate later authorization. No relay identifiers are published.</p></section></main><footer><p>State of the Web · sanitized operational pilot derivative</p></footer><script src="explorer.js" defer></script></body></html>
 """
 
 
@@ -453,7 +793,7 @@ def public_manifest(output: Path) -> dict:
             continue
         relative = path.relative_to(output).as_posix()
         suffix = path.suffix.lower()
-        media_type = {".css": "text/css", ".html": "text/html", ".json": "application/json", ".mp4": "video/mp4", ".png": "image/png"}.get(suffix)
+        media_type = {".css": "text/css", ".html": "text/html", ".js": "text/javascript", ".json": "application/json", ".mp4": "video/mp4", ".png": "image/png"}.get(suffix)
         if media_type is None:
             raise SystemExit("unknown public evidence media type")
         files.append({"bytes": path.stat().st_size, "mediaType": media_type, "path": relative, "sha256": sha256_file(path)})
@@ -472,6 +812,9 @@ def main() -> int:
     if not media_manifest_path.is_file():
         raise SystemExit("run process_fixed10_media.py before generation")
     media_manifest = load_json(media_manifest_path)
+    catalog_path = ROOT / "principles.json"
+    catalog = load_json(catalog_path)
+    catalog_rows, catalog_lookup = catalog_manifest(catalog)
 
     cohort = load_jsonl(private / "cohort.jsonl")
     events = load_jsonl(private / "cohort-events.jsonl")
@@ -494,12 +837,14 @@ def main() -> int:
     policy_values = set()
     catalog_values = set()
     rows = []
+    reports: dict[int, dict | None] = {}
     for cohort_row, event in zip(cohort, events, strict=True):
         ordinal = cohort_row["ordinal"]
         origin = normalize_origin(cohort_row.get("normalizedInputOrigin"))
         if len(urlsplit(cohort_row.get("normalizedInputOrigin")).path.strip("/")) or urlsplit(cohort_row.get("normalizedInputOrigin")).query or urlsplit(cohort_row.get("normalizedInputOrigin")).fragment:
             raise SystemExit("cohort origin is not origin-only")
         report = report_for_row(private, ordinal)
+        reports[ordinal] = report
         if ordinal in {1, 2} and report is not None or ordinal >= 3 and report is None:
             raise SystemExit("report inventory drift")
         if report:
@@ -558,6 +903,10 @@ def main() -> int:
         "schemaVersion": 1,
         "source": source,
     }
+    check_data = check_dataset(rows, reports, catalog_rows, catalog_lookup)
+    if source["catalogSha256"] != sha256_file(catalog_path):
+        raise SystemExit("catalog source checksum drift")
+
     cleanup = {
         "additionalAuditProfilesCoveredByPerSessionReceipts": False,
         "batchExited": cleanup_raw.get("batchExited") is True,
@@ -580,11 +929,12 @@ def main() -> int:
 
     data_dir.mkdir(parents=True, exist_ok=True)
     (data_dir / "pilot.json").write_bytes(canonical(dataset))
+    (data_dir / "check-outcomes.json").write_bytes(canonical(check_data))
     (data_dir / "cleanup-summary.json").write_bytes(canonical(cleanup))
     (data_dir / "provenance.json").write_bytes(canonical(provenance))
-    (output / "index.html").write_text(render_html(dataset, media_manifest), encoding="utf-8", newline="\n")
+    (output / "index.html").write_text(render_html(dataset, media_manifest, check_data), encoding="utf-8", newline="\n")
     (data_dir / "public-manifest.json").write_bytes(canonical(public_manifest(output)))
-    print(f"generated {len(rows)} sanitized rows")
+    print(f"generated {len(rows)} sanitized rows and {check_data['catalog']['totalSlots']} site-check slots")
     print(f"pilot sha256 {sha256_file(data_dir / 'pilot.json')}")
     return 0
 
