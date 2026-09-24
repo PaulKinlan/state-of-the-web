@@ -152,7 +152,10 @@ def evaluate_target(url: str, out: Path) -> tuple[int, str]:
             return value or ''
         output = text(exc.stdout) + text(exc.stderr)
         for profile in set(re.findall(r'/tmp/web-uplift-cdp-[A-Za-z0-9_-]+', output)):
-            subprocess.run(['pkill', '-f', f'--user-data-dir={profile}'], capture_output=True)
+            # `pkill -f` parses a leading `--` as an option and exits 2 without
+            # signalling anything (reviewer finding, state-of-the-web-4lk), so the
+            # pattern must follow an explicit end-of-options marker.
+            subprocess.run(['pkill', '-f', '--', f'--user-data-dir={profile}'], capture_output=True)
         return 124, f'timeout after {TIMEOUT}s'
 
 

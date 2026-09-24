@@ -187,31 +187,51 @@ class CrawlerWiringTest(unittest.TestCase):
             csv_path.write_text('domain\nexample.com\n')
             self.assertEqual(modern_web_probe.load_targets(str(csv_path)), [(None, 'example.com')])
 
-    def test_timeout_is_recorded_and_chrome_profile_is_killed(self):
-        """One unresponsive target must not kill the crawl or leak Chrome."""
-        import subprocess as sp
+    def test_timeout_kills_the_orphaned_chrome_profile_for_real(self):
+        """Real termination, not a recorded command shape.
+
+        A previous version of this test mocked subprocess.run and asserted the
+        argv it would have sent, which pinned a broken `pkill -f
+        --user-data-dir=...` (pkill exits 2 on that shape and kills nothing), and
+        an earlier rewrite killed the victim in its own cleanup before asserting,
+        which made the assertion unfailable. This version starts a real process
+        whose command line carries the profile, captures whether it survived
+        BEFORE any cleanup, and asserts on that captured value.
+        """
+        import os
         import tempfile
+        import time
         sys.path.insert(0, str(ROOT / 'scripts'))
         import modern_web_probe
-        killed = []
-        original_run = modern_web_probe.subprocess.run
+        profile = f'/tmp/web-uplift-cdp-Regression{os.getpid()}'
+        # `bash -c 'sleep 300'` execs sleep and drops the profile from argv, so the
+        # victim mirrors Chrome's shape instead: a process that keeps the profile
+        # path in its command line for its whole life.
+        victim = subprocess.Popen(['bash', '-c', 'sleep 300; exit 0', f'--user-data-dir={profile}'])
+        real_run = subprocess.run
+        probe_tmp = tempfile.mkdtemp()
 
-        def fake_run(command, **kwargs):
-            if command[:2] == ['pkill', '-f']:
-                killed.append(command[2])
-                return sp.CompletedProcess(command, 0, '', '')
-            raise sp.TimeoutExpired(command, modern_web_probe.TIMEOUT,
-                                    output='[browser] launching chrome (profile /tmp/web-uplift-cdp-AbC123)')
+        def fake_cli_run(command, **kwargs):
+            if command and command[0] == 'node':
+                raise subprocess.TimeoutExpired(command, modern_web_probe.TIMEOUT,
+                                                output=f'[browser] launching chrome (profile {profile})')
+            return real_run(command, **kwargs)
 
-        modern_web_probe.subprocess.run = fake_run
+        modern_web_probe.subprocess.run = fake_cli_run
         try:
-            with tempfile.TemporaryDirectory() as tmp:
-                exit_code, detail = modern_web_probe.evaluate_target('https://example.com/', Path(tmp) / 'out.json')
+            exit_code, detail = modern_web_probe.evaluate_target('https://example.com/', Path(probe_tmp) / 'out.json')
+            deadline = time.time() + 5
+            while victim.poll() is None and time.time() < deadline:
+                time.sleep(0.1)
+            survived = victim.poll() is None
         finally:
-            modern_web_probe.subprocess.run = original_run
+            modern_web_probe.subprocess.run = real_run
+            if victim.poll() is None:
+                victim.kill()
+                victim.wait(timeout=10)
         self.assertEqual(exit_code, 124)
         self.assertIn('timeout', detail)
-        self.assertEqual(killed, ['--user-data-dir=/tmp/web-uplift-cdp-AbC123'])
+        self.assertFalse(survived, 'orphaned Chrome profile process was not killed')
 
     def test_failed_probe_writes_failure_evidence_and_marks_not_ok(self):
         """Fail-closed: a target with no usable evidence is recorded as a failure."""
