@@ -142,6 +142,68 @@
     { needle: 'anchor-size(', family: 'anchorPositioning' },
   ];
 
+  // A function name inside a string literal is text, not a function call:
+  // `content: "anchor("` is not anchor positioning. Stripping strings is a
+  // complete fix rather than a heuristic, because an invalid function call such
+  // as `content: anchor(--x)` never parses into the CSSOM in the first place --
+  // so whatever survives outside a string really was parsed as a function.
+  const withoutStrings = value => value.replace(/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/g, '""');
+
+  // Did the author WRITE this longhand, or did the CSSOM synthesise it by
+  // expanding a shorthand? `style.item()` enumerates both, but only authored
+  // declarations survive into the rule's serialised text: `animation: pulse 2s`
+  // serialises back as the shorthand while still enumerating
+  // `animation-timeline: auto`.
+  //
+  // This matters because an inert value means two completely different things.
+  // `animation-timeline: none` written by hand is a decision. The same value
+  // synthesised by an ordinary `animation:` shorthand is not a decision at all --
+  // the author never considered the feature. Reporting both as "opted out" would
+  // invent intent that is not in the CSS.
+  //
+  // Best-effort by construction: it reads a serialisation, so it is a strong
+  // hint, not proof of intent. Known limitation: when a rule mixes a shorthand
+  // WITH longhand overrides, Chrome cannot round-trip the shorthand and expands
+  // every longhand into `cssText`, so untouched longhands in that rule look
+  // authored. The common case -- a plain `animation:` with no overrides --
+  // stays collapsed and is classified correctly. Never present `optedOut` as
+  // proof of deliberate intent; it is evidence to read, not a verdict.
+  const authoredIn = (text, property) => {
+    if (!text) return false;
+    return new RegExp(`(^|[{;\\s])${property}\\s*:`).test(text);
+  };
+
+  // Split a list value on top-level commas only, so `view(block 10% 20%), none`
+  // becomes two parts and the function's own commas are left alone.
+  const listParts = value => {
+    const parts = [];
+    let current = '';
+    let depth = 0;
+    let quote = '';
+    for (const character of value) {
+      if (quote) {
+        current += character;
+        if (character === quote) quote = '';
+        continue;
+      }
+      if (character === '"' || character === "'") {
+        quote = character;
+        current += character;
+        continue;
+      }
+      if (character === '(') depth++;
+      else if (character === ')') depth--;
+      else if (character === ',' && depth === 0) {
+        parts.push(current);
+        current = '';
+        continue;
+      }
+      current += character;
+    }
+    parts.push(current);
+    return parts.map(part => part.trim()).filter(Boolean);
+  };
+
   const TRACKED = new Set(Object.keys(PROPERTY_FAMILY));
   const FAMILY_NAMES = ['viewTransitions', 'scrollDrivenAnimations', 'anchorPositioning', 'scrollStateChrome', 'gesturePlatforms'];
 
@@ -153,11 +215,14 @@
       samples: [],
       optedOut: [],
       optedOutCount: 0,
+      inertDefaults: [],
+      inertDefaultCount: 0,
       usedCount: 0,
       inlineHit: false,
       _props: new Set(),
       _seen: new Set(),
       _seenOptedOut: new Set(),
+      _seenInertDefaults: new Set(),
     };
   }
 
@@ -174,21 +239,38 @@
     scrollStateContainerQuery: false,
   };
 
-  const record = (property, rawValue, { inline }) => {
+  const record = (property, rawValue, { inline, authored }) => {
     const family = families[PROPERTY_FAMILY[property]];
     if (!family) return;
     const value = String(rawValue || '').trim();
     if (!value) return;
     const lower = value.toLowerCase();
-    const inert = (INERT[property] || []).includes(lower) || CSS_WIDE.has(lower);
+    // List-valued properties must be judged PER PART. `animation-timeline:
+    // auto, none` is two inert values, but comparing the whole serialised
+    // string to a scalar token never matches, so it read as usage. A property
+    // counts only if at least one part actually enables the feature.
+    const inertTokens = INERT[property] || [];
+    const isInert = part => inertTokens.includes(part) || CSS_WIDE.has(part);
+    const inert = listParts(lower).every(isInert);
     const gate = REQUIRED_VALUE[property];
     const counts = !inert && (!gate || gate(lower));
     const pair = `${property}: ${value.length > 80 ? `${value.slice(0, 80)}…` : value}`;
     if (!counts) {
-      family.optedOutCount++;
-      if (!family._seenOptedOut.has(pair) && family.optedOut.length < SAMPLE_LIMIT) {
-        family._seenOptedOut.add(pair);
-        family.optedOut.push(pair);
+      // An authored inert value is a deliberate opt-out. One synthesised by a
+      // shorthand is an inert default the author never wrote. Keeping them in
+      // separate buckets is what makes `optedOut` mean something.
+      if (authored) {
+        family.optedOutCount++;
+        if (!family._seenOptedOut.has(pair) && family.optedOut.length < SAMPLE_LIMIT) {
+          family._seenOptedOut.add(pair);
+          family.optedOut.push(pair);
+        }
+      } else {
+        family.inertDefaultCount++;
+        if (!family._seenInertDefaults.has(pair) && family.inertDefaults.length < SAMPLE_LIMIT) {
+          family._seenInertDefaults.add(pair);
+          family.inertDefaults.push(pair);
+        }
       }
       return;
     }
@@ -206,11 +288,18 @@
     if (!style || typeof style.length !== 'number') return;
     for (let index = 0; index < style.length; index++) {
       const property = style.item(index);
-      if (TRACKED.has(property)) record(property, style.getPropertyValue(property), options);
+      if (TRACKED.has(property)) {
+        record(property, style.getPropertyValue(property), {
+          inline: options.inline,
+          authored: authoredIn(options.sourceText, property),
+        });
+      }
       if (!VALUE_FUNCTIONS.length) continue;
       // Only pay for the value lookup when the property could carry a function.
-      const value = style.getPropertyValue(property);
-      if (!value || value.indexOf('anchor') < 0) continue;
+      const raw = style.getPropertyValue(property);
+      if (!raw || raw.indexOf('anchor') < 0) continue;
+      const value = withoutStrings(raw);
+      if (value.indexOf('anchor') < 0) continue;
       for (const { needle, family } of VALUE_FUNCTIONS) {
         if (!value.includes(needle)) continue;
         const target = families[family];
@@ -250,14 +339,31 @@
         families.viewTransitions.used = true;
         families.viewTransitions._props.add('::view-transition');
       }
-      if (rule.constructor && rule.constructor.name === 'CSSViewTransitionRule') {
-        atRules.crossDocumentViewTransitions = true;
-        families.viewTransitions.used = true;
-        families.viewTransitions._props.add('@view-transition');
-      } else if (!selector && (rule.cssText || '').trim().startsWith('@view-transition')) {
-        atRules.crossDocumentViewTransitions = true;
-        families.viewTransitions.used = true;
-        families.viewTransitions._props.add('@view-transition');
+      // `@view-transition` only enables cross-document transitions when its
+      // `navigation` descriptor says so. `navigation: none` is an explicit
+      // opt-out, and an omitted descriptor is initially `none` -- neither is
+      // usage, so the rule's mere existence cannot be the signal.
+      const isViewTransitionRule = (rule.constructor && rule.constructor.name === 'CSSViewTransitionRule')
+        || (!selector && (rule.cssText || '').trim().startsWith('@view-transition'));
+      if (isViewTransitionRule) {
+        const declared = typeof rule.navigation === 'string' && rule.navigation
+          ? rule.navigation
+          : (/navigation\s*:\s*([a-zA-Z-]+)/.exec(rule.cssText || '') || [])[1] || '';
+        const navigation = declared.trim().toLowerCase();
+        if (navigation && navigation !== 'none') {
+          atRules.crossDocumentViewTransitions = true;
+          families.viewTransitions.used = true;
+          families.viewTransitions.usedCount++;
+          families.viewTransitions._props.add('@view-transition');
+        } else {
+          const pair = `@view-transition navigation: ${navigation || 'none (initial)'}`;
+          families.viewTransitions.optedOutCount++;
+          if (!families.viewTransitions._seenOptedOut.has(pair)
+            && families.viewTransitions.optedOut.length < SAMPLE_LIMIT) {
+            families.viewTransitions._seenOptedOut.add(pair);
+            families.viewTransitions.optedOut.push(pair);
+          }
+        }
       }
       if (!selector && prelude(rule).includes('scroll-state(')) {
         atRules.scrollStateContainerQuery = true;
@@ -265,7 +371,7 @@
         families.scrollStateChrome._props.add('scroll-state()');
       }
 
-      if (rule.style) readDeclarations(rule.style, { inline: false });
+      if (rule.style) readDeclarations(rule.style, { inline: false, sourceText: rule.cssText || '' });
       if (rule.cssRules) visitRules(rule.cssRules);
     }
   };
@@ -288,7 +394,9 @@
   for (const sheet of sheets) walkSheet(sheet);
 
   const inlineStyled = document.querySelectorAll('[style]');
-  for (const element of inlineStyled) readDeclarations(element.style, { inline: true });
+  for (const element of inlineStyled) {
+    readDeclarations(element.style, { inline: true, sourceText: element.getAttribute('style') || '' });
+  }
 
   for (const name of FAMILY_NAMES) {
     const family = families[name];
@@ -296,6 +404,7 @@
     delete family._props;
     delete family._seen;
     delete family._seenOptedOut;
+    delete family._seenInertDefaults;
   }
 
   let animations = { total: 0, withTimeline: 0, scrollTimelines: 0, viewTimelines: 0 };
@@ -326,6 +435,12 @@
     ok: true,
     url: location.href,
     matching: 'value-aware',
+    // How to read each family:
+    //   used/usedCount   values that actually enable the feature
+    //   optedOut         inert values the author appears to have WRITTEN
+    //   inertDefaults    inert values the CSSOM synthesised from a shorthand
+    // optedOut is a hint about intent, never a verdict: see authoredIn().
+    buckets: ['used', 'optedOut', 'inertDefaults'],
     supported,
     css: {
       sheets: css.sheets,

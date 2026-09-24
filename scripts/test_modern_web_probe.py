@@ -32,6 +32,7 @@ FIXTURES = ROOT / 'scripts' / 'fixtures'
 MODERN_FIXTURE = FIXTURES / 'modern-web-features.html'
 PLAIN_FIXTURE = FIXTURES / 'plain-page.html'
 OPTED_OUT_FIXTURE = FIXTURES / 'opted-out-features.html'
+PARTIAL_LIST_FIXTURE = FIXTURES / 'partial-inert-lists.html'
 CRAWLER = ROOT / 'scripts' / 'modern_web_probe.py'
 SKIP_ENV = 'ALLOW_SKIP_BROWSER_TESTS'
 # Mirrors cdp.mjs: CHROME_BIN wins, then the distro paths, then $PATH. Keeping
@@ -187,6 +188,81 @@ class ModernWebProbeTest(unittest.TestCase):
                                    f'{family} opt-out was dropped instead of recorded')
         self.assertFalse(report['css']['atRules']['scrollStateContainerQuery'])
         self.assertFalse(report['css']['atRules']['viewTransitionPseudo'])
+        # `@view-transition { navigation: none }` is an opt-out: the at-rule
+        # exists, but nothing is enabled, so its presence must not be the signal.
+        self.assertFalse(report['css']['atRules']['crossDocumentViewTransitions'],
+                         '@view-transition navigation:none counted as usage')
+
+    def test_wholly_inert_lists_and_disabled_at_rules_are_not_usage(self):
+        """Per-part judgement for list values, per-descriptor for `@view-transition`.
+
+        Found by independent review of the first value-aware fix. Three separate
+        ways a declaration can exist without enabling anything:
+
+        - `animation-timeline: auto, none` -- two animations, two values. The
+          serialised string never equals a scalar inert token, so comparing the
+          whole value read it as usage.
+        - `@view-transition { navigation: none }` -- the at-rule's existence was
+          the signal; the descriptor that decides the behaviour was ignored.
+        - `content: "anchor("` -- a function name inside a string literal is
+          text, not a call.
+        """
+        report = probe(OPTED_OUT_FIXTURE.as_uri())
+        scroll = report['css']['families']['scrollDrivenAnimations']
+        transitions = report['css']['families']['viewTransitions']
+        anchors = report['css']['families']['anchorPositioning']
+        self.assertFalse(scroll['used'], f'wholly inert list counted: {scroll["samples"]}')
+        self.assertFalse(transitions['used'], f'disabled view transitions counted: {transitions["samples"]}')
+        self.assertFalse(anchors['used'], f'string literal counted as anchor(): {anchors["samples"]}')
+        # Each opt-out must still be visible to the auditor.
+        self.assertTrue(any('navigation' in entry for entry in transitions['optedOut']),
+                        f'@view-transition opt-out not recorded: {transitions["optedOut"]}')
+        self.assertTrue(any(',' in entry for entry in scroll['optedOut']),
+                        f'inert list not recorded as an opt-out: {scroll["optedOut"]}')
+
+    def test_shorthand_defaults_are_not_reported_as_deliberate_opt_outs(self):
+        """`optedOut` must not claim intent the CSS does not contain.
+
+        Raised by independent review: an ordinary `animation: pulse 2s` yields
+        `animation-timeline: auto`, so grouping it with a hand-written
+        `animation-timeline: none` would tell an auditor a site deliberately
+        disabled scroll-driven animations when the author never mentioned them.
+        Authored inert values belong in `optedOut`; synthesised ones belong in
+        `inertDefaults`.
+        """
+        plain = probe(PLAIN_FIXTURE.as_uri())['css']['families']['scrollDrivenAnimations']
+        self.assertFalse(plain['used'])
+        self.assertEqual(plain['optedOutCount'], 0,
+                         f'shorthand defaults reported as deliberate opt-outs: {plain["optedOut"]}')
+        self.assertGreater(plain['inertDefaultCount'], 0,
+                          'shorthand-expanded defaults were not recorded at all')
+
+        # The opt-out fixture contains both kinds in the same family, so the two
+        # buckets have to be populated independently rather than one shadowing
+        # the other.
+        mixed = probe(OPTED_OUT_FIXTURE.as_uri())['css']['families']['scrollDrivenAnimations']
+        self.assertGreater(mixed['optedOutCount'], 0, 'authored opt-outs went missing')
+        self.assertGreater(mixed['inertDefaultCount'], 0, 'shorthand defaults went missing')
+        self.assertTrue(all('animation-timeline: auto' != entry for entry in mixed['optedOut']),
+                        f'a synthesised default leaked into optedOut: {mixed["optedOut"]}')
+
+    def test_partially_inert_lists_still_count_as_usage(self):
+        """Guards the opposite error: do not under-count real adoption.
+
+        Filtering lists too aggressively would drop `animation-timeline: --rail,
+        none` and `view(block 10% 20%), none`, which DO drive a real timeline.
+        A list counts when any part enables the feature, and the function's own
+        commas must not split the list.
+        """
+        report = probe(PARTIAL_LIST_FIXTURE.as_uri())
+        scroll = report['css']['families']['scrollDrivenAnimations']
+        self.assertTrue(scroll['used'], 'partially inert list was wrongly discarded')
+        self.assertGreaterEqual(scroll['usedCount'], 3, f'expected several real timelines: {scroll["samples"]}')
+        samples = ' '.join(scroll['samples'])
+        self.assertIn('--rail', samples, f'named timeline missing from samples: {scroll["samples"]}')
+        self.assertIn('view(', samples, f'view() timeline missing from samples: {scroll["samples"]}')
+        self.assertGreater(report['animations']['viewTimelines'] + report['animations']['scrollTimelines'], 0,
+                           'fixture should produce at least one live timeline')
 
 
 class CrawlerWiringTest(unittest.TestCase):

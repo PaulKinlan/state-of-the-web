@@ -62,14 +62,29 @@ cross-origin stylesheet whose text the page cannot read) as partial CSS evidence
 not as absence of the feature.
 
 Detection is **value-aware** (`matching: "value-aware"` in the report): a
-property counts only when its value enables the feature. `view-transition-name:
-none`, `position-anchor: unset`, and the `animation-timeline: auto` /
-`container-type: inline-size` that ordinary `animation:` and `container:`
-shorthands expand into are all reported under each family's `optedOut`, never as
-usage. When judging, read `families.<name>.used` plus `usedCount` for adoption,
-and `optedOut` to tell a site that does not use a feature apart from one that
-explicitly turned it off — the first is usually `not-applicable`, the second is a
-deliberate decision worth recording.
+property counts only when its value enables the feature. A list value is judged
+per comma-separated part, `@view-transition` is judged by its `navigation`
+descriptor rather than its existence, and a function name inside a string
+literal is text, not a call.
+
+Each family reports three buckets:
+
+- `used` / `usedCount` — values that actually enable the feature. This is the
+  adoption signal.
+- `optedOut` — inert values the author appears to have **written**
+  (`view-transition-name: none`, `position-anchor: unset`,
+  `@view-transition { navigation: none }`).
+- `inertDefaults` — inert values the CSSOM **synthesised** from a shorthand
+  (`animation:` produces `animation-timeline: auto`; `container:` produces
+  `container-type: inline-size`). The author never wrote these.
+
+When judging, read `used`/`usedCount` for adoption. Treat `optedOut` as a hint
+worth reading, **not as proof of intent**: it is derived from CSSOM
+serialisation, and a rule mixing a shorthand with longhand overrides expands
+every longhand into its text, so untouched longhands there look authored. Never
+turn the `optedOut` bucket alone into a verdict, and never read a family's
+absence as proof when `css.sheets.inaccessible` is non-zero — that is partial CSS
+evidence, and the honest outcome is bounded to what was readable.
 
 Then materialise the exact check manifest from `principles.json`, gather the check-specific evidence (including active interactions and representative routes where required), record every check outcome, derive the 17 principle outcomes, and run the coverage validator. Do not use a generic evidence bundle to default untested checks to pass.
 

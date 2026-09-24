@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Partially inert lists fixture</title>
+<style>
+  /* The mirror image of opted-out-features.html.
+
+     Every property here is a comma-separated list in which SOME part is inert
+     and at least one part really enables the feature. Filtering lists too
+     aggressively (e.g. dropping any value that contains an inert token) would
+     silently under-count real adoption, which is the opposite failure to
+     crediting opt-outs. These must all register as usage. */
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+
+  .named-then-none {
+    animation: reveal linear both, reveal linear both;
+    animation-timeline: --rail, none;
+  }
+
+  .function-then-none {
+    animation: reveal linear both, reveal linear both;
+    /* The function's own commas must not split the list. */
+    animation-timeline: view(block 10% 20%), none;
+  }
+
+  .range-partly-real {
+    animation: reveal linear both, reveal linear both;
+    animation-timeline: --rail, --rail;
+    animation-range-start: entry 0%, normal;
+  }
+
+  .rail { scroll-timeline-name: none, --rail; }
+  .shelf { view-timeline-name: none, --shelf; }
+</style>
+</head>
+<body>
+  <main>
+    <h1>Partially inert lists</h1>
+    <p class="named-then-none">named timeline, then none</p>
+    <p class="function-then-none">view() timeline, then none</p>
+    <p class="range-partly-real">real range start, then normal</p>
+    <div class="rail"><div class="shelf">shelf</div></div>
+  </main>
+</body>
+</html>
