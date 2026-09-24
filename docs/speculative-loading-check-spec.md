@@ -1,6 +1,6 @@
 # Speculative Loading Check Specification (Speculation Rules / Prefetch / Prerender)
 
-- **Issue:** `state-of-the-web-dpn`
+- **Issues:** `state-of-the-web-dpn`, `state-of-the-web-6z8`
 - **Principle:** `be-fast-and-stable`
 - **Check ID:** `speculative-loading`
 - **Catalog Versioning:** Generation 2 (Option A: retains immutable July 58-check publication snapshot)
@@ -60,7 +60,8 @@ Evaluated in-page via `node ~/.web-uplift/evidence/cli.mjs evaluate <url> --expr
    - Inspects `<link rel="prefetch">`, `<link rel="prerender">`, `<link rel="modulepreload">`.
 5. **Navigation Context & Applicability Signals**:
    - Counts total, internal, and external `<a href>` links.
-   - Detects Single-Page Application (SPA) client-side routing signatures (Next.js, Nuxt, Remix, SvelteKit, Gatsby, Angular, React SPA, hash routers).
+   - Reports framework presence as `frameworkHint` only. SSR markup, hydration roots and a hash-shaped URL do not prove routing behaviour.
+   - A snapshot leaves `isClientSideRouted: null` and `navigationObservation.type: "unobserved"`. It does not click links, invoke handlers, or replace history APIs.
 
 ### B. Network & HAR Signals (`scripts/speculative_loading.py`)
 
@@ -75,6 +76,34 @@ Parses network HAR / CDP logs:
    - `Link: <url>; rel="speculationrules"`
    - `Supports-Loading-Mode: credentialed-prerender` (enables cross-origin / authenticated prerendering)
 
+### C. Explicit Navigation Observation (`scripts/speculative_navigation.mjs`)
+
+```bash
+python3 scripts/speculative_loading.py https://example.com/articles \
+  --follow-link /articles/next --out /tmp/speculation-navigation.json
+```
+
+Use `--follow-link` only for a **safe, non-mutating href explicitly selected by
+the operator**. Same-origin alone does not establish safety: do not choose
+logout, delete, purchase, form-submission or other action routes. This option is
+rejected for manifests; ordinary single-page and batch collection stays
+snapshot-only. Neither a framework name nor an arbitrary first link enables it.
+
+The driver activates the first matching document anchor with real CDP mouse
+input, only when that anchor is visible. Missing/obscured links, downloads, other browsing contexts and
+cross-origin destinations are not activated. It observes the top frame's
+`Page.frameNavigated` / `Page.navigatedWithinDocument` events and loader identity,
+without monkey-patching the page. History/Navigation API routing must reach the
+requested URL in the original document. Fragment jumps, canceled clicks,
+same-URL history updates, failed destinations and unresolved events remain
+unknown. The event window is three seconds; the CLI driver also has a 45-second
+observation deadline, with outer process timeout/profile cleanup in the runner.
+
+Evidence and outcomes cover **the selected link**, not every link or the whole
+site. Exercise other representative routes separately, especially on hybrid
+sites. `is_spa_override` remains an explicit operator-context escape hatch in
+the Python API and is labelled as such, never as a browser measurement.
+
 ---
 
 ## 4. Scoring & Conformance Rules
@@ -84,12 +113,18 @@ Parses network HAR / CDP logs:
 - **`not-applicable`**:
   - **Single-Surface View**: The page contains zero navigation links (e.g. isolated tool, calculator, single form, error page).
   - **External Links Only**: The page contains only external links; same-origin Speculation Rules do not apply without cross-origin target opt-in.
-  - **Single-Page Application (SPA)**: The page uses client-side routing (e.g. Next.js, Nuxt, React Router, SvelteKit); internal view transitions do not use document navigations.
+  - **Observed Same-Document Route**: The explicitly sampled navigation stays in the same document. This is not a site-wide SPA classification.
 - **`issues`**:
-  - **Missing Speculation Rules**: A multi-page site with internal navigation links does not configure Speculation Rules to prefetch or prerender likely next navigations (or relies solely on legacy hints).
+  - **Missing Speculation Rules**: The sampled route performs a document navigation and the supplied probe/HAR evidence contains no speculative configuration. Framework markers do not exempt an SSR/multi-page route.
   - **Syntax Error**: Malformed or invalid JSON in `<script type="speculationrules">`.
 - **`blocked`**:
   - Anti-bot interstitial (HTTP 403 / Cloudflare / bot defense) prevented reaching or inspecting representative navigation routes.
+  - Navigation applicability is unobserved or ambiguous, including a marker-only snapshot. Neither a missing framework marker nor a legacy `isClientSideRouted` boolean proves document or SPA navigation.
+
+The existing valid-rules `pass` remains a **configuration** signal. It does not
+verify that list URLs are reachable, that document conditions match useful
+links, or that navigation is faster. Tightening that separate scoring policy is
+not part of the routing fix; no historical reports or catalog rows are rewritten.
 
 ---
 

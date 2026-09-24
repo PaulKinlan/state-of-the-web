@@ -125,6 +125,19 @@ evidence, and the honest outcome is bounded to what was readable.
 
 Then materialise the exact check manifest from `principles.json`, gather the check-specific evidence (including active interactions and representative routes where required), record every check outcome, derive the 17 principle outcomes, and run the coverage validator. Do not use a generic evidence bundle to default untested checks to pass.
 
+## Speculative-loading navigation applicability
+
+The prospective speculative-loading check must not infer routing from framework
+markers. Its normal probe is snapshot-only; unknown applicability stays blocked.
+For a single explicitly approved, non-mutating same-origin link, use
+`python3 scripts/speculative_loading.py <url> --follow-link <href> --out <file>`.
+The CDP driver observes a real click and document/same-document events; it never
+patches history APIs. Downloads, other contexts and cross-origin links are not
+followed. Never apply link activation automatically or to a manifest. Scope the
+result to the selected link, not all routes. See
+[the check specification](docs/speculative-loading-check-spec.md) for limits and
+configuration-versus-reachability semantics. No catalog migration is implied.
+
 ## Output schema
 
 Each site produces one JSON file at `results/gpt/{site}.json`:

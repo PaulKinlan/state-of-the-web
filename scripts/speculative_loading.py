@@ -58,8 +58,9 @@ def kill_profile(output: str) -> list[str]:
     return profiles
 
 
-def run_speculative_probe(url: str, timeout: int = DEFAULT_TIMEOUT, wait_ms: int = DEFAULT_WAIT_MS) -> dict[str, Any]:
-    """Execute the speculative-loading probe against a URL via CDP evaluate with leak guards."""
+def run_speculative_probe(url: str, timeout: int = DEFAULT_TIMEOUT, wait_ms: int = DEFAULT_WAIT_MS,
+                          follow_link: str | None = None) -> dict[str, Any]:
+    """Take a snapshot, optionally activating one operator-selected safe link."""
     if not EVIDENCE_CLI.exists():
         return {
             "probe": "speculative-loading",
@@ -80,6 +81,10 @@ def run_speculative_probe(url: str, timeout: int = DEFAULT_TIMEOUT, wait_ms: int
         "--wait", str(wait_ms),
         "--expr-file", str(PROBE_JS),
     ]
+    if follow_link is not None:
+        command = ["node", str(ROOT / "scripts" / "speculative_navigation.mjs"), url,
+                   "--follow-link", follow_link, "--harness", str(EVIDENCE_CLI),
+                   "--wait", str(wait_ms), "--expr-file", str(PROBE_JS)]
     try:
         proc = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
         output = (proc.stdout or "") + (proc.stderr or "")
@@ -104,8 +109,8 @@ def run_speculative_probe(url: str, timeout: int = DEFAULT_TIMEOUT, wait_ms: int
             }
         return report
     except subprocess.TimeoutExpired as exc:
-        raw_out = (exc.stdout or "") + (exc.stderr or "")
-        output_str = raw_out.decode(errors="replace") if isinstance(raw_out, bytes) else str(raw_out)
+        output_str = "".join(value.decode(errors="replace") if isinstance(value, bytes) else (value or "")
+                             for value in (exc.stdout, exc.stderr))
         kill_profile(output_str)
         return {
             "probe": "speculative-loading",
@@ -193,11 +198,11 @@ def synthesize_check_outcome(
 ) -> dict[str, Any]:
     """Derive an atomic check outcome candidate from probe and HAR evidence (F3 & F4).
 
-    Correctly enforces applicability:
-    - SPAs with client-side routing -> not-applicable
-    - Single-surface tools with 0 links -> not-applicable
-    - Pages with external links only -> not-applicable
-    - Multi-page sites with internal links -> issues (if missing rules) or pass (if present)
+    Framework markers do not establish applicability. A sampled same-document
+    route can be not-applicable; an observed document navigation can expose a
+    missing-rules finding. Unobserved/ambiguous behaviour remains blocked.
+    An explicit is_spa_override is operator-supplied context, not measurement.
+    Existing valid-rules passes describe configuration, not target reachability.
     """
     if not probe_data.get("ok"):
         return {
@@ -258,8 +263,12 @@ def synthesize_check_outcome(
     total_links = nav_ctx.get("anchorCount", 0)
     internal_links = nav_ctx.get("internalLinkCount", 0)
     external_links = nav_ctx.get("externalLinkCount", 0)
-    is_client_routed = is_spa_override if is_spa_override is not None else nav_ctx.get("isClientSideRouted", False)
-    framework = nav_ctx.get("frameworkRouter")
+    observation = nav_ctx.get("navigationObservation", {})
+    navigation_type = observation.get("type") if observation.get("method") == "cdp-link-activation" else None
+    method = "CDP observation of one explicitly selected link"
+    if is_spa_override is not None:
+        navigation_type = "same-document" if is_spa_override else "document"
+        method = "Operator-supplied routing override (not browser-observed)"
 
     # Case 1: Page has zero links (single-surface utility or isolated page)
     if total_links == 0:
@@ -285,20 +294,30 @@ def synthesize_check_outcome(
             "reason": "Exposes external links only; cross-origin speculative loading is not applicable without target opt-in.",
         }
 
-    # Case 3: Single-Page Application using client-side routing (F3 fix)
-    if is_client_routed:
-        router_desc = f" ({framework})" if framework else ""
+    # A marker, or a legacy isClientSideRouted boolean, cannot exempt a page.
+    if navigation_type not in {"same-document", "document"}:
+        return {
+            "principleId": "be-fast-and-stable",
+            "checkId": "speculative-loading",
+            "status": "blocked",
+            "confidence": "high",
+            "method": "Navigation applicability not established",
+            "evidence": observation.get("reason") or "No qualifying navigation behaviour was observed; framework markers are hints only.",
+            "reason": "Observe an explicitly selected safe internal link before judging missing speculation rules.",
+        }
+
+    if navigation_type == "same-document":
         return {
             "principleId": "be-fast-and-stable",
             "checkId": "speculative-loading",
             "status": "not-applicable",
             "confidence": "medium",
-            "method": "Client-side router detection and anchor inspection",
-            "evidence": f"Single-page application using client-side router{router_desc} with {internal_links} client-routed links.",
-            "reason": "Single-page application performs internal view transitions client-side without document navigations.",
+            "method": method,
+            "evidence": "The selected route is same-document; this does not classify the page's other links or the whole site.",
+            "reason": "Speculation Rules do not apply to the sampled same-document navigation.",
         }
 
-    # Case 4: Multi-page site with internal navigation links but no speculative loading
+    # A sampled document navigation without observed speculative configuration.
     legacy = probe_data.get("legacySpeculation", {})
     legacy_notes = []
     if legacy.get("linkPrefetch"):
@@ -307,8 +326,8 @@ def synthesize_check_outcome(
         legacy_notes.append(f"{legacy['linkPrerender']} legacy <link rel=prerender>")
 
     evidence_str = (
-        f"Multi-page site has {internal_links} internal navigation links but no <script type=\"speculationrules\"> "
-        f"or Speculation-Rules headers."
+        f"The selected route performs a document navigation; the source has {internal_links} internal navigation links. "
+        "No speculative configuration was found in the supplied probe/HAR evidence."
     )
     if legacy_notes:
         evidence_str += f" Uses legacy hints ({', '.join(legacy_notes)}) instead of modern Speculation Rules."
@@ -317,16 +336,18 @@ def synthesize_check_outcome(
         "principleId": "be-fast-and-stable",
         "checkId": "speculative-loading",
         "status": "issues",
-        "confidence": "high",
-        "method": "CDP evaluate speculation-rules probe",
+        "confidence": "medium",
+        "method": method,
         "evidence": evidence_str,
-        "reason": "Multi-page navigation flows do not leverage Speculation Rules to reduce navigation latency.",
+        "reason": "No speculative configuration was observed for the sampled document-navigation flow.",
     }
 
 
-def probe_single_target(url: str, out_path: Path | None = None) -> dict[str, Any]:
+def probe_single_target(url: str, out_path: Path | None = None, *,
+                        timeout: int = DEFAULT_TIMEOUT, wait_ms: int = DEFAULT_WAIT_MS,
+                        follow_link: str | None = None) -> dict[str, Any]:
     """Execute probe for one target, synthesize outcome, and persist immediately (F6)."""
-    raw_probe = run_speculative_probe(url)
+    raw_probe = run_speculative_probe(url, timeout=timeout, wait_ms=wait_ms, follow_link=follow_link)
     outcome = synthesize_check_outcome(raw_probe)
     record = {
         "url": url,
@@ -346,16 +367,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, default=None, help="Output file path (single URL) or directory (manifest)")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="Per-target timeout in seconds")
     parser.add_argument("--wait", type=int, default=DEFAULT_WAIT_MS, help="Settle wait in ms before evaluate")
+    parser.add_argument("--follow-link", help="Explicitly activate this safe, non-mutating same-origin href (single URL only)")
     args = parser.parse_args(argv)
 
     target_str = args.target.strip()
     if target_str.startswith(("http://", "https://", "file://")):
         out_file = args.out if args.out else Path(f"evidence/speculative-loading/{re.sub(r'[^A-Za-z0-9.-]+', '-', target_str)}.json")
-        res = probe_single_target(target_str, out_file)
+        res = probe_single_target(target_str, out_file, timeout=args.timeout, wait_ms=args.wait, follow_link=args.follow_link)
         status = res["outcome"]["status"]
         print(f"[{status}] {target_str} -> {out_file}: {res['outcome']['evidence']}")
         return 0 if res["probe"].get("ok") else 1
 
+    if args.follow_link is not None:
+        parser.error("--follow-link requires a single URL; manifest-wide link activation is not permitted")
     manifest_path = Path(target_str)
     if not manifest_path.exists():
         print(f"Target manifest file not found: {manifest_path}", file=sys.stderr)
@@ -384,7 +408,7 @@ def main(argv: list[str] | None = None) -> int:
     for idx, u in enumerate(urls, 1):
         slug = re.sub(r"[^A-Za-z0-9.-]+", "-", u).strip("-")
         out_file = out_dir / f"{idx:04d}-{slug}.json"
-        res = probe_single_target(u, out_file)
+        res = probe_single_target(u, out_file, timeout=args.timeout, wait_ms=args.wait)
         if res["probe"].get("ok"):
             success_count += 1
         print(f"[{idx}/{len(urls)}] [{res['outcome']['status']}] {u}")

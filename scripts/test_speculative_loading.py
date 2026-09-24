@@ -225,13 +225,15 @@ class OutcomeSynthesisTest(unittest.TestCase):
                 "internalLinkCount": 20,
                 "externalLinkCount": 0,
                 "isClientSideRouted": True,
-                "frameworkRouter": "next",
+                "frameworkHint": "next",
+                "navigationObservation": {"method": "cdp-link-activation", "type": "same-document"},
             },
         }
         outcome = speculative_loading.synthesize_check_outcome(mock_report)
         self.assertEqual(outcome["status"], "not-applicable")
-        self.assertIn("Single-page application", outcome["evidence"])
-        self.assertIn("next", outcome["evidence"])
+        self.assertIn("selected route is same-document", outcome["evidence"])
+        self.assertIn("not", outcome["evidence"])
+        self.assertIn("one explicitly selected link", outcome["method"])
 
     def test_synthesis_issues_on_multipage_site_without_speculation(self):
         """Multi-page site with internal navigation links without speculation is issues."""
@@ -244,6 +246,7 @@ class OutcomeSynthesisTest(unittest.TestCase):
                 "internalLinkCount": 12,
                 "externalLinkCount": 3,
                 "isClientSideRouted": False,
+                "navigationObservation": {"method": "cdp-link-activation", "type": "document"},
             },
             "legacySpeculation": {"linkPrefetch": 2},
         }

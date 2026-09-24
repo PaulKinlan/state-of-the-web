@@ -12,6 +12,12 @@ references are not runtime use or CSS adoption. Read `scriptInspection.partial`
 and the limits in AGENTS.md. Inaccessible CSS and omitted/unreadable scripts
 are partial evidence, never proof of absence.
 
+For speculative-loading applicability, framework markers are hints, not routing
+proof. Default collection never clicks. An operator-selected non-mutating link
+may be observed with `--follow-link` on a single URL; never activate links across
+a manifest. Unknown behaviour stays blocked and results cover only the sampled
+link. Follow the detailed limits in AGENTS.md and the check specification.
+
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->
 ## Beads Issue Tracker
 

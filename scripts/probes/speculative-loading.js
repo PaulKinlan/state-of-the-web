@@ -195,7 +195,7 @@
     // performance API not available or constrained
   }
 
-  // Navigation context: internal vs external links + SPA detection (F3)
+  // Navigation context: links and non-authoritative framework hints.
   const anchors = Array.from(document.querySelectorAll('a[href]'));
   let internalLinkCount = 0;
   let externalLinkCount = 0;
@@ -216,29 +216,34 @@
     }
   }
 
-  // Client-side router / SPA detection signals
-  let frameworkRouter = null;
+  // Framework markers are hints, not evidence that any link is intercepted.
+  // SSR/hydrated framework pages can perform ordinary document navigations.
+  let frameworkHint = null;
   if (typeof window !== 'undefined') {
     if (window.__NEXT_DATA__ || document.querySelector('#__next')) {
-      frameworkRouter = 'next';
+      frameworkHint = 'next';
     } else if (window.__NUXT__ || document.querySelector('#__nuxt')) {
-      frameworkRouter = 'nuxt';
+      frameworkHint = 'nuxt';
     } else if (window.__remixContext) {
-      frameworkRouter = 'remix';
+      frameworkHint = 'remix';
     } else if (window.__sveltekit || document.querySelector('[data-sveltekit-preload-data]')) {
-      frameworkRouter = 'sveltekit';
+      frameworkHint = 'sveltekit';
     } else if (window.___gatsby || document.querySelector('#___gatsby')) {
-      frameworkRouter = 'gatsby';
+      frameworkHint = 'gatsby';
     } else if (document.querySelector('[data-reactroot], [data-react-helmet]')) {
-      frameworkRouter = 'react-spa';
-    } else if (document.querySelector('[ng-version], [data-server-rendered]')) {
-      frameworkRouter = 'angular/ssr';
+      frameworkHint = 'react';
+    } else if (document.querySelector('[ng-version]')) {
+      frameworkHint = 'angular';
+    } else if (document.querySelector('[data-server-rendered]')) {
+      frameworkHint = 'vue-ssr';
     } else if (location.hash && location.hash.startsWith('#/')) {
-      frameworkRouter = 'hash-router';
+      frameworkHint = 'hash-router';
     }
   }
 
-  const isClientSideRouted = frameworkRouter !== null;
+  // A snapshot cannot establish navigation behaviour. The opt-in CDP driver
+  // records a representative link activation separately; null is not false.
+  const isClientSideRouted = null;
   const prefetchEagerness = Array.from(prefetchSummary.eagerness);
   const prerenderEagerness = Array.from(prerenderSummary.eagerness);
   const allEagerness = Array.from(new Set([...prefetchEagerness, ...prerenderEagerness]));
@@ -295,7 +300,8 @@
       internalLinkCount,
       externalLinkCount,
       isClientSideRouted,
-      frameworkRouter,
+      frameworkHint,
+      navigationObservation: { type: 'unobserved', method: 'snapshot-only' },
     },
     signals: {
       hasSpeculationRules,
