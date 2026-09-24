@@ -80,6 +80,21 @@ judged against the older one, with every published total still matching.
 
 `--check-local-evidence` is the full local publication gate: it requires each retained source report to match its canonical SHA-256 and every declared artifact to exist at its exact path beneath the recorded `evidenceRoot`. Omit the flag only in a publication-only clone where the intentionally uncommitted run tree is unavailable.
 
+### Catalog provenance
+
+`principles.json` declares `appliesAnalysis: docs/principles-analysis.md`, which
+records what the catalog pins, how its 58 checks reference Modern Web Guidance
+(137 guide slugs plus one search phrase per check), which guides nothing points
+at, and what a catalog edit costs. Regenerate or verify it with:
+
+```bash
+python3 scripts/analyze_guide_coverage.py --check docs/principles-analysis.md
+python3 -m unittest scripts.test_analyze_guide_coverage
+```
+
+The guide packages are not vendored; the document records the `npm pack` steps
+needed for the package-side facts.
+
 The existing per-report validator is intentionally fail-closed for incomplete reports. Across the canonical report set, its expected result is exactly 705 exit-zero reports and 295 exit-one reports. Every exit-one report must be one of the published 257 blocked or 38 partial dispositions; an incomplete report must never pass the publication gate or carry a score.
 
 ```bash
