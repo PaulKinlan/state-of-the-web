@@ -90,10 +90,21 @@ at, and what a catalog edit costs. Regenerate or verify it with:
 ```bash
 python3 scripts/analyze_guide_coverage.py --check docs/principles-analysis.md
 python3 -m unittest scripts.test_analyze_guide_coverage
+python3 -m unittest scripts.test_guide_coverage_verification
 ```
 
-The guide packages are not vendored; the document records the `npm pack` steps
-needed for the package-side facts.
+The guide bodies are not vendored, but their **slug names** are, in
+`scripts/fixtures/guide-slugs.json`, so the package-side numbers verify offline.
+Without that fixture those six numbers could only be produced by hand from two
+`npm pack` extractions, and `--check` compared only the keys it happened to
+derive — so it printed `OK` while the hardest-won numbers drifted. `--check` now
+**fails** when a recorded key cannot be derived, rather than quietly skipping it,
+and reports how many keys it actually verified.
+
+`--guides-dir` still accepts freshly extracted packs and takes precedence over
+the fixture, so a stale fixture can be corrected rather than silently believed.
+Both inputs record the same keys, so a document written one way verifies the
+other way.
 
 The existing per-report validator is intentionally fail-closed for incomplete reports. Across the canonical report set, its expected result is exactly 705 exit-zero reports and 295 exit-one reports. Every exit-one report must be one of the published 257 blocked or 38 partial dispositions; an incomplete report must never pass the publication gate or carry a score.
 
