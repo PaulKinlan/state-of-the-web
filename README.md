@@ -136,6 +136,12 @@ produces no false positive), and `scripts/fixtures/opted-out-features.html`
 profile-cleanup test spawns a real process and asserts it is gone, because a
 mocked `subprocess.run` cannot detect a cleanup command that does not work.
 
+A missing harness **fails** the suite rather than skipping quietly: browser tests
+that silently disappear still print `OK`, so a green run could mean nothing was
+verified. Set `ALLOW_SKIP_BROWSER_TESTS=1` to skip them deliberately (a lint-only
+job, or a machine with no Chrome). `WEB_UPLIFT_CLI` and `CHROME_BIN` override the
+harness locations — the same variables the crawler and the evidence CLI honour.
+
 Probed against real origins, the signal is complementary by design: `airbnb.com`
 shows genuine adoption (88 `view-transition-name` declarations with real values,
 10 anchor-positioning declarations), `scroll-driven-animations.style` reports 19

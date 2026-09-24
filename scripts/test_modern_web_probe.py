@@ -2,16 +2,24 @@
 """Crawler test suite: the modern-web feature probe and its crawler wiring.
 
 Drives the real web-uplift evidence CLI against the committed fixtures in a real
-headless Chrome (Chrome 134+ features: anchor positioning, scroll-driven
-animations, view transitions, scroll-state container queries, platform gestures).
-"Exit 0" is not the assertion: the probe must report the features on the page that
-uses them and must report nothing on the page that does not.
+headless Chrome (anchor positioning, scroll-driven animations, view transitions,
+scroll-state container queries, platform gestures). "Exit 0" is not the
+assertion: the probe must report the features on the page that uses them and must
+report nothing on the page that does not.
 
   python3 -m unittest scripts.test_modern_web_probe -v
+
+MISSING HARNESS IS A FAILURE, NOT A SKIP. If the evidence CLI or Chrome is
+absent, the browser-driven tests cannot verify anything, so the suite errors
+instead of reporting OK. Set `ALLOW_SKIP_BROWSER_TESTS=1` to skip them
+deliberately (a machine with no Chrome, a lint-only CI job). Overrides:
+`WEB_UPLIFT_CLI` for the evidence CLI, `CHROME_BIN` for the browser -- the same
+variables the crawler and the evidence CLI already honour.
 """
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -25,11 +33,16 @@ MODERN_FIXTURE = FIXTURES / 'modern-web-features.html'
 PLAIN_FIXTURE = FIXTURES / 'plain-page.html'
 OPTED_OUT_FIXTURE = FIXTURES / 'opted-out-features.html'
 CRAWLER = ROOT / 'scripts' / 'modern_web_probe.py'
-CLI_CANDIDATES = [
-    Path('/home/paulkinlan/journal/.web-uplift/evidence/cli.mjs'),
-    Path.home() / '.web-uplift' / 'evidence' / 'cli.mjs',
+SKIP_ENV = 'ALLOW_SKIP_BROWSER_TESTS'
+# Mirrors cdp.mjs: CHROME_BIN wins, then the distro paths, then $PATH. Keeping
+# the list in step with the harness means the suite cannot decide Chrome is
+# missing while the CLI it shells out to would have found it.
+CHROME_CANDIDATES = [
+    '/usr/bin/google-chrome-stable',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
 ]
-CHROME_CANDIDATES = ['/usr/bin/google-chrome-stable', '/usr/bin/google-chrome', '/usr/bin/chromium']
 
 FEATURE_FAMILIES = [
     'viewTransitions',
@@ -40,15 +53,48 @@ FEATURE_FAMILIES = [
 ]
 
 
+def missing_harness(reason: str) -> Exception:
+    """Fail hard when the browser harness is absent; skip only on request.
+
+    A suite that silently skips its browser tests still exits 0 and prints OK,
+    so "13 tests pass" can mean "the browser tests evaporated and nothing was
+    verified". On a fresh machine or in CI that is a green build with zero real
+    evidence -- the exact `it serves` != `it works` failure this repo forbids.
+    """
+    if os.environ.get(SKIP_ENV, '').strip().lower() in {'1', 'true', 'yes'}:
+        return unittest.SkipTest(f'{reason}; skipped because {SKIP_ENV} is set')
+    return RuntimeError(
+        f'{reason}. The browser-driven tests cannot run, so passing here would prove nothing. '
+        f'Install the harness, or set {SKIP_ENV}=1 to skip them deliberately.'
+    )
+
+
+def cli_candidates() -> list[Path]:
+    override = os.environ.get('WEB_UPLIFT_CLI', '').strip()
+    candidates = [Path(override).expanduser()] if override else []
+    candidates.append(Path.home() / '.web-uplift' / 'evidence' / 'cli.mjs')
+    return candidates
+
+
 def evidence_cli() -> Path:
-    for candidate in CLI_CANDIDATES:
+    for candidate in cli_candidates():
         if candidate.exists():
             return candidate
-    raise unittest.SkipTest('web-uplift evidence CLI not installed')
+    tried = ', '.join(str(candidate) for candidate in cli_candidates())
+    raise missing_harness(f'web-uplift evidence CLI not found (tried {tried}; set WEB_UPLIFT_CLI)')
 
 
-def chrome_available() -> bool:
-    return any(Path(candidate).exists() for candidate in CHROME_CANDIDATES)
+def chrome_binary() -> str | None:
+    """Resolve Chrome the way the evidence CLI does: CHROME_BIN, paths, $PATH."""
+    override = os.environ.get('CHROME_BIN', '').strip()
+    for candidate in ([override] if override else []) + CHROME_CANDIDATES:
+        if candidate and Path(candidate).exists():
+            return candidate
+    for name in ('google-chrome-stable', 'google-chrome', 'chromium', 'chromium-browser'):
+        found = shutil.which(name)
+        if found:
+            return found
+    return None
 
 
 def probe(url: str) -> dict:
@@ -70,8 +116,8 @@ def probe(url: str) -> dict:
 class ModernWebProbeTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        if not chrome_available():
-            raise unittest.SkipTest('no Chrome binary available')
+        if not chrome_binary():
+            raise missing_harness(f'no Chrome binary found (tried CHROME_BIN, {", ".join(CHROME_CANDIDATES)}, $PATH)')
         evidence_cli()
 
     def test_fixture_covers_every_modern_feature_family(self):
@@ -268,7 +314,7 @@ class CrawlerWiringTest(unittest.TestCase):
                     break
                 time.sleep(0.1)
             else:
-                self.skipTest('could not spawn the stand-in Chrome process')
+                self.fail('could not spawn the stand-in process; the cleanup path is unverified')
 
             modern_web_probe.kill_profile(str(profile))
 
@@ -306,6 +352,51 @@ class CrawlerWiringTest(unittest.TestCase):
     def test_probe_is_valid_javascript(self):
         result = subprocess.run(['node', '--check', str(PROBE)], capture_output=True, text=True, timeout=60)
         self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_missing_harness_fails_hard_unless_skipping_is_opted_into(self):
+        """A missing browser harness must break the build, not vanish quietly.
+
+        This pins the fix for the green-when-absent bug: without the opt-in the
+        suite must raise a hard error, and only an explicit environment variable
+        may downgrade that to a skip. Otherwise `OK` can mean `the browser tests
+        were never run`.
+        """
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import test_modern_web_probe as suite
+        previous = os.environ.get(SKIP_ENV)
+        try:
+            os.environ.pop(SKIP_ENV, None)
+            self.assertIsInstance(suite.missing_harness('no harness'), RuntimeError)
+            for value in ('1', 'true', 'YES'):
+                with self.subTest(value=value):
+                    os.environ[SKIP_ENV] = value
+                    self.assertIsInstance(suite.missing_harness('no harness'), unittest.SkipTest)
+            os.environ[SKIP_ENV] = '0'
+            self.assertIsInstance(suite.missing_harness('no harness'), RuntimeError)
+        finally:
+            os.environ.pop(SKIP_ENV, None)
+            if previous is not None:
+                os.environ[SKIP_ENV] = previous
+
+    def test_harness_resolution_honours_the_documented_overrides(self):
+        """No machine-specific paths: resolution follows env vars, then $PATH."""
+        import re
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import test_modern_web_probe as suite
+        source = Path(suite.__file__).read_text()
+        # Built as a pattern, not a literal: a literal home path in the
+        # assertion would match itself and fail forever.
+        hardcoded = re.compile(r'/home/[a-z][a-z0-9._-]*/').findall(source)
+        self.assertEqual(hardcoded, [], f'machine-specific path(s) hardcoded in the suite: {sorted(set(hardcoded))}')
+        previous = os.environ.get('WEB_UPLIFT_CLI')
+        try:
+            os.environ['WEB_UPLIFT_CLI'] = '/tmp/some-explicit-cli.mjs'
+            self.assertEqual(suite.cli_candidates()[0], Path('/tmp/some-explicit-cli.mjs'))
+        finally:
+            os.environ.pop('WEB_UPLIFT_CLI', None)
+            if previous is not None:
+                os.environ['WEB_UPLIFT_CLI'] = previous
+        self.assertEqual(suite.cli_candidates()[-1], Path.home() / '.web-uplift' / 'evidence' / 'cli.mjs')
 
 
 if __name__ == '__main__':
