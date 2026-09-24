@@ -177,6 +177,14 @@ unreadable. That is a bounded capture of one route, not proof the site uses
 nothing — which is exactly why `css.sheets.inaccessible` is reported alongside
 the families.
 
+The CSS probe walks the document and nested **open shadow roots**, inspecting
+`styleSheets`, `adoptedStyleSheets`, and inline styles in each. Shared constructed
+stylesheets are counted once, not per adoption. `css.scope` records the inspected
+root counts and uninspected closed-root/iframe scopes. The
+`shadow-dom-features.html` fixture tests each source independently, nested roots,
+shared sheets, inert values, and the closed-root limit. Script-text inspection
+still covers document inline scripts only, not external bundles.
+
 Known limitation: page JavaScript cannot read cross-origin stylesheets, so the
 probe reports them as `css.sheets.inaccessible` with their URLs (CDN-hosted CSS on
 `web.dev`, `developer.chrome.com` and `stripe.com` is unreadable from the page).

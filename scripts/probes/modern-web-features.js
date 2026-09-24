@@ -389,13 +389,28 @@
     }
   };
 
-  const sheets = [...document.styleSheets, ...(document.adoptedStyleSheets || [])];
-  css.sheets.total = sheets.length;
-  for (const sheet of sheets) walkSheet(sheet);
-
-  const inlineStyled = document.querySelectorAll('[style]');
-  for (const element of inlineStyled) {
-    readDeclarations(element.style, { inline: true, sourceText: element.getAttribute('style') || '' });
+  // querySelectorAll does not cross shadow boundaries. Visit each open root,
+  // including nested roots, without recursive calls on deeply nested components.
+  // Closed roots and iframe documents remain outside this page-level probe.
+  const roots = [document];
+  const seenSheets = new Set();
+  let inlineStyledElements = 0;
+  for (const root of roots) {
+    for (const element of root.querySelectorAll('*')) {
+      if (element.shadowRoot) roots.push(element.shadowRoot);
+    }
+    for (const sheet of [...(root.styleSheets || []), ...(root.adoptedStyleSheets || [])]) {
+      // A constructed sheet may be adopted by the document and many components.
+      // Count unique CSS sources, not adoptions, and preserve the rule budget.
+      if (seenSheets.has(sheet)) continue;
+      seenSheets.add(sheet);
+      css.sheets.total++;
+      walkSheet(sheet);
+    }
+    for (const element of root.querySelectorAll('[style]')) {
+      inlineStyledElements++;
+      readDeclarations(element.style, { inline: true, sourceText: element.getAttribute('style') || '' });
+    }
   }
 
   for (const name of FAMILY_NAMES) {
@@ -444,12 +459,18 @@
     supported,
     css: {
       sheets: css.sheets,
+      scope: {
+        rootsScanned: roots.length,
+        openShadowRootsScanned: roots.length - 1,
+        closedShadowRoots: 'not-inspected',
+        iframes: 'not-inspected',
+      },
       rulesScanned: css.rules,
       truncated: css.truncated,
       atRules,
       families,
     },
-    inlineStyledElements: inlineStyled.length,
+    inlineStyledElements,
     animations,
     viewTransitions: {
       apiAvailable: typeof document.startViewTransition === 'function',

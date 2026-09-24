@@ -33,6 +33,7 @@ MODERN_FIXTURE = FIXTURES / 'modern-web-features.html'
 PLAIN_FIXTURE = FIXTURES / 'plain-page.html'
 OPTED_OUT_FIXTURE = FIXTURES / 'opted-out-features.html'
 PARTIAL_LIST_FIXTURE = FIXTURES / 'partial-inert-lists.html'
+SHADOW_FIXTURE = FIXTURES / 'shadow-dom-features.html'
 CRAWLER = ROOT / 'scripts' / 'modern_web_probe.py'
 SKIP_ENV = 'ALLOW_SKIP_BROWSER_TESTS'
 # Mirrors cdp.mjs: CHROME_BIN wins, then the distro paths, then $PATH. Keeping
@@ -263,6 +264,49 @@ class ModernWebProbeTest(unittest.TestCase):
         self.assertIn('view(', samples, f'view() timeline missing from samples: {scroll["samples"]}')
         self.assertGreater(report['animations']['viewTimelines'] + report['animations']['scrollTimelines'], 0,
                            'fixture should produce at least one live timeline')
+
+    def test_shadow_sources_are_scanned_independently(self):
+        """A working <style> path cannot mask broken adopted or inline styles."""
+        for source in ('sheet', 'adopted', 'inline', 'nested'):
+            with self.subTest(source=source):
+                report = probe(f'{SHADOW_FIXTURE.as_uri()}#{source}')
+                expected_roots = 2 if source == 'nested' else 1
+                self.assertEqual(report['css']['scope']['openShadowRootsScanned'], expected_roots)
+                self.assertEqual(report['css']['sheets']['total'], 0 if source == 'inline' else 1)
+                self.assertEqual(report['css']['sheets']['inaccessible'], 0)
+                self.assertEqual(report['inlineStyledElements'], 1 if source == 'inline' else 0)
+                for family in FEATURE_FAMILIES:
+                    detail = report['css']['families'][family]
+                    self.assertTrue(detail['used'], f'{source}/{family} not detected')
+                    self.assertEqual(detail['inlineHit'], source == 'inline', f'{source}/{family}')
+
+    def test_shared_adopted_sheet_is_scanned_once(self):
+        """One sheet adopted by document and two components is one source."""
+        report = probe(f'{SHADOW_FIXTURE.as_uri()}#shared')
+        self.assertEqual(report['css']['scope']['rootsScanned'], 3)
+        self.assertEqual(report['css']['sheets']['total'], 1)
+        self.assertEqual(report['css']['sheets']['readable'], 1)
+        self.assertEqual(report['css']['rulesScanned'], 1)
+        for family in FEATURE_FAMILIES:
+            self.assertTrue(report['css']['families'][family]['used'])
+
+    def test_inert_shadow_declarations_remain_negative(self):
+        report = probe(f'{SHADOW_FIXTURE.as_uri()}#inert')
+        self.assertEqual(report['css']['scope']['openShadowRootsScanned'], 1)
+        self.assertEqual(report['css']['rulesScanned'], 1)
+        self.assertEqual(report['inlineStyledElements'], 1)
+        for family in FEATURE_FAMILIES:
+            self.assertFalse(report['css']['families'][family]['used'], family)
+            self.assertGreater(report['css']['families'][family]['optedOutCount'], 0, family)
+
+    def test_closed_shadow_roots_are_an_explicit_limit(self):
+        report = probe(f'{SHADOW_FIXTURE.as_uri()}#closed')
+        self.assertEqual(report['css']['scope']['openShadowRootsScanned'], 0)
+        self.assertEqual(report['css']['scope']['closedShadowRoots'], 'not-inspected')
+        self.assertEqual(report['css']['scope']['iframes'], 'not-inspected')
+        self.assertEqual(report['css']['sheets']['total'], 0)
+        for family in FEATURE_FAMILIES:
+            self.assertFalse(report['css']['families'][family]['used'], family)
 
 
 class CrawlerWiringTest(unittest.TestCase):
