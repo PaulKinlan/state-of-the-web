@@ -49,7 +49,17 @@ node ~/.web-uplift/evidence/cli.mjs har <url>
 node ~/.web-uplift/evidence/cli.mjs trace <url>
 node ~/.web-uplift/evidence/cli.mjs heap <url>
 node ~/.web-uplift/evidence/cli.mjs evaluate <url> --expr "<axe injection>"
+node ~/.web-uplift/evidence/cli.mjs evaluate <url> --expr-file scripts/probes/modern-web-features.js
 ```
+
+The last command is the [modern-web feature probe](scripts/probes/modern-web-features.js):
+it measures declarative view transitions, scroll-driven animations, anchor
+positioning, scroll-state container queries and platform gestures — the evidence
+`view-transitions`, `scroll-driven-animations`, `anchored-positioning`,
+`scroll-state-aware-chrome` and `physical-gestures` are judged from. Record its
+output for every representative route, and treat `css.sheets.inaccessible` (a
+cross-origin stylesheet whose text the page cannot read) as partial CSS evidence,
+not as absence of the feature.
 
 Then materialise the exact check manifest from `principles.json`, gather the check-specific evidence (including active interactions and representative routes where required), record every check outcome, derive the 17 principle outcomes, and run the coverage validator. Do not use a generic evidence bundle to default untested checks to pass.
 

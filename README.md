@@ -87,6 +87,47 @@ The publication validator independently checks:
 - exact 705 / 257 / 38 dispositions and zero queue/retry/invalid counts;
 - exactly 58,000 database test rows, 17,000 principle rows, and zero scores.
 
+## Modern-web feature evidence (Chrome 134+)
+
+`scripts/probes/modern-web-features.js` is the first-party probe for the catalog
+checks that need declarative-platform signals: `view-transitions`,
+`scroll-driven-animations`, `anchored-positioning`, `scroll-state-aware-chrome`,
+and `physical-gestures`. It reports **usage and browser support only, never a
+verdict**, so an auditor judges those checks from measured evidence instead of
+guessing from source:
+
+```bash
+node ~/.web-uplift/evidence/cli.mjs evaluate https://example.com/ \
+  --wait 3000 --expr-file scripts/probes/modern-web-features.js \
+  --out evidence/example.com/modern-web-features.json
+```
+
+For a manifest or site list — resumable, and it fails closed when a target
+produces no usable evidence (an exit-zero run that landed on Chrome's error page
+is a failure, not evidence):
+
+```bash
+python3 scripts/modern_web_probe.py results/atomic/manifest.csv --out runs/<run>/evidence/modern-web
+```
+
+Crawler suite: `python3 -m unittest scripts.test_modern_web_probe`. It drives real
+headless Chrome against `scripts/fixtures/modern-web-features.html` (asserting
+every family is detected, including `::view-transition`, `scroll-state()` and a
+live `viewTimeline`) and `scripts/fixtures/plain-page.html` (asserting ordinary
+CSS produces no false positive).
+
+Probed against real origins, the signal is complementary by design: `airbnb.com`
+and `microsoft.com` show declarative view-transition and anchor-positioning CSS,
+`scroll-driven-animations.style` reports 19 live view timelines, and `stripe.com`
+reports a live `ScrollTimeline` from **zero** readable stylesheets.
+
+Known limitation: page JavaScript cannot read cross-origin stylesheets, so the
+probe reports them as `css.sheets.inaccessible` with their URLs (CDN-hosted CSS on
+`web.dev`, `developer.chrome.com` and `stripe.com` is unreadable from the page).
+The live `animations` counts and a HAR with bodies are the cross-checks; reading
+that CSS directly needs the CDP `CSS.getStyleSheetText` domain, which belongs in
+the web-uplift evidence CLI rather than in this repo.
+
 ## Methodology and limitations
 
 - Audits use the [web-uplift](https://github.com/PaulKinlan/web-uplift) atomic-check methodology with representative routes, states, and active interactions where reachable.

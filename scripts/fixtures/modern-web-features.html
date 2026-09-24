@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modern web features fixture</title>
+<style>
+  :root { view-transition-name: none; }
+  ::view-transition-old(root) { animation: fade-out 200ms linear; }
+  @view-transition { navigation: auto; }
+
+  .hero { view-transition-name: hero; }
+  @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+  #btn { anchor-name: --btn; }
+  .tooltip {
+    position: absolute;
+    position-anchor: --btn;
+    position-area: top;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+
+  .rail { scroll-timeline-name: --rail; scroll-timeline-axis: block; }
+  .progress { animation: reveal linear both; animation-timeline: --rail; }
+
+  .shelf { container-type: scroll-state; }
+  @container scroll-state(stuck: top) { .sticky { box-shadow: 0 1px 0 rgb(0 0 0 / 0.2); } }
+  .sticky { position: sticky; top: 0; }
+
+  .carousel { overscroll-behavior: contain; scroll-snap-type: x mandatory; }
+  .slide { scroll-snap-align: center; }
+</style>
+</head>
+<body>
+  <header class="sticky" style="anchor-name: --inline-header">Fixture</header>
+  <main>
+    <h1>Modern web feature fixture</h1>
+    <button id="btn" type="button">Anchor</button>
+    <p class="tooltip" style="position-anchor: --btn">Anchored tooltip</p>
+    <section class="carousel">
+      <article class="slide">One</article>
+      <article class="slide">Two</article>
+    </section>
+    <div class="rail"><div class="progress">Progress</div></div>
+    <p class="reveal" style="animation-timeline: view()">Reveals on scroll</p>
+  </main>
+  <script>
+    document.getElementById('btn').addEventListener('click', () => {
+      if (document.startViewTransition) {
+        document.startViewTransition(() => document.body.classList.toggle('dark'));
+      }
+    });
+  </script>
+</body>
+</html>

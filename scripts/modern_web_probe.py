@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""Crawler entry point for the modern-web (Chrome 134+) feature probe.
+
+Collects objective, judgement-free evidence for the catalog checks that need
+declarative-platform signals: `view-transitions`, `scroll-driven-animations`,
+`anchored-positioning`, `scroll-state-aware-chrome`, and `physical-gestures`.
+
+The probe expression lives in `scripts/probes/modern-web-features.js` so the same
+test can be run by the model on any representative route during an atomic audit:
+
+    node ~/.web-uplift/evidence/cli.mjs evaluate <url> \\
+      --expr-file scripts/probes/modern-web-features.js \\
+      --out evidence/<site>/modern-web-features.json
+
+This runner does the same thing over a URL or a site list, resumably:
+
+    python3 scripts/modern_web_probe.py https://example.com/
+    python3 scripts/modern_web_probe.py results/atomic/manifest.csv --out /tmp/modernweb
+
+Exit code is non-zero when any target failed to produce evidence, so it can be
+used as a collection gate. Absent evidence is never recorded as a pass: a failed
+target stays absent (or is recorded with `ok: false`) for the auditor to judge as
+`blocked`/`not-run`.
+"""
+from __future__ import annotations
+
+import csv
+import json
+import os
+import subprocess
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+PROBE = ROOT / 'scripts' / 'probes' / 'modern-web-features.js'
+CLI = Path(os.environ.get('WEB_UPLIFT_CLI', Path.home() / '.web-uplift' / 'evidence' / 'cli.mjs'))
+TIMEOUT = int(os.environ.get('PROBE_TIMEOUT', '180'))
+# Real sites need to settle before CSSOM/animations are meaningful.
+WAIT = int(os.environ.get('PROBE_WAIT', '3000'))
+
+
+def target(name: str) -> tuple[int | None, str]:
+    """Accept `rank<TAB>domain`, `rank,domain`, `rank domain`, a domain, or a URL."""
+    cells = name.replace('\t', ' ').replace(',', ' ').split()
+    if not cells:
+        return None, ''
+    if len(cells) > 1 and cells[0].isdigit():
+        return int(cells[0]), ' '.join(cells[1:])
+    return None, ' '.join(cells)
+
+
+def url_for(value: str) -> str:
+    if value.startswith(('http://', 'https://', 'file://')):
+        return value
+    return f'https://{value}/'
+
+
+def load_targets(source: str) -> list[tuple[int | None, str]]:
+    path = Path(source)
+    if not path.exists() or source.startswith(('http://', 'https://', 'file://')):
+        return [target(source)]
+    text = path.read_text()
+    if path.suffix == '.json':
+        payload = json.loads(text)
+        entries = payload.get('targets', []) if isinstance(payload, dict) else payload
+        return [target(str(entry.get('url') or entry.get('domain')) if isinstance(entry, dict) else str(entry)) for entry in entries]
+    rows = list(csv.reader(text.splitlines())) if path.suffix == '.csv' else [line.split() for line in text.splitlines()]
+    return [target(' '.join(str(cell) for cell in row)) for row in rows if row and any(str(cell).strip() for cell in row)]
+
+
+def validate_evidence(path: Path) -> tuple[bool, str]:
+    """Judge the evidence, not the exit code.
+
+    The evidence CLI exits zero even when navigation lands on Chrome's error
+    page, so a written file proves nothing. Only a probe report from a real
+    document counts; anything else is missing evidence (the auditor then records
+    `blocked`/`not-run`, never a pass).
+    """
+    try:
+        report = json.loads(path.read_text())
+    except Exception as exc:
+        return False, f'unreadable evidence: {type(exc).__name__}: {exc}'
+    if report.get('ok') is not True:
+        return False, f"probe reported ok={report.get('ok')!r}"
+    url = str(report.get('url') or '')
+    if not url:
+        return False, 'probe reported no document url'
+    if url.startswith('chrome-error://') or url.startswith('about:'):
+        return False, f'navigation failed: {url}'
+    return True, url
+
+
+def slug(value: str) -> str:
+    return ''.join(character if character.isalnum() or character in '.-' else '-' for character in value.lower()).strip('-')
+
+
+def probe(rank: int | None, value: str, out_dir: Path) -> dict:
+    url = url_for(value)
+    out = out_dir / slug(value) / 'modern-web-features.json'
+    if out.exists():
+        try:
+            valid, detail = validate_evidence(out)
+            if valid:
+                return {'rank': rank, 'target': value, 'url': url, 'finalUrl': detail, 'out': str(out), 'ok': True, 'cached': True}
+        except Exception:
+            pass
+    out.parent.mkdir(parents=True, exist_ok=True)
+    started = time.time()
+    result = subprocess.run(
+        ['node', str(CLI), 'evaluate', url, '--wait', str(WAIT), '--expr-file', str(PROBE), '--out', str(out), '--quiet'],
+        capture_output=True,
+        text=True,
+        timeout=TIMEOUT,
+    )
+    ok, detail = validate_evidence(out) if out.exists() else (False, f'no evidence written (exit {result.returncode})')
+    if result.returncode != 0:
+        ok, detail = False, detail if out.exists() else f'exit {result.returncode}: {(result.stderr or "").strip()[-200:]}'
+    if not ok:
+        out.write_text(json.dumps({'probe': 'modern-web-features', 'ok': False, 'url': url,
+                                   'error': detail, 'exitCode': result.returncode,
+                                   'stderr': (result.stderr or '')[-2000:]}, indent=2) + '\n')
+    return {'rank': rank, 'target': value, 'url': url, 'finalUrl': detail if ok else None, 'out': str(out),
+            'ok': ok, 'failure': None if ok else detail, 'durationSeconds': round(time.time() - started, 2)}
+
+
+def main(argv: list[str]) -> int:
+    if len(argv) < 2:
+        print(__doc__.strip(), file=sys.stderr)
+        return 2
+    source = argv[1]
+    out_dir = Path(argv[argv.index('--out') + 1]) if '--out' in argv else Path('evidence/modern-web')
+    workers = int(argv[argv.index('--workers') + 1]) if '--workers' in argv else 2
+    if not CLI.exists():
+        print(f'web-uplift evidence CLI not found at {CLI}; set WEB_UPLIFT_CLI', file=sys.stderr)
+        return 2
+    if not PROBE.exists():
+        print(f'probe expression not found at {PROBE}', file=sys.stderr)
+        return 2
+
+    targets = [entry for entry in load_targets(source) if entry[1]]
+    if not targets:
+        print(f'no targets parsed from {source}', file=sys.stderr)
+        return 2
+    print(f'probing {len(targets)} target(s) with {workers} worker(s) -> {out_dir}', flush=True)
+    results = []
+    if len(targets) == 1:
+        results.append(probe(*targets[0], out_dir))
+    else:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {pool.submit(probe, rank, value, out_dir): value for rank, value in targets}
+            for future in as_completed(futures):
+                item = future.result()
+                results.append(item)
+                detail = '' if item['ok'] else f" -- {item.get('failure')}"
+                print(f"  {'ok' if item['ok'] else 'FAILED'} {item['target']} {item.get('durationSeconds', '')}s{detail}", flush=True)
+
+    summary = {'targets': len(results), 'ok': sum(1 for item in results if item['ok']),
+               'failed': sum(1 for item in results if not item['ok']), 'results': results,
+               'finishedAt': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+               'note': 'Judgement-free modern-web feature signals. Absent evidence is not a pass.'}
+    out_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = out_dir / 'summary.json'
+    summary_path.write_text(json.dumps(summary, indent=2) + '\n')
+    print(json.dumps({key: summary[key] for key in ('targets', 'ok', 'failed')}, indent=2), flush=True)
+    print(f'summary: {summary_path}', flush=True)
+    return 1 if summary['failed'] else 0
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
