@@ -38,6 +38,53 @@ def sha256_file(path: Path) -> str:
     return sha256_bytes(path.read_bytes())
 
 
+def path_beneath_root(root: Path, value: object) -> Path | None:
+    """Resolve a recorded repository-relative path without allowing escape."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    relative = Path(value)
+    if relative.is_absolute():
+        return None
+    resolved = (root / relative).resolve()
+    try:
+        resolved.relative_to(root.resolve())
+    except ValueError:
+        return None
+    return resolved
+
+
+def pinned_catalog(root: Path, inventory: dict) -> tuple[Path, dict, str]:
+    """Load the catalog the inventory pinned, not whatever the tree happens to hold.
+
+    The publication records the exact catalog its reports were judged against.
+    Reading the working `principles.json` instead silently mixes generations: a
+    tree whose catalog has moved on produces check DEFINITIONS from the new
+    catalog beside RESULTS from the old one, and every total still matches.
+    """
+    recorded = inventory.get("catalog") or {}
+    path = path_beneath_root(root, recorded.get("path"))
+    if path is None or not path.is_file():
+        raise SystemExit(f"inventory catalog path is missing or escapes the root: {recorded.get('path')!r}")
+    digest = sha256_file(path)
+    expected_digest = recorded.get("sha256")
+    if expected_digest and digest != expected_digest:
+        raise SystemExit(
+            f"pinned catalog {path} has SHA-256 {digest}, but the inventory pins {expected_digest}"
+        )
+    catalog = json.loads(path.read_text(encoding="utf-8"))
+    _, pairs, _ = expected_catalog(catalog)
+    recorded_checks = recorded.get("checksPerTarget")
+    if isinstance(recorded_checks, int) and len(pairs) != recorded_checks:
+        raise SystemExit(f"pinned catalog defines {len(pairs)} checks, but the inventory pins {recorded_checks}")
+    recorded_principles = recorded.get("principles")
+    if isinstance(recorded_principles, int) and len(catalog["principles"]) != recorded_principles:
+        raise SystemExit(
+            f"pinned catalog defines {len(catalog['principles'])} principles, "
+            f"but the inventory pins {recorded_principles}"
+        )
+    return path, catalog, digest
+
+
 def canonical_origin(value: str) -> str:
     """Compare root origins without treating a trailing slash as meaningful."""
     parsed = urlsplit(value)

@@ -143,9 +143,12 @@ The finished bounded run is reconciled into `results/atomic/`, 1,000 static page
 python3 scripts/reconcile_atomic_run.py <run-dir> --catalog <exact-run-catalog.json>
 python3 scripts/build_atomic_db.py
 python3 scripts/validate_atomic_publication.py --check-local-evidence
+python3 -m unittest scripts/test_atomic_catalog_pin.py
 ```
 
 The final inventory is unscored and must preserve complete, exhausted-blocked, and exhausted-partial dispositions exactly.
+
+**The database is built from the catalog the inventory pins**, at `inventory.catalog.path`, never from whatever `principles.json` currently holds. The builder verifies the pinned file's SHA-256 and recorded shape, requires every report to carry exactly the pinned catalog's `(principle, check)` pairs, derives its totals from that generation, and stages the database so a rejected build leaves the published one intact. The publication gate independently compares database check **identities** against the pinned catalog, because totals alone cannot distinguish a consistent database from one built across two catalog generations — a mismatched build still reports 58,000 rows.
 
 ## Important
 

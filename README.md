@@ -66,7 +66,17 @@ python3 scripts/reconcile_atomic_run.py \
 python3 scripts/build_atomic_db.py
 python3 scripts/validate_atomic_publication.py --check-local-evidence
 python3 -m unittest scripts/test_reconcile_atomic_run.py
+python3 -m unittest scripts/test_atomic_catalog_pin.py
 ```
+
+The database is built from the catalog `results/atomic/inventory.json` **pins**,
+never from whatever `principles.json` currently holds. The builder verifies the
+pinned file's SHA-256 and recorded shape before reading it, checks that every
+report carries exactly the pinned catalog's `(principle, check)` pairs, derives
+its totals from that generation, and stages the database so a rejected build
+leaves the published one untouched. Reading the working catalog instead mixed
+generations silently: check definitions from a newer catalog beside results
+judged against the older one, with every published total still matching.
 
 `--check-local-evidence` is the full local publication gate: it requires each retained source report to match its canonical SHA-256 and every declared artifact to exist at its exact path beneath the recorded `evidenceRoot`. Omit the flag only in a publication-only clone where the intentionally uncommitted run tree is unavailable.
 
@@ -85,7 +95,12 @@ The publication validator independently checks:
 - evidence/path/finding references and literal coverage counters;
 - with `--check-local-evidence`, exact source-report bytes and physical artifact paths beneath every retained evidence root;
 - exact 705 / 257 / 38 dispositions and zero queue/retry/invalid counts;
-- exactly 58,000 database test rows, 17,000 principle rows, and zero scores.
+- exactly 58,000 database test rows, 17,000 principle rows, and zero scores;
+- database check **identities**, not just totals: the `(principle, check)` pairs
+  defined in the database and present in its results must both equal the pinned
+  catalog's pairs exactly, and every site must carry exactly 58 check rows and
+  17 principle rows. Totals alone cannot distinguish a consistent database from
+  one built across two catalog generations.
 
 ## Methodology and limitations
 
