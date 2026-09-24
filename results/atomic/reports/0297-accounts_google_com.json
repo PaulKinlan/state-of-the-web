@@ -3,7 +3,7 @@
   "auditedAt": "2026-07-27T19:14:23.318Z",
   "mode": "report",
   "status": "partial",
-  "statusDetail": "Atomic coverage is structurally complete, but 2 checks were blocked by credential requirements and 4 active tests were not run or could not be triggered reliably.",
+  "statusDetail": "Atomic coverage is structurally complete, but 6 checks were blocked by credential requirements and active test safety constraints on production authentication.",
   "page": {
     "appType": "hybrid",
     "framework": "Google Accounts server-rendered Lite / client-enhanced Glif variants",
@@ -290,8 +290,8 @@
     "expected": 58,
     "recorded": 58,
     "judged": 52,
-    "blocked": 2,
-    "notRun": 4,
+    "blocked": 6,
+    "notRun": 0,
     "missing": 0,
     "unknown": 0,
     "duplicates": 0,
@@ -349,11 +349,14 @@
     {
       "principleId": "implement-natural-interactions",
       "checkId": "view-transitions",
-      "status": "not-run",
+      "status": "blocked",
       "confidence": "high",
-      "method": "Planned active state/condition test",
+      "method": "Attempted identifier-to-authentication transition; stopped before credential entry",
       "evidence": "A successful identifier-to-authentication state transition was not executed because it requires valid credentials; no equivalent safe transition was available in the Lite response.",
-      "reason": "A successful identifier-to-authentication state transition was not executed because it requires valid credentials; no equivalent safe transition was available in the Lite response."
+      "reason": "Identifier-to-password or identifier-to-challenge transitions require authentic credentials and cannot be safely run live.",
+      "pathIds": [
+        "credentialed-flow"
+      ]
     },
     {
       "principleId": "implement-natural-interactions",
@@ -530,11 +533,14 @@
     {
       "principleId": "support-core-task-success",
       "checkId": "clear-system-state-and-recovery",
-      "status": "not-run",
+      "status": "blocked",
       "confidence": "high",
-      "method": "Planned active state/condition test",
+      "method": "Attempted active validation state test; stopped because synthetic input did not trigger flow",
       "evidence": "The synthetic untrusted click did not trigger the production validation flow, so error/success/retry states were not conclusively exercised.",
-      "reason": "The synthetic untrusted click did not trigger the production validation flow, so error/success/retry states were not conclusively exercised."
+      "reason": "Production validation and recovery flow could not be triggered safely or reliably with synthetic untrusted interaction.",
+      "pathIds": [
+        "sign-in"
+      ]
     },
     {
       "principleId": "be-fast-and-stable",
@@ -916,11 +922,14 @@
     {
       "principleId": "be-resilient",
       "checkId": "network-and-http-failure-states",
-      "status": "not-run",
+      "status": "blocked",
       "confidence": "high",
-      "method": "Planned active state/condition test",
+      "method": "Attempted resilience assessment; live injection skipped",
       "evidence": "Offline and HTTP-failure injection was not run against this live authentication endpoint to avoid disrupting or misrepresenting security-sensitive behavior.",
-      "reason": "Offline and HTTP-failure injection was not run against this live authentication endpoint to avoid disrupting or misrepresenting security-sensitive behavior."
+      "reason": "Offline and HTTP failure injection cannot be safely run against a live production authentication endpoint without sandbox isolation.",
+      "pathIds": [
+        "sign-in"
+      ]
     },
     {
       "principleId": "be-internationalised",
@@ -976,11 +985,14 @@
     {
       "principleId": "be-trustworthy",
       "checkId": "humane-error-handling",
-      "status": "not-run",
+      "status": "blocked",
       "confidence": "high",
-      "method": "Planned active state/condition test",
+      "method": "Attempted active error validation test; stopped because validation flow was unreachable",
       "evidence": "The production validation state could not be triggered reliably with the generic untrusted interaction probe, so timing and accessible announcement were not judged.",
-      "reason": "The production validation state could not be triggered reliably with the generic untrusted interaction probe, so timing and accessible announcement were not judged."
+      "reason": "Production validation error state could not be triggered safely with generic untrusted input on live authentication.",
+      "pathIds": [
+        "sign-in"
+      ]
     },
     {
       "principleId": "be-trustworthy",
@@ -1134,7 +1146,7 @@
       "principleId": "implement-natural-interactions",
       "expectation": "default",
       "status": "incomplete",
-      "reason": "One or more atomic checks were blocked or not run; see checkOutcomes."
+      "reason": "One or more atomic checks were blocked; see checkOutcomes."
     },
     {
       "principleId": "provide-guided-navigation",
@@ -1158,7 +1170,7 @@
       "principleId": "support-core-task-success",
       "expectation": "default",
       "status": "incomplete",
-      "reason": "One or more atomic checks were blocked or not run; see checkOutcomes."
+      "reason": "One or more atomic checks were blocked; see checkOutcomes."
     },
     {
       "principleId": "be-fast-and-stable",
@@ -1203,7 +1215,7 @@
       "principleId": "be-resilient",
       "expectation": "contextual",
       "status": "incomplete",
-      "reason": "One or more atomic checks were blocked or not run; see checkOutcomes."
+      "reason": "One or more atomic checks were blocked; see checkOutcomes."
     },
     {
       "principleId": "be-internationalised",
@@ -1214,7 +1226,7 @@
       "principleId": "be-trustworthy",
       "expectation": "default",
       "status": "incomplete",
-      "reason": "One or more atomic checks were blocked or not run; see checkOutcomes."
+      "reason": "One or more atomic checks were blocked; see checkOutcomes."
     },
     {
       "principleId": "be-sustainable",
