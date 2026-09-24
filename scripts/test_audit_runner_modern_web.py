@@ -12,6 +12,7 @@ network is required:
 from __future__ import annotations
 
 import shutil
+import uuid
 
 import contextlib
 import json
@@ -167,6 +168,26 @@ class ModernWebCollectionTest(unittest.TestCase):
 
     def test_kill_profile_ignores_output_without_a_profile(self):
         self.assertEqual(audit_runner2.kill_profile('nothing to see here'), [])
+
+    def test_kill_profile_finds_profiles_in_any_temp_root(self):
+        """`mkdtemp` honours TMPDIR, so cleanup must not assume /tmp.
+
+        The os3 pilot hit this for real: /tmp inode exhaustion forced TMPDIR onto
+        disk-backed storage, where a /tmp-only cleanup would silently stop working.
+        Names are generated per run so this test cannot match its own process.
+        """
+        import tempfile as _tempfile
+        suffix = uuid.uuid4().hex[:8]
+        for root in sorted({str(_tempfile.gettempdir()), '/var/tmp'}):
+            candidate = f'{root}/web-uplift-cdp-Sweep{suffix}'
+            found = audit_runner2.kill_profile(f'[browser] launching chrome (profile {candidate})')
+            with self.subTest(root=root):
+                self.assertIn(candidate, found, f'profile under {root} was not detected')
+
+    def test_kill_profile_refuses_paths_outside_temp_roots(self):
+        suffix = uuid.uuid4().hex[:8]
+        outside = f'/etc/web-uplift-cdp-Outside{suffix}'
+        self.assertEqual(audit_runner2.kill_profile(f'chrome --user-data-dir={outside}'), [])
 
     def test_mode1_record_carries_modern_web_evidence(self):
         """The end-to-end assertion: a Mode 1 site record includes the probe."""
