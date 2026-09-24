@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Speculative Loading Fixture</title>
+  <link rel="prefetch" href="/assets/next-page-bundle.js">
+  <link rel="modulepreload" href="/modules/shared.js">
+  <link rel="preconnect" href="https://api.example.com">
+  <script type="speculationrules">
+  {
+    "prefetch": [
+      {
+        "source": "list",
+        "urls": ["/article/intro", "/article/details"],
+        "eagerness": "eager"
+      },
+      {
+        "source": "document",
+        "where": {
+          "and": [
+            { "href_matches": "/category/*" },
+            { "not": { "selector_matches": ".no-prefetch" } }
+          ]
+        },
+        "eagerness": "moderate"
+      }
+    ],
+    "prerender": [
+      {
+        "source": "list",
+        "urls": ["/checkout/step-1"],
+        "eagerness": "immediate"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <h1>Speculative Loading Fixture Page</h1>
+  <nav>
+    <a href="/article/intro">Intro</a>
+    <a href="/category/tech">Tech Category</a>
+    <a href="/category/news" class="no-prefetch">News (Excluded)</a>
+    <a href="https://external.example.com/about">External Partner</a>
+  </nav>
+  <main>
+    <p>This fixture provides both list and document speculation rules for prefetch and prerender.</p>
+  </main>
+</body>
+</html>
