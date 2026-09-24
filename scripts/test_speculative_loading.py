@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""Tests for the speculative-loading check definition, probe, and HAR parser."""
+"""Tests for the speculative-loading check definition, probe, HAR parser, and CLI runner."""
 from __future__ import annotations
 
 import json
+import shutil
+import subprocess
 import sys
+import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -11,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import speculative_loading
+
 FIXTURES = ROOT / "scripts" / "fixtures"
 
 
@@ -21,14 +26,17 @@ class SpeculativeLoadingDefinitionTest(unittest.TestCase):
         self.assertEqual(c["checkId"], "speculative-loading")
         self.assertTrue(c["summary"])
         self.assertIn("speculationrules", c["detectableVia"])
-        self.assertIn("improve-next-page-load-performance", c["guides"])
-        self.assertEqual(c["applicability"]["expectation"], "contextual")
+        # F1: Check-level applicability is unrepresentable in catalog schema
+        self.assertNotIn("applicability", c, "catalog check schema does not permit check-level applicability")
+        # F2: Only valid guide slugs from 0.0.172 / 0.0.190 permitted
+        self.assertEqual(c["guides"], ["improve-next-page-load-performance"])
+        self.assertNotIn("speculative-loading-speculation-rules", c["guides"])
+        self.assertNotIn("prerender-pages-chrome", c["guides"])
 
 
 class SpeculativeLoadingProbeTest(unittest.TestCase):
     def test_probe_js_exists_and_is_valid_javascript(self):
         self.assertTrue(speculative_loading.PROBE_JS.exists())
-        import subprocess
         proc = subprocess.run(["node", "--check", str(speculative_loading.PROBE_JS)], capture_output=True, text=True)
         self.assertEqual(proc.returncode, 0, proc.stderr)
 
@@ -187,19 +195,93 @@ class OutcomeSynthesisTest(unittest.TestCase):
         report = speculative_loading.run_speculative_probe(url)
         outcome = speculative_loading.synthesize_check_outcome(report)
         self.assertEqual(outcome["status"], "not-applicable")
+        self.assertIn("zero navigation links", outcome["evidence"])
 
-    def test_synthesis_issues_on_multipage_site_without_speculation(self):
+    def test_synthesis_not_applicable_on_external_only_links(self):
+        """F3: Page with 0 internal links and 8 external links must be not-applicable."""
         mock_report = {
             "ok": True,
             "signals": {"hasSpeculationRules": False},
             "speculationRules": {"errors": []},
-            "navigationContext": {"anchorCount": 15, "internalLinkCount": 12, "externalLinkCount": 3},
+            "navigationContext": {
+                "anchorCount": 8,
+                "internalLinkCount": 0,
+                "externalLinkCount": 8,
+                "isClientSideRouted": False,
+            },
+        }
+        outcome = speculative_loading.synthesize_check_outcome(mock_report)
+        self.assertEqual(outcome["status"], "not-applicable")
+        self.assertIn("external links only", outcome["reason"])
+
+    def test_synthesis_not_applicable_on_spa_client_side_routing(self):
+        """F3: SPA with client-side routing must be not-applicable, not issues."""
+        mock_report = {
+            "ok": True,
+            "signals": {"hasSpeculationRules": False},
+            "speculationRules": {"errors": []},
+            "navigationContext": {
+                "anchorCount": 20,
+                "internalLinkCount": 20,
+                "externalLinkCount": 0,
+                "isClientSideRouted": True,
+                "frameworkRouter": "next",
+            },
+        }
+        outcome = speculative_loading.synthesize_check_outcome(mock_report)
+        self.assertEqual(outcome["status"], "not-applicable")
+        self.assertIn("Single-page application", outcome["evidence"])
+        self.assertIn("next", outcome["evidence"])
+
+    def test_synthesis_issues_on_multipage_site_without_speculation(self):
+        """Multi-page site with internal navigation links without speculation is issues."""
+        mock_report = {
+            "ok": True,
+            "signals": {"hasSpeculationRules": False},
+            "speculationRules": {"errors": []},
+            "navigationContext": {
+                "anchorCount": 15,
+                "internalLinkCount": 12,
+                "externalLinkCount": 3,
+                "isClientSideRouted": False,
+            },
             "legacySpeculation": {"linkPrefetch": 2},
         }
         outcome = speculative_loading.synthesize_check_outcome(mock_report)
         self.assertEqual(outcome["status"], "issues")
         self.assertIn("12 internal navigation links", outcome["evidence"])
         self.assertIn("legacy hints", outcome["evidence"])
+
+
+class LeakSafetyAndPersistenceTest(unittest.TestCase):
+    def test_kill_profile_terminates_profile_process_and_removes_dir(self):
+        """F5: Chrome profile cleanup on timeout."""
+        profile_dir = Path(tempfile.mkdtemp(prefix="web-uplift-cdp-TimeoutTest-"))
+        victim = subprocess.Popen(["bash", "-c", "sleep 300; exit 0", f"--user-data-dir={profile_dir}"])
+        try:
+            killed = speculative_loading.kill_profile(f"[browser] launching chrome (profile {profile_dir})")
+            deadline = time.time() + 5
+            while victim.poll() is None and time.time() < deadline:
+                time.sleep(0.1)
+            survived = victim.poll() is None
+        finally:
+            if victim.poll() is None:
+                victim.kill()
+                victim.wait(timeout=5)
+            shutil.rmtree(profile_dir, ignore_errors=True)
+        self.assertEqual(killed, [str(profile_dir)])
+        self.assertFalse(survived, "timed-out Chrome profile process was not killed")
+
+    def test_probe_single_target_persists_evidence(self):
+        """F6: Runner persists evidence immediately."""
+        url = (FIXTURES / "speculative-loading.html").as_uri()
+        with tempfile.TemporaryDirectory() as tmp:
+            out_file = Path(tmp) / "out.json"
+            res = speculative_loading.probe_single_target(url, out_file)
+            self.assertTrue(out_file.exists())
+            persisted = json.loads(out_file.read_text())
+            self.assertEqual(persisted["url"], url)
+            self.assertEqual(persisted["outcome"]["status"], "pass")
 
 
 if __name__ == "__main__":

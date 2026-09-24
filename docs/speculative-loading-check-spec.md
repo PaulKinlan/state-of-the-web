@@ -19,23 +19,20 @@ Under **Option A**, the existing July run remains an immutable 58-check historic
 
 ## 2. Catalog Check Definition
 
+Conforming strictly to the catalog check schema (which permits keys `['id', 'summary', 'detectableVia', 'guides', 'references']`, with principle-level applicability only):
+
 ```json
 {
-  "principleId": "be-fast-and-stable",
-  "checkId": "speculative-loading",
+  "id": "speculative-loading",
   "summary": "Likely next navigations are speculatively loaded (Speculation Rules prefetch/prerender with an appropriate eagerness), rather than every navigation paying full cost.",
   "detectableVia": "HINT: the evaluate primitive inspects <script type=\"speculationrules\"> for valid JSON, prefetch/prerender rules, document vs list sources, and eagerness levels; checks HTMLScriptElement.supports('speculationrules'); a HAR summary or network trace can corroborate Sec-Purpose: prefetch/prerender, Sec-Speculation-Tags, or deliveryType: navigational-prefetch requests. The model chooses.",
-  "applicability": {
-    "expectation": "contextual",
-    "description": "Applies to multi-page sites and applications with internal navigation links. Single-page applications that execute purely client-side transitions without navigation, or standalone single-surface tools without internal navigation journeys, are legitimately not-applicable with an explicit rationale."
-  },
   "guides": [
-    "improve-next-page-load-performance",
-    "speculative-loading-speculation-rules",
-    "prerender-pages-chrome"
+    "improve-next-page-load-performance"
   ]
 }
 ```
+
+*Note on schema:* The check does not declare a check-level `applicability` object (which is invalid under the catalog schema). Per AGENTS.md, checks use standard outcome statuses (`pass`, `issues`, `not-applicable`, `blocked`, `not-run`) accompanied by check-specific rationale.
 
 ---
 
@@ -56,12 +53,14 @@ Evaluated in-page via `node ~/.web-uplift/evidence/cli.mjs evaluate <url> --expr
    - Inspects rule sources: `source: "list"` (with URL lists) vs `source: "document"` (with `where` selectors and pattern matching).
    - Extracts configured `eagerness` (`immediate`, `eager`, `moderate`, `conservative`).
    - Captures JSON syntax errors without crashing, reporting exact syntax errors and malformed snippets.
+   - Bounded payloads: caps `rawRulesets` to max 10 entries and URL lists to max 10 entries to prevent multi-MB payload bloat on large sites.
 3. **Resource Timing Signals**:
    - Inspects `performance.getEntriesByType('resource')` for `deliveryType: 'navigational-prefetch'`.
 4. **Legacy Hints**:
    - Inspects `<link rel="prefetch">`, `<link rel="prerender">`, `<link rel="modulepreload">`.
-5. **Navigation Context**:
-   - Counts total and internal `<a href>` links to establish multi-page applicability.
+5. **Navigation Context & Applicability Signals**:
+   - Counts total, internal, and external `<a href>` links.
+   - Detects Single-Page Application (SPA) client-side routing signatures (Next.js, Nuxt, Remix, SvelteKit, Gatsby, Angular, React SPA, hash routers).
 
 ### B. Network & HAR Signals (`scripts/speculative_loading.py`)
 
@@ -82,25 +81,19 @@ Parses network HAR / CDP logs:
 
 - **`pass`**:
   - Valid Speculation Rules declared via `<script type="speculationrules">` or HTTP headers for likely next navigations (list or document rules), OR active speculative network requests evidenced in HAR/traces.
-- **`issues`**:
-  - The site has internal navigation flows but provides no Speculation Rules (relying solely on legacy `<link rel="prefetch">` or no speculative loading).
-  - Malformed or invalid JSON in `<script type="speculationrules">`.
 - **`not-applicable`**:
-  - The page is a single-surface utility (e.g. calculator, single form, error page) with 0 navigation links, or an SPA that performs client-side transitions without navigation.
+  - **Single-Surface View**: The page contains zero navigation links (e.g. isolated tool, calculator, single form, error page).
+  - **External Links Only**: The page contains only external links; same-origin Speculation Rules do not apply without cross-origin target opt-in.
+  - **Single-Page Application (SPA)**: The page uses client-side routing (e.g. Next.js, Nuxt, React Router, SvelteKit); internal view transitions do not use document navigations.
+- **`issues`**:
+  - **Missing Speculation Rules**: A multi-page site with internal navigation links does not configure Speculation Rules to prefetch or prerender likely next navigations (or relies solely on legacy hints).
+  - **Syntax Error**: Malformed or invalid JSON in `<script type="speculationrules">`.
 - **`blocked`**:
   - Anti-bot interstitial (HTTP 403 / Cloudflare / bot defense) prevented reaching or inspecting representative navigation routes.
 
 ---
 
-## 5. Verification & Test Evidence
+## 5. Leak Safety & CLI Persistence
 
-Tested against headless Chrome 134+ over local fixtures (`scripts/test_speculative_loading.py`):
-
-1. **Speculation Rules Fixture** (`scripts/fixtures/speculative-loading.html`):
-   - Correctly detects 2 prefetch rules (list + document with eagerness `eager` and `moderate`) and 1 prerender rule (`immediate`).
-2. **Malformed Fixture** (`scripts/fixtures/invalid-speculation-rules.html`):
-   - Captures JSON parse errors safely, isolates broken script, marks `hasSpeculationRules: false`, produces `issues` verdict.
-3. **Plain Page Fixture** (`scripts/fixtures/plain-page.html`):
-   - Zero false positives on plain HTML; produces `not-applicable` verdict when link count is 0.
-4. **HAR Network Analyzer**:
-   - Successfully extracts `Sec-Purpose`, `Sec-Speculation-Tags`, `Speculation-Rules`, and `Supports-Loading-Mode`.
+- **Profile Leak Prevention**: On subprocess timeout, `kill_profile()` scans output for `/tmp/web-uplift-cdp-*` and executes `pkill -f -- --user-data-dir={profile}` plus `shutil.rmtree` to prevent orphaned Chrome processes.
+- **Persistence**: `scripts/speculative_loading.py` supports single-target and batch manifest execution with immediate per-site JSON persistence (`--out`).

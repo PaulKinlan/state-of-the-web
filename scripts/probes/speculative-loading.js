@@ -6,8 +6,8 @@
 // - A page that declares valid <script type="speculationrules"> with document or
 //   list rules is a pass candidate for speculative-loading.
 // - A page with invalid JSON speculation rules produces explicit syntax errors.
-// - A single-page application with no navigation links or a static page with no
-//   outbound targets provides link counts so auditors can judge applicability.
+// - A single-page application with client-side routing or a page with external-only
+//   links provides navigation context so auditors can judge applicability.
 // - Legacy signals (<link rel="prefetch|prerender">) and delivery metrics are
 //   captured side-by-side to detect modern vs legacy migration state.
 //
@@ -75,7 +75,7 @@
     return parts.join(', ');
   }
 
-  function inspectRule(rule, targetSummary, kind) {
+  function inspectRule(rule, targetSummary) {
     targetSummary.count++;
     const source = rule.source || 'list';
     if (source === 'list') {
@@ -101,6 +101,16 @@
     }
   }
 
+  function capRule(rule) {
+    if (!rule || typeof rule !== 'object') return rule;
+    const capped = { ...rule };
+    if (Array.isArray(capped.urls) && capped.urls.length > 10) {
+      capped.truncatedUrlsCount = capped.urls.length - 10;
+      capped.urls = capped.urls.slice(0, 10);
+    }
+    return capped;
+  }
+
   for (let i = 0; i < scripts.length; i++) {
     const el = scripts[i];
     const text = el.textContent ? el.textContent.trim() : '';
@@ -119,17 +129,31 @@
       continue;
     }
 
-    rawRulesets.push(parsed);
+    // Cap rulesets to prevent multi-MB payload bloat on large sites (F7)
+    if (rawRulesets.length < 10) {
+      const cappedRuleset = {};
+      if (parsed && typeof parsed === 'object') {
+        if (Array.isArray(parsed.prefetch)) {
+          cappedRuleset.prefetch = parsed.prefetch.slice(0, 10).map(capRule);
+          if (parsed.prefetch.length > 10) cappedRuleset.prefetchTruncatedCount = parsed.prefetch.length - 10;
+        }
+        if (Array.isArray(parsed.prerender)) {
+          cappedRuleset.prerender = parsed.prerender.slice(0, 10).map(capRule);
+          if (parsed.prerender.length > 10) cappedRuleset.prerenderTruncatedCount = parsed.prerender.length - 10;
+        }
+      }
+      rawRulesets.push(cappedRuleset);
+    }
 
     if (parsed && typeof parsed === 'object') {
       if (Array.isArray(parsed.prefetch)) {
         for (const rule of parsed.prefetch) {
-          if (rule && typeof rule === 'object') inspectRule(rule, prefetchSummary, 'prefetch');
+          if (rule && typeof rule === 'object') inspectRule(rule, prefetchSummary);
         }
       }
       if (Array.isArray(parsed.prerender)) {
         for (const rule of parsed.prerender) {
-          if (rule && typeof rule === 'object') inspectRule(rule, prerenderSummary, 'prerender');
+          if (rule && typeof rule === 'object') inspectRule(rule, prerenderSummary);
         }
       }
     }
@@ -171,7 +195,7 @@
     // performance API not available or constrained
   }
 
-  // Navigation context: internal vs external links
+  // Navigation context: internal vs external links + SPA detection (F3)
   const anchors = Array.from(document.querySelectorAll('a[href]'));
   let internalLinkCount = 0;
   let externalLinkCount = 0;
@@ -192,6 +216,29 @@
     }
   }
 
+  // Client-side router / SPA detection signals
+  let frameworkRouter = null;
+  if (typeof window !== 'undefined') {
+    if (window.__NEXT_DATA__ || document.querySelector('#__next')) {
+      frameworkRouter = 'next';
+    } else if (window.__NUXT__ || document.querySelector('#__nuxt')) {
+      frameworkRouter = 'nuxt';
+    } else if (window.__remixContext) {
+      frameworkRouter = 'remix';
+    } else if (window.__sveltekit || document.querySelector('[data-sveltekit-preload-data]')) {
+      frameworkRouter = 'sveltekit';
+    } else if (window.___gatsby || document.querySelector('#___gatsby')) {
+      frameworkRouter = 'gatsby';
+    } else if (document.querySelector('[data-reactroot], [data-react-helmet]')) {
+      frameworkRouter = 'react-spa';
+    } else if (document.querySelector('[ng-version], [data-server-rendered]')) {
+      frameworkRouter = 'angular/ssr';
+    } else if (location.hash && location.hash.startsWith('#/')) {
+      frameworkRouter = 'hash-router';
+    }
+  }
+
+  const isClientSideRouted = frameworkRouter !== null;
   const prefetchEagerness = Array.from(prefetchSummary.eagerness);
   const prerenderEagerness = Array.from(prerenderSummary.eagerness);
   const allEagerness = Array.from(new Set([...prefetchEagerness, ...prerenderEagerness]));
@@ -247,6 +294,8 @@
       anchorCount: anchors.length,
       internalLinkCount,
       externalLinkCount,
+      isClientSideRouted,
+      frameworkRouter,
     },
     signals: {
       hasSpeculationRules,
