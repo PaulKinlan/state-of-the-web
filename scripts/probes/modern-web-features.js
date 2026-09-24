@@ -33,6 +33,15 @@
 // Run it through the web-uplift evidence harness:
 //   node evidence/cli.mjs evaluate <url> --expr-file scripts/probes/modern-web-features.js \
 //     --out evidence/<site>/modern-web-features.json
+//
+// SCOPE: the document, every shadow root (including nested ones), their
+// styleSheets and adoptedStyleSheets, inline style attributes in any of them, and
+// script sources (inline plus a bounded synchronous read of external files, so a
+// bundled startViewTransition() is detected). Still NOT covered, both reported
+// rather than guessed: cross-origin stylesheet TEXT (page JavaScript cannot read
+// it — `css.sheets.inaccessible` lists the URLs; CDP CSS.getStyleSheetText or a
+// HAR with bodies closes that gap in the harness) and unreadable external scripts
+// (`scripts.externalUnreadable`, listed in `scripts.unreadableSamples`).
 (() => {
   const supports = (property, value) => {
     try {
@@ -163,10 +172,18 @@
 
   const RULE_LIMIT = 100000;
   const SAMPLE_LIMIT = 8;
+  // Bead state-of-the-web-6io blind spots: the probe read document scope only, so
+  // a component using adoptedStyleSheets on a shadow root reported
+  // rulesScanned=0 for its own CSS; and it scanned inline scripts only, so a
+  // framework SPA calling startViewTransition() from its bundle reported no usage.
+  // Roots are walked recursively and script sources are read (bounded) instead.
+  const SCRIPT_LIMIT = 25;
+  const SCRIPT_TOTAL_BYTES = 2000000;
   const css = {
     rules: 0,
     truncated: false,
     sheets: { total: 0, readable: 0, inaccessible: 0, unreadableUrls: [] },
+    scope: { roots: 0, shadowRoots: 0, rulesInShadowRoots: 0, inlineStyledElementsInShadowRoots: 0 },
   };
   const atRules = {
     crossDocumentViewTransitions: false,
@@ -234,13 +251,14 @@
     return brace > 0 ? text.slice(0, brace) : text;
   };
 
-  const visitRules = rules => {
+  const visitRules = (rules, inShadowRoot) => {
     for (const rule of rules || []) {
       if (css.rules >= RULE_LIMIT) {
         css.truncated = true;
         return;
       }
       css.rules++;
+      if (inShadowRoot) css.scope.rulesInShadowRoots++;
 
       // At-rules and selectors are text-level signals: they are not declarations,
       // so they have no value to judge.
@@ -266,13 +284,13 @@
       }
 
       if (rule.style) readDeclarations(rule.style, { inline: false });
-      if (rule.cssRules) visitRules(rule.cssRules);
+      if (rule.cssRules) visitRules(rule.cssRules, inShadowRoot);
     }
   };
 
-  const walkSheet = sheet => {
+  const walkSheet = (sheet, inShadowRoot) => {
     try {
-      visitRules(sheet.cssRules);
+      visitRules(sheet.cssRules, inShadowRoot);
       css.sheets.readable++;
     } catch {
       // Cross-origin stylesheets throw on cssRules; count them and record where
@@ -283,12 +301,35 @@
     }
   };
 
-  const sheets = [...document.styleSheets, ...(document.adoptedStyleSheets || [])];
-  css.sheets.total = sheets.length;
-  for (const sheet of sheets) walkSheet(sheet);
+  // Walk every style scope: the document, each shadow root, and shadow roots
+  // nested inside them. `document.querySelectorAll('*')` does not pierce shadow
+  // boundaries, so the recursion is explicit.
+  const roots = [];
+  const seenRoots = new Set();
+  const collectRoots = root => {
+    if (!root || seenRoots.has(root)) return;
+    seenRoots.add(root);
+    roots.push(root);
+    for (const element of root.querySelectorAll('*')) {
+      if (element.shadowRoot) collectRoots(element.shadowRoot);
+    }
+  };
+  collectRoots(document);
 
-  const inlineStyled = document.querySelectorAll('[style]');
-  for (const element of inlineStyled) readDeclarations(element.style, { inline: true });
+  const inlineStyledElements = [];
+  for (const root of roots) {
+    const inShadowRoot = root !== document;
+    const rootSheets = [...(root.styleSheets || []), ...(root.adoptedStyleSheets || [])];
+    css.sheets.total += rootSheets.length;
+    for (const sheet of rootSheets) walkSheet(sheet, inShadowRoot);
+    for (const element of root.querySelectorAll('[style]')) {
+      inlineStyledElements.push(element);
+      if (inShadowRoot) css.scope.inlineStyledElementsInShadowRoots++;
+      readDeclarations(element.style, { inline: true });
+    }
+  }
+  css.scope.roots = roots.length;
+  css.scope.shadowRoots = roots.length - 1;
 
   for (const name of FAMILY_NAMES) {
     const family = families[name];
@@ -314,11 +355,79 @@
     // getAnimations is unavailable or threw; leave the zeroed shape.
   }
 
+  // Scripts live in the document and in shadow roots, and adoption usually lives
+  // in an external bundle. Sources are read with a bounded synchronous XHR — the
+  // probe must stay synchronous inside Runtime.evaluate — so same-origin or
+  // CORS-permitted only; what could not be read is reported, never assumed.
+  const scriptsInPage = [];
+  for (const root of roots) {
+    for (const script of root.querySelectorAll('script')) scriptsInPage.push(script);
+  }
+  const inlineScriptsScanned = scriptsInPage.filter(script => !script.src).length;
+  const externalSources = [...new Set(scriptsInPage.filter(script => script.src).map(script => script.src))];
+  const scripts = {
+    inline: inlineScriptsScanned,
+    external: externalSources.length,
+    externalReadable: 0,
+    externalUnreadable: 0,
+    bytesScanned: 0,
+    truncated: externalSources.length > SCRIPT_LIMIT,
+    unreadableSamples: [],
+  };
   let apiReferencedInInlineScript = false;
-  let inlineScriptsScanned = 0;
-  for (const script of document.querySelectorAll('script:not([src])')) {
-    inlineScriptsScanned++;
-    if ((script.textContent || '').includes('startViewTransition')) apiReferencedInInlineScript = true;
+  let apiReferencedInExternalScript = false;
+  let apiInvocationSeen = false;
+  let apiMentionOnly = false;
+  const apiScriptSources = [];
+  // An invocation is stronger evidence than a mention: library code, a polyfill
+  // or a comment can name the API without the page ever calling it.
+  const scanScriptText = (text, source) => {
+    if (!text || text.indexOf('startViewTransition') < 0) return false;
+    if (/startViewTransition\s*\(/.test(text)) {
+      apiInvocationSeen = true;
+      if (apiScriptSources.length < 5) apiScriptSources.push(source);
+      return true;
+    }
+    apiMentionOnly = true;
+    return false;
+  };
+  for (const script of scriptsInPage) {
+    if (script.src) continue;
+    const text = script.textContent || '';
+    if (scanScriptText(text, 'inline')) apiReferencedInInlineScript = true;
+  }
+  let scannedBytes = 0;
+  for (const source of externalSources.slice(0, SCRIPT_LIMIT)) {
+    if (scannedBytes >= SCRIPT_TOTAL_BYTES) {
+      scripts.truncated = true;
+      scripts.externalUnreadable++;
+      continue;
+    }
+    try {
+      const request = new XMLHttpRequest();
+      request.open('GET', source, false);
+      request.send(null);
+      const text = String(request.responseText || '');
+      scannedBytes += text.length;
+      scripts.externalReadable++;
+      if (scanScriptText(text, source)) apiReferencedInExternalScript = true;
+    } catch (error) {
+      scripts.externalUnreadable++;
+      if (scripts.unreadableSamples.length < 5) scripts.unreadableSamples.push(source);
+    }
+  }
+  scripts.bytesScanned = scannedBytes;
+  const apiReferencedInScripts = apiReferencedInInlineScript || apiReferencedInExternalScript;
+  if (apiInvocationSeen) {
+    const viewTransitions = families.viewTransitions;
+    viewTransitions.used = true;
+    viewTransitions.usedCount++;
+    if (!viewTransitions.declarations.includes('startViewTransition()')) {
+      viewTransitions.declarations = [...viewTransitions.declarations, 'startViewTransition()'].sort();
+    }
+    if (viewTransitions.samples.length < SAMPLE_LIMIT && !viewTransitions.samples.includes('startViewTransition()')) {
+      viewTransitions.samples.push('startViewTransition()');
+    }
   }
 
   return {
@@ -329,17 +438,24 @@
     supported,
     css: {
       sheets: css.sheets,
+      scope: css.scope,
       rulesScanned: css.rules,
       truncated: css.truncated,
       atRules,
       families,
     },
-    inlineStyledElements: inlineStyled.length,
+    inlineStyledElements: inlineStyledElements.length,
     animations,
     viewTransitions: {
       apiAvailable: typeof document.startViewTransition === 'function',
       apiReferencedInInlineScript,
+      apiReferencedInExternalScript,
+      apiReferencedInScripts,
+      apiInvocationSeen,
+      apiMentionOnly,
+      apiScriptSources,
     },
     inlineScriptsScanned,
+    scripts,
   };
 })()
