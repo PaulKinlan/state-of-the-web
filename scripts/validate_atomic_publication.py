@@ -10,13 +10,24 @@ import sqlite3
 from collections import Counter
 from pathlib import Path
 
-from reconcile_atomic_run import (
-    canonical_origin,
-    disposition_for,
-    expected_catalog,
-    sha256_file,
-    validate_report,
-)
+try:  # invoked as a script, with scripts/ on sys.path
+    from reconcile_atomic_run import (
+        canonical_origin,
+        disposition_for,
+        expected_catalog,
+        pinned_catalog,
+        sha256_file,
+        validate_report,
+    )
+except ModuleNotFoundError:  # imported as scripts.validate_atomic_publication
+    from scripts.reconcile_atomic_run import (
+        canonical_origin,
+        disposition_for,
+        expected_catalog,
+        pinned_catalog,
+        sha256_file,
+        validate_report,
+    )
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,12 +51,10 @@ def validate(root: Path, check_db: bool = True, check_local_evidence: bool = Fal
     errors: list[str] = []
     inventory_path = root / "results/atomic/inventory.json"
     inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
-    catalog_path = root / inventory["catalog"]["path"]
-    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
-    catalog_sha = sha256_file(catalog_path)
-    _, pairs, _ = expected_catalog(catalog)
-    if catalog_sha != inventory["catalog"]["sha256"]:
-        errors.append("catalog SHA-256 mismatch")
+    # Load the catalog the inventory pinned, verifying its digest and shape
+    # before anything is judged against it.
+    catalog_path, catalog, catalog_sha = pinned_catalog(root, inventory)
+    principle_ids, pairs, _ = expected_catalog(catalog)
     if len(pairs) != 58:
         errors.append(f"catalog has {len(pairs)} checks")
 
@@ -170,7 +179,40 @@ def validate(root: Path, check_db: bool = True, check_local_evidence: bool = Fal
                 "scores": connection.execute("SELECT COUNT(*) FROM sites WHERE overall_score IS NOT NULL").fetchone()[0],
                 "dispositions": dict(connection.execute("SELECT disposition,COUNT(*) FROM sites GROUP BY disposition")),
             }
+            # Totals alone cannot tell a consistent database from a mixed one: a
+            # build that took definitions from a drifted catalog and results
+            # from the pinned generation still reports 58,000 rows. Compare the
+            # actual (principle, check) IDENTITIES against the pinned catalog.
+            definitions = set(connection.execute("SELECT principle_id,test_id FROM principle_tests"))
+            result_pairs = set(connection.execute("SELECT DISTINCT principle_id,test_id FROM test_results"))
+            # The schema's primary key already forbids duplicate (site, check)
+            # rows, so an exact per-site row count plus a catalog-subset check
+            # proves every site carries exactly the catalog's pairs.
+            odd_sites = [
+                row for row in connection.execute(
+                    "SELECT site,COUNT(*) FROM test_results GROUP BY site HAVING COUNT(*) != ?",
+                    (len(pairs),),
+                )
+            ]
+            odd_principle_sites = [
+                row for row in connection.execute(
+                    "SELECT site,COUNT(*) FROM principles GROUP BY site HAVING COUNT(*) != ?",
+                    (len(principle_ids),),
+                )
+            ]
             connection.close()
+            if definitions != pairs:
+                missing = sorted(pairs - definitions)[:5]
+                extra = sorted(definitions - pairs)[:5]
+                errors.append(f"database check definitions differ from the pinned catalog: missing={missing} extra={extra}")
+            if result_pairs != pairs:
+                missing = sorted(pairs - result_pairs)[:5]
+                extra = sorted(result_pairs - pairs)[:5]
+                errors.append(f"database results differ from the pinned catalog: missing={missing} extra={extra}")
+            if odd_sites:
+                errors.append(f"sites without exactly {len(pairs)} check rows: {odd_sites[:5]}")
+            if odd_principle_sites:
+                errors.append(f"sites without exactly {len(principle_ids)} principle rows: {odd_principle_sites[:5]}")
             if db_summary != {"sites": 1000, "positions": 1000, "checks": 58000, "principles": 17000, "scores": 0, "dispositions": {"complete": 705, "exhaustedBlocked": 257, "exhaustedPartial": 38}}:
                 errors.append(f"database totals differ: {db_summary}")
 
