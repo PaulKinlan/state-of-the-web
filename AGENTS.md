@@ -75,6 +75,14 @@ output for every representative route, and treat `css.sheets.inaccessible` (a
 cross-origin stylesheet whose text the page cannot read) as partial CSS evidence,
 not as absence of the feature.
 
+CSS inspection covers the document and recursively discovered **open shadow
+roots**: their `styleSheets`, `adoptedStyleSheets`, and inline styles. A shared
+constructed stylesheet is counted once, not once per adoption. `css.scope`
+reports inspected roots and the uninspected closed-shadow-root/iframe scopes;
+closed roots cannot be discovered through `element.shadowRoot`. The script-text
+signal still reads document inline scripts only, not external bundles. Do not
+interpret a negative signal as whole-page absence across these blind spots.
+
 Detection is **value-aware** (`matching: "value-aware"` in the report): a
 property counts only when its value enables the feature. A list value is judged
 per comma-separated part, `@view-transition` is judged by its `navigation`
