@@ -16,7 +16,7 @@ features, instead of a sweep completing while they silently stay unmeasured.
 
 Usage: python3 scripts/audit_runner2.py <site-list> [start-index] [count]
 """
-import json, os, re, shutil, subprocess, sys, time
+import csv, json, os, re, shutil, subprocess, sys, tempfile, time
 from pathlib import Path
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -58,19 +58,73 @@ def safe_name(domain):
     return re.sub(r'[^A-Za-z0-9.-]+', '-', domain).strip('-') or 'site'
 
 
+def load_targets(site_list):
+    """Read a plain domain list or the published manifest (position,origin,bucket).
+
+    The documented invocation is `audit_runner2.py results/atomic/manifest.csv 0 50`,
+    so the CSV header and full origin URLs must be handled: treating a manifest
+    row as a bare domain builds `https://www.<row>/`, which is not a site at all.
+    Returns (rank, url) pairs, preserving source order.
+    """
+    rows = [row for row in csv.reader(open(site_list, newline='')) if any(cell.strip() for cell in row)]
+    targets = []
+    if rows and any(cell.strip().lower() in ('position', 'rank', 'index') for cell in rows[0]):
+        header = [cell.strip().lower() for cell in rows[0]]
+        rank_at = next(i for i, cell in enumerate(header) if cell in ('position', 'rank', 'index'))
+        url_at = next((i for i, cell in enumerate(header) if cell in ('origin', 'domain', 'url', 'site')), None)
+        if url_at is None:
+            raise SystemExit(f'{site_list}: header has no origin/domain/url column')
+        for offset, row in enumerate(rows[1:], 1):
+            if url_at >= len(row):
+                continue
+            value = row[url_at].strip()
+            if not value:
+                continue
+            cell = row[rank_at].strip() if rank_at < len(row) else ''
+            targets.append((int(cell) if cell.isdigit() else offset, value))
+        return targets
+    for offset, row in enumerate(rows, 1):
+        value = row[0].strip()
+        if value:
+            targets.append((offset, value))
+    return targets
+
+
+def target_url(value):
+    """A manifest row is already a URL; a bare list entry is a domain."""
+    if value.startswith(('http://', 'https://')):
+        return value
+    return f'https://www.{value}/'
+
+
 def kill_profile(output):
     """Kill and remove the Chrome profile a timed-out invocation launched.
 
     The CLI cannot clean up after itself here: cdp.mjs removes the profile
     directory on normal exit and handles SIGINT/SIGTERM/SIGHUP, but a timed-out
     call is SIGKILLed (no handler runs) and leaves headless Chrome plus its
-    ~2 MB profile behind. Only the uniquely named profile(s) named in this
-    invocation's output are touched.
+    profile behind. Only profile directories that are direct children of a real
+    temp root are touched, so an arbitrary path that merely looks like a profile
+    name cannot be removed.
+
+    The temp root is resolved rather than assumed: `mkdtemp` honours TMPDIR, and a
+    sweep run with TMPDIR on disk-backed storage (which /tmp inode exhaustion
+    forces, see the os3 pilot) puts its profiles somewhere other than /tmp.
 
     `pkill -f` parses a leading `--` as an option and exits 2 without signalling
     anything, so the pattern must follow an explicit end-of-options marker.
     """
-    profiles = sorted(set(re.findall(r'/tmp/web-uplift-cdp-[A-Za-z0-9_-]+', output or '')))
+    candidates = set(re.findall(r'(/[^\s\'"]*?/web-uplift-cdp-[A-Za-z0-9_-]+)', output or ''))
+    temp_roots = {Path(tempfile.gettempdir()).resolve(), Path('/tmp').resolve(), Path('/var/tmp').resolve()}
+    profiles = []
+    for candidate in sorted(candidates):
+        path = Path(candidate)
+        try:
+            parent = path.parent.resolve()
+        except OSError:
+            continue
+        if path.name.startswith('web-uplift-cdp-') and parent in temp_roots:
+            profiles.append(str(path))
     for profile in profiles:
         subprocess.run(['pkill', '-f', '--', f'--user-data-dir={profile}'], capture_output=True)
         shutil.rmtree(profile, ignore_errors=True)
@@ -139,7 +193,7 @@ def collect_modern_web(domain, url):
 
 def audit_site(domain, rank, url=None):
     url = url or f"https://www.{domain}/"
-    print(f"  [{rank}] {domain}...", end=" ", flush=True)
+    print(f"  [{rank}] {url}...", end=" ", flush=True)
     t0 = time.time()
     r = {"domain": domain, "rank": rank, "url": url, "audited_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
 
@@ -190,18 +244,19 @@ def main(argv):
     start_idx = int(argv[2]) if len(argv) > 2 else 0
     count = int(argv[3]) if len(argv) > 3 else 50
 
-    domains = [l.strip() for l in open(site_list) if l.strip()]
-    batch = domains[start_idx:start_idx + count]
-    print(f"Auditing {len(batch)} sites ({start_idx}-{start_idx+count-1})", flush=True)
+    targets = load_targets(site_list)
+    batch = targets[start_idx:start_idx + count]
+    print(f"Auditing {len(batch)} sites ({start_idx}-{start_idx+count-1}) from {site_list}", flush=True)
     os.makedirs("evidence", exist_ok=True)
     results = []
-    for i, domain in enumerate(batch):
-        rank = start_idx + i + 1
+    for i, (rank, value) in enumerate(batch):
+        url = target_url(value)
+        domain = safe_name(re.sub(r'^https?://', '', value).split('/')[0])
         try:
-            results.append(audit_site(domain, rank))
+            results.append(audit_site(domain, rank, url=url))
         except Exception as e:
             print(f"  ERROR: {e}")
-            results.append({"domain": domain, "rank": rank, "error": str(e)})
+            results.append({"domain": domain, "rank": rank, "url": url, "error": str(e)})
         if (i+1) % 10 == 0:
             json.dump(results, open(f"results-batch-{start_idx}.json", "w"), indent=2, default=str)
             print(f"  Saved {len(results)}", flush=True)
