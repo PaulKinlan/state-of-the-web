@@ -29,10 +29,24 @@ Collects per site:
 - Discoverability (JS-shell detection, content coverage %, crawler vs rendered comparison)
 - Screenshots (desktop + mobile)
 - Viewport meta presence
+- Modern-web feature signals for the Chrome 134+ checks — view transitions,
+  scroll-driven animations, anchored positioning, scroll-state-aware chrome and
+  platform gestures — from `scripts/probes/modern-web-features.js`, retained per
+  site at `evidence/<domain>/modern-web-features.json`. A probe that cannot
+  measure the page records `ok: false` with the reason instead of implying the
+  features are absent.
 
 **Does NOT collect**: Lighthouse, axe, heap, HAR, traces, or principle judgments.
 
-Output: `results/cdp/results-batch-{start}.json`
+The probe runs inside the Mode 1 pass (bead state-of-the-web-if6), not as a
+separate step someone has to remember: `scripts/modern_web_probe.py` remains
+available for targeted or manifest-wide collection, and the same probe expression
+is the per-route evidence command in Mode 2 below.
+
+Output: `results-batch-{start}.json` in the working directory, plus per-site
+probe evidence at `evidence/<domain>/modern-web-features.json`. The tracked
+`results/cdp/results-batch-*.json` files are the retained v1 batch output; the
+runner does not write there, so a fresh pass cannot overwrite published records.
 
 ### Mode 2: Agentic atomic-check audit (requires a vision-capable model)
 
