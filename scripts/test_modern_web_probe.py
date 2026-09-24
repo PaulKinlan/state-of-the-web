@@ -12,6 +12,7 @@ uses them and must report nothing on the page that does not.
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 import unittest
@@ -22,6 +23,7 @@ PROBE = ROOT / 'scripts' / 'probes' / 'modern-web-features.js'
 FIXTURES = ROOT / 'scripts' / 'fixtures'
 MODERN_FIXTURE = FIXTURES / 'modern-web-features.html'
 PLAIN_FIXTURE = FIXTURES / 'plain-page.html'
+OPTED_OUT_FIXTURE = FIXTURES / 'opted-out-features.html'
 CRAWLER = ROOT / 'scripts' / 'modern_web_probe.py'
 CLI_CANDIDATES = [
     Path('/home/paulkinlan/journal/.web-uplift/evidence/cli.mjs'),
@@ -114,6 +116,32 @@ class ModernWebProbeTest(unittest.TestCase):
         self.assertFalse(report['css']['atRules']['scrollStateContainerQuery'])
         self.assertFalse(report['viewTransitions']['apiReferencedInInlineScript'])
 
+    def test_opt_outs_and_shorthand_expansion_are_not_counted_as_usage(self):
+        """Detection is value-aware: a declared property is not a used feature.
+
+        Two real failure modes are pinned here, both observed on live origins:
+        an explicit opt-out (`view-transition-name: none`, `position-anchor:
+        unset` -- the microsoft.com reset), and ordinary shorthands that the
+        CSSOM expands into tracked longhands (`animation:` -> `animation-
+        timeline: auto`, `container:` -> `container-type: inline-size`).
+        """
+        report = probe(OPTED_OUT_FIXTURE.as_uri())
+        self.assertEqual(report['matching'], 'value-aware')
+        self.assertGreater(report['css']['rulesScanned'], 0, 'fixture CSS must be readable')
+        for family in FEATURE_FAMILIES:
+            with self.subTest(family=family):
+                detail = report['css']['families'][family]
+                self.assertFalse(detail['used'], f'{family} false positive: {detail["samples"]}')
+                self.assertEqual(detail['usedCount'], 0, f'{family} counted {detail["usedCount"]} uses')
+        # The opt-outs must be REPORTED, not merely dropped: the auditor needs to
+        # tell "does not use the feature" apart from "explicitly turned it off".
+        for family in ('viewTransitions', 'scrollDrivenAnimations', 'anchorPositioning'):
+            with self.subTest(family=family, signal='optedOut'):
+                self.assertGreater(report['css']['families'][family]['optedOutCount'], 0,
+                                   f'{family} opt-out was dropped instead of recorded')
+        self.assertFalse(report['css']['atRules']['scrollStateContainerQuery'])
+        self.assertFalse(report['css']['atRules']['viewTransitionPseudo'])
+
 
 class CrawlerWiringTest(unittest.TestCase):
     def test_crawler_runs_the_modern_web_probe(self):
@@ -198,7 +226,7 @@ class CrawlerWiringTest(unittest.TestCase):
 
         def fake_run(command, **kwargs):
             if command[:2] == ['pkill', '-f']:
-                killed.append(command[2])
+                killed.append(list(command))
                 return sp.CompletedProcess(command, 0, '', '')
             raise sp.TimeoutExpired(command, modern_web_probe.TIMEOUT,
                                     output='[browser] launching chrome (profile /tmp/web-uplift-cdp-AbC123)')
@@ -211,7 +239,51 @@ class CrawlerWiringTest(unittest.TestCase):
             modern_web_probe.subprocess.run = original_run
         self.assertEqual(exit_code, 124)
         self.assertIn('timeout', detail)
-        self.assertEqual(killed, ['--user-data-dir=/tmp/web-uplift-cdp-AbC123'])
+        # `--` must terminate option parsing, or pkill rejects the pattern as an
+        # option and kills nothing. Shape only -- the behaviour is asserted for
+        # real in test_kill_profile_kills_a_real_process.
+        self.assertEqual(killed, [['pkill', '-f', '--', '--user-data-dir=/tmp/web-uplift-cdp-AbC123']])
+
+    def test_kill_profile_kills_a_real_process_and_removes_the_profile(self):
+        """The cleanup must WORK, not merely look right.
+
+        `pkill -f "--user-data-dir=..."` exits 2 with `unrecognized option` and
+        kills nothing, because the pattern starts with `--`. A test that mocks
+        subprocess.run cannot see that -- it asserts the argument and passes
+        against broken code. This test spawns a real process whose cmdline looks
+        like headless Chrome's and asserts the process is gone afterwards.
+        """
+        import subprocess as sp
+        import time
+        import uuid
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import modern_web_probe
+        profile = Path(f'/tmp/web-uplift-cdp-selftest-{uuid.uuid4().hex[:8]}')
+        profile.mkdir(parents=True, exist_ok=True)
+        stand_in = sp.Popen(['bash', '-c', f'exec -a "chrome --user-data-dir={profile} --headless" sleep 120'],
+                            stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+        try:
+            for _ in range(50):
+                if sp.run(['pgrep', '-f', f'user-data-dir={profile}'], capture_output=True).returncode == 0:
+                    break
+                time.sleep(0.1)
+            else:
+                self.skipTest('could not spawn the stand-in Chrome process')
+
+            modern_web_probe.kill_profile(str(profile))
+
+            for _ in range(50):
+                alive = sp.run(['pgrep', '-f', f'user-data-dir={profile}'], capture_output=True).returncode == 0
+                if not alive:
+                    break
+                time.sleep(0.1)
+            self.assertFalse(alive, 'process survived kill_profile -- Chrome would be orphaned')
+            self.assertFalse(profile.exists(), 'profile directory was left on disk')
+        finally:
+            sp.run(['pkill', '-f', '--', f'--user-data-dir={profile}'], capture_output=True)
+            stand_in.kill()
+            stand_in.wait(timeout=10)
+            shutil.rmtree(profile, ignore_errors=True)
 
     def test_failed_probe_writes_failure_evidence_and_marks_not_ok(self):
         """Fail-closed: a target with no usable evidence is recorded as a failure."""

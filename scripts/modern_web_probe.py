@@ -31,6 +31,7 @@ import csv
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -133,6 +134,20 @@ def slug(value: str) -> str:
     return ''.join(character if character.isalnum() or character in '.-' else '-' for character in value.lower()).strip('-')
 
 
+def kill_profile(profile: str) -> bool:
+    """Kill every Chrome process holding `profile`, and remove the profile dir.
+
+    `pkill -f "--user-data-dir=..."` does NOT work: the pattern starts with `--`,
+    so pkill parses it as an option and exits 2 without killing anything, which
+    left a headless Chrome (plus zygote/GPU children) orphaned for every timed-out
+    target. `--` terminates option parsing and makes the pattern a pattern.
+    """
+    killed = subprocess.run(['pkill', '-f', '--', f'--user-data-dir={profile}'],
+                            capture_output=True).returncode == 0
+    shutil.rmtree(profile, ignore_errors=True)
+    return killed
+
+
 def evaluate_target(url: str, out: Path) -> tuple[int, str]:
     """Run the probe once, bounded and leak-free.
 
@@ -152,7 +167,7 @@ def evaluate_target(url: str, out: Path) -> tuple[int, str]:
             return value or ''
         output = text(exc.stdout) + text(exc.stderr)
         for profile in set(re.findall(r'/tmp/web-uplift-cdp-[A-Za-z0-9_-]+', output)):
-            subprocess.run(['pkill', '-f', f'--user-data-dir={profile}'], capture_output=True)
+            kill_profile(profile)
         return 124, f'timeout after {TIMEOUT}s'
 
 

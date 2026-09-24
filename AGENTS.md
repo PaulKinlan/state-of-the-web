@@ -61,6 +61,16 @@ output for every representative route, and treat `css.sheets.inaccessible` (a
 cross-origin stylesheet whose text the page cannot read) as partial CSS evidence,
 not as absence of the feature.
 
+Detection is **value-aware** (`matching: "value-aware"` in the report): a
+property counts only when its value enables the feature. `view-transition-name:
+none`, `position-anchor: unset`, and the `animation-timeline: auto` /
+`container-type: inline-size` that ordinary `animation:` and `container:`
+shorthands expand into are all reported under each family's `optedOut`, never as
+usage. When judging, read `families.<name>.used` plus `usedCount` for adoption,
+and `optedOut` to tell a site that does not use a feature apart from one that
+explicitly turned it off — the first is usually `not-applicable`, the second is a
+deliberate decision worth recording.
+
 Then materialise the exact check manifest from `principles.json`, gather the check-specific evidence (including active interactions and representative routes where required), record every check outcome, derive the 17 principle outcomes, and run the coverage validator. Do not use a generic evidence bundle to default untested checks to pass.
 
 ## Output schema

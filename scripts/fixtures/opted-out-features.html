@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opted-out and shorthand-expanded fixture</title>
+<style>
+  /* This page must NOT register as modern-feature usage.
+
+     Two separate traps live here, and a probe that matches property NAMES
+     falls into both:
+
+     1. EXPLICIT OPT-OUTS. These properties are declared, but their values
+        switch the feature OFF. A site doing this is deliberately not using
+        the feature. */
+  :root { view-transition-name: none; }
+  .no-vt { view-transition-class: none; }
+  .no-anim { animation-timeline: none; }
+  .no-anchor { anchor-name: none; position-anchor: auto; }
+  /* The microsoft.com shape: an `all: unset`-style reset serialised by the
+     CSSOM into longhands. Every value is a CSS-wide keyword. */
+  .reset-button {
+    color-scheme: unset;
+    position-anchor: unset;
+    position-area: unset;
+    appearance: unset;
+    view-transition-name: initial;
+    animation-timeline: inherit;
+  }
+
+  /* 2. ORDINARY SHORTHANDS. Nothing modern is declared here at all, but the
+        CSSOM expands each shorthand into the very longhands the probe tracks:
+          animation:  -> animation-timeline: auto, animation-range-start: normal
+          container:  -> container-type: inline-size
+        A name-matching probe reports every animated page as scroll-driven. */
+  .badge { animation: pulse 2s infinite alternate; }
+  .card { container: card / inline-size; }
+  @keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
+
+  /* A comment mentioning position-area, scroll-state( and ::view-transition
+     must not count either. */
+</style>
+</head>
+<body>
+  <main>
+    <h1 class="no-vt">Opted out</h1>
+    <p class="no-anim no-anchor">Nothing modern is in use on this page.</p>
+    <button class="reset-button" type="button" style="view-transition-name: none">Reset</button>
+    <span class="badge">badge</span>
+    <section class="card">card</section>
+  </main>
+</body>
+</html>

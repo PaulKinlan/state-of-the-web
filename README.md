@@ -110,16 +110,39 @@ is a failure, not evidence):
 python3 scripts/modern_web_probe.py results/atomic/manifest.csv --out runs/<run>/evidence/modern-web
 ```
 
+Detection is **value-aware**: a declaration counts only when its value actually
+enables the feature. Matching bare property names is wrong in both directions,
+and both directions were observed on live origins:
+
+- **Opt-outs are not usage.** `view-transition-name: none` and `position-anchor:
+  unset` *disable* the feature. `microsoft.com` ships an `all: unset`-style reset
+  (`.sa-modern-cta-button { … position-anchor: unset; position-area: unset; … }`)
+  that a name-matching probe reported as anchor-positioning adoption.
+- **Ordinary shorthands are not usage.** The CSSOM expands `animation: pulse 2s
+  infinite` into `animation-timeline: auto` and `container: card / inline-size`
+  into `container-type: inline-size`, so name matching would have counted every
+  animated page as scroll-driven.
+
+Filtered values are still reported, under each family's `optedOut`, so an auditor
+can tell *"does not use the feature"* apart from *"explicitly turned it off"* —
+a distinction the catalog needs to choose between `not-applicable` and `issues`.
+
 Crawler suite: `python3 -m unittest scripts.test_modern_web_probe`. It drives real
 headless Chrome against `scripts/fixtures/modern-web-features.html` (asserting
 every family is detected, including `::view-transition`, `scroll-state()` and a
-live `viewTimeline`) and `scripts/fixtures/plain-page.html` (asserting ordinary
-CSS produces no false positive).
+live `viewTimeline`), `scripts/fixtures/plain-page.html` (asserting ordinary CSS
+produces no false positive), and `scripts/fixtures/opted-out-features.html`
+(asserting opt-outs and shorthand expansion are not credited as usage). The
+profile-cleanup test spawns a real process and asserts it is gone, because a
+mocked `subprocess.run` cannot detect a cleanup command that does not work.
 
 Probed against real origins, the signal is complementary by design: `airbnb.com`
-and `microsoft.com` show declarative view-transition and anchor-positioning CSS,
-`scroll-driven-animations.style` reports 19 live view timelines, and `stripe.com`
-reports a live `ScrollTimeline` from **zero** readable stylesheets.
+shows genuine adoption (88 `view-transition-name` declarations with real values,
+10 anchor-positioning declarations), `scroll-driven-animations.style` reports 19
+live view timelines, and `stripe.com` reports a live `ScrollTimeline` from **zero**
+readable stylesheets. `microsoft.com` reports **no** modern-feature usage: its 30
+tracked declarations are all inert defaults or resets, which is what value-aware
+matching is for.
 
 Known limitation: page JavaScript cannot read cross-origin stylesheets, so the
 probe reports them as `css.sheets.inaccessible` with their URLs (CDN-hosted CSS on
