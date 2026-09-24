@@ -260,6 +260,36 @@ The live `animations` counts and a HAR with bodies are the cross-checks; reading
 that CSS directly needs the CDP `CSS.getStyleSheetText` domain, which belongs in
 the web-uplift evidence CLI rather than in this repo.
 
+### Aggregating adoption across a run
+
+```bash
+python3 scripts/aggregate_modern_web.py runs/<run>/evidence/modern-web --json adoption.json
+python3 -m unittest scripts.test_aggregate_modern_web
+```
+
+Reports how many sites use each family, and **refuses to produce a number it
+cannot support**. Adoption percentages are the output most likely to be quoted
+and least likely to be re-derived, so the dangerous failure is not a crash — it
+is a plausible figure computed from evidence that cannot carry it.
+
+- **Pre-fix evidence is refused.** Reports lacking `matching: "value-aware"` came
+  from the probe that counted opt-outs and shorthand-expanded defaults as usage,
+  so their numbers are an upper bound. `--allow-legacy` aggregates anyway and
+  labels every output `legacy-inflated`.
+- **Mixed generations are refused outright**, with or without `--allow-legacy`: a
+  percentage spanning two definitions of "used" means nothing.
+- **Two denominators, always stated.** `adoptionOfJudged` counts sites the probe
+  actually read; `adoptionOfFullyReadable` counts only sites where no stylesheet
+  was unreadable. The gap between them is the size of the doubt, because a
+  non-detection on a site with cross-origin CSS means *not found in what we could
+  read*, not *not used*.
+- **Failed targets are never zeros.** A probe that could not reach a site leaves
+  it unmeasured and outside every percentage.
+
+Live scroll/view timelines are reported alongside as an independent cross-check:
+they are observed at runtime and survive unreadable CSS, so they corroborate
+scroll-driven adoption without the stylesheet text.
+
 ## Methodology and limitations
 
 - Audits use the [web-uplift](https://github.com/PaulKinlan/web-uplift) atomic-check methodology with representative routes, states, and active interactions where reachable.
