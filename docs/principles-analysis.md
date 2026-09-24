@@ -69,6 +69,7 @@ npm pack modern-web-guidance@0.0.190 && mkdir -p /tmp/mwg/0.0.190 && tar xzf mod
     "follow-best-practices/no-console-errors"
   ],
   "latestGuides": 147,
+  "latestPackVersion": "0.0.190",
   "latestUnreferenced": [
     "contrast-color",
     "ime-safe-enter-submit",
@@ -95,12 +96,19 @@ npm pack modern-web-guidance@0.0.190 && mkdir -p /tmp/mwg/0.0.190 && tar xzf mod
     "usage-aware-component-variations"
   ],
   "pinnedGuides": 137,
+  "pinnedPackVersion": "0.0.172",
   "pinnedUnreferenced": [
     "declarative-button-actions"
   ],
   "principles": 17,
   "referencedAbsentFromLatest": [],
+  "referencedAbsentFromPinned": [
+    "custom-button-actions"
+  ],
   "referencedSlugs": 137,
+  "removedFromPinned": [
+    "declarative-button-actions"
+  ],
   "searchPhrases": 58
 }
 -->
@@ -119,7 +127,9 @@ npm pack modern-web-guidance@0.0.190 && mkdir -p /tmp/mwg/0.0.190 && tar xzf mod
 - Guides shipped in the pinned pack: **137**
 - Guides shipped in the latest pack: **147**
 - New guides in the latest pack: **11**
+- Guides removed since the pinned pack: **1** (`declarative-button-actions`)
 - New guides no check references: **10**
+- Referenced slugs absent from the **pinned** pack (forward references): **1** (`custom-button-actions`)
 - Referenced slugs absent from the latest pack: **0**
 
 - New in the latest pack **and already referenced** by the pinned catalog: `custom-button-actions`
@@ -237,6 +247,10 @@ true, but incomplete: at the pinned version itself, those two check references
 cannot resolve. The pin is behind what the catalog already assumes, which is a
 reason to move the pin that is independent of adopting the ten unreferenced
 guides.
+
+This is recorded as `referencedAbsentFromPinned` in the generated block above, so
+it is a checked number rather than a claim in prose: `--check` fails if it stops
+being true, or if it silently becomes true of some other guide.
 
 Verification:
 
@@ -364,17 +378,36 @@ Only (b) should invalidate a published run.
 ## Regenerating this document
 
 ```bash
-python3 scripts/analyze_guide_coverage.py                     # facts as JSON
-python3 scripts/analyze_guide_coverage.py --write docs/principles-analysis.md \
-  --guides-dir /tmp/mwg/0.0.172 --guides-dir /tmp/mwg/0.0.190  # regenerate the section
-python3 scripts/analyze_guide_coverage.py --check docs/principles-analysis.md \
-  --guides-dir /tmp/mwg/0.0.172 --guides-dir /tmp/mwg/0.0.190  # verify, exit 1 if stale
+python3 scripts/analyze_guide_coverage.py                      # facts as JSON
+python3 scripts/analyze_guide_coverage.py --write docs/principles-analysis.md
+python3 scripts/analyze_guide_coverage.py --check docs/principles-analysis.md
 ```
 
-`--check` without `--guides-dir` verifies the catalog-side facts (counts, checksum,
-slug/phrase split, checks with no slug); with both packs it also verifies the
-package-side facts. Nothing in the repository vendors the guides, so the
-package-side check needs the `npm pack` steps above.
+Every recorded number verifies offline. The guide **bodies** are still not
+vendored, but their **slug names** are, in `scripts/fixtures/guide-slugs.json`,
+which is what the package-side facts are derived from.
+
+`--check` fails, rather than printing `OK`, when a recorded key cannot be
+derived by that run, and reports how many keys it verified. Previously it
+compared only the keys it happened to have, so the six package-side numbers —
+the ones that needed two `npm pack` extractions and were least likely to be
+re-derived by hand — could drift indefinitely while the command stayed green.
+
+To verify against freshly extracted packs instead of the fixture, or to refresh
+it after a new release:
+
+```bash
+npm pack modern-web-guidance@0.0.172 && tar xzf modern-web-guidance-0.0.172.tgz -C /tmp/mwg/0.0.172
+npm pack modern-web-guidance@0.0.190 && tar xzf modern-web-guidance-0.0.190.tgz -C /tmp/mwg/0.0.190
+python3 scripts/analyze_guide_coverage.py --check docs/principles-analysis.md \
+  --guides-dir /tmp/mwg/0.0.172 --guides-dir /tmp/mwg/0.0.190
+```
+
+`--guides-dir` takes precedence over the fixture, so a stale fixture is
+corrected by a real pack rather than silently believed. Both inputs record the
+same keys, so a document written one way verifies the other way. Pack versions
+are read from each pack's own `package.json`, not from argument order, so the
+pinned pack cannot become the latest one by passing the flags backwards.
 
 ## Open questions
 

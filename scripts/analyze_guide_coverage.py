@@ -30,6 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / 'principles.json'
+SLUG_FIXTURE = ROOT / 'scripts' / 'fixtures' / 'guide-slugs.json'
 BASELINE_MARKER = 'guide-coverage-baseline'
 BEGIN = '<!-- BEGIN GENERATED guide-coverage -->'
 END = '<!-- END GENERATED guide-coverage -->'
@@ -77,7 +78,59 @@ def guide_slugs(directory: Path):
     return {path.stem: path for path in directory.rglob('*.md')}
 
 
-def facts(catalog, catalog_checksum, rows, slug_refs, guide_dirs):
+def read_pack(directory: Path):
+    """Return (version, slugs) for an extracted modern-web-guidance pack.
+
+    Reading the version from the pack's own package.json keeps `--guides-dir`
+    and the fixture producing the SAME key set. They previously differed --
+    `--guides-dir` omitted the pack-version keys -- so a document written one
+    way failed `--check` run the other way.
+    """
+    slugs = set(guide_slugs(directory))
+    version = None
+    for manifest in sorted(directory.rglob('package.json')):
+        try:
+            payload = json.loads(manifest.read_text())
+        except (OSError, ValueError):
+            continue
+        if payload.get('name') == 'modern-web-guidance' and payload.get('version'):
+            version = str(payload['version'])
+            break
+    return version or directory.name, slugs
+
+
+def load_slug_fixture(path: Path = SLUG_FIXTURE):
+    """Guide slug NAMES per pack version, so package-side facts verify offline.
+
+    The guides themselves are not vendored, so without this the package-side
+    numbers could only be produced by hand from two `npm pack` extractions --
+    which meant the numbers that took the most work to derive were the ones
+    nothing re-checked. The fixture holds slug names only, no guide content.
+    """
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text())
+    return {version: set(slugs) for version, slugs in payload.get('packs', {}).items()}
+
+
+def select_packs(catalog, packs):
+    """Resolve which pack the catalog PINS and which is newest.
+
+    Derived from the catalog's own version rather than argument order, so
+    `pinned` cannot silently become `latest` because two `--guides-dir` flags
+    were passed the wrong way round.
+    """
+    if not packs:
+        return None, None, None, None
+    pin = str(catalog.get('guidanceCatalogVersion', '')).rsplit('@', 1)[-1]
+    versions = sorted(packs, key=lambda value: [int(part) if part.isdigit() else part
+                                               for part in re.split(r'[.\-]', value)])
+    latest_version = versions[-1]
+    pinned_version = pin if pin in packs else versions[0]
+    return pinned_version, packs[pinned_version], latest_version, packs[latest_version]
+
+
+def facts(catalog, catalog_checksum, rows, slug_refs, packs=None):
     referenced = set(slug_refs)
     data = {
         'catalogVersion': catalog['guidanceCatalogVersion'],
@@ -89,14 +142,22 @@ def facts(catalog, catalog_checksum, rows, slug_refs, guide_dirs):
         'searchPhrases': sum(len(row['phrases']) for row in rows),
         'checksWithoutReferencedSlug': sorted(f"{row['principle']}/{row['check']}" for row in rows if not row['slugs']),
     }
-    if guide_dirs:
-        pinned, latest = guide_dirs[0], guide_dirs[-1]
-        data['pinnedGuides'] = len(pinned)
-        data['latestGuides'] = len(latest)
-        data['newGuides'] = sorted(set(latest) - set(pinned))
-        data['referencedAbsentFromLatest'] = sorted(referenced - set(latest))
-        data['latestUnreferenced'] = sorted(set(latest) - referenced)
-        data['pinnedUnreferenced'] = sorted(set(pinned) - referenced)
+    pinned_version, pinned, latest_version, latest = select_packs(catalog, packs or {})
+    if pinned is None:
+        return data
+    data['pinnedGuides'] = len(pinned)
+    data['latestGuides'] = len(latest)
+    data['newGuides'] = sorted(latest - pinned)
+    data['removedFromPinned'] = sorted(pinned - latest)
+    # The forward reference: slugs the catalog already points at that did not
+    # exist in the version it pins. Recorded, not just narrated, because it is
+    # the finding the analysis exists to surface.
+    data['referencedAbsentFromPinned'] = sorted(referenced - pinned)
+    data['referencedAbsentFromLatest'] = sorted(referenced - latest)
+    data['latestUnreferenced'] = sorted(latest - referenced)
+    data['pinnedUnreferenced'] = sorted(pinned - referenced)
+    data['pinnedPackVersion'] = pinned_version
+    data['latestPackVersion'] = latest_version
     return data
 
 
@@ -124,7 +185,12 @@ def render(catalog, data, rows):
                 f"- Guides shipped in the pinned pack: **{data['pinnedGuides']}**",
                 f"- Guides shipped in the latest pack: **{data['latestGuides']}**",
                 f"- New guides in the latest pack: **{len(data['newGuides'])}**",
+                f"- Guides removed since the pinned pack: **{len(data.get('removedFromPinned', []))}**"
+                + (f" ({', '.join(f'`{s}`' for s in data.get('removedFromPinned', []))})" if data.get('removedFromPinned') else ''),
                 f"- New guides no check references: **{len(data['latestUnreferenced'])}**",
+                f"- Referenced slugs absent from the **pinned** pack (forward references): "
+                f"**{len(data.get('referencedAbsentFromPinned', []))}**"
+                + (f" ({', '.join(f'`{s}`' for s in data.get('referencedAbsentFromPinned', []))})" if data.get('referencedAbsentFromPinned') else ''),
                 f"- Referenced slugs absent from the latest pack: **{len(data['referencedAbsentFromLatest'])}**"
                 + (f" ({', '.join(f'`{s}`' for s in data['referencedAbsentFromLatest'])})" if data['referencedAbsentFromLatest'] else ''),
                 '']
@@ -153,12 +219,19 @@ def main(argv):
                         help='extracted modern-web-guidance pack (repeat: pinned, then latest)')
     parser.add_argument('--write', metavar='PATH', help='splice the generated section into this document')
     parser.add_argument('--check', metavar='PATH', help='verify this document against the catalog')
+    parser.add_argument('--no-fixture', action='store_true',
+                        help='ignore scripts/fixtures/guide-slugs.json (package-side facts become unverifiable)')
     args = parser.parse_args(argv[1:])
 
     catalog, checksum = load_catalog(Path(args.catalog))
     rows, slug_refs = analyse(catalog)
-    guide_dirs = [guide_slugs(Path(directory)) for directory in args.guides_dir]
-    data = facts(catalog, checksum, rows, slug_refs, guide_dirs)
+    packs = {} if args.no_fixture else load_slug_fixture()
+    # Explicit packs win over the fixture, so a freshly extracted pack can
+    # correct a stale fixture rather than be silently overridden by it.
+    for directory in args.guides_dir:
+        version, slugs = read_pack(Path(directory))
+        packs[version] = slugs
+    data = facts(catalog, checksum, rows, slug_refs, packs)
     block = render(catalog, data, rows)
 
     if args.write:
@@ -183,12 +256,24 @@ def main(argv):
             return 1
         recorded = json.loads(match.group(1))
         stale = {key: (recorded.get(key), value) for key, value in data.items() if recorded.get(key) != value}
+        # A recorded key this run could not derive is NOT verified. Saying so is
+        # the point: previously `--check` compared only the keys it happened to
+        # have and still printed OK, so six package-side numbers could drift
+        # indefinitely while the command stayed green.
+        unverified = sorted(set(recorded) - set(data))
         if stale:
             print(f'{args.check}: OUT OF DATE', file=sys.stderr)
             for key, (was, now) in stale.items():
                 print(f'  {key}: document says {was!r}; catalog says {now!r}', file=sys.stderr)
             return 1
-        print(f'{args.check}: OK ({data["referencedSlugs"]} referenced slugs across {data["checks"]} checks)')
+        if unverified:
+            print(f'{args.check}: NOT FULLY VERIFIED', file=sys.stderr)
+            print(f'  {len(unverified)} recorded key(s) could not be derived by this run: '
+                  + ', '.join(unverified), file=sys.stderr)
+            print('  supply --guides-dir, or restore scripts/fixtures/guide-slugs.json.', file=sys.stderr)
+            return 1
+        print(f'{args.check}: OK ({data["referencedSlugs"]} referenced slugs across {data["checks"]} checks, '
+              f'{len(data)} recorded key(s) verified)')
     elif not args.write:
         print(json.dumps({key: value for key, value in data.items() if key != 'checksWithoutReferencedSlug'}, indent=2))
     return 0
