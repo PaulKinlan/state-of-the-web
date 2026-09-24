@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Client-side Routed SPA Fixture</title>
+</head>
+<body>
+  <div id="__next">
+    <nav>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/settings">Settings</a>
+    </nav>
+    <main>
+      <h1>SPA Dashboard</h1>
+      <p>Simulates client-side router intercepting navigation.</p>
+    </main>
+  </div>
+  <script>
+    // Simulate client-side router delegation
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a');
+      if (a && a.getAttribute('href').startsWith('/')) {
+        e.preventDefault();
+        history.pushState({}, '', a.href);
+      }
+    });
+  </script>
+</body>
+</html>

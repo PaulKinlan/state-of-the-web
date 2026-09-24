@@ -230,6 +230,39 @@ def synthesize_check_outcome(
     has_speculation = signals.get("hasSpeculationRules") or har_signals.get("hasSpeculativeNetworkActivity")
 
     if has_speculation:
+        prefetch = rules.get("prefetch", {})
+        prerender = rules.get("prerender", {})
+        has_active_rules = prefetch.get("count", 0) > 0 or prerender.get("count", 0) > 0
+        has_target_urls = len(prefetch.get("sampleUrls", [])) > 0 or len(prerender.get("sampleUrls", [])) > 0
+        has_doc_conditions = len(prefetch.get("documentConditions", [])) > 0 or len(prerender.get("documentConditions", [])) > 0
+
+        # Check for empty or inert speculation rules without network activity
+        if not has_active_rules or (not has_target_urls and not has_doc_conditions):
+            if not har_signals.get("hasSpeculativeNetworkActivity"):
+                return {
+                    "principleId": "be-fast-and-stable",
+                    "checkId": "speculative-loading",
+                    "status": "issues",
+                    "confidence": "high",
+                    "method": "CDP evaluate speculation-rules probe",
+                    "evidence": "Speculation rules declared but inert (empty ruleset with no target URLs or document conditions).",
+                    "reason": "Speculation rules script contains no actionable prefetch or prerender targets.",
+                }
+
+        # Check for document rules declared on a page with zero navigation links
+        total_links = nav_ctx.get("anchorCount", 0)
+        if signals.get("hasDocumentRules") and not signals.get("hasListRules") and total_links == 0:
+            if not har_signals.get("hasSpeculativeNetworkActivity"):
+                return {
+                    "principleId": "be-fast-and-stable",
+                    "checkId": "speculative-loading",
+                    "status": "not-applicable",
+                    "confidence": "medium",
+                    "method": "CDP evaluate speculation-rules probe and anchor inspection",
+                    "evidence": "Document-based speculation rules are declared, but page has zero navigation links to match.",
+                    "reason": "Document speculation rules require matching anchors; page has no navigation links.",
+                }
+
         features = []
         if signals.get("hasPrerender"):
             features.append("prerender")
@@ -254,12 +287,13 @@ def synthesize_check_outcome(
             "evidence": f"Speculative loading configured: {', '.join(features)}",
         }
 
-    # Applicability evaluations when no Speculation Rules are found (F3):
+    # Applicability evaluations when no Speculation Rules are found:
     total_links = nav_ctx.get("anchorCount", 0)
     internal_links = nav_ctx.get("internalLinkCount", 0)
     external_links = nav_ctx.get("externalLinkCount", 0)
     is_client_routed = is_spa_override if is_spa_override is not None else nav_ctx.get("isClientSideRouted", False)
-    framework = nav_ctx.get("frameworkRouter")
+    framework = nav_ctx.get("frameworkMarker") or nav_ctx.get("frameworkRouter")
+    nav_mode = nav_ctx.get("linkNavigationMode", "document-navigation")
 
     # Case 1: Page has zero links (single-surface utility or isolated page)
     if total_links == 0:
@@ -285,16 +319,19 @@ def synthesize_check_outcome(
             "reason": "Exposes external links only; cross-origin speculative loading is not applicable without target opt-in.",
         }
 
-    # Case 3: Single-Page Application using client-side routing (F3 fix)
+    # Case 3: Single-Page Application using client-side routing (verified by click interception)
     if is_client_routed:
         router_desc = f" ({framework})" if framework else ""
+        intercepted = nav_ctx.get("interceptedLinksCount", 0)
+        sampled = nav_ctx.get("sampledLinksCount", 0)
+        interception_detail = f" ({intercepted}/{sampled} sampled links intercepted)" if sampled > 0 else ""
         return {
             "principleId": "be-fast-and-stable",
             "checkId": "speculative-loading",
             "status": "not-applicable",
             "confidence": "medium",
-            "method": "Client-side router detection and anchor inspection",
-            "evidence": f"Single-page application using client-side router{router_desc} with {internal_links} client-routed links.",
+            "method": "Client-side router detection and link interception probe",
+            "evidence": f"Single-page application with verified client-intercepted link navigation{router_desc}{interception_detail}.",
             "reason": "Single-page application performs internal view transitions client-side without document navigations.",
         }
 
@@ -306,9 +343,10 @@ def synthesize_check_outcome(
     if legacy.get("linkPrerender"):
         legacy_notes.append(f"{legacy['linkPrerender']} legacy <link rel=prerender>")
 
+    fw_note = f" ({framework} SSR)" if framework else ""
     evidence_str = (
-        f"Multi-page site has {internal_links} internal navigation links but no <script type=\"speculationrules\"> "
-        f"or Speculation-Rules headers."
+        f"Multi-page site{fw_note} has {internal_links} internal document navigation links but does not configure Speculation Rules "
+        f"to prefetch or prerender likely next navigations."
     )
     if legacy_notes:
         evidence_str += f" Uses legacy hints ({', '.join(legacy_notes)}) instead of modern Speculation Rules."

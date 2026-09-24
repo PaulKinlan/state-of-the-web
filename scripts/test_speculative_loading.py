@@ -40,6 +40,29 @@ class SpeculativeLoadingProbeTest(unittest.TestCase):
         proc = subprocess.run(["node", "--check", str(speculative_loading.PROBE_JS)], capture_output=True, text=True)
         self.assertEqual(proc.returncode, 0, proc.stderr)
 
+    def test_probe_detects_real_client_intercepted_links_on_spa(self):
+        url = (FIXTURES / "spa-client-routed.html").as_uri()
+        report = speculative_loading.run_speculative_probe(url)
+        self.assertTrue(report.get("ok"), report)
+        nav = report["navigationContext"]
+        self.assertEqual(nav["sampledLinksCount"], 2)
+        self.assertEqual(nav["interceptedLinksCount"], 2)
+        self.assertEqual(nav["linkNavigationMode"], "client-intercepted")
+        self.assertTrue(nav["isClientSideRouted"])
+        self.assertTrue(nav["defaultPreventedIntercepted"])
+        self.assertTrue(nav["pushStateIntercepted"])
+
+    def test_probe_distinguishes_framework_ssr_document_navigations(self):
+        url = (FIXTURES / "framework-ssr-multipage.html").as_uri()
+        report = speculative_loading.run_speculative_probe(url)
+        self.assertTrue(report.get("ok"), report)
+        nav = report["navigationContext"]
+        self.assertEqual(nav["sampledLinksCount"], 2)
+        self.assertEqual(nav["interceptedLinksCount"], 0)
+        self.assertEqual(nav["linkNavigationMode"], "document-navigation")
+        self.assertFalse(nav["isClientSideRouted"])
+        self.assertEqual(nav["frameworkMarker"], "next")
+
     def test_probe_detects_speculation_rules_on_fixture(self):
         url = (FIXTURES / "speculative-loading.html").as_uri()
         report = speculative_loading.run_speculative_probe(url)
@@ -249,7 +272,7 @@ class OutcomeSynthesisTest(unittest.TestCase):
         }
         outcome = speculative_loading.synthesize_check_outcome(mock_report)
         self.assertEqual(outcome["status"], "issues")
-        self.assertIn("12 internal navigation links", outcome["evidence"])
+        self.assertIn("12 internal document navigation links", outcome["evidence"])
         self.assertIn("legacy hints", outcome["evidence"])
 
 

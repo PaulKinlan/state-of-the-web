@@ -4,10 +4,11 @@
 //
 // It returns signals only, never verdicts:
 // - A page that declares valid <script type="speculationrules"> with document or
-//   list rules is a pass candidate for speculative-loading.
+//   list rules is evaluated for speculative-loading adoption.
 // - A page with invalid JSON speculation rules produces explicit syntax errors.
-// - A single-page application with client-side routing or a page with external-only
-//   links provides navigation context so auditors can judge applicability.
+// - Real link navigation behavior is measured by sampling internal links and testing
+//   for client-side click interception (preventDefault / pushState), so server-rendered
+//   framework sites with document navigations are distinguished from client-routed SPAs.
 // - Legacy signals (<link rel="prefetch|prerender">) and delivery metrics are
 //   captured side-by-side to detect modern vs legacy migration state.
 //
@@ -129,7 +130,7 @@
       continue;
     }
 
-    // Cap rulesets to prevent multi-MB payload bloat on large sites (F7)
+    // Cap rulesets to prevent multi-MB payload bloat on large sites
     if (rawRulesets.length < 10) {
       const cappedRuleset = {};
       if (parsed && typeof parsed === 'object') {
@@ -195,18 +196,25 @@
     // performance API not available or constrained
   }
 
-  // Navigation context: internal vs external links + SPA detection (F3)
+  // Navigation context: internal vs external links + real navigation interception behavior
   const anchors = Array.from(document.querySelectorAll('a[href]'));
-  let internalLinkCount = 0;
+  const internalLinks = [];
   let externalLinkCount = 0;
   const currentHost = location.host;
+  const isFileOrigin = location.protocol === 'file:';
 
   for (const a of anchors) {
     try {
       const url = new URL(a.href, location.href);
-      if (url.protocol === 'http:' || url.protocol === 'https:') {
+      if (isFileOrigin) {
+        if (url.protocol === 'file:') {
+          internalLinks.push(a);
+        } else {
+          externalLinkCount++;
+        }
+      } else if (url.protocol === 'http:' || url.protocol === 'https:') {
         if (url.host === currentHost) {
-          internalLinkCount++;
+          internalLinks.push(a);
         } else {
           externalLinkCount++;
         }
@@ -216,29 +224,81 @@
     }
   }
 
-  // Client-side router / SPA detection signals
-  let frameworkRouter = null;
+  // Framework presence markers
+  let frameworkMarker = null;
   if (typeof window !== 'undefined') {
     if (window.__NEXT_DATA__ || document.querySelector('#__next')) {
-      frameworkRouter = 'next';
+      frameworkMarker = 'next';
     } else if (window.__NUXT__ || document.querySelector('#__nuxt')) {
-      frameworkRouter = 'nuxt';
+      frameworkMarker = 'nuxt';
     } else if (window.__remixContext) {
-      frameworkRouter = 'remix';
+      frameworkMarker = 'remix';
     } else if (window.__sveltekit || document.querySelector('[data-sveltekit-preload-data]')) {
-      frameworkRouter = 'sveltekit';
+      frameworkMarker = 'sveltekit';
     } else if (window.___gatsby || document.querySelector('#___gatsby')) {
-      frameworkRouter = 'gatsby';
+      frameworkMarker = 'gatsby';
     } else if (document.querySelector('[data-reactroot], [data-react-helmet]')) {
-      frameworkRouter = 'react-spa';
-    } else if (document.querySelector('[ng-version], [data-server-rendered]')) {
-      frameworkRouter = 'angular/ssr';
+      frameworkMarker = 'react-spa';
+    } else if (document.querySelector('[data-server-rendered]')) {
+      frameworkMarker = 'vue/ssr';
+    } else if (document.querySelector('[ng-version]')) {
+      frameworkMarker = 'angular';
     } else if (location.hash && location.hash.startsWith('#/')) {
-      frameworkRouter = 'hash-router';
+      frameworkMarker = 'hash-router';
     }
   }
 
-  const isClientSideRouted = frameworkRouter !== null;
+  // Real navigation interception probe: sample internal links to check whether
+  // clicks trigger client-side routing (preventDefault / pushState) vs real document navigation
+  const sampleLinks = internalLinks.slice(0, 5);
+  let interceptedLinksCount = 0;
+  let defaultPreventedIntercepted = false;
+  let pushStateIntercepted = false;
+
+  for (const link of sampleLinks) {
+    let pushStateCalled = false;
+    const origPush = history.pushState;
+    const origReplace = history.replaceState;
+    try {
+      history.pushState = () => { pushStateCalled = true; };
+      history.replaceState = () => { pushStateCalled = true; };
+      const ev = new MouseEvent('click', { bubbles: true, cancelable: true });
+      link.dispatchEvent(ev);
+      if (ev.defaultPrevented || pushStateCalled) {
+        interceptedLinksCount++;
+        if (ev.defaultPrevented) defaultPreventedIntercepted = true;
+        if (pushStateCalled) pushStateIntercepted = true;
+      }
+    } catch {
+      // ignore dispatch issues
+    } finally {
+      history.pushState = origPush;
+      history.replaceState = origReplace;
+    }
+  }
+
+  let linkNavigationMode = 'none';
+  let isClientSideRouted = false;
+
+  if (sampleLinks.length > 0) {
+    if (interceptedLinksCount === sampleLinks.length) {
+      linkNavigationMode = 'client-intercepted';
+      isClientSideRouted = true;
+    } else if (interceptedLinksCount === 0) {
+      linkNavigationMode = 'document-navigation';
+      isClientSideRouted = false;
+    } else {
+      linkNavigationMode = 'mixed';
+      isClientSideRouted = false;
+    }
+  } else if (frameworkMarker === 'hash-router') {
+    linkNavigationMode = 'hash-router';
+    isClientSideRouted = true;
+  } else if (frameworkMarker && internalLinks.length === 0) {
+    linkNavigationMode = 'framework-isolated';
+    isClientSideRouted = true;
+  }
+
   const prefetchEagerness = Array.from(prefetchSummary.eagerness);
   const prerenderEagerness = Array.from(prerenderSummary.eagerness);
   const allEagerness = Array.from(new Set([...prefetchEagerness, ...prerenderEagerness]));
@@ -292,10 +352,15 @@
     },
     navigationContext: {
       anchorCount: anchors.length,
-      internalLinkCount,
+      internalLinkCount: internalLinks.length,
       externalLinkCount,
+      sampledLinksCount: sampleLinks.length,
+      interceptedLinksCount,
+      linkNavigationMode,
       isClientSideRouted,
-      frameworkRouter,
+      frameworkMarker,
+      defaultPreventedIntercepted,
+      pushStateIntercepted,
     },
     signals: {
       hasSpeculationRules,

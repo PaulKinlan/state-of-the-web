@@ -58,9 +58,11 @@ Evaluated in-page via `node ~/.web-uplift/evidence/cli.mjs evaluate <url> --expr
    - Inspects `performance.getEntriesByType('resource')` for `deliveryType: 'navigational-prefetch'`.
 4. **Legacy Hints**:
    - Inspects `<link rel="prefetch">`, `<link rel="prerender">`, `<link rel="modulepreload">`.
-5. **Navigation Context & Applicability Signals**:
+5. **Navigation Context & Behavioral Applicability Probe**:
    - Counts total, internal, and external `<a href>` links.
-   - Detects Single-Page Application (SPA) client-side routing signatures (Next.js, Nuxt, Remix, SvelteKit, Gatsby, Angular, React SPA, hash routers).
+   - Tests real link click navigation behavior: samples internal links and dispatches bubbling cancelable `click` events to test for client-side router interception (`event.defaultPrevented` and `history.pushState` calls).
+   - Distinguishes server-rendered framework sites (which execute real document navigations) from client-side routed SPAs (which intercept navigation).
+   - Identifies framework presence signatures (Next.js, Nuxt, Remix, SvelteKit, Gatsby, Angular, Vue SSR, React SPA, hash routers).
 
 ### B. Network & HAR Signals (`scripts/speculative_loading.py`)
 
@@ -80,13 +82,15 @@ Parses network HAR / CDP logs:
 ## 4. Scoring & Conformance Rules
 
 - **`pass`**:
-  - Valid Speculation Rules declared via `<script type="speculationrules">` or HTTP headers for likely next navigations (list or document rules), OR active speculative network requests evidenced in HAR/traces.
+  - Valid, actionable Speculation Rules declared via `<script type="speculationrules">` or HTTP headers for likely next navigations (list rules with target URLs or document rules on link-bearing pages), OR active speculative network requests evidenced in HAR/traces.
 - **`not-applicable`**:
   - **Single-Surface View**: The page contains zero navigation links (e.g. isolated tool, calculator, single form, error page).
   - **External Links Only**: The page contains only external links; same-origin Speculation Rules do not apply without cross-origin target opt-in.
-  - **Single-Page Application (SPA)**: The page uses client-side routing (e.g. Next.js, Nuxt, React Router, SvelteKit); internal view transitions do not use document navigations.
+  - **Single-Page Application (SPA)**: The page exhibits verified client-side routed link navigation (internal links intercepted via `preventDefault()` / `pushState()`); internal view transitions do not use document navigations.
+  - **Unmatched Document Rules**: Document rules declared on a page with zero navigation links to match.
 - **`issues`**:
-  - **Missing Speculation Rules**: A multi-page site with internal navigation links does not configure Speculation Rules to prefetch or prerender likely next navigations (or relies solely on legacy hints).
+  - **Missing Speculation Rules**: A multi-page site with internal document navigation links does not configure Speculation Rules to prefetch or prerender likely next navigations (including server-rendered framework sites that execute real document navigations).
+  - **Empty/Inert Ruleset**: Speculation rules script declared with no target URLs or document conditions.
   - **Syntax Error**: Malformed or invalid JSON in `<script type="speculationrules">`.
 - **`blocked`**:
   - Anti-bot interstitial (HTTP 403 / Cloudflare / bot defense) prevented reaching or inspecting representative navigation routes.
