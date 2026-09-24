@@ -14,7 +14,7 @@ The run `2026-07-17T17-27-24-856Z` exhausted its retry queue on 28 July 2026. Th
 | Queued / retry eligible / invalid | **0** | The bounded run has no remaining work |
 | **Total** | **1,000** | Every manifest origin appears exactly once |
 
-Across all targets, the publication retains exactly **58,000 check rows**: 42,752 judged (16,521 pass, 20,799 issues, 5,432 not applicable), 15,209 blocked, and 39 not run. Blocked and partial outcomes are not scores, passes, or inferred not-applicable outcomes. Aggregate outcome observations use only the selection-biased 705-report complete subset.
+Across all targets, the publication retains exactly **58,000 check rows**: 42,752 judged (16,521 pass, 20,799 issues, 5,432 not applicable), 15,248 blocked, and 0 not run. Blocked and partial outcomes are not scores, passes, or inferred not-applicable outcomes. Aggregate outcome observations use only the selection-biased 705-report complete subset.
 
 Browse the [exact 1,000-target inventory](index.html), download the [machine-readable inventory](results/atomic/inventory.json), or read the [final run summary](checkpoint.html).
 
@@ -66,7 +66,17 @@ python3 scripts/reconcile_atomic_run.py \
 python3 scripts/build_atomic_db.py
 python3 scripts/validate_atomic_publication.py --check-local-evidence
 python3 -m unittest scripts/test_reconcile_atomic_run.py
+python3 -m unittest scripts/test_atomic_catalog_pin.py
 ```
+
+The database is built from the catalog `results/atomic/inventory.json` **pins**,
+never from whatever `principles.json` currently holds. The builder verifies the
+pinned file's SHA-256 and recorded shape before reading it, checks that every
+report carries exactly the pinned catalog's `(principle, check)` pairs, derives
+its totals from that generation, and stages the database so a rejected build
+leaves the published one untouched. Reading the working catalog instead mixed
+generations silently: check definitions from a newer catalog beside results
+judged against the older one, with every published total still matching.
 
 `--check-local-evidence` is the full local publication gate: it requires each retained source report to match its canonical SHA-256 and every declared artifact to exist at its exact path beneath the recorded `evidenceRoot`. Omit the flag only in a publication-only clone where the intentionally uncommitted run tree is unavailable.
 
@@ -85,7 +95,12 @@ The publication validator independently checks:
 - evidence/path/finding references and literal coverage counters;
 - with `--check-local-evidence`, exact source-report bytes and physical artifact paths beneath every retained evidence root;
 - exact 705 / 257 / 38 dispositions and zero queue/retry/invalid counts;
-- exactly 58,000 database test rows, 17,000 principle rows, and zero scores.
+- exactly 58,000 database test rows, 17,000 principle rows, and zero scores;
+- database check **identities**, not just totals: the `(principle, check)` pairs
+  defined in the database and present in its results must both equal the pinned
+  catalog's pairs exactly, and every site must carry exactly 58 check rows and
+  17 principle rows. Totals alone cannot distinguish a consistent database from
+  one built across two catalog generations.
 
 ## Modern-web feature evidence (Chrome 134+)
 
@@ -122,10 +137,34 @@ and both directions were observed on live origins:
   infinite` into `animation-timeline: auto` and `container: card / inline-size`
   into `container-type: inline-size`, so name matching would have counted every
   animated page as scroll-driven.
+- **List values are judged per part.** `animation-timeline: auto, none` is two
+  inert values; `animation-timeline: --rail, none` is one real timeline and one
+  inert value. Comparing the whole serialised string to a single token counted
+  the first as usage, so each comma-separated part is judged on its own (a
+  function's own commas do not split the list).
+- **`@view-transition` is judged by its descriptor.** The at-rule only enables
+  cross-document transitions when `navigation` says so; `navigation: none` — and
+  an omitted descriptor, which is initially `none` — is not adoption. The rule's
+  existence is not the signal.
+- **Function names inside strings are text.** `content: "anchor("` is not anchor
+  positioning, so string literals are stripped before looking for `anchor()`.
 
-Filtered values are still reported, under each family's `optedOut`, so an auditor
-can tell *"does not use the feature"* apart from *"explicitly turned it off"* —
-a distinction the catalog needs to choose between `not-applicable` and `issues`.
+Filtered values are still reported, split across two buckets so the report does
+not invent intent:
+
+| Bucket | Meaning |
+| --- | --- |
+| `used` / `usedCount` | Values that actually enable the feature |
+| `optedOut` | Inert values the author appears to have **written** |
+| `inertDefaults` | Inert values the CSSOM **synthesised** from a shorthand |
+
+That split matters: an ordinary `animation:` produces `animation-timeline: auto`
+without the author ever considering scroll-driven animations, so grouping it with
+a hand-written `animation-timeline: none` would report a deliberate opt-out that
+does not exist. **`optedOut` is a hint about intent, never a verdict** — it is
+derived from CSSOM serialisation, and a rule that mixes a shorthand with longhand
+overrides expands every longhand into its text, which makes untouched longhands
+in that rule look authored.
 
 Crawler suite: `python3 -m unittest scripts.test_modern_web_probe`. It drives real
 headless Chrome against `scripts/fixtures/modern-web-features.html` (asserting
@@ -136,13 +175,22 @@ produces no false positive), and `scripts/fixtures/opted-out-features.html`
 profile-cleanup test spawns a real process and asserts it is gone, because a
 mocked `subprocess.run` cannot detect a cleanup command that does not work.
 
+A missing harness **fails** the suite rather than skipping quietly: browser tests
+that silently disappear still print `OK`, so a green run could mean nothing was
+verified. Set `ALLOW_SKIP_BROWSER_TESTS=1` to skip them deliberately (a lint-only
+job, or a machine with no Chrome). `WEB_UPLIFT_CLI` and `CHROME_BIN` override the
+harness locations — the same variables the crawler and the evidence CLI honour.
+
 Probed against real origins, the signal is complementary by design: `airbnb.com`
 shows genuine adoption (88 `view-transition-name` declarations with real values,
 10 anchor-positioning declarations), `scroll-driven-animations.style` reports 19
 live view timelines, and `stripe.com` reports a live `ScrollTimeline` from **zero**
-readable stylesheets. `microsoft.com` reports **no** modern-feature usage: its 30
-tracked declarations are all inert defaults or resets, which is what value-aware
-matching is for.
+readable stylesheets. On `microsoft.com/en-gb` **no modern-feature usage was found
+in the readable CSS**: its ~30 tracked declarations are inert defaults or an
+`all: unset`-style reset, and one of its 21 stylesheets was cross-origin and
+unreadable. That is a bounded capture of one route, not proof the site uses
+nothing — which is exactly why `css.sheets.inaccessible` is reported alongside
+the families.
 
 Known limitation: page JavaScript cannot read cross-origin stylesheets, so the
 probe reports them as `css.sheets.inaccessible` with their URLs (CDN-hosted CSS on

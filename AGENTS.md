@@ -76,14 +76,29 @@ cross-origin stylesheet whose text the page cannot read) as partial CSS evidence
 not as absence of the feature.
 
 Detection is **value-aware** (`matching: "value-aware"` in the report): a
-property counts only when its value enables the feature. `view-transition-name:
-none`, `position-anchor: unset`, and the `animation-timeline: auto` /
-`container-type: inline-size` that ordinary `animation:` and `container:`
-shorthands expand into are all reported under each family's `optedOut`, never as
-usage. When judging, read `families.<name>.used` plus `usedCount` for adoption,
-and `optedOut` to tell a site that does not use a feature apart from one that
-explicitly turned it off — the first is usually `not-applicable`, the second is a
-deliberate decision worth recording.
+property counts only when its value enables the feature. A list value is judged
+per comma-separated part, `@view-transition` is judged by its `navigation`
+descriptor rather than its existence, and a function name inside a string
+literal is text, not a call.
+
+Each family reports three buckets:
+
+- `used` / `usedCount` — values that actually enable the feature. This is the
+  adoption signal.
+- `optedOut` — inert values the author appears to have **written**
+  (`view-transition-name: none`, `position-anchor: unset`,
+  `@view-transition { navigation: none }`).
+- `inertDefaults` — inert values the CSSOM **synthesised** from a shorthand
+  (`animation:` produces `animation-timeline: auto`; `container:` produces
+  `container-type: inline-size`). The author never wrote these.
+
+When judging, read `used`/`usedCount` for adoption. Treat `optedOut` as a hint
+worth reading, **not as proof of intent**: it is derived from CSSOM
+serialisation, and a rule mixing a shorthand with longhand overrides expands
+every longhand into its text, so untouched longhands there look authored. Never
+turn the `optedOut` bucket alone into a verdict, and never read a family's
+absence as proof when `css.sheets.inaccessible` is non-zero — that is partial CSS
+evidence, and the honest outcome is bounded to what was readable.
 
 Then materialise the exact check manifest from `principles.json`, gather the check-specific evidence (including active interactions and representative routes where required), record every check outcome, derive the 17 principle outcomes, and run the coverage validator. Do not use a generic evidence bundle to default untested checks to pass.
 
@@ -177,9 +192,12 @@ The finished bounded run is reconciled into `results/atomic/`, 1,000 static page
 python3 scripts/reconcile_atomic_run.py <run-dir> --catalog <exact-run-catalog.json>
 python3 scripts/build_atomic_db.py
 python3 scripts/validate_atomic_publication.py --check-local-evidence
+python3 -m unittest scripts/test_atomic_catalog_pin.py
 ```
 
 The final inventory is unscored and must preserve complete, exhausted-blocked, and exhausted-partial dispositions exactly.
+
+**The database is built from the catalog the inventory pins**, at `inventory.catalog.path`, never from whatever `principles.json` currently holds. The builder verifies the pinned file's SHA-256 and recorded shape, requires every report to carry exactly the pinned catalog's `(principle, check)` pairs, derives its totals from that generation, and stages the database so a rejected build leaves the published one intact. The publication gate independently compares database check **identities** against the pinned catalog, because totals alone cannot distinguish a consistent database from one built across two catalog generations — a mismatched build still reports 58,000 rows.
 
 ## Important
 

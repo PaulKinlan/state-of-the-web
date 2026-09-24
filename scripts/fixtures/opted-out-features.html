@@ -37,6 +37,28 @@
   .card { container: card / inline-size; }
   @keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
 
+  /* 3. COMMA-SEPARATED LISTS WHERE EVERY PART IS INERT. Two animations means
+        two values per property. Comparing the whole serialised string
+        ("auto, none") to a scalar token never matches, so these read as usage
+        even though nothing is enabled. */
+  .two-animations {
+    animation-timeline: auto, none;
+    animation-range-start: normal, normal;
+    animation-range-end: normal, normal;
+    scroll-timeline-name: none, none;
+    view-timeline-name: none, none;
+  }
+
+  /* 4. CROSS-DOCUMENT VIEW TRANSITIONS EXPLICITLY DISABLED. The at-rule exists,
+        but `navigation: none` is the opt-out; an omitted descriptor is `none`
+        too. The rule's existence is not the signal -- the descriptor is. */
+  @view-transition { navigation: none; }
+
+  /* 5. A FUNCTION NAME INSIDE A STRING LITERAL. This is text content, not a
+        function call. */
+  .literal::before { content: "anchor("; }
+  .literal::after { content: 'anchor-size( is written here'; }
+
   /* A comment mentioning position-area, scroll-state( and ::view-transition
      must not count either. */
 </style>
@@ -48,6 +70,8 @@
     <button class="reset-button" type="button" style="view-transition-name: none">Reset</button>
     <span class="badge">badge</span>
     <section class="card">card</section>
+    <p class="two-animations">two animations, nothing enabled</p>
+    <p class="literal">literal</p>
   </main>
 </body>
 </html>

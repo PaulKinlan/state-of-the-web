@@ -5,8 +5,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
+from collections import Counter
 from pathlib import Path
+
+try:  # invoked as a script, with scripts/ on sys.path
+    from reconcile_atomic_run import expected_catalog, pinned_catalog
+except ModuleNotFoundError:  # imported as scripts.build_atomic_db, e.g. by the test suite
+    from scripts.reconcile_atomic_run import expected_catalog, pinned_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,10 +26,21 @@ def text_value(value):
 
 def build(root: Path, output: Path) -> None:
     inventory = json.loads((root / "results/atomic/inventory.json").read_text(encoding="utf-8"))
-    catalog = json.loads((root / "principles.json").read_text(encoding="utf-8"))
-    if output.exists():
-        output.unlink()
-    connection = sqlite3.connect(output)
+    # Read the catalog the inventory PINNED, never whatever the working tree
+    # holds. Reading `principles.json` unconditionally mixes generations: check
+    # definitions from a newer catalog land beside results judged against the
+    # older one, and every published total still matches.
+    _, catalog, _ = pinned_catalog(root, inventory)
+    principle_ids, catalog_pairs, _ = expected_catalog(catalog)
+    targets = inventory["targets"]
+    errors: list[str] = []
+
+    # Build into a staging file and swap only after validation, so a rejected
+    # build cannot leave the published database missing or half-written.
+    staging = output.with_name(f"{output.name}.staging")
+    if staging.exists():
+        staging.unlink()
+    connection = sqlite3.connect(staging)
     schema = (root / "schemas/schema.sql").read_text(encoding="utf-8")
     schema = "\n".join(line for line in schema.splitlines() if not line.strip().startswith("//"))
     connection.executescript(schema)
@@ -34,8 +52,22 @@ def build(root: Path, output: Path) -> None:
                 (principle["id"], check["id"], check["summary"], check.get("detectableVia")),
             )
 
-    for target in inventory["targets"]:
+    for target in targets:
         report = json.loads((root / target["report"]).read_text(encoding="utf-8"))
+        # Identity, not arithmetic: this site must carry exactly the catalog's
+        # pairs, once each. Counting rows alone cannot tell a complete site from
+        # one missing a check while carrying an unknown extra.
+        recorded_pairs = [(check["principleId"], check["checkId"]) for check in report["checkOutcomes"]]
+        duplicates = sorted({pair for pair, count in Counter(recorded_pairs).items() if count > 1})
+        missing = sorted(catalog_pairs - set(recorded_pairs))
+        unknown = sorted(set(recorded_pairs) - catalog_pairs)
+        if duplicates or missing or unknown:
+            errors.append(
+                f"{target['origin']}: duplicates={duplicates[:3]} missing={missing[:3]} unknown={unknown[:3]}"
+            )
+        recorded_principles = [outcome["principleId"] for outcome in report["principleOutcomes"]]
+        if sorted(recorded_principles) != sorted(principle_ids):
+            errors.append(f"{target['origin']}: principle outcomes do not match the pinned catalog")
         connection.execute(
             """INSERT INTO sites
                (site,source,manifest_position,crux_rank_bucket,disposition,attempts,
@@ -68,7 +100,10 @@ def build(root: Path, output: Path) -> None:
                 ),
             )
         for outcome in report["principleOutcomes"]:
-            rows = checks_by_principle[outcome["principleId"]]
+            # A malformed report must produce the collected diagnostics, not a
+            # KeyError: if a principle recorded no checks the build is already
+            # being rejected, and crashing here would hide why.
+            rows = checks_by_principle.get(outcome["principleId"], [])
             confidence = "high" if all(row.get("confidence") == "high" for row in rows) else (
                 "low" if any(row.get("confidence") == "low" for row in rows) else "medium"
             )
@@ -102,10 +137,53 @@ def build(root: Path, output: Path) -> None:
         "scored_sites": connection.execute("SELECT COUNT(*) FROM sites WHERE overall_score IS NOT NULL").fetchone()[0],
     }
     dispositions = dict(connection.execute("SELECT disposition,COUNT(*) FROM sites GROUP BY disposition"))
+    # Every definition must have results, and every result a definition.
+    orphan_definitions = list(
+        connection.execute(
+            "SELECT principle_id,test_id FROM principle_tests EXCEPT SELECT principle_id,test_id FROM test_results"
+        )
+    )
+    orphan_results = list(
+        connection.execute(
+            "SELECT DISTINCT principle_id,test_id FROM test_results EXCEPT SELECT principle_id,test_id FROM principle_tests"
+        )
+    )
     connection.close()
-    expected = {"sites": 1000, "unique_positions": 1000, "test_results": 58000, "principles": 17000, "scored_sites": 0}
-    if checks != expected or dispositions != {"complete": 705, "exhaustedBlocked": 257, "exhaustedPartial": 38}:
-        raise SystemExit(f"database validation failed: {checks}, {dispositions}")
+
+    # Totals are DERIVED from the selected generation, not hardcoded. For the
+    # July publication these derive to exactly 1000 / 58,000 / 17,000 and
+    # 705 / 257 / 38, so the historical contract is preserved rather than
+    # restated -- and a future generation with a different catalog is checked
+    # against its own shape instead of silently failing this gate.
+    expected = {
+        "sites": len(targets),
+        "unique_positions": len(targets),
+        "test_results": len(targets) * len(catalog_pairs),
+        "principles": len(targets) * len(principle_ids),
+        "scored_sites": 0,
+    }
+    expected_dispositions = dict(Counter(target["disposition"] for target in targets))
+    recorded_counts = inventory.get("counts") or {}
+    for disposition, count in expected_dispositions.items():
+        if disposition in recorded_counts and recorded_counts[disposition] != count:
+            errors.append(
+                f"inventory counts {disposition}={recorded_counts[disposition]} "
+                f"but {count} targets carry it"
+            )
+    if checks != expected:
+        errors.append(f"totals differ: {checks} != {expected}")
+    if dispositions != expected_dispositions:
+        errors.append(f"dispositions differ: {dispositions} != {expected_dispositions}")
+    if orphan_definitions:
+        errors.append(f"catalog checks with no results: {orphan_definitions[:5]}")
+    if orphan_results:
+        errors.append(f"results with no catalog check: {orphan_results[:5]}")
+
+    if errors:
+        staging.unlink(missing_ok=True)
+        raise SystemExit("database validation failed:\n  " + "\n  ".join(errors[:20]))
+
+    os.replace(staging, output)
     print(json.dumps({"database": str(output), **checks, "dispositions": dispositions}, indent=2))
 
 
