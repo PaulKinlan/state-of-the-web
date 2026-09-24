@@ -161,6 +161,19 @@ class CrawlerWiringTest(unittest.TestCase):
             unreadable.write_text('not json')
             self.assertFalse(modern_web_probe.validate_evidence(unreadable)[0])
 
+    def test_published_manifest_parses_with_rank_and_origin(self):
+        """The real manifest is `position,origin,crux_rank_bucket` with a header."""
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import modern_web_probe
+        rows = (ROOT / 'results' / 'atomic' / 'manifest.csv').read_text().splitlines()[:4]
+        entries = modern_web_probe.rows_to_targets([line.split(',') for line in rows])
+        self.assertEqual(len(entries), 3, 'header must be dropped, rows kept')
+        for rank, value in entries:
+            with self.subTest(rank=rank):
+                self.assertIsInstance(rank, int)
+                self.assertTrue(value.startswith('https://'), value)
+        self.assertEqual(entries[0][0], 1)
+
     def test_manifest_rows_keep_rank_and_domain(self):
         """A TSV manifest row must become rank+domain, not one opaque target."""
         sys.path.insert(0, str(ROOT / 'scripts'))
@@ -171,8 +184,52 @@ class CrawlerWiringTest(unittest.TestCase):
             tsv.write_text('1\tweb.dev\n2\twww.example.com\n')
             self.assertEqual(modern_web_probe.load_targets(str(tsv)), [(1, 'web.dev'), (2, 'www.example.com')])
             csv_path = Path(tmp) / 'manifest2.csv'
-            csv_path.write_text('3,example.com\n')
-            self.assertEqual(modern_web_probe.load_targets(str(csv_path)), [(3, 'example.com')])
+            csv_path.write_text('domain\nexample.com\n')
+            self.assertEqual(modern_web_probe.load_targets(str(csv_path)), [(None, 'example.com')])
+
+    def test_timeout_is_recorded_and_chrome_profile_is_killed(self):
+        """One unresponsive target must not kill the crawl or leak Chrome."""
+        import subprocess as sp
+        import tempfile
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import modern_web_probe
+        killed = []
+        original_run = modern_web_probe.subprocess.run
+
+        def fake_run(command, **kwargs):
+            if command[:2] == ['pkill', '-f']:
+                killed.append(command[2])
+                return sp.CompletedProcess(command, 0, '', '')
+            raise sp.TimeoutExpired(command, modern_web_probe.TIMEOUT,
+                                    output='[browser] launching chrome (profile /tmp/web-uplift-cdp-AbC123)')
+
+        modern_web_probe.subprocess.run = fake_run
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                exit_code, detail = modern_web_probe.evaluate_target('https://example.com/', Path(tmp) / 'out.json')
+        finally:
+            modern_web_probe.subprocess.run = original_run
+        self.assertEqual(exit_code, 124)
+        self.assertIn('timeout', detail)
+        self.assertEqual(killed, ['--user-data-dir=/tmp/web-uplift-cdp-AbC123'])
+
+    def test_failed_probe_writes_failure_evidence_and_marks_not_ok(self):
+        """Fail-closed: a target with no usable evidence is recorded as a failure."""
+        import tempfile
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import modern_web_probe
+        original = modern_web_probe.evaluate_target
+        modern_web_probe.evaluate_target = lambda url, out: (0, '')
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                item = modern_web_probe.probe(7, 'broken.example', Path(tmp))
+                recorded = json.loads(Path(item['out']).read_text())
+        finally:
+            modern_web_probe.evaluate_target = original
+        self.assertFalse(item['ok'])
+        self.assertTrue(item['failure'])
+        self.assertIs(recorded['ok'], False)
+        self.assertEqual(recorded['url'], 'https://broken.example/')
 
     def test_probe_is_valid_javascript(self):
         result = subprocess.run(['node', '--check', str(PROBE)], capture_output=True, text=True, timeout=60)

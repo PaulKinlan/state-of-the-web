@@ -19,14 +19,18 @@ This runner does the same thing over a URL or a site list, resumably:
 
 Exit code is non-zero when any target failed to produce evidence, so it can be
 used as a collection gate. Absent evidence is never recorded as a pass: a failed
-target stays absent (or is recorded with `ok: false`) for the auditor to judge as
+target is recorded with `ok: false` and a reason for the auditor to judge as
 `blocked`/`not-run`.
+
+Environment: `WEB_UPLIFT_CLI` (evidence CLI path), `PROBE_TIMEOUT` (per-target
+seconds, default 180), `PROBE_WAIT` (page settle ms, default 3000).
 """
 from __future__ import annotations
 
 import csv
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -57,6 +61,39 @@ def url_for(value: str) -> str:
     return f'https://{value}/'
 
 
+RANK_HEADERS = ('position', 'rank', 'index')
+TARGET_HEADERS = ('origin', 'domain', 'url', 'site')
+
+
+def rows_to_targets(rows: list[list[str]]) -> list[tuple[int | None, str]]:
+    """Map manifest rows to (rank, target), honouring a named header when present.
+
+    `results/atomic/manifest.csv` is `position,origin,crux_rank_bucket`: a parser
+    that ignores the header turns every row into an invalid URL.
+    """
+    rows = [row for row in rows if row and any(str(cell).strip() for cell in row)]
+    if not rows:
+        return []
+    header = [str(cell).strip().lower() for cell in rows[0]]
+    rank_index = next((index for index, cell in enumerate(header) if cell in RANK_HEADERS), None)
+    target_index = next((index for index, cell in enumerate(header) if cell in TARGET_HEADERS), None)
+    if target_index is None:
+        return [target(' '.join(str(cell) for cell in row)) for row in rows]
+    entries: list[tuple[int | None, str]] = []
+    for row in rows[1:]:
+        if target_index >= len(row):
+            continue
+        value = str(row[target_index]).strip()
+        if not value:
+            continue
+        rank = None
+        if rank_index is not None and rank_index < len(row):
+            cell = str(row[rank_index]).strip()
+            rank = int(cell) if cell.isdigit() else None
+        entries.append((rank, value))
+    return entries
+
+
 def load_targets(source: str) -> list[tuple[int | None, str]]:
     path = Path(source)
     if not path.exists() or source.startswith(('http://', 'https://', 'file://')):
@@ -67,7 +104,7 @@ def load_targets(source: str) -> list[tuple[int | None, str]]:
         entries = payload.get('targets', []) if isinstance(payload, dict) else payload
         return [target(str(entry.get('url') or entry.get('domain')) if isinstance(entry, dict) else str(entry)) for entry in entries]
     rows = list(csv.reader(text.splitlines())) if path.suffix == '.csv' else [line.split() for line in text.splitlines()]
-    return [target(' '.join(str(cell) for cell in row)) for row in rows if row and any(str(cell).strip() for cell in row)]
+    return rows_to_targets(rows)
 
 
 def validate_evidence(path: Path) -> tuple[bool, str]:
@@ -96,31 +133,47 @@ def slug(value: str) -> str:
     return ''.join(character if character.isalnum() or character in '.-' else '-' for character in value.lower()).strip('-')
 
 
+def evaluate_target(url: str, out: Path) -> tuple[int, str]:
+    """Run the probe once, bounded and leak-free.
+
+    A single unresponsive page must not kill the crawl: the timeout is caught,
+    recorded as a failure, and the uniquely named Chrome profile from this
+    invocation is killed so it cannot hold the port open (same discipline as the
+    recon crawler).
+    """
+    command = ['node', str(CLI), 'evaluate', url, '--wait', str(WAIT), '--expr-file', str(PROBE), '--out', str(out)]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=TIMEOUT)
+        return result.returncode, (result.stderr or '')[-2000:]
+    except subprocess.TimeoutExpired as exc:
+        def text(value):
+            if isinstance(value, bytes):
+                return value.decode(errors='replace')
+            return value or ''
+        output = text(exc.stdout) + text(exc.stderr)
+        for profile in set(re.findall(r'/tmp/web-uplift-cdp-[A-Za-z0-9_-]+', output)):
+            subprocess.run(['pkill', '-f', f'--user-data-dir={profile}'], capture_output=True)
+        return 124, f'timeout after {TIMEOUT}s'
+
+
 def probe(rank: int | None, value: str, out_dir: Path) -> dict:
     url = url_for(value)
     out = out_dir / slug(value) / 'modern-web-features.json'
     if out.exists():
-        try:
-            valid, detail = validate_evidence(out)
-            if valid:
-                return {'rank': rank, 'target': value, 'url': url, 'finalUrl': detail, 'out': str(out), 'ok': True, 'cached': True}
-        except Exception:
-            pass
+        valid, detail = validate_evidence(out)
+        if valid:
+            return {'rank': rank, 'target': value, 'url': url, 'finalUrl': detail, 'out': str(out), 'ok': True, 'cached': True}
     out.parent.mkdir(parents=True, exist_ok=True)
     started = time.time()
-    result = subprocess.run(
-        ['node', str(CLI), 'evaluate', url, '--wait', str(WAIT), '--expr-file', str(PROBE), '--out', str(out), '--quiet'],
-        capture_output=True,
-        text=True,
-        timeout=TIMEOUT,
-    )
-    ok, detail = validate_evidence(out) if out.exists() else (False, f'no evidence written (exit {result.returncode})')
-    if result.returncode != 0:
-        ok, detail = False, detail if out.exists() else f'exit {result.returncode}: {(result.stderr or "").strip()[-200:]}'
+    exit_code, stderr = evaluate_target(url, out)
+    if exit_code != 0 or not out.exists():
+        ok, detail = False, f'exit {exit_code}' if exit_code != 0 else 'no evidence written'
+    else:
+        ok, detail = validate_evidence(out)
     if not ok:
         out.write_text(json.dumps({'probe': 'modern-web-features', 'ok': False, 'url': url,
-                                   'error': detail, 'exitCode': result.returncode,
-                                   'stderr': (result.stderr or '')[-2000:]}, indent=2) + '\n')
+                                   'error': detail, 'exitCode': exit_code,
+                                   'stderr': stderr}, indent=2) + '\n')
     return {'rank': rank, 'target': value, 'url': url, 'finalUrl': detail if ok else None, 'out': str(out),
             'ok': ok, 'failure': None if ok else detail, 'durationSeconds': round(time.time() - started, 2)}
 
