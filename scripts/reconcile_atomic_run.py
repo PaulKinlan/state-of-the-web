@@ -369,10 +369,16 @@ def reconcile(run_dir: Path, catalog_path: Path, root: Path = ROOT) -> dict:
         if canonical_origin(origin) != canonical_origin(record["url"]):
             raise SystemExit(f"position {position}: manifest/status URL mismatch: {origin!r} != {record['url']!r}")
         source_report = Path(record["latestReport"])
+        if not source_report.is_absolute():
+            source_report = (run_dir / source_report).resolve()
         try:
-            source_relative = source_report.resolve().relative_to(root)
-        except ValueError as error:
-            raise SystemExit(f"position {position}: report is outside repository: {source_report}") from error
+            source_relative = source_report.resolve().relative_to(root.resolve())
+        except ValueError:
+            try:
+                rel_to_run = source_report.resolve().relative_to(run_dir.resolve())
+                source_relative = Path("runs") / run_dir.name / rel_to_run
+            except ValueError as error:
+                raise SystemExit(f"position {position}: report is outside repository: {source_report}") from error
         report_bytes = source_report.read_bytes()
         report = json.loads(report_bytes)
         if canonical_origin(report.get("url", "")) != canonical_origin(origin):
