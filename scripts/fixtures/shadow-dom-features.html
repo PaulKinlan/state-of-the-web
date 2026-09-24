@@ -1,0 +1,66 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Shadow DOM feature probe fixture</title>
+<h1>Shadow DOM feature probe fixture</h1>
+<p id="status"></p>
+<div id="host"></div>
+<div id="peer"></div>
+<script>
+  // No tracked declarations live in document CSS. Each URL fragment selects
+  // an independent source so one working source cannot mask another's failure.
+  const mode = location.hash.slice(1) || 'sheet';
+  document.querySelector('#status').textContent = `Source: ${mode}`;
+  const active = `
+    anchor-name: --shadow-anchor;
+    view-transition-name: shadow-title;
+    animation-timeline: scroll();
+    container-type: scroll-state;
+    scroll-snap-type: x mandatory;
+  `;
+  const inert = `
+    anchor-name: none;
+    view-transition-name: none;
+    animation-timeline: auto, none;
+    container-type: normal;
+    scroll-snap-type: none;
+  `;
+  const root = document.querySelector('#host').attachShadow({ mode: mode === 'closed' ? 'closed' : 'open' });
+  const addSubject = target => {
+    const subject = document.createElement('p');
+    subject.className = 'subject';
+    subject.textContent = `Feature declarations are inside this ${mode} component.`;
+    target.append(subject);
+    return subject;
+  };
+  const addSheet = (target, text) => {
+    const style = document.createElement('style');
+    style.textContent = text;
+    target.append(style);
+  };
+  const rule = `.subject { ${active} }`;
+  if (mode === 'nested') {
+    const nestedHost = document.createElement('div');
+    root.append(nestedHost);
+    const nestedRoot = nestedHost.attachShadow({ mode: 'open' });
+    addSubject(nestedRoot);
+    addSheet(nestedRoot, rule);
+  } else if (mode === 'adopted' || mode === 'shared') {
+    const sheet = new CSSStyleSheet();
+    sheet.replaceSync(rule);
+    root.adoptedStyleSheets = [sheet];
+    addSubject(root);
+    if (mode === 'shared') {
+      const otherRoot = document.querySelector('#peer').attachShadow({ mode: 'open' });
+      otherRoot.adoptedStyleSheets = [sheet];
+      addSubject(otherRoot);
+      // The same CSSStyleSheet can be adopted in the document and both roots.
+      document.adoptedStyleSheets = [sheet];
+    }
+  } else if (mode === 'inline' || mode === 'inert') {
+    addSubject(root).setAttribute('style', mode === 'inline' ? active : inert);
+    if (mode === 'inert') addSheet(root, `.subject { ${inert} }`);
+  } else {
+    addSubject(root);
+    addSheet(root, rule);
+  }
+</script>

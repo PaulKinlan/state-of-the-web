@@ -73,6 +73,17 @@ class ModernWebCollectionTest(unittest.TestCase):
             self.assertEqual(json.loads(Path(artifact).read_text())['url'], report['url'])
             self.assertEqual(report['artifact'], artifact)
 
+    def test_collect_modern_web_retains_nested_shadow_evidence(self):
+        fixture = FIXTURE.with_name('shadow-dom-features.html').as_uri() + '#nested'
+        with temp_cwd():
+            report, artifact = audit_runner2.collect_modern_web('shadow.test', fixture)
+            self.assertTrue(report.get('ok'), report)
+            self.assertEqual(report['css']['scope']['openShadowRootsScanned'], 2)
+            for family in FAMILIES:
+                self.assertTrue(report['css']['families'][family]['used'], family)
+            on_disk = json.loads(Path(artifact).read_text())
+            self.assertEqual(on_disk['css'], report['css'])
+
     def test_collect_modern_web_fails_closed_when_the_page_never_loads(self):
         """No usable evidence must never come back looking like a measurement."""
         missing = (FIXTURE.parent / 'does-not-exist.html').as_uri()
