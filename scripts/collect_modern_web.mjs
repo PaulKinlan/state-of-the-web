@@ -36,7 +36,7 @@ function sourceUrl(value) {
   }
 }
 
-async function collect(client, url, expression, wait, navigate, evaluate, log) {
+export async function collect(client, url, expression, wait, navigate, evaluate, log) {
   await client.Network.enable({
     maxResourceBufferSize: LIMITS.perScriptBytes,
     maxTotalBufferSize: LIMITS.totalBytes,
@@ -149,7 +149,7 @@ async function collect(client, url, expression, wait, navigate, evaluate, log) {
   return report;
 }
 
-try {
+async function main() {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
@@ -171,7 +171,13 @@ try {
   const text = JSON.stringify(report, null, 2) + '\n';
   if (values.out) writeFileSync(values.out, text);
   process.stdout.write(text);
-} catch (error) {
-  console.error(error.message);
-  process.exitCode = 1;
+}
+
+if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
+  try {
+    await main();
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
+  }
 }

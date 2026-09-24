@@ -6,8 +6,11 @@ Read [AGENTS.md](AGENTS.md) for the audit workflow and evidence limits. The
 modern-web CSS probe covers the document and nested open shadow roots, including
 ordinary/adopted stylesheets and inline styles. `css.scope` records inspected
 roots; closed roots and iframe documents are not inspected. Shared constructed
-stylesheets count once. External script bundles remain uninspected, and
-inaccessible CSS is partial evidence, never proof of absence.
+stylesheets count once. The crawlers' `collect_modern_web.mjs` also reads
+bounded, already-loaded external script bodies through CDP; its literal API-name
+references are not runtime use or CSS adoption. Read `scriptInspection.partial`
+and the limits in AGENTS.md. Inaccessible CSS and omitted/unreadable scripts
+are partial evidence, never proof of absence.
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->
 ## Beads Issue Tracker

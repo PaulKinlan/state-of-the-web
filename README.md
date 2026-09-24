@@ -212,8 +212,35 @@ The CSS probe walks the document and nested **open shadow roots**, inspecting
 stylesheets are counted once, not per adoption. `css.scope` records the inspected
 root counts and uninspected closed-root/iframe scopes. The
 `shadow-dom-features.html` fixture tests each source independently, nested roots,
-shared sheets, inert values, and the closed-root limit. Script-text inspection
-still covers document inline scripts only, not external bundles.
+shared sheets, inert values, and the closed-root limit. The direct CSS expression
+reads document inline script text only; both crawlers additionally use the
+shared CDP collector for external script sources.
+
+### External script evidence
+
+```bash
+node scripts/collect_modern_web.mjs https://example.com/ --out /tmp/modern-web.json
+python3 -m unittest scripts.test_external_scripts -v
+```
+
+The collector runs the CSS expression and reads already-loaded Script response
+bodies in the **same navigation**, using web-uplift's raw-CDP harness. It does not
+fetch URLs again, run synchronous XHR, or patch page APIs. Limits: 32 requests,
+1 MiB per decoded script, 4 MiB total, five seconds of body reading. CDP response
+buffers are also bounded. Failures, blocked responses, evictions, unfinished
+loads and budget omissions remain visible in `scriptInspection`; `partial`
+means a negative reference result is incomplete evidence. The scope is the top
+frame through navigation and settling, not workers, child frames or later
+interactions. Bodies, URL credentials and query strings are not retained.
+
+`viewTransitions.apiReferencedInExternalScript` means only that inspected text
+contains `startViewTransition` — comments, strings and dead code can match.
+`runtimeUsage: "not-measured"` is explicit; neither the text hit nor browser API
+availability establishes adoption or changes the CSS-family usage buckets.
+Missing harnesses and failed navigation fail closed. `WEB_UPLIFT_CLI` selects the
+harness (its sibling `cdp.mjs` is required); `CHROME_BIN` selects Chrome. The
+resumable crawler refreshes old CSS-only artifacts in its chosen output folder
+rather than silently reusing them as external-script evidence.
 
 Known limitation: page JavaScript cannot read cross-origin stylesheets, so the
 probe reports them as `css.sheets.inaccessible` with their URLs (CDN-hosted CSS on
