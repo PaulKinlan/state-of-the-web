@@ -80,8 +80,23 @@ roots**: their `styleSheets`, `adoptedStyleSheets`, and inline styles. A shared
 constructed stylesheet is counted once, not once per adoption. `css.scope`
 reports inspected roots and the uninspected closed-shadow-root/iframe scopes;
 closed roots cannot be discovered through `element.shadowRoot`. The script-text
-signal still reads document inline scripts only, not external bundles. Do not
-interpret a negative signal as whole-page absence across these blind spots.
+signal in that direct expression reads document inline scripts only. The
+crawler also runs `scripts/collect_modern_web.mjs`, which inspects external
+Script response bodies from the same navigation through CDP, without issuing
+new requests. For the combined evidence on a representative route, run:
+
+```bash
+node scripts/collect_modern_web.mjs <url> --out evidence/<site>/modern-web-features.json
+```
+
+`scriptInspection` records inspected, unreadable and omitted sources. It caps
+collection at 32 script requests, 1 MiB per decoded body, 4 MiB total, and a
+5-second body-reading window. Only the top frame's navigation/settle window is
+covered, not workers, child frames or subsequent interactions. Source bodies
+and query strings are not retained. `apiReferencedInExternalScript` is a literal
+name match, including comments, strings and dead code; `runtimeUsage` remains
+`not-measured`. Never promote such references to runtime use or CSS-family
+adoption. A partial capture or negative signal is not whole-page absence.
 
 Detection is **value-aware** (`matching: "value-aware"` in the report): a
 property counts only when its value enables the feature. A list value is judged

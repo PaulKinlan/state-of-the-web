@@ -313,7 +313,7 @@ class CrawlerWiringTest(unittest.TestCase):
     def test_crawler_runs_the_modern_web_probe(self):
         source = CRAWLER.read_text()
         self.assertIn('modern-web-features.js', source, 'crawler does not run the modern-web probe')
-        self.assertIn("'evaluate'", source.replace('"', "'"), 'crawler does not use the evaluate primitive')
+        self.assertIn('collect_modern_web.mjs', source, 'crawler does not use the shared CDP collector')
 
     def test_crawler_accumulates_ordered_results_and_exits_nonzero_on_failure(self):
         source = CRAWLER.read_text()

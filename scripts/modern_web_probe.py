@@ -12,7 +12,11 @@ test can be run by the model on any representative route during an atomic audit:
       --expr-file scripts/probes/modern-web-features.js \\
       --out evidence/<site>/modern-web-features.json
 
-This runner does the same thing over a URL or a site list, resumably:
+That direct expression is a CSS/inline-script snapshot. This runner also uses
+collect_modern_web.mjs to inspect bounded, already-loaded external script bodies
+via CDP in the same navigation, without re-requesting URLs. Text references are
+not runtime usage, and unreadable/over-budget sources remain explicit.
+It accepts a URL or site list, resumably:
 
     python3 scripts/modern_web_probe.py https://example.com/
     python3 scripts/modern_web_probe.py results/atomic/manifest.csv --out /tmp/modernweb
@@ -40,6 +44,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PROBE = ROOT / 'scripts' / 'probes' / 'modern-web-features.js'
+COLLECTOR = ROOT / 'scripts' / 'collect_modern_web.mjs'
 CLI = Path(os.environ.get('WEB_UPLIFT_CLI', Path.home() / '.web-uplift' / 'evidence' / 'cli.mjs'))
 TIMEOUT = int(os.environ.get('PROBE_TIMEOUT', '180'))
 # Real sites need to settle before CSSOM/animations are meaningful.
@@ -156,7 +161,8 @@ def evaluate_target(url: str, out: Path) -> tuple[int, str]:
     invocation is killed so it cannot hold the port open (same discipline as the
     recon crawler).
     """
-    command = ['node', str(CLI), 'evaluate', url, '--wait', str(WAIT), '--expr-file', str(PROBE), '--out', str(out)]
+    command = ['node', str(COLLECTOR), url, '--harness', str(CLI),
+               '--wait', str(WAIT), '--expr-file', str(PROBE), '--out', str(out)]
     try:
         result = subprocess.run(command, capture_output=True, text=True, timeout=TIMEOUT)
         return result.returncode, (result.stderr or '')[-2000:]
@@ -176,7 +182,9 @@ def probe(rank: int | None, value: str, out_dir: Path) -> dict:
     out = out_dir / slug(value) / 'modern-web-features.json'
     if out.exists():
         valid, detail = validate_evidence(out)
-        if valid:
+        # Old CSS-only artifacts cannot stand in for the newly requested script
+        # inspection. Keep published reports untouched; refresh only this output.
+        if valid and json.loads(out.read_text()).get('scriptInspection', {}).get('version') == 1:
             return {'rank': rank, 'target': value, 'url': url, 'finalUrl': detail, 'out': str(out), 'ok': True, 'cached': True}
     out.parent.mkdir(parents=True, exist_ok=True)
     started = time.time()
