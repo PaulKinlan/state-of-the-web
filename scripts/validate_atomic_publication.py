@@ -28,19 +28,12 @@ def path_beneath_root(root: Path, value: object) -> Path | None:
     relative = Path(value)
     if relative.is_absolute():
         return None
-    for base in (root, root.parent.parent / "state-of-the-web", Path("/home/paulkinlan/state-of-the-web")):
-        if not base.is_dir():
-            continue
-        target = base / relative
-        if not target.exists():
-            continue
-        resolved = target.resolve()
-        try:
-            resolved.relative_to(base.resolve())
-            return resolved
-        except ValueError:
-            continue
-    return None
+    resolved = (root / relative).resolve()
+    try:
+        resolved.relative_to(root.resolve())
+    except ValueError:
+        return None
+    return resolved
 
 
 def validate(root: Path, check_db: bool = True, check_local_evidence: bool = False) -> dict:

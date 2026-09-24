@@ -14,7 +14,7 @@ The run `2026-07-17T17-27-24-856Z` exhausted its retry queue on 28 July 2026. Th
 | Queued / retry eligible / invalid | **0** | The bounded run has no remaining work |
 | **Total** | **1,000** | Every manifest origin appears exactly once |
 
-Across all targets, the publication retains exactly **58,000 check rows**: 42,752 judged (16,521 pass, 20,799 issues, 5,432 not applicable), 15,209 blocked, and 39 not run. Blocked and partial outcomes are not scores, passes, or inferred not-applicable outcomes. Aggregate outcome observations use only the selection-biased 705-report complete subset.
+Across all targets, the publication retains exactly **58,000 check rows**: 42,752 judged (16,521 pass, 20,799 issues, 5,432 not applicable), 15,248 blocked, and 0 not run. Blocked and partial outcomes are not scores, passes, or inferred not-applicable outcomes. Aggregate outcome observations use only the selection-biased 705-report complete subset.
 
 Browse the [exact 1,000-target inventory](index.html), download the [machine-readable inventory](results/atomic/inventory.json), or read the [final run summary](checkpoint.html).
 
