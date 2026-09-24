@@ -11,11 +11,17 @@ network is required:
 """
 from __future__ import annotations
 
+import shutil
+
 import contextlib
 import json
 import os
+import socket
+import subprocess
 import sys
 import tempfile
+import threading
+import time
 import unittest
 from pathlib import Path
 
@@ -76,6 +82,80 @@ class ModernWebCollectionTest(unittest.TestCase):
             self.assertTrue(report.get('error'), 'failure must carry a reason')
             self.assertIn('navigation failed', report['error'])
             self.assertEqual(report['artifact'], artifact)
+            on_disk = json.loads(Path(artifact).read_text())
+            self.assertIs(on_disk['ok'], False, 'the artifact on disk still claims success')
+            self.assertIn('navigation failed', on_disk['error'])
+            self.assertEqual(on_disk['url'], missing)
+
+    def test_stale_artifact_is_replaced_not_read_back(self):
+        """A leftover success from an earlier run must never be reported as this one."""
+        missing = (FIXTURE.parent / 'does-not-exist.html').as_uri()
+        with temp_cwd() as tmp:
+            artifact = Path(tmp) / 'evidence' / 'stale.test' / 'modern-web-features.json'
+            artifact.parent.mkdir(parents=True)
+            artifact.write_text(json.dumps({'probe': 'modern-web-features', 'ok': True,
+                                            'url': 'https://stale.example/', 'css': {'families': {}}}))
+            report, artifact_path = audit_runner2.collect_modern_web('stale.test', missing)
+            on_disk = json.loads(Path(artifact_path).read_text())
+        self.assertIs(report.get('ok'), False)
+        self.assertIsNot(on_disk.get('ok'), True, 'stale success survived the failed run')
+        self.assertIn('navigation failed', on_disk['error'])
+        self.assertNotIn('stale.example', json.dumps(on_disk))
+
+    def test_timeout_writes_a_failure_artifact(self):
+        """A hung page must produce a failure payload on disk, not silence."""
+        server = StallingServer()
+        original_timeout = audit_runner2.PROBE_TIMEOUT
+        audit_runner2.PROBE_TIMEOUT = 6
+        try:
+            with temp_cwd():
+                report, artifact = audit_runner2.collect_modern_web('stall.test', server.url)
+                on_disk = json.loads(Path(artifact).read_text())
+        finally:
+            audit_runner2.PROBE_TIMEOUT = original_timeout
+            server.close()
+        self.assertIs(report.get('ok'), False)
+        self.assertIn('timed out', report['error'])
+        self.assertIs(on_disk['ok'], False)
+        self.assertIn('timed out', on_disk['error'])
+        self.assertEqual(on_disk['url'], server.url)
+
+    def test_nonzero_exit_is_a_failure_even_if_an_artifact_exists(self):
+        """A CLI that fails must not be able to leave a success behind."""
+        with temp_cwd() as tmp:
+            broken = Path(tmp) / 'broken-probe.js'
+            broken.write_text('this is not valid javascript (')
+            original_probe = audit_runner2.MODERN_WEB_PROBE
+            audit_runner2.MODERN_WEB_PROBE = str(broken)
+            try:
+                report, artifact = audit_runner2.collect_modern_web('broken.test', FIXTURE.as_uri())
+                on_disk = json.loads(Path(artifact).read_text())
+            finally:
+                audit_runner2.MODERN_WEB_PROBE = original_probe
+        self.assertIs(report.get('ok'), False, report)
+        self.assertIn('exited', report['error'])
+        self.assertIs(on_disk['ok'], False)
+
+    def test_kill_profile_terminates_the_real_process_and_removes_the_directory(self):
+        """Real cleanup, not a recorded argv shape."""
+        profile_dir = Path(tempfile.mkdtemp(prefix='web-uplift-cdp-TimeoutTest'))
+        victim = subprocess.Popen(['bash', '-c', 'sleep 300; exit 0', f'--user-data-dir={profile_dir}'])
+        try:
+            killed = audit_runner2.kill_profile(f'[browser] launching chrome (profile {profile_dir})')
+            deadline = time.time() + 5
+            while victim.poll() is None and time.time() < deadline:
+                time.sleep(0.1)
+            survived = victim.poll() is None
+        finally:
+            if victim.poll() is None:
+                victim.kill()
+                victim.wait(timeout=10)
+            shutil.rmtree(profile_dir, ignore_errors=True)
+        self.assertEqual(killed, [str(profile_dir)])
+        self.assertFalse(survived, 'timed-out Chrome profile process was not killed')
+
+    def test_kill_profile_ignores_output_without_a_profile(self):
+        self.assertEqual(audit_runner2.kill_profile('nothing to see here'), [])
 
     def test_mode1_record_carries_modern_web_evidence(self):
         """The end-to-end assertion: a Mode 1 site record includes the probe."""
@@ -106,6 +186,40 @@ class ModernWebCollectionTest(unittest.TestCase):
             audit_runner2.collect_modern_web = original_collect
             audit_runner2.run_evidence = original_run
         self.assertEqual(calls, [('example.com', 'https://www.example.com/')])
+
+
+class StallingServer:
+    """Accepts connections and never replies, so a navigation hangs."""
+
+    def __init__(self):
+        self.socket = socket.socket()
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.socket.bind(('127.0.0.1', 0))
+        self.socket.listen(5)
+        self.url = f'http://127.0.0.1:{self.socket.getsockname()[1]}/stall'
+        self.held = []
+        self.running = True
+        threading.Thread(target=self._accept, daemon=True).start()
+
+    def _accept(self):
+        while self.running:
+            try:
+                connection, _ = self.socket.accept()
+                self.held.append(connection)
+            except OSError:
+                return
+
+    def close(self):
+        self.running = False
+        for connection in self.held:
+            try:
+                connection.close()
+            except OSError:
+                pass
+        try:
+            self.socket.close()
+        except OSError:
+            pass
 
 
 if __name__ == '__main__':

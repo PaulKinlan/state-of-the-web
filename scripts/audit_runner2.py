@@ -16,12 +16,14 @@ features, instead of a sweep completing while they silently stay unmeasured.
 
 Usage: python3 scripts/audit_runner2.py <site-list> [start-index] [count]
 """
-import json, os, re, subprocess, sys, time
+import json, os, re, shutil, subprocess, sys, time
+from pathlib import Path
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 EVIDENCE_CLI = os.path.expanduser("~/.web-uplift/evidence/cli.mjs")
 MODERN_WEB_PROBE = os.path.join(ROOT, "probes", "modern-web-features.js")
 EVIDENCE_TIMEOUT = int(os.environ.get("AUDIT_EVIDENCE_TIMEOUT", "90"))
+PROBE_TIMEOUT = int(os.environ.get("AUDIT_PROBE_TIMEOUT", str(EVIDENCE_TIMEOUT)))
 # Real pages need to settle before CSSOM and running animation timelines are
 # meaningful; the fixture suite runs without it.
 PROBE_WAIT_MS = int(os.environ.get("AUDIT_PROBE_WAIT", "3000"))
@@ -56,6 +58,25 @@ def safe_name(domain):
     return re.sub(r'[^A-Za-z0-9.-]+', '-', domain).strip('-') or 'site'
 
 
+def kill_profile(output):
+    """Kill and remove the Chrome profile a timed-out invocation launched.
+
+    The CLI cannot clean up after itself here: cdp.mjs removes the profile
+    directory on normal exit and handles SIGINT/SIGTERM/SIGHUP, but a timed-out
+    call is SIGKILLed (no handler runs) and leaves headless Chrome plus its
+    ~2 MB profile behind. Only the uniquely named profile(s) named in this
+    invocation's output are touched.
+
+    `pkill -f` parses a leading `--` as an option and exits 2 without signalling
+    anything, so the pattern must follow an explicit end-of-options marker.
+    """
+    profiles = sorted(set(re.findall(r'/tmp/web-uplift-cdp-[A-Za-z0-9_-]+', output or '')))
+    for profile in profiles:
+        subprocess.run(['pkill', '-f', '--', f'--user-data-dir={profile}'], capture_output=True)
+        shutil.rmtree(profile, ignore_errors=True)
+    return profiles
+
+
 def collect_modern_web(domain, url):
     """Run the modern-web feature probe for one site.
 
@@ -63,29 +84,47 @@ def collect_modern_web(domain, url):
     nothing, reported an unsupported result, or evaluated on Chrome's error page
     comes back as ``ok: False`` with the reason, because absent evidence must
     never be mistaken for "the site does not use these features".
+
+    The artifact on disk is the evidence a later reader trusts, so it is written
+    for failures too, and any artifact from an earlier run is removed first so a
+    stale success can never be read back as this run's result.
     """
     artifact = os.path.join("evidence", safe_name(domain), "modern-web-features.json")
-    os.makedirs(os.path.dirname(artifact), exist_ok=True)
+    artifact_path = Path(artifact)
+    artifact_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def failure(reason):
+        payload = {"probe": "modern-web-features", "ok": False, "url": url,
+                   "error": reason, "artifact": artifact}
+        artifact_path.write_text(json.dumps(payload, indent=2) + "\n")
+        return payload, artifact
+
+    artifact_path.unlink(missing_ok=True)
+
     args = ["node", EVIDENCE_CLI, "evaluate", url,
             "--wait", str(PROBE_WAIT_MS),
             "--expr-file", MODERN_WEB_PROBE,
             "--out", artifact]
 
-    def failure(reason):
-        return {"probe": "modern-web-features", "ok": False, "url": url,
-                "error": reason, "artifact": artifact}, artifact
+    def captured(value):
+        return value.decode(errors="replace") if isinstance(value, bytes) else (value or "")
 
     try:
-        subprocess.run(args, capture_output=True, text=True, timeout=max(EVIDENCE_TIMEOUT, 2 * PROBE_WAIT_MS // 1000 + 60))
-    except subprocess.TimeoutExpired:
-        return failure(f"probe timed out after {EVIDENCE_TIMEOUT}s")
+        result = subprocess.run(args, capture_output=True, text=True, timeout=PROBE_TIMEOUT)
+        returncode = result.returncode
+        output = captured(result.stdout) + captured(result.stderr)
+    except subprocess.TimeoutExpired as exc:
+        kill_profile(captured(exc.stdout) + captured(exc.stderr))
+        return failure(f"probe timed out after {PROBE_TIMEOUT}s")
     except Exception as e:
         return failure(f"{type(e).__name__}: {e}")
 
-    if not os.path.exists(artifact):
+    if returncode != 0:
+        return failure(f"probe exited {returncode}: {output.strip()[-200:]}")
+    if not artifact_path.exists():
         return failure("probe wrote no evidence")
     try:
-        with open(artifact) as handle:
+        with artifact_path.open() as handle:
             report = json.load(handle)
     except Exception as e:
         return failure(f"unreadable evidence: {type(e).__name__}: {e}")
