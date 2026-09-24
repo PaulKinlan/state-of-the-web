@@ -22,6 +22,7 @@ from pathlib import Path
 ROOT = os.path.dirname(os.path.abspath(__file__))
 EVIDENCE_CLI = os.path.expanduser("~/.web-uplift/evidence/cli.mjs")
 MODERN_WEB_PROBE = os.path.join(ROOT, "probes", "modern-web-features.js")
+MODERN_WEB_COLLECTOR = os.path.join(ROOT, "collect_modern_web.mjs")
 EVIDENCE_TIMEOUT = int(os.environ.get("AUDIT_EVIDENCE_TIMEOUT", "90"))
 PROBE_TIMEOUT = int(os.environ.get("AUDIT_PROBE_TIMEOUT", str(EVIDENCE_TIMEOUT)))
 # Real pages need to settle before CSSOM and running animation timelines are
@@ -101,7 +102,7 @@ def collect_modern_web(domain, url):
 
     artifact_path.unlink(missing_ok=True)
 
-    args = ["node", EVIDENCE_CLI, "evaluate", url,
+    args = ["node", MODERN_WEB_COLLECTOR, url, "--harness", EVIDENCE_CLI,
             "--wait", str(PROBE_WAIT_MS),
             "--expr-file", MODERN_WEB_PROBE,
             "--out", artifact]
@@ -175,6 +176,10 @@ def audit_site(domain, rank, url=None):
         # bare "none" when part of the CSS was never measured.
         sheets = modern_web.get("css", {}).get("sheets", {})
         caveats = []
+        if modern_web.get("viewTransitions", {}).get("apiReferencedInExternalScript"):
+            caveats.append("external JS references startViewTransition; runtime usage not measured")
+        if modern_web.get("scriptInspection", {}).get("partial"):
+            caveats.append("partial external script inspection")
         if sheets.get("inaccessible"):
             caveats.append(f"{sheets['inaccessible']}/{sheets.get('total', '?')} CSS sheets unreadable")
         if modern_web.get("animations", {}).get("withTimeline"):
